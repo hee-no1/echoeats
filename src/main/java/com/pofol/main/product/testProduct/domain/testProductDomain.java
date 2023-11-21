@@ -1,9 +1,10 @@
-package com.pofol.main.testProduct;
+package com.pofol.main.product.testProduct.domain;
 
 import java.util.Objects;
 
-public class testProductDto {
+public class testProductDomain {
 
+  private Integer pno; // 상품진열번호
   private String name; // 상품이름
   private String desc; // 상품설명
   private Integer price; // 상품가격
@@ -17,7 +18,8 @@ public class testProductDto {
   private String as_guide; // 안내사항
   private String imgUrl; // 이미지url
 
-  public testProductDto(String name, String desc, Integer price, String seller, String pack_type, String sales_unit, String weight, String allergy, String exp_date, String origin, String as_guide, String imgUrl) {
+  public testProductDomain(Integer pno, String name, String desc, Integer price, String seller, String pack_type, String sales_unit, String weight, String allergy, String exp_date, String origin, String as_guide, String imgUrl) {
+    this.pno = pno;
     this.name = name;
     this.desc = desc;
     this.price = price;
@@ -128,11 +130,19 @@ public class testProductDto {
     this.imgUrl = imgUrl;
   }
 
+  public Integer getPno() {
+    return pno;
+  }
+
+  public void setPno(Integer pno) {
+    this.pno = pno;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    testProductDto that = (testProductDto) o;
+    testProductDomain that = (testProductDomain) o;
     return Objects.equals(name, that.name) && Objects.equals(desc, that.desc) && Objects.equals(price, that.price) && Objects.equals(seller, that.seller) && Objects.equals(pack_type, that.pack_type) && Objects.equals(sales_unit, that.sales_unit) && Objects.equals(weight, that.weight) && Objects.equals(allergy, that.allergy) && Objects.equals(exp_date, that.exp_date) && Objects.equals(origin, that.origin) && Objects.equals(as_guide, that.as_guide) && Objects.equals(imgUrl, that.imgUrl);
   }
 
