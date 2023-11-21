@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="/css/pro-css.css">
 </head>
 <body>
 <h1>
