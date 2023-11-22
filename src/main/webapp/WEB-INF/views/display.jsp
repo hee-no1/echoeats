@@ -137,7 +137,7 @@
         </div>
         <div class="SectionContent">
           <div class="content">
-            <a href="#">
+            <a href="/product">
               <div class="image-container">
                 <span><img src="./product-image001.jpg"></span>
                 <div class="product-sticker"><span>골라담기특가</span></div>

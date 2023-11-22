@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProdRepositoryImpl implements ProdRepository {
 
@@ -21,8 +23,8 @@ public class ProdRepositoryImpl implements ProdRepository {
 
     // 상품 목록 보기
     @Override
-    public ProdDto select(Integer pro_id) throws Exception {
-        return session.selectOne(namespace + "select", pro_id);
+    public List<ProdDto> selectAll() throws Exception {
+        return session.selectList(namespace + "selectAll");
     }
 
 
