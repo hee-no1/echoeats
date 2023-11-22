@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProdDaoImpl implements ProdDao {
+public class ProdRepositoryImpl implements ProdRepository {
 
     @Autowired
     private SqlSession session;
