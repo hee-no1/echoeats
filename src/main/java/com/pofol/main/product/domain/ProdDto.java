@@ -14,6 +14,7 @@ public class ProdDto {
     String weight;
     String allergy;
     String exp_date;
+    String origin;
     String as_guide;
     String pro_img;
 
@@ -22,17 +23,17 @@ public class ProdDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProdDto prodDto = (ProdDto) o;
-        return Objects.equals(pro_id, prodDto.pro_id) && Objects.equals(pro_name, prodDto.pro_name) && Objects.equals(pro_desc, prodDto.pro_desc) && Objects.equals(pro_pri, prodDto.pro_pri) && Objects.equals(seller, prodDto.seller) && Objects.equals(pack_type, prodDto.pack_type) && Objects.equals(sales_unit, prodDto.sales_unit) && Objects.equals(weight, prodDto.weight) && Objects.equals(allergy, prodDto.allergy) && Objects.equals(exp_date, prodDto.exp_date) && Objects.equals(as_guide, prodDto.as_guide) && Objects.equals(pro_img, prodDto.pro_img);
+        return Objects.equals(pro_id, prodDto.pro_id) && Objects.equals(pro_name, prodDto.pro_name) && Objects.equals(pro_desc, prodDto.pro_desc) && Objects.equals(pro_pri, prodDto.pro_pri) && Objects.equals(seller, prodDto.seller) && Objects.equals(pack_type, prodDto.pack_type) && Objects.equals(sales_unit, prodDto.sales_unit) && Objects.equals(weight, prodDto.weight) && Objects.equals(allergy, prodDto.allergy) && Objects.equals(exp_date, prodDto.exp_date) && Objects.equals(origin, prodDto.origin) && Objects.equals(as_guide, prodDto.as_guide) && Objects.equals(pro_img, prodDto.pro_img);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pro_id, pro_name, pro_desc, pro_pri, seller, pack_type, sales_unit, weight, allergy, exp_date, as_guide, pro_img);
+        return Objects.hash(pro_id, pro_name, pro_desc, pro_pri, seller, pack_type, sales_unit, weight, allergy, exp_date, origin, as_guide, pro_img);
     }
 
     public ProdDto(){}
 
-    public ProdDto(Integer pro_id, String pro_name, String pro_desc, Integer pro_pri, String seller, String pack_type, String sales_unit, String weight, String allergy, String exp_date, String as_guide, String pro_img) {
+    public ProdDto(Integer pro_id, String pro_name, String pro_desc, Integer pro_pri, String seller, String pack_type, String sales_unit, String weight, String allergy, String exp_date, String origin, String as_guide, String pro_img) {
         this.pro_id = pro_id;
         this.pro_name = pro_name;
         this.pro_desc = pro_desc;
@@ -43,6 +44,7 @@ public class ProdDto {
         this.weight = weight;
         this.allergy = allergy;
         this.exp_date = exp_date;
+        this.origin = origin;
         this.as_guide = as_guide;
         this.pro_img = pro_img;
     }
@@ -127,6 +129,14 @@ public class ProdDto {
         this.exp_date = exp_date;
     }
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
     public String getAs_guide() {
         return as_guide;
     }
@@ -156,9 +166,9 @@ public class ProdDto {
                 ", weight='" + weight + '\'' +
                 ", allergy='" + allergy + '\'' +
                 ", exp_date='" + exp_date + '\'' +
+                ", origin='" + origin + '\'' +
                 ", as_guide='" + as_guide + '\'' +
                 ", pro_img='" + pro_img + '\'' +
                 '}';
     }
-
 }

@@ -10,10 +10,13 @@ import java.util.List;
 @Repository
 public class ProdRepositoryImpl implements ProdRepository {
 
-    @Autowired
-    private SqlSession session;
-    private static String namespace = "ProdDto.";
+    private final SqlSession session;
+    private final String namespace = "ProdDto.";
 
+    @Autowired
+    public ProdRepositoryImpl(SqlSession session) {
+        this.session = session;
+    }
 
     // 상품 등록
     @Override

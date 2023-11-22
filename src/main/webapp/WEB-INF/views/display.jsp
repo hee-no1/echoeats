@@ -8,6 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="resources/css/display-css.css">
+  <script
+          src="https://code.jquery.com/jquery-3.4.1.js"
+          integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+          crossorigin="anonymous"></script>
   <style>
     #wrap {
       text-align: center;
@@ -137,9 +141,10 @@
         </div>
         <div class="SectionContent">
           <div class="content">
+            <c:forEach items="${display}" var="display">
             <a href="/product">
               <div class="image-container">
-                <span><img src="./product-image001.jpg"></span>
+                <span><img srcset="<c:out value="${display.pro_img}"/>"> </span>
                 <div class="product-sticker"><span>골라담기특가</span></div>
               </div>
               <div>
@@ -148,13 +153,13 @@
                   담기</button>
               </div>
               <div class="product-info">
-                <h3 class="product-name">[슈퍼빅세일] 인기 국탕류 9종 골라담기 (택2)</h3>
+                <h3 class="product-name"><c:out value="${display.pro_name}"/></h3>
                 <div class="content-row">
                   <div class="product-price">
                     <div><span class="dimmed-price">6,980<span class="won">원</span></span></div>
                     <div class="discount">
                       <span class="discount-rate">28%</span>
-                      <span class="sales-price">5,000<span class="won">원</span></span>
+                      <span class="sales-price"><c:out value="${display.pro_pri}"/> <span class="won">원</span></span>
                     </div>
                   </div>
                 </div>
@@ -167,6 +172,7 @@
                 </div>
               </div>
             </a>
+            </c:forEach>
           </div>
           <div class="content">
             <a href="#">

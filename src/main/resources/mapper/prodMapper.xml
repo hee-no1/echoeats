@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProdDto">
-    <select id="select" parameterType="int" resultType="ProdDto">
+    <select id="selectAll" resultType="ProdDto">
         SELECT * FROM spring.protest
     </select>
 
