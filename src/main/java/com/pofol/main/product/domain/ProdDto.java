@@ -30,6 +30,8 @@ public class ProdDto {
         return Objects.hash(pro_id, pro_name, pro_desc, pro_pri, seller, pack_type, sales_unit, weight, allergy, exp_date, as_guide, pro_img);
     }
 
+    public ProdDto(){}
+
     public ProdDto(Integer pro_id, String pro_name, String pro_desc, Integer pro_pri, String seller, String pack_type, String sales_unit, String weight, String allergy, String exp_date, String as_guide, String pro_img) {
         this.pro_id = pro_id;
         this.pro_name = pro_name;

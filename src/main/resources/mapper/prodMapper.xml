@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pofol.kurly.prodMapper">
-    <select id="insert" resultType="ProdDto">
-        SELECT * FROM protest
+<mapper namespace="ProdDto">
+    <select id="select" parameterType="int" resultType="ProdDto">
+        SELECT * FROM spring.protest
     </select>
 
 
