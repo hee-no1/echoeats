@@ -5,5 +5,6 @@
 <configuration>
 	<typeAliases>
 		<!-- <typeAlias alias="BoardDto" type="com.fastcampus.ch4.domain.BoardDto"/> -->
+		<typeAlias alias="TestProductDto" type="com.pofol.main.testProduct.domain.TestProductDto"/>
 	</typeAliases>
 </configuration>
