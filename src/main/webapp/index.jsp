@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="ko">
 <head>
     <title>Title</title>
 </head>
 <body>
 <a href="/main">echoeats</a>
-<a href="/manager">관리자</a>
+<a href="/managerForm">관리자</a>
 </body>
 </html>
