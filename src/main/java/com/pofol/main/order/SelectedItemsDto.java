@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class SelectedItemsDto {
 
-    private ProductDto dealProductNo;
+    private ProductDto dealProductNo; //dealProductNo 객체
     private Integer quantity;
 
     public SelectedItemsDto(){}

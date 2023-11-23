@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class TotalProductsDto {
     private String totalProductName;
-    private List<SelectedItemsDto> selectedItems;
+    private List<SelectedItemsDto> selectedItems; //selectedItems는 배열
     private Integer totalOrderQuantity;
     private Integer totalProductPrice;
 

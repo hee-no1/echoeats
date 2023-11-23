@@ -21,7 +21,6 @@ public class OrderController {
     @ResponseBody
     public TotalProductsDto receiveTotalProduct(@RequestBody TotalProductsDto totalProduct){
         System.out.println("totalProduct = " + totalProduct);
-        System.out.println(totalProduct.getSelectedItems().get(1));
         return totalProduct;
     }
 }
