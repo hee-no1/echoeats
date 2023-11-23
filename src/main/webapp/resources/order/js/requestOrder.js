@@ -31,12 +31,21 @@ $(document).ready(function(){
         totalProductPrice:totalProductPrice //총 상품 구매 금액
     }
 
+    console.log(totalProducts)
+
     $("#payBtn").click(function(){
         $.ajax({
             type:'POST',
-            url: ''
-        })
-    })
-
-
-})
+            url: '/payment',
+            headers:{"content-type": "application/json"},
+            dataType:'text',
+            data : JSON.stringify(totalProducts),
+            success: function(result){
+                alert("✅ received = " +result);
+                console.log(result);
+            },
+            error: function(){alert("error‼️")}
+        });
+        alert("the request is sent")
+    });
+});

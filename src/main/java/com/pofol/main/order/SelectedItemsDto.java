@@ -6,30 +6,30 @@ import java.util.Objects;
 
 public class SelectedItemsDto {
 
-    private String name;
-    private Integer price;
+    private ProductDto dealProductNo;
+    private Integer quantity;
 
     public SelectedItemsDto(){}
 
-    public SelectedItemsDto(String name, Integer price) {
-        this.name = name;
-        this.price = price;
+    public SelectedItemsDto(ProductDto dealProductNo, Integer quantity) {
+        this.dealProductNo = dealProductNo;
+        this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
+    public ProductDto getDealProductNo() {
+        return dealProductNo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDealProductNo(ProductDto dealProductNo) {
+        this.dealProductNo = dealProductNo;
     }
 
-    public Integer getPrice() {
-        return price;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -37,19 +37,19 @@ public class SelectedItemsDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SelectedItemsDto that = (SelectedItemsDto) o;
-        return Objects.equals(name, that.name) && Objects.equals(price, that.price);
+        return Objects.equals(dealProductNo, that.dealProductNo) && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price);
+        return Objects.hash(dealProductNo, quantity);
     }
 
     @Override
     public String toString() {
         return "SelectedItemsDto{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
+                "dealProductNo=" + dealProductNo +
+                ", quantity=" + quantity +
                 '}';
     }
 }

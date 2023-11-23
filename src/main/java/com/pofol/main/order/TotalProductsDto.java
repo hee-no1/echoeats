@@ -1,18 +1,19 @@
 package com.pofol.main.order;
 
+import java.util.List;
 import java.util.Objects;
 
 public class TotalProductsDto {
     private String totalProductName;
-    private SelectedItemsDto selectedItem;
+    private List<SelectedItemsDto> selectedItems;
     private Integer totalOrderQuantity;
     private Integer totalProductPrice;
 
     public TotalProductsDto(){}
 
-    public TotalProductsDto(String totalProductName, SelectedItemsDto selectedItem, Integer totalOrderQuantity, Integer totalProductPrice) {
+    public TotalProductsDto(String totalProductName, List<SelectedItemsDto> selectedItems, Integer totalOrderQuantity, Integer totalProductPrice) {
         this.totalProductName = totalProductName;
-        this.selectedItem = selectedItem;
+        this.selectedItems = selectedItems;
         this.totalOrderQuantity = totalOrderQuantity;
         this.totalProductPrice = totalProductPrice;
     }
@@ -25,12 +26,12 @@ public class TotalProductsDto {
         this.totalProductName = totalProductName;
     }
 
-    public SelectedItemsDto getSelectedItem() {
-        return selectedItem;
+    public List<SelectedItemsDto> getSelectedItems() {
+        return selectedItems;
     }
 
-    public void setSelectedItem(SelectedItemsDto selectedItem) {
-        this.selectedItem = selectedItem;
+    public void setSelectedItems(List<SelectedItemsDto> selectedItems) {
+        this.selectedItems = selectedItems;
     }
 
     public Integer getTotalOrderQuantity() {
@@ -54,19 +55,19 @@ public class TotalProductsDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TotalProductsDto that = (TotalProductsDto) o;
-        return Objects.equals(totalProductName, that.totalProductName) && Objects.equals(selectedItem, that.selectedItem) && Objects.equals(totalOrderQuantity, that.totalOrderQuantity) && Objects.equals(totalProductPrice, that.totalProductPrice);
+        return Objects.equals(totalProductName, that.totalProductName) && Objects.equals(selectedItems, that.selectedItems) && Objects.equals(totalOrderQuantity, that.totalOrderQuantity) && Objects.equals(totalProductPrice, that.totalProductPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalProductName, selectedItem, totalOrderQuantity, totalProductPrice);
+        return Objects.hash(totalProductName, selectedItems, totalOrderQuantity, totalProductPrice);
     }
 
     @Override
     public String toString() {
         return "TotalProductsDto{" +
                 "totalProductName='" + totalProductName + '\'' +
-                ", selectedItem=" + selectedItem +
+                ", selectedItems=" + selectedItems +
                 ", totalOrderQuantity=" + totalOrderQuantity +
                 ", totalProductPrice=" + totalProductPrice +
                 '}';

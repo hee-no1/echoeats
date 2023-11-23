@@ -1,20 +1,27 @@
 package com.pofol.main.order;
 
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/order")
 public class OrderController {
 
-    @GetMapping
+    @GetMapping("/order")
     public String order(){
         return "redirect:/order/checkout";
     }
-    @GetMapping("/checkout")
+
+    @GetMapping("/order/checkout")
     public String orderCheckout(){
         return "checkout";
     }
 
+    @PostMapping("/payment")
+    @ResponseBody
+    public TotalProductsDto receiveTotalProduct(@RequestBody TotalProductsDto totalProduct){
+        System.out.println("totalProduct = " + totalProduct);
+        System.out.println(totalProduct.getSelectedItems().get(1));
+        return totalProduct;
+    }
 }
