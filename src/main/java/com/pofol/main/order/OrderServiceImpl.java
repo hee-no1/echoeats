@@ -1,11 +1,17 @@
 package com.pofol.main.order;
 
+import com.pofol.main.order.orderProductTest.OrderProductService;
+import com.pofol.main.order.orderProductTest.ProductDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService{
+
+    @Autowired
+    OrderProductService orderProductService;
 
     @Override
     public Boolean verifyPayment(TotalProductsDto totalProduct) {
@@ -30,8 +36,17 @@ public class OrderServiceImpl implements OrderService{
             System.out.println(selectedItem);
             ProductDto dealProductNo = selectedItem.getDealProductNo();
 
-            //상품의 가격 <- 이 부분을 원래는 상품Table에서 가지고 와야한다!
-            int price = dealProductNo.getPrice();
+            //상품의 이름 가져오기
+            String productName = dealProductNo.getName();
+
+            //상품 table에서 상품 금액 가지고오기
+            ProductDto productDB = null;
+            try {
+                productDB = orderProductService.select(productName);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            int price = productDB.getPrice();
 
             //해당 상품의 수량
             int quantity = selectedItem.getQuantity();
