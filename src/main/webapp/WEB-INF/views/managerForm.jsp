@@ -26,8 +26,6 @@
 
             formData.append("uploadFile", fileObj);
 
-            console.log(formData.get("uploadFile"));
-
             $.ajax({
                 url: '/uploadImg',
                 processData: false,
