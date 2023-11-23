@@ -33,7 +33,7 @@
             })
                 .then(response => response.text()) // 또는 response.text() 등을 사용
                 .then(data => {
-                    console.log("1111111111111111111111111" + data);
+                    console.log("date의 값 = " , data);
                     // 이미지를 표시할 엘리먼트 생성 또는 가져오기
                     let imgElement = document.createElement('img');
                     imgElement.src = data;
@@ -45,85 +45,10 @@
                     console.error('Upload failed:', error);
                 });
 
-
-
-
-
-
-
-
         } else {
             console.error('No file selected.');
         }
     }
-
-
-
-
-
-
-
-   $(document).ready(function () {
-
-       /* 이미지 업로드 */
-       // $("input[type='file']").on("change", function (e) {
-       //
-       //     let formData = new FormData();
-       //     let fileInput = $('input[name="uploadFile"]');
-       //     let fileList = fileInput[0].files;
-       //     let fileObj = fileList[0];
-       //
-       //     if (!fileCheck(fileObj.name, fileObj.size)) {
-       //
-       //         return false;
-       //     }
-       //     formData.append("uploadFile", fileObj);
-       //
-       //     console.log("fileList", fileList);
-       //     console.log("fileObj", fileObj);
-       //     console.log("fileName : " + fileObj.name);
-       //     console.log("fileSize : " + fileObj.size);
-       //     console.log("fileType(MimeType) : " + fileObj.type);
-       //     console.log(formData);
-       //     console.log("uploadFile", formData.get("uploadFile"));
-       //
-       //
-       //     $.ajax({
-       //         url: '/uploadAjaxAction',
-       //         processData : false,
-       //         contentType : false,
-       //         data : formData,
-       //         type : 'GET',
-       //         dataType : 'json',
-       //         success: function (result) {
-       //             console.log(result);
-       //             alert("success");
-       //         },
-       //         error: function () {
-       //             alert("error");
-       //         }
-       //     });
-       // });
-       //
-       // let regex = new RegExp("(.*?)\.(jpg|png)$");
-       // let maxSize = 1048576; //1MB
-       //
-       // const fileCheck = function (fileName, fileSize) {
-       //
-       //     if (fileSize >= maxSize) {
-       //         alert("파일 사이즈 초과");
-       //         return false;
-       //     }
-       //
-       //     if (!regex.test(fileName)) {
-       //         alert("해당 종류의 파일은 업로드할 수 없습니다.");
-       //         return false;
-       //     }
-       //
-       //     return true;
-       //
-       // }
-   });
 </script>
 </body>
 </html>

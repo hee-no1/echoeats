@@ -106,19 +106,20 @@ public class TestProductController {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
-    // 이미지 파일 저장
+
+    // 이미지 파일정보 저장
     if (!file.isEmpty()) {
       try {
 //         여기에서 파일을 저장하거나 필요한 비즈니스 로직을 수행합니다.
 //         예를 들어, 파일을 특정 경로에 저장할 수 있습니다.
 //        file.transferTo(new File("/path/to/save/" + file.getOriginalFilename()));
+//        return "{\"message\": \"File uploaded successfully\", \"filename\": \"" + file.getOriginalFilename() + "\"}";
         return "C:\\upload\\2023\\11\\23\\" + file.getOriginalFilename();
       } catch (Exception e) {
         return "fail : " + e.getMessage();
       }
     } else {
-      return "No file uploaded.";
+      return "No uploaded.";
     }
   }
 }
