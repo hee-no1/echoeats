@@ -1,0 +1,20 @@
+package com.pofol.main.order;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/order")
+public class OrderController {
+
+    @GetMapping
+    public String order(){
+        return "redirect:/order/checkout";
+    }
+    @GetMapping("/checkout")
+    public String orderCheckout(){
+        return "checkout";
+    }
+
+}
