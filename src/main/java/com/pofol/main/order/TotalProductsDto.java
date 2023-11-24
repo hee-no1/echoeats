@@ -4,26 +4,28 @@ import java.util.List;
 import java.util.Objects;
 
 public class TotalProductsDto {
-    private String totalProductName;
+    private String tot_prod_name;
     private List<SelectedItemsDto> selectedItems; //selectedItems는 배열
-    private Integer totalOrderQuantity;
-    private Integer totalProductPrice;
+    private Integer tot_ord_qty; //총 수량
+    private Integer tot_prod_price; //총 상품 구매 금액
+    private Integer tot_pay_price; //총 실 결제 금액
 
     public TotalProductsDto(){}
 
-    public TotalProductsDto(String totalProductName, List<SelectedItemsDto> selectedItems, Integer totalOrderQuantity, Integer totalProductPrice) {
-        this.totalProductName = totalProductName;
+    public TotalProductsDto(String tot_prod_name, List<SelectedItemsDto> selectedItems, Integer tot_ord_qty, Integer tot_prod_price, Integer tot_pay_price) {
+        this.tot_prod_name = tot_prod_name;
         this.selectedItems = selectedItems;
-        this.totalOrderQuantity = totalOrderQuantity;
-        this.totalProductPrice = totalProductPrice;
+        this.tot_ord_qty = tot_ord_qty;
+        this.tot_prod_price = tot_prod_price;
+        this.tot_pay_price = tot_pay_price;
     }
 
-    public String getTotalProductName() {
-        return totalProductName;
+    public String getTot_prod_name() {
+        return tot_prod_name;
     }
 
-    public void setTotalProductName(String totalProductName) {
-        this.totalProductName = totalProductName;
+    public void setTot_prod_name(String tot_prod_name) {
+        this.tot_prod_name = tot_prod_name;
     }
 
     public List<SelectedItemsDto> getSelectedItems() {
@@ -34,20 +36,28 @@ public class TotalProductsDto {
         this.selectedItems = selectedItems;
     }
 
-    public Integer getTotalOrderQuantity() {
-        return totalOrderQuantity;
+    public Integer getTot_ord_qty() {
+        return tot_ord_qty;
     }
 
-    public void setTotalOrderQuantity(Integer totalOrderQuantity) {
-        this.totalOrderQuantity = totalOrderQuantity;
+    public void setTot_ord_qty(Integer tot_ord_qty) {
+        this.tot_ord_qty = tot_ord_qty;
     }
 
-    public Integer getTotalProductPrice() {
-        return totalProductPrice;
+    public Integer getTot_prod_price() {
+        return tot_prod_price;
     }
 
-    public void setTotalProductPrice(Integer totalProductPrice) {
-        this.totalProductPrice = totalProductPrice;
+    public void setTot_prod_price(Integer tot_prod_price) {
+        this.tot_prod_price = tot_prod_price;
+    }
+
+    public Integer getTot_pay_price() {
+        return tot_pay_price;
+    }
+
+    public void setTot_pay_price(Integer tot_pay_price) {
+        this.tot_pay_price = tot_pay_price;
     }
 
     @Override
@@ -55,21 +65,22 @@ public class TotalProductsDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TotalProductsDto that = (TotalProductsDto) o;
-        return Objects.equals(totalProductName, that.totalProductName) && Objects.equals(selectedItems, that.selectedItems) && Objects.equals(totalOrderQuantity, that.totalOrderQuantity) && Objects.equals(totalProductPrice, that.totalProductPrice);
+        return Objects.equals(tot_prod_name, that.tot_prod_name) && Objects.equals(selectedItems, that.selectedItems) && Objects.equals(tot_ord_qty, that.tot_ord_qty) && Objects.equals(tot_prod_price, that.tot_prod_price) && Objects.equals(tot_pay_price, that.tot_pay_price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalProductName, selectedItems, totalOrderQuantity, totalProductPrice);
+        return Objects.hash(tot_prod_name, selectedItems, tot_ord_qty, tot_prod_price, tot_pay_price);
     }
 
     @Override
     public String toString() {
         return "TotalProductsDto{" +
-                "totalProductName='" + totalProductName + '\'' +
+                "tot_prod_name='" + tot_prod_name + '\'' +
                 ", selectedItems=" + selectedItems +
-                ", totalOrderQuantity=" + totalOrderQuantity +
-                ", totalProductPrice=" + totalProductPrice +
+                ", tot_ord_qty=" + tot_ord_qty +
+                ", tot_prod_price=" + tot_prod_price +
+                ", tot_pay_price=" + tot_pay_price +
                 '}';
     }
 }

@@ -7,13 +7,13 @@ import java.util.Objects;
 public class SelectedItemsDto {
 
     private ProductDto dealProductNo; //dealProductNo 객체
-    private Integer quantity;
+    private Integer qty;
 
     public SelectedItemsDto(){}
 
-    public SelectedItemsDto(ProductDto dealProductNo, Integer quantity) {
+    public SelectedItemsDto(ProductDto dealProductNo, Integer qty) {
         this.dealProductNo = dealProductNo;
-        this.quantity = quantity;
+        this.qty = qty;
     }
 
     public ProductDto getDealProductNo() {
@@ -24,12 +24,12 @@ public class SelectedItemsDto {
         this.dealProductNo = dealProductNo;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getQty() {
+        return qty;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setQty(Integer qty) {
+        this.qty = qty;
     }
 
     @Override
@@ -37,19 +37,19 @@ public class SelectedItemsDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SelectedItemsDto that = (SelectedItemsDto) o;
-        return Objects.equals(dealProductNo, that.dealProductNo) && Objects.equals(quantity, that.quantity);
+        return Objects.equals(dealProductNo, that.dealProductNo) && Objects.equals(qty, that.qty);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dealProductNo, quantity);
+        return Objects.hash(dealProductNo, qty);
     }
 
     @Override
     public String toString() {
         return "SelectedItemsDto{" +
                 "dealProductNo=" + dealProductNo +
-                ", quantity=" + quantity +
+                ", quantity=" + qty +
                 '}';
     }
 }

@@ -4,6 +4,6 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<!-- <typeAlias alias="BoardDto" type="com.fastcampus.ch4.domain.BoardDto"/> -->
+		 <typeAlias alias="ProductDto" type="com.pofol.main.order.orderProductTest.ProductDto"/>
 	</typeAliases>
 </configuration>

@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService{
         //TotalProductsDto: 주문서를 거쳐 넘어온 상품들의 정보
 
         //총 상품 구매 금액
-        int totalProductPrice = totalProduct.getTotalProductPrice();
+        int totalProductPrice = totalProduct.getTot_prod_price();
 
         //기대값
         int computedPrice = 0;
@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService{
             int price = productDB.getPrice();
 
             //해당 상품의 수량
-            int quantity = selectedItem.getQuantity();
+            int quantity = selectedItem.getQty();
 
             computedPrice += price * quantity;
         }

@@ -19,8 +19,11 @@ public class OrderController {
 
     @PostMapping("/payment")
     @ResponseBody
-    public TotalProductsDto receiveTotalProduct(@RequestBody TotalProductsDto totalProduct){
-        System.out.println("totalProduct = " + totalProduct);
-        return totalProduct;
+    public PaymentDataDto receiveTotalProduct(@RequestBody PaymentDataDto paymentData){
+        System.out.println("paymentData = " + paymentData);
+        System.out.println(paymentData.getTotalProducts());
+        System.out.println(paymentData.getPayDiscount());
+
+        return paymentData;
     }
 }

@@ -19,7 +19,7 @@ class OrderProductServiceImplTest {
     @Test
     public void select() throws Exception {
         //환경설정
-        ProductDto prod1 = new ProductDto("sandwich", 8000);
+        ProductDto prod1 = new ProductDto("sandwich", 8000,"냉장");
 
         //테스트
         ProductDto prod2= orderProductService.select("sandwich");

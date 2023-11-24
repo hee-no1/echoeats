@@ -5,7 +5,7 @@
 
     <select id="select" parameterType="String" resultType="ProductDto">
         SELECT *
-        FROM prodtest
+        FROM producttest
         WHERE name = #{name}
     </select>
 

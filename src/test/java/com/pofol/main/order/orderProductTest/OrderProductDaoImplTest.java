@@ -20,13 +20,13 @@ public class OrderProductDaoImplTest {
     @Test
     public void select() throws Exception {
         //환경설정
-        ProductDto prod1 = new ProductDto("sandwich", 8000);
+        ProductDto prod1 = new ProductDto("sandwich", 8000,"냉장");
 
         //테스트
         ProductDto prod2= orderProductDao.select("sandwich");
 
         //검증
-        assertThat(prod1).isEqualTo(prod2);
+        assertThat(prod2).isEqualTo(prod1);
 
     }
 
