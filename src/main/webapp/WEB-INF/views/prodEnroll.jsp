@@ -37,7 +37,7 @@
         }
 
         $.ajax({
-            url : '/prodEnroll',
+            url : '/uploadAjaxAction',
             processData : false,
             contentType : false,
             data : formData,
