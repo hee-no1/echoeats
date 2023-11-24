@@ -4,6 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		 <typeAlias alias="ProductDto" type="com.pofol.main.order.orderProductTest.ProductDto"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.order.orderProductTest.ProductDto"/>
+		<typeAlias alias="OrderDto" type="com.pofol.main.orderTable.OrderDto"/>
 	</typeAliases>
 </configuration>

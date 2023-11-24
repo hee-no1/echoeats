@@ -1,4 +1,4 @@
-package com.pofol.main.order;
+package com.pofol.main.orderTable;
 
 
 import java.time.LocalDateTime;
@@ -25,6 +25,17 @@ public class OrderDto {
     private int ord_rfnd; //환불
 
     public OrderDto(){}
+
+    //[주문중 insert용]
+    public OrderDto(String mem_id, String tot_prod_name, Integer tot_prod_price, Integer tot_pay_price, Integer tot_ord_qty, String pay_way, int ord_ing) {
+        this.mem_id = mem_id;
+        this.tot_prod_name = tot_prod_name;
+        this.tot_prod_price = tot_prod_price;
+        this.tot_pay_price = tot_pay_price;
+        this.tot_ord_qty = tot_ord_qty;
+        this.pay_way = pay_way;
+        this.ord_ing = ord_ing;
+    }
 
     public OrderDto(Long ord_id, String mem_id, LocalDateTime ord_date, String tot_prod_name, Integer tot_prod_price, Integer tot_pay_price, Integer tot_ord_qty, String pay_way, int ord_ing, int ord_fail, int ord_cmplt, int prod_ing, int ord_prep_dlvy, int ord_in_dlvy, int ord_dlvy, int ord_cxl, int ord_ex, int ord_rfnd) {
         this.ord_id = ord_id;

@@ -2,6 +2,7 @@ package com.pofol.main.order;
 
 import com.pofol.main.order.orderProductTest.OrderProductService;
 import com.pofol.main.order.orderProductTest.ProductDto;
+import com.pofol.main.orderTable.OrderDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,19 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     OrderProductService orderProductService;
 
+    @Autowired
+    OrderDBService orderDBService; //주문 테이블
+
+
     @Override
-    public Boolean verifyPayment(TotalProductsDto totalProduct) {
+    public Boolean verifyPayment(PaymentDataDto paymentData) {
+        //PaymentDataDto: 주문서를 거쳐 넘어온 정보
+
         //TotalProductsDto: 주문서를 거쳐 넘어온 상품들의 정보
+        TotalProductsDto totalProducts = paymentData.getTotalProducts();
 
         //총 상품 구매 금액
-        int totalProductPrice = totalProduct.getTot_prod_price();
+        int totalProductPrice = totalProducts.getTot_prod_price();
 
         //기대값
         int computedPrice = 0;
@@ -30,7 +38,7 @@ public class OrderServiceImpl implements OrderService{
         */
 
         //주문한 상품 list
-        List<SelectedItemsDto> selectedItems = totalProduct.getSelectedItems();
+        List<SelectedItemsDto> selectedItems = totalProducts.getSelectedItems();
 
         for (SelectedItemsDto selectedItem : selectedItems) {
             System.out.println(selectedItem);
@@ -58,20 +66,15 @@ public class OrderServiceImpl implements OrderService{
         System.out.println(computedPrice);
 
         if(totalProductPrice == computedPrice){
+            System.out.println("성공");
+            orderDBService.insert(paymentData);
             return true;
         }
 
+        System.out.println("실패");
         return false;
 
     }
 
 
-
-    Long orderId = 1000000L; //주문번호
-
-    @Override
-    public Long creatOrderId() {  //주문번호 생성, 마켓컬리는 13자리지만, 지금은 임의로 7자리로
-        //1000000부터 1씩 증가해서 주문번호가 생성
-        return ++orderId;
-    }
 }

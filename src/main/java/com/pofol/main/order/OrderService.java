@@ -2,8 +2,7 @@ package com.pofol.main.order;
 
 public interface OrderService {
 
-    Boolean verifyPayment(TotalProductsDto totalProduct);
+    Boolean verifyPayment(PaymentDataDto paymentDataDto);
 
-    Long creatOrderId();
 
 }

@@ -1,5 +1,9 @@
-package com.pofol.main.order;
+package com.pofol.main.orderTable;
 
+import com.pofol.main.order.PayDiscountDto;
+import com.pofol.main.order.PaymentDataDto;
+import com.pofol.main.order.SelectedItemsDto;
+import com.pofol.main.order.TotalProductsDto;
 import com.pofol.main.order.orderProductTest.ProductDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,19 +15,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class OrderServiceImplTest {
+class OrderDBServiceImplTest {
 
     @Autowired
-    OrderService orderService;
+    OrderDBService orderDBService;
 
     @Test
-    @DisplayName("검증 테스트")
-    public void verifyPaymentTest(){
-        //환경설정 <- js 에서 넘어오는 상품을 설정
+    @DisplayName("주문table에 데이터 insert [주문중]")
+    public void insert(){
+        //환경설정
         //1. totalProducts
         ProductDto prod1 = new ProductDto("sandwich", 8000,"냉장");
         ProductDto prod2 = new ProductDto("chicken", 8500,"냉동");
@@ -46,12 +50,6 @@ public class OrderServiceImplTest {
         PaymentDataDto paymentDataDto = new PaymentDataDto(totalProducts, payDiscountDto);
 
         //테스트
-        Boolean verify = orderService.verifyPayment(paymentDataDto);
-
-        //검중
-        assertThat(verify).isEqualTo(true);
-
-
-
+        orderDBService.insert(paymentDataDto);
     }
 }
