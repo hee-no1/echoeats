@@ -34,7 +34,6 @@
 
         for(let i = 0; i < fileList.length; i++){
             formData.append("uploadFile", fileList[i]);
-            console.log(formData);
         }
 
         $.ajax({
@@ -47,8 +46,9 @@
             mimeType: 'multipart/form-data',
             success : function (result) {
                 alert("success");
+                console.log(result);
             },
-            error : function () {
+            error : function (result) {
                 alert("fail");
             }
         });
@@ -56,7 +56,7 @@
     });
 
     /* var, method related with attachFile */
-    let regex = new RegExp("(.*?)\.(jpg|png)$");
+    let regex = new RegExp("(.*?)\.(jpg|png|jpeg)$");
     let maxSize = 10485760; //1MB
 
     function fileCheck(fileName, fileSize) {
