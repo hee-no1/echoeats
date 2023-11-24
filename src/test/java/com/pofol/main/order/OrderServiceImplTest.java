@@ -1,6 +1,8 @@
 package com.pofol.main.order;
 
-import com.pofol.main.order.orderProductTest.ProductDto;
+import com.pofol.main.order.orderProductTest.*;
+import com.pofol.main.order.paymentData.PayDiscountDto;
+import com.pofol.main.order.paymentData.PaymentDataDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

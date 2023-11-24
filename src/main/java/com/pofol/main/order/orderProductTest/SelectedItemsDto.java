@@ -1,6 +1,4 @@
-package com.pofol.main.order;
-
-import com.pofol.main.order.orderProductTest.ProductDto;
+package com.pofol.main.order.orderProductTest;
 
 import java.util.Objects;
 

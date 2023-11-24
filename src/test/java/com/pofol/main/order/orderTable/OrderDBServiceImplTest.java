@@ -1,10 +1,11 @@
-package com.pofol.main.orderTable;
+package com.pofol.main.order.orderTable;
 
-import com.pofol.main.order.PayDiscountDto;
-import com.pofol.main.order.PaymentDataDto;
-import com.pofol.main.order.SelectedItemsDto;
-import com.pofol.main.order.TotalProductsDto;
+import com.pofol.main.order.paymentData.PayDiscountDto;
+import com.pofol.main.order.paymentData.PaymentDataDto;
+import com.pofol.main.order.orderProductTest.SelectedItemsDto;
+import com.pofol.main.order.orderProductTest.TotalProductsDto;
 import com.pofol.main.order.orderProductTest.ProductDto;
+import com.pofol.main.order.orderTable.OrderDBService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})

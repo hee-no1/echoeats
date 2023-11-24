@@ -1,4 +1,4 @@
-package com.pofol.main.orderTable;
+package com.pofol.main.order.orderTable;
 
 
 import java.time.LocalDateTime;

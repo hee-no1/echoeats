@@ -5,6 +5,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="ProductDto" type="com.pofol.main.order.orderProductTest.ProductDto"/>
-		<typeAlias alias="OrderDto" type="com.pofol.main.orderTable.OrderDto"/>
+		<typeAlias alias="OrderDto" type="com.pofol.main.order.orderTable.OrderDto"/>
 	</typeAliases>
 </configuration>

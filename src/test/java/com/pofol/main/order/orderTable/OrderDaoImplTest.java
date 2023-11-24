@@ -1,7 +1,7 @@
-package com.pofol.main.orderTable;
+package com.pofol.main.order.orderTable;
 
-import com.pofol.main.orderTable.OrderDao;
-import com.pofol.main.orderTable.OrderDto;
+import com.pofol.main.order.orderTable.OrderDao;
+import com.pofol.main.order.orderTable.OrderDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

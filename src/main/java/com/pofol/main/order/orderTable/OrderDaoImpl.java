@@ -1,4 +1,4 @@
-package com.pofol.main.orderTable;
+package com.pofol.main.order.orderTable;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

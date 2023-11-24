@@ -1,7 +1,7 @@
-package com.pofol.main.orderTable;
+package com.pofol.main.order.orderTable;
 
-import com.pofol.main.order.PaymentDataDto;
-import com.pofol.main.order.TotalProductsDto;
+import com.pofol.main.order.paymentData.PaymentDataDto;
+import com.pofol.main.order.orderProductTest.TotalProductsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
