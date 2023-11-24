@@ -64,4 +64,14 @@ public class OrderServiceImpl implements OrderService{
         return false;
 
     }
+
+
+
+    Long orderId = 1000000L; //주문번호
+
+    @Override
+    public Long creatOrderId() {  //주문번호 생성, 마켓컬리는 13자리지만, 지금은 임의로 7자리로
+        //1000000부터 1씩 증가해서 주문번호가 생성
+        return ++orderId;
+    }
 }
