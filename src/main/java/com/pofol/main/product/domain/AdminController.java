@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -22,13 +24,30 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/admin")
 @Slf4j
 public class AdminController {
+
+    @GetMapping("/main")
+    public void admainMainGET() throws Exception {
+        log.info("admainMainGET");
+    }
+
+    // 상품 등록 페이지 접속
+    @GetMapping("/prodEnroll")
+    public void prodEnrollGET() throws Exception {
+        log.info("상품등록페이지 접속");
+    }
+
+    // 상품 등록
+    @PostMapping("/prodEnroll")
+    public String prodEnrollPOST(ProdDto prodDto) throws Exception {
+        return "redirect:/admin/prodManage";
+    }
 
     // 첨부 파일 업로드
     @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<AttachImageDto>> prodEnrollPOST(MultipartFile[] uploadFile) {
-
         // 이미지 파일 체크
         for (MultipartFile multipartFile : uploadFile) {
             File checkFile = new File(multipartFile.getOriginalFilename());
