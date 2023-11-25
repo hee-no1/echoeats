@@ -35,18 +35,6 @@
                     <li >
                         <a class="admin_list_01" href="/admin/prodEnroll">상품 등록</a>
                     </li>
-                    <li>
-                        <a class="admin_list_02">상품 목록</a>
-                    </li>
-                    <lI>
-                        <a class="admin_list_03">작가 등록</a>
-                    </lI>
-                    <lI>
-                        <a class="admin_list_04">작가 관리</a>
-                    </lI>
-                    <lI>
-                        <a class="admin_list_05">회원 관리</a>
-                    </lI>
                 </ul>
                 <!--
                                     <div class="admin_list_01">
