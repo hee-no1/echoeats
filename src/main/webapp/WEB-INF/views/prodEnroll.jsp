@@ -58,6 +58,10 @@
     /* 이미지 업로드 */
     $("input[type='file']").on("change", function(e){
         alert("동작");
+        // 이미지 존재시 삭제
+        if ($(".imgDeleteBtn").length > 0) {
+            deleteFile();
+        }
 
         let formData = new FormData();
         let fileInput = $('input[name="uploadFile"]');
@@ -124,10 +128,37 @@
         let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
         str += "<div id='result_card'>";
         str += "<img src='/upload?fileName=" + fileCallPath + "'>";
-        str += "<div class='imgDeleteBtn'>x</div>";
+        str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
         str += "</div>";
 
         uploadResult.append(str);
+    }
+
+    // 이미지 삭제 버튼 동작
+    $("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+        deleteFile();
+    });
+
+    // 이미지 삭제
+    function deleteFile() {
+        let targetFile = $(".imgDeleteBtn").data("file");
+        let tagetDiv = $("#result_card");
+        $.ajax({
+            url : '/deleteFile',
+            data : {fileName : targetFile},
+            dataType : 'text',
+            type : 'POST',
+            success : function (result) {
+                console.log(result);
+                tagetDiv.remove();
+                $("input[type='file']").val("");
+                alert("success");
+            },
+            error : function (result) {
+                console.log(result);
+                alert("fail");
+            }
+        })
     }
 </script>
 </body>
