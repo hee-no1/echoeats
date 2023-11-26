@@ -1,7 +1,10 @@
-package com.pofol.main.product.domain;
+package com.pofol.main.product.controller;
 
-import lombok.extern.slf4j.Slf4j;
+import com.pofol.main.product.domain.AttachImageDto;
+import com.pofol.main.product.domain.ProdDto;
 import net.coobird.thumbnailator.Thumbnails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +28,9 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
-@Slf4j
 public class AdminController {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     @GetMapping("/main")
     public void admainMainGET() throws Exception {

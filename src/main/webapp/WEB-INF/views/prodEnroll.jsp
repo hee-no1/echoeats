@@ -77,7 +77,7 @@
         }
 
         $.ajax({
-            url : '/uploadAjaxAction',
+            url : 'admin/uploadAjaxAction',
             processData : false,
             contentType : false,
             data : formData,
@@ -144,7 +144,7 @@
         let targetFile = $(".imgDeleteBtn").data("file");
         let tagetDiv = $("#result_card");
         $.ajax({
-            url : '/deleteFile',
+            url : 'admin/deleteFile',
             data : {fileName : targetFile},
             dataType : 'text',
             type : 'POST',

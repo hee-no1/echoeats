@@ -1,6 +1,7 @@
 package com.pofol.main.product.service;
 
 import lombok.extern.log4j.Log4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ class ProdServicImplTest {
         this.prodService = prodService;
     }
 
+    @DisplayName("상품 목록 조회 테스트")
     @Test
     void getListTest() throws Exception {
         assertThat(prodService.getList().size()).isEqualTo(1);

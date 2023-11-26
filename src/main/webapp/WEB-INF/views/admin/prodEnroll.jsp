@@ -47,82 +47,82 @@
                     <form action="/admin/prodEnroll" method="post" id="enrollForm">
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>책 제목</label>
+                                <label>카테고리</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookName">
+                                <input name="mid_cat_id">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>작가</label>
+                                <label>상품명</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="authorId" value="0">
+                                <input name="prod_name">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>출판일</label>
+                                <label>판매가</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="publeYear">
+                                <input name="prod_price" value="숫자만 입력">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>출판사</label>
+                                <label>재고수량</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="publisher">
+                                <input name="prod_qty" value="0">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>책 카테고리</label>
+                                <label>옵션</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="cateCode">
+                                <input name="option" value="0">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>상품 가격</label>
+                                <label>상품이미지</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookPrice" value="0">
+                                <input name="prod_img" value="이미지 업로드">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>상품 재고</label>
+                                <label>소개글</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookStock" value="0">
+                                <input name="short_desc">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>상품 할인율</label>
+                                <label>상세설명</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookDiscount" value="0">
+                                <input name="long_desc">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>책 소개</label>
+                                <label>상품주요정보</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookIntro">
+                                <input name="prod_info" value="0">
                             </div>
                         </div>
                         <div class="form_section">
                             <div class="form_section_title">
-                                <label>책 목차</label>
+                                <label>전시상태</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="bookContents">
+                                <input name="disp_sts" value="Y/N">
                             </div>
                         </div>
                     </form>
