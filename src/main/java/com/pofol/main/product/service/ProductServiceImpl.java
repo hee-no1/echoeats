@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void productEnroll(ProductDto productDto) throws Exception {
+    public void productEnroll(ProductDto productDto) {
         try {
             productRepository.insert(productDto);
         } catch (Exception e) {
@@ -25,8 +25,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int productCount() throws Exception {
-        return productRepository.count();
+    public int productCount() {
+        try {
+            return productRepository.count();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
