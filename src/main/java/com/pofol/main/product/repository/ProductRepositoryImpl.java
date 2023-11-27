@@ -16,10 +16,14 @@ public class ProductRepositoryImpl implements ProductRepository {
         this.session = session;
     }
 
-    // 상품 등록
+    // 상품 등록(INSERT)
     @Override
-    public void productEnroll(ProductDto productDto) throws Exception {
-        session.insert(namespace + "productEnroll", productDto);
+    public void insert(ProductDto productDto) throws Exception {
+        session.insert(namespace + "insert", productDto);
     }
 
+    @Override
+    public int count() throws Exception {
+        return session.selectOne(namespace + "count");
+    }
 }
