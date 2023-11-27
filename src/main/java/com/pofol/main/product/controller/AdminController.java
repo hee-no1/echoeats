@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class AdminController {
         File file = null;
         try {
             // 썸네일 파일 삭제
-            file = new File("/Users/hyungjunlim/Documents/programming/echoeats_items" + URLDecoder.decode(fileName, "UTF-8"));
+            file = new File("/Users/hyungjunlim/Documents/programming/echoeats_items" + URLDecoder.decode(fileName, StandardCharsets.UTF_8));
             file.delete();
             // 원본 파일 삭제
             String originalFileName = file.getAbsolutePath().replace("s_", "");
