@@ -9,22 +9,22 @@ import lombok.ToString;
 @Getter
 public class ProductDto {
 
-    private int prod_id;
-    private int evt_gp_id;
-    private int prod_img_id;
-    private String cat_code;
-    private String prod_name;
-    private int prod_price;
-    private int rate;
-    private String sale_sts;
-    private int prod_qty;
-    private String is_opt;
-    private String disp_sts;
-    private int rev_num;
-    private String prod_rg_date;
-    private String prod_mod_date;
-    private String sel_str_date;
-    private String sel_end_date;
+    private int prod_id; // 상품 id
+    private int evt_gp_id; // 이벤트 그룹 id
+    private int prod_img_id; // 상품 이미지 id
+    private String cat_code; // 카테고리 코드
+    private String prod_name; // 상품명
+    private int prod_price; // 상품 가격
+    private int rate; // 할인율
+    private String sale_sts; // 판매 상태
+    private int prod_qty; // 재고 수량
+    private String is_opt; // 옵션 여부
+    private String disp_sts; // 전시 상태
+    private int rev_num; // 리뷰수
+    private String prod_rg_date; // 상품 등록일
+    private String prod_mod_date; // 상품 수정일
+    private String sel_str_date; // 판매 시작일
+    private String sel_end_date; // 판매 종료일
 
     public ProductDto() {}
 
