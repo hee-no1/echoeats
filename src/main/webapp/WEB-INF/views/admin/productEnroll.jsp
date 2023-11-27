@@ -6,13 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="../resources/css/admin/prodEnroll.css">
+    <link rel="stylesheet" href="../resources/css/admin/productEnroll.css">
 
     <script
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
-</head>
 </head>
 <body>
 
@@ -37,20 +36,20 @@
             <div class="admin_navi_wrap">
                 <ul>
                     <li >
-                        <a class="admin_list_01" href="/admin/prodEnroll">상품 등록</a>
+                        <a class="admin_list_01" href="/admin/productEnroll">상품 등록</a>
                     </li>
                 </ul>
             </div>
             <div class="admin_content_wrap">
                 <div class="admin_content_subject"><span>상품 등록</span></div>
                 <div class="admin_content_main">
-                    <form action="/admin/prodEnroll" method="post" id="enrollForm">
+                    <form action="/admin/productEnroll" method="post" id="enrollForm">
                         <div class="form_section">
                             <div class="form_section_title">
                                 <label>카테고리</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="mid_cat_id">
+                                <input name="cat_code">
                             </div>
                         </div>
                         <div class="form_section">
@@ -82,7 +81,7 @@
                                 <label>옵션</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="option" value="0">
+                                <input name="is_opt" value="N">
                             </div>
                         </div>
                         <div class="form_section">
@@ -90,7 +89,7 @@
                                 <label>상품이미지</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="prod_img" value="이미지 업로드">
+                                <input name="prod_img_id" value="이미지 업로드">
                             </div>
                         </div>
                         <div class="form_section">
@@ -122,7 +121,7 @@
                                 <label>전시상태</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="disp_sts" value="Y/N">
+                                <input name="disp_sts" value="N">
                             </div>
                         </div>
                     </form>
@@ -136,5 +135,22 @@
         </div>
     </div>
 </div>
+<script>
+
+    let enrollForm = $('#enrollForm');
+
+    // 취소버튼
+    $('#cancelBtn').click(function () {
+        location.href = '/admin/productManage';
+        enrollForm.submit();
+    });
+
+    // 등록 버튼
+    $('#enrollBtn').click(function (e) {
+        e.preventDefault();
+        enrollForm.submit();
+    });
+
+</script>
 </body>
 </html>
