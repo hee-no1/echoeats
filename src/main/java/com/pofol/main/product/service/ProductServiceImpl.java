@@ -24,4 +24,9 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public int productCount() throws Exception {
+        return productRepository.count();
+    }
+
 }
