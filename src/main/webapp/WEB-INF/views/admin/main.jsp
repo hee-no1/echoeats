@@ -32,15 +32,10 @@
             <!-- 네비영역 -->
             <div class="admin_navi_wrap">
                 <ul>
-                    <li >
-                        <a class="admin_list_01" href="/admin/prodEnroll">상품 등록</a>
+                    <li>
+                        <a class="admin_list_01" href="/admin/productEnroll">상품 등록</a>
                     </li>
                 </ul>
-                <!--
-                                    <div class="admin_list_01">
-                                        <a>상품 관리</a>
-                                    </div>
-                                     -->
             </div>
             <div class="admin_content_wrap">
                 <div>관리자 페이지 입니다.</div>
