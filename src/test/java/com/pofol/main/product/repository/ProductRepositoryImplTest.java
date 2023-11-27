@@ -26,8 +26,6 @@ class ProductRepositoryImplTest {
     void insertTest() throws Exception {
         // given
         ProductDto product = new ProductDto();
-
-        // when
         product.setProd_id(1);
         product.setEvt_gp_id(1);
         product.setProd_img_id(1);
@@ -39,11 +37,12 @@ class ProductRepositoryImplTest {
         product.setProd_qty(100);
         product.setIs_opt("N");
         product.setDisp_sts("N");
-        // product.setRev_num(0);
-        System.out.println(product);
+
+        // when
         productRepository.insert(product);
 
         // then
         assertThat(productRepository.count()).isEqualTo(1);
     }
+
 }
