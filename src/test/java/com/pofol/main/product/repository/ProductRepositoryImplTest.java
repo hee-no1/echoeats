@@ -14,29 +14,14 @@ import static org.assertj.core.api.Assertions.*;
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 class ProductRepositoryImplTest {
 
-    private final ProductRepository productRepository;
-
     @Autowired
-    public ProductRepositoryImplTest(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
     @DisplayName("상품 등록 테스트")
     @Test
     void insertTest() throws Exception {
         // given
-        ProductDto product = new ProductDto();
-        product.setProd_id(1);
-        product.setEvt_gp_id(1);
-        product.setProd_img_id(1);
-        product.setCat_code("907");
-        product.setProd_name("테스트 상품");
-        product.setProd_price(10000);
-        product.setRate(10);
-        product.setSale_sts("할인중");
-        product.setProd_qty(100);
-        product.setIs_opt("N");
-        product.setDisp_sts("N");
+        ProductDto product = new ProductDto(1, 1, "907", "테스트 상품", 10000, 10, "할인중", 100, "N", "N", "2021-01-01", "2021-01-01", "2021-01-01");
 
         // when
         productRepository.insert(product);

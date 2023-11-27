@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
-@Setter
 @Getter
 public class ProductDto {
 
@@ -21,15 +19,13 @@ public class ProductDto {
     private String is_opt; // 옵션 여부
     private String disp_sts; // 전시 상태
     private int rev_num; // 리뷰수
-    private String prod_rg_date; // 상품 등록일
     private String prod_mod_date; // 상품 수정일
     private String sel_str_date; // 판매 시작일
     private String sel_end_date; // 판매 종료일
 
     public ProductDto() {}
 
-    public ProductDto(int prod_id, int evt_gp_id, int prod_img_id, String cat_code, String prod_name, int prod_price, int rate, String sale_sts, int prod_qty, String is_opt, String disp_sts, int rev_num, String prod_rg_date, String prod_mod_date, String sel_str_date, String sel_end_date) {
-        this.prod_id = prod_id;
+    public ProductDto(int evt_gp_id, int prod_img_id, String cat_code, String prod_name, int prod_price, int rate, String sale_sts, int prod_qty, String is_opt, String disp_sts, String prod_mod_date, String sel_str_date, String sel_end_date) {
         this.evt_gp_id = evt_gp_id;
         this.prod_img_id = prod_img_id;
         this.cat_code = cat_code;
@@ -40,8 +36,6 @@ public class ProductDto {
         this.prod_qty = prod_qty;
         this.is_opt = is_opt;
         this.disp_sts = disp_sts;
-        this.rev_num = rev_num;
-        this.prod_rg_date = prod_rg_date;
         this.prod_mod_date = prod_mod_date;
         this.sel_str_date = sel_str_date;
         this.sel_end_date = sel_end_date;
