@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pofol.main.order.OrderDetailMapper">
+
+    <insert id="insert" parameterType="OrderDetailDto">
+        insert into ord_detail(ord_id,ord_date,code_id,prod_id,prod_name,prod_qty,prod_tot_price,pack_type,mem_id,dlvy_notes_id,dlvy_attr)
+        values(#{ord_id},#{ord_date}, #{code_id},#{prod_id},#{prod_name},#{prod_qty},#{prod_tot_price},#{pack_type},#{mem_id},#{dlvy_notes_id},#{dlvy_attr});
+    </insert>
+
+</mapper>
