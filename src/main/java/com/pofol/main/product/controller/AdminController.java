@@ -2,9 +2,13 @@ package com.pofol.main.product.controller;
 
 import com.pofol.main.product.domain.AttachImageDto;
 import com.pofol.main.product.domain.ProdDto;
+import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.service.ProdService;
+import com.pofol.main.product.service.ProductService;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -33,6 +38,13 @@ public class AdminController {
 
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
+    private final ProductService productService;
+
+    @Autowired
+    public AdminController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping("/main")
     public void admainMainGET() throws Exception {
         log.info("admainMainGET");
@@ -45,8 +57,10 @@ public class AdminController {
     }
 
     // 상품 등록
-    @PostMapping("/prodEnroll")
-    public String prodEnrollPOST(ProdDto prodDto) throws Exception {
+    @PostMapping("/productEnroll")
+    public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
+        productService.productEnroll(productDto);
+        redirectAttributes.addFlashAttribute("result", productDto.getProd_name() + " 상품이 등록되었습니다.");
         return "redirect:/admin/prodManage";
     }
 
