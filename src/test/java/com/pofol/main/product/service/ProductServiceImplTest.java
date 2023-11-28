@@ -23,7 +23,7 @@ class ProductServiceImplTest {
     @Test
     void productEnrollTest() throws Exception {
         // given
-        ProductDto product = new ProductDto(1, 1, "907", "테스트 상품", 10000, 10, "할인중", 100, "N", "N", "2021-01-01", "2021-01-01", "2021-01-01");
+        ProductDto product = new ProductDto(1, 1, "907", "테스트 상품", 10000, 10, "할인중", 100, "N", "테스트", "테스트", "N", "2021-01-01", "2021-01-01", "2021-01-01");
 
         // when
         productService.productEnroll(product);
