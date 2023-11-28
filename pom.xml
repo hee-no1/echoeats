@@ -13,8 +13,8 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	<dependencies>
 
+	<dependencies>
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 		<dependency>
 			<groupId>net.coobird</groupId>
@@ -22,11 +22,10 @@
 			<version>0.4.20</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version> <!-- Lombok 버전은 최신 버전으로 변경할 수 있습니다. -->
+			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
 
