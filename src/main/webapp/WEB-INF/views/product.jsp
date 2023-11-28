@@ -9,7 +9,7 @@
     <title></title>
     <style>
         .css-1c36ywl {
-            background: url(${product.pro_img}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
+            background: url(${product.prod_img_id}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
         }
     </style>
 </head>
@@ -96,15 +96,15 @@
                     <section class="css-1ua1wyk e17iylht3">
                         <div class="css-12lw2qc ezpe9l13">샛별배송</div>
                         <div class="css-1qy9c46 ezpe9l12">
-                            <h1 class="css-79gmk3 ezpe9l11">${product.pro_name}</h1>
-                            <h2 class="css-ki8mlo ezpe9l10">${product.pro_desc}</h2>
+                            <h1 class="css-79gmk3 ezpe9l11">${product.prod_name}</h1>
+                            <h2 class="css-ki8mlo ezpe9l10">${product.short_desc}</h2>
                             <button class=" css-57nu3d eaxuegm1"></button>
                         </div>
                         <h2 class="css-abwjr2 e1q8tigr4">
                                 <span class="css-5nirzt e1q8tigr3">
-                                    25%
+                                    ${product.rate}%
                                 </span>
-                            <span class="css-9pf1ze e1q8tigr2">${product.pro_pri}</span>
+                            <span class="css-9pf1ze e1q8tigr2">${product.prod_price}</span>
                             <span class="css-1x9cx9j e1q8tigr1">원</span>
                         </h2>
                         <span class="css-1e1rd4p e1q8tigr0">
@@ -183,14 +183,14 @@
                                     <p class="css-c02hqi e6qx2kx1">${product.weight}</p>
                                 </dd>
                             </li>
-                            <li class="css-e6zlnr epzddad2">
-                                <dt class="css-lytdfk epzddad1">알레르기정보</dt>
-                                <dd class="css-1k8t52o epzddad0">
-                                    <p class="css-c02hqi e6qx2kx1">
-                                        ${product.allergy}
-                                    </p>
-                                </dd>
-                            </li>
+<%--                            <li class="css-e6zlnr epzddad2">--%>
+<%--                                <dt class="css-lytdfk epzddad1">알레르기정보</dt>--%>
+<%--                                <dd class="css-1k8t52o epzddad0">--%>
+<%--                                    <p class="css-c02hqi e6qx2kx1">--%>
+<%--                                        없어--%>
+<%--                                    </p>--%>
+<%--                                </dd>--%>
+<%--                            </li>--%>
                             <li class="css-e6zlnr epzddad2">
                                 <dt class="css-lytdfk epzddad1">유통기한(또는 소비기한)정보</dt>
                                 <dd class="css-1k8t52o epzddad0">

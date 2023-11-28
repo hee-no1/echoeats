@@ -4,7 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/main">echoeats</a>
-<a href="/managerForm">관리자</a>
+<a href="/main">EcoEats</a>
 </body>
 </html>
