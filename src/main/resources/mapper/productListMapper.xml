@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pofol.main.product.list.repository.ProductListRepository">
+    <select id="select" parameterType="long" resultType="ProductDto">
+        SELECT p.prod_name, p.prod_img_id, p.prod_price, p.rate, p.rev_num, i.*
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id
+          and p.prod_id = #{prod_id}
+    </select>
+<!--    변경해야함 + 테이블 join 해야함-->
+
+    <select id="selectAll" resultType="ProductDto">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, rev_num
+        FROM product
+        WHERE disp_sts = 'Y'
+    </select>
+
+    <select id="selectEvent" resultType="ProductDto">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, rev_num
+        FROM product
+        WHERE disp_sts = 'Y'
+        and evt_gp_id = #{evt_gp_id}
+    </select>
+
+    <select id="selectCategory">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, rev_num
+        FROM product
+        WHERE disp_sts = 'Y'
+        and cat_code = #{cat_code}
+    </select>
+
+    <select id="selectRateProduct">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, rev_num
+        FROM product
+        WHERE disp_sts = 'Y'
+        and rate = #{rate}
+    </select>
+
+    <select id="selectProductPrice">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, rev_num
+        FROM product
+        WHERE disp_sts = 'Y'
+        and prod_price = #{prod_price}
+    </select>
+<!--    높은 가격, 낮은 가격 나눠야함-->
+
+    <select id="count">
+        SELECT COUNT(*) FROM product
+    </select>
+
+    <select id="eventEx" parameterType="long" resultType="EventGroupDto">
+        SELECT evt_gp_name, evt_gp_dtl
+        FROM event_group
+        WHERE evt_gp_id = #{evt_gp_id}
+    </select>
+<!--    <select id="searchResultCount">-->
+
+<!--    </select>-->
+
+<!--    <select id="searchSelect">-->
+<!--        -->
+<!--    </select>-->
+</mapper>
