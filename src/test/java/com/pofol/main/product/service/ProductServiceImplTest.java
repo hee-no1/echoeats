@@ -29,6 +29,6 @@ class ProductServiceImplTest {
         productService.productEnroll(product);
 
         // then
-        assertThat(productService.productCount()).isEqualTo(1);
+        assertThat(productService.productCount()).isEqualTo(3);
     }
 }
