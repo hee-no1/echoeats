@@ -14,7 +14,7 @@ public class ProductDto {
     private String sale_sts; // 판매 상태
     private int prod_qty; // 재고 수량
     private String is_opt; // 옵션 여부
-    private String short_desc; // 짧은 설명
+    private String short_desc; // 소개글
     private String long_desc; // 긴 설명
     private String disp_sts; // 전시 상태
     private String prod_mod_date; // 상품 수정일
@@ -39,6 +39,26 @@ public class ProductDto {
         this.prod_mod_date = prod_mod_date;
         this.sel_str_date = sel_str_date;
         this.sel_end_date = sel_end_date;
+    }
+
+    public void setProd_name(String prod_name) {
+        this.prod_name = prod_name;
+    }
+
+    public void setIs_opt(String is_opt) {
+        this.is_opt = is_opt;
+    }
+
+    public void setShort_desc(String short_desc) {
+        this.short_desc = short_desc;
+    }
+
+    public void setLong_desc(String long_desc) {
+        this.long_desc = long_desc;
+    }
+
+    public void setDisp_sts(String disp_sts) {
+        this.disp_sts = disp_sts;
     }
 
 }

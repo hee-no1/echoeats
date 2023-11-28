@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -7,11 +7,18 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link rel="stylesheet" href="../resources/css/admin/productEnroll.css">
+    <%-- 달력 위젯을 위한 스타일 시트 --%>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 
     <script
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
+    <%-- 위지윅을 위한 script src --%>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+    <%-- 달력위젯을 위한 script src --%>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -35,7 +42,7 @@
             <!-- 네비영역 -->
             <div class="admin_navi_wrap">
                 <ul>
-                    <li >
+                    <li>
                         <a class="admin_list_01" href="/admin/productEnroll">상품 등록</a>
                     </li>
                 </ul>
@@ -57,7 +64,7 @@
                                 <label>상품명</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="prod_name">
+                                <input name="prod_name" value="상품명을 입력하세요.">
                             </div>
                         </div>
                         <div class="form_section">
@@ -97,7 +104,7 @@
                                 <label>소개글</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="short_desc">
+                                <textarea name="short_desc" id="short_desc_textarea"></textarea>
                             </div>
                         </div>
                         <div class="form_section">
@@ -105,7 +112,7 @@
                                 <label>상세설명</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="long_desc">
+                                <textarea name="long_desc" id="long_desc_textarea"></textarea>
                             </div>
                         </div>
                         <div class="form_section">
@@ -113,7 +120,7 @@
                                 <label>상품주요정보</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="prod_info" value="0">
+                                <input name="sel_str_date" autocomplete="off" readonly="readonly">
                             </div>
                         </div>
                         <div class="form_section">
@@ -136,6 +143,26 @@
     </div>
 </div>
 <script>
+
+    // 위지윅 적용
+    // 상품 소개글
+    ClassicEditor
+        .create(document.querySelector('#short_desc_textarea'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    // 상품 상세설명
+    ClassicEditor
+        .create(document.querySelector('#long_desc_textarea'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    // 달력 위젯 적용
+    $(function() {
+        $( "input[name='sel_str_date']" ).datepicker();
+    });
 
     let enrollForm = $('#enrollForm');
 

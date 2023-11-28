@@ -60,7 +60,6 @@ public class ProdController {
             HttpHeaders header = new HttpHeaders();
             header.add("Content-type", Files.probeContentType(file.toPath()));
             result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-            log.info("info log={}", fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

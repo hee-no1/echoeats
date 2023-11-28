@@ -1,9 +1,7 @@
 package com.pofol.main.product.controller;
 
 import com.pofol.main.product.domain.AttachImageDto;
-import com.pofol.main.product.domain.ProdDto;
 import com.pofol.main.product.domain.ProductDto;
-import com.pofol.main.product.service.ProdService;
 import com.pofol.main.product.service.ProductService;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
