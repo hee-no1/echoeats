@@ -36,12 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                     .authorizeRequests()//인증이 필요한 url지정
-                    .antMatchers("/user").hasAnyAuthority("USER","ADMIN")
-                    .antMatchers("/admin").hasAuthority("ADMIN")
+                    .antMatchers("/member/user").hasAnyAuthority("USER","ADMIN")
+                    .antMatchers("/member/admin").hasAuthority("ADMIN")
                     .anyRequest().permitAll()
                 .and()
                     .formLogin()    //Form Login 방식 적용
-                    .loginPage("/login")
+                    .loginPage("/member/login_form")
                     .loginProcessingUrl("/login")
                    .successHandler(authenticationSuccessHandler)
                     .failureHandler(authenticationFailureHandler)
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login")
+                    .logoutSuccessUrl("/member/login_form")
                     .invalidateHttpSession(true);
 
 

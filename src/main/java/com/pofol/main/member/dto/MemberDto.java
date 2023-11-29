@@ -1,37 +1,35 @@
 package com.pofol.main.member.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
-public class memberDto {
+public class MemberDto {
 
-    String mem_id;
-    int  mbs_id;  //멤버쉽 아이디
-    int  own_cp_id;   //보유 쿠폰 아이디
-    String gd_name; //등급 이름
-    String mem_code_id;  //회원 상태
-    String mem_pwd;
-    String mem_name;
-    String mem_email;
-    String mem_phone;
-    String mem_gender;
+    private String mem_id;
+    private int  mbs_id;  //멤버쉽 아이디
+    private int  own_cp_id;   //보유 쿠폰 아이디
+    private String gd_name; //등급 이름
+    private String mem_code_id;  //회원 상태
+    private String mem_pwd;
+    private String mem_name;
+    private String mem_email;
+    private String mem_phone;
+    private String mem_gender;
 
-    String mem_birth;
-    String addr;
-    int point;
-    String per_info_col;
-    String free_ship_recep;
+    private String mem_birth;
+    private String addr;
+    private int point;
+    private String per_info_col;
+    private String free_ship_recep;
 
-    Date rg_date;
-    String rg_num;
-    Date md_date;
-    String md_num;
-    Date update_date;
+    private Date rg_date;
+    private String rg_num;
+    private Date md_date;
+    private String md_num;
+    private Date update_date;
 
-    String role;
+    private String role;
 
-    public memberDto() {
+    public MemberDto() {
         this.point =0;
         this.gd_name = "일반";
         this.mem_code_id ="활성";
@@ -40,7 +38,7 @@ public class memberDto {
         this.role="USER";
     }
 
-    public memberDto(String mem_id, int mbs_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, String addr, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
+    public MemberDto(String mem_id, int mbs_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, String addr, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
         this.mem_id = mem_id;
         this.mbs_id = mbs_id;
         this.own_cp_id = own_cp_id;

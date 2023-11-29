@@ -1,7 +1,6 @@
 package com.pofol.main.member.security;
 
-import com.pofol.main.TestDao;
-import com.pofol.main.member.dto.memberDto;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String mem_id) throws UsernameNotFoundException {
 
         //db에서 유저 정보를 가져온다
-        memberDto vo2 = service.select(mem_id);
+        MemberDto vo2 = service.select(mem_id);
 
         if (vo2==null){
             return null;
