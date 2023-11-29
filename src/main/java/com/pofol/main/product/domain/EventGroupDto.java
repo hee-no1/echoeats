@@ -1,4 +1,4 @@
-package com.pofol.main.product.list.domain;
+package com.pofol.main.product.domain;
 
 import java.util.Objects;
 

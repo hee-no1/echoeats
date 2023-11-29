@@ -1,8 +1,8 @@
-package com.pofol.main.product.list.repository;
+package com.pofol.main.product.repository;
 
-import com.pofol.main.product.list.SearchCondition;
-import com.pofol.main.product.list.domain.EventGroupDto;
-import com.pofol.main.product.list.domain.ProductDto;
+import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.ProductDto;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.pofol.main.product.list;
+package com.pofol.main.product;
 
 public class PageHandler {
 

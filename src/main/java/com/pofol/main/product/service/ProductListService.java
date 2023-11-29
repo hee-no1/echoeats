@@ -1,7 +1,7 @@
-package com.pofol.main.product.list.service;
+package com.pofol.main.product.service;
 
-import com.pofol.main.product.list.domain.EventGroupDto;
-import com.pofol.main.product.list.domain.ProductDto;
+import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.ProductDto;
 
 import java.util.List;
 
