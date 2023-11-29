@@ -1,8 +1,9 @@
-package com.pofol.main.product.list.repository;
+package com.pofol.main.product.repository;
 
-import com.pofol.main.product.list.domain.EventGroupDto;
-import com.pofol.main.product.list.domain.ProductDto;
-import com.pofol.main.product.list.SearchCondition;
+import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.repository.ProductListRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductListRepositoryImpl implements ProductListRepository{
+public class ProductListRepositoryImpl implements ProductListRepository {
 
-  private final String namespace = "com.pofol.main.product.list.repository.ProductListRepository.";
+  private final String namespace = "com.pofol.main.product.repository.ProductListRepository.";
 
   private final SqlSession sqlSession;
 

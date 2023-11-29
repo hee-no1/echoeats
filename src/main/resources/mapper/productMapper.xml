@@ -6,13 +6,13 @@
 
     <!-- 상품 등록 -->
     <insert id="insert" parameterType="ProductDto">
-        INSERT INTO spring.product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, sale_sts, prod_qty, is_opt, short_desc, long_desc, disp_sts, prod_mod_date, sel_str_date, sel_end_date)
+        INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, sale_sts, prod_qty, is_opt, short_desc, long_desc, disp_sts, prod_mod_date, sel_str_date, sel_end_date)
         VALUES (#{evt_gp_id}, #{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{rate}, #{sale_sts}, #{prod_qty}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{prod_mod_date}, #{sel_str_date}, #{sel_end_date})
     </insert>
 
     <!-- product테이블 행 개수 -->
     <select id="count" resultType="int">
-        SELECT COUNT(*) FROM spring.product
+        SELECT COUNT(*) FROM product
     </select>
 
 </mapper>

@@ -1,15 +1,15 @@
-package com.pofol.main.product.list.service;
+package com.pofol.main.product.service;
 
-import com.pofol.main.product.list.domain.EventGroupDto;
-import com.pofol.main.product.list.domain.ProductDto;
-import com.pofol.main.product.list.repository.ProductListRepository;
+import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.repository.ProductListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductListServiceImpl implements ProductListService{
+public class ProductListServiceImpl implements ProductListService {
 
   private final ProductListRepository productListRepository;
 

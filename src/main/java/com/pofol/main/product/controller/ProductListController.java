@@ -1,13 +1,12 @@
-package com.pofol.main.product.list.controller;
+package com.pofol.main.product.controller;
 
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
-import com.pofol.main.product.list.domain.EventGroupDto;
-import com.pofol.main.product.list.domain.ProductDto;
-import com.pofol.main.product.list.service.ProductListService;
+import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.service.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

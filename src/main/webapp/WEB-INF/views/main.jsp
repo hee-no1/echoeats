@@ -78,7 +78,7 @@
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="./kurly_logo.svg" alt="마켓컬리 로고">
+                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
                         <a>마켓컬리</a>
                         <div class="stick"></div>
                         <a>뷰티컬리</a>
@@ -159,19 +159,19 @@
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="./ad1.jpg">
+                            <img src="/resources/images/ad1.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="./ad2.jpg">
+                            <img src="/resources/images/ad2.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="./ad3.jpg">
+                            <img src="/resources/images/ad3.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="./ad4.jpg">
+                            <img src="/resources/images/ad4.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="./ad5.jpg">
+                            <img src="/resources/images/ad5.jpg">
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
             <div id="main-01"> <!-- 슈퍼빅세일특가 -->
                 <div class="SectionTitle">
                     <a href="/christmas"><span>🎄${eventEx.evt_gp_name}🎄</span>
-                        <span><img src="./arrow_right.svg"></span></a>
+                        <span><img src="/resources/icons/arrow_right.svg"></span></a>
                     <p>${eventEx.evt_gp_dtl}</p>
                 </div>
                 <div class="SectionContent">
@@ -250,7 +250,7 @@
             <!-- 슈퍼빅세일 기획특가 -->
             <div class="mid-ad">
                 <a href="#"><span>
-                        <img src="./mid-ad_banner01.jpg">
+                        <img src="/resources/images/mid-ad_banner01.jpg">
                     </span></a>
             </div>
 
@@ -359,7 +359,7 @@
             <div id="main-01"> <!-- 슈퍼빅세일특가 -->
                 <div class="SectionTitle">
                     <a href="#"><span>🎄${eventEx.evt_gp_name}🎄</span>
-                        <span><img src="./arrow_right.svg"></span></a>
+                        <span><img src="/resources/icons/arrow_right.svg"></span></a>
                     <p>${eventEx.evt_gp_dtl}</p>
                 </div>
                 <div class="SectionContent">
@@ -425,7 +425,7 @@
                 <div id="main-01"> <!-- 슈퍼빅세일특가 -->
                     <div class="SectionTitle">
                         <a href="#"><span>🎄${eventEx.evt_gp_name}🎄</span>
-                            <span><img src="./arrow_right.svg"></span></a>
+                            <span><img src="/resources/icons/arrow_right.svg"></span></a>
                         <p>${eventEx.evt_gp_dtl}</p>
                     </div>
                     <div class="SectionContent">
