@@ -35,7 +35,7 @@
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="./kurly_logo.svg" alt="마켓컬리 로고">
+                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
                         <a>마켓컬리</a>
                         <div class="stick"></div>
                         <a>뷰티컬리</a>
