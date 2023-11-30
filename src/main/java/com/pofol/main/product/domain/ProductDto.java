@@ -21,6 +21,9 @@ public class ProductDto {
   private Integer disc_price; // 할인된 가격
   private String sale_sts; // 판매 상태
   private Integer prod_qty; // 재고 수량
+
+  private String is_exch; // 교환 가능 여부
+
   private String is_opt; // 옵션 유무
   private String short_desc; // 짧은 상세 설명
   private String long_desc; // 긴 상세 설명
@@ -30,8 +33,8 @@ public class ProductDto {
   private Date prod_mod_date; // 상품 수정일
   private Date sel_str_date; // 판매 시작일
   private Date sel_end_date; // 판매 종료일
-
   private Long prod_desc_id; // 상품 상세
+
   private String brand; // 브랜드
   private String origin; // 원산지
   private String dlvy_type; // 배송 타입
@@ -41,7 +44,6 @@ public class ProductDto {
   private String weight; // 중량/용량
   private String exp_date; // 유통기한
   private String as_guide; // 안내사항
-
   public ProductDto() {}
 
   public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, int prod_price, int rate, String sale_sts, int prod_qty, String is_opt, String short_desc, String long_desc, String disp_sts, Date prod_mod_date, Date sel_str_date, Date sel_end_date) {
@@ -126,6 +128,10 @@ public class ProductDto {
     this.sel_end_date = sel_end_date;
   }
 
+  public void setIs_exch(String is_exch) {
+    this.is_exch = is_exch;
+  }
+
   public void setOrigin(String origin) {
     this.origin = origin;
   }
@@ -183,11 +189,11 @@ public class ProductDto {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ProductDto that = (ProductDto) o;
-    return Objects.equals(prod_id, that.prod_id) && Objects.equals(evt_gp_id, that.evt_gp_id) && Objects.equals(prod_img_id, that.prod_img_id) && Objects.equals(cat_code, that.cat_code) && Objects.equals(prod_name, that.prod_name) && Objects.equals(prod_price, that.prod_price) && Objects.equals(rate, that.rate) && Objects.equals(sale_sts, that.sale_sts) && Objects.equals(prod_qty, that.prod_qty) && Objects.equals(is_opt, that.is_opt) && Objects.equals(disp_sts, that.disp_sts) && Objects.equals(rev_num, that.rev_num) && Objects.equals(prod_rg_date, that.prod_rg_date) && Objects.equals(prod_mod_date, that.prod_mod_date) && Objects.equals(sel_str_date, that.sel_str_date) && Objects.equals(sel_end_date, that.sel_end_date) && Objects.equals(origin, that.origin) && Objects.equals(weight, that.weight) && Objects.equals(brand, that.brand) && Objects.equals(short_desc, that.short_desc) && Objects.equals(long_desc, that.long_desc) && Objects.equals(seller, that.seller) && Objects.equals(exp_date, that.exp_date) && Objects.equals(as_guide, that.as_guide) && Objects.equals(sales_unit, that.sales_unit) && Objects.equals(pack_type, that.pack_type);
+    return Objects.equals(prod_id, that.prod_id) && Objects.equals(evt_gp_id, that.evt_gp_id) && Objects.equals(prod_img_id, that.prod_img_id) && Objects.equals(cat_code, that.cat_code) && Objects.equals(prod_name, that.prod_name) && Objects.equals(prod_price, that.prod_price) && Objects.equals(rate, that.rate) && Objects.equals(disc_price, that.disc_price) && Objects.equals(sale_sts, that.sale_sts) && Objects.equals(prod_qty, that.prod_qty) && Objects.equals(is_exch, that.is_exch) && Objects.equals(is_opt, that.is_opt) && Objects.equals(short_desc, that.short_desc) && Objects.equals(long_desc, that.long_desc) && Objects.equals(disp_sts, that.disp_sts) && Objects.equals(rev_num, that.rev_num) && Objects.equals(prod_rg_date, that.prod_rg_date) && Objects.equals(prod_mod_date, that.prod_mod_date) && Objects.equals(sel_str_date, that.sel_str_date) && Objects.equals(sel_end_date, that.sel_end_date) && Objects.equals(prod_desc_id, that.prod_desc_id) && Objects.equals(brand, that.brand) && Objects.equals(origin, that.origin) && Objects.equals(dlvy_type, that.dlvy_type) && Objects.equals(seller, that.seller) && Objects.equals(pack_type, that.pack_type) && Objects.equals(sales_unit, that.sales_unit) && Objects.equals(weight, that.weight) && Objects.equals(exp_date, that.exp_date) && Objects.equals(as_guide, that.as_guide);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prod_id, evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, sale_sts, prod_qty, is_opt, disp_sts, rev_num, prod_rg_date, prod_mod_date, sel_str_date, sel_end_date, origin, weight, brand, short_desc, long_desc, seller, exp_date, as_guide, sales_unit, pack_type);
+    return Objects.hash(prod_id, evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, disc_price, sale_sts, prod_qty, is_exch, is_opt, short_desc, long_desc, disp_sts, rev_num, prod_rg_date, prod_mod_date, sel_str_date, sel_end_date, prod_desc_id, brand, origin, dlvy_type, seller, pack_type, sales_unit, weight, exp_date, as_guide);
   }
 }
