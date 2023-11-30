@@ -5,7 +5,6 @@ import java.util.Date;
 public class MemberDto {
 
     private String mem_id;
-    private int  mbs_id;  //멤버쉽 아이디
     private int  own_cp_id;   //보유 쿠폰 아이디
     private String gd_name; //등급 이름
     private String mem_code_id;  //회원 상태
@@ -16,7 +15,6 @@ public class MemberDto {
     private String mem_gender;
 
     private String mem_birth;
-    private String addr;
     private int point;
     private String per_info_col;
     private String free_ship_recep;
@@ -38,9 +36,8 @@ public class MemberDto {
         this.role="USER";
     }
 
-    public MemberDto(String mem_id, int mbs_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, String addr, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
+    public MemberDto(String mem_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
         this.mem_id = mem_id;
-        this.mbs_id = mbs_id;
         this.own_cp_id = own_cp_id;
         this.gd_name = gd_name;
         this.mem_code_id = mem_code_id;
@@ -50,7 +47,6 @@ public class MemberDto {
         this.mem_phone = mem_phone;
         this.mem_gender = mem_gender;
         this.mem_birth = mem_birth;
-        this.addr = addr;
         this.point = point;
         this.per_info_col = per_info_col;
         this.free_ship_recep = free_ship_recep;
@@ -67,7 +63,6 @@ public class MemberDto {
     public String toString() {
         return "memberDto{" +
                 "mem_id='" + mem_id + '\'' +
-                ", mbs_id=" + mbs_id +
                 ", own_cp_id=" + own_cp_id +
                 ", gd_name='" + gd_name + '\'' +
                 ", mem_code_id='" + mem_code_id + '\'' +
@@ -77,7 +72,6 @@ public class MemberDto {
                 ", mem_phone='" + mem_phone + '\'' +
                 ", mem_gender='" + mem_gender + '\'' +
                 ", mem_birth='" + mem_birth + '\'' +
-                ", addr='" + addr + '\'' +
                 ", point=" + point +
                 ", per_info_col='" + per_info_col + '\'' +
                 ", free_ship_recep='" + free_ship_recep + '\'' +
@@ -98,13 +92,6 @@ public class MemberDto {
         this.mem_id = mem_id;
     }
 
-    public int getMbs_id() {
-        return mbs_id;
-    }
-
-    public void setMbs_id(int mbs_id) {
-        this.mbs_id = mbs_id;
-    }
 
     public int getOwn_cp_id() {
         return own_cp_id;
@@ -178,13 +165,6 @@ public class MemberDto {
         this.mem_birth = mem_birth;
     }
 
-    public String getAddr() {
-        return addr;
-    }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
 
     public int getPoint() {
         return point;

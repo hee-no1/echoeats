@@ -6,6 +6,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * Handles requests for the application home page.
  */
@@ -28,11 +31,13 @@ public class MemberController {
 		return "user";
 	}
 
-	@GetMapping("/info")
-	public @ResponseBody String info(){
+	@GetMapping(value ="/info", produces = "text/plain; charset=UTF-8")
+	public @ResponseBody String info(HttpServletRequest request){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
        Object a = authentication.getPrincipal();
-		return a.toString();
+		HttpSession session = request.getSession();
+		Object greeting = session.getAttribute("greeting");
+		return a.toString()+"     "+greeting  + "    한글 테스트";
 	}
 
 

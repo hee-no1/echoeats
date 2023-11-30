@@ -7,6 +7,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +27,26 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             errormsg = "비밀번호불일치";
         }else if (exception instanceof InternalAuthenticationServiceException) {
             errormsg = "존재하지 않는 아이디입니다.";
-        }  else {
+        }else if (exception instanceof UsernameNotFoundException) {
+            errormsg = "계정없음";
+        } else if (exception instanceof AccountExpiredException) {
+            errormsg = "계정만료";
+        } else if (exception instanceof CredentialsExpiredException) {
+            errormsg = "비밀번호만료";
+        } else if (exception instanceof DisabledException) {
+            errormsg = "계정비활성화";
+        } else if (exception instanceof LockedException) {
+            errormsg = "계정잠김";
+        }else {
             errormsg = "확인된 에러가 없습니다.";
         }
 
         request.setAttribute("errormsg", errormsg);
-        System.out.println(errormsg);
-        response.sendRedirect("/login");
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/member/login_form");
+        dispatcher.forward(request, response);
+
+        //response.sendRedirect("/member/login_form");
 
     }
 
@@ -56,15 +70,3 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
 
 
-
-//else if (exception instanceof UsernameNotFoundException) {
-//        return "계정없음";
-//        } else if (exception instanceof AccountExpiredException) {
-//        return "계정만료";
-//        } else if (exception instanceof CredentialsExpiredException) {
-//        return "비밀번호만료";
-//        } else if (exception instanceof DisabledException) {
-//        return "계정비활성화";
-//        } else if (exception instanceof LockedException) {
-//        return "계정잠김";
-//        }
