@@ -35,23 +35,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                    .authorizeRequests()//인증이 필요한 url지정
-                    .antMatchers("/member/user").hasAnyAuthority("USER","ADMIN")
-                    .antMatchers("/member/admin").hasAuthority("ADMIN")
-                    .anyRequest().permitAll()
+                .authorizeRequests()//인증이 필요한 url지정
+                .antMatchers("/member/user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/member/admin").hasAuthority("ADMIN")
+                .anyRequest().permitAll()
                 .and()
-                    .formLogin()    //Form Login 방식 적용
-                    .loginPage("/member/login_form")
-                    .loginProcessingUrl("/login")
-                   .successHandler(authenticationSuccessHandler)
-                    .failureHandler(authenticationFailureHandler)
-                    .usernameParameter("mem_id")
-                    .passwordParameter("mem_pwd")
+                .formLogin()    //Form Login 방식 적용
+                .loginPage("/member/login_form")
+                .loginProcessingUrl("/login")
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
+                .usernameParameter("mem_id")
+                .passwordParameter("mem_pwd")
                 .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/member/login_form")
-                    .invalidateHttpSession(true);
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/member/login_form")
+                .invalidateHttpSession(true);
 
 
     }

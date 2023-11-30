@@ -4,5 +4,5 @@ import com.pofol.main.member.dto.MemberDto;
 
 public interface MemberService {
 
-    public MemberDto select(String id);
+    MemberDto select(String id);
 }

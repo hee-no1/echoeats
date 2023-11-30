@@ -30,7 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         // 권한 리스트
         List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
         System.out.print("권한 : ");
-        for(int i = 0; i< authList.size(); i++) {
+        for (int i = 0; i < authList.size(); i++) {
             System.out.print(authList.get(i).getAuthority() + " ");
         }
         System.out.println();
@@ -39,9 +39,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     }
 
 
-
 }
-
 
 
 //    HttpSession session = request.getSession();

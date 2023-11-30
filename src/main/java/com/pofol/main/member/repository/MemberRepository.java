@@ -6,9 +6,9 @@ import java.util.Date;
 
 public interface MemberRepository {
 
-    public MemberDto select_member(String mem_id);
+    MemberDto select_member(String mem_id);
 
-    public Date member_now();
+    Date member_now();
 
 
 }
