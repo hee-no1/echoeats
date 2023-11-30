@@ -25,13 +25,6 @@
 <div>
 	<button id="orderBtn" type="button">주문하기</button>
 </div>
-
-<script>
-	$(document).ready(function(){
-		$("#orderBtn").click(function(){
-			$(location).attr('href','${pageContext.request.contextPath}/order');
-		})
-	})
-</script>
+<script src="/resources/order/js/cartJS.js"></script>
 </body>
 </html>

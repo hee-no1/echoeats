@@ -1,25 +1,25 @@
-package com.pofol.main.order.orderProductTest;
+package com.pofol.main.orders.cartData;
 
 import java.util.Objects;
 
 public class SelectedItemsDto {
 
-    private ProductDto dealProductNo; //dealProductNo 객체
+    private Long prod_id;
     private Integer qty;
 
     public SelectedItemsDto(){}
 
-    public SelectedItemsDto(ProductDto dealProductNo, Integer qty) {
-        this.dealProductNo = dealProductNo;
+    public SelectedItemsDto(Long prod_id, Integer qty) {
+        this.prod_id = prod_id;
         this.qty = qty;
     }
 
-    public ProductDto getDealProductNo() {
-        return dealProductNo;
+    public Long getProd_id() {
+        return prod_id;
     }
 
-    public void setDealProductNo(ProductDto dealProductNo) {
-        this.dealProductNo = dealProductNo;
+    public void setProd_id(Long prod_id) {
+        this.prod_id = prod_id;
     }
 
     public Integer getQty() {
@@ -35,19 +35,19 @@ public class SelectedItemsDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SelectedItemsDto that = (SelectedItemsDto) o;
-        return Objects.equals(dealProductNo, that.dealProductNo) && Objects.equals(qty, that.qty);
+        return Objects.equals(prod_id, that.prod_id) && Objects.equals(qty, that.qty);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dealProductNo, qty);
+        return Objects.hash(prod_id, qty);
     }
 
     @Override
     public String toString() {
         return "SelectedItemsDto{" +
-                "dealProductNo=" + dealProductNo +
-                ", quantity=" + qty +
+                "prod_id=" + prod_id +
+                ", qty=" + qty +
                 '}';
     }
 }
