@@ -9,7 +9,8 @@ public class EventGroupDto {
   private String evt_gp_dtl; // 이벤트 그룹 설명
   private String evt_gp_std; // 이벤트 그룹 기준
 
-  public EventGroupDto() {}
+  public EventGroupDto() {
+  }
 
   public Long getEvt_gp_id() {
     return evt_gp_id;

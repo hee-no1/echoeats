@@ -16,23 +16,23 @@ import java.nio.file.Files;
 @Slf4j
 public class ProductController {
 
-    @GetMapping("/prodEnroll")
-    public String prodEnrollPageGET() {
-        return "prodEnroll";
-    }
+  @GetMapping("/prodEnroll")
+  public String prodEnrollPageGET() {
+    return "prodEnroll";
+  }
 
-    @GetMapping("/upload")
-    public ResponseEntity<byte[]> getImages(String fileName) {
-        File file = new File("/Users/hyungjunlim/Documents/programming/echoeats_items/" + fileName);
-        ResponseEntity<byte[]> result = null;
-        try {
-            HttpHeaders header = new HttpHeaders();
-            header.add("Content-type", Files.probeContentType(file.toPath()));
-            result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+  @GetMapping("/upload")
+  public ResponseEntity<byte[]> getImages(String fileName) {
+    File file = new File("/Users/hyungjunlim/Documents/programming/echoeats_items/" + fileName);
+    ResponseEntity<byte[]> result = null;
+    try {
+      HttpHeaders header = new HttpHeaders();
+      header.add("Content-type", Files.probeContentType(file.toPath()));
+      result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return result;
+  }
 
 }

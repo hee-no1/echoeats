@@ -68,7 +68,6 @@ public class ProductListRepositoryImpl implements ProductListRepository {
   }
 
 
-
   @Override // 이벤트 그룹 이름과 설명
   public EventGroupDto eventEx(Long evt_gp_id) throws Exception {
     return sqlSession.selectOne(namespace + "eventEx", evt_gp_id);

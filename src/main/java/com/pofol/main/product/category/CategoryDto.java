@@ -14,7 +14,8 @@ public class CategoryDto {
   private String cat_name;
   private String parent_code;
 
-  public CategoryDto() {}
+  public CategoryDto() {
+  }
 
   public void setCat_code(String cat_code) {
     this.cat_code = cat_code;

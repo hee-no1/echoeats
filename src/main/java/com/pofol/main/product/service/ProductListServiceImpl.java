@@ -34,7 +34,6 @@ public class ProductListServiceImpl implements ProductListService {
   }
 
 
-
   @Override // 이벤트 그룹 이름과 설명
   public EventGroupDto getEventEx(Long evt_gp_id) throws Exception {
     return productListRepository.eventEx(evt_gp_id);

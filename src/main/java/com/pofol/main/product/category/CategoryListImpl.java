@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CategoryListImpl implements CategoryList{
+public class CategoryListImpl implements CategoryList {
 
-  private String namespace = "com.pofol.main.product.category.CategoryDto.";
+  private final String namespace = "com.pofol.main.product.category.CategoryDto.";
 
   private final SqlSession sqlSession;
 
@@ -19,7 +19,7 @@ public class CategoryListImpl implements CategoryList{
   }
 
   @Override // 대 카테고리 정렬
-  public List<CategoryDto> bigCateList() throws Exception{
+  public List<CategoryDto> bigCateList() throws Exception {
     return sqlSession.selectList(namespace + "bigCateList");
   }
 
