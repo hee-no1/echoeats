@@ -56,7 +56,18 @@
                                 <label>카테고리</label>
                             </div>
                             <div class="form_section_content">
-                                <input name="cat_code">
+                                <div class="cate_wrap">
+                                    <span>대분류</span>
+                                    <select class="cate1">
+                                        <option selected value="none">선택</option>
+                                    </select>
+                                </div>
+                                <div class="cate_wrap">
+                                    <span>중분류</span>
+                                    <select class="cate2">
+                                        <option selected value="none">선택</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form_section">
@@ -176,6 +187,68 @@
     $('#enrollBtn').click(function (e) {
         e.preventDefault();
         enrollForm.submit();
+    });
+
+    // 상품 등록 페이지에 카테고리 리스트
+    <%--$(document).ready(function(){--%>
+    <%--    console.log('${categoryList}');--%>
+    <%--});--%>
+
+    // 카테고리 리스트
+    let categoryList = JSON.parse('${categoryList}');
+
+    let cate1Array = [];
+    let cate2Array = [];
+    let cate1Object = {};
+    let cate2Object = {};
+
+    let cate1Select = $('.cate1');
+    let cate2Select = $('.cate2');
+
+    for (let i = 0; i < categoryList.length; i++) {
+        if (categoryList[i].tier === '1') {
+            cate1Object = {};
+            cate1Object.cat_name = categoryList[i].cat_name;
+            cate1Object.cat_code = categoryList[i].cat_code;
+            cate1Object.parent_code = categoryList[i].parent_code;
+
+            cate1Array.push(cate1Object);
+        }
+    }
+
+    // 카테고리 배열 초기화 메서드
+    function makeCategoryArray(obj, array, categoryList, tier) {
+        for (let i = 0; i < categoryList.length; i++) {
+            if (categoryList[i].tier === tier) {
+                obj = {};
+                obj.cat_name = categoryList[i].cat_name;
+                obj.cat_code = categoryList[i].cat_code;
+                obj.parent_code = categoryList[i].parent_code;
+
+                array.push(obj);
+            }
+        }
+    }
+
+    // 배열 초기화
+    makeCategoryArray(cate1Object, cate1Array, categoryList, '1');
+    makeCategoryArray(cate2Object, cate2Array, categoryList, '2');
+
+    // 대분류 목록
+    for (let i = 0; i < cate1Array.length; i++) {
+        cate1Select.append('<option value="' + cate1Array[i].cat_code + '">' + cate1Array[i].cat_name + '</option>');
+    }
+
+    // 대분류 선택시 중분류 목록
+    $(cate1Select).on("change", function () {
+        let selectVal = $(this).find("option:selected").val();
+        cate2Select.children().remove();
+        cate2Select.append('<option selected value="none">선택</option>');
+        for(let i = 0; i < cate2Array.length; i++) {
+            if (cate2Array[i].parent_code === selectVal) {
+                cate2Select.append('<option value="' + cate2Array[i].cat_code + '">' + cate2Array[i].cat_name + '</option>');
+            }
+        }
     });
 
 </script>
