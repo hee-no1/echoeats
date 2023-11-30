@@ -5,7 +5,7 @@ import java.util.Date;
 public class MemberDto {
 
     private String mem_id;
-    private int  own_cp_id;   //보유 쿠폰 아이디
+    private int own_cp_id;   //보유 쿠폰 아이디
     private String gd_name; //등급 이름
     private String mem_code_id;  //회원 상태
     private String mem_pwd;
@@ -28,12 +28,12 @@ public class MemberDto {
     private String role;
 
     public MemberDto() {
-        this.point =0;
+        this.point = 0;
         this.gd_name = "일반";
-        this.mem_code_id ="활성";
-        this.free_ship_recep ="N";
+        this.mem_code_id = "활성";
+        this.free_ship_recep = "N";
         this.per_info_col = "N";
-        this.role="USER";
+        this.role = "USER";
     }
 
     public MemberDto(String mem_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
