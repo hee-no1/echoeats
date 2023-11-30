@@ -1,5 +1,8 @@
 package com.pofol.main.product.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pofol.main.product.category.CategoryDto;
+import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.AttachImageDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductService;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +42,12 @@ public class AdminController {
 
     private final ProductService productService;
 
+    private final CategoryList categoryList;
+
     @Autowired
-    public AdminController(ProductService productService) {
+    public AdminController(ProductService productService, CategoryList categoryList) {
         this.productService = productService;
+        this.categoryList = categoryList;
     }
 
     @GetMapping("/main")
@@ -50,8 +57,11 @@ public class AdminController {
 
     // 상품 등록 페이지 접속
     @GetMapping("/productEnroll")
-    public void prodEnrollGET() throws Exception {
-        log.info("상품등록페이지 접속");
+    public void prodEnrollGET(Model model) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<CategoryDto> list = categoryList.enrollCategoryList();
+        String categoryListJson = objectMapper.writeValueAsString(list);
+        model.addAttribute("categoryList", categoryListJson);
     }
 
     // 상품 등록
