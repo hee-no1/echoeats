@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/member")
 public class MemberController {
 
+
     @Autowired
     MemberService memberService;
     @Autowired
@@ -38,6 +39,7 @@ public class MemberController {
 
         return "member/login_form";
     }
+
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String userGET() {

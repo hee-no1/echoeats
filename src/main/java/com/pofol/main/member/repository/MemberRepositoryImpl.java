@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public class MemberRepositoryImpl implements MemberRepository {
     @Autowired
     private SqlSession session;
+
     private static String namespace = "com.pofol.main.member.memberMapper.";
     @Override
     public MemberDto selectMember(String mem_id) throws Exception {
@@ -42,4 +43,5 @@ public class MemberRepositoryImpl implements MemberRepository {
     public int checkEmail(String mem_email) throws Exception {
         return session.selectOne(namespace + "checkEmail", mem_email);
     }
+
 }

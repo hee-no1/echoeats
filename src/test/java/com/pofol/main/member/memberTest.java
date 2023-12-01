@@ -34,15 +34,10 @@ public class memberTest {
 	MemberService service;
 
 
-    @Test
-    public void test(){
-        System.out.println(Mdao.member_now());
-    }
-
 
 	@Test
 	public void test3(){
-		MemberDto exampleMemId = Mdao.select_member("admin123");
+		MemberDto exampleMemId = Mdao.selectMember("admin123");
 		System.out.println(exampleMemId.toString());
 	}
 

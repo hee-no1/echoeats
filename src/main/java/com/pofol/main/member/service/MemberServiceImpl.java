@@ -11,8 +11,15 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     MemberRepository memberRepository;
 
+
+    @Override
+    public MemberDto select(String id) {
+        return memberRepository.selectMember(id);
+
+
     @Override
     public int signin(MemberDto memberDto) throws Exception {
         return memberRepository.insertMember(memberDto);
+
     }
 }

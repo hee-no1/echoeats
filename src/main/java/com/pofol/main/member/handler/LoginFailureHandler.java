@@ -25,9 +25,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         if (exception instanceof BadCredentialsException) {
             errormsg = "비밀번호불일치";
-        }else if (exception instanceof InternalAuthenticationServiceException) {
+        } else if (exception instanceof InternalAuthenticationServiceException) {
             errormsg = "존재하지 않는 아이디입니다.";
-        }else if (exception instanceof UsernameNotFoundException) {
+        } else if (exception instanceof UsernameNotFoundException) {
             errormsg = "계정없음";
         } else if (exception instanceof AccountExpiredException) {
             errormsg = "계정만료";
@@ -37,7 +37,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             errormsg = "계정비활성화";
         } else if (exception instanceof LockedException) {
             errormsg = "계정잠김";
-        }else {
+        } else {
             errormsg = "확인된 에러가 없습니다.";
         }
 
@@ -49,11 +49,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         //response.sendRedirect("/member/login_form");
 
     }
-
-
-
-
-
 
 
 }

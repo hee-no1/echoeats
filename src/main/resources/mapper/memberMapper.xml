@@ -4,10 +4,12 @@
 
 <mapper namespace="com.pofol.main.member.memberMapper">
 
+
     <select id="select_member" resultType="MemberDto" parameterType="String">
         SELECT *
         FROM member where mem_id = #{mem_id}
     </select>
+
 
     <insert id="insert_member" parameterType="MemberDto">
         INSERT INTO member
