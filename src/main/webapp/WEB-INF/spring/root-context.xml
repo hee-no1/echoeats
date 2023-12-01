@@ -10,8 +10,11 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://database-1.choaw03xu0wn.ap-northeast-2.rds.amazonaws.com:3306/spring?useUnicode=true&amp;characterEncoding=utf8"></property>
-		<property name="username" value="root"></property>
+<!--		<property name="url" value="jdbc:mysql://database-1.choaw03xu0wn.ap-northeast-2.rds.amazonaws.com:3306/spring?useUnicode=true&amp;characterEncoding=utf8"></property>-->
+<!--		<property name="username" value="root"></property>-->
+<!--		<property name="password" value="12341234"></property>-->
+		<property name="url" value="jdbc:mysql://localhost:3306/spring?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="username" value="seahwani"></property>
 		<property name="password" value="12341234"></property>
 	</bean>
 	
