@@ -4,6 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>

@@ -1,16 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pofol.main.member.memberMapper">
-    <select id="select_member" parameterType="String" resultType="MemberDto">
-        SELECT * FROM member WHERE mem_id = #{mem_id}
+
+
+    <select id="select_member" resultType="MemberDto" parameterType="String">
+        SELECT *
+        FROM member where mem_id = #{mem_id}
     </select>
 
 
+    <insert id="insert_member" parameterType="MemberDto">
+        INSERT INTO member
+        (mem_id,mem_pwd, mem_name, mem_email, mem_phone, mem_gender, mem_birth, addr, per_info_col, free_ship_recep, rg_date, md_date, update_date)
+        VALUES
+            (#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, #{mem_phone}, #{mem_gender}, #{mem_birth}, #{addr}, #{per_info_col}, #{free_ship_recep}, now(), now(), now())
+    </insert>
 
+    <update id="update_member" parameterType="MemberDto">
+        UPDATE member
+        SET mem_pwd = #{mem_pwd}, mem_name = #{mem_name}, mem_email = #{mem_email}, mem_phone = #{mem_phone}, mem_gender = #{mem_gender}, mem_birth = #{mem_birth}, addr = #{addr}, point = #{point}, per_info_col = #{per_info_col}, free_ship_recep = #{free_ship_recep}, md_date = now(), md_num = #{md_num} ,update_date = #{update_date}, role = #{role}
+        WHERE mem_id =#{mem_id}
+    </update>
 
+    <delete id="delete_member">
+        DELETE FROM member where mem_id = #{mem_id}
+    </delete>
 
+    <delete id="deleteAll">
+        DELETE FROM member
+    </delete>
 
+    <select id="count" resultType="int">
+        SELECT count(*) FROM member
+    </select>
+
+    <select id="checkId" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE mem_id = #{mem_id}
+    </select>
+
+    <select id="checkEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE mem_email = #{mem_email}
+    </select>
 
 </mapper>

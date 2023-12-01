@@ -1,6 +1,9 @@
 package com.pofol.main.member.controller;
 
-
+import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/member")
 public class MemberController {
 
+
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository;
+
     @RequestMapping(value = "/login_form", method = RequestMethod.GET)
     public String loginGET(HttpServletRequest request, Model model, Authentication authentication) {
         //만약 인증이 되어 있는 회원이면 이전에 왔던 곳에서 리다이렉트
@@ -30,6 +39,7 @@ public class MemberController {
 
         return "member/login_form";
     }
+
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String userGET() {
@@ -64,6 +74,41 @@ public class MemberController {
         String referer = request.getHeader("Referer");
         System.out.println("컨트롤러 referer : " + referer);
     }
+    @GetMapping("/join")
+    public String memberJoin() {
+        return "member/join_form";
+    }
 
+    //회원가입
+    @PostMapping("/join")
+    @ResponseBody
+    public MemberDto join(@RequestBody MemberDto memberDto) throws Exception{
+        memberService.signin(memberDto);
+        return memberDto;
+    }
 
+    //아이디체크
+    @GetMapping("/checkId")
+    @ResponseBody
+    public int idCheck(String mem_id) throws Exception {
+        if(mem_id == null || mem_id.isEmpty()){
+            return -1;
+        } else {
+            System.out.println(mem_id);
+            System.out.println(memberRepository.checkId(mem_id));
+            return memberRepository.checkId(mem_id);}
+    }
+    //이메일 체크
+    @GetMapping("/checkEmail")
+    @ResponseBody
+    public int emailCheck(String mem_email) throws Exception {
+        if(mem_email == null || mem_email.isEmpty()){
+            return -1;
+        } else {
+            System.out.println(mem_email);
+            System.out.println(memberRepository.checkEmail(mem_email));
+            return memberRepository.checkEmail(mem_email);
+        }
+    }
 }
+
