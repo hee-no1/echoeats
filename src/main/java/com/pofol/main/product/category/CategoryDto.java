@@ -5,8 +5,8 @@ import lombok.ToString;
 
 import java.util.Objects;
 
-@Getter
 @ToString
+@Getter
 public class CategoryDto {
 
     private String cat_code; // 카테고리 코드
