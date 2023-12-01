@@ -18,11 +18,16 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
+    @GetMapping
+    public String Order(){
+        return "cartSample";
+    }
+
 
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
