@@ -36,13 +36,13 @@ public class memberTest {
 
 
 	@Test
-	public void test3(){
+	public void test3() throws Exception {
 		MemberDto exampleMemId = Mdao.selectMember("admin123");
 		System.out.println(exampleMemId.toString());
 	}
 
 	@Test
-	public void test4(){
+	public void test4() throws Exception {
 		MemberDto exampleMemId = service.select("sample_member_id");
 		System.out.println(exampleMemId.toString());
 	}
