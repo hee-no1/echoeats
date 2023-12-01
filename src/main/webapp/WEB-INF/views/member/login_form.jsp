@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="/resources/member/css/login_form.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/member/login_form.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">

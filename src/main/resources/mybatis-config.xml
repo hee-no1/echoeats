@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
+		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
 	</typeAliases>
 </configuration>
