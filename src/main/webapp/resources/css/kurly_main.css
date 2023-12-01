@@ -1,0 +1,283 @@
+* {
+    box-sizing: border-box;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+}
+
+#wrap {
+    text-align: center;
+}
+
+#wrap-center {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+}
+
+#top {
+    display: inline-block;
+    background-color: #ffffff;
+    width: 1050px;
+    height: 156px;
+}
+#top > #header {
+    position: relative;;
+}
+#top > #header > #homeInfo {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    z-index: 20;
+    display: flex;
+    box-align: center;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: -0.3px;
+}
+#top > #header > #homeInfo > .stick {
+    width: 1px;
+    height: 13px;
+    margin: 0px 12px;
+    background-color: rgb(217, 217, 217);
+}
+#top > #header > #homeInfo > a {
+    font-weight: bold;
+    cursor: pointer;
+}
+#top > #header > #homeInfo > a:nth-of-type(1) {
+    color: rgb(95, 0, 128);
+}
+#top > #header > #homeInfo span {
+    width: 8px;
+    height: 5px;
+    /*background-image: url(./ico_down_16x10.webp);*/
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 1px;
+}
+#top > #header > #homeInfo > .menu {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 35px;
+    width: 130px;
+    padding: 3px 9px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(255, 255, 255);
+}
+#top > #header > #homeInfo > div:nth-of-type(3) {
+    display: flex;
+    align-items: center;
+    width: 65px;
+    height: 35px;
+}
+#top > #header > #homeInfo > div:nth-of-type(3):hover + .menu {
+    display: block;
+}
+#top > #header > #homeInfo > .menu:hover {
+    display: block;
+}
+#top > #header > #homeInfo > .menu > div {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: left;
+    font-weight: normal;
+}
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+#search {
+    padding-top: 36px;
+    width: 1050px;
+    height: 100px;
+}
+#search > #search-bar {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 63px;
+}
+#search > #search-bar > a {
+    font-weight: bold;
+    color: rgb(95, 0, 128);
+    flex-shrink: 0;
+    font-size: 18px;
+    line-height: 1.33;
+    letter-spacing: normal;
+    cursor: pointer;
+    border: none;
+}
+#search > #search-bar > a:nth-of-type(1) {
+    margin-left: 20px;
+}
+#search > #search-bar > a:nth-of-type(1)::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 14px;
+    margin-top: 5px;
+    margin-left: 11px;
+    background-color: rgb(226, 226, 226);
+}
+#search > #search-bar > a:nth-of-type(2) {
+    /* color: rgb(181, 181, 181); */
+    cursor: pointer;
+    position: relative;
+    margin-left: 22px;
+    color: #b5b5b5;
+}
+#search > #search-bar > a:nth-of-type(2):hover {
+    color:  rgb(95, 0, 128);
+}
+#search > #search-bar > a:nth-of-type(2)::after {
+    content: "";
+    position: absolute;
+    display: block;
+    background: url(/resources/icons/kurly_new.svg) 0px 0px no-repeat;
+    width: 10px;
+    height: 10px;
+    top: 3px;
+    right: -13px;
+}
+#search > #search-bar > #search-center {
+    display: flex;
+    margin-left: 55px;
+    width: 400px;
+    height: 48px;
+    padding-left: 14px;
+    border: 1px solid rgb(95, 0, 128);
+    border-radius: 6px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
+}
+#search > #search-bar > #search-center > #search-input {
+    flex: 1;
+    font-weight: bold;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    letter-spacing: -0.33px;
+}
+#search > #search-bar > #search-center > #search-button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    bottom: 3px;
+    border: none;
+    cursor: pointer;
+    background: url(/resources/icons/kurly_search.svg) 0px 0px no-repeat;
+}
+#search > #search-bar > #search-right > button{
+    width: 36px;
+    height: 36px;
+    top : 15px;
+    position: absolute;
+    cursor: pointer;
+    border: none;
+}
+#search > #search-bar > #search-right > button:nth-of-type(3) {
+    background: url(/resources/icons/kurly_cart.svg) 50% 50% no-repeat;
+    right: 0;
+}
+#search > #search-bar > #search-right > button:nth-of-type(3):hover {
+    background: url(/resources/icons/kurly_cart_purple.svg) 50% 50% no-repeat;
+}
+#search > #search-bar > #search-right > button:nth-of-type(2) {
+    background: url(/resources/icons/kurly_heart.svg) 50% 50% no-repeat;
+    right: 58px;
+}
+#search > #search-bar > #search-right > button:nth-of-type(2):hover {
+    background: url(/resources/icons/kurly_heart_purple.svg) 50% 50% no-repeat;
+}
+#search > #search-bar > #search-right > button:nth-of-type(1) {
+    background: url(/resources/icons/kurly_adressAdd.svg) 50% 50% no-repeat;
+    right: 116px;
+}
+#search > #search-bar > #search-right > button:nth-of-type(1):hover {
+    background: url(/resources/icons/kurly_adressAdd_purple.svg) 50% 50% no-repeat;
+}
+
+#nev {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 1050px;
+    height: 56px;
+}
+#nev > #category {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+}
+#nev > #category > span:nth-of-type(1) {
+    width: 16px;
+    height: 14px;
+    margin-right: 14px;
+    background: url(/resources/icons/kurly_hamburger.svg) 0px 0px / 16px 14px no-repeat;
+}
+#nev > #category:hover > span:nth-of-type(1) {
+    background: url(/resources/icons/kurly_hamburger_purple.svg) 0px 0px / 16px 14px no-repeat;
+}
+#nev > #category > span:nth-of-type(2) {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    color: rgb(51, 51, 51);
+}
+#nev > #category:hover > span:nth-of-type(2) {
+    color: rgb(95, 0, 128);
+}
+#nev > #menu {
+    margin-left: 30px;
+}
+#nev > #menu > ul {
+    display: flex;
+    padding-left: 0;
+    list-style-type: none;
+    justify-content: center;
+}
+#nev > #menu > ul > li {
+    width: 150px;
+}
+#nev > #menu > ul > li > span:hover {
+    cursor: pointer;
+    color: rgb(95, 0, 128);
+    text-decoration: underline;
+}
+#nev > #nev-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#nev > #nev-right > div {
+    height: 32px;
+    padding: 6px 16px;
+    border-radius: 18px;
+    border: 1px solid rgb(238, 238, 238);
+    color: rgb(102, 102, 102);
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.32px;
+    cursor: pointer;
+}
+#nev > #nev-right > div > span:nth-of-type(1) {
+    color: rgb(95, 0, 128);
+}
