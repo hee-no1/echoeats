@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="ProductDto" type="com.pofol.main.order.orderProductTest.ProductDto"/>
-		<typeAlias alias="OrderDto" type="com.pofol.main.order.orderTable.OrderDto"/>
+		<typeAlias alias="RequiredProductDto" type="com.pofol.main.orders.sample.productSample.RequiredProductDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
 	</typeAliases>
 </configuration>

@@ -1,5 +1,7 @@
 package com.pofol.main.orders.sample.productSample;
 
+import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
+
 import java.util.List;
 
 public interface RequiredProductRepository {
@@ -10,6 +12,6 @@ public interface RequiredProductRepository {
 
     RequiredProductDto selectProductInfo(Long prod_id);
 
-    RequiredProductDto selectRequiredProduct(RequiredProductDto requiredProductDto);
+    RequiredProductDto selectRequiredProduct(SelectedItemsDto selectedItemsDto) throws Exception;
 
 }

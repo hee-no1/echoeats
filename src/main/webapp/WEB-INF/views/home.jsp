@@ -23,8 +23,12 @@
 	🍏EcoEats🥕
 </h1><br>
 <div>
-	<button id="orderBtn" type="button">주문하기</button>
+	<form action="${pageContext.request.contextPath}/order/checkout" method = "post">
+	<input type="hidden" name="prod_id" value="1">
+	<input type="hidden" name="opt_prod_id" value="1a">
+	<input type="hidden" name="qty" value="2">
+	<input id="orderBtn" type="submit" value="주문하기">
+</form>
 </div>
-<script src="/resources/order/js/cartJS.js"></script>
 </body>
 </html>

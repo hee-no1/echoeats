@@ -1,5 +1,6 @@
 package com.pofol.main.orders.sample.productSample;
 
+import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,8 +35,8 @@ public class RequiredProductRepositoryImpl implements RequiredProductRepository{
     }
 
     @Override
-    public RequiredProductDto selectRequiredProduct(RequiredProductDto requiredProductDto) {
+    public RequiredProductDto selectRequiredProduct(SelectedItemsDto selectedItemsDto) throws Exception{
 
-        return session.selectOne(namespace + "selectRequiredProductDto", requiredProductDto);
+        return session.selectOne(namespace + "selectRequiredProductDto", selectedItemsDto);
     }
 }

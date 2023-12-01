@@ -1,54 +1,56 @@
-package com.pofol.main.orders;
+package com.pofol.main.orders.order.controller;
 
 
-import com.pofol.main.orders.checkoutData.CheckoutDataDto;
-import com.pofol.main.orders.orderTable.OrderDBService;
-import com.pofol.main.orders.payHistoryTable.PayHistoryService;
-import com.pofol.main.orders.payTable.PayService;
-import com.pofol.main.orders.paymentData.PaymentDataDto;
+import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.service.OrderService;
+import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
+@RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
-    OrderService orderService;
+    private final OrderService orderService;
 
     @Autowired
-    OrderDBService orderDBService;
-
-    @Autowired
-    PayService payService;
-
-    @Autowired
-    PayHistoryService payHistoryService;
-
-    @GetMapping("/order")
-    public String order(){
-        return "redirect:/order/checkout";
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    @GetMapping("/order/checkout")
-    public String orderCheckout(){
-        return "checkout";
-    }
-
-    //주문서를 통해 넘어오는 정보
+    //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
-    @ResponseBody
-    public Long receiveTotalProduct(@RequestBody CheckoutDataDto checkoutData){
-        orderService.verifyPayment(checkoutData);
-        Long order_id = orderDBService.getOrderId();
-        return order_id; //이건 꼭 있어야함
+    public String receiveItems(SelectedItemsDto item, Model m){
+        List<SelectedItemsDto> items = new ArrayList<>();
+        SelectedItemsDto item1 = new SelectedItemsDto(1L, "1a", 2);
+        SelectedItemsDto item2 = new SelectedItemsDto(1L, "1c", 2);
+        SelectedItemsDto item3 = new SelectedItemsDto(2L,2);
+        items.add(item1);
+        items.add(item2);
+        items.add(item3);
+        OrderDto orderDto = orderService.calculateProductInfo(items);
+        System.out.println(orderDto);
+
+        m.addAttribute("orderDto",orderDto);
+        return "/order/checkout";
     }
 
-    //포트원을 통해 넘어오는 정보
-    @PostMapping("/payment")
-    @ResponseBody
-    public PaymentDataDto receivePaymentData(@RequestBody PaymentDataDto paymentDataDto){
-        payService.writePay(paymentDataDto);
-        return paymentDataDto;
-    }
+//    @GetMapping("/checkout")
+//    public String writeCheckout(@ModelAttribute("data") String data, Model m){
+////        OrderDto order = orderService.getOrder();
+//////        m.addAttribute("Order",order);
+////        System.out.println("hi"+orderDto);
+////        m.addAttribute("OrderDto",orderDto);
+//
+//        return "/order/checkout";
+//    }
+
+
+
 }
