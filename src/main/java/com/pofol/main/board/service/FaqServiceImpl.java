@@ -1,7 +1,7 @@
 package com.pofol.main.board.service;
 
-import com.pofol.main.board.dto.FaqDto;
-import com.pofol.main.board.repository.FaqDaoImpl;
+import com.pofol.main.board.domain.FaqDto;
+import com.pofol.main.board.repository.FaqRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class FaqServiceImpl implements FaqService {
     @Autowired
-    private FaqDaoImpl faqDao;
+    private FaqRepositoryImpl faqDao;
 
     @Override
     public int insertFaq(FaqDto dto) {
@@ -36,9 +36,4 @@ public class FaqServiceImpl implements FaqService {
     public List<FaqDto> selectAllFaq(FaqDto dto) {
         return faqDao.selectAll(dto);
     }
-
-//    public List<FaqDto> getPagedDataFaq(FaqDto dto) { return faqDao.getPagedData(dto); }
-//    public int getTotalFaqCountFaq(FaqDto dto) {
-//        return faqDao.getTotalFaqCount(dto);
-//    }
 }

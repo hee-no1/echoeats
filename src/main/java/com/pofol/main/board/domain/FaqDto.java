@@ -1,4 +1,4 @@
-package com.pofol.main.board.dto;
+package com.pofol.main.board.domain;
 
 public class FaqDto {
     private int faq_id;

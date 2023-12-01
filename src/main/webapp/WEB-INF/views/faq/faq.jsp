@@ -277,22 +277,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- ajax로 페이징을 전달할 공간 -->
-<%--            <div id="pagination" class="pagination-container">--%>
-
-<%--            </div>--%>
-
-<%--            <c:forEach var="i" begin="${pageHandler.beginPage}" end="${pageHandler.endPage}">--%>
-<%--                <c:choose>--%>
-<%--                    <c:when test="${i eq pageHandler.page}">--%>
-<%--                        <strong>${i}</strong>--%>
-<%--                    </c:when>--%>
-<%--                    <c:otherwise>--%>
-<%--                        <a href="?page=${i}&faq_type=${faqType}">${i}</a>--%>
-<%--                    </c:otherwise>--%>
-<%--                </c:choose>--%>
-<%--            </c:forEach>--%>
         </div>
     </div>
 </div>
@@ -303,10 +287,9 @@
     });
 
     // FAQ 목록 비동기적으로 가져오기 -> AJAX 이용하여 서버에 요청, 받아와서 화면에 출력
-    function getFaqList(page) {
+    function getFaqList() {
         var dataSend = {
             faq_type: $("select[name=location]").val(), // 선택된 카테고리 가져옴.
-            // page: page
         };
         $.ajax({
             type: "POST",
@@ -352,7 +335,13 @@
             }
         });
     }
+    // 카테고리가 변경(새롭게 선택)될 때마다 change 이벤트 발생
+    $("select[name=location]").change(function(){
+        console.log($(this).val()); //value값 가져오기
 
+        // 카테고리가 변경되었으므로, 새로운 FAQ 목록을 가져옴
+        getFaqList();
+    });
 </script>
 
 <div class="right-menu">
@@ -450,13 +439,5 @@
     <!-- footer -->
 </div>
 </body>
-<script>
-    // 카테고리가 변경(새롭게 선택)될 때마다 change 이벤트 발생
-    $("select[name=location]").change(function(){
-        console.log($(this).val()); //value값 가져오기
 
-        // 카테고리가 변경되었으므로, 새로운 FAQ 목록을 가져옴
-        getFaqList();
-    });
-</script>
 </html>

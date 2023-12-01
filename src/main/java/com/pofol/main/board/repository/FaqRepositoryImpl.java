@@ -1,14 +1,16 @@
 package com.pofol.main.board.repository;
 
-import com.pofol.main.board.dto.FaqDto;
+import com.pofol.main.board.domain.FaqDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
-public class FaqDaoImpl implements FaqDao{
+public class FaqRepositoryImpl implements FaqRepository {
     @Autowired
     private SqlSession session;
     private static String namespace = "com.pofol.main.repository.FaqDao.";
@@ -36,12 +38,8 @@ public class FaqDaoImpl implements FaqDao{
     public FaqDto select(FaqDto dto) {
         return session.selectOne(namespace + "select", dto);
     }
+    public int getTotalItems(FaqDto dto) {
+        return session.selectOne(namespace + "getTotalItems", dto);
+    }
 
-//    public List<FaqDto> getPagedData(FaqDto dto) {
-//        // paramMap에는 startRow, endRow, faq_type 등이 들어있어야 함.
-//        return session.selectList(namespace + "getPagedData", dto);
-//    }
-//    public int getTotalFaqCount(FaqDto dto) {
-//        return session.selectOne(namespace + "getTotalFaqCount", dto);
-//    }
 }

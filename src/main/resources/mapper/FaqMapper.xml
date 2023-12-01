@@ -58,41 +58,5 @@
     ORDER BY faq_id DESC
     </select>
 
-<!--    <select id="getPagedData" parameterType="FaqDto" resultType="FaqDto">-->
-<!--        SELECT *-->
-<!--        FROM (-->
-<!--        SELECT-->
-<!--        ROW_NUMBER() OVER (ORDER BY faq_id DESC) as row_num,-->
-<!--        faq_id,-->
-<!--        faq_type,-->
-<!--        faq_title,-->
-<!--        faq_con-->
-<!--        FROM FAQ-->
-<!--        <where>-->
-<!--            <choose>-->
-<!--                <when test="_parameter == null or (_parameter == null and _parameter.equals('전체'))">-->
-<!--                    <if test="faq_type != null and !faq_type.isEmpty()">-->
-<!--                        AND faq_type = #{faq_type}-->
-<!--                    </if>-->
-<!--                </when>-->
-<!--                <when test="!_parameter.equals('전체')">-->
-<!--                    <if test="faq_type != null and !faq_type.isEmpty()">-->
-<!--                        AND faq_type = #{faq_type}-->
-<!--                    </if>-->
-<!--                </when>-->
-<!--            </choose>-->
-<!--        </where>-->
-<!--        ) AS subquery-->
-<!--        WHERE row_num BETWEEN #{startRow} AND #{endRow}-->
-<!--    </select>-->
-
-<!--    <select id="getTotalFaqCount" parameterType="FaqDto" resultType="int">-->
-<!--        SELECT COUNT(*) FROM FAQ-->
-<!--        <where>-->
-<!--            <if test="faq_type != null and !faq_type.isEmpty()">-->
-<!--                AND faq_type = #{faq_type}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
 </mapper>
 
