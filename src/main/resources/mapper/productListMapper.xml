@@ -3,41 +3,53 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pofol.main.product.repository.ProductListRepository">
     <select id="select" parameterType="long" resultType="ProductDto">
-        SELECT p.prod_img_id, p.prod_name, p.prod_price, p.rate, p.disc_price, p.short_desc, p.long_desc, p.rev_num, i.*
+        SELECT p.prod_img_id, p.prod_name, p.prod_price, p.disc_rate, p.disc_price, p.short_desc, p.long_desc, p.rev_num, i.*
         FROM product p, product_info i
         WHERE p.prod_id = i.prod_id
           and p.prod_id = #{prod_id}
     </select>
 
     <select id="selectAll" resultType="ProductDto">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, disc_price, rev_num
+        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
     </select>
 
     <select id="selectEvent" resultType="ProductDto">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, disc_price, rev_num
+        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
         and evt_gp_id = #{evt_gp_id}
     </select>
 
-    <select id="selectCategory">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, disc_price, rev_num
+
+
+<!--    <select id="selectCategory" parameterType="String" resultType="ProductDto">-->
+<!--        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num-->
+<!--        FROM product-->
+<!--        WHERE disp_sts = 'Y'-->
+<!--        and cat_code = #{cat_code}-->
+<!--    </select>-->
+
+
+<!--    테스트 용도-->
+    <select id="selectCategory" parameterType="String" resultType="ProductDto">
+        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
-        WHERE disp_sts = 'Y'
-        and cat_code = #{cat_code}
+        WHERE disp_sts = 'Y' AND cat_code LIKE CONCAT(#{cat_code}, '%')
     </select>
 
+
+
     <select id="selectRateProduct">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, disc_price, rev_num
+        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
-        and rate = #{rate}
+        and disc_rate = #{disc_rate}
     </select>
 
     <select id="selectProductPrice">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, rate, disc_price, rev_num
+        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
         and prod_price = #{prod_price}
@@ -48,6 +60,9 @@
         SELECT COUNT(*) FROM product
     </select>
 
+
+
+<!--    이벤트 그룹 이름 + 설명-->
     <select id="eventEx" parameterType="long" resultType="EventGroupDto">
         SELECT evt_gp_name, evt_gp_dtl
         FROM event_group

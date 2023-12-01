@@ -13,9 +13,9 @@
 
     <!-- 중 카테고리 리스트 -->
     <select id="midCateList" parameterType="String" resultType="com.pofol.main.product.category.CategoryDto">
-        SELECT cat_code
+        SELECT cat_code, cat_name, parent_code
         FROM category
-        WHERE parent_code = #{cat_code} AND tier = 2
+        WHERE parent_code = SUBSTRING(#{cat_code}, 1, 3) AND tier = 2
         ORDER BY cat_code
     </select>
 
