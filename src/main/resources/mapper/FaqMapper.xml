@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.main.repository.FaqDao">
+
+    <!-- 새로운 faq 속성을 데이터베이스에 추가 -->
+    <insert id="insert" parameterType="FaqDto">
+        INSERT INTO faq (faq_id, faq_type, faq_title, faq_con)
+        VALUES (#{faq_id}, #{faq_type}, #{faq_title}, #{faq_con})
+    </insert>
+
+    <!-- faq 정보를 수정 -->
+    <update id="update" parameterType="FaqDto">
+        UPDATE faq
+        SET faq_title = #{faq_title},
+            faq_type = #{faq_type},
+            faq_con = #{faq_con}
+        WHERE faq_id = #{faq_id}
+    </update>
+
+    <!-- faq 삭제 -->
+    <delete id="delete" parameterType="FaqDto">
+        DELETE FROM faq WHERE faq_id = #{faq_id}
+    </delete>
+
+    <!-- 특정 faq 정보를 조회 -->
+    <select id="select" parameterType="FaqDto" resultType="FaqDto">
+        SELECT *
+        FROM faq WHERE faq_id = #{faq_id}
+    </select>
+
+
+    <select id="selectAll" parameterType="FaqDto" resultType="FaqDto">
+    SELECT
+        <!-- 조회된 faq_id를 다시 순차적 1,2,3 .. 으로 나타내기 위한 ROW_NUMBER() -->
+        ROW_NUMBER() over (ORDER BY faq_id DESC) as faq_id,
+        faq_type,
+        faq_title,
+        faq_con
+    FROM FAQ
+    <where>
+        <!-- MyBatis의 조건문을 사용하여 FAQ 타입에 따라 WHERE 절을 동적으로 생성한다 -->
+        <choose>
+        <!-- 쿼리에 전달된 매개변수 '_parameter' (MyBatis 내장변수) -->
+            <when test="_parameter == null or (_parameter == null and _parameter.equals('전체'))">
+                <if test="faq_type != null and !faq_type.isEmpty()">
+                    AND faq_type = #{faq_type}
+                </if>
+            </when>
+            <when test="!_parameter.equals('전체')">
+                <if test="faq_type != null and !faq_type.isEmpty()">
+                    AND faq_type = #{faq_type}
+                </if>
+            </when>
+        </choose>
+    </where>
+    ORDER BY faq_id DESC
+    </select>
+
+</mapper>
+
