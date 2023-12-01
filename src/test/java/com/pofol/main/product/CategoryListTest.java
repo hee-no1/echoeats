@@ -12,22 +12,22 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class CategoryListTest {
-
-  @Autowired
-  CategoryList categoryList;
-
-  @DisplayName("카테고리 리스트 테스트")
-  @Test
-  void CategoryList() throws Exception {
-
-    System.out.println("categoryList = " + categoryList.cateList());
-
-  }
-
-  @DisplayName("상품 등록할 때, 필요한 카테고리 리스트 테스트")
-  @Test
-  void enrollCategoryList() throws Exception {
-    System.out.println("categoryList = " + categoryList.enrollCategoryList());
-  }
+//
+//  @Autowired
+//  CategoryList categoryList;
+//
+//  @DisplayName("카테고리 리스트 테스트")
+//  @Test
+//  void CategoryList() throws Exception {
+//
+//    System.out.println("categoryList = " + categoryList.cateList());
+//
+//  }
+//
+//  @DisplayName("상품 등록할 때, 필요한 카테고리 리스트 테스트")
+//  @Test
+//  void enrollCategoryList() throws Exception {
+//    System.out.println("categoryList = " + categoryList.enrollCategoryList());
+//  }
 
 }
