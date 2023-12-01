@@ -1,4 +1,4 @@
-package com.pofol.main;
+package com.pofol.main.product;
 
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
