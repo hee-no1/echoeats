@@ -5,5 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
+		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 	</typeAliases>
 </configuration>
