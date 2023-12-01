@@ -4,7 +4,7 @@ import com.pofol.main.member.dto.MemberDto;
 
 public interface MemberService {
 
-    MemberDto select(String id);
+    MemberDto select(String id) throws Exception;
 
     int signin(MemberDto memberDto) throws Exception;
 
