@@ -37,6 +37,7 @@ public class OrderController {
         OrderDto orderDto = orderService.calculateProductInfo(items);
         System.out.println(orderDto);
 
+
         m.addAttribute("orderDto",orderDto);
         return "/order/checkout";
     }
