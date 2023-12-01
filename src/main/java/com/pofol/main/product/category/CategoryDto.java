@@ -44,5 +44,6 @@ public class CategoryDto {
   @Override
   public int hashCode() {
     return Objects.hash(cat_code, tier, cat_name, parent_code);
-  }
+  } 
+
 }
