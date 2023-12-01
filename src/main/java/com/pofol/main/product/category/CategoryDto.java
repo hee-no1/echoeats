@@ -10,7 +10,7 @@ import java.util.Objects;
 public class CategoryDto {
 
     private String cat_code; // 카테고리 코드
-    private String tier; // 카테고리 계층
+    private String tier; // 카테고리 계층 
     private String cat_name; // 카테고리 이름
     private String parent_code; // 부모 카테고리 코드
 
