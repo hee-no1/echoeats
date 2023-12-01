@@ -6,11 +6,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./favicon.ico">
     <link rel="stylesheet" href="/resources/css/header-css.css">
     <link rel="stylesheet" href="/resources/css/productList-css.css">
     <title>ecoeats - best</title>
     <style>
+        /*드롭 다운 카테고리 (수정 필요)*/
+        nav {
+            overflow: hidden;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /*드롭다운 css 끝*/
         #best {
             padding-top: 50px;
         }
@@ -62,6 +108,7 @@
             margin-right: 8px;
             background-color: rgb(226, 226, 226);
         }
+
         .css-9o2zup {
             display: flex;
             flex-direction: column;
@@ -69,6 +116,7 @@
             color: rgb(51, 51, 51);
             cursor: pointer;
         }
+
         .css-tou8lf {
             overflow: hidden;
             position: relative;
@@ -77,6 +125,7 @@
             width: 249px;
             height: 320px;
         }
+
         .css-9o2zup .button-wrapper {
             width: 100%;
             height: 36px;
@@ -89,11 +138,13 @@
             -webkit-box-align: center;
             align-items: center;
         }
+
         .css-9o2zup .button-wrapper > button {
             height: 36px;
             font-size: 16px;
             line-height: 19px;
         }
+
         .css-13xu5fn {
             color: rgb(51, 51, 51);
             width: 100%;
@@ -104,19 +155,23 @@
             -webkit-box-align: center;
             align-items: center;
         }
+
         .css-1kpzrna {
             padding: 8px 10px 0px 0px;
         }
+
         .css-1qd61ut {
             display: block;
             padding-bottom: 2px;
         }
+
         .css-1vdqr5b {
             font-size: 14px;
             color: rgb(153, 153, 153);
             line-height: 19px;
             letter-spacing: -0.5px;
         }
+
         .css-1dry2r1 {
             max-height: 58px;
             font-size: 16px;
@@ -129,6 +184,7 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
+
         .css-1wejlc3 {
             padding-top: 4px;
             font-size: 12px;
@@ -142,19 +198,23 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
+
         .css-1tl7659 {
             display: flex;
             flex-direction: column;
             padding-top: 8px;
         }
+
         .css-1tl7659 .dimmed-price {
             font-size: 14px;
             color: rgb(181, 181, 181);
             text-decoration: line-through;
         }
+
         .css-1tl7659 .discount-rate {
             margin-right: 7px;
         }
+
         .css-1tl7659 .discount-rate, .css-1tl7659 .sales-price {
             font-weight: 800;
             font-size: 16px;
@@ -162,9 +222,11 @@
             white-space: nowrap;
             letter-spacing: -0.5px;
         }
+
         .css-19lkxd2 {
             color: rgb(250, 98, 47);
         }
+
         .css-xezqwk {
             display: flex;
             -webkit-box-align: center;
@@ -175,104 +237,103 @@
             color: rgb(153, 153, 153);
             line-height: 17px;
         }
+
         .css-mz5g71 {
             width: 15px;
             height: 15px;
             margin: 1px -1px 0px 0px;
         }
+
         svg:not(:root) {
             overflow: hidden;
         }
+
         .css-l610kl {
             padding-left: 3px;
             font-weight: 400;
         }
+
         .css-11kh0cw {
             display: grid;
             grid-template-columns: repeat(auto-fill, 249px);
             gap: 31px 18px;
             width: 100%;
         }
+        #search > #search-bar > #search-right > #tooltip{
+            display: none;
+            position: absolute;
+            inset: 0px auto auto 0px;
+            margin: 0px;
+            transform: translate(13px, 36px);
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+        }
+        #search > #search-bar > #search-right > #tooltip > div{
+            opacity: 1;
+            transition: opacity 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        }
+        #search > #search-bar > #search-right > #tooltip > p{
+            font-weight: 500;
+            font-size: 16px;
+            color: rgb(51, 51, 51);
+            line-height: 24px;
+            letter-spacing: 0.32px;
+        }
+        #search > #search-bar > #search-right > #tooltip button:nth-of-type(1) {
+            display: block;
+            padding: 0px 10px;
+            text-align: center;
+            overflow: hidden;
+            width: 80px;
+            height: 36px;
+            border-radius: 3px;
+            color: rgb(95, 0, 128);
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(95, 0, 128);
+        }
+        #search > #search-bar > #search-right > #tooltip button:nth-of-type(2) {
+            display: block;
+            padding: 0px 10px;
+            text-align: center;
+            overflow: hidden;
+            width: 100%;
+            height: 36px;
+            border-radius: 3px;
+            color: rgb(255, 255, 255);
+            background-color: rgb(95, 0, 128);
+            border: 0px none;
+        }
+    /*  -------------------------------------------------------------------  */
+
+        .css-raoddi {
+            display: grid;
+            grid-template-columns: repeat(4, 180px);
+            gap: 16px 83px;
+            overflow: hidden;
+            margin-top: 28px;
+            padding: 30px 40px;
+            border: 1px solid rgb(226, 226, 226);
+            line-height: 20px;
+        }
+        .css-1h52dri {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .css-1b2to1r {
+            letter-spacing: -1px;
+            cursor: pointer;
+            font-weight: 700;
+            color: rgb(95, 0, 128);
+        }
+        #best {
+            font-size: 28px;
+        }
     </style>
 </head>
 
 <body>
-<div id="wrap">
-    <div id="wrap-center">
-        <div id="top">
-            <div id="header">
-                <div id="homeInfo">
-                    <a>회원가입</a>
-                    <div class="stick"></div>
-                    <a>로그인</a>
-                    <div class="stick"></div>
-                    <div>
-                        <a>고객센터<span></span></a>
-                    </div>
-                    <div class="menu">
-                        <div>공지사항</div>
-                        <div>자주하는 질문</div>
-                        <div>1:1 문의</div>
-                        <div>대량주문 문의</div>
-                    </div>
-                </div>
-                <div id="search">
-                    <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
-                        <div id="search-center">
-                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">
-                            <button id="search-button">
-                                <div><span class="blind">검색</span></div>
-                            </button>
-                        </div>
-                        <div id="search-right">
-                            <button href="#">
-                                <span class="blind">배송지등록</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">찜하기</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">장바구니</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="nev">
-                <div id="category">
-                    <span></span>
-                    <span>카테고리</span>
-                </div>
-                <div id="meun">
-                    <ul>
-                        <li>
-                            <span href="#">신상품</span>
-                        </li>
-                        <li>
-                            <span href="#">베스트</span>
-                        </li>
-                        <li>
-                            <span href="#">알뜰쇼핑</span>
-                        </li>
-                        <li>
-                            <span href="#">특가/혜택</span>
-                        </li>
-                    </ul>
-                </div>
-                <div id="nev-right">
-                    <div>
-                        <span>샛별・택배</span>
-                        <span>배송안내</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<%@ include file="include/header.jspf" %>
 
 <div id="wrap1">
     <div id="wrap1-center">
@@ -280,7 +341,23 @@
         <div id="search1"></div>
         <div id="navigation1"></div>
         <div id="main1">
-            <h3 id="best">베스트</h3>
+            <h3 id="best">${bigCateName}</h3>
+
+
+
+            <ul class="css-raoddi e1lg1uoa2">
+                <li class="css-1h52dri e1lg1uoa1">
+                    <a href="/category/${midCategoryList.get(0).parent_code}" class="css-1b2to1r e1lg1uoa0">전체보기</a>
+                </li>
+            <c:forEach var="midCategoryList" items="${midCategoryList}">
+                <li class="css-1h52dri e1lg1uoa1">
+                    <a href="/category/${midCategoryList.cat_code}" class="css-1b2to1r e1lg1uoa0">${midCategoryList.cat_name}</a>
+                </li>
+            </c:forEach>
+            </ul>
+
+
+
             <div id="main1-menu">
                 <div id="filter">
                     <div id="filter-top">
@@ -962,7 +1039,7 @@
 
                 <div class="menu">
                     <div class="css-1stur9s eudxpx34">
-                        <div class="css-crqql1 eudxpx33">총 284건(count)</div>
+                        <div class="css-crqql1 eudxpx33">총 284건(count 계산해야함)</div>
                         <ul class="css-1vmfy7j eudxpx32">
                             <li class="css-5uzvtq eudxpx31">
                                 <a href="#"
@@ -980,14 +1057,26 @@
                     </div>
 
 
+
+<%--                    여기에 중 카테고리 박스가 들어가야 함--%>
+
+
+
+
                     <div class="css-11kh0cw ef36txc5">
+
+                        <%--------------------------------------------------------------------------------------------------------------%>
+
+                        <%-- 상품 전체 진열로 테스트 (나중에 정렬기준에 나눠서 정렬하는거로 바꿔야 함 + model명은 productList로 통일) --%>
+
+                        <c:forEach var="productList" items="${productList}">
                         <a href="#" class="css-9o2zup e1c07x4813">
                             <div class="css-0 e1c07x4811">
                                 <div class="e1c07x4812 css-tou8lf e3um3060"><span
                                         style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
                                         alt="상품 이미지" sizes="100vw"
-                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"
-                                        src="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg"
+                                <%--                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"--%>
+                                        src="${productList.prod_img_id}"
                                         decoding="async" data-nimg="fill" class="css-0"
                                         style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
                                 </div>
@@ -1002,15 +1091,18 @@
                                     담기
                                 </button>
                             </div>
-                            <div class="css-1kpzrna e1c07x489"><span class="css-1qd61ut e1ms5t9c1"><span
-                                    class="css-1vdqr5b e1ms5t9c0">샛별배송</span></span><span class="css-1dry2r1 e1c07x488">[압구정주꾸미] 주꾸미 볶음 2종 (택1)</span>
-                                <p class="css-1wejlc3 e1c07x486">마늘의 감칠맛이 듬뿍</p>
+                            <div class="css-1kpzrna e1c07x489">
+<%--                                <span class="css-1qd61ut e1ms5t9c1">--%>
+<%--                                                                    <span class="css-1vdqr5b e1ms5t9c0">샛별배송</span>--%>
+<%--                                </span>--%>
+                                <span class="css-1dry2r1 e1c07x488">${productList.prod_name}</span>
+                                <p class="css-1wejlc3 e1c07x486">${productList.short_desc}</p>
                                 <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
-                                    <div><span class="dimmed-price css-18tpqqq ei5rudb1">8,900<span class="won">원</span></span>
+                                    <div><span class="dimmed-price css-18tpqqq ei5rudb1">${productList.prod_price}<span class="won">원</span></span>
                                     </div>
                                     <div class="discount"><span
-                                            class="discount-rate css-19lkxd2 ei5rudb0">26%</span><span
-                                            class="sales-price css-18tpqqq ei5rudb1">6,565<span
+                                            class="discount-rate css-19lkxd2 ei5rudb0">${productList.disc_rate}</span><span
+                                            class="sales-price css-18tpqqq ei5rudb1">${productList.disc_price}<span
                                             class="won">원</span>~</span></div>
                                 </div>
                                 <div class="review-count css-xezqwk e1c07x482"><span class="css-mz5g71 e1c07x481"><svg
@@ -1021,129 +1113,44 @@
                                                                                                     d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path></mask><path
                                         fill="#999"
                                         d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
-                                        mask="url(#path-1-inside-1_1513_17755)"></path><circle fill="#999" cx="4.34998"
-                                                                                               cy="6.17871"
-                                                                                               r="0.75"></circle><circle
-                                        fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle><circle fill="#999"
-                                                                                                     cx="9.15002"
-                                                                                                     cy="6.17871"
-                                                                                                     r="0.75"></circle></svg></span><span
-                                        class="review-number css-l610kl e1c07x480">9,999+</span></div>
+                                        mask="url(#path-1-inside-1_1513_17755)"></path>
+                                    <circle fill="#999" cx="4.34998" cy="6.17871" r="0.75"></circle>
+                                    <circle fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle>
+                                    <circle fill="#999" cx="9.15002" cy="6.17871" r="0.75"></circle>
+                                </svg>
+                                </span>
+
+                                    <c:if test="${productList.rev_num gt 9999}">
+                                        <span class="review-number css-l610kl e1c07x480">9999+</span>
+                                    </c:if>
+                                    <c:if test="${productList.rev_num le 9999}">
+                                        <span class="review-number css-l610kl e1c07x480">${productList.rev_num}</span>
+                                    </c:if>
+
+                                </div>
                                 <div class="css-1hrnl0u e1cvv2hm1"><span class="css-1e5t2sz e1cvv2hm0">Kurly Only</span>
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class="css-9o2zup e1c07x4813">
-                            <div class="css-0 e1c07x4811">
-                                <div class="e1c07x4812 css-tou8lf e3um3060"><span
-                                        style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
-                                        alt="상품 이미지" sizes="100vw"
-                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"
-                                        src="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg"
-                                        decoding="async" data-nimg="fill" class="css-0"
-                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
-                                </div>
-                            </div>
-                            <div class="button-wrapper">
-                                <button type="button" class="css-13xu5fn e17x72af0">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z"
-                                              stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path>
-                                    </svg>
-                                    담기
-                                </button>
-                            </div>
-                            <div class="css-1kpzrna e1c07x489"><span class="css-1qd61ut e1ms5t9c1"><span
-                                    class="css-1vdqr5b e1ms5t9c0">샛별배송</span></span><span class="css-1dry2r1 e1c07x488">[압구정주꾸미] 주꾸미 볶음 2종 (택1)</span>
-                                <p class="css-1wejlc3 e1c07x486">마늘의 감칠맛이 듬뿍</p>
-                                <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
-                                    <div><span class="dimmed-price css-18tpqqq ei5rudb1">8,900<span class="won">원</span></span>
-                                    </div>
-                                    <div class="discount"><span
-                                            class="discount-rate css-19lkxd2 ei5rudb0">26%</span><span
-                                            class="sales-price css-18tpqqq ei5rudb1">6,565<span
-                                            class="won">원</span>~</span></div>
-                                </div>
-                                <div class="review-count css-xezqwk e1c07x482"><span class="css-mz5g71 e1c07x481"><svg
-                                        width="100%" height="100%" viewBox="0 0 14 14" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"><mask id="path-1-inside-1_1513_17755"
-                                                                                 fill="white"><path fill-rule="evenodd"
-                                                                                                    clip-rule="evenodd"
-                                                                                                    d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path></mask><path
-                                        fill="#999"
-                                        d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
-                                        mask="url(#path-1-inside-1_1513_17755)"></path><circle fill="#999" cx="4.34998"
-                                                                                               cy="6.17871"
-                                                                                               r="0.75"></circle><circle
-                                        fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle><circle fill="#999"
-                                                                                                     cx="9.15002"
-                                                                                                     cy="6.17871"
-                                                                                                     r="0.75"></circle></svg></span><span
-                                        class="review-number css-l610kl e1c07x480">9,999+</span></div>
-                                <div class="css-1hrnl0u e1cvv2hm1"><span class="css-1e5t2sz e1cvv2hm0">Kurly Only</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="css-9o2zup e1c07x4813">
-                            <div class="css-0 e1c07x4811">
-                                <div class="e1c07x4812 css-tou8lf e3um3060"><span
-                                        style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
-                                        alt="상품 이미지" sizes="100vw"
-                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"
-                                        src="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg"
-                                        decoding="async" data-nimg="fill" class="css-0"
-                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
-                                </div>
-                            </div>
-                            <div class="button-wrapper">
-                                <button type="button" class="css-13xu5fn e17x72af0">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z"
-                                              stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path>
-                                    </svg>
-                                    담기
-                                </button>
-                            </div>
-                            <div class="css-1kpzrna e1c07x489"><span class="css-1qd61ut e1ms5t9c1"><span
-                                    class="css-1vdqr5b e1ms5t9c0">샛별배송</span></span><span class="css-1dry2r1 e1c07x488">[압구정주꾸미] 주꾸미 볶음 2종 (택1)</span>
-                                <p class="css-1wejlc3 e1c07x486">마늘의 감칠맛이 듬뿍</p>
-                                <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
-                                    <div><span class="dimmed-price css-18tpqqq ei5rudb1">8,900<span class="won">원</span></span>
-                                    </div>
-                                    <div class="discount"><span
-                                            class="discount-rate css-19lkxd2 ei5rudb0">26%</span><span
-                                            class="sales-price css-18tpqqq ei5rudb1">6,565<span
-                                            class="won">원</span>~</span></div>
-                                </div>
-                                <div class="review-count css-xezqwk e1c07x482"><span class="css-mz5g71 e1c07x481"><svg
-                                        width="100%" height="100%" viewBox="0 0 14 14" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"><mask id="path-1-inside-1_1513_17755"
-                                                                                 fill="white"><path fill-rule="evenodd"
-                                                                                                    clip-rule="evenodd"
-                                                                                                    d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path></mask><path
-                                        fill="#999"
-                                        d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
-                                        mask="url(#path-1-inside-1_1513_17755)"></path><circle fill="#999" cx="4.34998"
-                                                                                               cy="6.17871"
-                                                                                               r="0.75"></circle><circle
-                                        fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle><circle fill="#999"
-                                                                                                     cx="9.15002"
-                                                                                                     cy="6.17871"
-                                                                                                     r="0.75"></circle></svg></span><span
-                                        class="review-number css-l610kl e1c07x480">9,999+</span></div>
-                                <div class="css-1hrnl0u e1cvv2hm1"><span class="css-1e5t2sz e1cvv2hm0">Kurly Only</span>
-                                </div>
-                            </div>
-                        </a>
+                        </c:forEach>
+
+
+
+
+                        <%--------------------------------------------------------------------------------------------------------------%>
                     </div>
 
+<%--                    여기까지가 상품 리스트--%>
+
+
+
+<%--                    여기부터는 페이징 관련--%>
 
                     <div>
 
                     </div>
 
+<%--                    여기까지가 페이징 끝--%>
 
                 </div>
             </div>

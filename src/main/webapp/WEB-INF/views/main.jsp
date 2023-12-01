@@ -117,7 +117,7 @@
                                 <div class="product-price">
                                     <div><span class="dimmed-price">${product.prod_price}<span class="won">원</span></span></div>
                                     <div class="discount">
-                                        <span class="discount-rate">${product.rate}%</span>
+                                        <span class="discount-rate">${product.disc_rate}%</span>
                                         <span class="sales-price">${product.disc_price}<span
                                                 class="won">원</span></span>
                                     </div>
@@ -226,7 +226,7 @@
                                 <div class="product-price">
                                     <div><span class="dimmed-price">${eventOneList.prod_price}<span class="won">원</span></span></div>
                                     <div class="discount">
-                                        <span class="discount-rate">${eventOneList.rate}%</span>
+                                        <span class="discount-rate">${eventOneList.disc_rate}%</span>
                                         <span class="sales-price">${eventOneList.disc_price}<span
                                                 class="won">원</span></span>
                                     </div>
@@ -293,7 +293,7 @@
                                 <div class="product-price">
                                     <div><span class="dimmed-price">6,980<span class="won">원</span></span></div>
                                     <div class="discount">
-                                        <span class="discount-rate">${product.rate}%</span>
+                                        <span class="discount-rate">${product.disc_rate}%</span>
                                         <span class="sales-price">${product.prod_price}<span
                                                 class="won">원</span></span>
                                     </div>
@@ -359,7 +359,7 @@
                                     <div class="product-price">
                                         <div><span class="dimmed-price">6,980<span class="won">원</span></span></div>
                                         <div class="discount">
-                                            <span class="discount-rate">${product.rate}%</span>
+                                            <span class="discount-rate">${product.disc_rate}%</span>
                                             <span class="sales-price">${product.prod_price}<span
                                                     class="won">원</span></span>
                                         </div>
