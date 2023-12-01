@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
-    MemberRepository dao;
+    MemberRepository memberRepository;
 
 
     @Override
     public MemberDto select(String id) {
-        return dao.select_member(id);
+        return memberRepository.selectMember(id);
     }
 
 }
