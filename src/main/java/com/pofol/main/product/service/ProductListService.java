@@ -13,9 +13,11 @@ public interface ProductListService {
   // 전체 상품 리스트 조회
   List<ProductDto> getList() throws Exception;
 
+  // 카테고리 그룹 상품 리스트 조회
+  List<ProductDto> getCategoryProductList(String cat_code) throws Exception;
+
   // 이벤트 그룹 상품 리스트 조회
   List<ProductDto> getEventList(Long evt_gp_id) throws Exception;
-
 
   // 이벤트 그룹 상품 리스트 설명
   EventGroupDto getEventEx(Long evt_gp_id) throws Exception;

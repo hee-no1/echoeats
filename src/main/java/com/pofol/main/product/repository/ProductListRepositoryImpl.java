@@ -38,7 +38,7 @@ public class ProductListRepositoryImpl implements ProductListRepository {
   }
 
   @Override // 카테고리 상품 리스트 조회
-  public List<ProductDto> selectCategory(String cat_code) throws Exception {
+  public List<ProductDto> selectCategoryProductList(String cat_code) throws Exception {
     return sqlSession.selectList(namespace + "selectCategory", cat_code);
   }
 
