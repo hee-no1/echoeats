@@ -17,14 +17,11 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 
     @Override
-    public MemberDto select_member(String mem_id) {
+    public MemberDto selectMember(String mem_id) {
         return session.selectOne(namespace + "select_member", mem_id);
     }
 
-    @Override
-    public Date member_now() {
-        return session.selectOne(namespace + "member_now");
-    }
+
 
 
 }

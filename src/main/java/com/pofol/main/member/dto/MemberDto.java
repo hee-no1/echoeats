@@ -5,7 +5,6 @@ import java.util.Date;
 public class MemberDto {
 
     private String mem_id;
-    private int own_cp_id;   //보유 쿠폰 아이디
     private String gd_name; //등급 이름
     private String mem_code_id;  //회원 상태
     private String mem_pwd;
@@ -36,9 +35,8 @@ public class MemberDto {
         this.role = "USER";
     }
 
-    public MemberDto(String mem_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
+    public MemberDto(String mem_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
         this.mem_id = mem_id;
-        this.own_cp_id = own_cp_id;
         this.gd_name = gd_name;
         this.mem_code_id = mem_code_id;
         this.mem_pwd = mem_pwd;
@@ -63,7 +61,6 @@ public class MemberDto {
     public String toString() {
         return "memberDto{" +
                 "mem_id='" + mem_id + '\'' +
-                ", own_cp_id=" + own_cp_id +
                 ", gd_name='" + gd_name + '\'' +
                 ", mem_code_id='" + mem_code_id + '\'' +
                 ", mem_pwd='" + mem_pwd + '\'' +
@@ -90,15 +87,6 @@ public class MemberDto {
 
     public void setMem_id(String mem_id) {
         this.mem_id = mem_id;
-    }
-
-
-    public int getOwn_cp_id() {
-        return own_cp_id;
-    }
-
-    public void setOwn_cp_id(int own_cp_id) {
-        this.own_cp_id = own_cp_id;
     }
 
     public String getGd_name() {
