@@ -9,22 +9,33 @@ import java.util.List;
 @Repository
 public class CategoryListImpl implements CategoryList {
 
-  private final String namespace = "com.pofol.main.product.category.CategoryDto.";
+    private final String namespace = "com.pofol.main.product.category.CategoryDto.";
 
-  private final SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
-  @Autowired
-  public CategoryListImpl(SqlSession sqlSession) {
-    this.sqlSession = sqlSession;
-  }
+    @Autowired
+    public CategoryListImpl(SqlSession sqlSession) {
+        this.sqlSession = sqlSession;
+    }
 
-  @Override // 대 카테고리 정렬
-  public List<CategoryDto> bigCateList() throws Exception {
-    return sqlSession.selectList(namespace + "bigCateList");
-  }
+    @Override
+    public List<CategoryDto> cateList() throws Exception {
+        return sqlSession.selectList(namespace + "cateList");
+    }
 
-  @Override // 중 카테고리 정렬
-  public List<CategoryDto> midCateList(String cat_code) throws Exception {
-    return sqlSession.selectList(namespace + "midCateList", cat_code);
-  }
+    // 상품 등록할 때 필요한 카테고리 목록
+    @Override
+    public List<CategoryDto> enrollCategoryList() throws Exception {
+        return sqlSession.selectList(namespace + "enrollCategoryList");
+    }
+
+    @Override // 대 카테고리 정렬
+    public List<CategoryDto> bigCateList() throws Exception {
+        return sqlSession.selectList(namespace + "bigCateList");
+    }
+
+    @Override // 중 카테고리 정렬
+    public List<CategoryDto> midCateList(String cat_code) throws Exception {
+        return sqlSession.selectList(namespace + "midCateList", cat_code);
+    }
 }

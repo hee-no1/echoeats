@@ -11,12 +11,12 @@ import java.util.List;
 @Service
 public class ProductListServiceImpl implements ProductListService {
 
-  private final ProductListRepository productListRepository;
+    private final ProductListRepository productListRepository;
 
-  @Autowired
-  public ProductListServiceImpl(ProductListRepository productListRepository) {
-    this.productListRepository = productListRepository;
-  }
+    @Autowired
+    public ProductListServiceImpl(ProductListRepository productListRepository) {
+        this.productListRepository = productListRepository;
+    }
 
   @Override // 상품 조회
   public ProductDto read(Long prod_id) throws Exception {
