@@ -25,20 +25,14 @@ public class OrderController {
 
     @GetMapping
     public String Order(){
-        return "cartSample";
+        return "/order/cartSample";
     }
 
 
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
-    public String receiveItems(SelectedItemsDto item, Model m){
-        List<SelectedItemsDto> items = new ArrayList<>();
-        SelectedItemsDto item1 = new SelectedItemsDto(1L, "1a", 2);
-        SelectedItemsDto item2 = new SelectedItemsDto(1L, "1c", 2);
-        SelectedItemsDto item3 = new SelectedItemsDto(2L,2);
-        items.add(item1);
-        items.add(item2);
-        items.add(item3);
+    public String receiveItems(SelectedItemsDto selectedItems, Model m){
+        List<SelectedItemsDto> items = selectedItems.getItems();
         OrderDto orderDto = orderService.calculateProductInfo(items);
         System.out.println(orderDto);
 
