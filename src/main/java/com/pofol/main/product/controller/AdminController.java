@@ -41,7 +41,6 @@ public class AdminController {
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     private final ProductService productService;
-
     private final CategoryList categoryList;
 
     @Autowired
@@ -143,8 +142,8 @@ public class AdminController {
 //                ImageIO.write(bt_image, "jpg", thumbnailFile);
                 /** thumbnailator 라이브러리 사용 **/
                 Thumbnails.of(saveFile)
-                        .size(width, height)
-                        .toFile(thumbnailFile);
+                    .size(width, height)
+                    .toFile(thumbnailFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
