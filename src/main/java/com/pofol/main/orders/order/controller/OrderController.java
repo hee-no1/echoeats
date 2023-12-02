@@ -1,7 +1,7 @@
 package com.pofol.main.orders.order.controller;
 
 
-import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,12 +29,12 @@ public class OrderController {
 
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
-    public String receiveItems(SelectedItemsDto selectedItems, Model m){
-        List<SelectedItemsDto> items = selectedItems.getItems();
-        OrderDto orderDto = orderService.calculateProductInfo(items);
-        System.out.println(orderDto);
+    public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
+        List<SelectedItemsDto> items = selectedItemsDto.getItems();
+        OrderCheckout orderCheckout = orderService.writeCheckout(items);
+        System.out.println(orderCheckout);
+        m.addAttribute("checkout",orderCheckout);
 
-        m.addAttribute("orderDto",orderDto);
         return "/order/checkout";
     }
 
