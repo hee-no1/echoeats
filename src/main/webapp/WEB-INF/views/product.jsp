@@ -102,7 +102,7 @@
                         </div>
                         <h2 class="css-abwjr2 e1q8tigr4">
                                 <span class="css-5nirzt e1q8tigr3">
-                                    ${product.rate}%
+                                    ${product.disc_rate}%
                                 </span>
                             <span class="css-9pf1ze e1q8tigr2">${product.prod_price}</span>
                             <span class="css-1x9cx9j e1q8tigr1">원</span>
