@@ -5,6 +5,8 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,21 +18,16 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class ProductListController {
 
     private final ProductListService productListService;
     private final CategoryList categoryList;
 
-    @Autowired
-    public ProductListController(ProductListService productListService, CategoryList categoryList) {
-        this.productListService = productListService;
-        this.categoryList = categoryList;
-    }
-
     // 이벤트 화면으로 (그냥 만듬)
     @GetMapping("/christmas")
     public String christmasEvent() {
-        return "christmasEvent";
+        return "/product/christmasEvent";
     }
 
     // main 화면으로
@@ -65,7 +62,7 @@ public class ProductListController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "product";
+        return "/product/product";
     }
 
     // 상품 리스트 카테고리로 분류
@@ -97,6 +94,6 @@ public class ProductListController {
             e.printStackTrace();
         }
 //    return "categorySortPage";
-        return "productList";
+        return "/product/productList";
     }
 }

@@ -31,7 +31,7 @@ public class PageHandler {
     private void doPaging(int totalCnt, SearchCondition sc) {
         totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);
 
-        this.sc.setPage(Math.min(sc.getPage(), totalPage)); // 다시 확인해야 함
+        this.sc.setPage(Math.min(sc.getPage(), totalPage));
 
         if (totalPage == 0) {
             totalPage = 1;
