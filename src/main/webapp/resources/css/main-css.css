@@ -54,7 +54,7 @@ canvas, img, video {
 #top > #header > #homeInfo span {
     width: 8px;
     height: 5px;
-    background-image: url(./ico_down_16x10.webp);
+    background-image: url(/resources/icons/ico_down_16x10.webp);
     background-size: cover;
     background-position: center center;
     display: inline-block;
@@ -148,7 +148,7 @@ canvas, img, video {
     content: "";
     position: absolute;
     display: block;
-    background: url(./kurly_new.svg) 0px 0px no-repeat;
+    background: url(/resources/icons/kurly_new.svg) 0px 0px no-repeat;
     width: 10px;
     height: 10px;
     top: 3px;
@@ -182,7 +182,7 @@ canvas, img, video {
     bottom: 3px;
     border: none;
     cursor: pointer;
-    background: url(./kurly_search.svg) 0px 0px no-repeat;
+    background: url(/resources/icons/kurly_search.svg) 0px 0px no-repeat;
 }
 #search > #search-bar > #search-right > button{
     width: 36px;
@@ -193,25 +193,25 @@ canvas, img, video {
     border: none;
 }
 #search > #search-bar > #search-right > button:nth-of-type(3) {
-    background: url(./kurly_cart.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_cart.svg) 50% 50% no-repeat;
     right: 0;
 }
 #search > #search-bar > #search-right > button:nth-of-type(3):hover {
-    background: url(./kurly_cart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_cart_purple.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2) {
-    background: url(./kurly_heart.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_heart.svg) 50% 50% no-repeat;
     right: 58px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2):hover {
-    background: url(./kurly_heart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_heart_purple.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1) {
-    background: url(./kurly_adressAdd.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_adressAdd.svg) 50% 50% no-repeat;
     right: 116px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1):hover {
-    background: url(./kurly_adressAdd_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_adressAdd_purple.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > #tooltip{
     display: none;
@@ -273,10 +273,10 @@ canvas, img, video {
     width: 16px;
     height: 14px;
     margin-right: 14px;
-    background: url(./kurly_hamburger.svg) 0px 0px / 16px 14px no-repeat;
+    background: url(/resources/icons/kurly_hamburger.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category:hover > span:nth-of-type(1) {
-    background: url(./kurly_hamburger_purple.svg) 0px 0px / 16px 14px no-repeat;
+    background: url(/resources/icons/kurly_hamburger_purple.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category > span:nth-of-type(2) {
     font-size: 16px;
@@ -385,7 +385,7 @@ main > div > button {
     height: 52px;
     transition: all 0.5s ease 0s;
     opacity: 0;
-    background: url(./arrow_btn.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/arrow_btn.svg) 50% 50% no-repeat;
 
 }
 main > div > button:nth-of-type(1) {

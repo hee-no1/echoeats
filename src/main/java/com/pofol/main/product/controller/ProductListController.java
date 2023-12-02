@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class ProductListController {
 
     private final ProductListService productListService;
@@ -33,7 +34,7 @@ public class ProductListController {
     }
 
     // main 화면으로
-    @RequestMapping("/main")
+    @GetMapping("/main")
     public String main(Model model) {
         try {
             // 동적으로 만들 생각 해야함 (그룹으로 나눠서 상품 리스트 정렬)
@@ -46,9 +47,9 @@ public class ProductListController {
             List<ProductDto> eventOneList = productListService.getEventList(1L);
             model.addAttribute("eventOneList", eventOneList);
 
-            // 카테고리 리스트 정렬
-            List<CategoryDto> categoryList = this.categoryList.cateList();
-            model.addAttribute("categoryList", categoryList);
+            // 대 카테고리 리스트 정렬
+            List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
+            model.addAttribute("categoryList", bigCategoryProductList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,7 +71,32 @@ public class ProductListController {
     // 상품 리스트 카테고리로 분류
     @GetMapping("/category/{cat_code}")
     public String getCategoryProduct(@PathVariable String cat_code, Model model) {
-        model.addAttribute("cat_code", cat_code);
-        return "categorySortPage";
+
+        try {
+            // 중 카테고리 리스트 (메뉴판에 보여질 것)
+            List<CategoryDto> midCategoryList = categoryList.midCateList(cat_code);
+            model.addAttribute("midCategoryList", midCategoryList);
+
+            // 대 카테고리 리스트 정렬
+            List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
+            model.addAttribute("categoryList", bigCategoryProductList);
+
+            // 카테고리 종류별로 상품 리스트 정렬
+            List<ProductDto> categoryProductList = productListService.getCategoryProductList(cat_code);
+            model.addAttribute("productList", categoryProductList);
+
+            // 각각의 대 카테고리 이름 가져오기
+            for (CategoryDto bigCategoryName : bigCategoryProductList) {
+                if (cat_code.startsWith(bigCategoryName.getCat_code())) {
+                    String bigCateName = bigCategoryName.getCat_name();
+                    model.addAttribute("bigCateName", bigCateName);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//    return "categorySortPage";
+        return "productList";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @DisplayName("카테고리 리스트 테스트")
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class CategoryListTest {
+public class CategoryProductListTest {
 
     @Autowired
     CategoryList categoryList;
