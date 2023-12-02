@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/resources/css/main-css.css">
-    <script src="/resources/javascript/main.js"></script>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
+    <script src="/resources/product/js/main.js"></script>
     <style>
         /*드롭 다운 카테고리 (수정 필요)*/
         nav {

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/resources/order//css/checkoutStyle.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="css-1ykiyus e146m4rf2">

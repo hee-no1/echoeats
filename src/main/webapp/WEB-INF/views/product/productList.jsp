@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/resources/css/header-css.css">
-    <link rel="stylesheet" href="/resources/css/productList-css.css">
+    <link rel="stylesheet" href="/resources/product/css/header-css.css">
+    <link rel="stylesheet" href="/resources/product/css/productList-css.css">
     <title>ecoeats - best</title>
     <style>
         /*드롭 다운 카테고리 (수정 필요)*/
@@ -333,7 +333,7 @@
 
 <body>
 
-<%@ include file="include/header.jspf" %>
+<%@ include file="../include/header.jspf" %>
 
 <div id="wrap1">
     <div id="wrap1-center">
