@@ -25,6 +25,13 @@ public class SearchCondition {
         this.pageSize = pageSize;
     }
 
+    public String goSearchPage() {
+        return goSearchPage(page);
+    }
+    public String goSearchPage(Integer page) {
+        return "?page=" + page + "&pageSize=" + pageSize + "&keyword=" + keyword;
+    }
+
     public void setPage(Integer page) {
         this.page = page;
     }
@@ -35,6 +42,13 @@ public class SearchCondition {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public Integer getSkip() {
+        if (page == 0) {
+            page = 1;
+        }
+        return (page - 1) * pageSize;
     }
 
     public void setSkip(Integer skip) {
