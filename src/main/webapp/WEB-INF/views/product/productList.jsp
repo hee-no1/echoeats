@@ -56,6 +56,7 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
         /*드롭다운 css 끝*/
         #best {
             padding-top: 50px;
@@ -258,8 +259,10 @@
             grid-template-columns: repeat(auto-fill, 249px);
             gap: 31px 18px;
             width: 100%;
+            text-align: left;
         }
-        #search > #search-bar > #search-right > #tooltip{
+
+        #search > #search-bar > #search-right > #tooltip {
             display: none;
             position: absolute;
             inset: 0px auto auto 0px;
@@ -267,17 +270,20 @@
             transform: translate(13px, 36px);
             font-family: Roboto, Helvetica, Arial, sans-serif;
         }
-        #search > #search-bar > #search-right > #tooltip > div{
+
+        #search > #search-bar > #search-right > #tooltip > div {
             opacity: 1;
             transition: opacity 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
         }
-        #search > #search-bar > #search-right > #tooltip > p{
+
+        #search > #search-bar > #search-right > #tooltip > p {
             font-weight: 500;
             font-size: 16px;
             color: rgb(51, 51, 51);
             line-height: 24px;
             letter-spacing: 0.32px;
         }
+
         #search > #search-bar > #search-right > #tooltip button:nth-of-type(1) {
             display: block;
             padding: 0px 10px;
@@ -290,6 +296,7 @@
             background-color: rgb(255, 255, 255);
             border: 1px solid rgb(95, 0, 128);
         }
+
         #search > #search-bar > #search-right > #tooltip button:nth-of-type(2) {
             display: block;
             padding: 0px 10px;
@@ -302,7 +309,8 @@
             background-color: rgb(95, 0, 128);
             border: 0px none;
         }
-    /*  -------------------------------------------------------------------  */
+
+        /*  -------------------------------------------------------------------  */
 
         .css-raoddi {
             display: grid;
@@ -314,19 +322,51 @@
             border: 1px solid rgb(226, 226, 226);
             line-height: 20px;
         }
+
         .css-1h52dri {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
         .css-1b2to1r {
             letter-spacing: -1px;
             cursor: pointer;
             font-weight: 700;
             color: rgb(95, 0, 128);
         }
+
         #best {
             font-size: 28px;
+        }
+
+        .css-rdz8z7 {
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-top: 36px;
+        }
+
+        .css-1d20dg7:first-of-type {
+            border-left: 1px solid rgb(221, 221, 221);
+        }
+
+        .css-1d20dg7 {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-top: 1px solid rgb(221, 221, 221);
+            border-right: 1px solid rgb(221, 221, 221);
+            border-bottom: 1px solid rgb(221, 221, 221);
+            border-image: initial;
+            border-left: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -341,21 +381,29 @@
         <div id="search1"></div>
         <div id="navigation1"></div>
         <div id="main1">
-            <h3 id="best">${bigCateName}</h3>
 
+            <%--베스트, 신상품 정렬 할 시 모델 이름 생각해야함 or if태그 써서 바꿔야 함--%>
 
+            <%--            카테고리 상품 정렬 페이지--%>
+            <c:if test="${pageType eq 'category'}">
+                <h3 id="best">${bigCateName}</h3>
+                <ul class="css-raoddi e1lg1uoa2">
+                    <li class="css-1h52dri e1lg1uoa1">
+                        <a href="/category/${midCategoryList.get(0).parent_code}" class="css-1b2to1r e1lg1uoa0">전체보기</a>
+                    </li>
+                    <c:forEach var="midCategoryList" items="${midCategoryList}">
+                        <li class="css-1h52dri e1lg1uoa1">
+                            <a href="/category/${midCategoryList.cat_code}"
+                               class="css-1b2to1r e1lg1uoa0">${midCategoryList.cat_name}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </c:if>
 
-            <ul class="css-raoddi e1lg1uoa2">
-                <li class="css-1h52dri e1lg1uoa1">
-                    <a href="/category/${midCategoryList.get(0).parent_code}" class="css-1b2to1r e1lg1uoa0">전체보기</a>
-                </li>
-            <c:forEach var="midCategoryList" items="${midCategoryList}">
-                <li class="css-1h52dri e1lg1uoa1">
-                    <a href="/category/${midCategoryList.cat_code}" class="css-1b2to1r e1lg1uoa0">${midCategoryList.cat_name}</a>
-                </li>
-            </c:forEach>
-            </ul>
-
+            <%--            상품 검색 페이지    --%>
+            <c:if test="${pageType eq 'searchProduct'}">
+                <h3 id="best">'${searchContent}'에 대한 검색결과</h3>
+            </c:if>
 
 
             <div id="main1-menu">
@@ -1039,7 +1087,7 @@
 
                 <div class="menu">
                     <div class="css-1stur9s eudxpx34">
-                        <div class="css-crqql1 eudxpx33">총 284건(count 계산해야함)</div>
+                        <div class="css-crqql1 eudxpx33">총 ${totalCount}건</div>
                         <ul class="css-1vmfy7j eudxpx32">
                             <li class="css-5uzvtq eudxpx31">
                                 <a href="#"
@@ -1056,101 +1104,136 @@
                         </ul>
                     </div>
 
-
-
-<%--                    여기에 중 카테고리 박스가 들어가야 함--%>
-
-
+                    <%--------------------------------------------------------------------------------------------------------------%>
 
 
                     <div class="css-11kh0cw ef36txc5">
 
-                        <%--------------------------------------------------------------------------------------------------------------%>
-
-                        <%-- 상품 전체 진열로 테스트 (나중에 정렬기준에 나눠서 정렬하는거로 바꿔야 함 + model명은 productList로 통일) --%>
+                        <%-- 상품 전체 진열로 테스트 (현재는 카테고리 정렬기준만 있음 + model명은 productList로 통일) --%>
 
                         <c:forEach var="productList" items="${productList}">
-                        <a href="#" class="css-9o2zup e1c07x4813">
-                            <div class="css-0 e1c07x4811">
-                                <div class="e1c07x4812 css-tou8lf e3um3060"><span
-                                        style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
-                                        alt="상품 이미지" sizes="100vw"
-                                <%--                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"--%>
-                                        src="${productList.prod_img_id}"
-                                        decoding="async" data-nimg="fill" class="css-0"
-                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
-                                </div>
-                            </div>
-                            <div class="button-wrapper">
-                                <button type="button" class="css-13xu5fn e17x72af0">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z"
-                                              stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path>
-                                    </svg>
-                                    담기
-                                </button>
-                            </div>
-                            <div class="css-1kpzrna e1c07x489">
-<%--                                <span class="css-1qd61ut e1ms5t9c1">--%>
-<%--                                                                    <span class="css-1vdqr5b e1ms5t9c0">샛별배송</span>--%>
-<%--                                </span>--%>
-                                <span class="css-1dry2r1 e1c07x488">${productList.prod_name}</span>
-                                <p class="css-1wejlc3 e1c07x486">${productList.short_desc}</p>
-                                <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
-                                    <div><span class="dimmed-price css-18tpqqq ei5rudb1">${productList.prod_price}<span class="won">원</span></span>
+                            <a href="/product/${productList.prod_id}" class="css-9o2zup e1c07x4813">
+                                <div class="css-0 e1c07x4811">
+                                    <div class="e1c07x4812 css-tou8lf e3um3060">
+                                    <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+                                        <img alt="상품 이미지" sizes="100vw"
+                                            <%--                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"--%>
+                                             src="${productList.prod_img_id}"
+                                             decoding="async" data-nimg="fill" class="css-0"
+                                             style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
+                                    </span>
                                     </div>
-                                    <div class="discount"><span
-                                            class="discount-rate css-19lkxd2 ei5rudb0">${productList.disc_rate}</span><span
-                                            class="sales-price css-18tpqqq ei5rudb1">${productList.disc_price}<span
-                                            class="won">원</span>~</span></div>
                                 </div>
-                                <div class="review-count css-xezqwk e1c07x482"><span class="css-mz5g71 e1c07x481"><svg
-                                        width="100%" height="100%" viewBox="0 0 14 14" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"><mask id="path-1-inside-1_1513_17755"
-                                                                                 fill="white"><path fill-rule="evenodd"
-                                                                                                    clip-rule="evenodd"
-                                                                                                    d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path></mask><path
-                                        fill="#999"
-                                        d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
-                                        mask="url(#path-1-inside-1_1513_17755)"></path>
+                                <div class="button-wrapper">
+                                    <button type="button" class="css-13xu5fn e17x72af0">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z"
+                                                  stroke="#333333" stroke-linecap="square"
+                                                  stroke-linejoin="round"></path>
+                                        </svg>
+                                        담기
+                                    </button>
+                                </div>
+                                <div class="css-1kpzrna e1c07x489">
+                                        <%--                                <span class="css-1qd61ut e1ms5t9c1">--%>
+                                        <%--                                                                    <span class="css-1vdqr5b e1ms5t9c0">샛별배송</span>--%>
+                                        <%--                                </span>--%>
+                                    <span class="css-1dry2r1 e1c07x488">${productList.prod_name}</span>
+                                    <p class="css-1wejlc3 e1c07x486">${productList.short_desc}</p>
+                                    <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
+                                        <div><span
+                                                class="dimmed-price css-18tpqqq ei5rudb1">${productList.prod_price}<span
+                                                class="won">원</span></span>
+                                        </div>
+                                        <div class="discount">
+                                            <span class="discount-rate css-19lkxd2 ei5rudb0">${productList.disc_rate}%</span>
+                                            <span class="sales-price css-18tpqqq ei5rudb1">${productList.disc_price}<span
+                                                    class="won">원</span></span></div>
+                                    </div>
+                                    <div class="review-count css-xezqwk e1c07x482"><span class="css-mz5g71 e1c07x481">
+                                    <svg width="100%" height="100%" viewBox="0 0 14 14" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <mask id="path-1-inside-1_1513_17755" fill="white">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path></mask><path
+                                            fill="#999"
+                                            d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
+                                            mask="url(#path-1-inside-1_1513_17755)"></path>
                                     <circle fill="#999" cx="4.34998" cy="6.17871" r="0.75"></circle>
                                     <circle fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle>
                                     <circle fill="#999" cx="9.15002" cy="6.17871" r="0.75"></circle>
                                 </svg>
                                 </span>
 
-                                    <c:if test="${productList.rev_num gt 9999}">
-                                        <span class="review-number css-l610kl e1c07x480">9999+</span>
-                                    </c:if>
-                                    <c:if test="${productList.rev_num le 9999}">
-                                        <span class="review-number css-l610kl e1c07x480">${productList.rev_num}</span>
-                                    </c:if>
+                                        <c:if test="${productList.rev_num gt 9999}">
+                                            <span class="review-number css-l610kl e1c07x480">9999+</span>
+                                        </c:if>
+                                        <c:if test="${productList.rev_num le 9999}">
+                                            <span class="review-number css-l610kl e1c07x480">${productList.rev_num}</span>
+                                        </c:if>
 
+                                    </div>
+                                    <div class="css-1hrnl0u e1cvv2hm1"><span
+                                            class="css-1e5t2sz e1cvv2hm0">Ecoeats Only</span>
+                                    </div>
                                 </div>
-                                <div class="css-1hrnl0u e1cvv2hm1"><span class="css-1e5t2sz e1cvv2hm0">Kurly Only</span>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
                         </c:forEach>
-
-
-
-
-                        <%--------------------------------------------------------------------------------------------------------------%>
                     </div>
-
-<%--                    여기까지가 상품 리스트--%>
-
+                    <%-- 여기까지가 상품 리스트 --%>
 
 
-<%--                    여기부터는 페이징 관련--%>
+                    <div> <%-- 여기부터는 페이징 관련 --%>
 
-                    <div>
+                        <div class="css-rdz8z7 e82lnfz1">
+                            <c:choose>
+                                <c:when test="${pageHandler.prev}">
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
+                                    </a>
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.sc.page - 1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
+                                    </span>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <c:forEach var="pageNumber" begin="${pageHandler.beginPage}" end="${pageHandler.endPage}">
+                                <a href="/${pageType}${pageHandler.sc.goSearchPage(pageNumber)}" class="css-1d20dg7 e82lnfz0">${pageNumber}</a>
+                            </c:forEach>
+
+                            <c:choose>
+                                <c:when test="${pageHandler.next}">
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.sc.page + 1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
+                                    </a>
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.totalPage)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
+                                    </span>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </div>
 
                     </div>
+                    <%-- 여기까지가 페이징 끝 --%>
 
-<%--                    여기까지가 페이징 끝--%>
 
                 </div>
             </div>

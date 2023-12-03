@@ -1,5 +1,6 @@
 package com.pofol.main.product.service;
 
+import com.pofol.main.product.SearchCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.repository.ProductListRepository;
@@ -59,6 +60,24 @@ public class ProductListServiceImpl implements ProductListService {
   public EventGroupDto getEventEx(Long evt_gp_id) throws Exception {
     try {
       return productListRepository.eventEx(evt_gp_id);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override // 상품제목으로 검색한 상품 리스트 조회
+  public List<ProductDto> getSearchSelectProduct(SearchCondition sc) throws Exception {
+    try {
+      return productListRepository.searchSelectProduct(sc);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override // 상품 검색 리스트 카운트
+  public Integer getSearchResultCount(SearchCondition sc) throws Exception {
+    try {
+      return productListRepository.searchResultCount(sc);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

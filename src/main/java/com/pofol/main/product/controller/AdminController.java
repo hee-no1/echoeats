@@ -6,6 +6,7 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.AttachImageDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,8 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController {
-
-    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     private final ProductService productService;
     private final CategoryList categoryList;
