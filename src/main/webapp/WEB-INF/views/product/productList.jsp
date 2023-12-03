@@ -339,6 +339,35 @@
         #best {
             font-size: 28px;
         }
+
+        .css-rdz8z7 {
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-top: 36px;
+        }
+
+        .css-1d20dg7:first-of-type {
+            border-left: 1px solid rgb(221, 221, 221);
+        }
+
+        .css-1d20dg7 {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-top: 1px solid rgb(221, 221, 221);
+            border-right: 1px solid rgb(221, 221, 221);
+            border-bottom: 1px solid rgb(221, 221, 221);
+            border-image: initial;
+            border-left: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -352,21 +381,29 @@
         <div id="search1"></div>
         <div id="navigation1"></div>
         <div id="main1">
-            <h3 id="best">${bigCateName}</h3>
 
             <%--베스트, 신상품 정렬 할 시 모델 이름 생각해야함 or if태그 써서 바꿔야 함--%>
 
-            <ul class="css-raoddi e1lg1uoa2">
-                <li class="css-1h52dri e1lg1uoa1">
-                    <a href="/category/${midCategoryList.get(0).parent_code}" class="css-1b2to1r e1lg1uoa0">전체보기</a>
-                </li>
-                <c:forEach var="midCategoryList" items="${midCategoryList}">
+            <%--            카테고리 상품 정렬 페이지--%>
+            <c:if test="${pageType eq 'category'}">
+                <h3 id="best">${bigCateName}</h3>
+                <ul class="css-raoddi e1lg1uoa2">
                     <li class="css-1h52dri e1lg1uoa1">
-                        <a href="/category/${midCategoryList.cat_code}"
-                           class="css-1b2to1r e1lg1uoa0">${midCategoryList.cat_name}</a>
+                        <a href="/category/${midCategoryList.get(0).parent_code}" class="css-1b2to1r e1lg1uoa0">전체보기</a>
                     </li>
-                </c:forEach>
-            </ul>
+                    <c:forEach var="midCategoryList" items="${midCategoryList}">
+                        <li class="css-1h52dri e1lg1uoa1">
+                            <a href="/category/${midCategoryList.cat_code}"
+                               class="css-1b2to1r e1lg1uoa0">${midCategoryList.cat_name}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+
+            <%--            상품 검색 페이지    --%>
+            <c:if test="${pageType eq 'searchProduct'}">
+                <h3 id="best">'${searchContent}'에 대한 검색결과</h3>
+            </c:if>
 
 
             <div id="main1-menu">
@@ -1050,7 +1087,7 @@
 
                 <div class="menu">
                     <div class="css-1stur9s eudxpx34">
-                        <div class="css-crqql1 eudxpx33">총 284건(count 계산해야함)</div>
+                        <div class="css-crqql1 eudxpx33">총 ${totalCount}건</div>
                         <ul class="css-1vmfy7j eudxpx32">
                             <li class="css-5uzvtq eudxpx31">
                                 <a href="#"
@@ -1149,10 +1186,53 @@
 
                     <div> <%-- 여기부터는 페이징 관련 --%>
 
+                        <div class="css-rdz8z7 e82lnfz1">
+                            <c:choose>
+                                <c:when test="${pageHandler.prev}">
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
+                                    </a>
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.sc.page - 1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
+                                    </span>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
 
-                    </div> <%-- 여기까지가 페이징 끝 --%>
+                            <c:forEach var="pageNumber" begin="${pageHandler.beginPage}" end="${pageHandler.endPage}">
+                                <a href="/${pageType}${pageHandler.sc.goSearchPage(pageNumber)}" class="css-1d20dg7 e82lnfz0">${pageNumber}</a>
+                            </c:forEach>
 
+                            <c:choose>
+                                <c:when test="${pageHandler.next}">
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.sc.page + 1)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
+                                    </a>
+                                    <a href="/${pageType}${pageHandler.sc.goSearchPage(pageHandler.totalPage)}" class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
+                                    </span>
+                                    <span class="css-1d20dg7 e82lnfz0">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
 
+                        </div>
+
+                    </div>
+                    <%-- 여기까지가 페이징 끝 --%>
 
 
                 </div>

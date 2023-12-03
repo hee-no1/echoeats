@@ -29,12 +29,16 @@
                         <a>마켓컬리</a>
                         <div class="stick"></div>
                         <a>뷰티컬리</a>
-                        <div id="search-center">
-                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">
-                            <button id="search-button">
-                                <div><span class="blind">검색</span></div>
-                            </button>
-                        </div>
+
+                        <form action="/searchProduct" id="search-form">
+                            <div id="search-center">
+                                <input id="search-input" name="keyword" type="text" placeholder="검색어를 입력하세요.">
+                                <button id="search-button" type="submit">
+                                    <div><span class="blind">검색</span></div>
+                                </button>
+                            </div>
+                        </form>
+
                         <div id="search-right">
                             <button href="#">
                                 <span class="blind">배송지등록</span>

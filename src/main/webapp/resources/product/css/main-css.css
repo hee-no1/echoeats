@@ -154,7 +154,7 @@ canvas, img, video {
     top: 3px;
     right: -13px;
 }
-#search > #search-bar > #search-center {
+#search-center {
     display: flex;
     margin-left: 55px;
     width: 400px;
@@ -165,7 +165,7 @@ canvas, img, video {
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 }
-#search > #search-bar > #search-center > #search-input {
+#search-input {
     flex: 1;
     font-weight: bold;
     background-color: inherit;
@@ -174,7 +174,7 @@ canvas, img, video {
     font-size: 16px;
     letter-spacing: -0.33px;
 }
-#search > #search-bar > #search-center > #search-button {
+#search-button {
     position: relative;
     width: 30px;
     height: 30px;
