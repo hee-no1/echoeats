@@ -4,12 +4,13 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="RequiredProductDto" type="com.pofol.main.orders.sample.productSample.RequiredProductDto"/>
-		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
 		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
-		<typeAlias alias="SearchCondition" type="com.pofol.main.product.SearchCondition"/>
+		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
+		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
+    <typeAlias alias="SearchCondition" type="com.pofol.main.product.SearchCondition"/>
 	</typeAliases>
 </configuration>
