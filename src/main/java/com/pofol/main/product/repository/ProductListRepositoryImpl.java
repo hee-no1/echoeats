@@ -27,7 +27,7 @@ public class ProductListRepositoryImpl implements ProductListRepository {
         return sqlSession.selectOne(namespace + "select", prod_id);
     }
 
-    @Override // 전체 진열 상품 리스트 조회
+    @Override // 전체 진열 상품 리스트 조회 (필요하지 않을 가능성 높음)
     public List<ProductDto> selectAll() throws Exception {
         return sqlSession.selectList(namespace + "selectAll");
     }
@@ -52,19 +52,19 @@ public class ProductListRepositoryImpl implements ProductListRepository {
         return sqlSession.selectList(namespace + "selectProductPrice", prod_price);
     }
 
-    @Override // 상품 리스트 카운트
-    public int count() throws Exception {
-        return 0;
+    @Override // 상품제목으로 검색한 상품 리스트 조회
+    public List<ProductDto> searchSelectProduct(SearchCondition sc) throws Exception {
+        return sqlSession.selectList(namespace + "searchSelectProduct", sc);
     }
 
     @Override // 상품 검색 리스트 카운트
     public int searchResultCount(SearchCondition sc) throws Exception {
-        return 0;
+        return sqlSession.selectOne(namespace + "searchResultCount", sc);
     }
 
-    @Override // 상품 검색 리스트 조회
-    public List<ProductDto> searchSelect(SearchCondition sc) throws Exception {
-        return null;
+    @Override // 전체 상품 리스트 카운트
+    public int count() throws Exception {
+        return 0;
     }
 
     @Override // 이벤트 그룹 이름과 설명

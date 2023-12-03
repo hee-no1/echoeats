@@ -3,6 +3,7 @@ package com.pofol.main.product.repository;
 import com.pofol.main.product.SearchCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -28,14 +29,16 @@ public interface ProductListRepository {
     // 가격 순 상품 리스트 조회 (높은 가격 or 낮은 가격)
     List<ProductDto> selectProductPrice(Integer prod_price) throws Exception;
 
-    // 상품 리스트 카운트
-    int count() throws Exception;
+    // 상품제목으로 검색한 상품 리스트 조회
+    List<ProductDto> searchSelectProduct(SearchCondition sc) throws Exception;
 
     // 상품 검색 리스트 카운트
     int searchResultCount(SearchCondition sc) throws Exception;
 
-    // 상품 검색 리스트 조회
-    List<ProductDto> searchSelect(SearchCondition sc) throws Exception;
+    // 상품 리스트 카운트
+    int count() throws Exception;
+
+
 
 
     // 판매 등록일 상품 리스트 조회
