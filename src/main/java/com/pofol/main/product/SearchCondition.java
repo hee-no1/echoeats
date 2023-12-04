@@ -25,10 +25,13 @@ public class SearchCondition {
         this.pageSize = pageSize;
     }
 
-    public String goSearchPage() {
-        return goSearchPage(page);
+    public String goSelectPage() {
+        return goSelectPage(page);
     }
-    public String goSearchPage(Integer page) {
+    public String goSelectPage(Integer page) {
+        if (keyword.isEmpty()) {
+            return "?page=" + page;
+        }
         return "?page=" + page + "&pageSize=" + pageSize + "&keyword=" + keyword;
     }
 

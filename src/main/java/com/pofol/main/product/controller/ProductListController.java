@@ -74,9 +74,12 @@ public class ProductListController {
 
     // 상품 리스트 카테고리로 분류
     @GetMapping("/category/{cat_code}")
-    public String getCategoryProduct(@PathVariable String cat_code, Model model) {
+    public String getCategoryProduct(@PathVariable String cat_code, SearchCondition sc, Model model) {
 
         try {
+            // 카테고리 코드
+            model.addAttribute("cat_code", cat_code);
+
             // 카테고리별 상품 정렬 페이지
             model.addAttribute("pageType", "category");
 
@@ -88,9 +91,17 @@ public class ProductListController {
             List<CategoryDto> bigCategoryList = categoryList.bigCateList();
             model.addAttribute("categoryList", bigCategoryList);
 
+            // 카테고리 종류별로 상품 리스트 카운트
+            int totalCount = productListService.getCategoryProductCount(cat_code);
+            model.addAttribute("totalCount", totalCount);
+
             // 카테고리 종류별로 상품 리스트 정렬
-            List<ProductDto> categoryProductList = productListService.getCategoryProductList(cat_code);
+            List<ProductDto> categoryProductList = productListService.getCategoryProductList(cat_code, sc);
             model.addAttribute("productList", categoryProductList);
+
+            // 페이징
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
+            model.addAttribute("pageHandler", pageHandler);
 
             // 각각의 대 카테고리 이름 가져오기
             for (CategoryDto bigCategoryName : bigCategoryList) {
@@ -132,6 +143,7 @@ public class ProductListController {
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
             model.addAttribute("categoryList", bigCategoryProductList);
+
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("totalCount", 0);
