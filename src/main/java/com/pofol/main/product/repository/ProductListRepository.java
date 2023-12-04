@@ -1,9 +1,8 @@
 package com.pofol.main.product.repository;
 
-import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public interface ProductListRepository {
     List<ProductDto> selectEvent(Long evt_gp_id) throws Exception;
 
     // 카테고리 상품 리스트 조회
-    List<ProductDto> selectCategoryProductList(String cat_code, SearchCondition sc) throws Exception;
+    List<ProductDto> selectCategoryProductList(String cat_code, SearchProductCondition sc, String type) throws Exception;
 
     // 카테고리 상품 카운트
     int selectCategoryCount(String cat_code) throws Exception;
@@ -33,10 +32,10 @@ public interface ProductListRepository {
     List<ProductDto> selectProductPrice(Integer prod_price) throws Exception;
 
     // 상품제목으로 검색한 상품 리스트 조회
-    List<ProductDto> searchSelectProduct(SearchCondition sc) throws Exception;
+    List<ProductDto> searchSelectProduct(SearchProductCondition sc) throws Exception;
 
     // 상품 검색 리스트 카운트
-    int searchResultCount(SearchCondition sc) throws Exception;
+    int searchResultCount(SearchProductCondition sc) throws Exception;
 
     // 상품 리스트 카운트
     int count() throws Exception;

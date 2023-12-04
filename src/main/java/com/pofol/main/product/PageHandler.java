@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class PageHandler {
 
-    private SearchCondition sc;
+    private SearchProductCondition sc;
 
     public final int NAV_SIZE = 30; // 페이지 네비게이션의 크기
     private final int totalCount; // 총 게시물 개수
@@ -18,17 +18,17 @@ public class PageHandler {
     private boolean prev = false; // 다음 페이지로 이동하는 버튼을 보여줄 것인지 여부
 
     public PageHandler() {
-        this(1, new SearchCondition());
+        this(1, new SearchProductCondition());
     }
 
-    public PageHandler(int totalCount, SearchCondition sc) {
+    public PageHandler(int totalCount, SearchProductCondition sc) {
         this.totalCount = totalCount;
         this.sc = sc;
 
         doPaging(totalCount, sc);
     }
 
-    private void doPaging(int totalCount, SearchCondition sc) {
+    private void doPaging(int totalCount, SearchProductCondition sc) {
         totalPage = totalCount / sc.getPageSize() + (totalCount % sc.getPageSize() == 0 ? 0 : 1);
 
         this.sc.setPage(Math.min(sc.getPage(), totalPage));
@@ -38,7 +38,7 @@ public class PageHandler {
         this.next = sc.getPage() != totalPage;
     }
 
-    public void setSc(SearchCondition sc) {
+    public void setSc(SearchProductCondition sc) {
         this.sc = sc;
     }
 

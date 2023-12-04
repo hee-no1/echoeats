@@ -1135,16 +1135,16 @@
                                 <div class="css-crqql1 eudxpx33">총 ${totalCount}건</div>
                                 <ul class="css-1vmfy7j eudxpx32">
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="#"
+                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=1"
                                            class="css-19ce13b eudxpx30">신상품순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="#"
+                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=2"
                                            class="css-19ce13b eudxpx30">혜택순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="#"
+                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=3"
                                            class="css-19ce13b eudxpx30">낮은 가격순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="#"
+                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=4"
                                            class="css-19ce13b eudxpx30">높은 가격순</a></li>
                                 </ul>
                             </div>
