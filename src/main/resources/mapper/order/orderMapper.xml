@@ -103,7 +103,7 @@
        	</choose>
 	</sql>
 	
-    <select id="searchSelectPage" parameterType="SearchCondition" resultType="OrderDto">
+    <select id="searchSelectPage" parameterType="SearchOrderCondition" resultType="OrderDto">
 	    SELECT *
         FROM spring.order
         WHERE true
@@ -112,7 +112,7 @@
 	    LIMIT #{offset}, #{pageSize}
     </select>
     
-    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+    <select id="searchResultCnt" parameterType="SearchOrderCondition" resultType="int">
 	    SELECT count(*)
         FROM spring.order
         WHERE true

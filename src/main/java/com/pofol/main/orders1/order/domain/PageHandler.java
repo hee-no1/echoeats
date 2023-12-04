@@ -3,7 +3,7 @@ package com.pofol.main.orders1.order.domain;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageHandler {
-    private SearchCondition sc;
+    private SearchOrderCondition sc;
     public  final int NAV_SIZE = 10; // page navigation size
     private int totalCnt; // 게시물의 총 갯수
     private int totalPage; // 전체 페이지의 갯수
@@ -13,21 +13,21 @@ public class PageHandler {
     private boolean showPrev = false; // 이전을 보여줄지의 여부. beginPage==1이 아니면 showPrev는 false
 
     public PageHandler(int totalCnt, Integer page) {
-        this(totalCnt, new SearchCondition(page, 10));
+        this(totalCnt, new SearchOrderCondition(page, 10));
     }
 
     public PageHandler(int totalCnt, Integer page, Integer pageSize) {
-        this(totalCnt, new SearchCondition(page, pageSize));
+        this(totalCnt, new SearchOrderCondition(page, pageSize));
     }
 
-    public PageHandler(int totalCnt, SearchCondition sc) {
+    public PageHandler(int totalCnt, SearchOrderCondition sc) {
         this.totalCnt = totalCnt;
         this.sc = sc;
 
         doPaging(totalCnt, sc);
     }
 
-    private void doPaging(int totalCnt, SearchCondition sc) {
+    private void doPaging(int totalCnt, SearchOrderCondition sc) {
         this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize()==0? 0:1);
         this.sc.setPage(Math.min(sc.getPage(), totalPage));  // page가 totalPage보다 크지 않게
         this.beginPage = (this.sc.getPage() -1) / NAV_SIZE * NAV_SIZE + 1; // 11 -> 11, 10 -> 1, 15->11. 따로 떼어내서 테스트
@@ -46,11 +46,11 @@ public class PageHandler {
         System.out.println(showNext? " NEXT" : "");
     }
 
-    public SearchCondition getSc() {
+    public SearchOrderCondition getSc() {
         return sc;
     }
 
-    public void setSc(SearchCondition sc) {
+    public void setSc(SearchOrderCondition sc) {
         this.sc = sc;
     }
 

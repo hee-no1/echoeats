@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pofol.main.orders1.order.domain.OrderDto;
-import com.pofol.main.orders1.order.domain.SearchCondition;
+import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
@@ -56,12 +56,12 @@ public class OrderRepositoryImpl implements OrderRepository {
 		return session.selectOne(namespace + "count");
 	}
 	@Override
-	public List searchSelectPage(SearchCondition sc) throws Exception {
+	public List searchSelectPage(SearchOrderCondition sc) throws Exception {
 		return session.selectList(namespace+"searchSelectPage", sc);
 	}
 	
 	@Override
-	public int searchResultCnt(SearchCondition sc) throws Exception {
+	public int searchResultCnt(SearchOrderCondition sc) throws Exception {
 		return session.selectOne(namespace+"searchResultCnt", sc);
 	}
 }

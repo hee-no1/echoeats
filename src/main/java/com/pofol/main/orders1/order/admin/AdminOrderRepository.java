@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.pofol.main.orders1.order.domain.CodeTableDto;
 import com.pofol.main.orders1.order.domain.OrderDto;
-import com.pofol.main.orders1.order.domain.SearchCondition;
+import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 
 public interface AdminOrderRepository {
 	

@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pofol.main.orders1.order.domain.CodeTableDto;
 import com.pofol.main.orders1.order.domain.PageHandler;
-import com.pofol.main.orders1.order.domain.SearchCondition;
+import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 import com.pofol.main.orders1.order.repository.OrderRepository;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/admin1")
+public class AdminController1 {
 	
 	@Autowired
 	AdminOrderRepository adminOrdRpo;
@@ -29,7 +29,7 @@ public class AdminController {
 	OrderRepository ordRop;
 	
 	@GetMapping("/order/list")
-    public String orderList(SearchCondition sc, Model m, HttpServletRequest request){
+    public String orderList(SearchOrderCondition sc, Model m, HttpServletRequest request){
 		System.out.println("AdminController.orderList()");
 		System.out.println("sc = "+sc);
 		

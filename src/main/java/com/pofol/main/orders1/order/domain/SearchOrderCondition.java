@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class SearchCondition {
+public class SearchOrderCondition {
     private Integer page = 1;
     private Integer pageSize = DEFAULT_PAGE_SIZE;
     private String  date_type = "";
@@ -21,13 +21,13 @@ public class SearchCondition {
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 50;
 
-    public SearchCondition(){}
+    public SearchOrderCondition(){}
 
-    public SearchCondition(Integer page, Integer pageSize) {
+    public SearchOrderCondition(Integer page, Integer pageSize) {
         this(page, pageSize, "");
     }
 
-    public SearchCondition(Integer page, Integer pageSize, String keyword) {
+    public SearchOrderCondition(Integer page, Integer pageSize, String keyword) {
         this.page = page;
         this.pageSize = pageSize;
         this.keyword = keyword;
