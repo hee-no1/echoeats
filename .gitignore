@@ -274,3 +274,5 @@ $RECYCLE.BIN/
 .mvn
 mvnw
 mvnw.cmd
+
+*.properties
