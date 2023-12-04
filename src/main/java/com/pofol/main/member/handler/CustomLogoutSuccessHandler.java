@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -24,18 +25,9 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
 
 
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("referer".equals(cookie.getName())) {
-                    System.out.println("cookie"+cookie.getValue());
-                }
-            }
-        }
-
         String referer = request.getHeader("Referer");
         System.out.println("로그아웃 referer : " + referer);
-        request.getSession().setAttribute("lastUrl", referer);
+       // request.getSession().setAttribute("SPRING_SECURITY_SAVED_REQUEST", referer);
 
         Enumeration<String> attributeNames = request.getSession().getAttributeNames();
         while(attributeNames.hasMoreElements()){
@@ -43,11 +35,16 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
             System.out.println("로그아웃 세션 확인 : "+ a + "  :   "+ request.getSession().getAttribute(a));
         }
 
-        if(referer==null){
-            response.sendRedirect("/member/login_form");
-        }
+        HttpSession session = request.getSession();
+        session.setAttribute("result", null);
 
-        response.sendRedirect(referer);
+
+        if (referer == null) {
+            //setDefaultTargetUrl("http://localhost:8080/member/info");
+            referer = "http://localhost:8080/member/info";
+        }
+        setDefaultTargetUrl(referer);
+        super.onLogoutSuccess(request, response, authentication);
     }
 
 }

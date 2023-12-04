@@ -18,7 +18,7 @@ public class ProductController {
 
   @GetMapping("/prodEnroll")
   public String prodEnrollPageGET() {
-    return "prodEnroll";
+    return "/product/prodEnroll";
   }
 
   @GetMapping("/upload")

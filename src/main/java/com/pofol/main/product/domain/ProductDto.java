@@ -1,6 +1,7 @@
 package com.pofol.main.product.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 @ToString
 @Getter
+@NoArgsConstructor
 public class ProductDto {
 
   private Long prod_id; // 상품 ID
@@ -42,10 +44,6 @@ public class ProductDto {
   private String weight; // 중량/용량
   private String exp_date; // 유통기한
   private String as_guide; // 안내사항
-
-  public ProductDto() {
-  }
-
 
   // insert 테스트용 생성자
   public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, int prod_price, int disc_rate, String sale_sts, int prod_qty, String is_opt, String short_desc, String long_desc, String disp_sts, Date prod_mod_date, Date sel_str_date, Date sel_end_date) {

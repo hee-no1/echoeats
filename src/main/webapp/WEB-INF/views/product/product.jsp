@@ -5,90 +5,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/product-css.css"/>
     <title></title>
     <style>
         .css-1c36ywl {
             background: url(${product.prod_img_id}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
         }
+
+        /*드롭 다운 카테고리 (수정 필요)*/
+        nav {
+            overflow: hidden;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
-<div id="wrap">
-    <div id="wrap-center">
-        <div id="top">
-            <div id="header">
-                <div id="homeInfo">
-                    <a>회원가입</a>
-                    <div class="stick"></div>
-                    <a>로그인</a>
-                    <div class="stick"></div>
-                    <div>
-                        <a>고객센터<span></span></a>
-                    </div>
-                    <div class="menu">
-                        <div>공지사항</div>
-                        <div>자주하는 질문</div>
-                        <div>1:1 문의</div>
-                        <div>대량주문 문의</div>
-                    </div>
-                </div>
-                <div id="search">
-                    <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
-                        <div id="search-center">
-                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">
-                            <button id="search-button">
-                                <div><span class="blind">검색</span></div>
-                            </button>
-                        </div>
-                        <div id="search-right">
-                            <button href="#">
-                                <span class="blind">배송지등록</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">찜하기</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">장바구니</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="nev">
-                <div id="category">
-                    <span></span>
-                    <span>카테고리</span>
-                </div>
-                <div id="meun">
-                    <ul>
-                        <li>
-                            <span href="#">신상품</span>
-                        </li>
-                        <li>
-                            <span href="#">베스트</span>
-                        </li>
-                        <li>
-                            <span href="#">알뜰쇼핑</span>
-                        </li>
-                        <li>
-                            <span href="#">특가/혜택</span>
-                        </li>
-                    </ul>
-                </div>
-                <div id="nev-right">
-                    <div>
-                        <span>샛별・택배</span>
-                        <span>배송안내</span>
-                    </div>
-                </div>
-            </div>
-            <div class="css-1px7x3s e1py5jsz0" hidden></div>
-        </div>
+<%--<div id="wrap">--%>
+<%--    <div id="wrap-center">--%>
+<%--        <div id="top">--%>
+<%--            <div id="header">--%>
+<%--                <div id="homeInfo">--%>
+<%--                    <a>회원가입</a>--%>
+<%--                    <div class="stick"></div>--%>
+<%--                    <a>로그인</a>--%>
+<%--                    <div class="stick"></div>--%>
+<%--                    <div>--%>
+<%--                        <a>고객센터<span></span></a>--%>
+<%--                    </div>--%>
+<%--                    <div class="menu">--%>
+<%--                        <div>공지사항</div>--%>
+<%--                        <div>자주하는 질문</div>--%>
+<%--                        <div>1:1 문의</div>--%>
+<%--                        <div>대량주문 문의</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div id="search">--%>
+<%--                    <div id="search-bar">--%>
+<%--                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">--%>
+<%--                        <a>마켓컬리</a>--%>
+<%--                        <div class="stick"></div>--%>
+<%--                        <a>뷰티컬리</a>--%>
+<%--                        <div id="search-center">--%>
+<%--                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">--%>
+<%--                            <button id="search-button">--%>
+<%--                                <div><span class="blind">검색</span></div>--%>
+<%--                            </button>--%>
+<%--                        </div>--%>
+<%--                        <div id="search-right">--%>
+<%--                            <button href="#">--%>
+<%--                                <span class="blind">배송지등록</span>--%>
+<%--                            </button>--%>
+<%--                            <button href="#">--%>
+<%--                                <span class="blind">찜하기</span>--%>
+<%--                            </button>--%>
+<%--                            <button href="#">--%>
+<%--                                <span class="blind">장바구니</span>--%>
+<%--                            </button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div id="nev">--%>
+<%--                <div id="category">--%>
+<%--                    <span></span>--%>
+<%--                    <span>카테고리</span>--%>
+<%--                </div>--%>
+<%--                <div id="meun">--%>
+<%--                    <ul>--%>
+<%--                        <li>--%>
+<%--                            <span href="#">신상품</span>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <span href="#">베스트</span>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <span href="#">알뜰쇼핑</span>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <span href="#">특가/혜택</span>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
+<%--                <div id="nev-right">--%>
+<%--                    <div>--%>
+<%--                        <span>샛별・택배</span>--%>
+<%--                        <span>배송안내</span>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="css-1px7x3s e1py5jsz0" hidden></div>--%>
+<%--        </div>--%>
+
+<%@ include file="../include/header.jspf" %>
+
         <div class="css-n48rgu ex9g73v0">
             <div class="css-16c0d8l e1brqtzw0">
                 <main id="product-atf" class="css-1eoy87d e17iylht5">
