@@ -20,7 +20,7 @@ public class MemberDto {
 
     private Date rg_date;
     private String rg_num;
-    private Date md_date;
+    private Date md_date;  //String으로
     private String md_num;
     private Date update_date;
 
