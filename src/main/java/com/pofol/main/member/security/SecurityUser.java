@@ -12,7 +12,6 @@ public class SecurityUser implements UserDetails {
     private String mem_pwd;  // credential
 
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -39,7 +38,6 @@ public class SecurityUser implements UserDetails {
     public void setPassword(String mem_pwd) {
         this.mem_pwd = mem_pwd;
     }
-
 
 
     @Override

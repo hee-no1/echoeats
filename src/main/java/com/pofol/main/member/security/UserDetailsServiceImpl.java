@@ -28,33 +28,35 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String mem_id) throws UsernameNotFoundException {
 
-        System.out.println("service 진입");
+        System.out.println("---------------UserDetailsService---------------");
 
         //db에서 유저 정보를 가져온다
-        MemberDto vo2 = service.select(mem_id);
+        MemberDto vo2 = null;
+        try {
+            vo2 = service.select(mem_id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(vo2);
-        if (vo2==null){
+        if (vo2 == null) {
             return null;
         }
 
         //UserDetails 객체 생성 (Authentication에 넣기 위해)
         SecurityUser securityUser = new SecurityUser();
-        
+
         securityUser.setUsername(vo2.getMem_id());
         String pwd = vo2.getMem_pwd();
         pwd = bCryptPasswordEncoder.encode(pwd);
         securityUser.setPassword(pwd);
-       // securityUser.setName("AA");
+        // securityUser.setName("AA");
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority(vo2.getRole()));
         securityUser.setAuthorities(grantedAuthorities);
 
 
-        System.out.println("securityUser = "+securityUser.toString());
-
-
-
+        System.out.println("securityUser = " + securityUser);
 
 
         return securityUser;
@@ -62,11 +64,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
 }
-
-
-
-
-
 
 
 //        Authentication authentication = new UsernamePasswordAuthenticationToken(

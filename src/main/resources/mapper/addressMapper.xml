@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.main.member.addressMapper">
+    <insert id="insert_address">
+        INSERT INTO address
+        (addr_id, addr, dtl_addr, name, phone, post_num, type, def_addr, rg_date, rg_num, md_date, md_num, mem_id)
+        VALUES
+            (#{addr_id}, #{addr}, #{dtl_addr}, #{name}, #{phone}, #{post_num}, #{type}, #{def_addr}, #{rg_date}, #{rg_num}, #{md_date}, #{md_num}, #{mem_id})
+    </insert>
+
+    <select id="selectAll_address">
+        SELECT * FROM address where mem_id = #{mem_id}
+    </select>
+
+    <select id="select_address">
+        SELECT * FROM address WHERE addr_id = #{addr_id}
+    </select>
+
+    <update id="update_address">
+        UPDATE address
+        SET addr = #{addr}, dtl_addr = #{dtl_addr}, name = #{name}, phone = #{phone}, post_num = #{post_num}, type = #{type}, def_addr = #{def_addr}, md_date = now(), md_num = #{md_num}
+        WHERE addr_id = #{addr_id}
+    </update>
+
+     <delete id="delete_address">
+         DELETE FROM address WHERE address_id = #{address_id}
+     </delete>
+
+    <select id="count_address">
+        SELECT count(*) FROM address WHERE mem_id = #{mem_id}
+    </select>
+
+</mapper>
