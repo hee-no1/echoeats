@@ -13,7 +13,7 @@ import java.util.Map;
 public class FaqRepositoryImpl implements FaqRepository {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.pofol.main.repository.FaqDao.";
+    private static String namespace = "com.pofol.main.repository.FaqRepository.";
 
     // 등록하기
     public int insert(FaqDto dto) {
@@ -38,8 +38,8 @@ public class FaqRepositoryImpl implements FaqRepository {
     public FaqDto select(FaqDto dto) {
         return session.selectOne(namespace + "select", dto);
     }
-    public int getTotalItems(FaqDto dto) {
-        return session.selectOne(namespace + "getTotalItems", dto);
-    }
 
+    public int count(FaqDto dto) {
+        return session.selectOne(namespace + "count", dto);
+    }
 }

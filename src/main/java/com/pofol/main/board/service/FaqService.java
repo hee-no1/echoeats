@@ -10,5 +10,6 @@ public interface FaqService {
     int deleteFaq(FaqDto dto);
     FaqDto selectFaq(FaqDto dto);
     List<FaqDto> selectAllFaq(FaqDto dto);
+    int countFaq(FaqDto dto);
 
 }
