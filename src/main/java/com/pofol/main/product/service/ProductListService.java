@@ -1,6 +1,6 @@
 package com.pofol.main.product.service;
 
-import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 
@@ -15,7 +15,7 @@ public interface ProductListService {
   List<ProductDto> getList() throws Exception;
 
   // 카테고리 그룹 상품 리스트 조회
-  List<ProductDto> getCategoryProductList(String cat_code, SearchCondition sc) throws Exception;
+  List<ProductDto> getCategoryProductList(String cat_code, SearchProductCondition sc, String type) throws Exception;
 
   // 카테고리 별 상품 리스트 카운트
   int getCategoryProductCount(String cat_code) throws Exception;
@@ -27,8 +27,8 @@ public interface ProductListService {
   EventGroupDto getEventEx(Long evt_gp_id) throws Exception;
 
   // 상품제목으로 검색한 상품 리스트 조회
-  List<ProductDto> getSearchSelectProduct(SearchCondition sc) throws Exception;
+  List<ProductDto> getSearchSelectProduct(SearchProductCondition sc) throws Exception;
 
   // 상품 검색 리스트 카운트
-  Integer getSearchResultCount(SearchCondition sc) throws Exception;
+  Integer getSearchResultCount(SearchProductCondition sc) throws Exception;
 }

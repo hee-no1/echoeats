@@ -70,7 +70,7 @@
         </script>
     </head>
     <body class="sb-nav-fixed">
-    	<%@include file="../common/top_side_nav.jsp" %>
+    	<%@include file="../../common/top_side_nav.jsp" %>
             <div id="layoutSidenav_content">
                 <div class="container">
                 	<h2 class="mTitle">전체 주문 조회</h2>

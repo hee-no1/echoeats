@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Getter
 @ToString
-public class SearchCondition {
+public class SearchProductCondition {
 
     private Integer page = 1;
     private Integer pageSize = PAGE_SIZE;
@@ -16,11 +16,11 @@ public class SearchCondition {
 
     public static final int PAGE_SIZE = 30;
 
-    public SearchCondition() {
+    public SearchProductCondition() {
         this(1, PAGE_SIZE);
     }
 
-    public SearchCondition(Integer page, Integer pageSize) {
+    public SearchProductCondition(Integer page, Integer pageSize) {
         this.page = page;
         this.pageSize = pageSize;
     }
@@ -30,9 +30,9 @@ public class SearchCondition {
     }
     public String goSelectPage(Integer page) {
         if (keyword.isEmpty()) {
-            return "?page=" + page;
+            return "?page=" + page + "&pageSize=" + pageSize;
         }
-        return "?page=" + page + "&pageSize=" + pageSize + "&keyword=" + keyword;
+        return "?keyword=" + keyword + "&page=" + page + "&pageSize=" + pageSize;
     }
 
     public void setPage(Integer page) {
@@ -62,7 +62,7 @@ public class SearchCondition {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SearchCondition that = (SearchCondition) o;
+        SearchProductCondition that = (SearchProductCondition) o;
         return Objects.equals(page, that.page) && Objects.equals(pageSize, that.pageSize) && Objects.equals(keyword, that.keyword) && Objects.equals(skip, that.skip);
     }
 

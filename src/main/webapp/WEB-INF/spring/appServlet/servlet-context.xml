@@ -29,7 +29,7 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 
-	<context:component-scan base-package="com.pofol.main" />
+	<context:component-scan base-package="com.pofol" />
 
 	<!-- 업로드 관련 빈 -->
 	<beans:bean id="multipartResolver"
