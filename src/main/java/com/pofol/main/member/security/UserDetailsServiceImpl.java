@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String mem_id) throws UsernameNotFoundException {
 
-        System.out.println("service 진입");
+        System.out.println("---------------UserDetailsService---------------");
 
         //db에서 유저 정보를 가져온다
         MemberDto vo2 = null;

@@ -1,0 +1,297 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+html {
+  line-height: 1.15;
+}
+
+body {
+  font-size: 14px;
+  color: #333;
+  user-select: none;
+}
+
+body,
+html {
+  margin: 0 auto;
+  padding: 0;
+}
+
+#wrap1 {
+  display: flex;
+}
+
+#wrap1-center {
+  margin: 0px auto;
+  width: 1050px;
+  display: inline-block;
+}
+
+#main1 {
+  height: 19617px;
+}
+
+#best {
+  font-size: 28px;
+  text-align: center;
+}
+
+#main1-menu {
+  position: relative;
+  display: flex;
+  width: 1050px;
+  margin-top: 50px;
+  margin-bottom: 75px;
+}
+
+#filter {
+  position: sticky;
+  width: 220px;
+  flex-shrink: 0;
+  height: 100%;
+  max-height: calc(100vh - 120px);
+  top: 80px;
+  margin-right: 47px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  overflow: hidden scroll;
+}
+
+#filter::-webkit-scrollbar {
+  display: none;
+}
+
+#filter-top {
+  position: sticky;
+  top: 0px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  z-index: 20;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  line-height: 20px;
+  -webkit-box-pack: justify;
+}
+
+#filter-name {
+  display: flex;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.filtering-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  overflow: hidden;
+}
+
+#filter-name {
+  font-weight: 500;
+  font-size: 15px;
+  user-select: none;
+}
+
+#filter-reload {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+#reload {
+  margin-left: 5px;
+  font-weight: 500;
+  color: rgb(221, 221, 221)
+}
+
+button {
+  font-size: 14px;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+}
+
+.side-bar {
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+div {
+  display: block;
+}
+
+.menu {
+  width: 100%;
+  background-color: white;
+}
+
+.select-options-box {
+  max-height: 100vh;
+  opacity: 1;
+  transition: all 250ms cubic-bezier(0.83, 0, 0.17, 1) 0s;
+  height: auto;
+  overflow: hidden;
+}
+
+.select-options:first-of-type {
+  /*display: inline-block;*/
+  margin-top: 9px;
+}
+
+.select-options {
+  list-style: none;
+  margin-bottom: 18px;
+}
+
+.more-see {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(153, 153, 153);
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 11px;
+}
+
+li {
+  display: list-item;
+}
+
+.kind {
+  margin-right: 4px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgb(51, 51, 51);
+}
+
+.number {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(204, 204, 204);
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+.check-button {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.select-options-area {
+  display: flex;
+  align-items: center;
+}
+
+.more-view-category {
+  transform: rotate(90deg);
+}
+
+.soon-group {
+  display: flex;
+  gap: 12px;
+  list-style-type: none;
+  margin-bottom: 25px;
+}
+
+.ganadara-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  gap: 4px 2.5px;
+}
+
+.ganada-button {
+  font-size: 14px;
+  color: rgb(95, 0, 128);
+  font-weight: 500;
+}
+
+.ganada-button::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  margin-left: 12px;
+  background-color: rgb(238, 238, 238);
+  font-size: 10px;
+  vertical-align: -2px;
+}
+
+.many-product-button {
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  font-weight: 400;
+}
+
+.brand-ganadara {
+  list-style-type: none;
+}
+
+.entire-button {
+  display: block;
+  width: 47px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border-radius: 2px;
+  font-size: 13px;
+  background-color: rgb(51, 51, 51);
+  font-weight: 500;
+  line-height: 17px;
+  color: rgb(255, 255, 255);
+}
+
+.ganadara-button {
+  display: block;
+  width: 22px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border-radius: 2px;
+  font-size: 13px;
+  background-color: rgb(247, 247, 247);
+  font-weight: 400;
+  line-height: 17px;
+  color: rgb(181, 181, 181);
+}
+
+.finally-button {
+  display: block;
+  width: 47px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border-radius: 2px;
+  font-size: 13px;
+  background-color: rgb(247, 247, 247);
+  font-weight: 500;
+  line-height: 17px;
+  color: rgb(181, 181, 181);
+}
+
+nav {
+  display: block;
+}
+

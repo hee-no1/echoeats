@@ -1,6 +1,6 @@
 package com.pofol.main.product.repository;
 
-import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 
@@ -20,7 +20,10 @@ public interface ProductListRepository {
     List<ProductDto> selectEvent(Long evt_gp_id) throws Exception;
 
     // 카테고리 상품 리스트 조회
-    List<ProductDto> selectCategory(String mid_cat_name) throws Exception;
+    List<ProductDto> selectCategoryProductList(String cat_code, SearchProductCondition sc, String type) throws Exception;
+
+    // 카테고리 상품 카운트
+    int selectCategoryCount(String cat_code) throws Exception;
 
     // 할인율 상품 리스트 조회
     List<ProductDto> selectRateProduct(Double rate) throws Exception;
@@ -28,14 +31,16 @@ public interface ProductListRepository {
     // 가격 순 상품 리스트 조회 (높은 가격 or 낮은 가격)
     List<ProductDto> selectProductPrice(Integer prod_price) throws Exception;
 
+    // 상품제목으로 검색한 상품 리스트 조회
+    List<ProductDto> searchSelectProduct(SearchProductCondition sc) throws Exception;
+
+    // 상품 검색 리스트 카운트
+    int searchResultCount(SearchProductCondition sc) throws Exception;
+
     // 상품 리스트 카운트
     int count() throws Exception;
 
-    // 상품 검색 리스트 카운트
-    int searchResultCount(SearchCondition sc) throws Exception;
 
-    // 상품 검색 리스트 조회
-    List<ProductDto> searchSelect(SearchCondition sc) throws Exception;
 
 
     // 판매 등록일 상품 리스트 조회
