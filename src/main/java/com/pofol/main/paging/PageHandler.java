@@ -1,125 +1,112 @@
 package com.pofol.main.paging;
 
 public class PageHandler {
-    private int totalCnt; // 총 게시물 개수
-    private int pageSize; // 한 페이지의 크기 (게시물 개수)
-    private int naviSize = 10; // 페이지 네비게이션의 크기
-    private int totalPage; // 전체 페이지 개수
-    private int page; // 현재 페이지
-    private int beginPage; // 네비게이션의 첫번째 페이지
-    private int endPage; // 네비게이션의 마지막 페이지
-    private boolean showPrev; // 이전 페이지로 이동하는 버튼을 보여줄 것인지 여부
-    private boolean showNext; // 다음 페이지로 이동하는 버튼을 보여줄 것인지 여부
 
-    public PageHandler(int totalCnt, int page) {
-        this(totalCnt, page, 10);
+    private int currentPageNo;			//현재 페이지 번호
+    private int recordCountPerPage;		//한 페이지당 게시되는 게시물 수
+    private int pageSize;				//페이지 리스트에 게시되는 페이지 수
+    private int totalRecordCount;		//전체 게시물 수
+    private int realEnd;				//페이징 마지막 숫자
+
+    public int getCurrentPageNo() {
+        return currentPageNo;
     }
-    public PageHandler(int totalCnt, int page, int pageSize) {
-        this.totalCnt = totalCnt;
-        this.page = page;
-        this.pageSize = pageSize;
-
-        totalPage = (int) Math.ceil(totalCnt / (double) pageSize); // 남는 페이지가 있을 수 있어 올림처리
-        beginPage = page / naviSize * naviSize + 1;
-        endPage = Math.min(beginPage + naviSize - 1, totalPage); // endPage가 totalPage보다 작을 수 있다.
-        showPrev = beginPage != 1; // 시작 페이지가 1일 때는 나오지 않게
-        showNext = endPage != totalPage; // 다음으로 갈게 없으므로 나올 필요가 없다.
+    public void setCurrentPageNo(int currentPageNo) {
+        this.currentPageNo = currentPageNo;
     }
-
-    // page nav 를 print 하는 메서드
-    void print() {
-        System.out.println("page = " + page);
-        System.out.print(showPrev ? "[PREV] " : "");
-        for (int i = beginPage; i <= endPage; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println(showNext ? " [NEXT]" : "");
+    public int getRecordCountPerPage() {
+        return recordCountPerPage;
     }
-
-    public int getTotalCnt() {
-        return totalCnt;
+    public void setRecordCountPerPage(int recordCountPerPage) {
+        this.recordCountPerPage = recordCountPerPage;
     }
-
-    public void setTotalCnt(int totalCnt) {
-        this.totalCnt = totalCnt;
-    }
-
     public int getPageSize() {
         return pageSize;
     }
-
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-
-    public int getNaviSize() {
-        return naviSize;
+    public int getTotalRecordCount() {
+        return totalRecordCount;
+    }
+    public void setTotalRecordCount(int totalRecordCount) {
+        this.totalRecordCount = totalRecordCount;
     }
 
-    public void setNaviSize(int naviSize) {
-        this.naviSize = naviSize;
+    private int firstPageNoOnPageList;	//페이지 리스트의 첫 페이지 번호
+    private int lastPageNoOnPageList;	//페이지 리스트의 마지막 페이지 번호
+    private int firstRecordIndex; 		//페이징 sql의 조건절에 사용되는 시작 rownum
+
+    private boolean xprev;		//이전버튼
+    private boolean xnext;		//다음버튼
+
+
+    public int getFirstPageNoOnPageList() {
+        lastPageNoOnPageList = (int)(Math.ceil(currentPageNo/10.0)) * 10;
+
+        firstPageNoOnPageList = lastPageNoOnPageList - 9;
+        return firstPageNoOnPageList;
     }
 
-    public int getTotalPage() {
-        return totalPage;
+    public void setFirstPageNoOnPageList(int firstPageNoOnPageList) {
+        this.firstPageNoOnPageList = firstPageNoOnPageList;
     }
 
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
+    public int getLastPageNoOnPageList() {
+        lastPageNoOnPageList = (int)(Math.ceil(getCurrentPageNo()/10.0)) * 10;
+
+        int realEnd = (int)(Math.ceil((getTotalRecordCount() * 1.0) / getRecordCountPerPage()));
+
+
+        if(realEnd < lastPageNoOnPageList) {
+            lastPageNoOnPageList = realEnd;
+        }
+
+        return lastPageNoOnPageList;
     }
 
-    public int getPage() {
-        return page;
+    public void setLastPageNoOnPageList(int lastPageNoOnPageList) {
+        this.lastPageNoOnPageList = lastPageNoOnPageList;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public int getFirstRecordIndex() {
+        firstRecordIndex = (getCurrentPageNo() - 1) * getRecordCountPerPage();
+        return firstRecordIndex;
     }
 
-    public int getBeginPage() {
-        return beginPage;
+    public void setFirstRecordIndex(int firstRecordIndex) {
+        this.firstRecordIndex = firstRecordIndex;
     }
 
-    public void setBeginPage(int beginPage) {
-        this.beginPage = beginPage;
+    public boolean getXprev() {
+        xprev= getFirstPageNoOnPageList() > 1;
+        return xprev;
     }
 
-    public int getEndPage() {
-        return endPage;
+    public void setXprev(boolean xprev) {
+        this.xprev = xprev;
     }
 
-    public void setEndPage(int endPage) {
-        this.endPage = endPage;
+    public boolean getXnext() {
+
+        int realEnd = (int)(Math.ceil((getTotalRecordCount() * 1.0) / getRecordCountPerPage()));
+
+        xnext = getLastPageNoOnPageList() < realEnd;
+        return xnext;
     }
 
-    public boolean isShowPrev() {
-        return showPrev;
+    public void setXnext(boolean xnext) {
+        this.xnext = xnext;
     }
 
-    public void setShowPrev(boolean showPrev) {
-        this.showPrev = showPrev;
+    public int getRealEnd() {
+
+        realEnd = (int)(Math.ceil((getTotalRecordCount() * 1.0) / getRecordCountPerPage()));
+
+        return realEnd;
+    }
+    public void setRealEnd(int realEnd) {
+        this.realEnd = realEnd;
     }
 
-    public boolean isShowNext() {
-        return showNext;
-    }
-
-    public void setShowNext(boolean showNext) {
-        this.showNext = showNext;
-    }
-
-    @Override
-    public String toString() {
-        return "PageHandler{" +
-                "totalCnt=" + totalCnt +
-                ", pageSize=" + pageSize +
-                ", naviSize=" + naviSize +
-                ", totalPage=" + totalPage +
-                ", page=" + page +
-                ", beginPage=" + beginPage +
-                ", endPage=" + endPage +
-                ", showPrev=" + showPrev +
-                ", showNext=" + showNext +
-                '}';
-    }
 }
