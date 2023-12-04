@@ -107,7 +107,11 @@ local.properties
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+<<<<<<< HEAD
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+=======
+# Reference: https://intellij-support.jetbrains.[]com/hc/en-us/articles/206544839
+>>>>>>> 635abd32a002d313efa63da67f9db0c835b4077b
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -274,3 +278,8 @@ $RECYCLE.BIN/
 .mvn
 mvnw
 mvnw.cmd
+<<<<<<< HEAD
+=======
+
+*.properties
+>>>>>>> 635abd32a002d313efa63da67f9db0c835b4077b
