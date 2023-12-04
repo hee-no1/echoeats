@@ -21,7 +21,10 @@ public interface ProductListRepository {
     List<ProductDto> selectEvent(Long evt_gp_id) throws Exception;
 
     // 카테고리 상품 리스트 조회
-    List<ProductDto> selectCategoryProductList(String cat_code) throws Exception;
+    List<ProductDto> selectCategoryProductList(String cat_code, SearchCondition sc) throws Exception;
+
+    // 카테고리 상품 카운트
+    int selectCategoryCount(String cat_code) throws Exception;
 
     // 할인율 상품 리스트 조회
     List<ProductDto> selectRateProduct(Double rate) throws Exception;

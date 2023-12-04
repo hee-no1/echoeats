@@ -38,12 +38,21 @@ public class ProductListServiceImpl implements ProductListService {
   }
 
   @Override // 카테고리 상품 리스트 조회
-  public List<ProductDto> getCategoryProductList(String cat_code) throws Exception {
+  public List<ProductDto> getCategoryProductList(String cat_code, SearchCondition sc) throws Exception {
     try {
-      return productListRepository.selectCategoryProductList(cat_code);
+      return productListRepository.selectCategoryProductList(cat_code, sc);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override // 카테고리 상품 리스트 카운트
+  public int getCategoryProductCount(String cat_code) throws Exception {
+      try {
+        return productListRepository.selectCategoryCount(cat_code);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
   }
 
   @Override // 이벤트 상품 리스트 조회

@@ -3,12 +3,13 @@ package com.pofol.main.product.repository;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.SearchCondition;
-import com.pofol.main.product.repository.ProductListRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ProductListRepositoryImpl implements ProductListRepository {
@@ -38,8 +39,17 @@ public class ProductListRepositoryImpl implements ProductListRepository {
     }
 
     @Override // 카테고리 상품 리스트 조회
-    public List<ProductDto> selectCategoryProductList(String cat_code) throws Exception {
-        return sqlSession.selectList(namespace + "selectCategory", cat_code);
+    public List<ProductDto> selectCategoryProductList(String cat_code, SearchCondition sc) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("cat_code", cat_code);
+        map.put("skip", sc.getSkip());
+        map.put("pageSize", sc.getPageSize());
+        return sqlSession.selectList(namespace + "selectCategory", map);
+    }
+
+    @Override // 카테고리 상품 카운트
+    public int selectCategoryCount(String cat_code) throws Exception {
+        return sqlSession.selectOne(namespace + "selectCategoryCount", cat_code);
     }
 
     @Override // 할인율 상품 리스트 조회
