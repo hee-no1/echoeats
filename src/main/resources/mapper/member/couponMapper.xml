@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.main.member.couponMapper">
+    <select id="select_coupon" parameterType="int"  resultType="couponDto">
+        select * from coupon where cp_id =#{id}
+    </select>
+
+    <select id="select_coupon_mapping" parameterType="int" resultType="MemCouponDto">
+        select * from `mem-coupon` where own_cp_id =#{id}
+    </select>
+
+
+
+
+    <select id="selectMembersWithCoupons" resultType="java.util.List">
+        SELECT a.mem_id, b.cp_qty, b.cp_sts, b.cp_del_date, c.cp_name, c.cash_rate, c.min_amt, c.max_disc_amt
+        FROM member AS a
+                 JOIN mem_coupon AS b ON a.own_cp_id = b.own_cp_id
+                 JOIN coupon AS c ON b.cp_id = c.cp_id
+    </select>
+    
+</mapper>
+

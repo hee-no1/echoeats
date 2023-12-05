@@ -100,7 +100,7 @@ public class MemberController {
         Object result = request.getSession().getAttribute("result");
         System.out.println(result);
         model.addAttribute("result", result);
-        return "member/main_test";
+        return "include/header";
     }
 
     @GetMapping("/board")
