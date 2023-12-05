@@ -9,6 +9,7 @@
     <title>Document</title>
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <c:set var="member" value="${checkout.sampleMemberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />
@@ -78,7 +79,7 @@
                 </div></div></div>
                 <ul class="css-wx42bm e4nb37r0"><li>※ 카카오페이, 토스, 네이버페이, 페이코 결제 시, 결제하신 수단으로만 환불되는 점 양해부탁드립니다.</li><li>※ 고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 토스 페이먼츠의 구매안전(에스크로) 서비스를 이용하실 수 있습니다.</li></ul><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">개인정보 수집/제공</h3></div><div class="css-37px7p eh5sxvr5"><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">개인정보 수집∙이용 및 처리 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">전자지급 결제대행 서비스 이용약관 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><strong class="css-87vide eh5sxvr4">위 내용을 확인 하였으며 결제에 동의합니다.</strong></div><p class="css-1tak4sl eh5sxvr3">주문완료 상태일 경우에만 주문 취소가 가능하며, 상품 미배송 시 결제하신 수단으로 환불됩니다.</p>
                 <%-- 결제하기 버튼 --%>
-                <div class="css-1azakc el0c5j40"><button class="css-1lha8en e4nu7ef3" type="button" width="240" height="56" radius="3"><span class="css-nytqmg e4nu7ef1"><span id="payment" class="money">28,025</span>원 결제하기</span></button></div></div>
+                <div class="css-1azakc el0c5j40"><button class="css-1lha8en e4nu7ef3" type="button" width="240" height="56" radius="3" id="paymentBtn"><span class="css-nytqmg e4nu7ef1"><span id="payment" class="money">28,025</span>원 결제하기</span></button></div></div>
 
         <%-- 결제 금액 라인 --%>
         <div class="css-1rz7w0y epvroj91"><div class="css-9i9om4 epvroj90"><div class="css-6hge48 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 금액</h3></div>
