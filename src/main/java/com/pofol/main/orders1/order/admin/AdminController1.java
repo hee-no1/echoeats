@@ -44,7 +44,7 @@ public class AdminController1 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return "/admin/orderList";
+    	return "/admin/order/orderList";
     }
 	
 	@ModelAttribute

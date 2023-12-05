@@ -57,339 +57,8 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         /*드롭다운 css 끝*/
-        #best {
-            padding-top: 50px;
-        }
 
-        .menu {
-            width: 100%;
-            background-color: white;
-        }
-
-        .css-1stur9s {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: justify;
-            justify-content: space-between;
-            padding-bottom: 20px;
-            line-height: 20px;
-        }
-
-        .css-crqql1 {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgb(51, 51, 51);
-        }
-
-        .css-1vmfy7j {
-            position: relative;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-        }
-
-        .css-5uzvtq {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: end;
-            justify-content: flex-end;
-            margin-left: 8px;
-            font-size: 14px;
-            color: rgb(153, 153, 153);
-        }
-
-        .css-5uzvtq::before {
-            content: "";
-            display: flex;
-            width: 1px;
-            height: 10px;
-            margin-right: 8px;
-            background-color: rgb(226, 226, 226);
-        }
-
-        .css-9o2zup {
-            display: flex;
-            flex-direction: column;
-            height: 573px;
-            color: rgb(51, 51, 51);
-            cursor: pointer;
-        }
-
-        .css-tou8lf {
-            overflow: hidden;
-            position: relative;
-            border-radius: 4px;
-            background-color: rgb(245, 245, 245);
-            width: 249px;
-            height: 320px;
-        }
-
-        .css-9o2zup .button-wrapper {
-            width: 100%;
-            height: 36px;
-            margin-top: 6px;
-            border: 1px solid rgb(221, 221, 221);
-            border-radius: 4px;
-            display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-        }
-
-        .css-9o2zup .button-wrapper > button {
-            height: 36px;
-            font-size: 16px;
-            line-height: 19px;
-        }
-
-        .css-13xu5fn {
-            color: rgb(51, 51, 51);
-            width: 100%;
-            height: 32px;
-            display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-        }
-
-        .css-1kpzrna {
-            padding: 8px 10px 0px 0px;
-        }
-
-        .css-1qd61ut {
-            display: block;
-            padding-bottom: 2px;
-        }
-
-        .css-1vdqr5b {
-            font-size: 14px;
-            color: rgb(153, 153, 153);
-            line-height: 19px;
-            letter-spacing: -0.5px;
-        }
-
-        .css-1dry2r1 {
-            max-height: 58px;
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: normal;
-            display: -webkit-box;
-            overflow: hidden;
-            word-break: break-all;
-            white-space: normal;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .css-1wejlc3 {
-            padding-top: 4px;
-            font-size: 12px;
-            color: rgb(153, 153, 153);
-            line-height: 18px;
-            letter-spacing: normal;
-            display: -webkit-box;
-            overflow: hidden;
-            word-break: break-all;
-            white-space: normal;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .css-1tl7659 {
-            display: flex;
-            flex-direction: column;
-            padding-top: 8px;
-        }
-
-        .css-1tl7659 .dimmed-price {
-            font-size: 14px;
-            color: rgb(181, 181, 181);
-            text-decoration: line-through;
-        }
-
-        .css-1tl7659 .discount-rate {
-            margin-right: 7px;
-        }
-
-        .css-1tl7659 .discount-rate, .css-1tl7659 .sales-price {
-            font-weight: 800;
-            font-size: 16px;
-            line-height: 24px;
-            white-space: nowrap;
-            letter-spacing: -0.5px;
-        }
-
-        .css-19lkxd2 {
-            color: rgb(250, 98, 47);
-        }
-
-        .css-xezqwk {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            padding-top: 8px;
-            font-weight: 500;
-            font-size: 13px;
-            color: rgb(153, 153, 153);
-            line-height: 17px;
-        }
-
-        .css-mz5g71 {
-            width: 15px;
-            height: 15px;
-            margin: 1px -1px 0px 0px;
-        }
-
-        svg:not(:root) {
-            overflow: hidden;
-        }
-
-        .css-l610kl {
-            padding-left: 3px;
-            font-weight: 400;
-        }
-
-        .css-11kh0cw {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 249px);
-            gap: 31px 18px;
-            width: 100%;
-            text-align: left;
-        }
-
-        #search > #search-bar > #search-right > #tooltip {
-            display: none;
-            position: absolute;
-            inset: 0px auto auto 0px;
-            margin: 0px;
-            transform: translate(13px, 36px);
-            font-family: Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        #search > #search-bar > #search-right > #tooltip > div {
-            opacity: 1;
-            transition: opacity 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        }
-
-        #search > #search-bar > #search-right > #tooltip > p {
-            font-weight: 500;
-            font-size: 16px;
-            color: rgb(51, 51, 51);
-            line-height: 24px;
-            letter-spacing: 0.32px;
-        }
-
-        #search > #search-bar > #search-right > #tooltip button:nth-of-type(1) {
-            display: block;
-            padding: 0px 10px;
-            text-align: center;
-            overflow: hidden;
-            width: 80px;
-            height: 36px;
-            border-radius: 3px;
-            color: rgb(95, 0, 128);
-            background-color: rgb(255, 255, 255);
-            border: 1px solid rgb(95, 0, 128);
-        }
-
-        #search > #search-bar > #search-right > #tooltip button:nth-of-type(2) {
-            display: block;
-            padding: 0px 10px;
-            text-align: center;
-            overflow: hidden;
-            width: 100%;
-            height: 36px;
-            border-radius: 3px;
-            color: rgb(255, 255, 255);
-            background-color: rgb(95, 0, 128);
-            border: 0px none;
-        }
-
-        /*  -------------------------------------------------------------------  */
-
-        .css-raoddi {
-            display: grid;
-            grid-template-columns: repeat(4, 180px);
-            gap: 16px 83px;
-            overflow: hidden;
-            margin-top: 28px;
-            padding: 30px 40px;
-            border: 1px solid rgb(226, 226, 226);
-            line-height: 20px;
-        }
-
-        .css-1h52dri {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .css-1b2to1r {
-            letter-spacing: -1px;
-            cursor: pointer;
-            font-weight: 700;
-            color: rgb(95, 0, 128);
-        }
-
-        #best {
-            font-size: 28px;
-        }
-
-        .css-rdz8z7 {
-            display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-            margin-top: 36px;
-        }
-
-        .css-1d20dg7:first-of-type {
-            border-left: 1px solid rgb(221, 221, 221);
-        }
-
-        .css-1d20dg7 {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            width: 34px;
-            height: 34px;
-            border-top: 1px solid rgb(221, 221, 221);
-            border-right: 1px solid rgb(221, 221, 221);
-            border-bottom: 1px solid rgb(221, 221, 221);
-            border-image: initial;
-            border-left: none;
-            cursor: pointer;
-        }
-
-        .css-hayd9f {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 480px;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            margin: auto;
-            padding: 100px 0px;
-        }
-
-        .css-h97wyk {
-            text-align: center;
-            font-size: 16px;
-            color: rgb(181, 181, 181);
-            margin-top: 16px;
-            line-height: normal;
-        }
     </style>
 </head>
 
@@ -1135,16 +804,16 @@
                                 <div class="css-crqql1 eudxpx33">총 ${totalCount}건</div>
                                 <ul class="css-1vmfy7j eudxpx32">
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=1"
+                                        <a href="${pageHandler.sc.goSelectPage(1)}&type=1"
                                            class="css-19ce13b eudxpx30">신상품순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=2"
+                                        <a href="${pageHandler.sc.goSelectPage(1)}&type=2"
                                            class="css-19ce13b eudxpx30">혜택순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=3"
+                                        <a href="${pageHandler.sc.goSelectPage(1)}&type=3"
                                            class="css-19ce13b eudxpx30">낮은 가격순</a></li>
                                     <li class="css-5uzvtq eudxpx31">
-                                        <a href="?${pageHandler.sc.goSelectPage(pageHandler.sc.page)}&type=4"
+                                        <a href="${pageHandler.sc.goSelectPage(1)}&type=4"
                                            class="css-19ce13b eudxpx30">높은 가격순</a></li>
                                 </ul>
                             </div>
@@ -1153,8 +822,6 @@
 
 
                             <div class="css-11kh0cw ef36txc5">
-
-                                    <%-- 상품 전체 진열로 테스트 (현재는 카테고리 정렬기준만 있음 + model명은 productList로 통일) --%>
 
                                 <c:forEach var="productList" items="${productList}">
                                     <a href="/product/${productList.prod_id}" class="css-9o2zup e1c07x4813">
@@ -1233,11 +900,11 @@
                                 <div class="css-rdz8z7 e82lnfz1">
                                     <c:choose>
                                         <c:when test="${pageHandler.prev}">
-                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(1)}"
+                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(1)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                                class="css-1d20dg7 e82lnfz0">
                                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
                                             </a>
-                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.sc.page - 1)}"
+                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.sc.page - 1)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                                class="css-1d20dg7 e82lnfz0">
                                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
                                             </a>
@@ -1254,17 +921,17 @@
 
                                     <c:forEach var="pageNumber" begin="${pageHandler.beginPage}"
                                                end="${pageHandler.endPage}">
-                                        <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageNumber)}"
+                                        <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageNumber)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                            class="css-1d20dg7 e82lnfz0">${pageNumber}</a>
                                     </c:forEach>
 
                                     <c:choose>
                                         <c:when test="${pageHandler.next}">
-                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.sc.page + 1)}"
+                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.sc.page + 1)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                                class="css-1d20dg7 e82lnfz0">
                                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
                                             </a>
-                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.totalPage)}"
+                                            <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.totalPage)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                                class="css-1d20dg7 e82lnfz0">
                                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
                                             </a>
