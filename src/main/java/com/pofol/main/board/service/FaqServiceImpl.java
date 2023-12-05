@@ -10,30 +10,33 @@ import java.util.List;
 @Service
 public class FaqServiceImpl implements FaqService {
     @Autowired
-    private FaqRepositoryImpl faqDao;
+    private FaqRepositoryImpl faqRepository;
 
     @Override
     public int insertFaq(FaqDto dto) {
-        return faqDao.insert(dto);
+        return faqRepository.insert(dto);
     }
 
     @Override
     public int updateFaq(FaqDto dto) {
-        return faqDao.update(dto);
+        return faqRepository.update(dto);
     }
 
     @Override
     public int deleteFaq(FaqDto dto) {
-        return faqDao.delete(dto);
+        return faqRepository.delete(dto);
     }
 
     @Override
     public FaqDto selectFaq(FaqDto dto) {
-        return faqDao.select(dto);
+        return faqRepository.select(dto);
     }
 
     @Override
     public List<FaqDto> selectAllFaq(FaqDto dto) {
-        return faqDao.selectAll(dto);
+        return faqRepository.selectAll(dto);
+    }
+    public int countFaq(FaqDto dto) {
+        return faqRepository.count(dto);
     }
 }

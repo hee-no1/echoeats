@@ -1,15 +1,13 @@
 package com.pofol.main.product.controller;
 
 import com.pofol.main.product.PageHandler;
-import com.pofol.main.product.SearchCondition;
+import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,9 +72,18 @@ public class ProductListController {
 
     // 상품 리스트 카테고리로 분류
     @GetMapping("/category/{cat_code}")
-    public String getCategoryProduct(@PathVariable String cat_code, SearchCondition sc, Model model) {
+    public String getCategoryProduct(@PathVariable String cat_code, SearchProductCondition sc, Model model, String type) {
+
+        System.out.println("type = " + type);
 
         try {
+            // 신상품, 혜택율, 높은 가격순, 낮은 가격순 정렬 타입
+            if (type != null) {
+                model.addAttribute("type", type);
+            }
+
+
+
             // 카테고리 코드
             model.addAttribute("cat_code", cat_code);
 
@@ -96,7 +103,7 @@ public class ProductListController {
             model.addAttribute("totalCount", totalCount);
 
             // 카테고리 종류별로 상품 리스트 정렬
-            List<ProductDto> categoryProductList = productListService.getCategoryProductList(cat_code, sc);
+            List<ProductDto> categoryProductList = productListService.getCategoryProductList(cat_code, sc, type);
             model.addAttribute("productList", categoryProductList);
 
             // 페이징
@@ -119,7 +126,7 @@ public class ProductListController {
 
     // 상품 이름으로 검색한 상품리스트 정렬
     @GetMapping("/searchProduct")
-    public String getSearchProduct(SearchCondition sc, Model model) {
+    public String getSearchProduct(SearchProductCondition sc, Model model) {
 
         try {
             // 상품이름 검색 페이지

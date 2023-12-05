@@ -30,6 +30,18 @@
         SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y' AND cat_code LIKE CONCAT(#{cat_code}, '%')
+        <if test='type=="1"'>
+            ORDER BY sel_str_date DESC, prod_id ASC
+        </if>
+        <if test='type=="2"'>
+            ORDER BY disc_rate DESC, prod_id ASC
+        </if>
+        <if test='type=="3"'>
+            ORDER BY disc_price ASC, prod_id ASC
+        </if>
+        <if test='type=="4"'>
+            ORDER BY disc_price DESC, prod_id ASC
+        </if>
         LIMIT #{skip}, #{pageSize}
     </select>
 
@@ -48,26 +60,29 @@
         ORDER BY disc_rate DESC
     </select>
 
-<!--    가격순 정렬 + 변경해야함-->
-    <select id="selectProductPrice">
-        SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
-        FROM product
-        WHERE disp_sts = 'Y'
-        AND prod_price = #{prod_price}
-    </select>
-<!--    높은 가격, 낮은 가격 나눠야함-->
-
 <!--    상품명으로 검색 리스트 정렬-->
-    <select id="searchSelectProduct" parameterType="SearchCondition" resultType="ProductDto">
+    <select id="searchSelectProduct" parameterType="SearchProductCondition" resultType="ProductDto">
         SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
         AND (prod_name LIKE concat('%',#{keyword} ,'%'))
+        <if test='type=="1"'>
+            ORDER BY sel_str_date DESC, prod_id ASC
+        </if>
+        <if test='type=="2"'>
+            ORDER BY disc_rate DESC, prod_id ASC
+        </if>
+        <if test='type=="3"'>
+            ORDER BY disc_price ASC, prod_id ASC
+        </if>
+        <if test='type=="4"'>
+            ORDER BY disc_price DESC, prod_id ASC
+        </if>
         LIMIT #{skip}, #{pageSize}
     </select>
 
 <!--    검색한 상품 리스트 카운트-->
-    <select id="searchResultCount" parameterType="SearchCondition" resultType="int">
+    <select id="searchResultCount" parameterType="SearchProductCondition" resultType="int">
         SELECT COUNT(*)
         FROM product
         WHERE disp_sts = 'Y'

@@ -6,6 +6,9 @@ import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +29,28 @@ public class MemberController {
     MemberRepository memberRepository;
 
     @RequestMapping(value = "/login_form", method = RequestMethod.GET)
-    public String loginGET(HttpServletRequest request, Model model, Authentication authentication) {
+    public String loginGET(HttpServletRequest request,HttpServletResponse response, Model model, Authentication authentication) {
+        HttpSession session = request.getSession();
         //만약 인증이 되어 있는 회원이면 이전에 왔던 곳에서 리다이렉트
         //1. 인증된 회원과 익명사용자의 Authentication을 확인
         System.out.println("로그인GET : " + authentication);
+        String referer = request.getHeader("Referer"); //login_form
+
+        //referer - o 버튼으로 들어옴
+        //referer - x url
+        if(referer != null){
+            session.setAttribute("referer", referer);
+        }else {
+            session.removeAttribute("referer");
+        }
+        System.out.println("referer  :  "+referer);
+
+        //2. 게시판 - 로그인 - 게시판
+        // 그냥 로그인 버튼을 클릭했을 경우 login success에서 referer이나 savedRequest는 생기지 않는다(가로챘을때는 생김)
+        //그래서 referer을 세션에 저장해서 로그인 성공했을 경우 referer쪽으로 보낸다
         if (authentication != null) {
             //model.addAttribute("msg","이미 인증된 회원입니다");
-            String referer = request.getHeader("Referer"); //login_form
-            System.out.println(referer);
+
             return "redirect:" + (referer != null ? referer : "/member/info");
         }
 
@@ -42,7 +59,10 @@ public class MemberController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String userGET() {
+    public String userGET(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Object result = session.getAttribute("result");
+        model.addAttribute("result", result);
         return "member/user";
     }
 
@@ -74,6 +94,20 @@ public class MemberController {
         String referer = request.getHeader("Referer");
         System.out.println("컨트롤러 referer : " + referer);
     }
+
+    @GetMapping("/main_test")
+    public String member_test(HttpServletRequest request, Model model) {
+        Object result = request.getSession().getAttribute("result");
+        System.out.println(result);
+        model.addAttribute("result", result);
+        return "member/main_test";
+    }
+
+    @GetMapping("/board")
+    public String boardJoin() {
+        return "member/board_test";
+    }
+
     @GetMapping("/join")
     public String memberJoin() {
         return "member/join_form";

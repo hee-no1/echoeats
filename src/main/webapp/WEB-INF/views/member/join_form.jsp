@@ -523,7 +523,7 @@
                     alert("email중복확인 눌러주세요.")
                 } else if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1) {
                     alert("회원가입이 완료되었습니다.")
-                    location.href = "/";
+                    location.href = "/main";
                 }
                 }).fail(function (error){
                     alert("회원가입에 실패하셨습니다.")
