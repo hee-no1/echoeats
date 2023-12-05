@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항 - 컬리</title>
+    <%@ include file="../include/bootstrap.jspf" %>
     <style>
         .card {
             border: white;
@@ -44,91 +45,13 @@
             font-size: 14px;
         }
     </style>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/kurly_main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectPratice.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
-<div id="wrap">
-    <div id="wrap-center">
-        <div id="top">
-            <div id="header">
-                <div id="homeInfo">
-                    <a>회원가입</a>
-                    <div class="stick"></div>
-                    <a>로그인</a>
-                    <div class="stick"></div>
-                    <div>
-                        <a>고객센터<span></span></a>
-                    </div>
-                    <div class="menu">
-                        <div>공지사항</div>
-                        <div>자주하는 질문</div>
-                        <div>1:1 문의</div>
-                        <div>대량주문 문의</div>
-                    </div>
-                </div>
-                <div id="search">
-                    <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
-                        <div id="search-center">
-                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">
-                            <button id="search-button">
-                                <div><span class="blind">검색</span></div>
-                            </button>
-                        </div>
-                        <div id="search-right">
-                            <button href="#">
-                                <span class="blind">배송지등록</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">찜하기</span>
-                            </button>
-                            <button href="#">
-                                <span class="blind">장바구니</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="nev">
-                <div id="category">
-                    <span></span>
-                    <span>카테고리</span>
-                </div>
-                <div id="menu">
-                    <ul>
-                        <li>
-                            <span href="#">신상품</span>
-                        </li>
-                        <li>
-                            <span href="#">베스트</span>
-                        </li>
-                        <li>
-                            <span href="#">알뜰쇼핑</span>
-                        </li>
-                        <li>
-                            <span href="#">특가/혜택</span>
-                        </li>
-                    </ul>
-                </div>
-                <div id="nev-right">
-                    <div>
-                        <span>샛별・택배</span>
-                        <span>배송안내</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<header>
+    <%@ include file="../include/header.jspf" %>
+</header>
 <div class="content-page">
     <div class="customer-service-center">
         <div class="center-left-menu"> <!--고객센터 메뉴(화면 왼쪽)-->
@@ -280,8 +203,15 @@
         </div>
     </div>
 </div>
-
 <script>
+    function faq_delete(faq_id) {
+        if (confirm("정말 삭제하시겠습니까??") == true) {
+            location.href="deletefaq.do?faq_id="+faq_id
+        } else {
+            return false;
+        }
+    }
+
     $(document).ready(function() {
         getFaqList();
     });
@@ -343,6 +273,16 @@
         getFaqList();
     });
 </script>
+    <div class="board-footer"> <!--게시판 하단-->
+        <div class="board-footer-button">
+            <button type="button" class="left-button">
+                <div class="left-button1">이전</div>
+            </button>
+            <button type="button" class="right-button">
+                <div class="right-button1">이후</div>
+            </button>
+        </div>
+    </div>
 
 <div class="right-menu">
     <div class="right-menu-list">
@@ -408,36 +348,9 @@
             </button>
         </div>
     </div>
-
-    <div class="board-footer"> <!--게시판 하단-->
-        <div class="board-footer-button">
-            <button type="button" class="left-button">
-                <div class="left-button1">이전</div>
-            </button>
-            <button type="button" class="right-button">
-                <div class="right-button1">이후</div>
-            </button>
-        </div>
-    </div>
-
-</div>
-<div id="footer">
-    <div id="footer1">
-        <div class="footer1-1">
-            <div>
-
-            </div>
-            <div>
-
-            </div>
-        </div>
-        <div>
-
-        </div>
-    </div>
-    <div id="footer2"></div>
-    <!-- footer -->
 </div>
 </body>
-
+<footer>
+    <%@ include file="../include/footer.jspf" %>
+</footer>
 </html>
