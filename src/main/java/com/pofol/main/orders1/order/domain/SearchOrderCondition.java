@@ -50,6 +50,17 @@ public class SearchOrderCondition {
                 .build().toString();
     }
     
+    public String getQueryStringWithoutPS() {
+        return UriComponentsBuilder.newInstance()
+                .queryParam("page",     page)
+                .queryParam("date_type", date_type)
+                .queryParam("start_date", start_date)
+                .queryParam("end_date", end_date)
+                .queryParam("keyword_type", keyword_type)
+                .queryParam("keyword",  keyword)
+                .build().toString();
+    }
+    
     public Integer getPage() {
         return page;
     }
