@@ -21,6 +21,7 @@ public class OrderDto {
     private Integer dlvy_fee;
     private Integer tot_prod_qty;
     private String pay_way;
+    private Integer ord_ing;
     private Integer ord_cmplt;
     private Integer ord_fail;
     private Integer prod_ing;
@@ -38,6 +39,7 @@ public class OrderDto {
     public OrderDto() {
     	this.dlvy_fee = 0;
     	
+    	this.ord_ing = 0;
     	this.ord_cmplt = 0;
         this.ord_fail = 0;
         this.prod_ing = 0;
@@ -64,6 +66,7 @@ public class OrderDto {
 		
 		this.dlvy_fee = 0;
 		
+		this.ord_ing = 0;
 		this.ord_cmplt = 0;
         this.ord_fail = 0;
         this.prod_ing = 0;
@@ -89,9 +92,10 @@ public class OrderDto {
 				&& Objects.equals(md_num, other.md_num) && Objects.equals(mem_id, other.mem_id)
 				&& Objects.equals(ord_cmplt, other.ord_cmplt) && Objects.equals(ord_cxl, other.ord_cxl)
 				&& Objects.equals(ord_ex, other.ord_ex) && Objects.equals(ord_fail, other.ord_fail)
-				&& Objects.equals(ord_id, other.ord_id) && Objects.equals(ord_rfnd, other.ord_rfnd)
-				&& Objects.equals(pay_way, other.pay_way) && Objects.equals(prod_ing, other.prod_ing)
-				&& Objects.equals(rg_num, other.rg_num) && Objects.equals(tot_pay_price, other.tot_pay_price)
+				&& Objects.equals(ord_id, other.ord_id) && Objects.equals(ord_ing, other.ord_ing)
+				&& Objects.equals(ord_rfnd, other.ord_rfnd) && Objects.equals(pay_way, other.pay_way)
+				&& Objects.equals(prod_ing, other.prod_ing) && Objects.equals(rg_num, other.rg_num)
+				&& Objects.equals(tot_pay_price, other.tot_pay_price)
 				&& Objects.equals(tot_prod_disc, other.tot_prod_disc)
 				&& Objects.equals(tot_prod_name, other.tot_prod_name)
 				&& Objects.equals(tot_prod_price, other.tot_prod_price)
@@ -101,8 +105,7 @@ public class OrderDto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(dlvy_cmplt, dlvy_fee, dlvy_ing, dlvy_prep_ing, md_num, mem_id, ord_cmplt, ord_cxl, ord_ex,
-				ord_fail, ord_id, ord_rfnd, pay_way, prod_ing, rg_num, tot_pay_price, tot_prod_disc, tot_prod_name,
-				tot_prod_price, tot_prod_qty);
+				ord_fail, ord_id, ord_ing, ord_rfnd, pay_way, prod_ing, rg_num, tot_pay_price, tot_prod_disc,
+				tot_prod_name, tot_prod_price, tot_prod_qty);
 	}
-    
 }

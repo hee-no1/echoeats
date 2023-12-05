@@ -3,18 +3,21 @@ package com.pofol.main.orders.order.domain;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import lombok.Data;
+
 public class OrderDto {
 
     private Long ord_id; //주문번호
     private String mem_id; //회원ID
     private LocalDateTime ord_date;  //주문일시
     private String tot_prod_name; //총 상품명
-    private Integer tot_prod_price; //총 주문금액
-    private Integer tot_pay_price; //총 실결제 금액
+    private Integer tot_prod_price; //총 주문금액(상품금액-상품할인금액)
+    private Integer tot_pay_price; //총 실결제 금액(총주문금액+배송비-할인금액)
     private Integer tot_prod_disc; //총 상품할인금액
     private Integer dlvy_fee; //배송비
     private Integer prod_qty; //총 상품 수량
     private String pay_way; //결제방법
+    private Integer ord_ing; // 주문중
     private Integer ord_cmplt; //주문완료
     private Integer ord_fail; //주문실패
     private Integer prod_ing; //상품준비중
@@ -52,7 +55,8 @@ public class OrderDto {
         this.rg_num = rg_num;
         this.md_num = md_num;
     }
-
+    
+    
     public Long getOrd_id() {
         return ord_id;
     }
