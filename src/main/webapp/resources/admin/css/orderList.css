@@ -993,8 +993,11 @@ html:lang(ko) .btnNormal span {
     padding-right: 4px;
 }
 
-.mBoard tbody th[scope*='col'] {
+.mBoard tbody th[scope*='col'], .mBoard tbody td[scope*='col'] {
     text-align: center;
+}
+.mBoard tbody td[scope*='col'] {
+    box-sizing: content-box;
 }
 
 html:lang(ko) .mBoard thead th,

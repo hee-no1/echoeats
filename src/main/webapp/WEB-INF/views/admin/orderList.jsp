@@ -18,10 +18,19 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
         <script>
             $(function(){
+                
+
                 $('.start_date').val(fullDate(0));
                 $('.end_date').val(fullDate(0));
-                SearchCondition();
+                $('select[name=rows]').val('${ph.sc.pageSize}');
                 
+                SearchCondition();
+
+                $('select[name=rows]').change(function(){
+                    const ps = $('select[name=rows]').val();
+                    location.href = "/admin1/order/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;
+                });
+
                 $('.btnDate').click(function(e) {
                     e.preventDefault();
                     $('.btnDate').removeClass('selected');
@@ -49,6 +58,12 @@
                 if('${ph.sc.date_type}'!=''){
                     $('select[name=date_type]').val('${ph.sc.date_type}').prop("selected", true);
                 }
+                if('${ph.sc.keyword_type}'!=''){
+                    $('select[name=keyword_type]').val('${ph.sc.keyword_type}').prop("selected", true);
+                }
+                if('${ph.sc.keyword}'!=''){
+                    $('input[name=keyword]').val('${ph.sc.keyword}');
+                }
                 if('${ph.sc.start_date}'!=''){
                     const startDate = "<fmt:formatDate value='${ph.sc.start_date}' pattern='yyyy-MM-dd' type='date'/>";
                     $('duet-date-picker[name=start_date]').val(startDate);
@@ -68,13 +83,43 @@
                     return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
                 }
         </script>
+        <style>
+        .pagination, .datatable-pagination ul {
+            --bs-pagination-padding-x: 0.75rem;
+            --bs-pagination-padding-y: 0.375rem;
+            --bs-pagination-font-size: 1rem;
+            --bs-pagination-color: #6c757d;
+            --bs-pagination-bg: #fff;
+            --bs-pagination-border-width: 1px;
+            --bs-pagination-border-color: #dee2e6;
+            --bs-pagination-border-radius: 0.375rem;
+            --bs-pagination-hover-color: #1b1e26;
+            --bs-pagination-hover-bg: #e9ecef;
+            --bs-pagination-hover-border-color: #dee2e6;
+            --bs-pagination-focus-color: #1b1e26;
+            --bs-pagination-focus-bg: #e9ecef;
+            --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            --bs-pagination-active-color: #fff;
+            --bs-pagination-active-bg: #1b1e26;
+            --bs-pagination-active-border-color: #1b1e26;
+            --bs-pagination-disabled-color: #6c757d;
+            --bs-pagination-disabled-bg: #fff;
+            --bs-pagination-disabled-border-color: #dee2e6;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+        .page-item .page-link {
+            font-size: 12px;
+        }
+        </style>
     </head>
     <body class="sb-nav-fixed">
     	<%@include file="../common/top_side_nav.jsp" %>
             <div id="layoutSidenav_content">
                 <div class="container">
                 	<h2 class="mTitle">전체 주문 조회</h2>
-                    <form action="<c:url value='/admin/order/list'/>" class="optionArea" method="get">
+                    <form action="<c:url value='/admin1/order/list'/>" class="optionArea" method="get">
                     <!-- <div class="optionArea " id="QA_deposit1"> -->
                         <div class="mOption">
                             <table border="1">
@@ -116,7 +161,8 @@
                                                             <option value="${ct.code_name}">${ct.column_sts}</option>
                                                         </c:forEach>
                                                     </select>
-                                                <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword" id="sBaseSearchBox" style="width:400px;">
+                                                <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword" 
+                                                id="sBaseSearchBox" style="width:400px;" placeholder="검색어를 입력해 주세요">
                                                 <a href="#none" class="btnIcon icoPlus"><span>추가</span></a>
                                                 
                                                 </div>
@@ -145,7 +191,7 @@
                     <div id="tabNumber" class="tabCont">
                         <div class="mState typeHeader">
                             <div class="gLeft">
-                                <div class="total">검색결과 : <strong>0</strong>건
+                                <div class="total">검색결과 : <strong>${ph.totalCnt}</strong>건
                                 </div>
                             </div>
                         </div>
@@ -167,9 +213,9 @@
                                                                             <option value="settle_price_asc">총 실결제금액순</option>
                                         <option value="settle_price_desc">총 실결제금액역순</option>
                                                                     </select>
-                                <select name="rows" class="fSelect" init_rows="20">
+                                <select name="rows" class="fSelect">
                                     <option value="10">10개씩보기</option>
-                                    <option value="20" selected="" }="">20개씩보기</option>
+                                    <option value="20">20개씩보기</option>
                                     <option value="30">30개씩보기</option>
                                     <option value="50">50개씩보기</option>
                                     <option value="100">100개씩보기</option>
@@ -224,48 +270,92 @@
                                 <tr>
                                     <th scope="col" class="w24"><input type="checkbox" id="allChk"></th>
                                     <th scope="col" class="w50" style="display:none;">No</th>
-                                                                                                            <th scope="col" class="w120" style="">주문일(결제일)</th>
+                                    <th scope="col" class="w120" style="">주문일(결제일)</th>
                                     <th scope="col" class="w120" style="">주문번호</th>
                                     <th scope="col" class="w95" style="">주문자 <div class="cTip eSmartMode" code="OD.AO.170"></div></th>
                                     <th scope="col" class="w95" style="display:none;">
                                         사업자 회원 정보
                                     </th>
                                     <th scope="col" class="w120" style="">상품명</th>
-                                                                        <th scope="col" class="w105" style="">총 상품구매금액</th>
-                                                                        <th scope="col" class="w105" style="display:none;">총 주문금액</th>
+                                    <th scope="col" class="w105" style="">총 상품구매금액</th>
+                                    <th scope="col" class="w105" style="display:none;">총 주문금액</th>
                                     <th scope="col" class="w105" style="">총 실결제금액</th>
                                     <th scope="col" class="w60" style="">결제수단</th>
                                     <th scope="col" class="w55" style="">결제상태</th>
-                                                                        <th scope="col" class="w45" style="">미배송</th>
+                                    <th scope="col" class="w45" style="">미배송</th>
                                     <th scope="col" class="w45" style="">배송중</th>
                                     <th scope="col" class="w55" style="">배송완료</th>
                                     <th scope="col" class="w60" style="display:none;">구매 확정</th>
                                     <th scope="col" class="w45" style="">취소</th>
                                     <th scope="col" class="w45" style="">교환</th>
-                                                                        <th scope="col" class="w45" style="">반품</th>
-                                                                            <th scope="col" class="w90" style=" ">목록삭제</th>
-                                                                        <th scope="col" class="w35" style="display:none;">메모</th>
+                                    <th scope="col" class="w45" style="">반품</th>
+                                    <th scope="col" class="w90" style=" ">목록삭제</th>
+                                    <th scope="col" class="w35" style="display:none;">메모</th>
                                 </tr>
                                 </tbody>
                             </table>
-                                                                                                <table border="1" summary="">
-                                        <caption>전체주문 조회 목록</caption>
+                            <table border="1">
+                                <tbody>
+                                    <c:if test="${not empty list}">
                                         <c:forEach var="ordDto" items="${list}">
-                                            <tr>
-                                                <td class="orddate"><fmt:formatDate value="${ordDto.ord_date}" pattern="yyyy-MM-dd" type="date"/></td>
-                                                <td class="ordId">${ordDto.ord_id}</td>
-                                            </tr>
-                                        </c:forEach>
-                                        <tbody class="empty">
                                         <tr>
-                                            <td colspan="15">검색된 주문내역이 없습니다.</td>
+                                            <td scope="col" class="w24"><input type="checkbox" id="allChk"></td>
+                                            <td scope="col" class="w50" style="display:none;">No</td>
+                                            <td scope="col" class="w120 ord_date" style=""><fmt:formatDate value="${ordDto.ord_date}" pattern="yyyy-MM-dd" type="date"/></td>
+                                            <td scope="col" class="w120 ord_id" style="">${ordDto.ord_id}</td>
+                                            <td scope="col" class="w95 mem_id" style="">${ordDto.mem_id}</td>
+                                            <td scope="col" class="w95" style="display:none;">사업자 회원 정보</td>
+                                            <td scope="col" class="w120 tot_prod_name" style="">${ordDto.tot_prod_name}</td>
+                                            <td scope="col" class="w105" style="">${ordDto.tot_prod_price + tot_prod_disc}</td>
+                                            <td scope="col" class="w105" style="display:none;">${ordDto.tot_prod_price}</td>
+                                            <td scope="col" class="w105" style="">${ordDto.tot_pay_price}</td>
+                                            <td scope="col" class="w60" style="">${ordDto.pay_way}</td>
+                                            <td scope="col" class="w55" style="">결제상태</td>
+                                            <td scope="col" class="w45" style="">${ordDto.ord_ing}</td>
+                                            <td scope="col" class="w45" style="">${ordDto.ord_cmplt}</td>
+                                            <td scope="col" class="w55" style="">${ordDto.ord_fail}</td>
+                                            <td scope="col" class="w55" style="">${ordDto.prod_ing}</td>
+                                            <td scope="col" class="w45" style="">${ordDto.dlvy_prep_ing}</td>
+                                            <td scope="col" class="w45" style="">${ordDto.dlvy_ing}</td>
+                                            <td scope="col" class="w55" style="">${ordDto.dlvy_cmplt}</td>
+                                            <td scope="col" class="w60" style="display:none;">구매 확정</td>
+                                            <td scope="col" class="w55" style="">${ordDto.ord_cxl}</td>
+                                            <td scope="col" class="w55" style="">${ordDto.ord_ex}</td>
+                                            <td scope="col" class="w55" style="">${ordDto.ord_rfnd}</td>
+                                            <td scope="col" class="w90" style=" ">목록삭제</td>
+                                            <td scope="col" class="w35" style="display:none;">메모</td>
                                         </tr>
-                                        </tbody>
-                                    </table>
+                                    </c:forEach>
+                                </tbody>
+                                </c:if>
+                                <c:if test="${empty list}">
+                                    <tbody class="empty">
+                                    <tr>
+                                        <td colspan="15">검색된 주문내역이 없습니다.</td>
+                                    </tr>
+                                    </tbody>
+                                </c:if>
+                            </table>
                                                             
                         </div>
-                        <div class="mPaginate">
-                            1
+                        <div class="mPaginate d-flex justify-content-center" style="width: 1000px;">
+                            <ul class="pagination">
+                                <c:if test="${ph.totalCnt!=null && ph.totalCnt!=0}">
+                                  <c:if test="${ph.showPrev}">
+                                      <li class="page-item">
+                                    <a class="page-link" href="<c:url value="/admin1/order/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                    </li>
+                                  </c:if>
+                                  <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                    <li class="page-item ${i==ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin1/order/list${ph.sc.getQueryString(i)}"/>">${i}</a></li>
+                                  </c:forEach>
+                                  <c:if test="${ph.showNext}">
+                                    <li class="page-item">
+                                    <a class="page-link" href="<c:url value="/admin1/order/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                                    </li>
+                                  </c:if>
+                                </c:if>
+                            </ul>
                         </div>
                     </div>
                 </div> <!-- context -->
