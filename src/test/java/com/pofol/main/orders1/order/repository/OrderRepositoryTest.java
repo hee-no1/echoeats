@@ -32,18 +32,18 @@ public class OrderRepositoryTest {
 //		assertTrue(dao.count() == 0);
     }
 	
-//	@Test
-//	public void selectOptionTest() throws Exception {
-//		// insert
-//		for(int i=1; i<=100; i++) {
-//			OrderDto dto = new OrderDto("you11", "Product"+i, 100, 100, 0, 0, 1, "card", "you11");
-//			LocalDate currentDate = LocalDate.now().plusDays(-i);
-//			Date orderDate = java.sql.Date.valueOf(currentDate);
-//			dto.setOrd_date(orderDate);
-//			assertTrue(dao.insertAll(dto) == 1);
-//		}
-//		assertTrue(dao.count() == 100);
-//	}
+	@Test
+	public void selectOptionTest() throws Exception {
+		// insert
+		for(int i=1; i<=100; i++) {
+			OrderDto dto = new OrderDto("you11", "Product"+i, 100, 100, 0, 0, 1, "card", "you11");
+			LocalDate currentDate = LocalDate.now().plusDays(-i);
+			Date orderDate = java.sql.Date.valueOf(currentDate);
+			dto.setOrd_date(orderDate);
+			assertTrue(dao.insertAll(dto) == 1);
+		}
+		//assertTrue(dao.count() == 100);
+	}
 	
 //	@Test
 //	public void insertTest() throws Exception {

@@ -26,7 +26,7 @@ public class CouponRepositoryImpl implements CouponRepository{
     }
 
     @Override
-    public List<CouponJoinDto> selectMembersWithCoupons() {
-        return  session.selectList(namespace+"selectMembersWithCoupons");
+    public List<CouponJoinDto> selectMembersWithCoupons(String id) {
+        return  session.selectList(namespace+"selectMembersWithCoupons", id);
     }
 }

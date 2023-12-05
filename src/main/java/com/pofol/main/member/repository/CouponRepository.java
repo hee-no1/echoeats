@@ -10,5 +10,5 @@ public interface CouponRepository {
     CouponDto select_coupon (int id);
     MemCouponDto select_coupon_mapping(int id);
 
-    List<CouponJoinDto> selectMembersWithCoupons();
+    List<CouponJoinDto> selectMembersWithCoupons(String id);
 }

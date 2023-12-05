@@ -41,7 +41,7 @@ public class MemberServiceImplTest {
 
     @Test
     public void main3(){
-        List<CouponJoinDto> memCouponDtos = couponRepository.selectMembersWithCoupons();
+        List<CouponJoinDto> memCouponDtos = couponRepository.selectMembersWithCoupons("admin123");
         System.out.println(memCouponDtos);
     }
 
