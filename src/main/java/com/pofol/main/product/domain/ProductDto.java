@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductDto {
 
   private Long prod_id; // 상품 ID

@@ -21,7 +21,7 @@ public class ProductListServiceImpl implements ProductListService {
         try {
             return productListRepository.select(prod_id);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 

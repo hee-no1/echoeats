@@ -5,8 +5,6 @@ import lombok.*;
 import java.util.Objects;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class OptionProductDto {
 
   private String opt_prod_id; // 옵션 상품 id

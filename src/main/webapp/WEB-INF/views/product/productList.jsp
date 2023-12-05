@@ -924,7 +924,7 @@
                                         <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageNumber)}<c:if test="${type ne null}">&type=${type}</c:if>"
                                            class="css-1d20dg7 e82lnfz0">${pageNumber}</a>
                                     </c:forEach>
-
+                                    
                                     <c:choose>
                                         <c:when test="${pageHandler.next}">
                                             <a href="/${pageType}<c:if test="${pageType eq 'category'}">/${cat_code}</c:if>${pageHandler.sc.goSelectPage(pageHandler.sc.page + 1)}<c:if test="${type ne null}">&type=${type}</c:if>"
