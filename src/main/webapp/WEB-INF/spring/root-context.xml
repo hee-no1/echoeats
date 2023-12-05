@@ -28,5 +28,5 @@
 	</bean>
 
 	<tx:annotation-driven/>
-	<context:component-scan base-package="com.pofol.main"/>
+	<context:component-scan base-package="com.pofol"/>
 </beans>
