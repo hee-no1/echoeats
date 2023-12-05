@@ -43,7 +43,7 @@ public class OrderController {
         @PostMapping("/calculatePayment")
         public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pd){
             Integer coupon_disc = pd.getCoupon_disc(); // 쿠폰 사용 금액
-            Integer reserves_used = pd.getReserves_used(); // 적립금 사용 금액
+            Integer reserves_used = pd.getPoint_used(); // 적립금 사용 금액
             int discountPrice = 0;
             System.out.println(pd);
 
