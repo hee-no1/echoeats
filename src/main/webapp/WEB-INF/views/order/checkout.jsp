@@ -23,11 +23,32 @@
 <%--        주문상품--%>
         <div class="css-ixlb9s epvroj94">
         <div class="css-zo1i6f edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">주문 상품</h3>
-            <button data-testid="fold-button" class="css-lvqq7y e17cst860">
-                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(-45 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
+            <button data-testid="fold-button" id="prodDetailBtn" class="css-lvqq7y e17cst860">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(-45 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
             </button></div>
 
-            <div class="css-r6muhy e1fjdxoo1">${checkout.tot_prod_name}</div>
+            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}</div>
+
+            <c:forEach var="item" items="${items}">
+                <c:set var="prod" value="${item.sampleProductDto}"/>
+                <div class="css-bd9p1l e17a7yib10 items">
+                    <c:choose>
+                        <c:when test = "${empty prod.opt_prod_id}">
+                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
+                            <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.prod_name}</span></span>
+                            <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.disc_price}원</span></span>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1646377916155l0.jpg" alt="[KF365] 1+등급 무항생제 대란 20구" class="css-17jyui4 e17a7yib9">
+                            <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.opt_prod_name}</span></span>
+                            <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.opt_disc_price}원</span></span>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+            </c:forEach>
 
 <%--         주문자 정보--%>
         <div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">주문자 정보</h3></div>
@@ -84,9 +105,9 @@
         <%-- 결제 금액 라인 --%>
         <div class="css-1rz7w0y epvroj91"><div class="css-9i9om4 epvroj90"><div class="css-6hge48 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 금액</h3></div>
             <div class="css-hdnk73 e12lli9y0"><div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">주문금액</div><div><span class="css-2pg1ps eahaaoi10 money" id="tot_prod_price">${checkout.tot_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div><div><span class="css-2pg1ps eahaaoi10" ><span class="css-rfpchb eahaaoi3"></span><span class="money">${checkout.origin_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><span class = "money">${checkout.origin_prod_price - checkout.tot_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span><span id = "dlvy_fee" class="money">${checkout.dlvy_fee}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="origin_prod_price"><span class="css-rfpchb eahaaoi3"></span>${checkout.origin_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="prod_disc"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><span class = "money">${checkout.origin_prod_price - checkout.tot_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10 money" id="dlvy_fee"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span>${checkout.dlvy_fee}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="sign"></span><span id="outputPointUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1hgn7mh eahaaoi7"><div class="css-1rmc3ba eahaaoi11">최종결제금액</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id = "tot_pay_price" class="money">${checkout.tot_prod_price + checkout.dlvy_fee}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
@@ -95,7 +116,17 @@
            </div></div></div>
 
     </div></div></div>
-
+<script>
+    let selectedItems = []
+    <c:forEach var="item" items="${items}" varStatus="loop">
+        selectedItems[${loop.index}] = {prod_id: ${item.prod_id}, opt_prod_id: '${item.opt_prod_id}', qty: ${item.qty}}
+    // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.->option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
+    </c:forEach>
+    let tot_prod_name = '${checkout.tot_prod_name}';
+    let tot_prod_price = ${checkout.tot_prod_price};
+    let origin_prod_price = ${checkout.origin_prod_price};
+    let dlvy_fee = ${checkout.dlvy_fee};
+</script>
 <script src="/resources/order/js/checkoutJS.js"></script>
 </body>
 </html>

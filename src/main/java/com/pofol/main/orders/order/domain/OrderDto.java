@@ -1,11 +1,15 @@
 package com.pofol.main.orders.order.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Data //getter, setter, 기본생성자, equals, hashcode, toString까지
+@Data //getter, setter, equals, hashcode, toString까지
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDto {
 
     private Long ord_id; //주문번호
@@ -16,7 +20,6 @@ public class OrderDto {
     private Integer tot_pay_price; //총 실결제 금액
     private Integer tot_prod_disc; //총 상품할인금액
     private Integer dlvy_fee; //배송비
-    private Integer prod_qty; //총 상품 수량
     private String pay_way; //결제방법
     private Integer ord_int; //주문중
     private Integer ord_cmplt; //주문완료
