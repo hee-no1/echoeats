@@ -6,16 +6,17 @@ public class CouponJoinDto {
     private String mem_id;
     private int cp_qty;
     private String cp_sts;
-    private Date cp_del_date;
+    private String cp_del_date;
     private String cp_name;
     private int cash_rate;
     private int min_amt;
     private int max_disc_amt;
+    private String type;
 
     public CouponJoinDto() {
     }
 
-    public CouponJoinDto(String mem_id, int cp_qty, String cp_sts, Date cp_del_date, String cp_name, int cash_rate, int min_amt, int max_disc_amt) {
+    public CouponJoinDto(String mem_id, int cp_qty, String cp_sts, String cp_del_date, String cp_name, int cash_rate, int min_amt, int max_disc_amt, String type) {
         this.mem_id = mem_id;
         this.cp_qty = cp_qty;
         this.cp_sts = cp_sts;
@@ -24,6 +25,22 @@ public class CouponJoinDto {
         this.cash_rate = cash_rate;
         this.min_amt = min_amt;
         this.max_disc_amt = max_disc_amt;
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "CouponJoinDto{" +
+                "mem_id='" + mem_id + '\'' +
+                ", cp_qty=" + cp_qty +
+                ", cp_sts='" + cp_sts + '\'' +
+                ", cp_del_date=" + cp_del_date +
+                ", cp_name='" + cp_name + '\'' +
+                ", cash_rate=" + cash_rate +
+                ", min_amt=" + min_amt +
+                ", max_disc_amt=" + max_disc_amt +
+                ", type='" + type + '\'' +
+                '}';
     }
 
     public String getMem_id() {
@@ -50,11 +67,11 @@ public class CouponJoinDto {
         this.cp_sts = cp_sts;
     }
 
-    public Date getCp_del_date() {
+    public String getCp_del_date() {
         return cp_del_date;
     }
 
-    public void setCp_del_date(Date cp_del_date) {
+    public void setCp_del_date(String cp_del_date) {
         this.cp_del_date = cp_del_date;
     }
 
@@ -90,17 +107,11 @@ public class CouponJoinDto {
         this.max_disc_amt = max_disc_amt;
     }
 
-    @Override
-    public String toString() {
-        return "CouponJoinDto{" +
-                "mem_id='" + mem_id + '\'' +
-                ", cp_qty=" + cp_qty +
-                ", cp_sts='" + cp_sts + '\'' +
-                ", cp_del_date=" + cp_del_date +
-                ", cp_name='" + cp_name + '\'' +
-                ", cash_rate=" + cash_rate +
-                ", min_amt=" + min_amt +
-                ", max_disc_amt=" + max_disc_amt +
-                '}';
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

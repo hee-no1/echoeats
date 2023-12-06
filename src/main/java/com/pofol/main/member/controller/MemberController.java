@@ -78,6 +78,7 @@ public class MemberController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object a = authentication.getPrincipal();
         HttpSession session = request.getSession();
+        System.out.println(authentication);
         Object greeting = session.getAttribute("greeting");
         return a.toString() + "     " + greeting + "    한글 테스트";
     }
