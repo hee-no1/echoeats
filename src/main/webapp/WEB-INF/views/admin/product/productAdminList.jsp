@@ -70,7 +70,7 @@
     </script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="../../common/top_side_nav.jsp" %>
+<%@include file="../../admin/include/top_side_nav.jspf" %>
 <div id="layoutSidenav_content">
     <div class="container">
         <h2 class="mTitle">상품 조회/수정</h2>
