@@ -1,25 +1,3 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     addComma();
-// });
-
-// //금액에 콤마 추가
-// let addComma = function(){
-//     $(".money").each(function () {
-//         let currentValue = $(this).text();
-//         let formattedValue = Number(currentValue).toLocaleString();
-//         $(this).text(formattedValue);
-//     });
-// }
-//
-// //금액에 콤마 제거
-// let removeComma = function(){
-//     $(".money").each(function () {
-//         let currentValue = $(this).text();
-//         let formattedValue = currentValue.replace(/,/g, '');
-//         $(this).text(formattedValue);
-//     });
-// }
-
 let checkout = {
     selectedItems: selectedItems,
     tot_prod_name: tot_prod_name,
@@ -101,32 +79,10 @@ $("#allUseBtn").click(function(){
     document.getElementById('inputPointUsed').value = point;
 
     ajaxData();
-})
-
-$('#paymentBtn').click(function(){
-
-    checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
-    console.log(checkout);
-    console.log(typeof checkout.tot_pay_price);
-    //넘어가야하는 것
-    //총 상품명, 총 주문금액, 총 실결제 금액,총 상품할인 금액, 배송비, 결제 방법, 회원 아이디는 서버에서 세션으로 받는다.
-    $.ajax({
-        type:'POST',
-        url: '/payment/verify/prev',
-        headers:{"content-type": "application/json"},
-        dataType: 'text',
-        data : JSON.stringify(checkout),
-        success: function(result){
-            alert("✅ 1차 검증 성공 " );
-
-        },
-        error: function(){alert("🔥 1차 검증 실패 또는 서버 오류")}
-    });
-})
-
-
-
+});
 $(document).ready(function() {
+
+
     $('.totItems').show(); //페이지를 로드할 때 표시할 요소
     $('.items').hide(); //페이지를 로드할 때 숨길 요소
     $('#prodDetailBtn').click(function(){
@@ -142,5 +98,48 @@ $(document).ready(function() {
             arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
         }
     });
+
+    $('#paymentBtn').click(function(){
+
+        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
+        console.log(checkout);
+        console.log(typeof checkout.tot_pay_price);
+        //넘어가야하는 것
+        //총 상품명, 총 주문금액, 총 실결제 금액,총 상품할인 금액, 배송비, 결제 방법, 회원 아이디는 서버에서 세션으로 받는다.
+        $.ajax({
+            type:'POST',
+            url: '/payment/verify/prev',
+            headers:{"content-type": "application/json"},
+            dataType: 'text',
+            data : JSON.stringify(checkout),
+            success: function(result){
+                alert("✅ 1차 검증 성공 " );
+                requestPay();
+
+            },
+            error: function(){alert("🔥 1차 검증 실패 또는 서버 오류")}
+        });
+    })
+
+    var IMP = window.IMP;
+    IMP.init("imp38341687");
+
+    function requestPay() {
+        IMP.request_pay({
+            pg: 'kakaopay',
+            pay_method: 'card',
+            merchant_uid: 12345,
+            name: checkout.tot_prod_name,
+            amount: checkout.tot_pay_price,
+        }, rsp => {
+            if (rsp.success) {
+                // axios로 HTTP 요청, 결제 성공시 서버로 전송
+                alert("success");
+            } else {
+                alert("fail")
+            }
+        });
+    }
+
 });
 
