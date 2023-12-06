@@ -1,10 +1,12 @@
 package com.pofol.main.member.security;
 
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Builder
 public class SecurityUser implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;

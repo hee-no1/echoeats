@@ -4,7 +4,6 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./favicon.ico">
     <title>컬리</title>
@@ -272,34 +271,10 @@
             <div class="membership">
                 <h2>전체 회원 등급</h2>
                 <ul class="grade-list">
-                    <li class="grade-item">
-                        <div class="grade-title">나무</div>
-                        <div class="grade-benefit">적립률: 10% <br> 혜택: 더블 후기 적립금</div>
-                        <div class="grade-info">전월 실적<br>150만원 이상</div>
-                    </li>
-                    <li class="grade-item">
-                        <div class="grade-title">가지</div>
-                        <div class="grade-benefit">적립률: 7% <br> 혜택: 할인 쿠폰 제공</div>
-                        <div class="grade-info">전월 실적<br>100만원 이상</div>
-                    </li>
-                    <li class="grade-item">
-                        <div class="grade-title">잎새</div>
-                        <div class="grade-benefit">적립률: 5% </div>
-                        <div class="grade-info">전월 실적<br>50만원 이상</div>
-                    </li>
-                    <li class="grade-item">
-                        <div class="grade-title">새싹</div>
-                        <div class="grade-benefit">적립률: 3% </div>
-                        <div class="grade-info">전월 실적<br>30만원 이상</div>
-                    </li>
-                    <li class="grade-item active">
-                        <div class="grade-title">씨앗</div>
-                        <div class="grade-benefit">적립률: 1% </div>
-                        <div class="grade-info">전월 실적<br>15만원 미만</div>
-                    </li>
+
 
                     <c:forEach var="grade" items="${grade}">
-                        <li class="grade-item active">
+                        <li class="grade-item active ${grade.gd_name}">
                             <div class="grade-title">${grade.gd_name}</div>
                             <div class="grade-benefit">적립률: ${grade.acm_rate}% </div>
                             <div class="grade-info">전월 실적<br>${grade.gd_condition}</div>
@@ -321,14 +296,18 @@
 <script>
     $(document).ready(function () {
 
+        var userId = '<%= request.getAttribute("id") %>';
+        console.log('userId : '+userId);
 
+        // contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         $.ajax({
             url: "grade_data",
             method: "GET",
-            dataType: "text",
+            data: { id: userId },
+            dataType: "json",
             success: function(data) {
-
-                console.log('Received data:', data);
+                console.log('Received data:', data.gd_name);
+                $('.' + data.gd_name).css('border', '1px solid blue');
 
             },
             error: function(error) {
