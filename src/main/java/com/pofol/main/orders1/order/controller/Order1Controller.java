@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,5 +20,16 @@ public class Order1Controller {
 			e.printStackTrace();
 		}
     	return "/order/mypageOrder";
+    }
+	
+	@GetMapping("/order/{ord_id}")
+    public String orderDet(@PathVariable Integer ord_id, Model m, HttpServletRequest request){
+		System.out.println("OrderController.order()");
+		
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return "/order/mypageOrderDet";
     }
 }
