@@ -32,7 +32,7 @@ public interface ProductListRepository {
     List<ProductDto> selectProductPrice(Integer prod_price) throws Exception;
 
     // 상품제목으로 검색한 상품 리스트 조회
-    List<ProductDto> searchSelectProduct(SearchProductCondition sc) throws Exception;
+    List<ProductDto> searchSelectProduct(SearchProductCondition sc, String type) throws Exception;
 
     // 상품 검색 리스트 카운트
     int searchResultCount(SearchProductCondition sc) throws Exception;
