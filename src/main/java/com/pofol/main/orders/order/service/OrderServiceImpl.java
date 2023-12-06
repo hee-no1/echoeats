@@ -1,6 +1,7 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
@@ -99,4 +100,7 @@ public class OrderServiceImpl implements OrderService{
         return oc;
     }
 
+    public OrderDto writeOrder(){
+        return null;
+    }
 }

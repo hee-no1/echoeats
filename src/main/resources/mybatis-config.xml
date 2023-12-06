@@ -6,6 +6,7 @@
 	<typeAliases>
 		<!-- Order -->
 		<typeAlias alias="OrderDto" type="com.pofol.main.orders1.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDetailDto" type="com.pofol.main.orders.order.domain.OrderDetailDto"/>
 		<!-- Payment -->
 		<!-- CodeTable -->
 		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders1.order.domain.CodeTableDto"/>
