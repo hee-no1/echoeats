@@ -7,12 +7,12 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -155,4 +155,21 @@ public class ProductListController {
         return "/product/productList";
     }
 
+    // 상품 수량에 따라 상품 가격 계산
+    @ResponseBody
+    @PostMapping("/ProductCalculation")
+    public ProductRequest productCalculation(@RequestBody ProductRequest productRequest) {
+        productRequest.setDisc_price(productRequest.getQuantity() * productRequest.getDisc_price());
+        return productRequest;
+    }
+    
+    // 상품 상세페이지에서 수량만 가져오기 위한 클래스 (ajax용)
+    @Getter
+    @Setter
+    public static class ProductRequest {
+
+        private Integer disc_price;
+        private Integer quantity;
+
+    }
 }
