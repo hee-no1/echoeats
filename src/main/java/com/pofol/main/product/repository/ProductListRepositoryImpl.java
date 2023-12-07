@@ -3,6 +3,7 @@ package com.pofol.main.product.repository;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.SearchProductCondition;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,16 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@RequiredArgsConstructor
 public class ProductListRepositoryImpl implements ProductListRepository {
 
     private final String namespace = "com.pofol.main.product.repository.ProductListRepository.";
 
     private final SqlSession sqlSession;
-
-    @Autowired
-    public ProductListRepositoryImpl(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
-    }
 
     @Override // 상품 리스트 조회
     public ProductDto select(Long prod_id) throws Exception {
@@ -64,8 +61,13 @@ public class ProductListRepositoryImpl implements ProductListRepository {
     }
 
     @Override // 상품제목으로 검색한 상품 리스트 조회
-    public List<ProductDto> searchSelectProduct(SearchProductCondition sc) throws Exception {
-        return sqlSession.selectList(namespace + "searchSelectProduct", sc);
+    public List<ProductDto> searchSelectProduct(SearchProductCondition sc, String type) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("skip", sc.getSkip());
+        map.put("pageSize", sc.getPageSize());
+        map.put("keyword", sc.getKeyword());
+        map.put("type", type);
+        return sqlSession.selectList(namespace + "searchSelectProduct", map);
     }
 
     @Override // 상품 검색 리스트 카운트

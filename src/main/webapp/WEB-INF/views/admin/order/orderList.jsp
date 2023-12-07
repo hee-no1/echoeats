@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -115,7 +115,7 @@
         </style>
     </head>
     <body class="sb-nav-fixed">
-    	<%@include file="../../common/top_side_nav.jsp" %>
+    	<%@include file="../include/top_side_nav.jspf" %>
             <div id="layoutSidenav_content">
                 <div class="container">
                 	<h2 class="mTitle">전체 주문 조회</h2>
@@ -397,12 +397,5 @@
             });
                 
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-		<script src="<c:url value='/resources/common/js/scripts.js' />"></script>
-		<script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
-		<script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
-		<script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
     </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">ECOEATS ADMIN</a>
@@ -45,15 +46,19 @@
                                     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
                             </div>
+
+
+
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
+                                상품
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
+                                        상품 조회/수정
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
@@ -64,10 +69,10 @@
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
+                                        상품 등록
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <div class="collapse" id="pagesCollapseError" aria-l`zabelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="401.html">401 Page</a>
                                             <a class="nav-link" href="404.html">404 Page</a>
@@ -76,6 +81,11 @@
                                     </div>
                                 </nav>
                             </div>
+
+
+
+
+
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

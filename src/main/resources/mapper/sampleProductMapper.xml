@@ -17,9 +17,19 @@
             <if test='opt_prod_id != null'>
                 sp.prod_id = #{prod_id} and sop.opt_prod_id = #{opt_prod_id}
             </if>
-
         </where>
+    </select>
 
+    <select id="selectProduct" parameterType="long" resultType="SampleProductDto">
+        select prod_id, prod_name, prod_price, disc_price
+        from sample_product
+        where prod_id = #{prod_id};
+    </select>
+
+    <select id="selectOptionProduct" parameterType="string" resultType="SampleProductDto">
+        select opt_prod_id, opt_prod_name, opt_price, opt_disc_price
+        from sample_option_product
+        where opt_prod_id = #{opt_prod_id};
     </select>
 
 </mapper>

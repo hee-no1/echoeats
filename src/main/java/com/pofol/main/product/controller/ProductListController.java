@@ -7,12 +7,12 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class ProductListController {
 
     // main 화면으로
     @GetMapping("/main")
-    public String main(Model model) {
+    public String goMain(Model model) {
         try {
             // 동적으로 만들 생각 해야함 (그룹으로 나눠서 상품 리스트 정렬)
             List<ProductDto> productList = productListService.getEventList(2L);
@@ -74,15 +74,9 @@ public class ProductListController {
     @GetMapping("/category/{cat_code}")
     public String getCategoryProduct(@PathVariable String cat_code, SearchProductCondition sc, Model model, String type) {
 
-        System.out.println("type = " + type);
-
         try {
-            // 신상품, 혜택율, 높은 가격순, 낮은 가격순 정렬 타입
-            if (type != null) {
-                model.addAttribute("type", type);
-            }
-
-
+            // 정렬 타입 (신상품, 혜택율, 낮은 가격, 높은 가격)
+            model.addAttribute("type", type);
 
             // 카테고리 코드
             model.addAttribute("cat_code", cat_code);
@@ -126,9 +120,12 @@ public class ProductListController {
 
     // 상품 이름으로 검색한 상품리스트 정렬
     @GetMapping("/searchProduct")
-    public String getSearchProduct(SearchProductCondition sc, Model model) {
+    public String getSearchProduct(SearchProductCondition sc, Model model, String type) {
 
         try {
+            // 정렬 타입 (신상품, 혜택율, 낮은 가격, 높은 가격)
+            model.addAttribute("type", type);
+
             // 상품이름 검색 페이지
             model.addAttribute("pageType", "searchProduct");
 
@@ -140,7 +137,7 @@ public class ProductListController {
             model.addAttribute("totalCount", totalCount);
 
             // 검색한 상품 리스트 정렬
-            List<ProductDto> searchSelectProduct = productListService.getSearchSelectProduct(sc);
+            List<ProductDto> searchSelectProduct = productListService.getSearchSelectProduct(sc, type);
             model.addAttribute("productList", searchSelectProduct);
 
             // 페이징
@@ -158,4 +155,21 @@ public class ProductListController {
         return "/product/productList";
     }
 
+    // 상품 수량에 따라 상품 가격 계산
+    @ResponseBody
+    @PostMapping("/ProductCalculation")
+    public ProductRequest productCalculation(@RequestBody ProductRequest productRequest) {
+        productRequest.setDisc_price(productRequest.getQuantity() * productRequest.getDisc_price());
+        return productRequest;
+    }
+    
+    // 상품 상세페이지에서 수량만 가져오기 위한 클래스 (ajax용)
+    @Getter
+    @Setter
+    public static class ProductRequest {
+
+        private Integer disc_price;
+        private Integer quantity;
+
+    }
 }
