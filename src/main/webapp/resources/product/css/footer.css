@@ -222,3 +222,6 @@ footer {
     font-weight: normal;
     text-align: left;
 }
+canvas, img, video {
+    max-width: 100%;
+}

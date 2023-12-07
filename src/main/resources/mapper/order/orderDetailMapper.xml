@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order.repository.orderDetailMapper">
+    <insert id="insert" parameterType="OrderDetailDto">
+        INSERT INTO spring.order_detail
+        (ord_id, mem_id, prod_id, opt_prod_id, code_name, prod_name, prod_qty, prod_tot_price, pack_type, rg_num, md_num)
+        VALUES
+        (#{ord_id},#{mem_id},#{prod_id},#{opt_prod_id},#{code_name},#{prod_name},#{prod_qty},#{prod_tot_price},#{pack_type},#{rg_num},#{md_num});
+    </insert>
+
+    <select id="select" parameterType="long" resultType="OrderDetailDto">
+        SELECT *
+        FROM spring.order_detail
+        WHERE
+        ord_det_id=#{ord_det_id};
+    </select>
+
+    <select id="selectList" resultType="OrderDetailDto">
+        SELECT *
+        FROM spring.order_detail
+        WHERE
+        ord_id=#{ord_id};
+    </select>
+
+    <update id="updateStatus" parameterType="long">
+        UPDATE spring.order_detail
+        SET
+            code_name = #{code_name},
+            md_date = current_timestamp,
+            md_num = #{md_num}
+        WHERE ord_det_id = #{ord_det_id}
+    </update>
+
+
+    <delete id="delete">
+        DELETE FROM spring.order_detail WHERE ord_det_id = #{ord_det_id}
+    </delete>
+
+    <delete id="deleteList">
+        DELETE FROM spring.order_detail WHERE ord_id = #{ord_id}
+    </delete>
+
+    <select id="selectAll" resultType="OrderDetailDto">
+        SELECT *
+        FROM spring.order_detail
+        ORDER BY rg_date DESC, ord_id DESC
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM spring.order_detail
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM spring.order_detail
+    </select>
+</mapper>

@@ -295,8 +295,8 @@
                                 </tbody>
                             </table>
                             <table border="1">
-                                <tbody>
                                     <c:if test="${not empty list}">
+                                    <tbody><tbody>
                                         <c:forEach var="ordDto" items="${list}">
                                         <tr>
                                             <td scope="col" class="w24"><input type="checkbox" id="allChk"></td>
@@ -347,7 +347,7 @@
                                     </li>
                                   </c:if>
                                   <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                                    <li class="page-item ${i==ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin1/order/list${ph.sc.getQueryString(i)}"/>">${i}</a></li>
+                                    <li class='page-item ${i==ph.sc.page? "active" : ""}'><a class="page-link" href="<c:url value="/admin1/order/list${ph.sc.getQueryString(i)}"/>">${i}</a></li>
                                   </c:forEach>
                                   <c:if test="${ph.showNext}">
                                     <li class="page-item">

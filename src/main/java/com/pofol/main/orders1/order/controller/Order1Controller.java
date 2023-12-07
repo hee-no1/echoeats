@@ -32,4 +32,16 @@ public class Order1Controller {
 		}
     	return "/order/mypageOrderDet";
     }
+	
+	@GetMapping("/inquiry/form")
+    public String inquiryForm(Model m, HttpServletRequest request){
+		System.out.println("inquiryForm");
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return "/order/mypageInquiry";
+    }
 }

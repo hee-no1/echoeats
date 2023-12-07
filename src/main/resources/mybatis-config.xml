@@ -6,6 +6,8 @@
 	<typeAliases>
 		<!-- Order -->
 		<typeAlias alias="OrderDto" type="com.pofol.main.orders1.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDetailDto" type="com.pofol.main.orders.order.domain.OrderDetailDto"/>
+		<typeAlias alias="OrderHistoryDto" type="com.pofol.main.orders.order.domain.OrderHistoryDto"/>
 		<!-- Payment -->
 		<!-- CodeTable -->
 		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders1.order.domain.CodeTableDto"/>
@@ -13,6 +15,10 @@
 		<typeAlias alias="SearchOrderCondition" type="com.pofol.main.orders1.order.domain.SearchOrderCondition"/>
 		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
+		<typeAlias alias="CouponDto" type="com.pofol.main.member.dto.CouponDto"/>
+		<typeAlias alias="MemCouponDto" type="com.pofol.main.member.dto.MemCouponDto"/>
+		<typeAlias alias="CouponJoinDto" type="com.pofol.main.member.dto.CouponJoinDto"/>
+		<typeAlias alias="GradeDto" type="com.pofol.main.member.dto.GradeDto"/>
 		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
 		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>

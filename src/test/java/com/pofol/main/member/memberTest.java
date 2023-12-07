@@ -35,6 +35,11 @@ public class memberTest {
 	MemberService service;
 
 
+	@Test
+	public void test(){
+		System.out.println(ds);
+		System.out.println(session);
+	}
 
 	@Test
 	public void test3() throws Exception {

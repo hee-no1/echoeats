@@ -31,12 +31,13 @@ public class AdminController1 {
 	@GetMapping("/order/list")
     public String orderList(SearchOrderCondition sc, Model m, HttpServletRequest request){
 		System.out.println("AdminController.orderList()");
-		System.out.println("sc = "+sc);
 		
 		try {
 			int totalCnt = ordRop.searchResultCnt(sc);
 			PageHandler ph = new PageHandler(totalCnt, sc);
 			m.addAttribute("ph", ph);
+			if (totalCnt == 0)
+				return "/admin/order/orderList";
 			List list = ordRop.searchSelectPage(sc);
 			m.addAttribute("list", list);
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
