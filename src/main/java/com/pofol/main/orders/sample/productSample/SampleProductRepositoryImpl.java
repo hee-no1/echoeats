@@ -12,22 +12,22 @@ public class SampleProductRepositoryImpl implements SampleProductRepository {
     private final SqlSession session;
 
     @Autowired
-    public SampleProductRepositoryImpl(SqlSession session) {
+    public SampleProductRepositoryImpl(SqlSession session) throws Exception {
         this.session = session;
     }
 
     @Override
-    public SampleProductDto selectProduct(Long prod_id) {
+    public SampleProductDto selectProduct(Long prod_id) throws Exception {
         return session.selectOne(namespace+"selectProduct",prod_id);
     }
 
     @Override
-    public SampleProductDto selectOptionProduct(String opt_prod_id) {
+    public SampleProductDto selectOptionProduct(String opt_prod_id) throws Exception {
         return session.selectOne(namespace+"selectOptionProduct",opt_prod_id);
     }
 
     @Override
-    public SampleProductDto selectProductInfo(Long prod_id) {
+    public SampleProductDto selectProductInfo(Long prod_id) throws Exception {
         return session.selectOne(namespace+"selectProductInfo",prod_id);
     }
 

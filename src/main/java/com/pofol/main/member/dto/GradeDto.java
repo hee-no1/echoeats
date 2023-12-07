@@ -8,11 +8,14 @@ public class GradeDto {
     private int acm_rate;   //적립률
     private String benefits;  //혜택
     private Date rg_date;
-    private Long rg_num;
+    private String rg_num;
     private Date md_date;
-    private Long md_num;
+    private String md_num;
 
-    public GradeDto(String gd_name, String gd_condition, int acm_rate, String benefits, Long rg_num, Long md_num) {
+    public GradeDto() {
+    }
+
+    public GradeDto(String gd_name, String gd_condition, int acm_rate, String benefits, String rg_num, String md_num) {
         this.gd_name = gd_name;
         this.gd_condition = gd_condition;
         this.acm_rate = acm_rate;
@@ -61,11 +64,11 @@ public class GradeDto {
         this.rg_date = rg_date;
     }
 
-    public Long getRg_num() {
+    public String getRg_num() {
         return rg_num;
     }
 
-    public void setRg_num(Long rg_num) {
+    public void setRg_num(String rg_num) {
         this.rg_num = rg_num;
     }
 
@@ -77,11 +80,11 @@ public class GradeDto {
         this.md_date = md_date;
     }
 
-    public Long getMd_num() {
+    public String getMd_num() {
         return md_num;
     }
 
-    public void setMd_num(Long md_num) {
+    public void setMd_num(String md_num) {
         this.md_num = md_num;
     }
 

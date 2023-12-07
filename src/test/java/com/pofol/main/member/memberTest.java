@@ -20,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class memberTest {
+
 	@Autowired
 	DataSource ds;
 
@@ -34,6 +35,11 @@ public class memberTest {
 	MemberService service;
 
 
+	@Test
+	public void test(){
+		System.out.println(ds);
+		System.out.println(session);
+	}
 
 	@Test
 	public void test3() throws Exception {

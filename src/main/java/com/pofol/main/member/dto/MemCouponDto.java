@@ -14,6 +14,19 @@ public class MemCouponDto {
     private Date md_date;
     private int md_num;
 
+    private MemberDto memberDto;
+    private CouponDto couponDto;
+
+    public MemCouponDto() {
+    }
+
+    public MemCouponDto(int cp_qty, String cp_sts, Date cp_del_date, MemberDto memberDto, CouponDto couponDto) {
+        this.cp_qty = cp_qty;
+        this.cp_sts = cp_sts;
+        this.cp_del_date = cp_del_date;
+        this.memberDto = memberDto;
+        this.couponDto = couponDto;
+    }
 
     public MemCouponDto(int cp_id, String mem_id, int cp_qty, String cp_sts, Date cp_del_date, int rg_num, int md_num) {
         this.cp_id = cp_id;
@@ -105,6 +118,22 @@ public class MemCouponDto {
         this.md_num = md_num;
     }
 
+    public MemberDto getMemberDto() {
+        return memberDto;
+    }
+
+    public void setMemberDto(MemberDto memberDto) {
+        this.memberDto = memberDto;
+    }
+
+    public CouponDto getCouponDto() {
+        return couponDto;
+    }
+
+    public void setCouponDto(CouponDto couponDto) {
+        this.couponDto = couponDto;
+    }
+
     @Override
     public String toString() {
         return "MemCouponDto{" +
@@ -118,6 +147,8 @@ public class MemCouponDto {
                 ", rg_num=" + rg_num +
                 ", md_date=" + md_date +
                 ", md_num=" + md_num +
+                ", memberDto=" + memberDto +
+                ", couponDto=" + couponDto +
                 '}';
     }
 }

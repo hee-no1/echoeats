@@ -6,22 +6,27 @@ public class CouponDto {
         private int cp_id;   //PK, AUTO_INCREMENT
         private String cp_name;  //쿠폰 이름
         private String cp_content;  //쿠폰 내용
-        private int disc_cash;  //할인 금액
+        private int cash_rate;  //할인 금액
         private int min_amt;  //최소 주문 금액
         private int max_disc_amt;  //최대 할인 금액
+        private String type;
         private Date rg_date;
         private int rg_num;
         private Date md_date;
         private int md_num;
 
-    public CouponDto( String cp_name, String cp_content, int disc_cash, int min_amt, int max_disc_amt, int rg_num, int md_num) {
+    public CouponDto() {
+    }
+
+    public CouponDto(String cp_name, String cp_content, int disc_cash, int min_amt, int max_disc_amt, int rg_num, int md_num, String type) {
         this.cp_name = cp_name;
         this.cp_content = cp_content;
-        this.disc_cash = disc_cash;
+        this.cash_rate = disc_cash;
         this.min_amt = min_amt;
         this.max_disc_amt = max_disc_amt;
         this.rg_num = rg_num;
         this.md_num = md_num;
+        this.type = type;
     }
 
     public int getCp_id() {
@@ -49,11 +54,11 @@ public class CouponDto {
     }
 
     public int getDisc_cash() {
-        return disc_cash;
+        return cash_rate;
     }
 
     public void setDisc_cash(int disc_cash) {
-        this.disc_cash = disc_cash;
+        this.cash_rate = disc_cash;
     }
 
     public int getMin_amt() {
@@ -70,6 +75,14 @@ public class CouponDto {
 
     public void setMax_disc_amt(int max_disc_amt) {
         this.max_disc_amt = max_disc_amt;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Date getRg_date() {
@@ -110,9 +123,10 @@ public class CouponDto {
                 "cp_id=" + cp_id +
                 ", cp_name='" + cp_name + '\'' +
                 ", cp_content='" + cp_content + '\'' +
-                ", disc_cash=" + disc_cash +
+                ", cash_rate=" + cash_rate +
                 ", min_amt=" + min_amt +
                 ", max_disc_amt=" + max_disc_amt +
+                ", type='" + type + '\'' +
                 ", rg_date=" + rg_date +
                 ", rg_num=" + rg_num +
                 ", md_date=" + md_date +
