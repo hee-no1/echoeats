@@ -11,14 +11,12 @@ const productAjax = function (action) {
     // 상품 수량 (html)
     let productQuantityHtml = document.querySelector('.count');
     // 상품 수량 내리기 버튼
-    let productCountDown = document.querySelector('.css-8azp8');
+    // let productCountDown = document.querySelector('.css-8azp8');
 
     let productQuantityAndPrice = {
         disc_price: discountPrice,
         quantity: 1
     }
-
-    console.log(typeof discountPrice);
 
     if (action === 'increase') {
         productQuantityAndPrice.quantity = parseInt(productQuantity) + 1
@@ -35,13 +33,13 @@ const productAjax = function (action) {
         dataType: 'json',
         data: JSON.stringify(productQuantityAndPrice),
         success: function (result) {
-            // product2 = result;
-            let {disc_price} = result;
-            let {quantity} = result;
+            product2 = result;
+            let {disc_price} = product2;
+            let {quantity} = product2;
             totalPrice.textContent = disc_price;
             productQuantityHtml.textContent = quantity;
 
-            productCountDown.disabled = quantity === '1';
+            // productCountDown.disabled = quantity === 1;
         },
         error: function () {
             alert("error");

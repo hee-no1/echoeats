@@ -21,4 +21,24 @@ public class ProductAdminServiceImpl implements ProductAdminService{
             throw  new RuntimeException();
         }
     }
+
+    @Override
+    public List<ProductDto> getProductAdminSearchList(SearchProductAdminCondition searchProductAdminCondition, String selling, String display) throws Exception {
+
+        try {
+            return productAdminRepository.searchSelectPage(searchProductAdminCondition, selling, display);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public Integer getProductAdminSearchCount(SearchProductAdminCondition searchProductAdminCondition) throws Exception {
+
+        try {
+            return productAdminRepository.searchResultCnt(searchProductAdminCondition);
+        } catch (Exception e) {
+            throw  new RuntimeException();
+        }
+    }
 }

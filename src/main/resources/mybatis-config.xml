@@ -14,8 +14,6 @@
 		<!-- paging -->
 		<typeAlias alias="SearchOrderCondition" type="com.pofol.main.orders1.order.domain.SearchOrderCondition"/>
 		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
-		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
-		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
 		<typeAlias alias="CouponDto" type="com.pofol.main.member.dto.CouponDto"/>
 		<typeAlias alias="MemCouponDto" type="com.pofol.main.member.dto.MemCouponDto"/>
@@ -24,7 +22,13 @@
 		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
 		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
-		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+
+		<!-- product -->
+		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
+		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
+		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
+		<!-- product -->
 	</typeAliases>
 </configuration>
