@@ -707,9 +707,9 @@ a {
     text-decoration: none;
     color: inherit;
 }
-a:-webkit-any-link {
+/* a:-webkit-any-link {
     color: -webkit-link;
-    cursor: pointer;
+    cursor: pointer; */
     /* text-decoration: underline; */
 }
 
