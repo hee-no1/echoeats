@@ -78,6 +78,7 @@ public class MemberController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object a = authentication.getPrincipal();
         HttpSession session = request.getSession();
+        System.out.println(authentication);
         Object greeting = session.getAttribute("greeting");
         return a.toString() + "     " + greeting + "    한글 테스트";
     }
@@ -100,7 +101,7 @@ public class MemberController {
         Object result = request.getSession().getAttribute("result");
         System.out.println(result);
         model.addAttribute("result", result);
-        return "member/main_test";
+        return "include/header";
     }
 
     @GetMapping("/board")
