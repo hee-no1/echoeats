@@ -5,7 +5,6 @@ import java.util.Date;
 public class MemberDto {
 
     private String mem_id;
-    private int own_cp_id;   //보유 쿠폰 아이디
     private String gd_name; //등급 이름
     private String mem_code_id;  //회원 상태
     private String mem_pwd;
@@ -19,11 +18,11 @@ public class MemberDto {
     private String per_info_col;
     private String free_ship_recep;
 
-    private Date rg_date;
+    private String rg_date;
     private String rg_num;
-    private Date md_date;
+    private String md_date;
     private String md_num;
-    private Date update_date;
+    private String update_date;
 
     private String role;
 
@@ -36,9 +35,8 @@ public class MemberDto {
         this.role = "USER";
     }
 
-    public MemberDto(String mem_id, int own_cp_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, Date rg_date, String rg_num, Date md_date, String md_num, Date update_date, String role) {
+    public MemberDto(String mem_id, String gd_name, String mem_code_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, int point, String per_info_col, String free_ship_recep, String rg_date, String rg_num, String md_date, String md_num, String update_date, String role) {
         this.mem_id = mem_id;
-        this.own_cp_id = own_cp_id;
         this.gd_name = gd_name;
         this.mem_code_id = mem_code_id;
         this.mem_pwd = mem_pwd;
@@ -58,12 +56,26 @@ public class MemberDto {
         this.role = role;
     }
 
+    public MemberDto(String mem_id, String mem_pwd, String mem_name, String mem_email, String mem_phone, String mem_gender, String mem_birth, String per_info_col, String free_ship_recep, String rg_date, String md_date) {
+        this.mem_id = mem_id;
+        this.mem_pwd = mem_pwd;
+        this.mem_name = mem_name;
+        this.mem_email = mem_email;
+        this.mem_phone = mem_phone;
+        this.mem_gender = mem_gender;
+        this.mem_birth = mem_birth;
+        this.per_info_col = per_info_col;
+        this.free_ship_recep = free_ship_recep;
+        this.rg_date = rg_date;
+        this.md_date = md_date;
+//        this.update_date = update_date;
+    }
+
 
     @Override
     public String toString() {
         return "memberDto{" +
                 "mem_id='" + mem_id + '\'' +
-                ", own_cp_id=" + own_cp_id +
                 ", gd_name='" + gd_name + '\'' +
                 ", mem_code_id='" + mem_code_id + '\'' +
                 ", mem_pwd='" + mem_pwd + '\'' +
@@ -90,15 +102,6 @@ public class MemberDto {
 
     public void setMem_id(String mem_id) {
         this.mem_id = mem_id;
-    }
-
-
-    public int getOwn_cp_id() {
-        return own_cp_id;
-    }
-
-    public void setOwn_cp_id(int own_cp_id) {
-        this.own_cp_id = own_cp_id;
     }
 
     public String getGd_name() {
@@ -190,11 +193,11 @@ public class MemberDto {
         this.free_ship_recep = free_ship_recep;
     }
 
-    public Date getRg_date() {
+    public String getRg_date() {
         return rg_date;
     }
 
-    public void setRg_date(Date rg_date) {
+    public void setRg_date(String rg_date) {
         this.rg_date = rg_date;
     }
 
@@ -206,11 +209,11 @@ public class MemberDto {
         this.rg_num = rg_num;
     }
 
-    public Date getMd_date() {
+    public String getMd_date() {
         return md_date;
     }
 
-    public void setMd_date(Date md_date) {
+    public void setMd_date(String md_date) {
         this.md_date = md_date;
     }
 
@@ -222,11 +225,11 @@ public class MemberDto {
         this.md_num = md_num;
     }
 
-    public Date getUpdate_date() {
+    public String getUpdate_date() {
         return update_date;
     }
 
-    public void setUpdate_date(Date update_date) {
+    public void setUpdate_date(String update_date) {
         this.update_date = update_date;
     }
 

@@ -1,0 +1,123 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<div id="wrap">
+    <div id="wrap-center">
+        <div id="top">
+            <div id="header">
+                <div id="homeInfo">
+                    <c:if test="${result eq null}">
+                        <a>회원가입</a>
+                        <div class="stick"></div>
+                        <a href="/member/login_form">로그인</a>
+                        <div class="stick"></div>
+                    </c:if>
+                    <c:if test="${result ne null}">
+                        <a href="/member/admin">관리자</a>
+                        <div class="stick"></div>
+                        <a href="/logout">로그아웃</a>
+                        <div class="stick"></div>
+                    </c:if>
+                    <div>
+                        <a>고객센터<span></span></a>
+                    </div>
+                    <div class="menu">
+                        <div>공지사항</div>
+                        <div>자주하는 질문</div>
+                        <div>1:1 문의</div>
+                        <div>대량주문 문의</div>
+                    </div>
+                </div>
+                <div id="search">
+                    <div id="search-bar">
+                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
+                        <a>마켓컬리</a>
+                        <div class="stick"></div>
+                        <a>뷰티컬리</a>
+
+                        <form action="/searchProduct" id="search-form">
+                            <div id="search-center">
+                                <input id="search-input" name="keyword" type="text" placeholder="검색어를 입력하세요.">
+                                <button id="search-button" type="submit">
+                                    <div><span class="blind">검색</span></div>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="search-right">
+                            <button href="#">
+                                <span class="blind">배송지등록</span>
+                            </button>
+                            <div id="tooltip">
+                                <div>
+                                    <div><p><strong>배송지를 등록</strong>하고<br><span>구매 가능한 상품을 확인하세요!</span></p>
+                                        <div>
+                                            <button type="button" width="80" height="36" radius="3"><span>로그인</span>
+                                            </button>
+                                            <button type="button" height="36" radius="3"><span><img src="">주소 검색</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button href="#">
+                                <span class="blind">찜하기</span>
+                            </button>
+                            <button href="#">
+                                <span class="blind">장바구니</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nev">
+                <div id="category">
+                    <span></span>
+                    <nav>
+                        <div class="dropdown">
+                        <span class="dropbtn">카테고리
+                            <i class="fa fa-caret-down"></i>
+                        </span>
+                            <div class="dropdown-content">
+                                <c:forEach var="categoryList" items="${categoryList}">
+                                    <a href="/category/${categoryList.cat_code}">${categoryList.cat_name}</a>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div id="meun">
+                    <ul>
+                        <li>
+                            <span href="#">신상품</span>
+                        </li>
+                        <li>
+                            <span href="#">베스트</span>
+                        </li>
+                        <li>
+                            <span href="#">알뜰쇼핑</span>
+                        </li>
+                        <li>
+                            <span href="#">특가/혜택</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="nev-right">
+                    <div>
+                        <span>샛별・택배</span>
+                        <span>배송안내</span>
+                    </div>
+                </div>
+            </div>
+        </div> <!--top -->
+    </div>
+</div>
+</body>
+</html>
+

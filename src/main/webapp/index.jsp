@@ -4,6 +4,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/main">EcoEats</a>
+<a href="/order">order</a>&nbsp;&nbsp;
+<a href="/main">ecoeats(main)</a>&nbsp;&nbsp;
+<a href="/admin/product/list">productAdmin</a>&nbsp;&nbsp;
 </body>
 </html>

@@ -29,4 +29,13 @@ public class CategoryListImpl implements CategoryList {
         return sqlSession.selectList(namespace + "enrollCategoryList");
     }
 
+    @Override // 대 카테고리 정렬
+    public List<CategoryDto> bigCateList() throws Exception {
+        return sqlSession.selectList(namespace + "bigCateList");
+    }
+
+    @Override // 중 카테고리 정렬
+    public List<CategoryDto> midCateList(String cat_code) throws Exception {
+        return sqlSession.selectList(namespace + "midCateList", cat_code);
+    }
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pofol.admin.product.ProductAdminRepository">
+
+<!--    상품관리 (상품 조회) + (테스트용)-->
+    <select id="selectAll" parameterType="long" resultType="ProductDto">
+        SELECT p.prod_id, p.prod_name, p.sale_sts, p.disp_sts, p.prod_qty, p.prod_price, p.disc_price, i.dlvy_type, p.cat_code, i.brand, p.prod_rg_date, p.prod_mod_date, p.sel_str_date, p.sel_end_date
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id
+        ORDER BY p.prod_id ASC
+    </select>
+
+<!--    상품 판매, 진열, 재고 상태 수정-->
+<!--    <update id="">-->
+
+<!--    </update>-->
+
+
+
+
+
+<!--검색 / 카테고리(대 / 소) / 상품등록일 / 판매상태 / 진열상태 / 재고상태 / 재고수량 / 상품가격 / 옵션유무-->
+
+<!--    상품 목록 검색 (관리자)-->
+<!--    <select id="searchSelectPage" parameterType="SearchProductAdminCondition" resultType="ProductDto">-->
+<!--        SELECT *-->
+<!--        FROM product p, product_info i-->
+<!--        WHERE p.prod_id = i.prod_id-->
+<!--        LIMIT #{offset}, #{pageSize}-->
+<!--    </select>-->
+
+<!--    상품 목록 카운트 (관리자)-->
+    <select id="searchResultCnt" parameterType="SearchProductAdminCondition" resultType="int">
+        SELECT count(*)
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id
+    </select>
+
+
+
+
+
+
+
+
+
+    <!--    상품 목록 검색 (관리자)-->
+    <select id="searchSelectPage" parameterType="map" resultType="ProductDto">
+        SELECT *
+        FROM product p, product_info i, category c
+        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+        <choose>
+            <when test='keyword_type == "ProductName"'>
+                AND p.prod_name LIKE concat('%',#{keyword} ,'%')
+            </when>
+            <when test='keyword_type == "ProductNumber"'>
+                AND p.prod_id = #{keyword}
+            </when>
+            <when test='keyword_type == "DeliveryType"'>
+                AND i.dlvy_type = #{keyword}
+            </when>
+            <when test='keyword_type == "Brand"'>
+                AND i.brand = #{keyword}
+            </when>
+        </choose>
+
+<!--        카테고리 관련 정렬-->
+<!--        <choose>-->
+<!--            <when test="">-->
+<!--                -->
+<!--            </when>-->
+<!--        </choose>-->
+
+        <choose>
+            <when test='date_type == "ProductRegisterDate"'>
+                AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "ProductModifyDate"'>
+                AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "saleStartDate"'>
+                AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "saleEndDate"'>
+                AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+        </choose>
+
+        <if test='selling != null and selling != "" and selling != "A"'>
+            AND p.sale_sts = #{selling}
+        </if>
+
+        <if test='display != null and display != "" and display != "A"'>
+            AND p.disp_sts = #{display}
+        </if>
+
+--         재고상태 쿼리문도 짜야함
+
+        <choose>
+            <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
+                AND p.prod_qty BETWEEN #{stock_min} AND #{stock_max}
+            </when>
+            <when test='stock_min != null and stock_min != ""'>
+                AND p.prod_qty >= #{stock_min}
+            </when>
+            <when test='stock_max != null and stock_max != ""'>
+                AND p.prod_qty &lt;= #{stock_max}
+            </when>
+        </choose>
+
+
+
+        LIMIT #{offset}, #{pageSize}
+
+</select>
+
+
+
+
+
+
+
+
+
+</mapper>

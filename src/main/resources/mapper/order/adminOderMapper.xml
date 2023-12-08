@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order.repository.adminOrderMapper">
+	<insert id="insert">
+		INSERT INTO spring.order
+		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
+		tot_prod_disc, dlvy_fee, tot_prod_qty, pay_way, rg_num, md_num)
+		VALUES
+		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
+		#{tot_prod_disc}, #{dlvy_fee}, #{tot_prod_qty}, #{pay_way}, #{rg_num}, #{md_num})
+		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
+			SELECT MAX(ord_id) FROM spring.order
+		</selectKey>
+	</insert>
+
+	<select id="selectCodeType" resultType="CodeTableDto">
+		SELECT *
+		FROM spring.code_table
+		WHERE
+		code_type=#{code_type}
+		order by code_type desc, code_no
+	</select>
+
+	<update id="update">
+		UPDATE spring.order
+		SET
+		tot_prod_name = #{tot_prod_name},
+		tot_prod_price = #{tot_prod_price},
+		tot_pay_price = #{tot_pay_price},
+		tot_prod_disc = #{tot_prod_disc},
+		dlvy_fee = #{dlvy_fee},
+		tot_prod_qty = #{tot_prod_qty},
+		pay_way = #{pay_way},
+		rg_num = #{rg_num},
+		md_date = current_timestamp,
+		md_num = #{md_num}
+		WHERE ord_id = #{ord_id}
+	</update>
+
+	<update id="updateStatus">
+		UPDATE spring.order
+		SET
+		ord_ing =#{ord_ing},
+		ord_fail=#{ord_fail},
+		ord_cmplt = #{ord_cmplt},
+		prod_ing = #{prod_ing},
+		ord_prep_dlvy = #{ord_prep_dlvy},
+		ord_in_dlvy = #{ord_in_dlvy},
+		ord_dlvy = #{ord_dlvy},
+		ord_cxl = #{ord_cxl},
+		ord_ex = #{ord_ex},
+		ord_rfnd = #{ord_rfnd},
+		md_date = current_timestamp
+		WHERE ord_id = #{ord_id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM spring.order WHERE ord_id = #{ord_id}
+	</delete>
+
+	<select id="selectAll" resultType="OrderDto">
+		SELECT *
+		FROM spring.order
+		ORDER BY rg_date DESC, ord_id DESC
+	</select>
+
+	<delete id="deleteAll">
+		DELETE FROM spring.order
+	</delete>
+
+	<select id="count" resultType="int">
+		SELECT count(*) FROM spring.order
+	</select>
+	
+</mapper>

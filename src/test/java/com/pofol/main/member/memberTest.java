@@ -20,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class memberTest {
+
 	@Autowired
 	DataSource ds;
 
@@ -34,20 +35,20 @@ public class memberTest {
 	MemberService service;
 
 
-    @Test
-    public void test(){
-        System.out.println(Mdao.member_now());
-    }
-
+	@Test
+	public void test(){
+		System.out.println(ds);
+		System.out.println(session);
+	}
 
 	@Test
-	public void test3(){
-		MemberDto exampleMemId = Mdao.select_member("admin123");
+	public void test3() throws Exception {
+		MemberDto exampleMemId = Mdao.selectMember("admin123");
 		System.out.println(exampleMemId.toString());
 	}
 
 	@Test
-	public void test4(){
+	public void test4() throws Exception {
 		MemberDto exampleMemId = service.select("sample_member_id");
 		System.out.println(exampleMemId.toString());
 	}
