@@ -29,6 +29,8 @@
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
+		<typeAlias alias="CategoryDto" type="com.pofol.main.product.category.CategoryDto"/>
+		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
 		<!-- product -->
 	</typeAliases>
 </configuration>
