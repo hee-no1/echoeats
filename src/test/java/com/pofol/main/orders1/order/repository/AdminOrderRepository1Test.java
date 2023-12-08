@@ -20,7 +20,7 @@ import com.pofol.main.orders1.order.domain.OrderDto;
 
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/root-context.xml" })
-public class AdminOrderRepositoryTest {
+public class AdminOrderRepository1Test {
 	@Autowired
 	DataSource ds;
 	

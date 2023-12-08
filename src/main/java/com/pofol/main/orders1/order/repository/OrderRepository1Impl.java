@@ -10,7 +10,7 @@ import com.pofol.main.orders1.order.domain.OrderDto;
 import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 
 @Repository
-public class OrderRepositoryImpl implements OrderRepository {
+public class OrderRepository1Impl implements OrderRepository1 {
 
 	@Autowired
 	private SqlSession session;

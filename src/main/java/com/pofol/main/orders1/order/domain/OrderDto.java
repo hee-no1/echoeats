@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Objects;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 //@Data = (@Getter, @Setter, @RequiredArgsConstructor, 
 //			@ToString, @EqualsAndHashCode)
@@ -19,7 +18,7 @@ public class OrderDto {
     private Integer tot_pay_price;
     private Integer tot_prod_disc;
     private Integer dlvy_fee;
-    private Integer tot_prod_qty;
+    private Integer tot_ord_qty;
     private String pay_way;
     private Integer ord_ing;
     private Integer ord_cmplt;
@@ -52,13 +51,13 @@ public class OrderDto {
     }
 
 	public OrderDto(String mem_id, String tot_prod_name, Integer tot_prod_price, Integer tot_pay_price,
-			Integer tot_prod_disc, Integer dlvy_fee, Integer tot_prod_qty, String pay_way, String rg_num) {
+					Integer tot_prod_disc, Integer dlvy_fee, Integer tot_ord_qty, String pay_way, String rg_num) {
 		this.mem_id = mem_id;
 		this.tot_prod_name = tot_prod_name;
 		this.tot_prod_price = tot_prod_price;
 		this.tot_pay_price = tot_pay_price;
 		this.tot_prod_disc = tot_prod_disc;
-		this.tot_prod_qty = tot_prod_qty;
+		this.tot_ord_qty = tot_ord_qty;
 		this.pay_way = pay_way;
 		
 		this.rg_num = rg_num;
@@ -99,13 +98,13 @@ public class OrderDto {
 				&& Objects.equals(tot_prod_disc, other.tot_prod_disc)
 				&& Objects.equals(tot_prod_name, other.tot_prod_name)
 				&& Objects.equals(tot_prod_price, other.tot_prod_price)
-				&& Objects.equals(tot_prod_qty, other.tot_prod_qty);
+				&& Objects.equals(tot_ord_qty, other.tot_ord_qty);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(dlvy_cmplt, dlvy_fee, dlvy_ing, dlvy_prep_ing, md_num, mem_id, ord_cmplt, ord_cxl, ord_ex,
 				ord_fail, ord_id, ord_ing, ord_rfnd, pay_way, prod_ing, rg_num, tot_pay_price, tot_prod_disc,
-				tot_prod_name, tot_prod_price, tot_prod_qty);
+				tot_prod_name, tot_prod_price, tot_ord_qty);
 	}
 }
