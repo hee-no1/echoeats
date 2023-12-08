@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="ko">
@@ -9,9 +9,12 @@
     <link rel="icon" href="./favicon.ico">
     <title>컬리</title>
     <link rel="stylesheet" href="/resources/css/member/coupon.css">
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
+    <link rel="stylesheet" href="/resources/product/css/footer.css">
 </head>
 
 <body>
+<%@ include file="../include/header.jspf" %>
 <div class = "css-2b29tl">
     <div class = "css-1jgbowa epggjnz4">
         <div class = "css-1oynwoh epggjnz3">
@@ -368,5 +371,6 @@
     </div>
 
 </div>
+<%@ include file="../include/footer.jspf" %>
 </body>
 </html>
