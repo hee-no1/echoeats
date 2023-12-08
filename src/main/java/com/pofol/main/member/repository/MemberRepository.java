@@ -2,6 +2,8 @@ package com.pofol.main.member.repository;
 
 import com.pofol.main.member.dto.MemberDto;
 
+import java.util.List;
+
 public interface MemberRepository {
 
     MemberDto selectMember(String id) throws Exception;
@@ -12,5 +14,5 @@ public interface MemberRepository {
     void deleteAll() throws Exception;
     int checkId(String id) throws Exception;
     int checkEmail(String id) throws Exception;
-
+    List<MemberDto> checkGrade(String date) throws Exception;
 }

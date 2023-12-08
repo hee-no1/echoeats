@@ -11,14 +11,14 @@ public class CouponDto {
         private int max_disc_amt;  //최대 할인 금액
         private String type;
         private Date rg_date;
-        private int rg_num;
+        private String rg_num;
         private Date md_date;
-        private int md_num;
+        private String md_num;
 
     public CouponDto() {
     }
 
-    public CouponDto(String cp_name, String cp_content, int disc_cash, int min_amt, int max_disc_amt, int rg_num, int md_num, String type) {
+    public CouponDto(String cp_name, String cp_content, int disc_cash, int min_amt, int max_disc_amt, String rg_num, String md_num, String type) {
         this.cp_name = cp_name;
         this.cp_content = cp_content;
         this.cash_rate = disc_cash;
@@ -93,11 +93,11 @@ public class CouponDto {
         this.rg_date = rg_date;
     }
 
-    public int getRg_num() {
+    public String getRg_num() {
         return rg_num;
     }
 
-    public void setRg_num(int rg_num) {
+    public void setRg_num(String rg_num) {
         this.rg_num = rg_num;
     }
 
@@ -109,11 +109,11 @@ public class CouponDto {
         this.md_date = md_date;
     }
 
-    public int getMd_num() {
+    public String getMd_num() {
         return md_num;
     }
 
-    public void setMd_num(int md_num) {
+    public void setMd_num(String md_num) {
         this.md_num = md_num;
     }
 
