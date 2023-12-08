@@ -47,6 +47,8 @@ public class PaymentServiceImpl implements PaymentService{
             dbTotPayPrice += 3000;
         }
 
+        dbTotPayPrice -= (oc.getCoupon_disc() + oc.getPoint_used());
+
         System.out.println("jsTotPayPrice = " + jsTotPayPrice);
         System.out.println("dbTotPayPrice = " + dbTotPayPrice);
         return jsTotPayPrice == dbTotPayPrice; //같으면 true, 다르면 false

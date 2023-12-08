@@ -103,8 +103,11 @@ $(document).ready(function() {
     $('#paymentBtn').click(function(){
 
         checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
-        console.log(checkout);
-        console.log(typeof checkout.tot_pay_price);
+        checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
+        checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText*1;
+        checkout.point_used = document.getElementById("outputPointUsed").innerText*1;
+        console.log("1차 검증 바로전 checkout = " + checkout);
+
         //넘어가야하는 것
         //총 상품명, 총 주문금액, 총 실결제 금액,총 상품할인 금액, 배송비, 결제 방법, 회원 아이디는 서버에서 세션으로 받는다.
         $.ajax({

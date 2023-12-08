@@ -34,7 +34,9 @@ public class OrderCheckout {
     /* 주문서 -> 결제 */
     private Integer tot_pay_price; //실 결제 금액
     private String pay_way; //결제 방법
-
+    private Integer prod_disc; //상품 할인 금액
+    private Integer coupon_disc; //쿠폰 할인 금액
+    private Integer point_used; //적립금 사용 금액
 
 
     public OrderCheckout(List<SelectedItemsDto> selectedItems) {
