@@ -5,7 +5,7 @@ import java.util.List;
 import com.pofol.main.orders1.order.domain.OrderDto;
 import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 
-public interface OrderRepository {
+public interface OrderRepository1 {
 	//crud
 		public abstract int insert(OrderDto dto) throws Exception;
 		public abstract int insertAll(OrderDto dto) throws Exception;

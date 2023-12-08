@@ -1,7 +1,12 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.domain.OrderHistoryDto;
+import com.pofol.main.orders.order.repository.OrderDetailRepository;
+import com.pofol.main.orders.order.repository.OrderHistoryRepository;
+import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
@@ -17,11 +22,17 @@ public class OrderServiceImpl implements OrderService{
 
     private final SampleMemberRepository memRepo;
     private final SampleProductRepository prodRepo;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
+    private final OrderHistoryRepository orderHistoryRepository;
 
     @Autowired
-    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo) {
+    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository) {
         this.memRepo = memRepo;
         this.prodRepo = prodRepo;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
+        this.orderHistoryRepository = orderHistoryRepository;
     }
 
     @Override
@@ -67,7 +78,7 @@ public class OrderServiceImpl implements OrderService{
         //총 상품명 구하기
         SelectedItemsDto firstItem = items.get(0);
         SampleProductDto firstProd = firstItem.getSampleProductDto();
-        int tot_prod_qty = items.size(); //총 상품 수량
+        int tot_ord_qty = items.size(); //총 상품 수량
 
         try{
             if(firstItem.getOpt_prod_id() == null){ //일반 상품일 때
@@ -76,10 +87,10 @@ public class OrderServiceImpl implements OrderService{
                 tot_prod_name = firstProd.getOpt_prod_name();
             }
 
-            if(tot_prod_qty == 1){ //상품수량이 1개일 때
+            if(tot_ord_qty == 1){ //상품수량이 1개일 때
                 tot_prod_name += "상품을 주문합니다.";
             } else {//상품수량이 2개 이상일 때
-                tot_prod_name += " 외 " + (tot_prod_qty-1) +"개의 상품을 주문합니다.";
+                tot_prod_name += " 외 " + (tot_ord_qty-1) +"개의 상품을 주문합니다.";
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -100,7 +111,43 @@ public class OrderServiceImpl implements OrderService{
         return oc;
     }
 
-    public OrderDto writeOrder(){
-        return null;
+
+    @Override
+    public void writeOrder(OrderCheckout oc) {
+        System.out.println("writeOrder 주문서 = " + oc);
+        List<SelectedItemsDto> items = oc.getSelectedItems();
+
+        String mem_id = "you11"; //회원id 가져오기
+        //주문 table 작성
+        OrderDto orderDto = new OrderDto(mem_id, oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), oc.getOrigin_prod_price() - oc.getTot_prod_price(), items.size(), oc.getDlvy_fee(), oc.getPay_way(), items.size(), mem_id, mem_id);
+        try {
+            orderRepository.insert(orderDto);
+            Long ord_id = orderDto.getOrd_id();
+
+            //주문 상세 table 작성
+            for (SelectedItemsDto item : items) {
+                SampleProductDto prod = prodRepo.selectRequiredProduct(item);
+                item.setSampleProductDto(prod);
+                item.calculateProductTotal();
+
+                OrderDetailDto orderDetailDto;
+                if(item.getOpt_prod_id() == null || item.getOpt_prod_id().isEmpty() ){ //일반 상품일 때
+                    orderDetailDto = new OrderDetailDto(ord_id, mem_id, item.getProd_id(), "ORDERING", prod.getProd_name(), item.getQty(), prod.getDisc_price() * item.getQty(), prod.getPack_type(), mem_id, mem_id);
+                }else { //option 상품일 때
+                    orderDetailDto = new OrderDetailDto(ord_id, mem_id, item.getProd_id(), item.getOpt_prod_id(), "ORDERING", prod.getOpt_prod_name(), item.getQty(), prod.getOpt_disc_price() * item.getQty(), prod.getPack_type(), mem_id, mem_id);
+                }
+                orderDetailRepository.insert(orderDetailDto);
+            }
+
+            //주문 이력 table 작성
+            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(ord_id, mem_id, "ORDERING", oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), items.size(), oc.getPay_way(), mem_id, mem_id);
+            orderHistoryRepository.insert(orderHistoryDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
     }
+
 }

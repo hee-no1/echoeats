@@ -126,6 +126,7 @@
     let tot_prod_price = ${checkout.tot_prod_price};
     let origin_prod_price = ${checkout.origin_prod_price};
     let dlvy_fee = ${checkout.dlvy_fee};
+    let pay_way = 'kakao'
 </script>
 <script src="/resources/order/js/checkoutJS.js"></script>
 </body>
