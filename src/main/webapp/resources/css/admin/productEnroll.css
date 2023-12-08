@@ -9,6 +9,9 @@ a{
 ul{
     list-style: none;
 }
+div {
+    display: block;
+}
 /* 화면 전체 wrap */
 .wrapper{
     width: 100%;
@@ -17,6 +20,10 @@ ul{
 .wrap{
     width : 1080px;
     margin: auto;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0;
 }
 /* 홈페이지 기능 네비 */
 .top_gnb_area{
@@ -154,6 +161,96 @@ ul{
 }
 .cate_wrap:not(:first-child) {
     margin-top: 20px;
+}
+/* 가격 css 설정 */
+.form_section_content input {
+    width: 25%;
+    height: 35px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+.price_wrap span {
+    font-weight: 600;
+}
+.price_wrap:not(:first-child) {
+    margin-top: 20px;
+}
+/* 할인 가격 문구 */
+.discounted_price {
+    display: block;
+    padding-top: 5px;
+    font-weight: 500;
+}
+/* 판매 기간 영역 */
+.sel_date {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+/* 옵션 영역 */
+.seller-input-toggle {
+    background-color: #fff;
+    display: inline-block;
+    margin-right: 10px; /* 각 버튼 사이의 간격을 위한 마진 설정 */
+}
+.seller-input-toggle input + label {
+    display: table-cell;
+    padding: 4px 20px;
+    margin-bottom: 0;
+    color: #767a83;
+    border : 1px solid #dbdde2;
+}
+.seller-input-toggle input[type="radio"] {
+    display: none;
+}
+.seller-input-toggle label {
+    background-color: inherit;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.seller-input-toggle input[type="radio"]:checked + label {
+    /* 라디오 버튼이 체크된 경우의 스타일 */
+    background-color: #00c73c;
+    border-color: #00ae34;
+    color: #fff;
+}
+.seller-input-toggle {
+    display: table;
+    table-layout: fixed;
+}
+.form_section{
+    float : left;
+}
+.control-label{
+    width: 180px;
+    padding-top: 5px;
+}
+.form-sub-wrap {
+    display: flex;
+}
+.seller-input-wrap .btn-clear {
+    position: absolute;
+    top:0;
+    right: 10px;
+    line-height: 34px;
+}
+.btn-clear {
+    z-index: 99;
+}
+.btn-clear span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: -1px 0 1px;
+    line-height: 19px;
+    border-radius: 50px;
+    background-color: #d2d5dc;
+    color: #fff;
+}
+[role="button"] {
+    cursor: pointer;
 }
 /* 버튼 영역 */
 .btn_section{
