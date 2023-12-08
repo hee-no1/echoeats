@@ -1,6 +1,7 @@
 package com.pofol.main.orders.payment.controller;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
+@RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentService paymentService;
-
-    @Autowired
-    public PaymentController(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
+    private final OrderService orderService;
 
     @PostMapping("/payment/verify/prev")
     public ResponseEntity<String> PrevVerify(@RequestBody OrderCheckout oc){
@@ -31,6 +29,7 @@ public class PaymentController {
             Boolean isVerify = paymentService.prevVerify(oc);
             System.out.println(isVerify);
             if(isVerify){ //1차 검증 성공 시
+                orderService.writeOrder(oc);
                 return ResponseEntity.ok("1차 검증 성공");
             }else { //1차 검증 실패 시
                 return ResponseEntity.badRequest().body("1차 검증 실패");

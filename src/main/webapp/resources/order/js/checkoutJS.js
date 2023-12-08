@@ -3,7 +3,8 @@ let checkout = {
     tot_prod_name: tot_prod_name,
     tot_prod_price: tot_prod_price,
     origin_prod_price: origin_prod_price,
-    dlvy_fee: dlvy_fee
+    dlvy_fee: dlvy_fee,
+    pay_way: pay_way,
 }
 console.log(checkout);
 
@@ -82,7 +83,7 @@ $("#allUseBtn").click(function(){
 });
 $(document).ready(function() {
 
-
+    //주문서 상품 목록
     $('.totItems').show(); //페이지를 로드할 때 표시할 요소
     $('.items').hide(); //페이지를 로드할 때 숨길 요소
     $('#prodDetailBtn').click(function(){
@@ -128,13 +129,13 @@ $(document).ready(function() {
         IMP.request_pay({
             pg: 'kakaopay',
             pay_method: 'card',
-            merchant_uid: 12345,
+            merchant_uid: 12341234,
             name: checkout.tot_prod_name,
             amount: checkout.tot_pay_price,
         }, rsp => {
             if (rsp.success) {
                 // axios로 HTTP 요청, 결제 성공시 서버로 전송
-                alert("success");
+                alert("success")
             } else {
                 alert("fail")
             }
