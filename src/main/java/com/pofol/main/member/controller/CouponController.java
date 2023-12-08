@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -24,6 +25,16 @@ public class CouponController {
         String id = authentication.getName();
         List<CouponJoinDto> coupon = couponService.getCoupon(id);
         System.out.println(coupon);
+        for (CouponJoinDto couponJoinDto : coupon) {
+            if(couponJoinDto.getCp_sts().equals("UNUSED")){
+                couponJoinDto.setCp_sts("사용가능");
+            } else if (couponJoinDto.getCp_sts().equals("USED")) {
+                couponJoinDto.setCp_sts("사용 완료");
+            }else if (couponJoinDto.getCp_sts().equals("EXPIRES")) {
+                couponJoinDto.setCp_sts("기간 만료");
+            }
+        }
+
         model.addAttribute("coupon", coupon);
         return "member/coupon";
     }
