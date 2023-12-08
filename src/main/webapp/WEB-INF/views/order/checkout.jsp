@@ -120,7 +120,7 @@
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">
         selectedItems[${loop.index}] = {prod_id: ${item.prod_id}, opt_prod_id: '${item.opt_prod_id}', qty: ${item.qty}}
-    // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.->option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
+    // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.-> option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
     </c:forEach>
     let tot_prod_name = '${checkout.tot_prod_name}';
     let tot_prod_price = ${checkout.tot_prod_price};

@@ -11,7 +11,7 @@ import java.util.List;
 public class PaymentDiscountRepositoryImpl implements PaymentDiscountRepository {
 
     private final SqlSession session;
-    private String namespace = "order.repository.payDiscountMapper.";
+    private String namespace = "payment.repository.payDiscountMapper.";
 
 
     @Override

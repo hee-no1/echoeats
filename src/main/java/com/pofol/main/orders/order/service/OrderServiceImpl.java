@@ -4,6 +4,7 @@ import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
+import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
@@ -144,8 +145,8 @@ public class OrderServiceImpl implements OrderService{
             orderHistoryRepository.insert(orderHistoryDto);
 
             //할인 금액 정보 table 작성
-            PayDiscountDto payDiscountDto = new PayDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
-            paymentDiscountRepository.insert(payDiscountDto);
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
+            paymentDiscountRepository.insert(paymentDiscountDto);
 
         } catch (Exception e) {
             e.printStackTrace();
