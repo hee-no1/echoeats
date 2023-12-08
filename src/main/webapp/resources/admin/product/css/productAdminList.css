@@ -982,7 +982,7 @@ html:lang(ko) .btnNormal span {
 .mBoard th,
 .mBoard td {
     padding: 9px 9px 7px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .mBoard th {

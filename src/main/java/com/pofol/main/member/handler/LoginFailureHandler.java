@@ -23,30 +23,18 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         String errormsg = null;
 
-        if (exception instanceof BadCredentialsException) {
-            errormsg = "비밀번호불일치";
-        } else if (exception instanceof InternalAuthenticationServiceException) {
-            errormsg = "존재하지 않는 아이디입니다.";
-        } else if (exception instanceof UsernameNotFoundException) {
-            errormsg = "계정없음";
-        } else if (exception instanceof AccountExpiredException) {
-            errormsg = "계정만료";
-        } else if (exception instanceof CredentialsExpiredException) {
-            errormsg = "비밀번호만료";
-        } else if (exception instanceof DisabledException) {
-            errormsg = "계정비활성화";
-        } else if (exception instanceof LockedException) {
-            errormsg = "계정잠김";
-        } else {
+        //비밀번호 불일치
+        //존재하지 않는 아이디
+        if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
+            errormsg = "아이디 또는 비밀번호를 잘못 입력했습니다.";
+        }  else {
             errormsg = "확인된 에러가 없습니다.";
         }
 
-        request.setAttribute("errormsg", errormsg);
+        request.getSession().setAttribute("errormsg", errormsg);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/member/login_form");
-        dispatcher.forward(request, response);
 
-        //response.sendRedirect("/member/login_form");
+        response.sendRedirect("/member/login_form");
 
     }
 
@@ -56,7 +44,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
 
 
-
+//else if (exception instanceof UsernameNotFoundException) {
+//        errormsg = "계정없음";
+//        } else if (exception instanceof AccountExpiredException) {
+//        errormsg = "계정만료";
+//        } else if (exception instanceof CredentialsExpiredException) {
+//        errormsg = "비밀번호만료";
+//        } else if (exception instanceof DisabledException) {
+//        errormsg = "계정비활성화";
+//        } else if (exception instanceof LockedException) {
+//        errormsg = "계정잠김";
+//        }
 
 
 

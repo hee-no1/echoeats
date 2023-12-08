@@ -1,9 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main-css.css">
 </head>
 <body>
 <div id="wrap">
@@ -11,10 +12,18 @@
         <div id="top">
             <div id="header">
                 <div id="homeInfo">
-                    <a>회원가입</a>
-                    <div class="stick"></div>
-                    <a>로그인</a>
-                    <div class="stick"></div>
+                    <c:if test="${result eq null}">
+                        <a>회원가입</a>
+                        <div class="stick"></div>
+                        <a href="/member/login_form">로그인</a>
+                        <div class="stick"></div>
+                    </c:if>
+                    <c:if test="${result ne null}">
+                        <a href="/member/admin">관리자</a>
+                        <div class="stick"></div>
+                        <a href="/logout">로그아웃</a>
+                        <div class="stick"></div>
+                    </c:if>
                     <div>
                         <a>고객센터<span></span></a>
                     </div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.main.member.gradeMapper">
+    <select id="select_grade" parameterType="String" resultType="GradeDto">
+        select b.* from member as a
+        join grade as b on a.gd_name = b.gd_name
+        where mem_id =#{id}
+    </select>
+
+    <select id="select_grade_list" resultType="GradeDto">
+        select * from grade ORDER BY acm_rate DESC
+    </select>
+</mapper>
