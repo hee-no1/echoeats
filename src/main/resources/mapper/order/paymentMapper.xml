@@ -5,9 +5,9 @@
 <mapper namespace="payment.repository.paymentMapper">
     <insert id="insert" parameterType="PaymentDto">
         INSERT INTO spring.payment
-        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, pay_date, pay_way, rg_num, md_num)
+        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, pay_way, rg_num, md_num)
         VALUES
-        (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{pay_date},#{pay_way},#{rg_num},#{md_num});
+        (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{pay_way},#{rg_num},#{md_num});
     </insert>
 
     <select id="select" parameterType="string" resultType="PaymentDto">
@@ -21,7 +21,7 @@
         SELECT *
         FROM spring.payment
         WHERE
-        code_name = "PAYMENT_COMPLETE" pay_id = #{pay_id};
+        code_name = 'PAYMENT_COMPLETE' and pay_id = #{pay_id};
     </select>
 
     <update id="updateStatus">
@@ -33,7 +33,7 @@
     </update>
 
 
-    <delete id="delete" parameterType="long">
+    <delete id="delete" parameterType="string">
         DELETE FROM spring.payment WHERE pay_id = #{pay_id}
     </delete>
 
