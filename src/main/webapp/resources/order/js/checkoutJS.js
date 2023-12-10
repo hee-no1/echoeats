@@ -3,7 +3,8 @@ let checkout = {
     tot_prod_name: tot_prod_name,
     tot_prod_price: tot_prod_price,
     origin_prod_price: origin_prod_price,
-    dlvy_fee: dlvy_fee
+    dlvy_fee: dlvy_fee,
+    pay_way: pay_way,
 }
 console.log(checkout);
 
@@ -82,7 +83,9 @@ $("#allUseBtn").click(function(){
 });
 $(document).ready(function() {
 
+    let orderData = {};
 
+    //주문서 상품 목록
     $('.totItems').show(); //페이지를 로드할 때 표시할 요소
     $('.items').hide(); //페이지를 로드할 때 숨길 요소
     $('#prodDetailBtn').click(function(){
@@ -99,11 +102,15 @@ $(document).ready(function() {
         }
     });
 
+    //결제 버튼 누르면
     $('#paymentBtn').click(function(){
 
         checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
-        console.log(checkout);
-        console.log(typeof checkout.tot_pay_price);
+        checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
+        checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText*1;
+        checkout.point_used = document.getElementById("outputPointUsed").innerText*1;
+        console.log("1차 검증 바로전 checkout = " + checkout);
+
         //넘어가야하는 것
         //총 상품명, 총 주문금액, 총 실결제 금액,총 상품할인 금액, 배송비, 결제 방법, 회원 아이디는 서버에서 세션으로 받는다.
         $.ajax({
@@ -113,7 +120,8 @@ $(document).ready(function() {
             dataType: 'text',
             data : JSON.stringify(checkout),
             success: function(result){
-                alert("✅ 1차 검증 성공 " );
+                alert("✅ 1차 검증 성공 = " + result);
+                orderData.ord_id = result*1;
                 requestPay();
 
             },
@@ -127,19 +135,47 @@ $(document).ready(function() {
     function requestPay() {
         IMP.request_pay({
             pg: 'kakaopay',
-            pay_method: 'card',
-            merchant_uid: 12345,
+            pay_method: 'kakaopay',
+            merchant_uid: orderData.ord_id,
             name: checkout.tot_prod_name,
             amount: checkout.tot_pay_price,
         }, rsp => {
             if (rsp.success) {
                 // axios로 HTTP 요청, 결제 성공시 서버로 전송
-                alert("success");
+                alert("success")
+                console.log("rsp",rsp);
+                writePayment(rsp);
+
             } else {
                 alert("fail")
+                writePayment(rsp);
             }
         });
     }
 
+    function writePayment(rsp){
+        axios({
+            url: "/payment/verify/next",
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            data: {
+                pay_id: rsp.imp_uid,
+                ord_id: rsp.merchant_uid,
+                tot_prod_name: rsp.name,
+                tot_pay_price: rsp.paid_amount,
+                pay_way: rsp.pg_provider,
+                pg_tid: rsp.pg_tid,
+                success: rsp.success
+            }
+        }).then(response  => {
+            // 서버 결제 API 성공시 로직
+            alert("success: " +JSON.stringify(response.data))
+            //주문번호
+            window.location.href = '/order/completed/'+orderData.ord_id;
+
+        }).catch(error => {
+            alert("error: " + JSON.stringify(error.response))
+        });
+    }
 });
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payment.repository.paymentHistoryMapper">
+    <insert id="insert" parameterType="PaymentHistoryDto">
+        INSERT INTO spring.payment_history
+        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, pg_tid, pay_way, rg_num, md_num)
+        VALUES
+            (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{pg_tid}, #{pay_way},#{rg_num},#{md_num});
+    </insert>
+
+    <select id="selectOne" parameterType="long" resultType="PaymentHistoryDto">
+        SELECT *
+        FROM spring.payment_history
+        WHERE
+        code_name = 'PAYMENT_COMPLETE' and pay_hist_id = #{pay_hist_id};
+    </select>
+
+    <select id="selectList" parameterType="long" resultType="PaymentHistoryDto">
+        SELECT *
+        FROM spring.payment_history
+        WHERE
+            pay_hist_id = #{pay_hist_id};
+    </select>
+
+
+    <delete id="deleteList" parameterType="long">
+        DELETE FROM spring.payment_history WHERE pay_hist_id = #{pay_hist_id}
+    </delete>
+
+    <select id="selectAll" resultType="PaymentHistoryDto">
+        SELECT *
+        FROM spring.payment_history
+        ORDER BY rg_date DESC, ord_id DESC
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM spring.payment_history
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM spring.payment_history
+    </select>
+</mapper>

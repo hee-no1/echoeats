@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CouponJoinDto {
     private String mem_id;
+    private int cp_id;
     private int cp_qty;
     private String cp_sts;
     private String cp_del_date;
@@ -16,8 +17,9 @@ public class CouponJoinDto {
     public CouponJoinDto() {
     }
 
-    public CouponJoinDto(String mem_id, int cp_qty, String cp_sts, String cp_del_date, String cp_name, int cash_rate, int min_amt, int max_disc_amt, String type) {
+    public CouponJoinDto(String mem_id, int cp_id, int cp_qty, String cp_sts, String cp_del_date, String cp_name, int cash_rate, int min_amt, int max_disc_amt, String type) {
         this.mem_id = mem_id;
+        this.cp_id = cp_id;
         this.cp_qty = cp_qty;
         this.cp_sts = cp_sts;
         this.cp_del_date = cp_del_date;
@@ -32,9 +34,10 @@ public class CouponJoinDto {
     public String toString() {
         return "CouponJoinDto{" +
                 "mem_id='" + mem_id + '\'' +
+                ", cp_id=" + cp_id +
                 ", cp_qty=" + cp_qty +
                 ", cp_sts='" + cp_sts + '\'' +
-                ", cp_del_date=" + cp_del_date +
+                ", cp_del_date='" + cp_del_date + '\'' +
                 ", cp_name='" + cp_name + '\'' +
                 ", cash_rate=" + cash_rate +
                 ", min_amt=" + min_amt +
@@ -49,6 +52,14 @@ public class CouponJoinDto {
 
     public void setMem_id(String mem_id) {
         this.mem_id = mem_id;
+    }
+
+    public int getCp_id() {
+        return cp_id;
+    }
+
+    public void setCp_id(int cp_id) {
+        this.cp_id = cp_id;
     }
 
     public int getCp_qty() {

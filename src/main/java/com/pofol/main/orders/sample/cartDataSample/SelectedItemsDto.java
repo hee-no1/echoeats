@@ -37,7 +37,7 @@ public class SelectedItemsDto {
     }
 
     public void calculateProductTotal(){
-        if(opt_prod_id == null){ //option상품이 아닐때
+        if(opt_prod_id == null || opt_prod_id.isEmpty()){ //option상품이 아닐때
             total_prod_price = sampleProductDto.getDisc_price() * qty;
             origin_prod_price = sampleProductDto.getProd_price() * qty;
         }else { //option상품일때

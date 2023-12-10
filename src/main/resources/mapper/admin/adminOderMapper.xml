@@ -6,10 +6,10 @@
 	<insert id="insert">
 		INSERT INTO spring.order
 		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
-		tot_prod_disc, dlvy_fee, tot_prod_qty, pay_way, rg_num, md_num)
+		tot_prod_disc, dlvy_fee, tot_ord_qty, pay_way, rg_num, md_num)
 		VALUES
-		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
-		#{tot_prod_disc}, #{dlvy_fee}, #{tot_prod_qty}, #{pay_way}, #{rg_num}, #{md_num})
+		(#{mem_id}, #{tot_prod_name}, #{tot_ord_price},#{tot_pay_price},
+		#{tot_prod_disc}, #{dlvy_fee}, #{tot_ord_qty}, #{pay_way}, #{rg_num}, #{md_num})
 		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
 			SELECT MAX(ord_id) FROM spring.order
 		</selectKey>
@@ -31,7 +31,7 @@
 		tot_pay_price = #{tot_pay_price},
 		tot_prod_disc = #{tot_prod_disc},
 		dlvy_fee = #{dlvy_fee},
-		tot_prod_qty = #{tot_prod_qty},
+		tot_prod_qty = #{tot_ord_qty},
 		pay_way = #{pay_way},
 		rg_num = #{rg_num},
 		md_date = current_timestamp,
