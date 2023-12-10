@@ -26,5 +26,9 @@
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
 		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<!-- Mypage -->
+		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
+		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>
+		<typeAlias alias="InquiryPrdDto" type="com.pofol.main.orders.inquiry.domain.InquiryPrdDto"/>
 	</typeAliases>
 </configuration>

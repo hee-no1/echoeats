@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.pofol.main.orders.order.domain.OrderDetailDto;
+import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders1.order.domain.OrderDto;
 
 @ExtendWith(SpringExtension.class) // Junit5
@@ -24,6 +26,8 @@ public class OrderRepositoryTest {
 
 	@Autowired
 	OrderRepository dao;
+	@Autowired
+	OrderDetailRepository ordDetRpo;
 	
 	@BeforeEach  
 	public void init() throws Exception{
@@ -32,16 +36,30 @@ public class OrderRepositoryTest {
 //		assertTrue(dao.count() == 0);
     }
 	
+//	@Test
+//	public void selectOptionTest() throws Exception {
+//		// insert
+//		for(int i=1; i<=100; i++) {
+//			OrderDto dto = new OrderDto("you11", "Product"+i, 100, 100, 0, 0, 1, "card", "you11");
+//			LocalDate currentDate = LocalDate.now().plusDays(-i);
+//			Date orderDate = java.sql.Date.valueOf(currentDate);
+//			dto.setOrd_date(orderDate);
+//			assertTrue(dao.insertAll(dto) == 1);
+//		}
+//		//assertTrue(dao.count() == 100);
+//	}
+	
 	@Test
-	public void selectOptionTest() throws Exception {
+	public void orderDetInsertTest() throws Exception {
+		OrderDto dto = dao.selectAll().get(0);
 		// insert
-		for(int i=1; i<=100; i++) {
-			OrderDto dto = new OrderDto("you11", "Product"+i, 100, 100, 0, 0, 1, "card", "you11");
-			LocalDate currentDate = LocalDate.now().plusDays(-i);
-			Date orderDate = java.sql.Date.valueOf(currentDate);
-			dto.setOrd_date(orderDate);
-			assertTrue(dao.insertAll(dto) == 1);
-		}
+		//(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num)
+		OrderDetailDto ordDetDto1 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test1", 1, 10000, "냉장", "you11", "you11");
+		OrderDetailDto ordDetDto2 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test2", 2, 20000, "냉장", "you11", "you11");
+		OrderDetailDto ordDetDto3 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test3", 3, 30000, "냉장", "you11", "you11");
+		assertTrue( ordDetRpo.insert(ordDetDto1)==1 );
+		assertTrue( ordDetRpo.insert(ordDetDto2)==1 );
+		assertTrue( ordDetRpo.insert(ordDetDto3)==1 );
 		//assertTrue(dao.count() == 100);
 	}
 	

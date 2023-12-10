@@ -17,7 +17,7 @@
 	<insert id="insertAll">
 		INSERT INTO spring.order
 		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
-		tot_prod_disc, dlvy_fee, tot_prod_qty, pay_way, rg_num, md_num,
+		tot_prod_disc, dlvy_fee, tot_ord_qty, pay_way, rg_num, md_num,
 		ord_date)
 		VALUES
 		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
