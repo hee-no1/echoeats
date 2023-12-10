@@ -173,7 +173,7 @@ public class OrderServiceImpl implements OrderService{
             //주문 table
             OrderDto orderDto = orderRepository.select(pd.getOrd_id());
             orderDto.setStatus(items);
-            orderRepository.update(orderDto);
+            orderRepository.updateStatus(orderDto);
             System.out.println("orderDto: "+orderDto);
 
             //주문 이력 table

@@ -63,7 +63,6 @@ public class PaymentController {
                 return ResponseEntity.badRequest().body("결제 실패");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
         }
     }

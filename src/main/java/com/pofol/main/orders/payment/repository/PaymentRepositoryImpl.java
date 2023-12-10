@@ -20,8 +20,8 @@ public class PaymentRepositoryImpl implements PaymentRepository{
     }
 
     @Override
-    public PaymentDto select(String pay_id) throws Exception {
-        return session.selectOne(namespace+"select",pay_id);
+    public PaymentDto select(Long ord_id) throws Exception {
+        return session.selectOne(namespace+"select",ord_id);
     }
 
     @Override

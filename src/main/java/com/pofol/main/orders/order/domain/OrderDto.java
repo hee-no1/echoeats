@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class OrderDto {
     private Integer prod_ing; //상품준비중
     private Integer dlvy_prep_ing; //배송준비중
     private Integer dlvy_ing; //배송중
-    private Integer dlvy_complt; //배송완료
+    private Integer dlvy_cmplt; //배송완료
     private Integer ord_cxl; //주문취소
     private Integer ord_ex; //교환
     private Integer ord_rfnd; //환불
@@ -65,7 +64,7 @@ public class OrderDto {
         this.prod_ing = 0;
         this.dlvy_prep_ing = 0;
         this.dlvy_ing = 0;
-        this.dlvy_complt = 0;
+        this.dlvy_cmplt = 0;
         this.ord_cxl = 0;
         this.ord_ex = 0;
         this.ord_rfnd = 0;
@@ -80,7 +79,7 @@ public class OrderDto {
         this.prod_ing = 0;
         this.dlvy_prep_ing = 0;
         this.dlvy_ing = 0;
-        this.dlvy_complt = 0;
+        this.dlvy_cmplt = 0;
         this.ord_cxl = 0;
         this.ord_ex = 0;
         this.ord_rfnd = 0;
@@ -95,7 +94,7 @@ public class OrderDto {
             } else if (status.contains("EXCHANGE") && !status.contains("COMPLETE")) { //교환___
                 this.ord_ex++;
             } else if (status.equals("REFUND_COMPLETE") || status.equals("EXCHANGE_COMPLETE") || status.equals("DELIVERY_COMPLETE")) { //환불완료, 교환완료, 배송완료 -> 배송완료
-                this.dlvy_complt++;
+                this.dlvy_cmplt++;
             } else if (status.equals("ORDERING")) { //주문중
                 this.ord_ing++;
             } else if (status.equals("ORDER_COMPLETE")) { //주문완료

@@ -170,6 +170,8 @@ $(document).ready(function() {
         }).then(response  => {
             // 서버 결제 API 성공시 로직
             alert("success: " +JSON.stringify(response.data))
+            //주문번호
+            window.location.href = '/order/completed/'+orderData.ord_id;
 
         }).catch(error => {
             alert("error: " + JSON.stringify(error.response))

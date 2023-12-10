@@ -38,6 +38,12 @@ public class PaymentDto {
         this.md_num = md_num;
     }
 
+    //주문 table update를 위한 용도
+    public PaymentDto(Long ord_id, String code_name) {
+        this.ord_id = ord_id;
+        this.code_name = code_name;
+    }
+
     public void setMemberData(String mem_id){
         this.mem_id = mem_id;
         this.rg_num = mem_id;

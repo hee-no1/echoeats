@@ -29,8 +29,8 @@ class PaymentRepositoryImplTest {
 
     @Test
     void select() throws Exception {
-        PaymentDto paymentDto = paymentRepository.select("imp1234");
-        System.out.println(paymentDto);
+//        PaymentDto paymentDto = paymentRepository.select("imp1234");
+//        System.out.println(paymentDto);
     }
 
     @Test

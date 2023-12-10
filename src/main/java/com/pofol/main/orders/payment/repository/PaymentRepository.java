@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaymentRepository {
     int insert(PaymentDto paymentDto) throws Exception;
-    PaymentDto select(String pay_id) throws Exception;
+    PaymentDto select(Long ord_id) throws Exception;
     int updateStatus(PaymentDto paymentDto) throws Exception;
     int delete(String pay_id) throws Exception;
     List<PaymentDto> selectAll() throws Exception;
