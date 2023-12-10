@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -65,7 +64,7 @@ public class OrderHistoryDto {
             this.code_name = "ORDER_FAIL";
         } else if (this.tot_ord_qty.equals(od.getOrd_cxl())) { //주문취소
             this.code_name = "ORDER_CANCEL";
-        } else if (this.tot_ord_qty.equals(od.getDlvy_complt())) { //배송완료
+        } else if (this.tot_ord_qty.equals(od.getDlvy_cmplt())) { //배송완료
             this.code_name = "DELIVERY_COMPLETE";
         }
 

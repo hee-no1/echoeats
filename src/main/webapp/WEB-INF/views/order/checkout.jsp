@@ -10,6 +10,7 @@
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <c:set var="member" value="${checkout.sampleMemberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />
@@ -108,7 +109,7 @@
                 <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="origin_prod_price"><span class="css-rfpchb eahaaoi3"></span>${checkout.origin_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="prod_disc"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><span class = "money">${checkout.origin_prod_price - checkout.tot_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10 money" id="dlvy_fee"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span>${checkout.dlvy_fee}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id="outputCouponUsed"class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="sign"></span><span id="outputPointUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1hgn7mh eahaaoi7"><div class="css-1rmc3ba eahaaoi11">최종결제금액</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id = "tot_pay_price" class="money">${checkout.tot_prod_price + checkout.dlvy_fee}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
@@ -120,7 +121,7 @@
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">
         selectedItems[${loop.index}] = {prod_id: ${item.prod_id}, opt_prod_id: '${item.opt_prod_id}', qty: ${item.qty}}
-    // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.->option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
+    // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.-> option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
     </c:forEach>
     let tot_prod_name = '${checkout.tot_prod_name}';
     let tot_prod_price = ${checkout.tot_prod_price};

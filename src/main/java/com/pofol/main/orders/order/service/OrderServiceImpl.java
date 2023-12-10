@@ -1,12 +1,12 @@
 package com.pofol.main.orders.order.service;
 
-import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDetailDto;
-import com.pofol.main.orders.order.domain.OrderDto;
-import com.pofol.main.orders.order.domain.OrderHistoryDto;
+import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
+import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
+import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
@@ -25,14 +25,16 @@ public class OrderServiceImpl implements OrderService{
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
+    private final PaymentDiscountRepository paymentDiscountRepository;
 
     @Autowired
-    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository) {
+    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository, PaymentDiscountRepository paymentDiscountRepository) {
         this.memRepo = memRepo;
         this.prodRepo = prodRepo;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.orderHistoryRepository = orderHistoryRepository;
+        this.paymentDiscountRepository = paymentDiscountRepository;
     }
 
     @Override
@@ -113,7 +115,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
-    public void writeOrder(OrderCheckout oc) {
+    public Long writeOrder(OrderCheckout oc) {
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
 
@@ -143,11 +145,46 @@ public class OrderServiceImpl implements OrderService{
             OrderHistoryDto orderHistoryDto = new OrderHistoryDto(ord_id, mem_id, "ORDERING", oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), items.size(), oc.getPay_way(), mem_id, mem_id);
             orderHistoryRepository.insert(orderHistoryDto);
 
+            //할인 금액 정보 table 작성
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
+            paymentDiscountRepository.insert(paymentDiscountDto);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
 
+        return orderDto.getOrd_id();
     }
+
+
+    @Override
+    public void modifyOrder(PaymentDto pd) {
+        System.out.println("modifyOrder");
+        try {
+            //주문 상세 table
+            List<OrderDetailDto> items = orderDetailRepository.selectList(pd.getOrd_id());
+            for (OrderDetailDto item : items) {
+                item.setStatus(pd.getCode_name());
+                orderDetailRepository.updateStatus(item);
+                System.out.println("item: "+item);
+            }
+
+            //주문 table
+            OrderDto orderDto = orderRepository.select(pd.getOrd_id());
+            orderDto.setStatus(items);
+            orderRepository.updateStatus(orderDto);
+            System.out.println("orderDto: "+orderDto);
+
+            //주문 이력 table
+            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(pd.getOrd_id());
+            orderHistoryDto.setStatus(orderDto);
+            orderHistoryRepository.insert(orderHistoryDto);
+            System.out.println("orderHist: "+orderHistoryDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

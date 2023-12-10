@@ -10,6 +10,9 @@
 		<typeAlias alias="OrderDetailDto" type="com.pofol.main.orders.order.domain.OrderDetailDto"/>
 		<typeAlias alias="OrderHistoryDto" type="com.pofol.main.orders.order.domain.OrderHistoryDto"/>
 		<!-- Payment -->
+		<typeAlias alias="PaymentDiscountDto" type="com.pofol.main.orders.payment.domain.PaymentDiscountDto"/>
+		<typeAlias alias="PaymentDto" type="com.pofol.main.orders.payment.domain.PaymentDto"/>
+		<typeAlias alias="PaymentHistoryDto" type="com.pofol.main.orders.payment.domain.PaymentHistoryDto"/>
 		<!-- CodeTable -->
 		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders1.order.domain.CodeTableDto"/>
 		<!-- paging -->

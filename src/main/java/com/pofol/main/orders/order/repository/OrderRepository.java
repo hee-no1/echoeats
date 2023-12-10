@@ -1,19 +1,21 @@
 package com.pofol.main.orders.order.repository;
 
 import com.pofol.main.orders.order.domain.OrderDto;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
 public interface OrderRepository {
 	//crud
-		public abstract int insert(OrderDto dto) throws Exception;
-		public abstract int insertAll(OrderDto dto) throws Exception;
-	    public abstract OrderDto select(Long id) throws Exception;
-	    public abstract int update(OrderDto dto) throws Exception;
-		public abstract int delete(Long id) throws Exception;
+		int insert(OrderDto dto) throws Exception;
+		int insertAll(OrderDto dto) throws Exception;
+	    OrderDto select(Long id) throws Exception;
+	    int update(OrderDto dto) throws Exception;
+		int updateStatus(OrderDto dto) throws Exception;
+		int delete(Long id) throws Exception;
 		
-		public abstract List<OrderDto> selectAll() throws Exception;
-	    public abstract int deleteAll() throws Exception;
-	    public abstract int count() throws Exception;
+		List<OrderDto> selectAll() throws Exception;
+	    int deleteAll() throws Exception;
+	    int count() throws Exception;
 
 }

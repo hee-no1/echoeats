@@ -4,6 +4,8 @@ package com.pofol.main.orders.order.controller;
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
+import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.repository.PaymentRepository;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
@@ -59,4 +62,11 @@ public class OrderController {
         return pd;
     }
 
+    @GetMapping("/completed/{ord_id}")
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id){
+        System.out.println(ord_id);
+        PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
+        orderService.modifyOrder(pd);
+        return "/order/orderCompleted";
+    }
 }
