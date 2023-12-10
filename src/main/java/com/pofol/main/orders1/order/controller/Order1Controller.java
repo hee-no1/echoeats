@@ -1,6 +1,7 @@
 package com.pofol.main.orders1.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 public class Order1Controller {
 	@GetMapping("/order")
-    public String order(Model m, HttpServletRequest request){
+    public String order(Model m, HttpSession session){
 		System.out.println("OrderController.order()");
+		// 회원id 정보 session or security
+		if (session.getAttribute("id") == null) {
+		    session.setAttribute("id", "you11");
+		}
+		String id = (String) session.getAttribute("id");
+		
+		
+		
 		
 		try {
 		} catch (Exception e) {
@@ -31,17 +40,5 @@ public class Order1Controller {
 			e.printStackTrace();
 		}
     	return "/order/mypageOrderDet";
-    }
-	
-	@GetMapping("/inquiry/form")
-    public String inquiryForm(Model m, HttpServletRequest request){
-		System.out.println("inquiryForm");
-		
-		try {
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    	return "/order/mypageInquiry";
     }
 }

@@ -5,8 +5,6 @@ import java.util.Objects;
 
 import lombok.Data;
 
-//@Data = (@Getter, @Setter, @RequiredArgsConstructor, 
-//			@ToString, @EqualsAndHashCode)
 @Data
 //@NoArgsConstructor
 public class OrderDto {
