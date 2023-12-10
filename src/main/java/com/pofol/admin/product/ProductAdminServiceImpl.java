@@ -1,5 +1,6 @@
 package com.pofol.admin.product;
 
+import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,11 @@ public class ProductAdminServiceImpl implements ProductAdminService{
     }
 
     @Override
-    public List<ProductDto> getProductAdminSearchList(SearchProductAdminCondition searchProductAdminCondition, String selling, String display) throws Exception {
+    public List<ProductDto> getProductAdminSearchList(
+        SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
 
         try {
-            return productAdminRepository.searchSelectPage(searchProductAdminCondition, selling, display);
+            return productAdminRepository.searchSelectPage(searchProductAdminCondition, productFilterDto);
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -41,4 +43,15 @@ public class ProductAdminServiceImpl implements ProductAdminService{
             throw  new RuntimeException();
         }
     }
+
+    @Override
+    public List<CategoryDto> getCategoryList() throws Exception {
+        try {
+            return productAdminRepository.categoryList();
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.pofol.admin.product;
 
 import com.pofol.main.orders1.order.domain.CodeTableDto;
 import com.pofol.main.orders1.order.domain.OrderDto;
+import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.ProductDto;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public interface ProductAdminRepository {
     int count() throws Exception;
 
     // 조건에 따른 상품 리스트 정렬 (관리자)
-//    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition) throws Exception;
-    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition, String selling, String display) throws Exception;
+    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;
 
     // 조건에 따른 상품 리스트 카운트 (관리자)
     Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition) throws Exception;
+
+    // 상품관리자 페이지에 대 카테고리 + 중카테고리 정렬
+    List<CategoryDto> categoryList() throws Exception;
 }
