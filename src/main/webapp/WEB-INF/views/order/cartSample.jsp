@@ -32,7 +32,7 @@
 	<input type="hidden" name="items[1].opt_prod_id" value="1c">
 	<input type="hidden" name="items[1].qty" value="1">
 
-	<input type="hidden" name="items[2].prod_id" value="2">
+	<input type="hidden" name="items[2].prod_id" value="3">
 	<input type="hidden" name="items[2].qty" value="4">
 
 	<input id="orderBtn" type="submit" value="주문하기">

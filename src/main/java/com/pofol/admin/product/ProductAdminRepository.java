@@ -20,5 +20,10 @@ public interface ProductAdminRepository {
     // 상품목록의 수를 카운트한다 (조건에 따라 변경되게 만들어야함) + 일단 전체 카운트
     int count() throws Exception;
 
+    // 조건에 따른 상품 리스트 정렬 (관리자)
+//    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition) throws Exception;
+    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition, String selling, String display) throws Exception;
 
+    // 조건에 따른 상품 리스트 카운트 (관리자)
+    Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition) throws Exception;
 }

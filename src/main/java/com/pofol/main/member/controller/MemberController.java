@@ -50,7 +50,10 @@ public class MemberController {
         //그래서 referer을 세션에 저장해서 로그인 성공했을 경우 referer쪽으로 보낸다
         if (authentication != null) {
             //model.addAttribute("msg","이미 인증된 회원입니다");
-
+            if(referer.equals("http://localhost:8080/member/login_form")){
+                System.out.println("referer가 로그인폼");
+                return "main";
+            }
             return "redirect:" + (referer != null ? referer : "/member/info");
         }
 

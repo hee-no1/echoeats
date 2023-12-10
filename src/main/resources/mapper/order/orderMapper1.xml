@@ -6,10 +6,10 @@
 	<insert id="insert">
 		INSERT INTO spring.order
 		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
-		tot_prod_disc, tot_ord_qty, dlvy_fee, pay_way, ord_ing, rg_num, md_num)
+		tot_prod_disc, tot_ord_qty, dlvy_fee, pay_way, rg_num, md_num)
 		VALUES
 		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
-		#{tot_prod_disc}, #{tot_ord_qty}, #{dlvy_fee}, #{pay_way},#{ord_ing}, #{rg_num}, #{md_num})
+		#{tot_prod_disc}, #{tot_ord_qty}, #{dlvy_fee}, #{pay_way}, #{rg_num}, #{md_num})
 		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
 			SELECT MAX(ord_id) FROM spring.order
 		</selectKey>
@@ -28,7 +28,7 @@
 		</selectKey>
 	</insert>
 
-	<select id="select" resultType="OrderDto">
+	<select id="select" resultType="OrderDto1">
 		SELECT *
 		FROM spring.order
 		WHERE
@@ -72,7 +72,7 @@
 		DELETE FROM spring.order WHERE ord_id = #{ord_id}
 	</delete>
 
-	<select id="selectAll" resultType="OrderDto">
+	<select id="selectAll" resultType="OrderDto1">
 		SELECT *
 		FROM spring.order
 		ORDER BY rg_date DESC, ord_id DESC
@@ -103,7 +103,7 @@
        	</choose>
 	</sql>
 	
-    <select id="searchSelectPage" parameterType="SearchOrderCondition" resultType="OrderDto">
+    <select id="searchSelectPage" parameterType="SearchOrderCondition" resultType="OrderDto1">
 	    SELECT *
         FROM spring.order
         WHERE true

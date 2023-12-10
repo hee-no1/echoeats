@@ -15,7 +15,7 @@
 
 
     <select id="selectMembersWithCoupons" parameterType="String" resultType="CouponJoinDto">
-        SELECT a.mem_id, b.cp_qty, b.cp_sts, DATE_FORMAT(b.cp_del_date, '%Y.%m.%d %H시까지') AS cp_del_date, c.cp_name, c.cash_rate, c.min_amt, c.max_disc_amt, c.type
+        SELECT a.mem_id,c.cp_id, b.cp_qty, b.cp_sts, DATE_FORMAT(b.cp_del_date, '%Y.%m.%d %H시까지') AS cp_del_date, c.cp_name, c.cash_rate, c.min_amt, c.max_disc_amt, c.type
         FROM member AS a
                  JOIN `mem-coupon` AS b ON a.mem_id = b.mem_id
                  JOIN coupon AS c ON b.cp_id = c.cp_id
