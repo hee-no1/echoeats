@@ -19,8 +19,8 @@ public class ProductAdminController {
     private final ProductAdminService productAdminService;
 
     @GetMapping("/product/list")
-    public String getAdminProductList(
-        SearchProductAdminCondition searchProductAdminCondition, Model model,ProductFilterDto productFilterDto) {
+    public String getAdminProductList(SearchProductAdminCondition searchProductAdminCondition,
+                                      Model model,ProductFilterDto productFilterDto) {
 
         try {
             // 카테고리 정렬
@@ -30,9 +30,10 @@ public class ProductAdminController {
             model.addAttribute("categoryList", categoryList);
 
             // 페이징
-            Integer totalCount = productAdminService.getProductAdminSearchCount(searchProductAdminCondition);
+            Integer totalCount = productAdminService.getProductAdminSearchCount(searchProductAdminCondition, productFilterDto);
             PageHandler pageHandler = new PageHandler(totalCount, searchProductAdminCondition);
             model.addAttribute("ph", pageHandler);
+            model.addAttribute("totalCount", totalCount);
 
             // 상품 관리자 페이지에서 조건에 따라 상품조회
             List<ProductDto> productAdminList = productAdminService.getProductAdminSearchList(searchProductAdminCondition, productFilterDto);
@@ -46,4 +47,21 @@ public class ProductAdminController {
         return "admin/product/productAdminList";
     }
 
+    // 관리자 페이지에서 상품상태 수정 + 이력 insert
+    @GetMapping("product/modify")
+    public String AdminProductModify(Model model, ProductDto productDto,
+                                     SearchProductAdminCondition searchProductAdminCondition,
+                                     ProductFilterDto productFilterDto) {
+
+        try {
+            productAdminService.updateProductAdmin(productDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return "admin/product/productAdminList";
+    }
+    
+    // 상품 그룹 관리 + main 페이지 그룹별 진열 관리
 }

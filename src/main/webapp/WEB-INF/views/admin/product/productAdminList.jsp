@@ -296,7 +296,7 @@
             </div>
             <div class="mCtrl typeSetting setting">
                 <div class="gLeft">
-                    <div class="total">검색결과 : <strong>0</strong>건
+                    <div class="total">검색결과 : <strong>${totalCount}</strong>건
                 </div>
             </div>
                 <div class="gRight">

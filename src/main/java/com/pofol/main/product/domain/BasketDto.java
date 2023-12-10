@@ -13,8 +13,7 @@ public class BasketDto {
     private String opt_prod_id;
     private Integer opt_disc_price;
     private Integer disc_price;
-    private Integer quantity;
 
+    private Integer quantity;
     private Integer total_price;
-//    private List<BasketDto> productList;
 }

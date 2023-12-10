@@ -30,11 +30,6 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     }
 
     @Override
-    public int update(ProductDto productDto) throws Exception {
-        return 0;
-    }
-
-    @Override
     public int count() throws Exception {
         return 0;
     }
@@ -61,12 +56,29 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     }
 
     @Override // 조건에 따른 상품 리스트 카운트 (관리자)
-    public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition) throws Exception {
-        return sqlSession.selectOne(namespace + "searchResultCnt", searchProductAdminCondition);
+    public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
+        map.put("keyword", searchProductAdminCondition.getKeyword());
+        map.put("stock_min", productFilterDto.getStock_min());
+        map.put("stock_max", productFilterDto.getPrice_max());
+        map.put("selling", productFilterDto.getSelling());
+        map.put("display", productFilterDto.getDisplay());
+        map.put("option", productFilterDto.getOption());
+        map.put("price_min", productFilterDto.getPrice_min());
+        map.put("price_max", productFilterDto.getPrice_max());
+        map.put("bigCategory", productFilterDto.getBigCategory());
+        map.put("midCategory", productFilterDto.getMidCategory());
+        return sqlSession.selectOne(namespace + "searchResultCnt", map);
     }
 
     @Override // 카테고리 정렬
     public List<CategoryDto> categoryList() throws Exception {
         return sqlSession.selectList(namespace + "cateList");
+    }
+
+    @Override // 상품의 상태를 변경한다 (판매상태 + 진열상태)
+    public int update(ProductDto productDto) throws Exception {
+        return sqlSession.update(namespace + "update", productDto);
     }
 }

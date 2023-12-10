@@ -1,4 +1,4 @@
-package com.pofol.main.product;
+package com.pofol.main.product.category;
 
 import com.pofol.main.product.category.CategoryList;
 import org.junit.jupiter.api.DisplayName;

@@ -171,25 +171,14 @@ public class ProductListController {
     @PostMapping("/ProductCalculation")
     public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
 
-        if (basketDtoList.size() == 1) {
-            BasketDto basketDto = basketDtoList.get(0);
-            basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
-        } else {
-            for (BasketDto basketDto : basketDtoList) {
+        for (BasketDto basketDto : basketDtoList) {
+            if (basketDtoList.size() == 1) {
+                basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
+            } else {
                 basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
             }
         }
 
         return basketDtoList;
-    }
-    
-    // 상품 상세페이지에서 수량만 가져오기 위한 클래스 (ajax용)
-    @Getter
-    @Setter
-    public static class ProductRequest {
-
-        private Integer disc_price;
-        private Integer quantity;
-
     }
 }

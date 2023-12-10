@@ -19,38 +19,157 @@
     </select>
 
 <!--    상품 판매, 진열, 재고 상태 수정-->
-<!--    <update id="">-->
+    <update id="update">
+        UPDATE product
+        SET
+        sale_sts = #{sale_sts},
+        disp_sts = #{disp_sts},
+        prod_mod_date = now()
+    </update>
 
-<!--    </update>-->
 
 
 
 
 
-<!--검색 / 카테고리(대 / 소) / 상품등록일 / 판매상태 / 진열상태 / 재고상태 / 재고수량 / 상품가격 / 옵션유무-->
 
-<!--    상품 목록 검색 (관리자)-->
-<!--    <select id="searchSelectPage" parameterType="SearchProductAdminCondition" resultType="ProductDto">-->
-<!--        SELECT *-->
-<!--        FROM product p, product_info i-->
-<!--        WHERE p.prod_id = i.prod_id-->
-<!--        LIMIT #{offset}, #{pageSize}-->
-<!--    </select>-->
+
+
+
+
+
+    <!--    <상품 데이터 insert문>-->
+    <!--    <insert id="">-->
+    <!--        INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, sale_sts, prod_qty, is_opt, short_desc, long_desc, disp_sts, prod_mod_date, sel_str_date, sel_end_date)-->
+    <!--        VALUES (1, 'imgUrl', '907', '테스트 상품', 10000, 10, '할인중', 100, 'N', '테스트', '테스트', 'N', now(), now(), now());-->
+    <!--        SET @lastProdID = LAST_INSERT_ID();-->
+    <!--        INSERT INTO product_info (prod_id) VALUES (@lastProdfID);-->
+    <!--        INSERT INTO option_product (opt_prod_id, prod_id) VALUES (CONCAT(@lastProdID, 'A') ,@lastProdID);-->
+    <!--    </insert>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--    상품 목록 카운트 (관리자)-->
-    <select id="searchResultCnt" parameterType="SearchProductAdminCondition" resultType="int">
+    <select id="searchResultCnt" parameterType="map" resultType="int">
         SELECT count(*)
-        FROM product p, product_info i
-        WHERE p.prod_id = i.prod_id
+        FROM product p, product_info i, category c
+        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+        <choose>
+            <when test='keyword_type == "ProductName"'>
+                AND p.prod_name LIKE concat('%',#{keyword} ,'%')
+            </when>
+            <when test='keyword_type == "ProductNumber"'>
+                AND p.prod_id = #{keyword}
+            </when>
+            <when test='keyword_type == "DeliveryType"'>
+                AND i.dlvy_type = #{keyword}
+            </when>
+            <when test='keyword_type == "Brand"'>
+                AND i.brand = #{keyword}
+            </when>
+        </choose>
+
+        --         카테고리 관련 정렬
+        <choose>
+            <when test='midCategory != null and midCategory != ""'>
+                AND p.cat_code = #{midCategory}
+            </when>
+            <when test='midCategory == null and midCategory == ""'>
+                AND c.parent_code = #{bigCategory}
+            </when>
+        </choose>
+
+        <choose>
+            <when test='date_type == "ProductRegisterDate"'>
+                AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "ProductModifyDate"'>
+                AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "saleStartDate"'>
+                AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+            <when test='date_type == "saleEndDate"'>
+                AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+            </when>
+        </choose>
+
+        <if test='selling != null and selling != "" and selling != "A"'>
+            AND p.sale_sts = #{selling}
+        </if>
+
+        <if test='display != null and display != "" and display != "A"'>
+            AND p.disp_sts = #{display}
+        </if>
+
+        --         재고상태 쿼리문도 짜야함 (다시 생각해야함)
+        <if test='Stock != null and Stock != "" and Stock != "A"'>
+            <if test='Stock == "재고정상"'>
+                AND p.prod_qty >= 51
+            </if>
+            <if test='Stock == "재고부족"'>
+                AND p.prod_qty BETWEEN 1 AND 50
+            </if>
+            <if test='Stock == "품절"'>
+                AND p.prod_qty = 0
+            </if>
+        </if>
+
+        <choose>
+            <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
+                AND p.prod_qty BETWEEN #{stock_min} AND #{stock_max}
+            </when>
+            <when test='stock_min != null and stock_min != ""'>
+                AND p.prod_qty >= #{stock_min}
+            </when>
+            <when test='stock_max != null and stock_max != ""'>
+                AND p.prod_qty &lt;= #{stock_max}
+            </when>
+        </choose>
+
+        <choose>
+            <when test='price == "product"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.prod_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.prod_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.prod_price &lt;= #{price_max}
+                </if>
+            </when>
+            <when test='price == "custom"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.disc_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.disc_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.disc_price &lt;= #{price_max}
+                </if>
+            </when>
+        </choose>
+
+        <if test='option != null and option != "" and option != "A"'>
+            AND p.is_opt = #{option}
+        </if>
     </select>
-
-
-
-
-
-
-
-
 
     <!--    상품 목록 검색 (관리자)-->
     <select id="searchSelectPage" parameterType="map" resultType="ProductDto">
@@ -159,14 +278,6 @@
             AND p.is_opt = #{option}
         </if>
         LIMIT #{offset}, #{pageSize}
-</select>
-
-
-
-
-
-
-
-
+    </select>
 
 </mapper>
