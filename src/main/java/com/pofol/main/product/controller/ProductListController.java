@@ -4,12 +4,15 @@ import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
+import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductListController {
 
     private final ProductListService productListService;
@@ -60,6 +64,13 @@ public class ProductListController {
             // 상품 조회
             ProductDto product = productListService.read(prod_id);
             model.addAttribute("product", product);
+
+            // 옵션이 존재하는 상품일 시 옵션상품 조회
+            if (product.getIs_opt().equals("Y")) {
+                List<OptionProductDto> optionList = productListService.getOptionList(prod_id);
+                model.addAttribute("optionList", optionList);
+                model.addAttribute("option", "option");
+            }
 
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
@@ -158,9 +169,18 @@ public class ProductListController {
     // 상품 수량에 따라 상품 가격 계산
     @ResponseBody
     @PostMapping("/ProductCalculation")
-    public ProductRequest productCalculation(@RequestBody ProductRequest productRequest) {
-        productRequest.setDisc_price(productRequest.getQuantity() * productRequest.getDisc_price());
-        return productRequest;
+    public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
+
+        if (basketDtoList.size() == 1) {
+            BasketDto basketDto = basketDtoList.get(0);
+            basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
+        } else {
+            for (BasketDto basketDto : basketDtoList) {
+                basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
+            }
+        }
+
+        return basketDtoList;
     }
     
     // 상품 상세페이지에서 수량만 가져오기 위한 클래스 (ajax용)
