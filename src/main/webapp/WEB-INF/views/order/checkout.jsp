@@ -10,6 +10,7 @@
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <c:set var="member" value="${checkout.sampleMemberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />

@@ -23,6 +23,8 @@ public class PaymentDto {
     private String rg_num;
     private String md_num;
 
+    private String pg_tid; //pg사 거래번호
+    private String success; //결제 성공 여부
 
     public PaymentDto(String pay_id, Long ord_id, String mem_id, String code_name, String tot_prod_name, Integer tot_pay_price, String pay_way, String rg_num, String md_num) {
         this.pay_id = pay_id;
@@ -34,5 +36,11 @@ public class PaymentDto {
         this.pay_way = pay_way;
         this.rg_num = rg_num;
         this.md_num = md_num;
+    }
+
+    public void setMemberData(String mem_id){
+        this.mem_id = mem_id;
+        this.rg_num = mem_id;
+        this.md_num = mem_id;
     }
 }

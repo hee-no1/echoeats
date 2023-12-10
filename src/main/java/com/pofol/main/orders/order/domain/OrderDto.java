@@ -71,7 +71,23 @@ public class OrderDto {
         this.ord_rfnd = 0;
     }
 
+
+    //초기값 0으로 셋팅
+    public void setZero(){
+        this.ord_ing = 0;
+        this.ord_cmplt = 0;
+        this.ord_fail = 0;
+        this.prod_ing = 0;
+        this.dlvy_prep_ing = 0;
+        this.dlvy_ing = 0;
+        this.dlvy_complt = 0;
+        this.ord_cxl = 0;
+        this.ord_ex = 0;
+        this.ord_rfnd = 0;
+    }
+
     public void setStatus(List<OrderDetailDto> list){
+        setZero();
         for (OrderDetailDto dto : list) {
             String status = dto.getCode_name();
             if (status.contains("REFUND") && !status.contains("COMPLETE")) { //환불___

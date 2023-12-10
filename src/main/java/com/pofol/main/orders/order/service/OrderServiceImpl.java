@@ -5,6 +5,7 @@ import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
+import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
@@ -114,7 +115,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
-    public void writeOrder(OrderCheckout oc) {
+    public Long writeOrder(OrderCheckout oc) {
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
 
@@ -153,6 +154,37 @@ public class OrderServiceImpl implements OrderService{
             throw new RuntimeException(e);
         }
 
+        return orderDto.getOrd_id();
     }
+
+
+    @Override
+    public void modifyOrder(PaymentDto pd) {
+        System.out.println("modifyOrder");
+        try {
+            //주문 상세 table
+            List<OrderDetailDto> items = orderDetailRepository.selectList(pd.getOrd_id());
+            for (OrderDetailDto item : items) {
+                item.setStatus(pd.getCode_name());
+                orderDetailRepository.updateStatus(item);
+                System.out.println("item: "+item);
+            }
+
+            //주문 table
+            OrderDto orderDto = orderRepository.select(pd.getOrd_id());
+            orderDto.setStatus(items);
+            orderRepository.update(orderDto);
+            System.out.println("orderDto: "+orderDto);
+
+            //주문 이력 table
+            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(pd.getOrd_id());
+            orderHistoryDto.setStatus(orderDto);
+            orderHistoryRepository.insert(orderHistoryDto);
+            System.out.println("orderHist: "+orderHistoryDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

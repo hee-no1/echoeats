@@ -47,8 +47,6 @@ public class OrderDetailDto {
     }
 
     //insert용도, 일반상품일 때
-
-
     public OrderDetailDto(Long ord_id, String mem_id, Long prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num) {
         this.ord_id = ord_id;
         this.mem_id = mem_id;
@@ -69,5 +67,14 @@ public class OrderDetailDto {
         this.md_num = md_num;
     }
 
-
+    //결제 상태 -> 주문 상세 상태
+    public void setStatus(String payStatus){
+        if(payStatus.equals("PAYMENT_COMPLETE")){ //결제 완료
+            this.code_name = "ORDER_COMPLETE"; //-> 주문 완료
+        }else if (payStatus.equals("PAYMENT_FAIL")){ //결제 실패
+            this.code_name = "ORDER_FAIL"; //-> 주문 실패
+        }else { //결제 취소
+            this.code_name = "ORDER_CANCEL"; //-> 주문 취소
+        }
+    }
 }
