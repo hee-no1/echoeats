@@ -1,6 +1,7 @@
 package com.pofol.main.product.repository;
 
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.SearchProductCondition;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,11 @@ public class ProductListRepositoryImpl implements ProductListRepository {
     @Override // 상품 리스트 조회
     public ProductDto select(Long prod_id) throws Exception {
         return sqlSession.selectOne(namespace + "select", prod_id);
+    }
+
+    @Override // 옵션 상푸 조회
+    public List<OptionProductDto> selectOption(Long prod_id) throws Exception {
+        return sqlSession.selectList(namespace + "selectOption", prod_id);
     }
 
     @Override // 전체 진열 상품 리스트 조회 (필요하지 않을 가능성 높음)
