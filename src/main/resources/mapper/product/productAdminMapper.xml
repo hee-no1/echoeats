@@ -11,6 +11,13 @@
         ORDER BY p.prod_id ASC
     </select>
 
+    <!-- 카테고리 리스트 -->
+    <select id="cateList" resultType="CategoryDto">
+        SELECT *
+        FROM category
+        ORDER BY cat_code
+    </select>
+
 <!--    상품 판매, 진열, 재고 상태 수정-->
 <!--    <update id="">-->
 
@@ -65,12 +72,15 @@
             </when>
         </choose>
 
-<!--        카테고리 관련 정렬-->
-<!--        <choose>-->
-<!--            <when test="">-->
-<!--                -->
-<!--            </when>-->
-<!--        </choose>-->
+--         카테고리 관련 정렬
+        <choose>
+            <when test='midCategory != null and midCategory != ""'>
+                AND p.cat_code = #{midCategory}
+            </when>
+            <when test='midCategory == null and midCategory == ""'>
+                AND c.parent_code = #{bigCategory}
+            </when>
+        </choose>
 
         <choose>
             <when test='date_type == "ProductRegisterDate"'>
@@ -95,7 +105,18 @@
             AND p.disp_sts = #{display}
         </if>
 
---         재고상태 쿼리문도 짜야함
+--         재고상태 쿼리문도 짜야함 (다시 생각해야함)
+        <if test='Stock != null and Stock != "" and Stock != "A"'>
+            <if test='Stock == "재고정상"'>
+                AND p.prod_qty >= 51
+            </if>
+            <if test='Stock == "재고부족"'>
+                AND p.prod_qty BETWEEN 1 AND 50
+            </if>
+            <if test='Stock == "품절"'>
+                AND p.prod_qty = 0
+            </if>
+        </if>
 
         <choose>
             <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
@@ -109,10 +130,35 @@
             </when>
         </choose>
 
+        <choose>
+            <when test='price == "product"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.prod_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.prod_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.prod_price &lt;= #{price_max}
+                </if>
+            </when>
+            <when test='price == "custom"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.disc_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.disc_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.disc_price &lt;= #{price_max}
+                </if>
+            </when>
+        </choose>
 
-
+        <if test='option != null and option != "" and option != "A"'>
+            AND p.is_opt = #{option}
+        </if>
         LIMIT #{offset}, #{pageSize}
-
 </select>
 
 
