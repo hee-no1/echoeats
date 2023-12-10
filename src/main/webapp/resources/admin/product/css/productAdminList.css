@@ -316,7 +316,8 @@ tbody {
     text-align: left;
 }
 
-.fSelect {
+.fSelect,
+.fSelect2 {
     display: inline;
     height: 28px;
     margin: 0;
@@ -327,6 +328,10 @@ tbody {
     -webkit-appearance: none;
     appearance: none;
     background: #fff url(//img.echosting.cafe24.com/ec/v2/ico_select.png) no-repeat right 7px center;
+}
+
+.fSelect2 {
+    width: 185px;
 }
 
 .btnDate span {

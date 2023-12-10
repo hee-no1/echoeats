@@ -47,4 +47,8 @@ public class ProductDto {
   private String weight; // 중량/용량
   private String exp_date; // 유통기한
   private String as_guide; // 안내사항
+
+  // 관리자 페이지에서 사용
+  private String bigCategory;
+  private String midCategory;
 }
