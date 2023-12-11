@@ -3,9 +3,10 @@ package com.pofol.main.product.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
-import com.pofol.main.product.domain.AttachImageDto;
 import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
@@ -38,15 +39,19 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/admin")
 @Slf4j
+@RequiredArgsConstructor
 public class AdminController {
 
     private final ProductService productService;
     private final CategoryList categoryList;
 
-    @Autowired
-    public AdminController(ProductService productService, CategoryList categoryList) {
-        this.productService = productService;
-        this.categoryList = categoryList;
+    @GetMapping("/test")
+    public String testGET(Model model) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<CategoryDto> list = categoryList.enrollCategoryList();
+        String categoryListJson = objectMapper.writeValueAsString(list);
+        model.addAttribute("categoryList", categoryListJson);
+        return "/admin/hyoungJun/test";
     }
 
     @GetMapping("/main")
@@ -55,7 +60,7 @@ public class AdminController {
     }
 
     // 상품 등록 페이지 접속
-    @GetMapping("/productEnroll")
+    @GetMapping("/hyoungJun/productEnroll")
     public void prodEnrollGET(Model model) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         List<CategoryDto> list = categoryList.enrollCategoryList();
@@ -78,7 +83,7 @@ public class AdminController {
 
     // 첨부 파일 업로드
     @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<AttachImageDto>> prodEnrollPOST(MultipartFile[] uploadFile) {
+    public ResponseEntity<List<ProductImageDto>> prodEnrollPOST(MultipartFile[] uploadFile) {
         // 이미지 파일 체크
         for (MultipartFile multipartFile : uploadFile) {
             File checkFile = new File(multipartFile.getOriginalFilename());
@@ -90,7 +95,7 @@ public class AdminController {
                 throw new RuntimeException(e);
             }
             if (!type.startsWith("image")) {
-                List<AttachImageDto> list = null;
+                List<ProductImageDto> list = null;
                 return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
             }
         }
@@ -110,18 +115,18 @@ public class AdminController {
         }
 
         // 이미지 정보 담는 객체
-        List<AttachImageDto> list = new ArrayList<>();
+        List<ProductImageDto> list = new ArrayList<>();
 
         for (MultipartFile multipartFile : uploadFile) {
             // 이미지 정보 객체
-            AttachImageDto dto = new AttachImageDto();
+            ProductImageDto dto = new ProductImageDto();
             // 파일 이름
             String uploadFileName = multipartFile.getOriginalFilename();
-            dto.setFileName(uploadFileName);
-            dto.setUploadPath(datePath);
+            //dto.setFileName(uploadFileName);
+            //dto.setUploadPath(datePath);
             // UUID 적용 파일 이름
             String uuid = UUID.randomUUID().toString();
-            dto.setUuid(uuid);
+            //dto.setUuid(uuid);
             uploadFileName = uuid + "_" + uploadFileName;
             // 파일 위치, 파일 이름을 합친 File객체
             File saveFile = new File(uploadPath, uploadFileName);
@@ -149,7 +154,7 @@ public class AdminController {
             }
             list.add(dto);
         }
-        return new ResponseEntity<List<AttachImageDto>>(list, HttpStatus.OK);
+        return new ResponseEntity<List<ProductImageDto>>(list, HttpStatus.OK);
     }
 
     // 첨부 파일 삭제

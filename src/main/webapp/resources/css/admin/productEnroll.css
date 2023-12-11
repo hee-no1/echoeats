@@ -1,208 +1,168 @@
 @charset "UTF-8";
-*{
+* {
     margin: 0;
-    padding:0;
+    padding: 0;
 }
-a{
+
+a {
     text-decoration: none;
 }
-ul{
+
+ul {
     list-style: none;
 }
+
 div {
     display: block;
 }
+
+body {
+    font-family: 나눔고딕,NanumGothic,Helvetica Neue,Helvetica,AppleSDGothicNeo-Regular,Arial,맑은고딕,malgun gothic,돋움,dotum,sans-serif;
+}
+
+h2 {
+    font-weight: 400;
+}
+
 /* 화면 전체 wrap */
-.wrapper{
+.wrapper {
     width: 100%;
 }
+
 /* content wrap */
-.wrap{
-    width : 1080px;
+.wrap {
+    width: 1080px;
     margin: auto;
 }
+
 label {
     display: inline-block;
     margin-bottom: 0;
 }
-/* 홈페이지 기능 네비 */
-.top_gnb_area{
-    width: 100%;
-    height: 50px;
-    background-color: #f0f0f1;
-    position:relative;
-}
-.top_gnb_area .list{
-    position: absolute;
-    top: 0px;
-    right: 0;
-
-}
-.top_gnb_area .list li{
-    list-style: none;
-    float : left;
-    padding: 13px 15px 0 10px;
-    font-weight: 900;
-    cursor: pointer;
-}
-
-/* 관리제 페이지 상단 현페이지 정보 */
-.admin_top_wrap{
-    height:110px;
-    line-height: 110px;
-    background-color: #5080bd;
-    margin-bottom:15px;
-}
-.admin_top_wrap>span{
-    margin-left: 30px;
-    display:inline-block;
-    color: white;
-    font-size: 50px;
-    font-weight: bolder;
-}
-/* 관리자 wrap(네비+컨텐츠) */
-.admin_wrap{
-
-
-}
-
-/* 관리자페이지 네비 영역 */
-.admin_navi_wrap{
-    width: 20%;
-    height: 300px;
-    float:left;
-    height: 100%;
-}
-.admin_navi_wrap li{
-    display: block;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-}
-.admin_navi_wrap li a{
-    display: block;
-    height: 100%;
-    width: 95%;
-    margin: 0 auto;
-    cursor: pointer;
-    font-size: 30px;
-    font-weight: bolder;
-}
-.admin_navi_wrap li a:link {color: black;}
-.admin_navi_wrap li a:visited {color: black;}
-.admin_navi_wrap li a:active {color: black;}
-.admin_navi_wrap li a:hover {color: black;}
-
-.admin_list_01{
-    background-color: #c8c8c8;
-}
-
 
 /* 관리자페이지 컨텐츠 영역 */
-.admin_content_wrap{
+.admin-content-wrap {
     width: 80%;
-    float:left;
+    float: left;
     height: 100%;
     height: 700px;
 
 }
+
 /* 관리자 컨텐츠 제목 영역 */
-.admin_content_subject{
+.admin-content-subject {
     font-size: 40px;
     font-weight: bolder;
     padding-left: 15px;
-    background-color: #6AAFE6;
+    background-color: #fff;
     height: 80px;
     line-height: 80px;
-    color: white;
 }
+
 /* 관리자 컨텐츠 메인 영역 */
-.form_section{
+.form-section {
     width: 95%;
     margin-left: 2%;
     margin-top: 20px;
     border: 1px solid #dbdde2;
     background-color: #efefef;
 }
-.form_section_title{
+
+.form-section-title {
     padding: 20px 35px;
 }
-.form_section_title label{
+
+.form-section-title > label {
     display: block;
     font-size: 20px;
     font-weight: 800;
 }
-.form_section_content{
+
+.form-section-content {
     padding: 20px 35px;
     border-top: 1px solid #dbdde2;
 }
-.form_section_content input{
+
+.form-section-content input {
     width: 98%;
     height: 25px;
     font-size: 20px;
     padding: 5px 1%;
 }
-.form_section_content select{
+
+.form-section-content select {
     width: 98%;
     height: 35px;
     font-size: 20px;
     text-align-last: center;
 }
+
 /* 카테고리 css 설정 */
-.form_section_content select {
+.form-section-content select {
     width: 92%;
     height: 35px;
     font-size: 20px;
     text-align-last: center;
     margin-left: 5px;
 }
-.cate_wrap span {
+
+.cate-wrap span {
     font-weight: 600;
 }
-.cate_wrap:not(:first-child) {
+
+.cate-wrap:not(:first-child) {
     margin-top: 20px;
 }
+
 /* 가격 css 설정 */
-.form_section_content input {
+.form-section-content input {
     width: 25%;
     height: 35px;
     font-size: 20px;
     margin-left: 5px;
 }
-.price_wrap span {
+
+.price-wrap span {
     font-weight: 600;
 }
-.price_wrap:not(:first-child) {
+
+.price-wrap:not(:first-child) {
     margin-top: 20px;
 }
+
 /* 할인 가격 문구 */
-.discounted_price {
+.discounted-price {
     display: block;
     padding-top: 5px;
     font-weight: 500;
 }
+
 /* 판매 기간 영역 */
 .sel_date {
     display: block;
     width: 100%;
     margin-top: 20px;
 }
+
 /* 옵션 영역 */
 .seller-input-toggle {
     background-color: #fff;
     display: inline-block;
     margin-right: 10px; /* 각 버튼 사이의 간격을 위한 마진 설정 */
 }
+
 .seller-input-toggle input + label {
     display: table-cell;
     padding: 4px 20px;
     margin-bottom: 0;
     color: #767a83;
-    border : 1px solid #dbdde2;
+    border: 1px solid #dbdde2;
 }
+
 .seller-input-toggle input[type="radio"] {
     display: none;
 }
+
 .seller-input-toggle label {
     background-color: inherit;
     color: white;
@@ -210,35 +170,43 @@ label {
     font-size: 16px;
     cursor: pointer;
 }
+
 .seller-input-toggle input[type="radio"]:checked + label {
     /* 라디오 버튼이 체크된 경우의 스타일 */
     background-color: #00c73c;
     border-color: #00ae34;
     color: #fff;
 }
+
 .seller-input-toggle {
     display: table;
     table-layout: fixed;
 }
-.form_section{
-    float : left;
+
+.form-section {
+    float: left;
 }
-.control-label{
+
+.control-label {
     width: 180px;
     padding-top: 5px;
 }
+
 .form-sub-wrap {
     display: flex;
 }
+
 .seller-input-wrap .btn-clear {
     position: absolute;
-    top:0;
+    top: 0;
     right: 10px;
     line-height: 34px;
 }
+
 .btn-clear {
     z-index: 99;
 }
+
 .btn-clear span {
     display: inline-block;
     width: 20px;
@@ -249,28 +217,34 @@ label {
     background-color: #d2d5dc;
     color: #fff;
 }
+
 [role="button"] {
     cursor: pointer;
 }
+
 /* 버튼 영역 */
-.btn_section{
+.btn-section {
     text-align: center;
     margin: 80px 0;
 }
-.btn{
+
+.btn {
     min-width: 180px;
     padding: 4px 30px;
     font-size: 25px;
     font-weight: 600;
     line-height: 40px;
 }
-.enroll_btn{
+
+.enroll-btn {
     background-color: #dbdde2;
-    margin-left:15px;
+    margin-left: 15px;
 }
+
 #enrollBtn:hover {
     background-color: #c9cbd0;
 }
+
 .ck-content {
     height: 170px;
 }
