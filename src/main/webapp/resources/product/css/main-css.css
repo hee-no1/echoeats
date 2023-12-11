@@ -197,21 +197,21 @@ canvas, img, video {
     right: 0;
 }
 #search > #search-bar > #search-right > button:nth-of-type(3):hover {
-    background: url(/resources/icons/kurly_cart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_cart_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2) {
     background: url(/resources/icons/kurly_heart.svg) 50% 50% no-repeat;
     right: 58px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2):hover {
-    background: url(/resources/icons/kurly_heart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_heart_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1) {
     background: url(/resources/icons/kurly_adressAdd.svg) 50% 50% no-repeat;
     right: 116px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1):hover {
-    background: url(/resources/icons/kurly_adressAdd_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_adressAdd_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > #tooltip{
     display: none;
@@ -276,7 +276,7 @@ canvas, img, video {
     background: url(/resources/icons/kurly_hamburger.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category:hover > span:nth-of-type(1) {
-    background: url(/resources/icons/kurly_hamburger_purple.svg) 0px 0px / 16px 14px no-repeat;
+    background: url(/resources/icons/kurly_hamburger_green.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category > span:nth-of-type(2) {
     font-size: 16px;
