@@ -10,7 +10,7 @@
 		</layout>
 	</appender>
 	<!-- Application Loggers -->
-	<logger name="com.pofol.kurly">
+	<logger name="com.pofol">
 		<level value="info" />
 	</logger>
 	<!-- 3rdparty Loggers -->

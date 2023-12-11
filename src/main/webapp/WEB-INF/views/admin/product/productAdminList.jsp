@@ -155,14 +155,11 @@
                         <th scope="row">상품분류</th>
                         <td colspan="3">
                             <div class="gSingle">
-                                <select class="fSelect category eCategory" id="eCategory1" depth="1" name="categorys[]">
-                                    <option value="">- 대분류 선택 -</option>
-                                    <option value="23">(대분류) 미진열</option> <option value="24">(대분류) Outerwear</option>
-                                    <option value="25">(대분류) Tops</option> <option value="26">(대분류) Dresses</option>
-                                    <option value="27">(대분류) Bottoms</option> <option value="28">(대분류) Accessories</option>
+                                <select class="fSelect category eCategory" id="eCategory1" depth="1" name="bigCategory">
+                                    <option name="bigCategory" value="">- 대분류 선택 -</option>
                                 </select>
-                                <select class="fSelect category eCategory" id="eCategory2" depth="2" name="categorys[]">
-                                    <option value="">- 중분류 선택 -</option>
+                                <select class="fSelect2 category eCategory" id="eCategory2" depth="2" name="midCategory">
+                                    <option name="midCategory" value="">- 중분류 선택 -</option>
                                 </select>
                             </div>
                         </td>
@@ -176,7 +173,7 @@
 <%--                                </c:forEach>--%>
 
                                 <option value="ProductRegisterDate">상품등록일</option>
-                                <option value="ProductModifyDate">상품최종수정일</option>
+                                <option value="ProductModifyDate">상품수정일</option>
                                 <option value="saleStartDate">판매시작일</option>
                                 <option value="saleEndDate">판매종료일</option>
 
@@ -235,8 +232,8 @@
                         <td colspan="3">
                             <ul class="mForm typeVer" id="eSearchFormStock">
                                 <li>
-                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="stock_min[]"> 개 ~
-                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="stock_max[]"> 개
+                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="stock_min"> 개 ~
+                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="stock_max"> 개
                                     <a href="#none" class="btnIcon icoMinus" search-type="stock"><span>삭제</span></a>
                                     <a href="#none" class="btnIcon icoPlus" search-type="stock" style=""><span>추가</span></a>
                                 </li>
@@ -248,12 +245,12 @@
                         <td colspan="3">
                             <ul class="mForm typeVer" id="eSearchFormPrice">
                                 <li>
-                                    <select class="fSelect" name="price[]">
+                                    <select class="fSelect" name="price">
                                         <option value="product" selected="selected">판매가</option>
                                         <option value="custom">할인가</option>
                                     </select>
-                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="price_min[]"> <span class="txtCode">KRW</span> ~
-                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="price_max[]"> <span class="txtCode">KRW</span>
+                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="price_min"> <span class="txtCode">KRW</span> ~
+                                    <input type="text" class="fText right eSearchText" style="width:60px;" value="" name="price_max"> <span class="txtCode">KRW</span>
                                     <a href="#none" class="btnIcon icoMinus" search-type="price"><span>삭제</span></a>
                                     <a href="#none" class="btnIcon icoPlus" search-type="price" style=""><span>추가</span></a>
                                 </li>
@@ -291,15 +288,27 @@
         <div id="tabNumber" class="tabCont">
             <div class="mCtrl typeHeader">
                 <div class="gTop">
+                    <select>
+                        <option value="">판매전</option>
+                        <option value="">판매중</option>
+                        <option value="">판매중지</option>
+                        <option value="">판매종료</option>
+                        <option value="">판매금지</option>
+                    </select>
+                    <select>
+                        <option value="">진열함</option>
+                        <option value="">진열안함</option>
+                    </select>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl"><span>진열상태</span></a>
+                       class="btnCtrl"><span>판매가 변경</span></a>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
-                       class="btnNormal"><span>판매상태</span></a>
+                       class="btnNormal"><span>판매기간 변경</span></a>
+                    <button type="submit">수정</button>
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
                 <div class="gLeft">
-                    <div class="total">검색결과 : <strong>0</strong>건
+                    <div class="total">검색결과 : <strong>${totalCount}</strong>건
                 </div>
             </div>
                 <div class="gRight">
@@ -313,8 +322,8 @@
                         <option value="order_desc">판매종료일순</option>
                     </select>
                     <select name="rows" class="fSelect" init_rows="20">
-                        <option value="10">10개씩보기</option>
-                        <option value="20" selected="" }="">20개씩보기</option>
+                        <option value="10" selected="">10개씩보기</option>
+                        <option value="20">20개씩보기</option>
                         <option value="30">30개씩보기</option>
                         <option value="50">50개씩보기</option>
                         <option value="100">100개씩보기</option>
@@ -331,25 +340,23 @@
                             <div class="wrap">
                                 <ul class="default">
                                     <li><label><input type="checkbox" id="iDisplayNo" class="fChk" value="21"> No</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="2"> 주문일(결제일)</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="3" disabled="disabled"> 주문번호</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="4"> 주문자</label></li>
-                                    <li><label><input type="checkbox" class="fChk" value="23" id="eBizinfo">
-                                        사업자 회원 정보</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="5"> 상품명</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" id="ePrdTotalPrice" class="fChk" value="6"> 총 상품구매금액</label></li>
-                                    <li><label><input type="checkbox" id="eOrdTotalPrice" class="fChk" value="20"> 총 주문금액</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="7"> 총 실결제금액</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="8"> 결제수단</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="9"> 결제상태</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="10"> 미배송</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="11"> 배송중</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="12"> 배송완료</label></li>
-                                    <li><label><input type="checkbox" id="ePurchaseconfirmation" class="fChk" value="22"> 구매 확정</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="13"> 취소</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="14"> 교환</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 반품</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="16" disabled="disabled"> 목록삭제</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="2"> 상품번호</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="3" disabled="disabled"> 상품명</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="4"> 판매상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="5"> 전시상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="7"> 재고상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="8"> 재고수량</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="9"> 판매가</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="10"> 할인가</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="11"> 옵션상품</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="12"> 배송속성</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="13"> 대분류</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="14"> 중분류</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 브랜드명</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 상품등록일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 최종수정일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 판매시작일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 판매종료일</label></li>
                                     <li><label><input type="checkbox" class="fChk" value="17"> 메모</label></li>
                                 </ul>
                             </div>
@@ -393,20 +400,44 @@
                         <tbody>
                         <c:forEach var="product" items="${product}">
                             <tr>
+                                <c:forEach var="category" items="${category}">
+                                    <c:if test="${product.cat_code eq category.cat_code}">
+                                        <c:set var="cateCodeName" value="${category.cat_name}"/>
+                                        <c:set var="parentCode" value="${category.parent_code}"/>
+                                    </c:if>
+                                </c:forEach>
                                 <td scope="col" class="w24"><input type="checkbox" id="allChk"></td>
                                 <td scope="col" class="w50" style="display:none;">No</td>
                                 <td scope="col" class="w120" style="">${product.prod_id}</td>
                                 <td scope="col" class="w150" style="">${product.prod_name}</td>
                                 <td scope="col" class="w95" style="">${product.sale_sts} <div class="cTip eSmartMode" code="OD.AO.170"></div></td>
                                 <td scope="col" class="w95" style="">${product.disp_sts}</td>
-                                <td scope="col" class="w95" style="">변경할것</td>
+                                <td scope="col" class="w95" style="">
+                                    <c:choose>
+                                        <c:when test="${product.prod_qty eq 0}">
+                                            품절
+                                        </c:when>
+                                        <c:when test="${product.prod_qty > 50}">
+                                            재고정상
+                                        </c:when>
+                                        <c:otherwise>
+                                            재고부족
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                                 <td scope="col" class="w95" style="">${product.prod_qty}</td>
                                 <td scope="col" class="w95" style="">${product.prod_price}</td>
                                 <td scope="col" class="w95" style="">${product.disc_price}</td>
                                 <td scope="col" class="w77" style="">${product.is_opt}</td>
                                 <td scope="col" class="w95" style="">${product.dlvy_type}</td>
-                                <td scope="col" class="w150" style="">대분류${product.cat_code}</td>
-                                <td scope="col" class="w150" style="">중분류${product.cat_code}</td>
+                                <td scope="col" class="w150" style="">
+                                    <c:forEach var="category" items="${category}">
+                                        <c:if test="${parentCode eq category.cat_code}">
+                                            ${category.cat_name}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td scope="col" class="w150" style="">${cateCodeName}</td>
                                 <td scope="col" class="w77" style="">${product.brand}</td>
                                 <td scope="col" class="w150" style=""><fmt:formatDate value="${product.prod_rg_date}" pattern="yyyy-MM-dd HH:mm:ss" type="date"/></td>
                                 <td scope="col" class="w150" style=""><fmt:formatDate value="${product.prod_mod_date}" pattern="yyyy-MM-dd HH:mm:ss" type="date"/></td>
@@ -462,6 +493,62 @@
 </div>
 </div>
 <script>
+
+    let categoryList = JSON.parse('${categoryList}');
+
+    let cate1Array = [];
+    let cate2Array = [];
+    let cate1Object = {};
+    let cate2Object = {};
+
+    let cate1Select = $('#eCategory1');
+    let cate2Select = $('#eCategory2');
+
+    $(document).ready(function(){
+        console.log(cate1Array);
+        console.log(cate2Array);
+    });
+
+    // 카테고리 배열 초기화 메서드
+    const makeCategoryArray = function(obj, array, categoryList, tier) {
+        for (let i = 0; i < categoryList.length; i++) {
+            if (categoryList[i].tier === tier) {
+                obj = {};
+                obj.cat_name = categoryList[i].cat_name;
+                obj.cat_code = categoryList[i].cat_code;
+                obj.parent_code = categoryList[i].parent_code;
+
+                array.push(obj);
+            }
+        }
+    }
+
+    // 배열 초기화
+    makeCategoryArray(cate1Object, cate1Array, categoryList, '1');
+    makeCategoryArray(cate2Object, cate2Array, categoryList, '2');
+
+    // 대분류 목록
+    for (let i = 0; i < cate1Array.length; i++) {
+        cate1Select.append('<option value="' + cate1Array[i].cat_code + '">' + cate1Array[i].cat_name + '</option>');
+    }
+
+    // 대분류 선택시 중분류 목록
+    $(cate1Select).on("change", function () {
+        let selectVal = $(this).find("option:selected").val();
+        cate2Select.children().remove();
+        cate2Select.append('<option selected value="none">- 중분류 선택 -</option>');
+        for(let i = 0; i < cate2Array.length; i++) {
+            if (cate2Array[i].parent_code === selectVal) {
+                cate2Select.append('<option value="' + cate2Array[i].cat_code + '">' + cate2Array[i].cat_name + '</option>');
+            }
+        }
+    });
+
+
+
+
+
+
     const pickers = document.querySelectorAll(".duet-date-picker")
     pickers.forEach(picker => {
         picker.localization = {
