@@ -11,6 +11,13 @@
         ORDER BY p.prod_id ASC
     </select>
 
+<!--    상품관리 (1개 상품 조회) + (테스트용)-->
+    <select id="select" parameterType="long" resultType="ProductDto">
+        SELECT p.*, i.*
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id AND p.prod = #{prod_id}
+    </select>
+
     <!-- 카테고리 리스트 -->
     <select id="cateList" resultType="CategoryDto">
         SELECT *
@@ -19,16 +26,33 @@
     </select>
 
 <!--    상품 판매, 진열, 재고 상태 수정-->
-    <update id="update">
+    <update id="update" parameterType="ProductDto">
         UPDATE product
         SET
         sale_sts = #{sale_sts},
         disp_sts = #{disp_sts},
-        prod_mod_date = now()
+        prod_mod_date = now(),
+        prod_qty = #{prod_qty}
+        WHERE prod_id = #{prod_id}
     </update>
 
 
-
+    <select id="selectRequiredProductDto" parameterType="SelectedItemsDto" resultType="SampleProductDto">
+        select sp.prod_id,sp.prod_name, sp.prod_price, sp.disc_price, spi.pack_type, spi.dlvy_type, sop.opt_prod_id, sop.opt_prod_name, sop.opt_price, sop.opt_disc_price
+        from product as sp
+        join product_info as spi
+        on sp.prod_id  = spi.prod_id
+        left join option_product as sop
+        on sp.prod_id = sop.prod_id and sp.is_opt = 'Y'
+        <where>
+            <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id}
+            </if>
+            <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id} and sop.opt_prod_id = #{opt_prod_id}
+            </if>
+        </where>
+    </select>
 
 
 
@@ -52,22 +76,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!--    상품 목록 카운트 (관리자)-->
-    <select id="searchResultCnt" parameterType="map" resultType="int">
-        SELECT count(*)
-        FROM product p, product_info i, category c
-        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+    <sql id="searchCondition">
         <choose>
             <when test='keyword_type == "ProductName"'>
                 AND p.prod_name LIKE concat('%',#{keyword} ,'%')
@@ -82,8 +91,6 @@
                 AND i.brand = #{keyword}
             </when>
         </choose>
-
-        --         카테고리 관련 정렬
         <choose>
             <when test='midCategory != null and midCategory != ""'>
                 AND p.cat_code = #{midCategory}
@@ -92,7 +99,6 @@
                 AND c.parent_code = #{bigCategory}
             </when>
         </choose>
-
         <choose>
             <when test='date_type == "ProductRegisterDate"'>
                 AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
@@ -107,7 +113,6 @@
                 AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
             </when>
         </choose>
-
         <if test='selling != null and selling != "" and selling != "A"'>
             AND p.sale_sts = #{selling}
         </if>
@@ -115,8 +120,6 @@
         <if test='display != null and display != "" and display != "A"'>
             AND p.disp_sts = #{display}
         </if>
-
-        --         재고상태 쿼리문도 짜야함 (다시 생각해야함)
         <if test='Stock != null and Stock != "" and Stock != "A"'>
             <if test='Stock == "재고정상"'>
                 AND p.prod_qty >= 51
@@ -128,7 +131,6 @@
                 AND p.prod_qty = 0
             </if>
         </if>
-
         <choose>
             <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
                 AND p.prod_qty BETWEEN #{stock_min} AND #{stock_max}
@@ -140,7 +142,6 @@
                 AND p.prod_qty &lt;= #{stock_max}
             </when>
         </choose>
-
         <choose>
             <when test='price == "product"'>
                 <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
@@ -165,10 +166,17 @@
                 </if>
             </when>
         </choose>
-
         <if test='option != null and option != "" and option != "A"'>
             AND p.is_opt = #{option}
         </if>
+    </sql>
+
+<!--    상품 목록 카운트 (관리자)-->
+    <select id="searchResultCnt" parameterType="map" resultType="int">
+        SELECT count(*)
+        FROM product p, product_info i, category c
+        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+        <include refid="searchCondition"/>
     </select>
 
     <!--    상품 목록 검색 (관리자)-->
@@ -176,107 +184,7 @@
         SELECT *
         FROM product p, product_info i, category c
         WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
-        <choose>
-            <when test='keyword_type == "ProductName"'>
-                AND p.prod_name LIKE concat('%',#{keyword} ,'%')
-            </when>
-            <when test='keyword_type == "ProductNumber"'>
-                AND p.prod_id = #{keyword}
-            </when>
-            <when test='keyword_type == "DeliveryType"'>
-                AND i.dlvy_type = #{keyword}
-            </when>
-            <when test='keyword_type == "Brand"'>
-                AND i.brand = #{keyword}
-            </when>
-        </choose>
-
---         카테고리 관련 정렬
-        <choose>
-            <when test='midCategory != null and midCategory != ""'>
-                AND p.cat_code = #{midCategory}
-            </when>
-            <when test='midCategory == null and midCategory == ""'>
-                AND c.parent_code = #{bigCategory}
-            </when>
-        </choose>
-
-        <choose>
-            <when test='date_type == "ProductRegisterDate"'>
-                AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "ProductModifyDate"'>
-                AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "saleStartDate"'>
-                AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "saleEndDate"'>
-                AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-        </choose>
-
-        <if test='selling != null and selling != "" and selling != "A"'>
-            AND p.sale_sts = #{selling}
-        </if>
-
-        <if test='display != null and display != "" and display != "A"'>
-            AND p.disp_sts = #{display}
-        </if>
-
---         재고상태 쿼리문도 짜야함 (다시 생각해야함)
-        <if test='Stock != null and Stock != "" and Stock != "A"'>
-            <if test='Stock == "재고정상"'>
-                AND p.prod_qty >= 51
-            </if>
-            <if test='Stock == "재고부족"'>
-                AND p.prod_qty BETWEEN 1 AND 50
-            </if>
-            <if test='Stock == "품절"'>
-                AND p.prod_qty = 0
-            </if>
-        </if>
-
-        <choose>
-            <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
-                AND p.prod_qty BETWEEN #{stock_min} AND #{stock_max}
-            </when>
-            <when test='stock_min != null and stock_min != ""'>
-                AND p.prod_qty >= #{stock_min}
-            </when>
-            <when test='stock_max != null and stock_max != ""'>
-                AND p.prod_qty &lt;= #{stock_max}
-            </when>
-        </choose>
-
-        <choose>
-            <when test='price == "product"'>
-                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
-                    AND p.prod_price BETWEEN #{price_min} AND #{price_max}
-                </if>
-                <if test='price_min != null and price_min != ""'>
-                    AND p.prod_price >= #{price_min}
-                </if>
-                <if test='price_max != null and price_max != ""'>
-                    AND p.prod_price &lt;= #{price_max}
-                </if>
-            </when>
-            <when test='price == "custom"'>
-                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
-                    AND p.disc_price BETWEEN #{price_min} AND #{price_max}
-                </if>
-                <if test='price_min != null and price_min != ""'>
-                    AND p.disc_price >= #{price_min}
-                </if>
-                <if test='price_max != null and price_max != ""'>
-                    AND p.disc_price &lt;= #{price_max}
-                </if>
-            </when>
-        </choose>
-
-        <if test='option != null and option != "" and option != "A"'>
-            AND p.is_opt = #{option}
-        </if>
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
 

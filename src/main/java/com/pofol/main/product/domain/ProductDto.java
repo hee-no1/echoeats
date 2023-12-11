@@ -52,6 +52,15 @@ public class ProductDto {
     private String bigCategory;
     private String midCategory;
 
-    // insert 용도 만들어야 함
+    // insert 용도 만들어야 함 (상품등록)
 
+
+
+    // 상품 관리자 페이지에서 update 용도
+    public ProductDto(Long prod_id, String sale_sts, String disp_sts, Integer prod_qty) {
+        this.prod_id = prod_id;
+        this.sale_sts = sale_sts;
+        this.disp_sts =disp_sts;
+        this.prod_qty = prod_qty;
+    }
 }

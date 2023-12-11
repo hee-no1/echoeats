@@ -39,25 +39,20 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
 
         Map<String, Object> map = new HashMap<>();
-        map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
-        map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("offset", searchProductAdminCondition.getOffset());
         map.put("pageSize", searchProductAdminCondition.getPageSize());
-        map.put("stock_min", productFilterDto.getStock_min());
-        map.put("stock_max", productFilterDto.getPrice_max());
-        map.put("selling", productFilterDto.getSelling());
-        map.put("display", productFilterDto.getDisplay());
-        map.put("option", productFilterDto.getOption());
-        map.put("price_min", productFilterDto.getPrice_min());
-        map.put("price_max", productFilterDto.getPrice_max());
-        map.put("bigCategory", productFilterDto.getBigCategory());
-        map.put("midCategory", productFilterDto.getMidCategory());
+        productFilter(searchProductAdminCondition, productFilterDto, map);
         return sqlSession.selectList(namespace + "searchSelectPage", map);
     }
 
     @Override // 조건에 따른 상품 리스트 카운트 (관리자)
     public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
         Map<String, Object> map = new HashMap<>();
+        productFilter(searchProductAdminCondition, productFilterDto, map);
+        return sqlSession.selectOne(namespace + "searchResultCnt", map);
+    }
+
+    private void productFilter(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, Map<String, Object> map) {
         map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
         map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("stock_min", productFilterDto.getStock_min());
@@ -69,7 +64,6 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("price_max", productFilterDto.getPrice_max());
         map.put("bigCategory", productFilterDto.getBigCategory());
         map.put("midCategory", productFilterDto.getMidCategory());
-        return sqlSession.selectOne(namespace + "searchResultCnt", map);
     }
 
     @Override // 카테고리 정렬

@@ -64,6 +64,7 @@ public class SearchProductAdminCondition {
                 .build().toString();
     }
 
+    // 상품 관리 검색에 사용할 것
     public String getProductQueryString(Integer page) {
         return UriComponentsBuilder.newInstance()
             .queryParam("page",     page)
@@ -106,7 +107,7 @@ public class SearchProductAdminCondition {
 	}
 
 	public Integer getOffset() {
-        return (page-1)*pageSize;
+        return page == 0 ? 0 : (page-1)*pageSize;
     }
 
 	@Override

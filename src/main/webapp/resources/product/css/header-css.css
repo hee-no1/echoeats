@@ -47,7 +47,7 @@ html, body {
   cursor: pointer;
 }
 #top > #header > #homeInfo > a:nth-of-type(1) {
-  color: rgb(95, 0, 128);
+  color: #00c73c;
 }
 #top > #header > #homeInfo span {
   width: 8px;
@@ -113,7 +113,7 @@ html, body {
 }
 #search > #search-bar > a {
   font-weight: bold;
-  color: rgb(95, 0, 128);
+  color: #00c73c;
   flex-shrink: 0;
   font-size: 18px;
   line-height: 1.33;
@@ -141,7 +141,7 @@ html, body {
   color: #b5b5b5;
 }
 #search > #search-bar > a:nth-of-type(2):hover {
-  color:  rgb(95, 0, 128);
+  color:  #00c73c;
 }
 #search > #search-bar > a:nth-of-type(2)::after {
   content: "";
@@ -159,7 +159,7 @@ html, body {
   width: 400px;
   height: 48px;
   padding-left: 14px;
-  border: 1px solid rgb(95, 0, 128);
+  border: 1px solid #00c73c;
   border-radius: 6px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
@@ -243,7 +243,7 @@ html, body {
   color: rgb(51, 51, 51);
 }
 #nev > #category:hover > span:nth-of-type(2) {
-  color: rgb(95, 0, 128);
+  color: #00c73c;
 }
 #nev > #meun {
   margin-left: 30px;
@@ -260,7 +260,7 @@ html, body {
 }
 #nev > #meun > ul > li > span:hover {
   cursor: pointer;
-  color: rgb(95, 0, 128);
+  color: #00c73c;
   text-decoration: underline;
 }
 #nev > #nev-right {
@@ -280,5 +280,5 @@ html, body {
   cursor: pointer;
 }
 #nev > #nev-right > div > span:nth-of-type(1) {
-  color: rgb(95, 0, 128);
+  color: #00c73c;
 }

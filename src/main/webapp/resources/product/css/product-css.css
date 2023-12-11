@@ -248,7 +248,7 @@ html, body {
     color: rgb(51, 51, 51);
 }
 #nev > #category:hover > span:nth-of-type(2) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 #nev > #meun {
     display: flex;
@@ -266,7 +266,7 @@ html, body {
 }
 #nev > #meun > ul > li > span:hover {
     cursor: pointer;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     text-decoration: underline;
 }
 #nev > #nev-right {
@@ -286,7 +286,7 @@ html, body {
     cursor: pointer;
 }
 #nev > #nev-right > div > span:nth-of-type(1) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 
 .css-n48rgu {
@@ -406,7 +406,7 @@ button {
 
 .css-toq1xn {
     font-size: 14px;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     line-height: 19px;
     height: 19px;
     letter-spacing: -0.5px;
@@ -434,7 +434,7 @@ button {
 }
 .css-1pf406l > strong {
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 .css-iqoq9n {
     margin-top: 20px;

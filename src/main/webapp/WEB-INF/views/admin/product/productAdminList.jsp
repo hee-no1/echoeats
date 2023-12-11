@@ -288,10 +288,22 @@
         <div id="tabNumber" class="tabCont">
             <div class="mCtrl typeHeader">
                 <div class="gTop">
+                    <select>
+                        <option value="">판매전</option>
+                        <option value="">판매중</option>
+                        <option value="">판매중지</option>
+                        <option value="">판매종료</option>
+                        <option value="">판매금지</option>
+                    </select>
+                    <select>
+                        <option value="">진열함</option>
+                        <option value="">진열안함</option>
+                    </select>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl"><span>진열상태</span></a>
+                       class="btnCtrl"><span>판매가 변경</span></a>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
-                       class="btnNormal"><span>판매상태</span></a>
+                       class="btnNormal"><span>판매기간 변경</span></a>
+                    <button type="submit">수정</button>
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
@@ -328,25 +340,23 @@
                             <div class="wrap">
                                 <ul class="default">
                                     <li><label><input type="checkbox" id="iDisplayNo" class="fChk" value="21"> No</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="2"> 주문일(결제일)</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="3" disabled="disabled"> 주문번호</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="4"> 주문자</label></li>
-                                    <li><label><input type="checkbox" class="fChk" value="23" id="eBizinfo">
-                                        사업자 회원 정보</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="5"> 상품명</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" id="ePrdTotalPrice" class="fChk" value="6"> 총 상품구매금액</label></li>
-                                    <li><label><input type="checkbox" id="eOrdTotalPrice" class="fChk" value="20"> 총 주문금액</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="7"> 총 실결제금액</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="8"> 결제수단</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="9"> 결제상태</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="10"> 미배송</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="11"> 배송중</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="12"> 배송완료</label></li>
-                                    <li><label><input type="checkbox" id="ePurchaseconfirmation" class="fChk" value="22"> 구매 확정</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="13"> 취소</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="14"> 교환</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 반품</label></li>
-                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="16" disabled="disabled"> 목록삭제</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="2"> 상품번호</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="3" disabled="disabled"> 상품명</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="4"> 판매상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="5"> 전시상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="7"> 재고상태</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="8"> 재고수량</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="9"> 판매가</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="10"> 할인가</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="11"> 옵션상품</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="12"> 배송속성</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="13"> 대분류</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="14"> 중분류</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 브랜드명</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 상품등록일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 최종수정일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 판매시작일</label></li>
+                                    <li><label class=" eSelected"><input type="checkbox" class="fChk" value="15"> 판매종료일</label></li>
                                     <li><label><input type="checkbox" class="fChk" value="17"> 메모</label></li>
                                 </ul>
                             </div>
@@ -403,7 +413,17 @@
                                 <td scope="col" class="w95" style="">${product.sale_sts} <div class="cTip eSmartMode" code="OD.AO.170"></div></td>
                                 <td scope="col" class="w95" style="">${product.disp_sts}</td>
                                 <td scope="col" class="w95" style="">
-                                    변경할것
+                                    <c:choose>
+                                        <c:when test="${product.prod_qty eq 0}">
+                                            품절
+                                        </c:when>
+                                        <c:when test="${product.prod_qty > 50}">
+                                            재고정상
+                                        </c:when>
+                                        <c:otherwise>
+                                            재고부족
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                                 <td scope="col" class="w95" style="">${product.prod_qty}</td>
                                 <td scope="col" class="w95" style="">${product.prod_price}</td>
