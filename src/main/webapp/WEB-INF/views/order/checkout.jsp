@@ -31,7 +31,7 @@
             <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}</div>
 
             <c:forEach var="item" items="${items}">
-                <c:set var="prod" value="${item.sampleProductDto}"/>
+                <c:set var="prod" value="${item.productOrderCheckout}"/>
                 <div class="css-bd9p1l e17a7yib10 items">
                     <c:choose>
                         <c:when test = "${empty prod.opt_prod_id}">

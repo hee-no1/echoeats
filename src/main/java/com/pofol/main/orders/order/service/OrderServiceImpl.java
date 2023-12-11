@@ -7,11 +7,11 @@ import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
-import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
+import com.pofol.main.product.basket.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
-import com.pofol.main.orders.sample.productSample.SampleProductDto;
-import com.pofol.main.orders.sample.productSample.SampleProductRepository;
+import com.pofol.main.orders.order.domain.ProductOrderCheckout;
+import com.pofol.main.product.basket.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +21,16 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService{
 
     private final SampleMemberRepository memRepo;
-    private final SampleProductRepository prodRepo;
+    private final BasketRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
     private final PaymentDiscountRepository paymentDiscountRepository;
 
     @Autowired
-    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository, PaymentDiscountRepository paymentDiscountRepository) {
+    public OrderServiceImpl(SampleMemberRepository memRepo, BasketRepository basketRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository, PaymentDiscountRepository paymentDiscountRepository) {
         this.memRepo = memRepo;
-        this.prodRepo = prodRepo;
+        this.basketRepo = basketRepo;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.orderHistoryRepository = orderHistoryRepository;
@@ -49,8 +49,8 @@ public class OrderServiceImpl implements OrderService{
 
         try{
             for (SelectedItemsDto item : items) {
-                SampleProductDto prod = prodRepo.selectRequiredProduct(item);
-                item.setSampleProductDto(prod);
+                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                item.setProductOrderCheckout(prod);
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
                     tot_prod_price += prod.getDisc_price() * item.getQty(); //총 주문금액 계산
@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService{
 
         //총 상품명 구하기
         SelectedItemsDto firstItem = items.get(0);
-        SampleProductDto firstProd = firstItem.getSampleProductDto();
+        ProductOrderCheckout firstProd = firstItem.getProductOrderCheckout();
         int tot_ord_qty = items.size(); //총 상품 수량
 
         try{
@@ -128,8 +128,8 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                SampleProductDto prod = prodRepo.selectRequiredProduct(item);
-                item.setSampleProductDto(prod);
+                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 
                 OrderDetailDto orderDetailDto;

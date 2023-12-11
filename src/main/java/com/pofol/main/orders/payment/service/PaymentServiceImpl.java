@@ -2,18 +2,16 @@ package com.pofol.main.orders.payment.service;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.domain.OrderDto;
-import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.domain.PaymentHistoryDto;
 import com.pofol.main.orders.payment.repository.PaymentHistoryRepository;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
-import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
-import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
-import com.pofol.main.orders.sample.productSample.SampleProductDto;
-import com.pofol.main.orders.sample.productSample.SampleProductRepository;
+import com.pofol.main.product.basket.SelectedItemsDto;
+import com.pofol.main.product.basket.BasketRepository;
+import com.pofol.main.product.domain.OptionProductDto;
+import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService{
 
-    private final SampleProductRepository sampleProductRepository;
+    private final BasketRepository basketRepository;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final PaymentHistoryRepository paymentHistoryRepository;
@@ -39,10 +37,10 @@ public class PaymentServiceImpl implements PaymentService{
             Integer qty = item.getQty();
             try{
                 if(opt_prod_id == null || opt_prod_id.isEmpty()){ //일반 상품일 때
-                    SampleProductDto prod = sampleProductRepository.selectProduct(item.getProd_id());
+                    ProductDto prod = basketRepository.selectProduct(item.getProd_id());
                     dbTotPayPrice += prod.getDisc_price() * qty;
                 }else { //옵션 상품일 때
-                    SampleProductDto prod = sampleProductRepository.selectOptionProduct(item.getOpt_prod_id());
+                    OptionProductDto prod = basketRepository.selectOptionProduct(item.getOpt_prod_id());
                     dbTotPayPrice += prod.getOpt_disc_price() * qty;
                 }
             } catch (Exception e) {
