@@ -25,8 +25,7 @@
 		<typeAlias alias="GradeDto" type="com.pofol.main.member.dto.GradeDto"/>
 		<typeAlias alias="DelNotesDto" type="com.pofol.main.member.dto.DelNotesDto"/>
 		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
-		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
-		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
+		<typeAlias alias="ProductOrderCheckout" type="com.pofol.main.orders.order.domain.ProductOrderCheckout"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
 		<!-- Mypage -->
 		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
@@ -40,6 +39,7 @@
 		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
 		<typeAlias alias="CategoryDto" type="com.pofol.main.product.category.CategoryDto"/>
 		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.basket.SelectedItemsDto"/>
 		<!-- product -->
 	</typeAliases>
 </configuration>

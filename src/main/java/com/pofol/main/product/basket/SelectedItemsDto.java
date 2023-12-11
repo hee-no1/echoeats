@@ -1,13 +1,11 @@
-package com.pofol.main.orders.sample.cartDataSample;
+package com.pofol.main.product.basket;
 
-import com.pofol.main.orders.sample.productSample.SampleProductDto;
+import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +18,7 @@ public class SelectedItemsDto {
     private Integer qty; //상품수량
 
     //DB에서 꺼내야하는 데이터
-    private SampleProductDto sampleProductDto;
+    private ProductOrderCheckout productOrderCheckout;
 
 
     //만들어 내야하는 데이터 <- 상품별
@@ -38,11 +36,11 @@ public class SelectedItemsDto {
 
     public void calculateProductTotal(){
         if(opt_prod_id == null || opt_prod_id.isEmpty()){ //option상품이 아닐때
-            total_prod_price = sampleProductDto.getDisc_price() * qty;
-            origin_prod_price = sampleProductDto.getProd_price() * qty;
+            total_prod_price = productOrderCheckout.getDisc_price() * qty;
+            origin_prod_price = productOrderCheckout.getProd_price() * qty;
         }else { //option상품일때
-            total_prod_price = sampleProductDto.getOpt_disc_price() *qty;
-            origin_prod_price = sampleProductDto.getOpt_price() *qty;
+            total_prod_price = productOrderCheckout.getOpt_disc_price() *qty;
+            origin_prod_price = productOrderCheckout.getOpt_price() *qty;
         }
     }
 }

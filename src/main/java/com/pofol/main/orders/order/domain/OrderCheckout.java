@@ -1,15 +1,12 @@
 package com.pofol.main.orders.order.domain;
 
-import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
+import com.pofol.main.product.basket.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
-import com.pofol.main.orders.sample.productSample.SampleProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor

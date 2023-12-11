@@ -1,9 +1,8 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
-import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
+import com.pofol.main.product.basket.SelectedItemsDto;
 
 import java.util.List;
 

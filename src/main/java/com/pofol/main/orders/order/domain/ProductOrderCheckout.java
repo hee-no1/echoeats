@@ -1,16 +1,13 @@
-package com.pofol.main.orders.sample.productSample;
+package com.pofol.main.orders.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SampleProductDto {
+public class ProductOrderCheckout {
 
     private Long prod_id;
     private String prod_name;
@@ -23,11 +20,11 @@ public class SampleProductDto {
     private String pack_type;
     private String dlvy_type;
 
-    public SampleProductDto(Long prod_id) {
+    public ProductOrderCheckout(Long prod_id) {
         this.prod_id = prod_id;
     }
 
-    public SampleProductDto(Long prod_id, String opt_prod_id) {
+    public ProductOrderCheckout(Long prod_id, String opt_prod_id) {
         this.prod_id = prod_id;
         this.opt_prod_id = opt_prod_id;
     }
