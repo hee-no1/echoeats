@@ -1270,10 +1270,10 @@ b, optgroup, strong {
     position: relative;
     width: 284px;
 }
-.css-1gxrfiw {
+.css-9i9om4 {
+    position: absolute;
     width: 284px;
-    position: sticky;
-    top: 60px;
+    top: 0px;
 }
 .css-6hge48 {
     display: flex;
