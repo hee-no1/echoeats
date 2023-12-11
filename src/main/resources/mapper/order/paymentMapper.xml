@@ -32,7 +32,6 @@
         WHERE pay_id = #{pay_id}
     </update>
 
-
     <delete id="delete" parameterType="string">
         DELETE FROM spring.payment WHERE pay_id = #{pay_id}
     </delete>

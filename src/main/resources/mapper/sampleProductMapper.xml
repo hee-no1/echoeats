@@ -5,10 +5,10 @@
 
     <select id="selectRequiredProductDto" parameterType="SelectedItemsDto" resultType="SampleProductDto">
         select sp.prod_id,sp.prod_name, sp.prod_price, sp.disc_price, spi.pack_type, spi.dlvy_type, sop.opt_prod_id, sop.opt_prod_name, sop.opt_price, sop.opt_disc_price
-        from sample_product as sp
-        join sample_product_info as spi
+        from product as sp
+        join product_info as spi
             on sp.prod_id  = spi.prod_id
-        left join sample_option_product as sop
+        left join option_product as sop
             on sp.prod_id = sop.prod_id and sp.is_opt = 'Y'
         <where>
             <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>

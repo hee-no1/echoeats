@@ -1,3 +1,13 @@
+window.addEventListener('scroll', function() {
+    let scrollPosition = window.scrollY;
+    // 특정 스크롤 위치 이상일 때
+    if (scrollPosition >= 55) {
+        document.querySelector('.css-9i9om4').style.position = 'sticky';
+        document.querySelector('.css-9i9om4').style.top = '55px';
+    }
+});
+
+
 let checkout = {
     selectedItems: selectedItems,
     tot_prod_name: tot_prod_name,
@@ -134,8 +144,8 @@ $(document).ready(function() {
 
     function requestPay() {
         IMP.request_pay({
-            pg: 'kakaopay',
-            pay_method: 'kakaopay',
+            pg: 'kcp',
+            pay_method: 'card',
             merchant_uid: orderData.ord_id,
             name: checkout.tot_prod_name,
             amount: checkout.tot_pay_price,
