@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int signin (MemberDto memberDto) throws Exception {
+        System.out.println(memberDto.toString());
          return memberRepository.insertMember(memberDto);
 
      }

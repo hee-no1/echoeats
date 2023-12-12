@@ -47,6 +47,12 @@ public class memberTest {
 		System.out.println(exampleMemId.toString());
 	}
 
+	@Test
+	public void test5() throws Exception {
+		MemberDto memberDto = new MemberDto("qwerqwer", "qwerqwer", "김도형", "qwerqwer@naver.com", "01030359787", "남자", "19981012", "Y", "Y", "now()", "now()");
+		Mdao.insertMember(memberDto);
+	}
+
 
 
 }

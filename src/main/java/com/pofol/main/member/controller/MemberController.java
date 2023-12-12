@@ -117,6 +117,7 @@ public class MemberController {
     @PostMapping("/join")
     @ResponseBody
     public MemberDto join(@RequestBody MemberDto memberDto) throws Exception{
+        System.out.println(memberDto.toString());
         memberService.signin(memberDto);
         return memberDto;
     }
