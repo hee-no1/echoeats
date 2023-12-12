@@ -73,6 +73,11 @@ public class GradeTask {
 }
 
 
+//    Map<String, Integer> result = list.stream()
+//            .sorted((a1, a2) -> Integer.compare(a1.getAge(), a2.getAge()))
+//            .collect(Collectors.toMap(A::getName, A::getAge));
+//
+
 
 
 ////LocalDate currentDate = LocalDate.now();

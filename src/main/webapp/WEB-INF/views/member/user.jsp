@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <html>
 <head>
@@ -24,6 +25,10 @@ ${result}
 <c:if test="${result eq '거긴 안돼요'}">
     <p>거긴 안돼요</p>
 </c:if>
+<sec:authorize access="isAuthenticated()">
+    <!-- 현재 사용자가 인증되어 있을 때 보이는 내용 -->
+    <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+</sec:authorize>
 <script>
     function setRefererCookie() {
         // 현재 페이지 URL을 쿠키에 저장
