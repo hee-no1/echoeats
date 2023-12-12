@@ -25,7 +25,7 @@
     </update>
 
      <delete id="delete_address">
-         DELETE FROM address WHERE addr_id = #{addr_id}
+         DELETE FROM address WHERE address_id = #{address_id}
      </delete>
 
     <select id="count_address">

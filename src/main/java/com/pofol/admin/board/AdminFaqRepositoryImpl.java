@@ -1,7 +1,6 @@
-package com.pofol.main.board.repository;
+package com.pofol.admin.board;
 
 import com.pofol.main.board.domain.FaqDto;
-import com.pofol.main.orders1.order.domain.SearchOrderCondition;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class FaqRepositoryImpl implements FaqRepository {
+public class AdminFaqRepositoryImpl implements AdminFaqRepository {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.pofol.main.repository.FaqRepository.";
+    private static String namespace = "board.repository.adminFaqRepository.";
 
     // 등록하기
     public int insert(FaqDto dto) {
@@ -41,14 +40,4 @@ public class FaqRepositoryImpl implements FaqRepository {
     public int count(FaqDto dto) {
         return session.selectOne(namespace + "count", dto);
     }
-    @Override
-    public List searchSelectPage(SearchOrderCondition sc) throws Exception {
-        return session.selectList(namespace+"searchSelectPage", sc);
-    }
-
-    @Override
-    public int searchResultCnt(SearchOrderCondition sc) throws Exception {
-        return session.selectOne(namespace+"searchResultCnt", sc);
-    }
-
 }

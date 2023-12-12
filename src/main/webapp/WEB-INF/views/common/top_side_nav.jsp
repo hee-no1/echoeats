@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">ECOEATS ADMIN</a>
@@ -85,6 +87,20 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables
                             </a>
+
+                            <!-- 게시물관리 sidebar -->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#boardCollapse" aria-expanded="false" aria-controls="boardCollapse">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                게시물 관리
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="boardCollapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#">공지사항</a>
+                                    <a class="nav-link" href="/admin1/faq/list">FAQ</a>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

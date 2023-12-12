@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html lang="ko">
@@ -80,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="active left-menu-list">
+                    <a class="active left-menu-list" href="/board/faq">
                         자주하는 질문
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>

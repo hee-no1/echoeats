@@ -12,6 +12,8 @@
 		<!-- paging -->
 		<typeAlias alias="SearchOrderCondition" type="com.pofol.main.orders1.order.domain.SearchOrderCondition"/>
 		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
+		<typeAlias alias="NoticeDto" type="com.pofol.main.board.domain.NoticeDto"/>
+		<typeAlias alias="SearchBoardCondition" type="com.pofol.main.board.domain.SearchBoardCondition"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>

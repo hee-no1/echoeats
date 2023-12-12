@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pofol.main.repository.FaqRepository">
+<mapper namespace="board.repository.adminFaqRepository">
 
     <!-- 새로운 faq 속성을 데이터베이스에 추가 -->
     <insert id="insert" parameterType="FaqDto">
@@ -32,35 +32,34 @@
 
 
     <select id="selectAll" parameterType="FaqDto" resultType="FaqDto">
-    SELECT
+        SELECT
         <!-- 조회된 faq_id를 다시 순차적 1,2,3 .. 으로 나타내기 위한 ROW_NUMBER() -->
         faq_id,
         faq_type,
         faq_title,
         faq_con
-    FROM faq
-    <where>
-        <!-- MyBatis의 조건문을 사용하여 FAQ 타입에 따라 WHERE 절을 동적으로 생성한다 -->
-        <choose>
-        <!-- 쿼리에 전달된 매개변수 '_parameter' (MyBatis 내장변수) -->
-            <when test="_parameter == null or (_parameter == null and _parameter.equals('전체'))">
-                <if test="faq_type != null and !faq_type.isEmpty()">
-                    AND faq_type = #{faq_type}
-                </if>
-            </when>
-            <when test="!_parameter.equals('전체')">
-                <if test="faq_type != null and !faq_type.isEmpty()">
-                    AND faq_type = #{faq_type}
-                </if>
-            </when>
-        </choose>
-    </where>
-    ORDER BY faq_id DESC
+        FROM faq
+        <where>
+            <!-- MyBatis의 조건문을 사용하여 FAQ 타입에 따라 WHERE 절을 동적으로 생성한다 -->
+            <choose>
+                <!-- 쿼리에 전달된 매개변수 '_parameter' (MyBatis 내장변수) -->
+                <when test="_parameter == null or (_parameter == null and _parameter.equals('전체'))">
+                    <if test="faq_type != null and !faq_type.isEmpty()">
+                        AND faq_type = #{faq_type}
+                    </if>
+                </when>
+                <when test="!_parameter.equals('전체')">
+                    <if test="faq_type != null and !faq_type.isEmpty()">
+                        AND faq_type = #{faq_type}
+                    </if>
+                </when>
+            </choose>
+        </where>
+        ORDER BY faq_id DESC
     </select>
 
     <select id="count" resultType="int">
         SELECT count(*) FROM faq
     </select>
-
 </mapper>
 

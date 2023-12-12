@@ -15,10 +15,6 @@ public class FaqController {
     @Autowired
     private FaqService faqService;
 
-//    @GetMapping(value = "/notice")
-//    public String noticePage() {
-//        return "board/notice";
-//    }
     @RequestMapping(value = "/faq")
     public String faqPage() {
         System.out.println("FAQ 조회 페이지");
