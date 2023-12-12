@@ -12,12 +12,16 @@ import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
 import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import com.pofol.main.product.basket.BasketRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
     private final SampleMemberRepository memRepo;
@@ -27,18 +31,12 @@ public class OrderServiceImpl implements OrderService{
     private final OrderHistoryRepository orderHistoryRepository;
     private final PaymentDiscountRepository paymentDiscountRepository;
 
-    @Autowired
-    public OrderServiceImpl(SampleMemberRepository memRepo, BasketRepository basketRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository, PaymentDiscountRepository paymentDiscountRepository) {
-        this.memRepo = memRepo;
-        this.basketRepo = basketRepo;
-        this.orderRepository = orderRepository;
-        this.orderDetailRepository = orderDetailRepository;
-        this.orderHistoryRepository = orderHistoryRepository;
-        this.paymentDiscountRepository = paymentDiscountRepository;
-    }
 
     @Override
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;

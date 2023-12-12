@@ -13,5 +13,7 @@ public interface PaymentRepository {
     List<PaymentDto> selectAll() throws Exception;
     int deleteAll() throws Exception;
     int count() throws Exception;
+    Integer selectTotalPrice(PaymentDto paymentDto) throws Exception;
+    List<PaymentDto> selectPayment(PaymentDto paymentDto) throws Exception;
 
 }
