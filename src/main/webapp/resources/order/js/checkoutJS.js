@@ -62,6 +62,21 @@ let ajaxData = function(){
     });
 }
 
+//쿠폰 list
+$('#couponList').hide(); //페이지를 로드할 때 숨길 요소
+$("#couponBtn").click(function(){
+    let couponBtn = $("#couponBtn");
+    if(couponBtn.val() === 'unchecked'){
+        $('#couponList').show();
+        couponBtn.val('checked');
+    }else {
+        $('#couponList').hide();
+        couponBtn.val('unchecked');
+    }
+});
+
+
+
 //적립금 입력
 function updateValue(input){
 
@@ -93,7 +108,75 @@ $("#allUseBtn").click(function(){
 });
 $(document).ready(function() {
 
-    let orderData = {};
+
+    let orderData = {
+        pg : 'kakaopay',
+        pay_method : 'kakaopay'
+    };
+
+    //결제 버튼 클릭 이벤트
+    $(".payBtnList").on('click', function (e){
+       if(e.target.id === 'kakaopayBtn'){
+           $('#kakaopayBtn').removeClass('css-1wlyg0y');
+           $('#kakaopayBtn').addClass('css-1fecctx');
+           $('#creditcardBtn').removeClass('css-1pvbmgb');
+           $('#creditcardBtn').addClass('css-1wlyg0y');
+           $('#simplepayBtn').removeClass('css-1pvbmgb');
+           $('#simplepayBtn').addClass('css-1wlyg0y');
+           $('#mobiliansBtn').removeClass('css-1pvbmgb');
+           $('#mobiliansBtn').addClass('css-1wlyg0y');
+           $(".css-nemdq9").remove()
+           orderData.pg = $("#kakaopayBtn").val();
+           orderData.pay_method = 'kakaopay';
+
+       } else if(e.target.id === 'creditcardBtn'){
+           $('#creditcardBtn').removeClass('css-1wlyg0y');
+           $('#creditcardBtn').addClass('css-1pvbmgb');
+           $('#kakaopayBtn').removeClass('css-1fecctx');
+           $('#kakaopayBtn').addClass('css-1wlyg0y');
+           $('#simplepayBtn').removeClass('css-1pvbmgb');
+           $('#simplepayBtn').addClass('css-1wlyg0y');
+           $('#mobiliansBtn').removeClass('css-1pvbmgb');
+           $('#mobiliansBtn').addClass('css-1wlyg0y');
+           $(".css-nemdq9").remove()
+           orderData.pg = $("#creditcardBtn").val();
+           orderData.pay_method = 'card';
+
+       } else if(e.target.id === 'simplepayBtn'){
+           $('#simplepayBtn').removeClass('css-1wlyg0y');
+           $('#simplepayBtn').addClass('css-1pvbmgb');
+           $('#kakaopayBtn').removeClass('css-1fecctx');
+           $('#kakaopayBtn').addClass('css-1wlyg0y');
+           $('#creditcardBtn').removeClass('css-1pvbmgb');
+           $('#creditcardBtn').addClass('css-1wlyg0y');
+           $('#mobiliansBtn').removeClass('css-1pvbmgb');
+           $('#mobiliansBtn').addClass('css-1wlyg0y');
+           let checkbox = "";
+           checkbox = checkbox + '<div class="css-nemdq9 evz7bw03">' +
+               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="naver-pay">' +
+                    '<input data-testid="radio-naver-pay" id="naver-pay" name="naver-pay" type="radio" class="css-1pes2r6 et8nqc32" value="naver-pay" checked=""><span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span><span aria-labelledby="naver-pay" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">네이버페이 </span></span></label></div>' +
+               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="toss">' +
+                    '<input data-testid="radio-toss" id="toss" name="toss" type="radio" class="css-1pes2r6 et8nqc32" value="toss"><span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span><span aria-labelledby="toss" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">토스 </span></span></label></div>' +
+               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="payco">' +
+                    '<input data-testid="radio-payco" id="payco" name="payco" type="radio" class="css-1pes2r6 et8nqc32" value="payco"><span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span><span aria-labelledby="payco" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">페이코</span></span></label></div>' +
+               '</div>';
+           $(".css-gd125q").append(checkbox);
+
+
+       } else if(e.target.id === 'mobiliansBtn'){
+           $('#mobiliansBtn').removeClass('css-1wlyg0y');
+           $('#mobiliansBtn').addClass('css-1pvbmgb');
+           $('#kakaopayBtn').removeClass('css-1fecctx');
+           $('#kakaopayBtn').addClass('css-1wlyg0y');
+           $('#creditcardBtn').removeClass('css-1pvbmgb');
+           $('#creditcardBtn').addClass('css-1wlyg0y');
+           $('#simplepayBtn').removeClass('css-1pvbmgb');
+           $('#simplepayBtn').addClass('css-1wlyg0y');
+           $(".css-nemdq9").remove()
+       }
+    });
+
+
 
     //주문서 상품 목록
     $('.totItems').show(); //페이지를 로드할 때 표시할 요소
@@ -144,8 +227,8 @@ $(document).ready(function() {
 
     function requestPay() {
         IMP.request_pay({
-            pg: 'kcp',
-            pay_method: 'card',
+            pg: orderData.pg,
+            pay_method: orderData.pay_method,
             merchant_uid: orderData.ord_id,
             name: checkout.tot_prod_name,
             amount: checkout.tot_pay_price,

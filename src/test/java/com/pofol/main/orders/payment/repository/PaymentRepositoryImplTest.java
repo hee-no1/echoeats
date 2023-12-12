@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,5 +46,21 @@ class PaymentRepositoryImplTest {
     void delete() throws Exception {
         int delete = paymentRepository.delete("imp1234");
         assertThat(delete).isEqualTo(1);
+    }
+
+    @Test
+    void selectTotalPrice() throws Exception{
+        PaymentDto paymentDto = new PaymentDto("you11", "2023-12-01", "2024-01-02");
+        Integer i = paymentRepository.selectTotalPrice(paymentDto);
+        System.out.println(i);
+    }
+
+    @Test
+    void selectPayment() throws Exception{
+        PaymentDto paymentDto = new PaymentDto("you11", "2023-11-30", "2023-12-31");
+        List<PaymentDto> paymentDtos = paymentRepository.selectPayment(paymentDto);
+        for (PaymentDto dto : paymentDtos) {
+            System.out.println(dto);
+        }
     }
 }

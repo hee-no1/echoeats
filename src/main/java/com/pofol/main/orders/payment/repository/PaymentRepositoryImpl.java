@@ -49,4 +49,14 @@ public class PaymentRepositoryImpl implements PaymentRepository{
         return session.selectOne(namespace+"count");
     }
 
+    @Override
+    public Integer selectTotalPrice(PaymentDto paymentDto) throws Exception {
+        return session.selectOne(namespace+"selectTotalPrice",paymentDto);
+    }
+
+    @Override
+    public List<PaymentDto> selectPayment(PaymentDto paymentDto) throws Exception {
+        return session.selectList(namespace+"selectPayment",paymentDto);
+    }
+
 }

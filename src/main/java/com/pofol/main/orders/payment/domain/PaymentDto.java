@@ -26,6 +26,11 @@ public class PaymentDto {
     private String pg_tid; //pg사 거래번호
     private String success; //결제 성공 여부
 
+
+    //결제 조회 특정 기간
+    private String start_date;
+    private String end_date;
+
     public PaymentDto(String pay_id, Long ord_id, String mem_id, String code_name, String tot_prod_name, Integer tot_pay_price, String pay_way, String rg_num, String md_num) {
         this.pay_id = pay_id;
         this.ord_id = ord_id;
@@ -43,6 +48,14 @@ public class PaymentDto {
         this.ord_id = ord_id;
         this.code_name = code_name;
     }
+
+    //특정기간 결제 조회시 이용
+    public PaymentDto(String mem_id, String start_date, String end_date) {
+        this.mem_id = mem_id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+    }
+
 
     public void setMemberData(String mem_id){
         this.mem_id = mem_id;

@@ -1,7 +1,5 @@
 package com.pofol.main.member.dto;
 
-import java.util.Date;
-
 public class CouponJoinDto {
     private String mem_id;
     private int cp_id;
