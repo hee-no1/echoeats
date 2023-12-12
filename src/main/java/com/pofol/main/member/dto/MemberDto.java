@@ -14,7 +14,7 @@ public class MemberDto {
     private String mem_gender;
 
     private String mem_birth;
-    private int point;
+    private Integer point;
     private String per_info_col;
     private String free_ship_recep;
 

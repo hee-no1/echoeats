@@ -34,6 +34,7 @@
 
 		<!-- product -->
 		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
+		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
