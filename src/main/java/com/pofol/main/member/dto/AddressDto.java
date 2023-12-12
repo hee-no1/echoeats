@@ -6,14 +6,52 @@ public class AddressDto {
     private String dtl_addr;
     private String name;
     private String phone;
-    private int post_num;
     private String type;
-    private char def_addr;
+    private String def_addr;
     private String rg_date;
     private int rg_num;
     private String md_date;
     private int md_num;
     private String mem_id;
+
+    public AddressDto(){};
+    public AddressDto(String addr, String dtl_addr){
+        this.addr = addr;
+        this.dtl_addr = dtl_addr;
+    }
+    public AddressDto(String mem_id, String addr, String dtl_addr, String def_addr){
+        this.addr = addr;
+        this.dtl_addr = dtl_addr;
+        this.mem_id = mem_id;
+        this.def_addr = def_addr;
+    }
+    public AddressDto(int addr_id, String addr, String dtl_addr, String name, String phone, String type, String def_addr) {
+        this.addr_id = addr_id;
+        this.addr = addr;
+        this.dtl_addr = dtl_addr;
+        this.name = name;
+        this.phone = phone;
+        this.type = type;
+        this.def_addr = def_addr;
+    }
+
+    @Override
+    public String toString() {
+        return "AddressDto{" +
+                "addr_id=" + addr_id +
+                ", addr='" + addr + '\'' +
+                ", dtl_addr='" + dtl_addr + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", def_addr=" + def_addr +
+                ", rg_date='" + rg_date + '\'' +
+                ", rg_num=" + rg_num +
+                ", md_date='" + md_date + '\'' +
+                ", md_num=" + md_num +
+                ", mem_id='" + mem_id + '\'' +
+                '}';
+    }
 
     public int getAddr_id() {
         return addr_id;
@@ -55,14 +93,6 @@ public class AddressDto {
         this.phone = phone;
     }
 
-    public int getPost_num() {
-        return post_num;
-    }
-
-    public void setPost_num(int post_num) {
-        this.post_num = post_num;
-    }
-
     public String getType() {
         return type;
     }
@@ -71,11 +101,11 @@ public class AddressDto {
         this.type = type;
     }
 
-    public char getDef_addr() {
+    public String getDef_addr() {
         return def_addr;
     }
 
-    public void setDef_addr(char def_addr) {
+    public void setDef_addr(String def_addr) {
         this.def_addr = def_addr;
     }
 

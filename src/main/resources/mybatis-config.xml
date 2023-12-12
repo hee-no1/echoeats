@@ -19,6 +19,6 @@
 		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
 		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
-		<typeAlias alias="AddressDto" type="com.pofol.main.member.AddressDto"/>
+		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
 	</typeAliases>
 </configuration>
