@@ -4,10 +4,18 @@
 <mapper namespace="com.pofol.main.product.repository.ProductListRepository">
 <!--    상품 조회-->
     <select id="select" parameterType="long" resultType="ProductDto">
-        SELECT p.prod_img_id, p.prod_name, p.prod_price, p.disc_rate, p.disc_price, p.short_desc, p.long_desc, p.rev_num, i.*
+--         SELECT p.prod_img_id, p.prod_name, p.prod_price, p.disc_rate, p.disc_price, p.short_desc, p.long_desc, p.rev_num, i.*
+        SELECT p.*, i.*
         FROM product p, product_info i
         WHERE p.prod_id = i.prod_id
-          and p.prod_id = #{prod_id}
+        AND p.prod_id = #{prod_id}
+    </select>
+
+<!--    옵션 상품 조회-->
+    <select id="selectOption" parameterType="long" resultType="OptionProductDto">
+        SELECT *
+        FROM option_product
+        WHERE prod_id = #{prod_id}
     </select>
 
 <!--    상품 전체 리스트 정렬-->
@@ -61,7 +69,7 @@
     </select>
 
 <!--    상품명으로 검색 리스트 정렬-->
-    <select id="searchSelectProduct" parameterType="SearchProductCondition" resultType="ProductDto">
+    <select id="searchSelectProduct" parameterType="map" resultType="ProductDto">
         SELECT prod_id, prod_img_id, prod_name, prod_price, disc_rate, disc_price, short_desc, rev_num
         FROM product
         WHERE disp_sts = 'Y'
@@ -93,6 +101,14 @@
     <select id="count">
         SELECT COUNT(*) FROM product
     </select>
+
+
+
+
+
+
+
+
 
 
 

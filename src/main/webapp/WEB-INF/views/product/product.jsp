@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/product-css.css"/>
-    <title></title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>상품 상세 페이지</title>
     <style>
         .css-1c36ywl {
             background: url(${product.prod_img_id}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
@@ -62,81 +63,6 @@
     </style>
 </head>
 <body>
-<%--<div id="wrap">--%>
-<%--    <div id="wrap-center">--%>
-<%--        <div id="top">--%>
-<%--            <div id="header">--%>
-<%--                <div id="homeInfo">--%>
-<%--                    <a>회원가입</a>--%>
-<%--                    <div class="stick"></div>--%>
-<%--                    <a>로그인</a>--%>
-<%--                    <div class="stick"></div>--%>
-<%--                    <div>--%>
-<%--                        <a>고객센터<span></span></a>--%>
-<%--                    </div>--%>
-<%--                    <div class="menu">--%>
-<%--                        <div>공지사항</div>--%>
-<%--                        <div>자주하는 질문</div>--%>
-<%--                        <div>1:1 문의</div>--%>
-<%--                        <div>대량주문 문의</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div id="search">--%>
-<%--                    <div id="search-bar">--%>
-<%--                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">--%>
-<%--                        <a>마켓컬리</a>--%>
-<%--                        <div class="stick"></div>--%>
-<%--                        <a>뷰티컬리</a>--%>
-<%--                        <div id="search-center">--%>
-<%--                            <input id="search-input" type="text" placeholder="검색어를 입력하세요.">--%>
-<%--                            <button id="search-button">--%>
-<%--                                <div><span class="blind">검색</span></div>--%>
-<%--                            </button>--%>
-<%--                        </div>--%>
-<%--                        <div id="search-right">--%>
-<%--                            <button href="#">--%>
-<%--                                <span class="blind">배송지등록</span>--%>
-<%--                            </button>--%>
-<%--                            <button href="#">--%>
-<%--                                <span class="blind">찜하기</span>--%>
-<%--                            </button>--%>
-<%--                            <button href="#">--%>
-<%--                                <span class="blind">장바구니</span>--%>
-<%--                            </button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div id="nev">--%>
-<%--                <div id="category">--%>
-<%--                    <span></span>--%>
-<%--                    <span>카테고리</span>--%>
-<%--                </div>--%>
-<%--                <div id="meun">--%>
-<%--                    <ul>--%>
-<%--                        <li>--%>
-<%--                            <span href="#">신상품</span>--%>
-<%--                        </li>--%>
-<%--                        <li>--%>
-<%--                            <span href="#">베스트</span>--%>
-<%--                        </li>--%>
-<%--                        <li>--%>
-<%--                            <span href="#">알뜰쇼핑</span>--%>
-<%--                        </li>--%>
-<%--                        <li>--%>
-<%--                            <span href="#">특가/혜택</span>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--                <div id="nev-right">--%>
-<%--                    <div>--%>
-<%--                        <span>샛별・택배</span>--%>
-<%--                        <span>배송안내</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="css-1px7x3s e1py5jsz0" hidden></div>--%>
-<%--        </div>--%>
 
 <%@ include file="../include/header.jspf" %>
 
@@ -155,12 +81,12 @@
                                 <span class="css-5nirzt e1q8tigr3">
                                     ${product.disc_rate}%
                                 </span>
-                            <span class="css-9pf1ze e1q8tigr2">${product.prod_price}</span>
-                            <span class="css-1x9cx9j e1q8tigr1">원</span>
+                            <span class="css-9pf1ze e1q8tigr2"></span>
+                            <span class="css-1x9cx9j e1q8tigr1">${product.disc_price}원</span>
                         </h2>
                         <span class="css-1e1rd4p e1q8tigr0">
                                 <span>
-                                    8,900원
+                                   ${product.prod_price}원
                                 </span>
                                 <button type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" widht="21" height="21"
@@ -234,14 +160,6 @@
                                     <p class="css-c02hqi e6qx2kx1">${product.weight}</p>
                                 </dd>
                             </li>
-<%--                            <li class="css-e6zlnr epzddad2">--%>
-<%--                                <dt class="css-lytdfk epzddad1">알레르기정보</dt>--%>
-<%--                                <dd class="css-1k8t52o epzddad0">--%>
-<%--                                    <p class="css-c02hqi e6qx2kx1">--%>
-<%--                                        없어--%>
-<%--                                    </p>--%>
-<%--                                </dd>--%>
-<%--                            </li>--%>
                             <li class="css-e6zlnr epzddad2">
                                 <dt class="css-lytdfk epzddad1">유통기한(또는 소비기한)정보</dt>
                                 <dd class="css-1k8t52o epzddad0">
@@ -252,39 +170,100 @@
                         <div class="css-1bp09d0 e17iylht1">
                             <div class="css-2lvxh7 e1qy0s5w0">
                                 <li class="css-e6zlnr epzddad2">
-                                    <dt class="css-lytdfk epzddad1">상품선택</dt>
-                                    <dd class="css-1k8t52o epzddad0">
-                                        <div class="cart-option-item css-1cb5lnc e1bjklo18">
-                                            <div class="css-1qdyvok e1bjklo16">
-                                                <span class="css-1yojl0t e1bjklo14">[압구정주꾸미] 주꾸미 볶음 300g</span>
-                                            </div>
-                                            <span class="css-1072618 e1bjklo13">적립제외상품</span>
-                                            <div class="css-tk6lxo e1bjklo15">
-                                                <div class="css-nx0orh e1cqr3m40">
-                                                    <button type="button" aria-label="수량내리기" disabled
-                                                            class="css-1e90glc e1hx75jb0"></button>
-                                                    <div class="count css-6m57y0 e1cqr3m41">1</div>
-                                                    <button type="button" aria-label="수량올리기"
-                                                            class="css-18y6jr4 e1hx75jb0"></button>
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <c:if test='${option eq "option"}'>
+                                        <dt class="css-lytdfk epzddad1">상품선택</dt>
+                                        <dd class="css-1k8t52o epzddad0">
+                                            <c:forEach var="optionList" items="${optionList}">
+                                                <div class="cart-option-item css-1cb5lnc e1bjklo18">
+                                                    <div class="css-1qdyvok e1bjklo16">
+                                                        <span class="css-1yojl0t e1bjklo14">${optionList.opt_prod_name}</span>
+                                                    </div>
+                                                    <span class="css-1072618 e1bjklo13">적립상품</span>
+                                                    <div class="css-tk6lxo e1bjklo15">
+                                                        <div class="css-nx0orh e1cqr3m40">
+                                                            <button type="button" aria-label="수량내리기"
+                                                                    class="css-8azp8 e1hx75jb0"></button>
+                                                            <div class="count css-6m57y0 e1cqr3m41">0</div>
+                                                            <button type="button" aria-label="수량올리기"
+                                                                    class="css-18y6jr4 e1hx75jb0"></button>
+                                                        </div>
+                                                        <div class="css-1jzvrpg e1bjklo12">
+                                                            <span class="css-fburr9 e1bjklo11">${optionList.opt_price}원</span>
+                                                            <span class="css-gqkxk8 e1bjklo10">${optionList.opt_disc_price}원</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="css-1jzvrpg e1bjklo12">
-                                                            <span class="css-fburr9 e1bjklo11">
-                                                                8,900원
-                                                            </span>
-                                                    <span class="css-gqkxk8 e1bjklo10">
-                                                                6,675원
-                                                            </span>
+                                            </c:forEach>
+                                        </dd>
+                                    </c:if>
+
+
+
+
+
+
+
+
+
+                                    <c:if test='${option ne "option"}'>
+                                        <dt class="css-lytdfk epzddad1">상품선택</dt>
+                                        <dd class="css-1k8t52o epzddad0">
+                                            <div class="cart-option-item css-1cb5lnc e1bjklo18">
+                                                <div class="css-1qdyvok e1bjklo16">
+                                                    <span class="css-1yojl0t e1bjklo14">${product.prod_name}</span>
+                                                </div>
+                                                <span class="css-1072618 e1bjklo13">적립상품</span>
+                                                <div class="css-tk6lxo e1bjklo15">
+                                                    <div class="css-nx0orh e1cqr3m40">
+                                                        <button type="button" aria-label="수량내리기"
+                                                                class="css-8azp8 e1hx75jb0"></button>
+                                                        <div class="count css-6m57y0 e1cqr3m41">1</div>
+                                                        <button type="button" aria-label="수량올리기"
+                                                                class="css-18y6jr4 e1hx75jb0"></button>
+                                                    </div>
+                                                    <div class="css-1jzvrpg e1bjklo12">
+                                                        <span class="css-fburr9 e1bjklo11">${product.prod_price}원</span>
+                                                        <span class="css-gqkxk8 e1bjklo10">${product.disc_price}원</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </dd>
+                                        </dd>
+                                    </c:if>
+
+
+
+
+
+
+
                                 </li>
                             </div>
                             <div class="css-9y0nwt e17iylht0">
                                 <div class="css-ixlb9s eebc7rx8">
                                     <div class="css-yhijln eebc7rx7">
                                         <span class="css-w1is7v eebc7rx6">총 상품금액 :</span>
-                                        <span class="css-x4cdgl eebc7rx5">6,675</span>
+                                        <span class="css-x4cdgl eebc7rx5">
+                                            <c:choose>
+                                                <c:when test="${option eq 'option'}">
+                                                    0
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${product.disc_price}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </span>
                                         <span class="css-1jb8hmu eebc7rx4">원</span>
                                     </div>
                                     <div class="css-1iis94s eebc7rx3">
@@ -321,5 +300,30 @@
     </div>
 </div>
 </div>
+<script>
+
+    let productList = [];
+    <c:choose>
+    <c:when test="${option eq 'option'}">
+    <c:forEach var="optionList" items="${optionList}" varStatus="loop">
+    productList[${loop.index}] = {
+        prod_id : ${optionList.prod_id},
+        opt_prod_id : '${optionList.opt_prod_id}',
+        opt_disc_price : ${optionList.opt_disc_price},
+        quantity : 0
+    }
+    </c:forEach>
+    </c:when>
+    <c:otherwise>
+    productList[0] = {
+        prod_id : ${product.prod_id},
+        disc_price : ${product.disc_price},
+        quantity : 1
+    }
+    </c:otherwise>
+    </c:choose>
+
+</script>
+<script src="/resources/product/js/product.js"></script>
 </body>
 </html>

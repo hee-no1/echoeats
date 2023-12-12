@@ -1,4 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+
 <html>
 <head>
     <title>Title</title>
@@ -9,10 +13,20 @@
         <div id="top">
             <div id="header">
                 <div id="homeInfo">
-                    <a>회원가입</a>
-                    <div class="stick"></div>
-                    <a>로그인</a>
-                    <div class="stick"></div>
+                    <sec:authorize access="!isAuthenticated()">
+                        <a>회원가입</a>
+                        <div class="stick"></div>
+                        <a href="/member/login_form">로그인</a>
+                        <div class="stick"></div>
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                        <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+                        <a href="/member/admin">관리자</a>
+                        <div class="stick"></div>
+                        <a href="/logout">로그아웃</a>
+                        <div class="stick"></div>
+                    </sec:authorize>
+
                     <div>
                         <a>고객센터<span></span></a>
                     </div>
@@ -105,5 +119,8 @@
                 </div>
             </div>
         </div> <!--top -->
+    </div>
+</div>
 </body>
 </html>
+

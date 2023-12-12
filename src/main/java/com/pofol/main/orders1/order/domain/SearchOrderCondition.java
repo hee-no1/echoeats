@@ -1,5 +1,6 @@
 package com.pofol.main.orders1.order.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -42,6 +43,23 @@ public class SearchOrderCondition {
         return UriComponentsBuilder.newInstance()
                 .queryParam("page",     page)
                 .queryParam("pageSize", pageSize)
+                .queryParam("date_type", date_type)
+                .queryParam("start_date", start_date)
+                .queryParam("end_date", end_date)
+                .queryParam("keyword_type", keyword_type)
+                .queryParam("keyword",  keyword)
+                .build().toString();
+    }
+    
+    public String getQueryStringWithoutPS() {
+    	if(!(start_date==null || end_date==null))
+    	{
+	    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    	String str = format.format(start_date);
+	    	str = format.format(end_date);
+    	}
+        return UriComponentsBuilder.newInstance()
+                .queryParam("page",     page)
                 .queryParam("date_type", date_type)
                 .queryParam("start_date", start_date)
                 .queryParam("end_date", end_date)

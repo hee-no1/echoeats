@@ -20,7 +20,7 @@
 
     <update id="update_member" parameterType="MemberDto">
         UPDATE member
-        SET mem_pwd = #{mem_pwd}, mem_name = #{mem_name}, mem_email = #{mem_email}, mem_phone = #{mem_phone}, mem_gender = #{mem_gender}, mem_birth = #{mem_birth}, addr = #{addr}, point = #{point}, per_info_col = #{per_info_col}, free_ship_recep = #{free_ship_recep}, md_date = now(), md_num = #{md_num} ,update_date = #{update_date}, role = #{role}
+        SET mem_pwd = #{mem_pwd}, mem_name = #{mem_name}, mem_email = #{mem_email}, mem_phone = #{mem_phone}, mem_gender = #{mem_gender}, mem_birth = #{mem_birth}, point = #{point}, per_info_col = #{per_info_col}, free_ship_recep = #{free_ship_recep}, md_date = now(), md_num = #{md_num} ,update_date = #{update_date}, role = #{role}
         WHERE mem_id =#{mem_id}
     </update>
 
@@ -42,6 +42,11 @@
 
     <select id="checkEmail" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM member WHERE mem_email = #{mem_email}
+    </select>
+
+    <select id="checkGrade" parameterType="String" resultType="MemberDto">
+        select mem_id, gd_name from member
+        where update_date = #{date}
     </select>
 
 </mapper>

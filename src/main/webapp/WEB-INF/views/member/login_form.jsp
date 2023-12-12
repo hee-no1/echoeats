@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java"  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <link href="/resources/css/member/login_form.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/resources/product/css/main-css.css">
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -10,7 +13,7 @@
 </head>
 <body>
 
-
+<%@ include file="../include/header.jspf" %>
 
 <div class="login">
     <div class="title">로그인</div>
@@ -19,7 +22,7 @@
             <div class="id_pw">
                 <div class="outer">
                     <div class="inner">
-                        <input type="text" name="mem_id" placeholder="아이디를 입력해주세요">
+                        <input type="text" name="mem_id" value="${input_id}" placeholder="아이디를 입력해주세요">
                     </div>
                 </div>
                 <div class="outer">
@@ -27,6 +30,7 @@
                         <input  type="password" name="mem_pwd" placeholder="비밀번호를 입력해주세요">
                     </div>
                 </div>
+                <div class="warm">${errormsg} </div>
             </div>
             <div class="find">
                 <a class="find_inner">아이디 찾기</a>
@@ -40,6 +44,8 @@
                 <button type="button" class="sign_in_button">
                     <span class="button_name" id="join">회원가입</span>
                 </button>
+                <a class="kakao_a" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=adb16712b617f7a830213eb50de44a79&redirect_uri=http://localhost:8080/auth/kakao/callback">
+                    <img src="/resources/images/kakao_login_button.png"></a>
             </div>
         </form>
     </div>
