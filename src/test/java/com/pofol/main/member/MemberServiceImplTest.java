@@ -11,6 +11,7 @@ import com.pofol.main.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,6 +49,9 @@ public class MemberServiceImplTest {
     @Autowired
     DelNotesService delNotesService;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void main(){
         CouponDto couponDto = couponRepository.select_coupon(1);
@@ -80,8 +84,9 @@ public class MemberServiceImplTest {
 
     @Test
     public void main6(){
-        GradeDto admin123 = gradeService.show_grade("admin123");
-        System.out.println(admin123);
+        String grade = gradeService.show_grade("admin123").getGd_name();
+
+        System.out.println(grade);
     }
 
     @Test
@@ -152,6 +157,13 @@ public class MemberServiceImplTest {
         DelNotesDto dto = delNotesService.select_delNotes("asd125");
         System.out.println(dto);
         assertTrue(dto.getMem_id().equals("asd125"));
+    }
+
+
+    @Test
+    public void sss() throws Exception {
+
+
     }
 
 
