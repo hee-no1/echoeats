@@ -43,6 +43,9 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
             //setDefaultTargetUrl("http://localhost:8080/member/info");
             referer = "http://localhost:8080/member/info";
         }
+        if(referer.equals("http://localhost:8080/member/login_form")){
+            referer ="http://localhost:8080/main";
+        }
         setDefaultTargetUrl(referer);
         super.onLogoutSuccess(request, response, authentication);
     }
