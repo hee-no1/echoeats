@@ -15,7 +15,8 @@
     <select id="select" parameterType="long" resultType="ProductDto">
         SELECT p.*, i.*
         FROM product p, product_info i
-        WHERE p.prod_id = i.prod_id AND p.prod = #{prod_id}
+        WHERE p.prod_id = i.prod_id
+        AND p.prod_id = #{prod_id}
     </select>
 
     <!-- 카테고리 리스트 -->
@@ -91,18 +92,17 @@
         <if test='selling != null and selling != "" and selling != "A"'>
             AND p.sale_sts = #{selling}
         </if>
-
         <if test='display != null and display != "" and display != "A"'>
             AND p.disp_sts = #{display}
         </if>
         <if test='Stock != null and Stock != "" and Stock != "A"'>
-            <if test='Stock == "재고정상"'>
+            <if test='Stock == "stockNormal"'>
                 AND p.prod_qty >= 51
             </if>
-            <if test='Stock == "재고부족"'>
+            <if test='Stock == "stockLack"'>
                 AND p.prod_qty BETWEEN 1 AND 50
             </if>
-            <if test='Stock == "품절"'>
+            <if test='Stock == "stockOut"'>
                 AND p.prod_qty = 0
             </if>
         </if>

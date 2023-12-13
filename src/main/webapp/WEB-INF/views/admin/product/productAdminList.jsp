@@ -91,15 +91,15 @@
             --bs-pagination-border-width: 1px;
             --bs-pagination-border-color: #dee2e6;
             --bs-pagination-border-radius: 0.375rem;
-            --bs-pagination-hover-color: #1b1e26;
+            --bs-pagination-hover-color: #00c73c;
             --bs-pagination-hover-bg: #e9ecef;
             --bs-pagination-hover-border-color: #dee2e6;
-            --bs-pagination-focus-color: #1b1e26;
+            --bs-pagination-focus-color: #00c73c;
             --bs-pagination-focus-bg: #e9ecef;
             --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             --bs-pagination-active-color: #fff;
-            --bs-pagination-active-bg: #1b1e26;
-            --bs-pagination-active-border-color: #1b1e26;
+            --bs-pagination-active-bg: #00c73c;
+            --bs-pagination-active-border-color: #00c73c;
             --bs-pagination-disabled-color: #6c757d;
             --bs-pagination-disabled-bg: #fff;
             --bs-pagination-disabled-border-color: #dee2e6;
@@ -134,15 +134,10 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-<%--                                        <c:forEach var="ct" items="${ksList}">--%>
-<%--                                            <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                        </c:forEach>--%>
-
                                         <option value="ProductName">상품명</option>
                                         <option value="ProductNumber">상품번호</option>
                                         <option value="DeliveryType">배송속성</option>
                                         <option value="Brand">브랜드</option>
-
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword" id="sBaseSearchBox" style="width:400px;">
                                     <a href="#none" class="btnIcon icoPlus"><span>추가</span></a>
@@ -168,19 +163,12 @@
                         <th scope="row">상품등록일</th>
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
-<%--                                <c:forEach var="ct" items="${dtList}">--%>
-<%--                                    <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                </c:forEach>--%>
-
                                 <option value="ProductRegisterDate">상품등록일</option>
                                 <option value="ProductModifyDate">상품수정일</option>
                                 <option value="saleStartDate">판매시작일</option>
                                 <option value="saleEndDate">판매종료일</option>
-
                             </select>
-<%--                            <c:forEach var="ct" items="${diList}">--%>
-<%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
-<%--                            </c:forEach>--%>
+
                             <a href="#none" class="btnDate" date-interval="0"><span>오늘</span></a>
                             <a href="#none" class="btnDate" date-interval="3"><span>3일</span></a>
                             <a href="#none" class="btnDate" date-interval="7"><span>7일</span></a>
@@ -222,9 +210,9 @@
                         <th scope="row">재고상태</th>
                         <td colspan="3">
                             <label class="gSingleLabel eSelected"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="A" checked="&quot;checked&quot;"> 전체</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="재고정상"> 재고정상</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="재고부족"> 재고부족</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="품절"> 품절</label>
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockNormal"> 재고정상</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockLack"> 재고부족</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockOut"> 품절</label>
                         </td>
                     </tr>
                     <tr>
@@ -261,8 +249,8 @@
                         <th scope="row">옵션상품</th>
                         <td colspan="3">
                             <label class="gSingleLabel eSelected"><input type="radio" class="fChk eDisplayStatus" name="option" value="A" checked="&quot;checked&quot;"> 전체</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="T"> 옵션있음</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="F"> 옵션없음</label>
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="Y"> 옵션있음</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="N"> 옵션없음</label>
                         </td>
                     </tr>
                     <tr>
@@ -284,26 +272,28 @@
                     <img src="//img.echosting.cafe24.com/suio/ico_loading.gif" alt="">
                 </div> -->
             </div>
-        </form> <!--option -->
+
         <div id="tabNumber" class="tabCont">
             <div class="mCtrl typeHeader">
                 <div class="gTop">
-                    <select>
-                        <option value="">판매전</option>
-                        <option value="">판매중</option>
-                        <option value="">판매중지</option>
-                        <option value="">판매종료</option>
-                        <option value="">판매금지</option>
+                    <select class="btnNormal" name="saleStatus">
+                        <option value="">판매변경</option>
+                        <option value="판매전">판매전</option>
+                        <option value="판매중">판매중</option>
+                        <option value="판매중지">판매중지</option>
+                        <option value="판매종료">판매종료</option>
+                        <option value="판매금지">판매금지</option>
                     </select>
-                    <select>
-                        <option value="">진열함</option>
-                        <option value="">진열안함</option>
+                    <select class="btnNormal" name="displayStatus">
+                        <option value="">진열변경</option>
+                        <option value="Y">진열함</option>
+                        <option value="N">진열안함</option>
                     </select>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl"><span>판매가 변경</span></a>
+                       class="btnNormal"><span>판매가 변경</span></a>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
                        class="btnNormal"><span>판매기간 변경</span></a>
-                    <button type="submit">수정</button>
+                    <button type="submit" class="btnNormal" id="updateButton"><span>수정</span></button>
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
@@ -406,7 +396,7 @@
                                         <c:set var="parentCode" value="${category.parent_code}"/>
                                     </c:if>
                                 </c:forEach>
-                                <td scope="col" class="w24"><input type="checkbox" id="allChk"></td>
+                                <td scope="col" class="w24"><input type="checkbox" id="allChk" name="selectProductId" value="${product.prod_id}"></td>
                                 <td scope="col" class="w50" style="display:none;">No</td>
                                 <td scope="col" class="w120" style="">${product.prod_id}</td>
                                 <td scope="col" class="w150" style="">${product.prod_name}</td>
@@ -414,11 +404,11 @@
                                 <td scope="col" class="w95" style="">${product.disp_sts}</td>
                                 <td scope="col" class="w95" style="">
                                     <c:choose>
-                                        <c:when test="${product.prod_qty eq 0}">
-                                            품절
-                                        </c:when>
                                         <c:when test="${product.prod_qty > 50}">
                                             재고정상
+                                        </c:when>
+                                        <c:when test="${product.prod_qty eq 0}">
+                                            품절
                                         </c:when>
                                         <c:otherwise>
                                             재고부족
@@ -476,6 +466,7 @@
                 </ul>
             </div>
         </div>
+        </form> <!--option -->
     </div> <!-- context -->
 
     <footer class="py-4 bg-light mt-auto">
@@ -578,5 +569,6 @@
 <script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
 <script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
 <script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
+<script src="/resources/product/js/productAdmin.js"></script>
 </body>
 </html>

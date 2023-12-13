@@ -14,12 +14,17 @@ public class ProductAdminServiceImpl implements ProductAdminService{
     private final ProductAdminRepository productAdminRepository;
 
     @Override
+    public ProductDto getProduct(Long prod_id) throws Exception {
+        return productAdminRepository.select(prod_id);
+    }
+
+    @Override
     public List<ProductDto> getProductAdminList() throws Exception {
 
         try {
             return productAdminRepository.selectAll();
         } catch (Exception e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 

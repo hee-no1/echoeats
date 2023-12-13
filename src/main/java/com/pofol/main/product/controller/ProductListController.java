@@ -1,5 +1,7 @@
 package com.pofol.main.product.controller;
 
+import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.service.GradeService;
 import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
@@ -9,10 +11,10 @@ import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.service.ProductListService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ public class ProductListController {
 
     private final ProductListService productListService;
     private final CategoryList categoryList;
+    private final GradeService gradeService;
 
     // 이벤트 화면으로 (그냥 만듬)
     @GetMapping("/christmas")
@@ -75,6 +78,20 @@ public class ProductListController {
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
             model.addAttribute("categoryList", bigCategoryProductList);
+
+            // 회원 등급에 따른 적립금 계산
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String memberID = authentication.getName();
+
+            // 로그인 상태일 때 (적립금 계산)
+            if (!memberID.equals("anonymousUser")) {
+                GradeDto memberGrade = gradeService.show_grade(memberID);
+                model.addAttribute("memberGrade", memberGrade);
+
+                Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
+                model.addAttribute("saveMoney", saveMoney);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

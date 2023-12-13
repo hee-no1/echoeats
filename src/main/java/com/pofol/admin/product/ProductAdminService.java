@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface ProductAdminService {
 
+    // 상품 1개 자겨오기
+    ProductDto getProduct(Long prod_id) throws Exception;
+
     List<ProductDto> getProductAdminList() throws Exception;
 
     List<ProductDto> getProductAdminSearchList(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;

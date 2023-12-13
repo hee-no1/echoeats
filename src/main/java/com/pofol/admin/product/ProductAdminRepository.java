@@ -12,6 +12,9 @@ public interface ProductAdminRepository {
     // 코드테이블에서 상태코드를 가져온다
     List<CodeTableDto> selectCodeType(Integer code_type) throws Exception;
 
+    // 상품 리스트를 가져온다
+    ProductDto select(Long prod_id) throws Exception;
+
     // 상품 전체 리스트를 가져온다
     List<ProductDto> selectAll() throws Exception;
 

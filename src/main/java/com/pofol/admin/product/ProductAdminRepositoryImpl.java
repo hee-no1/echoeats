@@ -25,6 +25,11 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     }
 
     @Override
+    public ProductDto select(Long prod_id) throws Exception {
+        return sqlSession.selectOne(namespace + "select", prod_id);
+    }
+
+    @Override
     public List<ProductDto> selectAll() throws Exception {
         return sqlSession.selectList(namespace + "selectAll");
     }
@@ -56,7 +61,7 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
         map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("stock_min", productFilterDto.getStock_min());
-        map.put("stock_max", productFilterDto.getPrice_max());
+        map.put("stock_max", productFilterDto.getStock_max());
         map.put("selling", productFilterDto.getSelling());
         map.put("display", productFilterDto.getDisplay());
         map.put("option", productFilterDto.getOption());
