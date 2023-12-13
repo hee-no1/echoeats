@@ -63,4 +63,8 @@ public class ProductDto {
         this.disp_sts =disp_sts;
         this.prod_qty = prod_qty;
     }
+
+    public boolean isSaleExpired() {
+        return sel_end_date != null && sel_end_date.before(new Date());
+    }
 }

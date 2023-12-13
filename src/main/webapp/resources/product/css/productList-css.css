@@ -542,7 +542,7 @@ svg:not(:root) {
   letter-spacing: -1px;
   cursor: pointer;
   font-weight: 700;
-  color: #00c73c;
+  color: #333;
 }
 
 #best {

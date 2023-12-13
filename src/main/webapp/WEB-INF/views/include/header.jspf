@@ -39,10 +39,10 @@
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
+                        <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">
+                        <a> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%--                        <div class="stick"></div>--%>
+<%--                        <a>뷰티컬리</a>--%>
 
                         <form action="/searchProduct" id="search-form">
                             <div id="search-center">
@@ -119,8 +119,6 @@
                 </div>
             </div>
         </div> <!--top -->
-    </div>
-</div>
 </body>
 </html>
 
