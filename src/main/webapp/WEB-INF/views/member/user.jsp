@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <html>
 <head>
@@ -30,10 +31,16 @@ ${result}
     <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
 </sec:authorize>
 <script>
-    function setRefererCookie() {
-        // 현재 페이지 URL을 쿠키에 저장
-        //document.cookie = "referer=" + window.location.href;
-    }
+    $(document).ready(function () {
+        // 현재 사용자의 mem_name 값을 가져옴
+        //var memName = "<sec:authentication property='principal.mem_name' />";
+        var encodedString = "<sec:authentication property='principal.mem_name' />";
+        var div = document.createElement('div');
+        div.innerHTML = encodedString;
+        var decodedString = div.textContent || div.innerText;
+
+        console.log(decodedString);
+    });
 </script>
 </body>
 </html>
