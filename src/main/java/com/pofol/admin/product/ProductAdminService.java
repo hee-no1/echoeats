@@ -3,6 +3,7 @@ package com.pofol.admin.product;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.ProductDto;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProductAdminService {
@@ -19,4 +20,6 @@ public interface ProductAdminService {
     List<CategoryDto> getCategoryList() throws Exception;
 
     Integer updateProductAdmin(ProductDto productDto) throws Exception;
+
+    List<ProductDto> getSalePeriod(String range, Date currentDate) throws Exception;
 }

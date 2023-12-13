@@ -10,6 +10,8 @@ import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.exception.ExpiredProductException;
+import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,8 +94,20 @@ public class ProductListController {
                 model.addAttribute("saveMoney", saveMoney);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
+            if (product.isSaleExpired()) {
+                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
+            } else if (product.getDisp_sts().equals("N")) {
+                throw new ExpiredProductException("현재 판매중인 상품이 아닙니다.");
+            }
+
+        } catch (ExpiredProductException expiredProductException) {
+            HandlerProductException handlerProductException = new HandlerProductException();
+            handlerProductException.ExpiredProductExceptionHandler(expiredProductException);
+            return "redirect:/";
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
         return "/product/product";
     }

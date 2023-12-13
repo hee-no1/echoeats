@@ -36,7 +36,14 @@
 
                 let interval = e.target.closest('a.btnDate').getAttribute('date-interval');
 
-                $('.start_date').val(fullDate(-interval));
+                if (interval !== '-1') {
+                    $('.start_date').val(fullDate(-interval));
+                    $('.duet-date__input').prop('disabled', false)
+                } else {
+                    $('.duet-date__input').prop('disabled', true)
+                }
+                console.log("날짜계산", interval)
+                console.log(typeof interval)
             });
 
             $('#search_button').click(function(e){
@@ -49,6 +56,7 @@
             });
 
             $('.duet-date-picker-grid').click(function(e){
+                $('.duet-date__input').prop('disabled', false)
                 $('.btnDate').removeClass('selected');
             });
         });
@@ -175,7 +183,7 @@
                             <a href="#none" class="btnDate" date-interval="30"><span>1개월</span></a>
                             <a href="#none" class="btnDate" date-interval="90"><span>3개월</span></a>
                             <a href="#none" class="btnDate" date-interval="365"><span>1년</span></a>
-                            <a href="#none" class="btnDate" date-interval="9999"><span>전체</span></a>
+                            <a href="#none" class="btnDate" date-interval="-1"><span>전체</span></a>
 
                             <div class="duet-date-picker-grid  duet-date-theme-ec-new  sun">
                                 <duet-date-picker first-day-of-week="0" name="start_date" identifier="startDate"
@@ -486,59 +494,6 @@
 <script>
 
     let categoryList = JSON.parse('${categoryList}');
-
-    let cate1Array = [];
-    let cate2Array = [];
-    let cate1Object = {};
-    let cate2Object = {};
-
-    let cate1Select = $('#eCategory1');
-    let cate2Select = $('#eCategory2');
-
-    $(document).ready(function(){
-        console.log(cate1Array);
-        console.log(cate2Array);
-    });
-
-    // 카테고리 배열 초기화 메서드
-    const makeCategoryArray = function(obj, array, categoryList, tier) {
-        for (let i = 0; i < categoryList.length; i++) {
-            if (categoryList[i].tier === tier) {
-                obj = {};
-                obj.cat_name = categoryList[i].cat_name;
-                obj.cat_code = categoryList[i].cat_code;
-                obj.parent_code = categoryList[i].parent_code;
-
-                array.push(obj);
-            }
-        }
-    }
-
-    // 배열 초기화
-    makeCategoryArray(cate1Object, cate1Array, categoryList, '1');
-    makeCategoryArray(cate2Object, cate2Array, categoryList, '2');
-
-    // 대분류 목록
-    for (let i = 0; i < cate1Array.length; i++) {
-        cate1Select.append('<option value="' + cate1Array[i].cat_code + '">' + cate1Array[i].cat_name + '</option>');
-    }
-
-    // 대분류 선택시 중분류 목록
-    $(cate1Select).on("change", function () {
-        let selectVal = $(this).find("option:selected").val();
-        cate2Select.children().remove();
-        cate2Select.append('<option selected value="none">- 중분류 선택 -</option>');
-        for(let i = 0; i < cate2Array.length; i++) {
-            if (cate2Array[i].parent_code === selectVal) {
-                cate2Select.append('<option value="' + cate2Array[i].cat_code + '">' + cate2Array[i].cat_name + '</option>');
-            }
-        }
-    });
-
-
-
-
-
 
     const pickers = document.querySelectorAll(".duet-date-picker")
     pickers.forEach(picker => {

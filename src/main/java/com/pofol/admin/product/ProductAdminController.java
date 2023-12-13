@@ -45,6 +45,7 @@ public class ProductAdminController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/";
         }
 
         return "admin/product/productAdminList";
@@ -57,10 +58,10 @@ public class ProductAdminController {
                                      String displayStatus) {
 
         // 판매가 변경 + 판매기간 변경
-        
+
+        System.out.println("이거 실행 됨");
         
         try {
-
             ProductDto product = productAdminService.getProduct(selectProductId);
 
             if (!saleStatus.isEmpty()) {

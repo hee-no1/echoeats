@@ -346,9 +346,9 @@ tbody {
 
 .btnDate:hover span,
 .btnDate.selected span {
-    border-color: #3971ff;
+    border-color: #00c73c;
     z-index: 1;
-    color: #3971ff;
+    color: #00c73c;
 }
 
 html:lang(ko) .btnDate span {
@@ -1115,4 +1115,8 @@ ul.mForm {
     border: 1px solid #aeb4c6;
     padding: 0 8px;
     color: white;
+}
+
+input.duet-date__input:disabled {
+    background-color: #00c73c1f;
 }

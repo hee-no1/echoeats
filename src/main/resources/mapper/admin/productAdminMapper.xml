@@ -37,6 +37,40 @@
         WHERE prod_id = #{prod_id}
     </update>
 
+<!--    상품 판매시작일 + 판매종료일 가져오기-->
+    <select id="selectSaleDate" parameterType="map" resultType="ProductDto">
+        SELECT sel_str_date, sel_end_date
+        FROM product
+        <where>
+            <if test='range == "start"'>
+                AND sel_str_date &lt;= #{currentDate}
+            </if>
+            <if test='range == "end"'>
+                AND sel_end_date &lt;= #{currentDate}
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--    <상품 데이터 insert문>-->
     <!--    <insert id="">-->
@@ -46,6 +80,20 @@
     <!--        INSERT INTO product_info (prod_id) VALUES (@lastProdfID);-->
     <!--        INSERT INTO option_product (opt_prod_id, prod_id) VALUES (CONCAT(@lastProdID, 'A') ,@lastProdID);-->
     <!--    </insert>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
