@@ -11,7 +11,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" /> -->
     <link href="<c:url value='/resources/common/css/styles.css' />" rel="stylesheet"/>
     <link href="<c:url value='/resources/admin/order/css/orderList.css' />" rel="stylesheet"/>
-    <link rel="stylesheet" href="/resources/css/admin/test.css">
+    <link rel="stylesheet" href="/resources/css/admin/productEnroll.css">
     <%-- 달력 위젯을 위한 스타일 시트 --%>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"/>
 
@@ -688,16 +688,21 @@
         });
 
     // 달력 위젯 적용
+    /* 설정 */
+    const config = {
+        dateFormat: 'yy-mm-dd'
+    }
+
     $(function () {
-        $("input[name='sel_str_date']").datepicker();
+        $("input[name='sel_str_date']").datepicker(config);
     });
 
     $(function () {
-        $("input[name='sel_end_date']").datepicker();
+        $("input[name='sel_end_date']").datepicker(config);
     });
 
     $(function () {
-        $("input[name='expiration-date']").datepicker();
+        $("input[name='expiration-date']").datepicker(config);
     });
 
     let enrollForm = document.getElementById('enrollForm');
