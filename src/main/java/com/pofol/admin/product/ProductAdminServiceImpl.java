@@ -1,6 +1,7 @@
 package com.pofol.admin.product;
 
 import com.pofol.main.product.category.CategoryDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,11 @@ public class ProductAdminServiceImpl implements ProductAdminService{
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Integer updateOptionAdmin(OptionProductDto optionProductDto) throws Exception {
+        return productAdminRepository.optionUpdate(optionProductDto);
     }
 
     @Override

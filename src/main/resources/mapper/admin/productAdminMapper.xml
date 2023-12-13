@@ -19,12 +19,17 @@
         AND p.prod_id = #{prod_id}
     </select>
 
-    <!-- 카테고리 리스트 -->
-    <select id="cateList" resultType="CategoryDto">
-        SELECT *
-        FROM category
-        ORDER BY cat_code
-    </select>
+<!--    1개의 상품에 옵션 상품 리스트 조회-->
+<!--    <select id="selectAllOption" parameterType="long" resultType="OptionProduct">-->
+<!--        SELECT *-->
+<!--        FROM option_product-->
+<!--        WHERE pord_id = #{prod_id}-->
+<!--    </select>-->
+<!--    옵션 상품 (1개 옵션) 조회-->
+
+
+
+
 
 <!--    상품 판매, 진열, 재고 상태 수정-->
     <update id="update" parameterType="ProductDto">
@@ -34,6 +39,15 @@
         disp_sts = #{disp_sts},
         prod_mod_date = now(),
         prod_qty = #{prod_qty}
+        WHERE prod_id = #{prod_id}
+    </update>
+
+<!--    옵션 상품 판매, 재고 상태 수정-->
+    <update id="optionUpdate">
+        UPDATE option_product
+        SET
+        opt_prod_qty = #{opt_prod_qty},
+        opt_prod_sts = #{opt_prod_sts}
         WHERE prod_id = #{prod_id}
     </update>
 
@@ -51,7 +65,12 @@
         </where>
     </select>
 
-
+    <!-- 카테고리 리스트 -->
+    <select id="cateList" resultType="CategoryDto">
+        SELECT *
+        FROM category
+        ORDER BY cat_code
+    </select>
 
 
 

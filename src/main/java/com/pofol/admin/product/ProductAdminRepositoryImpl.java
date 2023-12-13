@@ -2,6 +2,7 @@ package com.pofol.admin.product;
 
 import com.pofol.main.orders1.order.domain.CodeTableDto;
 import com.pofol.main.product.category.CategoryDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +19,8 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
 
     private final SqlSession sqlSession;
 
-    private final String namespace = "com.pofol.admin.product.ProductAdminRepository.";
+    private final String productAdminNamespace = "com.pofol.admin.product.ProductAdminRepository.";
+    private final String categoryNamespace = "com.pofol.main.product.category.CategoryDto.";
 
     @Override
     public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
@@ -27,17 +29,22 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
 
     @Override
     public ProductDto select(Long prod_id) throws Exception {
-        return sqlSession.selectOne(namespace + "select", prod_id);
+        return sqlSession.selectOne(productAdminNamespace + "select", prod_id);
     }
 
     @Override
     public List<ProductDto> selectAll() throws Exception {
-        return sqlSession.selectList(namespace + "selectAll");
+        return sqlSession.selectList(productAdminNamespace + "selectAll");
     }
 
     @Override
     public int count() throws Exception {
         return 0;
+    }
+
+    @Override
+    public List<OptionProductDto> selectAllOption(Long prod_id) throws Exception {
+        return sqlSession.selectList(productAdminNamespace + "selectOption", prod_id);
     }
 
     @Override // 조건에 따른 상품 리스트 정렬 (관리자)
@@ -48,14 +55,14 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("offset", searchProductAdminCondition.getOffset());
         map.put("pageSize", searchProductAdminCondition.getPageSize());
         productFilter(searchProductAdminCondition, productFilterDto, map);
-        return sqlSession.selectList(namespace + "searchSelectPage", map);
+        return sqlSession.selectList(productAdminNamespace + "searchSelectPage", map);
     }
 
     @Override // 조건에 따른 상품 리스트 카운트 (관리자)
     public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
         Map<String, Object> map = new HashMap<>();
         productFilter(searchProductAdminCondition, productFilterDto, map);
-        return sqlSession.selectOne(namespace + "searchResultCnt", map);
+        return sqlSession.selectOne(productAdminNamespace + "searchResultCnt", map);
     }
 
     private void productFilter(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, Map<String, Object> map) {
@@ -74,12 +81,17 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
 
     @Override // 카테고리 정렬
     public List<CategoryDto> categoryList() throws Exception {
-        return sqlSession.selectList(namespace + "cateList");
+        return sqlSession.selectList(categoryNamespace + "cateList");
     }
 
     @Override // 상품의 상태를 변경한다 (판매상태 + 진열상태)
     public int update(ProductDto productDto) throws Exception {
-        return sqlSession.update(namespace + "update", productDto);
+        return sqlSession.update(productAdminNamespace + "update", productDto);
+    }
+
+    @Override // 상품 상태에 따라 옵션 상품 상태를 변경한다
+    public int optionUpdate(OptionProductDto optionProductDto) throws Exception {
+        return sqlSession.update(productAdminNamespace + "optionUpdate", optionProductDto);
     }
 
     @Override // 상품의 판매시작일 + 판매종료일 (판매기간에 따른 상품 상태 변경)
@@ -87,6 +99,6 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         Map<String, Object> map = new HashMap<>();
         map.put("range", range);
         map.put("currentDate", currentDate);
-        return sqlSession.selectList(namespace + "selectSaleDate", map);
+        return sqlSession.selectList(productAdminNamespace + "selectSaleDate", map);
     }
 }

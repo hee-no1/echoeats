@@ -4,6 +4,35 @@
 
 <mapper namespace="ProductDto">
 
+    <!--    상품 조회-->
+    <select id="select" parameterType="long" resultType="ProductDto">
+        SELECT p.*, i.*
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id
+          AND p.prod_id = #{prod_id}
+    </select>
+
+    <!--    전체 상품 조회-->
+    <select id="selectAll" parameterType="long" resultType="ProductDto">
+        SELECT p.prod_id, p.prod_name, p.sale_sts, p.disp_sts, p.prod_qty, p.prod_price, p.disc_price, i.dlvy_type, p.cat_code, i.brand, p.prod_rg_date, p.prod_mod_date, p.sel_str_date, p.sel_end_date
+        FROM product p, product_info i
+        WHERE p.prod_id = i.prod_id
+        ORDER BY p.prod_id ASC
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- 상품 등록 -->
     <insert id="insert" parameterType="ProductDto">
         INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, disc_rate, sale_sts, prod_qty, is_opt, short_desc, long_desc, disp_sts, prod_mod_date, sel_str_date, sel_end_date)

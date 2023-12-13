@@ -73,6 +73,10 @@ public class ProductAdminController {
 
             productAdminService.updateProductAdmin(product);
 
+            if (product.getIs_opt().equals("Y")) {
+
+            }
+
             return "redirect:/admin/product/list"; // (변경해야함)
         } catch (Exception e) {
             e.printStackTrace();
