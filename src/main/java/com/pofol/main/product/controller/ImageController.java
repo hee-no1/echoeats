@@ -21,12 +21,12 @@ public class ImageController {
 
     @PostMapping("/upload")
     public String imageUploadPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
-        System.out.println(productDto);
+        log.info("--------------imageUploadPOST----------------");
+        log.info("productDto : " + productDto);
+        log.info("productDto.getProd_img() : " + productDto.getProd_img());
+        log.info("productDto.getProd_img().getOriginalFilename() : " + productDto.getProd_img().getOriginalFilename());
         String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                 productDto.getProd_img(), "product");
-        System.out.println("imgUrl = "+imgUrl);
-        System.out.println(productDto.getProd_img().getOriginalFilename());
-        System.out.println();
         //productService.productEnroll(productDto);
         return "redirect:/prodEnroll";
     }

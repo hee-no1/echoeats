@@ -78,7 +78,7 @@ public class ProductDto {
     this.prod_img = prod_img;
     this.rg_num = rg_num;
     this.md_num = rg_num;
-    this.disc_price = this.prod_price * ((100-this.disc_rate) / 100);
+    this.disc_price = (this.prod_price * ((100-this.disc_rate) / 100)) / 10 * 10;
   }
 
 }
