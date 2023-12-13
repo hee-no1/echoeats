@@ -628,7 +628,7 @@ span.btnIcon {
     font-size: 12px;
     line-height: 26px;
     color: #fff;
-    background-color: #444b59;
+    background-color: #00c73c;
 }
 
 .btnSearch.save span,
@@ -639,7 +639,7 @@ span.btnIcon {
 }
 
 .mButton {
-    margin: 16px 0 0;
+    margin: 16px 0 16px 0;
     text-align: right;
 }
 
@@ -678,7 +678,7 @@ form>.mButton .btnSearch span,
 
 .btnSearch:hover span,
 .btnSearch.selected span {
-    background-color: #667084;
+    background-color: #45bd6a;
 }
 
 .btnSearch.save:hover span,
@@ -753,25 +753,26 @@ label.eSelected {
     width: 14px;
     height: 14px;
     outline: none;
-    background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+    /*background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');*/
     background-repeat: no-repeat;
-    -webkit-appearance: none;
-    appearance: none;
+    /*-webkit-appearance: none;*/
+    /*appearance: none;*/
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
     position: relative;
     opacity: 1;
     width: 14px;
     height: 14px;
     cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+    /*appearance: none;*/
+    /*-webkit-appearance: none;*/
+    /*-moz-appearance: none;*/
+    /*background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');*/
     background-position: 0 0;
     background-repeat: no-repeat;
     outline: 0;
+    accent-color: #00a833;
 }
 
 label .fChk {
@@ -1089,8 +1090,9 @@ table .rowChk[type="checkbox"] {
     outline: none;
     background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
     background-repeat: no-repeat;
-    -webkit-appearance: none;
-    appearance: none;
+    accent-color: #00c73c;
+    /*-webkit-appearance: none;*/
+    /*appearance: none;*/
 }
 
 .mPaginate {
@@ -1108,4 +1110,9 @@ ul.mForm {
     list-style-type: none;
 }
 
-
+#updateButton span {
+    background-color: #00c73c;
+    border: 1px solid #aeb4c6;
+    padding: 0 8px;
+    color: white;
+}
