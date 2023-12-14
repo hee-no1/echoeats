@@ -13,6 +13,12 @@ public interface OrderDetailRepository {
     List<OrderDetailDto> selectAll() throws Exception;
     int deleteAll() throws Exception;
     int count() throws Exception;
+    // mypage에서 주문상세 리스트 가져오는 메서드
+    public abstract List<OrderDetailDto> selectAllByOrdId(Long ord_id);
+	// mypage에서 주문리스트 이미지가져오는 메서드
+    public abstract String selectByOrderDetImg(Long ord_det_id);
+	// mypage에서 주문상세의 배송상태를 code테이블에서 가져오는 메서드
+    public abstract String selectByCodeName(String code_name);
 
 
 }

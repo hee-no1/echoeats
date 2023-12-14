@@ -29,7 +29,9 @@ public class OrderDetailDto {
     private Date ex_rfund_date; //교환,환불 일시
     private String rg_num;
     private String md_num;
-
+    
+    private String column_sts; // code_name에 대한 한글명
+    private String img_url; // 주문상세 상품이미지
 
     //insert 용도, option상품일때
     public OrderDetailDto(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num) {

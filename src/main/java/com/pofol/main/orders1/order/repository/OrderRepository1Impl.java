@@ -14,7 +14,7 @@ public class OrderRepository1Impl implements OrderRepository1 {
 
 	@Autowired
 	private SqlSession session;
-	private static String namespace = "order.repository.orderMapper.";
+	private static String namespace = "order.repository.order1Mapper.";
 
 	@Override
 	public int insert(OrderDto dto) throws Exception {

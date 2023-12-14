@@ -9,7 +9,7 @@
 		tot_prod_disc, tot_ord_qty, dlvy_fee, pay_way, ord_ing, rg_num, md_num)
 		VALUES
 		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
-		#{tot_prod_disc}, #{tot_ord_qty}, #{dlvy_fee}, #{pay_way},#{ord_ing}, #{rg_num}, #{md_num})
+		#{tot_prod_disc}, #{tot_ord_qty}, #{dlvy_fee}, #{pay_way}, #{ord_ing}, #{rg_num}, #{md_num})
 		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
 			SELECT MAX(ord_id) FROM spring.order
 		</selectKey>
@@ -77,7 +77,34 @@
 		FROM spring.order
 		ORDER BY rg_date DESC, ord_id DESC
 	</select>
-
+	
+	<select id="selectAllByUserIdAndPeriod" parameterType="map" resultType="OrderDto">
+		SELECT *
+		FROM spring.order
+		WHERE mem_id = #{id}
+		AND ord_date >= DATE_SUB(NOW(), INTERVAL #{period} DAY)
+		ORDER BY ord_date DESC, ord_id DESC
+	</select>
+	
+	<select id="selectByOrderMainImg" resultType="string">
+		SELECT pi.upld_path
+		FROM product_image pi
+		JOIN order_detail od ON pi.prd_id = od.prod_id
+		JOIN (
+		    SELECT MIN(ord_det_id) ord_det_id
+		    FROM order_detail
+		    WHERE ord_id = #{ord_id}
+		    GROUP BY ord_id
+		) min_od ON od.ord_det_id = min_od.ord_det_id
+	</select>
+	
+	<select id="selectByOrderId" resultType="OrderDto">
+		SELECT *
+		FROM spring.order ord
+		JOIN pay_discount pd ON ord.ord_id = pd.ord_id
+		WHERE ord.ord_id = #{ord_id};
+	</select>
+	
 	<delete id="deleteAll">
 		DELETE FROM spring.order
 	</delete>

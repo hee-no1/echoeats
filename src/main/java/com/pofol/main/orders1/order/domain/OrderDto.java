@@ -32,6 +32,8 @@ public class OrderDto {
     private String rg_num;
     private Date md_date;
     private String md_num;
+    
+    private String img_url;
 
     public OrderDto() {
     	this.dlvy_fee = 0;

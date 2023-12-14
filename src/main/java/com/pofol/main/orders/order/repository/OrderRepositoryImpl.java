@@ -1,11 +1,13 @@
 package com.pofol.main.orders.order.repository;
 
-import com.pofol.main.orders.order.domain.OrderDto;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.pofol.main.orders.order.domain.OrderDto;
 
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
@@ -52,6 +54,21 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public int count() throws Exception {
 		return session.selectOne(namespace + "count");
+	}
+
+	@Override
+	public List<OrderDto> selectAllByUserIdAndPeriod(Map map) throws Exception {
+		return session.selectList(namespace + "selectAllByUserIdAndPeriod", map);
+	}
+
+	@Override
+	public String selectByOrderMainImg(Long ord_id) {
+		return session.selectOne(namespace + "selectByOrderMainImg", ord_id);
+	}
+
+	@Override
+	public OrderDto selectByOrderId(Long ord_id) {
+		return session.selectOne(namespace + "selectByOrderId", ord_id);
 	}
 
 }

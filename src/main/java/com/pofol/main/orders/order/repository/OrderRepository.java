@@ -1,8 +1,9 @@
 package com.pofol.main.orders.order.repository;
 
-import com.pofol.main.orders.order.domain.OrderDto;
-
 import java.util.List;
+import java.util.Map;
+
+import com.pofol.main.orders.order.domain.OrderDto;
 
 public interface OrderRepository {
 	//crud
@@ -15,5 +16,8 @@ public interface OrderRepository {
 		public abstract List<OrderDto> selectAll() throws Exception;
 	    public abstract int deleteAll() throws Exception;
 	    public abstract int count() throws Exception;
+		public abstract List<OrderDto> selectAllByUserIdAndPeriod(Map map)throws Exception;
+		public abstract String selectByOrderMainImg(Long ord_id);
+		public abstract OrderDto selectByOrderId(Long ord_id);
 
 }

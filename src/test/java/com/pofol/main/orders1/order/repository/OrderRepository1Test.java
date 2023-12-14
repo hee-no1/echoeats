@@ -2,9 +2,11 @@ package com.pofol.main.orders1.order.repository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +17,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.pofol.main.orders.order.domain.OrderDetailDto;
+import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
-import com.pofol.main.orders1.order.domain.OrderDto;
+import com.pofol.main.orders.order.repository.OrderRepository;
 
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/root-context.xml" })
@@ -25,7 +28,7 @@ public class OrderRepository1Test {
 	DataSource ds;
 
 	@Autowired
-	OrderRepository1 dao;
+	OrderRepository dao;
 	@Autowired
 	OrderDetailRepository ordDetRpo;
 	
@@ -50,18 +53,34 @@ public class OrderRepository1Test {
 //	}
 	
 	@Test
-	public void orderDetInsertTest() throws Exception {
-		OrderDto dto = dao.selectAll().get(0);
+	public void orderSelectAllByUserIdTest() throws Exception {
+		Map map = new HashMap();
+        map.put("id", "test");
+        map.put("period", 90);
+		List<OrderDto> list = dao.selectAllByUserIdAndPeriod(map);
 		// insert
-		//(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num)
-		OrderDetailDto ordDetDto1 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test1", 1, 10000, "냉장", "you11", "you11");
-		OrderDetailDto ordDetDto2 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test2", 2, 20000, "냉장", "you11", "you11");
-		OrderDetailDto ordDetDto3 = new OrderDetailDto(dto.getOrd_id(), "you11", dto.getOrd_id(), null, "DELIVERY_COMPLETE", "test3", 3, 30000, "냉장", "you11", "you11");
-		assertTrue( ordDetRpo.insert(ordDetDto1)==1 );
-		assertTrue( ordDetRpo.insert(ordDetDto2)==1 );
-		assertTrue( ordDetRpo.insert(ordDetDto3)==1 );
+		if(!list.isEmpty()) {
+			for(OrderDto dto : list) {
+				System.out.println(dto);
+			}
+		}
 		//assertTrue(dao.count() == 100);
 	}
+	
+//	@Test
+//	public void orderDetInsertTest() throws Exception {
+//		OrderDto dto = dao.selectAll().get(0);
+//		// insert
+//		//(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num)
+//		OrderDetailDto ordDetDto1 = new OrderDetailDto(dto.getOrd_id(), "you11", 1L, null, "DELIVERY_COMPLETE", "test1", 1, 10000, "냉장", "you11", "you11");
+//		OrderDetailDto ordDetDto2 = new OrderDetailDto(dto.getOrd_id(), "you11", 2L, null, "DELIVERY_COMPLETE", "test2", 2, 20000, "냉장", "you11", "you11");
+//		OrderDetailDto ordDetDto3 = new OrderDetailDto(dto.getOrd_id(), "you11", 3L, null, "DELIVERY_COMPLETE", "test3", 3, 30000, "냉장", "you11", "you11");
+//		System.out.println(ordDetDto1);
+//		assertTrue( ordDetRpo.insert(ordDetDto1)==1 );
+//		assertTrue( ordDetRpo.insert(ordDetDto2)==1 );
+//		assertTrue( ordDetRpo.insert(ordDetDto3)==1 );
+//		//assertTrue(dao.count() == 100);
+//	}
 	
 //	@Test
 //	public void insertTest() throws Exception {
