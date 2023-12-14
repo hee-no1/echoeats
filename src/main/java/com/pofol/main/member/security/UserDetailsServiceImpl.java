@@ -48,9 +48,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         securityUser.setUsername(vo2.getMem_id());
         String pwd = vo2.getMem_pwd();
-        //pwd = bCryptPasswordEncoder.encode(pwd);
         securityUser.setPassword(pwd);
-        // securityUser.setName("AA");
         securityUser.setMem_name(vo2.getMem_name());
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
