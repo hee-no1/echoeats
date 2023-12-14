@@ -70,8 +70,7 @@ public class KakaoController {
         System.out.println("카카오 엑세스 토큰: "+oAuthToken.getAccess_token());
 
 
-
-
+        //회원 정보 얻어오기
         RestTemplate rt2 = new RestTemplate();
         HttpHeaders headers2 = new HttpHeaders();
         headers2.add("Authorization","Bearer "+oAuthToken.getAccess_token());
@@ -102,19 +101,21 @@ public class KakaoController {
 
         System.out.println(memberDto1);
 
+        //db에 없다면 회원가입 시킨다
         if (memberDto1 == null){
-
-
             MemberDto memberDto = new MemberDto(id,name,pwd);
             memberRepository.insertMember(memberDto);
         }
 
+        //로그인 시켜서 - 인증을 진행
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(id, "kakao"));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
-        System.out.println(response2.getBody());
+        System.out.println("authenticate : "+authenticate);
 
 
-        return "main";
+        //그냥 "main"으로 했을 때는 브라우저는 정상적으로 main으로 나오지만 url주소는 kakao/auth/callback/~~~~~ 이렇게 나온다
+        //그래서 리다이렉트로 바꿈
+        return "redirect:http://localhost:8080/main";
     }
 }

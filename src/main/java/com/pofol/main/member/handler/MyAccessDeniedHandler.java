@@ -36,6 +36,9 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         if(referer == null){
             referer="/member/info";
         }
+        if (referer.startsWith("http://localhost:8080/auth/kakao")){
+            referer ="http://localhost:8080/main";
+        }
 
         response.sendRedirect(referer);
     }

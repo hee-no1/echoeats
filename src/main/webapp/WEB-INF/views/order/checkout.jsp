@@ -12,9 +12,10 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<c:set var="member" value="${checkout.sampleMemberDto}" />
+<c:set var="member" value="${checkout.memberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />
 <c:set var="coupon" value="${checkout.couponJoinDto}" />
+<c:set var="delNotes" value="${checkout.delNotesDto}" />
 
 
 <body>
@@ -33,7 +34,7 @@
 
             <c:forEach var="item" items="${items}">
                 <c:set var="prod" value="${item.productOrderCheckout}"/>
-                <div class="css-bd9p1l e17a7yib10 items">
+                <div class="css-bd9p1l e17a7yib10 items" style="display: none">
                     <c:choose>
                         <c:when test = "${empty prod.opt_prod_id}">
                             <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
@@ -73,11 +74,36 @@
                         <div class="css-82a6rk ev65imb1"><span class="css-2s3epn er4y7r80">장바구니, 홈에서</span><span class="css-4zleql er4y7r80">배송지를 변경할 수 있어요</span></div><button class="css-157xhr7 ev65imb0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.6154 12.8154L3 3" stroke="#fff" stroke-linecap="round"></path><path d="M3 12.8154L12.6242 3" stroke="#fff" stroke-linecap="round"></path></svg></button></div></div></div>
             <div class="css-5d6nlw e17yjk9v4">
                 <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">배송지</span>
-                    <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">서울 종로구 종로 69 (서울 YMCA) 5층 522호</p><div class="css-iqoq9n e17yjk9v0"><button class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
+                    <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">서울 종로구 종로 69 (서울 YMCA) 5층 522호</p>
+                        <div class="css-iqoq9n e17yjk9v0"><button class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
             <div id="checkout-shipping-details" class="css-1y0xj4c e1pxan881">
-                <div class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span><div class="css-82a6rk e150alo80"><span class="css-11y0tcn efthce41">문 앞</span><span class="css-bhczxb efthce40"></span><span class="css-11y0tcn efthce41">자유 출입 가능<span></span><span></span></span>
-                    <div class="css-rqc9f e14u1xpe0">${member.mem_name}, ${member.mem_email}</div>
-                    <div class="css-iqoq9n e1pxan880"><button class="css-117jo2j e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">수정</span></button></div></div></div></div></div>
+                <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span>
+            <c:choose>
+                <c:when test = "${delNotes == null}">
+                    <div id="firstDelNotesDiv"class="css-82a6rk e150alo80">
+                    <span id="firstDelNotes" class="css-11y0tcn efthce41">배송 요청사항을 입력해주세요</span>
+                    <div class="css-iqoq9n e1pxan880"><button class="css-117jo2j e4nu7ef3 delNotesBtn" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">입력</span></button></div>
+                    </div>
+
+                </c:when>
+                <c:otherwise>
+                    <div id="NotFirst" class="css-82a6rk e150alo80"><span id="place" class="css-11y0tcn efthce41">${delNotes.place}</span><span class="css-bhczxb efthce40"></span>
+                    <span id="entryway" class="css-11y0tcn efthce41">${delNotes.column_sts}</span>
+                        <c:choose>
+                            <c:when test = "${empty delNotes.entryway_detail}">
+                                <span id="entrywayDetail"></span>
+                            </c:when>
+                            <c:otherwise>
+                                <span id="entrywayDetail"> (${delNotes.entryway_detail})</span>
+                            </c:otherwise>
+                        </c:choose>
+                                <div id="personData" class="css-rqc9f e14u1xpe0">${delNotes.name},${delNotes.number}</div>
+                    <div class="css-iqoq9n e1pxan880"><button class="css-117jo2j e4nu7ef3 delNotesBtn" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">수정</span></button></div></div></div>
+                </c:otherwise>
+            </c:choose>
+
+        </div>
+        </div>
 <div></div>
 
     <div class="css-4c6dm7 epvroj93">
@@ -140,6 +166,8 @@
     let origin_prod_price = ${checkout.origin_prod_price};
     let dlvy_fee = ${checkout.dlvy_fee};
     let pay_way = 'kakao'
+
+
 </script>
 <script src="/resources/order/js/checkoutJS.js"></script>
 </body>
