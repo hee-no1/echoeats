@@ -5,6 +5,8 @@ import java.util.List;
 import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
 
 public interface InquiryImgRepository {
+
+	public abstract List<String> selectAllByInqId(Long inquiry_id);
 	//crud
 	public abstract int insert(InquiryImgDto dto) throws Exception;
     public abstract InquiryImgDto select(Long id) throws Exception;

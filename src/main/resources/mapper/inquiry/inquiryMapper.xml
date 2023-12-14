@@ -16,6 +16,21 @@
 		</selectKey>
 	</insert>
 	
+	<select id="selectAllByUserId" resultType="InquiryDto">
+		SELECT *
+		FROM inquiry
+		WHERE
+		mem_id=#{mem_id}
+		ORDER BY rg_date desc
+	</select>
+	
+	<select id="selectByinqId" resultType="InquiryDto">
+		SELECT *
+		FROM inquiry
+		WHERE
+		inquiry_id=#{inquiry_id}
+	</select>
+	
 	<select id="select" resultType="InquiryDto">
 		SELECT *
 		FROM inquiry
@@ -31,7 +46,7 @@
 	        det_type = #{det_type},
 	        title = #{title},
 	        content = #{content},
-	        is_rep = #{is_rep},
+	        rep_sts = #{rep_sts},
 	        rg_num = #{rg_num},
 	        md_date = current_timestamp,
 	        md_num = #{md_num}

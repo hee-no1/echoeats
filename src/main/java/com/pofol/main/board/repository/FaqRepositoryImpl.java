@@ -1,13 +1,13 @@
 package com.pofol.main.board.repository;
 
 import com.pofol.main.board.domain.FaqDto;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class FaqRepositoryImpl implements FaqRepository {
@@ -42,4 +42,14 @@ public class FaqRepositoryImpl implements FaqRepository {
     public int count(FaqDto dto) {
         return session.selectOne(namespace + "count", dto);
     }
+    @Override
+    public List searchSelectPage(SearchOrderCondition sc) throws Exception {
+        return session.selectList(namespace+"searchSelectPage", sc);
+    }
+
+    @Override
+    public int searchResultCnt(SearchOrderCondition sc) throws Exception {
+        return session.selectOne(namespace+"searchResultCnt", sc);
+    }
+
 }

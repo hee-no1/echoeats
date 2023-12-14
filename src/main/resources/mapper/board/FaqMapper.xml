@@ -61,5 +61,6 @@
     <select id="count" resultType="int">
         SELECT count(*) FROM faq
     </select>
+
 </mapper>
 

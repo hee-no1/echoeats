@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class BasketRepositoryImpl implements BasketRepository {
 
-    private String namespace = "com.pofol.product.BasketMapper.";
+    private final String namespace = "com.pofol.product.BasketMapper.";
     private final SqlSession session;
 
     @Override

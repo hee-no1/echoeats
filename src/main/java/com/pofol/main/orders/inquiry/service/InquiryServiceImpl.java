@@ -2,50 +2,46 @@ package com.pofol.main.orders.inquiry.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
-@Repository
+import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
+import com.pofol.main.orders.inquiry.repository.InquiryImgRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryPrdRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class InquiryServiceImpl implements InquiryService {
-
-	@Autowired
-	private SqlSession session;
-	private static String namespace = "repository.inquiryMapper.";
-
+	
+	private final InquiryRepository inqRepo;
+	private final InquiryPrdRepository inqPrdRepo;
+	private final InquiryImgRepository inqImgRepo;
+	
 	@Override
+//	@Transactional(rollbackFor=Exception.class) 
 	public int insert(InquiryDto dto) throws Exception {
-		return session.insert(namespace + "insert", dto);
+		inqRepo.insert(dto);
+		InquiryImgDto inqImgDto;
+		for(MultipartFile file : dto.getImageFile()) {
+			String file_name ="";//
+			inqImgDto = new InquiryImgDto(dto.getInquiry_id(),file_name,dto.getRg_num() );
+			inqImgRepo.insert(inqImgDto);
+		}
+		return 1;
 	}
 
 	@Override
-	public InquiryDto select(Long inquiry_id) throws Exception {
-		return session.selectOne(namespace + "select", inquiry_id);
+	public List<InquiryDto> selectAllByUserId(String mem_id) throws Exception {
+		return inqRepo.selectAllByUserId(mem_id);
 	}
 
 	@Override
-	public int update(InquiryDto dto) throws Exception {
-		return session.update(namespace + "update", dto);
-	}// updateStatus
-
-	@Override
-	public int delete(Long inquiry_id) throws Exception {
-		return session.delete(namespace + "delete", inquiry_id);
-	}
-
-	@Override
-	public List<InquiryDto> selectAll() throws Exception {
-		return session.selectList(namespace + "selectAll");
-	}
-
-	@Override
-	public int deleteAll() throws Exception {
-		return session.delete(namespace + "deleteAll");
-	}
-
-	@Override
-	public int count() throws Exception {
-		return session.selectOne(namespace + "count");
+	public InquiryDto selectByinqId(Long inquiry_id) {
+		return inqRepo.selectByinqId(inquiry_id);
 	}
 }

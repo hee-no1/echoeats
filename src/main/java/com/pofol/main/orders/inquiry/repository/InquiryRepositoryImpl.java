@@ -15,6 +15,16 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	private static String namespace = "repository.inquiryMapper.";
 
 	@Override
+	public List<InquiryDto> selectAllByUserId(String mem_id) {
+		return session.selectList(namespace+"selectAllByUserId", mem_id);
+	}
+	
+	@Override
+	public InquiryDto selectByinqId(Long inquiry_id) {
+		return session.selectOne(namespace+"selectByinqId", inquiry_id);
+	}
+
+	@Override
 	public int insert(InquiryDto dto) throws Exception {
 		return session.insert(namespace + "insert", dto);
 	}
@@ -48,4 +58,5 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	public int count() throws Exception {
 		return session.selectOne(namespace + "count");
 	}
+
 }

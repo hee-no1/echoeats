@@ -13,7 +13,12 @@ public class InquiryImgRepositoryImpl implements InquiryImgRepository {
 	@Autowired
 	private SqlSession session;
 	private static String namespace = "repository.inquiryImgMapper.";
-
+	
+	@Override
+	public List<String> selectAllByInqId(Long inquiry_id) {
+		return session.selectList(namespace+"selectAllByInqId", inquiry_id);
+	}
+	
 	@Override
 	public int insert(InquiryImgDto dto) throws Exception {
 		return session.insert(namespace + "insert", dto);
