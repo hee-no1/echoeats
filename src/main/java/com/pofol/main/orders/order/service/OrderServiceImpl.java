@@ -1,7 +1,10 @@
 package com.pofol.main.orders.order.service;
 
+import com.pofol.main.member.dto.CouponDto;
+import com.pofol.main.member.dto.CouponJoinDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.member.repository.DelNotesRepository;
 import com.pofol.main.member.repository.MemberRepository;
 import com.pofol.main.orders.order.domain.*;
@@ -29,6 +32,7 @@ public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memRepo;
     private final DelNotesRepository delNotesRepository;
+    private final CouponRepository couponRepository;
     private final BasketRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
@@ -102,7 +106,7 @@ public class OrderServiceImpl implements OrderService{
 
         oc.setTot_prod_name(tot_prod_name);
 
-        //회원정보, 배송요청사항
+        //회원정보, 배송요청사항, 쿠폰정보
         try {
             //회원정보 가져오기
             MemberDto mem = memRepo.selectMember(mem_id);
@@ -111,14 +115,49 @@ public class OrderServiceImpl implements OrderService{
             //배송요청사항 가져오기
             DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
             oc.setDelNotesDto(delNotes);
+
+            //쿠폰 정보 가져오기
+            List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
+            oc.setCouponList(couponJoinDtos);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-
-
-
         return oc;
+    }
+
+
+    @Override
+    public PaymentDiscountDto calculatePayment(PaymentDiscountDto pdd) {
+        Long coupon_id = pdd.getCoupon_id();// 쿠폰 id
+        int coupon_disc = 0; //쿠폰 사용 금액
+        Integer reserves_used = pdd.getPoint_used(); // 적립금 사용 금액
+        int discountPrice = 0; //할인 총 금액
+
+        try{
+            if(coupon_id != null){ //쿠폰 사용 시
+                CouponDto coupon = couponRepository.select_coupon(coupon_id);
+                if(coupon.getType().equals("cash")){ //쿠폰이 할인 금액일 때
+                    coupon_disc = coupon.getCash_rate();
+                }else { //쿠폰이 할인율일 때
+                    coupon_disc = pdd.getTot_prod_price() * coupon.getCash_rate() / 100;
+                }
+                pdd.setCoupon_disc(coupon_disc);
+                discountPrice += coupon_disc;
+            }
+            if(reserves_used != null){ //적립금 할인 금액이 입력시
+                discountPrice += reserves_used;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
+
+        System.out.println("계산후"+pdd);
+
+        return pdd;
     }
 
 
@@ -157,7 +196,7 @@ public class OrderServiceImpl implements OrderService{
             orderHistoryRepository.insert(orderHistoryDto);
 
             //할인 금액 정보 table 작성
-            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
         } catch (Exception e) {

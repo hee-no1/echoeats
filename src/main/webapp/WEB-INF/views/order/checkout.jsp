@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +15,7 @@
 </head>
 <c:set var="member" value="${checkout.memberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />
-<c:set var="coupon" value="${checkout.couponJoinDto}" />
 <c:set var="delNotes" value="${checkout.delNotesDto}" />
-
 
 <body>
 <div class="css-1ykiyus e146m4rf2">
@@ -114,8 +113,19 @@
                 <%-- 쿠폰 내용 --%>
                 <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">쿠폰 적용</span>
                     <div class="css-82a6rk e150alo80"><div class="css-1uj3loi e1brt3tk0">
-                        <button id="couponBtn" class="css-1cg046d e1wlhyxd1" value="unchecked">사용가능 쿠폰 0장 / 전체 0장<span class="css-1e56lav e1wlhyxd0"><span rotate="0" class="css-f2a03j ebkt7i80"></span></span></button>
-                        <div id="couponList" role="listbox" class="css-wvvmzg e12aaan21"><div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"><img src="https://res.kurly.com/pc/service/order/1908/ico_check_32x20.png" alt="" data-testid="selected-icon" class="css-kt8w1h egyf6hx0"></span><span class="css-esc77i e1ro4vie4">쿠폰 적용 안함</span></div><div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"></span><span class="css-esc77i e1ro4vie4">사용 불가</span><div class="css-kmlyvg e1ro4vie3"><strong class="css-1bfy7g3 e1ro4vie2">[뷰티컬리페스타] 30% 할인 쿠폰 (최대1만5천원)</strong><span class="css-bs5mk4 e1ro4vie1">뷰티컬리 쿠폰 적용상품 1원 이상 주문 시 30% 할인</span><span class="css-bs5mk4 e1ro4vie0">2023년 12월14일 11시 만료</span></div></div></div>
+                        <button id="couponBtn" class="css-1cg046d e1wlhyxd1" value="unchecked">사용가능 쿠폰 ${fn:length(checkout.couponList)}장<span class="css-1e56lav e1wlhyxd0"><span rotate="0" class="css-f2a03j ebkt7i80"></span></span></button>
+                        <div id="couponList" role="listbox" class="css-wvvmzg e12aaan21">
+                        <c:forEach var="coupon" items="${checkout.couponList}">
+                            <button  class="couponListBtn">
+                                <div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"></span>
+                                    <div class="css-kmlyvg e1ro4vie3">
+                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}</strong>
+                                        <span class="css-bs5mk4 e1ro4vie0 coupon${coupon.cp_id}">${coupon.cp_del_date} 만료</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </c:forEach>
+                        </div>
                     </div>
                         <button type="button" class="css-y9957 e1rx731f1"><span class="css-s5xdrg e1rx731f0">쿠폰 사용 문의 (카카오톡) <span class="css-1q6xk2g e1563em20"></span></span></button><div class="css-17pnhmt eggaj260"></div></div></div>
             <%-- 적립금 헤더 --%>
@@ -147,8 +157,8 @@
                 <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="origin_prod_price"><span class="css-rfpchb eahaaoi3"></span>${checkout.origin_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="prod_disc"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><span class = "money">${checkout.origin_prod_price - checkout.tot_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10 money" id="dlvy_fee"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span>${checkout.dlvy_fee}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id="outputCouponUsed"class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="sign"></span><span id="outputPointUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="signCoupon"></span><span id="outputCouponUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+                <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="signPoint"></span><span id="outputPointUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
                 <div class="css-1hgn7mh eahaaoi7"><div class="css-1rmc3ba eahaaoi11">최종결제금액</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id = "tot_pay_price" class="money">${checkout.tot_prod_price + checkout.dlvy_fee}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
                 <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div></div>
@@ -158,15 +168,20 @@
 <script>
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">
-        selectedItems[${loop.index}] = {prod_id: ${item.prod_id}, opt_prod_id: '${item.opt_prod_id}', qty: ${item.qty}}
+        selectedItems[${loop.index}] = {prod_id: ${item.prod_id}, opt_prod_id: '${item.opt_prod_id}', qty: ${item.qty}};
     // 서버에서 null값일 때 EL로 받아오면 빈문자열이 들어간다.-> option상품이 아닌건 opt_prod_id에 빈문자열 들어간다.
     </c:forEach>
     let tot_prod_name = '${checkout.tot_prod_name}';
     let tot_prod_price = ${checkout.tot_prod_price};
     let origin_prod_price = ${checkout.origin_prod_price};
     let dlvy_fee = ${checkout.dlvy_fee};
-    let pay_way = 'kakao'
+    let pay_way = 'kakao';
 
+    //쿠폰 리스트
+    let couponDtoList = [];
+    <c:forEach var="coupon" items="${checkout.couponList}" varStatus="loop">
+        couponDtoList[${loop.index}] = {cp_id: ${coupon.cp_id}, cp_name: '${coupon.cp_name}', cp_del_date: '${coupon.cp_del_date}', cash_rate:${coupon.cash_rate}, type:'${coupon.type}'};
+    </c:forEach>
 
 </script>
 <script src="/resources/order/js/checkoutJS.js"></script>

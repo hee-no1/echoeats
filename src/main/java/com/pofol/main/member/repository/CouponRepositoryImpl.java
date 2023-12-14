@@ -16,12 +16,12 @@ public class CouponRepositoryImpl implements CouponRepository{
 
     private static String namespace = "com.pofol.main.member.couponMapper.";
     @Override
-    public CouponDto select_coupon(int id) {
+    public CouponDto select_coupon(Long id) {
         return session.selectOne(namespace+"select_coupon", id);
     }
 
     @Override
-    public MemCouponDto select_coupon_mapping(int id) {
+    public MemCouponDto select_coupon_mapping(Long id) {
         return session.selectOne(namespace+"select_coupon_mapping", id);
     }
 

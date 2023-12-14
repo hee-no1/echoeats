@@ -3,11 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pofol.main.member.couponMapper">
-    <select id="select_coupon" parameterType="int"  resultType="couponDto">
+    <select id="select_coupon" parameterType="long"  resultType="couponDto">
         select * from coupon where cp_id =#{id}
     </select>
 
-    <select id="select_coupon_mapping" parameterType="int" resultType="MemCouponDto">
+    <select id="select_coupon_mapping" parameterType="long" resultType="MemCouponDto">
         select * from `mem-coupon` where own_cp_id =#{id}
     </select>
 

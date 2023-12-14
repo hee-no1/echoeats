@@ -37,41 +37,41 @@ public class OrderController {
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
-        OrderCheckout orderCheckout = orderService.writeCheckout(items);
-        System.out.println(orderCheckout);
-        m.addAttribute("checkout",orderCheckout);
+        try{
+            OrderCheckout orderCheckout = orderService.writeCheckout(items);
+            System.out.println(orderCheckout);
+            m.addAttribute("checkout",orderCheckout);
+            return "/order/checkout";
 
-        return "/order/checkout";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
     @ResponseBody
     @PostMapping("/calculatePayment")
-    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pd){
-        Integer coupon_disc = pd.getCoupon_disc(); // 쿠폰 사용 금액
-        Integer reserves_used = pd.getPoint_used(); // 적립금 사용 금액
-        int discountPrice = 0;
-        System.out.println(pd);
-
-        if(coupon_disc != null){ //쿠폰 할인 금액이 입력 돼 있을 때
-            discountPrice += coupon_disc;
-        }else if(reserves_used != null){ //적립금 할인 금액이 입력시
-            discountPrice += reserves_used;
+    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
+        try{
+            System.out.println("계산전"+ pdd);
+            PaymentDiscountDto paymentDiscountDto = orderService.calculatePayment(pdd);
+            return paymentDiscountDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        pd.setTot_pay_price(pd.getTot_prod_price() - discountPrice + pd.getDlvy_fee());
-
-        System.out.println(pd);
-        return pd;
     }
 
 
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id){
-        System.out.println(ord_id);
-        PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
-        orderService.modifyOrder(pd);
-        return "/order/orderCompleted";
+        try{
+            System.out.println(ord_id);
+            PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
+            orderService.modifyOrder(pd);
+            return "/order/orderCompleted";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //팝업창, 배송 요청 사항
@@ -85,24 +85,32 @@ public class OrderController {
             DelNotesDto delNotes = delNotesService.getDelNotes();
             m.addAttribute("member", member);
             m.addAttribute("delNotes", delNotes);
+            return "/order/receiverDetails";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "/order/receiverDetails";
     }
 
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")
     public DelNotesDto writeDelNotes(@RequestBody DelNotesDto delNotesDto){
-        System.out.println(delNotesDto);
-        delNotesService.writeDelNotes(delNotesDto);
-        return delNotesDto;
+        try{
+            System.out.println(delNotesDto);
+            delNotesService.writeDelNotes(delNotesDto);
+            return delNotesDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @ResponseBody
     @GetMapping("/checkout/getDelNotes")
     public DelNotesDto getDelNotes(){
-        return delNotesService.getDelNotes();
+        try{
+            return delNotesService.getDelNotes();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
