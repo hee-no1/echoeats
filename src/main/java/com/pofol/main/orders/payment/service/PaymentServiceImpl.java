@@ -74,9 +74,12 @@ public class PaymentServiceImpl implements PaymentService{
         try {
             //결제 table 작성
             pay.setMemberData(mem_id);
-            //적립금 계산
-            GradeDto grade = gradeRepository.select_grade(mem_id);
-            pay.setReserves(pay.getTot_pay_price() * grade.getAcm_rate() / 100);
+            //적립금 계산 <- 결제 완료 시에만 필요
+            if(pay.getSuccess().equals("true")){
+                GradeDto grade = gradeRepository.select_grade(mem_id);
+                System.out.println(grade);
+                pay.setReserves(pay.getTot_pay_price() * grade.getAcm_rate() / 100);
+            }
             paymentRepository.insert(pay);
 
             //결제이력 table 작성
@@ -84,6 +87,7 @@ public class PaymentServiceImpl implements PaymentService{
             paymentHistoryRepository.insert(paymentHistoryDto);
             return pay;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -101,6 +105,7 @@ public class PaymentServiceImpl implements PaymentService{
             System.out.println("2차 검증: "+(jsTotPayPrice==dbTotPayPrice));
             return jsTotPayPrice == dbTotPayPrice; //같은면 true, 다르면 false
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -112,6 +117,7 @@ public class PaymentServiceImpl implements PaymentService{
             PaymentDto paymentDto = paymentRepository.select(ord_id);
             return paymentDto;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
