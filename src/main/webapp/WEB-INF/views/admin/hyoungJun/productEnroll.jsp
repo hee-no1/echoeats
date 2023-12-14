@@ -730,17 +730,6 @@
     let cate1Select = $('.cate1');
     let cate2Select = $('.cate2');
 
-    for (let i = 0; i < categoryList.length; i++) {
-        if (categoryList[i].tier === '1') {
-            cate1Object = {};
-            cate1Object.cat_name = categoryList[i].cat_name;
-            cate1Object.cat_code = categoryList[i].cat_code;
-            cate1Object.parent_code = categoryList[i].parent_code;
-
-            cate1Array.push(cate1Object);
-        }
-    }
-
     // 카테고리 배열 초기화 메서드
     function makeCategoryArray(obj, array, categoryList, tier) {
         for (let i = 0; i < categoryList.length; i++) {

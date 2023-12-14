@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-  private final String namespace = "ProductDto.";
+  private final String namespace = "ecoeats.productMapper";
   private final SqlSession session;
 
   @Autowired

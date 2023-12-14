@@ -48,7 +48,7 @@ public class AdminController {
     @GetMapping("/test")
     public String testGET(Model model) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.enrollCategoryList();
+        List<CategoryDto> list = categoryList.cateList();
         String categoryListJson = objectMapper.writeValueAsString(list);
         model.addAttribute("categoryList", categoryListJson);
         return "/admin/hyoungJun/test";
@@ -63,7 +63,7 @@ public class AdminController {
     @GetMapping("/hyoungJun/productEnroll")
     public void prodEnrollGET(Model model) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.enrollCategoryList();
+        List<CategoryDto> list = categoryList.cateList();
         String categoryListJson = objectMapper.writeValueAsString(list);
         model.addAttribute("categoryList", categoryListJson);
     }
