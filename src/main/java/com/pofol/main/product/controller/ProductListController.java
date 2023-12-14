@@ -1,15 +1,22 @@
 package com.pofol.main.product.controller;
 
+import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.service.GradeService;
 import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
+import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.exception.ExpiredProductException;
+import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +26,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductListController {
 
     private final ProductListService productListService;
     private final CategoryList categoryList;
+    private final GradeService gradeService;
 
     // 이벤트 화면으로 (그냥 만듬)
     @GetMapping("/christmas")
@@ -61,11 +70,44 @@ public class ProductListController {
             ProductDto product = productListService.read(prod_id);
             model.addAttribute("product", product);
 
+            // 옵션이 존재하는 상품일 시 옵션상품 조회
+            if (product.getIs_opt().equals("Y")) {
+                List<OptionProductDto> optionList = productListService.getOptionList(prod_id);
+                model.addAttribute("optionList", optionList);
+                model.addAttribute("option", "option");
+            }
+
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
             model.addAttribute("categoryList", bigCategoryProductList);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            // 회원 등급에 따른 적립금 계산
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String memberID = authentication.getName();
+
+            // 로그인 상태일 때 (적립금 계산)
+            if (!memberID.equals("anonymousUser")) {
+                GradeDto memberGrade = gradeService.show_grade(memberID);
+                model.addAttribute("memberGrade", memberGrade);
+
+                Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
+                model.addAttribute("saveMoney", saveMoney);
+            }
+
+            // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
+            if (product.isSaleExpired()) {
+                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
+            } else if (product.getDisp_sts().equals("N")) {
+                throw new ExpiredProductException("현재 판매중인 상품이 아닙니다.");
+            }
+
+        } catch (ExpiredProductException expiredProductException) {
+            HandlerProductException handlerProductException = new HandlerProductException();
+            handlerProductException.ExpiredProductExceptionHandler(expiredProductException);
+            return "redirect:/";
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
         return "/product/product";
     }
@@ -158,18 +200,16 @@ public class ProductListController {
     // 상품 수량에 따라 상품 가격 계산
     @ResponseBody
     @PostMapping("/ProductCalculation")
-    public ProductRequest productCalculation(@RequestBody ProductRequest productRequest) {
-        productRequest.setDisc_price(productRequest.getQuantity() * productRequest.getDisc_price());
-        return productRequest;
-    }
+    public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
 
-    // 상품 상세페이지에서 수량만 가져오기 위한 클래스 (ajax용)
-    @Getter
-    @Setter
-    public static class ProductRequest {
+        for (BasketDto basketDto : basketDtoList) {
+            if (basketDtoList.size() == 1) {
+                basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
+            } else {
+                basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
+            }
+        }
 
-        private Integer disc_price;
-        private Integer quantity;
-
+        return basketDtoList;
     }
 }

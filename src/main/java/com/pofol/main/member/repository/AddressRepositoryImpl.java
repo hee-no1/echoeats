@@ -11,7 +11,7 @@ import java.util.List;
 public class AddressRepositoryImpl implements AddressRepository{
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.prfol.main.member.addressMapper.";
+    private final String namespace = "com.pofol.main.member.addressMapper.";
 
     @Override
     public int insertAddress(AddressDto addressDto) throws Exception {
@@ -20,7 +20,7 @@ public class AddressRepositoryImpl implements AddressRepository{
 
     @Override
     public List<AddressDto> selectAllAddress(String mem_id) throws Exception {
-        return session.selectList(namespace + "selectAll_address",mem_id);
+        return session.selectList(namespace + "selectAll_address", mem_id);
     }
 
     @Override

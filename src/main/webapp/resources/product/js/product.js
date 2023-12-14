@@ -1,27 +1,14 @@
-let product2 = {}
+let basketProduct = {}
 
-const productAjax = function (action) {
+const productAjax = function (action, productQuantity, discountPrice, productQuantityHtml, i) {
 
-    // 상품 가격
-    let discountPrice = document.querySelector('.css-gqkxk8').textContent.match(/\d+/)[0];
-    // 상품 수량
-    let productQuantity = document.querySelector('.count').textContent
-    // 총 상품 가격 (html)
+    // 총 상품 가격
     let totalPrice = document.querySelector('.css-x4cdgl');
-    // 상품 수량 (html)
-    let productQuantityHtml = document.querySelector('.count');
-    // 상품 수량 내리기 버튼
-    // let productCountDown = document.querySelector('.css-8azp8');
-
-    let productQuantityAndPrice = {
-        disc_price: discountPrice,
-        quantity: 1
-    }
 
     if (action === 'increase') {
-        productQuantityAndPrice.quantity = parseInt(productQuantity) + 1
+        productList[i].quantity = parseInt(productQuantity) + 1
     } else if (action === 'decrease') {
-        productQuantityAndPrice.quantity = parseInt(productQuantity) - 1
+        productList[i].quantity = parseInt(productQuantity) - 1
     }
 
     $.ajax({
@@ -31,15 +18,17 @@ const productAjax = function (action) {
             "content-type": "application/json"
         },
         dataType: 'json',
-        data: JSON.stringify(productQuantityAndPrice),
+        data: JSON.stringify(productList),
         success: function (result) {
-            product2 = result;
-            let {disc_price} = product2;
-            let {quantity} = product2;
-            totalPrice.textContent = disc_price;
-            productQuantityHtml.textContent = quantity;
+            basketProduct = result;
+            let totalProductPrice = 0;
 
-            // productCountDown.disabled = quantity === 1;
+            for (let j = 0; j < basketProduct.length; j++) {
+                totalProductPrice += basketProduct[j].total_price;
+            }
+            totalPrice.textContent = totalProductPrice;
+            let {quantity} = basketProduct[i];
+            productQuantityHtml.textContent = quantity;
         },
         error: function () {
             alert("error");
@@ -50,21 +39,65 @@ const productAjax = function (action) {
 $(document).ready(function () {
 
     // 상품 수량 올리기
-    document.querySelectorAll('.css-18y6jr4')[0].addEventListener("click", function () {
-        console.log('수량 올리기 실행')
-        productAjax('increase');
-    })
+    const upButton = document.querySelectorAll('.css-18y6jr4')
+
+    for (let i = 0; i < upButton.length; i++) {
+        upButton[i].addEventListener("click", function () {
+            let productQuantity = document.querySelectorAll('.count')[i].textContent
+            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.match(/\d+/)[0];
+            let productQuantityHtml = document.querySelectorAll('.count')[i];
+
+            productAjax('increase', productQuantity, discountPrice, productQuantityHtml, i);
+        })
+    }
 
     // 상품 수량 내리기
-    document.querySelectorAll('.css-8azp8')[0].addEventListener("click", function () {
+    const downButton = document.querySelectorAll('.css-8azp8')
 
-        let productQuantityCount = document.querySelectorAll('.count')[0].textContent
-        if (productQuantityCount === '1') {
-            return;
-        }
+    for (let i = 0; i < downButton.length; i++) {
+        downButton[i].addEventListener("click", function () {
 
-        console.log('수량 내리기 실행')
-        productAjax('decrease');
-    })
+            let productQuantity = document.querySelectorAll('.count')[i].textContent
+            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.match(/\d+/)[0];
+            let productQuantityHtml = document.querySelectorAll('.count')[i];
 
-})
+            if (downButton.length === 1) {
+                if (productQuantity === '1') {
+                    return;
+                }
+            } else {
+                if (productQuantity === '0') {
+                    return;
+                }
+            }
+
+            productAjax('decrease', productQuantity, discountPrice, productQuantityHtml, i);
+        })
+    }
+
+    const button_description = document.getElementsByClassName('efe6b6j0')[0];
+    const button_detail = document.getElementsByClassName('efe6b6j0')[1];
+    const button_review = document.getElementsByClassName('efe6b6j0')[2];
+    const button_inquiry = document.getElementsByClassName('efe6b6j0')[3];
+    const description = document.getElementById('description');
+    const detail = document.getElementById('detail');
+    const review = document.getElementById('review');
+    const inquiry = document.getElementById('inquiry');
+
+    button_description.addEventListener('click', () => {
+        window.scrollBy({top: description.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_detail.addEventListener('click', () => {
+        window.scrollBy({top: detail.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_review.addEventListener('click', () => {
+        window.scrollBy({top: review.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_inquiry.addEventListener('click', () => {
+        window.scrollBy({top: inquiry.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+});

@@ -2,6 +2,7 @@ package com.pofol.main.member.controller;
 
 import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.member.security.SecurityUser;
 import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -48,12 +49,17 @@ public class MemberController {
         //2. 게시판 - 로그인 - 게시판
         // 그냥 로그인 버튼을 클릭했을 경우 login success에서 referer이나 savedRequest는 생기지 않는다(가로챘을때는 생김)
         //그래서 referer을 세션에 저장해서 로그인 성공했을 경우 referer쪽으로 보낸다
+        //12월11일 로그인 - url에 로그인 폼 - 500에러 (referer nullpoint)
         if (authentication != null) {
+            if(referer == null){
+                return "main";
+            }
             //model.addAttribute("msg","이미 인증된 회원입니다");
-
-            return "redirect:" + (referer != null ? referer : "/member/info");
+            if(referer.equals("http://localhost:8080/member/login_form")){
+                return "main";
+            }
+            return "redirect:" +referer;
         }
-
         return "member/login_form";
     }
 
@@ -79,8 +85,16 @@ public class MemberController {
         Object a = authentication.getPrincipal();
         HttpSession session = request.getSession();
         System.out.println(authentication);
+
+        //유저이름을 가져오기 위해서
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+
+        // SecurityUser 객체에서 mem_name 가져오기
+        String memName = securityUser.getMem_name();
+
         Object greeting = session.getAttribute("greeting");
-        return a.toString() + "     " + greeting + "    한글 테스트";
+
+        return a.toString() + "     " + greeting + "    한글 테스트     "+ authentication.getName()+"의  이름은 "+memName;
     }
 
 
@@ -118,6 +132,7 @@ public class MemberController {
     @PostMapping("/join")
     @ResponseBody
     public MemberDto join(@RequestBody MemberDto memberDto) throws Exception{
+        System.out.println(memberDto.toString());
         memberService.signin(memberDto);
         return memberDto;
     }

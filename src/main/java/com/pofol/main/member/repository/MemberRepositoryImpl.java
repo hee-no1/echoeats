@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
     @Autowired
@@ -21,6 +23,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
     @Override
     public int insertMember(MemberDto memberDto) throws Exception {
+        System.out.println(memberDto.toString());
         return session.insert(namespace + "insert_member", memberDto);
     }
     @Override
@@ -42,6 +45,11 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public int checkEmail(String mem_email) throws Exception {
         return session.selectOne(namespace + "checkEmail", mem_email);
+    }
+
+    @Override
+    public List<MemberDto> checkGrade(String date) throws Exception {
+        return session.selectList(namespace+"checkGrade",date);
     }
 
 }

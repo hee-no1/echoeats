@@ -14,10 +14,10 @@
                 <script>
                     $(function () {
 
-                        /* $('.content').html(
-                            
-                        ); */
-
+                        $('textarea[name=content]').change(function(){
+                            console.log($('textarea[name=content]').val());
+                        });
+                        
                     });
                 </script>
                 <style>
@@ -448,6 +448,8 @@
                     }
 
                     .css-rm6te4 textarea {
+                        font-size: 14px;
+                        font-weight: 400;
                         font-family: "Noto Sans", sans-serif;
                     }
 
@@ -729,6 +731,7 @@
                                     </svg>
                                 </a>
                             </div>
+                            <!-- Inquiry -->
                             <div class="css-171zbec eug5r8l0">
                                 <div class="css-j0lifa ed9qr673">
                                     <div class="css-fhxb3m ed9qr672">
@@ -745,60 +748,32 @@
                                                 <div class="css-zjik7 epfrwk70">
                                                     <div class="css-1a8mkrv e1u0xj870">
                                                         <div>
-                                                            <div class="MuiFormControl-root css-tzsjye">
-                                                                <div variant="outlined"
-                                                                    class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl jss1 css-eg1co4">
-                                                                    <div tabindex="0" role="button"
-                                                                        aria-expanded="false" aria-haspopup="listbox"
-                                                                        aria-label="Without label"
-                                                                        class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-qiwgdb">
-                                                                        문의유형을 선택해주세요</div><input aria-hidden="true"
-                                                                        tabindex="-1"
-                                                                        class="MuiSelect-nativeInput css-1k3x8v3"
-                                                                        value=""><svg
-                                                                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1636szt"
-                                                                        focusable="false" aria-hidden="true"
-                                                                        viewBox="0 0 24 24"
-                                                                        data-testid="ArrowDropDownIcon">
-                                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                                    </svg>
-                                                                    <fieldset aria-hidden="true"
-                                                                        class="MuiOutlinedInput-notchedOutline css-igs3ac">
-                                                                        <legend class="css-nnbavb"><span
-                                                                                class="notranslate">&ZeroWidthSpace;</span>
-                                                                        </legend>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
+                                                            <style>
+                                                                .inquiry_type, .inquiry_detType {
+                                                                    font-weight: 400;
+                                                                    border-radius: 4px;
+                                                                    border: 1px solid rgb(221, 221, 221);
+                                                                    width: 315px;
+                                                                    height: 44px;
+                                                                    padding-left: 15px;
+                                                                    appearance: none;
+                                                                    background: #fff url(//img.echosting.cafe24.com/ec/v2/ico_select.png) no-repeat right 12px center;
+                                                                }
+                                                            </style>
+                                                            <select name="type" class="inquiry_type">
+                                                                <option value="test1">test1</option>
+                                                                <option value="test2">test2</option>
+                                                                <option value="test3">test3</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="css-1a8mkrv e1u0xj870">
                                                         <div>
-                                                            <div class="MuiFormControl-root css-tzsjye">
-                                                                <div variant="outlined"
-                                                                    class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-formControl jss1 css-eg1co4">
-                                                                    <div role="button" aria-disabled="true"
-                                                                        aria-expanded="false" aria-haspopup="listbox"
-                                                                        aria-label="Without label"
-                                                                        class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiOutlinedInput-input MuiInputBase-input Mui-disabled css-qiwgdb">
-                                                                        상세유형을 선택해주세요</div><input aria-hidden="true"
-                                                                        tabindex="-1" disabled=""
-                                                                        class="MuiSelect-nativeInput css-1k3x8v3"
-                                                                        value=""><svg
-                                                                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1636szt"
-                                                                        focusable="false" aria-hidden="true"
-                                                                        viewBox="0 0 24 24"
-                                                                        data-testid="ArrowDropDownIcon">
-                                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                                    </svg>
-                                                                    <fieldset aria-hidden="true"
-                                                                        class="MuiOutlinedInput-notchedOutline css-igs3ac">
-                                                                        <legend class="css-nnbavb"><span
-                                                                                class="notranslate">&ZeroWidthSpace;</span>
-                                                                        </legend>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
+                                                            <select name="det_type" class="inquiry_detType">
+                                                                <option value="test1">test1</option>
+                                                                <option value="test2">test2</option>
+                                                                <option value="test3">test3</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -811,7 +786,7 @@
                                             <div class="css-12l4j2c e1vbjq4w1">
                                                 <div class="css-1waqr6j e1uzxhvi6">
                                                     <div height="44" class="css-t7kbxx e1uzxhvi3"><input
-                                                            data-testid="input-box" id="inquiry-subject" name="subject"
+                                                            data-testid="input-box" id="inquiry-subject" name="title"
                                                             placeholder="제목을 입력해주세요" type="text" height="44"
                                                             class="css-1quw3ub e1uzxhvi2" value=""></div>
                                                 </div>
@@ -827,7 +802,7 @@
                                                     <div class="css-0 e1tjt2bn7">
                                                         <div class="css-1gua357 e1tjt2bn5"><textarea
                                                                 id="inquiry-contents" inputmode="text"
-                                                                aria-label="textarea-message" name="contents"
+                                                                aria-label="textarea-message" name="content"
                                                                 class="css-5etceh e1tjt2bn1"></textarea>
                                                             <div class="placeholder css-1ofzfyp e1tjt2bn6">
                                                                 <div class="css-168e7y9 e1fgvk593"><strong

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         securityUser.setUsername(vo2.getMem_id());
         String pwd = vo2.getMem_pwd();
-        pwd = bCryptPasswordEncoder.encode(pwd);
+        //pwd = bCryptPasswordEncoder.encode(pwd);
         securityUser.setPassword(pwd);
         // securityUser.setName("AA");
+        securityUser.setMem_name(vo2.getMem_name());
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority(vo2.getRole()));

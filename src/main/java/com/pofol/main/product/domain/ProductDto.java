@@ -53,6 +53,10 @@ public class ProductDto {
   private String as_guide; // 안내사항
 
   MultipartFile prod_img; // 상품 이미지 파일
+  
+      // 관리자 페이지에서 사용
+    private String bigCategory;
+    private String midCategory;
 
   public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, Integer prod_price, Integer disc_rate, String sale_sts, Integer prod_qty, String is_exch, String is_opt, String short_desc, String long_desc, String disp_sts, String brand, String origin, String dlvy_type, String pack_type, String sales_unit, String weight, String exp_date, MultipartFile prod_img, String rg_num) {
     this.evt_gp_id = evt_gp_id;
@@ -81,4 +85,15 @@ public class ProductDto {
     this.disc_price = (this.prod_price * ((100-this.disc_rate) / 100)) / 10 * 10;
   }
 
+    // 상품 관리자 페이지에서 update 용도
+    public ProductDto(Long prod_id, String sale_sts, String disp_sts, Integer prod_qty) {
+        this.prod_id = prod_id;
+        this.sale_sts = sale_sts;
+        this.disp_sts =disp_sts;
+        this.prod_qty = prod_qty;
+    }
+
+    public boolean isSaleExpired() {
+        return sel_end_date != null && sel_end_date.before(new Date());
+    }
 }

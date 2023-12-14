@@ -31,12 +31,26 @@ public class OrderDetailDto {
     private String md_num;
 
 
-    //insert 용도
+    //insert 용도, option상품일때
     public OrderDetailDto(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num) {
         this.ord_id = ord_id;
         this.mem_id = mem_id;
         this.prod_id = prod_id;
         this.opt_prod_id = opt_prod_id;
+        this.code_name = code_name;
+        this.prod_name = prod_name;
+        this.prod_qty = prod_qty;
+        this.prod_tot_price = prod_tot_price;
+        this.pack_type = pack_type;
+        this.rg_num = rg_num;
+        this.md_num = md_num;
+    }
+
+    //insert용도, 일반상품일 때
+    public OrderDetailDto(Long ord_id, String mem_id, Long prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num) {
+        this.ord_id = ord_id;
+        this.mem_id = mem_id;
+        this.prod_id = prod_id;
         this.code_name = code_name;
         this.prod_name = prod_name;
         this.prod_qty = prod_qty;
@@ -53,6 +67,14 @@ public class OrderDetailDto {
         this.md_num = md_num;
     }
 
-    //updateStatusList용도
-
+    //결제 상태 -> 주문 상세 상태
+    public void setStatus(String payStatus){
+        if(payStatus.equals("PAYMENT_COMPLETE")){ //결제 완료
+            this.code_name = "ORDER_COMPLETE"; //-> 주문 완료
+        }else if (payStatus.equals("PAYMENT_FAIL")){ //결제 실패
+            this.code_name = "ORDER_FAIL"; //-> 주문 실패
+        }else { //결제 취소
+            this.code_name = "ORDER_CANCEL"; //-> 주문 취소
+        }
+    }
 }

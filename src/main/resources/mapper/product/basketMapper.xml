@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pofol.product.BasketMapper">
+
+    <select id="selectProductOrderCheckout" parameterType="SelectedItemsDto" resultType="ProductOrderCheckout">
+        select sp.prod_id,sp.prod_name, sp.prod_price, sp.disc_price, spi.pack_type, spi.dlvy_type, sop.opt_prod_id, sop.opt_prod_name, sop.opt_price, sop.opt_disc_price
+        from product as sp
+        join product_info as spi
+        on sp.prod_id  = spi.prod_id
+        left join option_product as sop
+        on sp.prod_id = sop.prod_id and sp.is_opt = 'Y'
+        <where>
+            <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id}
+            </if>
+            <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id} and sop.opt_prod_id = #{opt_prod_id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectProduct" parameterType="long" resultType="ProductDto">
+        select prod_id, prod_name, prod_price, disc_price
+        from product
+        where prod_id = #{prod_id};
+    </select>
+
+    <select id="selectOptionProduct" parameterType="string" resultType="OptionProductDto">
+        select opt_prod_id, opt_prod_name, opt_price, opt_disc_price
+        from option_product
+        where opt_prod_id = #{opt_prod_id};
+    </select>
+
+</mapper>

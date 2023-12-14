@@ -2,6 +2,7 @@ package com.pofol.main.product.service;
 
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.repository.ProductListRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,16 @@ public class ProductListServiceImpl implements ProductListService {
     public ProductDto read(Long prod_id) throws Exception {
         try {
             return productListRepository.select(prod_id);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public List<OptionProductDto> getOptionList(Long prod_id) throws Exception {
+
+        try {
+            return productListRepository.selectOption(prod_id);
         } catch (Exception e) {
             throw new RuntimeException();
         }
