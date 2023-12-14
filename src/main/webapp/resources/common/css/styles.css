@@ -2812,9 +2812,11 @@ textarea.form-control-lg {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  /*border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);*/
+  border: var(--bs-btn-border-width) solid #00c73c;
   border-radius: var(--bs-btn-border-radius);
-  background-color: var(--bs-btn-bg);
+  /*background-color: var(--bs-btn-bg);*/
+  background-color: #00c73c;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {

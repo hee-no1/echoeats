@@ -94,6 +94,7 @@ public class ProductDto {
     }
 
     public boolean isSaleExpired() {
-        return sel_end_date != null && sel_end_date.before(new Date());
+//        return sel_end_date != null && sel_end_date.before(new Date());
+        return false;
     }
 }

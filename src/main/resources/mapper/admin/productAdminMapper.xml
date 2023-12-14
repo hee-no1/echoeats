@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pofol.admin.product.ProductAdminRepository">
-
-<!--    상품관리 (상품 조회) + (테스트용)-->
-    <select id="selectAll" parameterType="long" resultType="ProductDto">
-        SELECT p.prod_id, p.prod_name, p.sale_sts, p.disp_sts, p.prod_qty, p.prod_price, p.disc_price, i.dlvy_type, p.cat_code, i.brand, p.prod_rg_date, p.prod_mod_date, p.sel_str_date, p.sel_end_date
-        FROM product p, product_info i
-        WHERE p.prod_id = i.prod_id
-        ORDER BY p.prod_id ASC
-    </select>
-
-<!--    상품관리 (1개 상품 조회) + (테스트용)-->
-    <select id="select" parameterType="long" resultType="ProductDto">
-        SELECT p.*, i.*
-        FROM product p, product_info i
-        WHERE p.prod_id = i.prod_id
-        AND p.prod_id = #{prod_id}
-    </select>
-
-    <!-- 카테고리 리스트 -->
-    <select id="cateList" resultType="CategoryDto">
-        SELECT *
-        FROM category
-        ORDER BY cat_code
-    </select>
+<mapper namespace="ecoeats.productAdminMapper">
 
 <!--    상품 판매, 진열, 재고 상태 수정-->
     <update id="update" parameterType="ProductDto">
@@ -34,6 +11,15 @@
         disp_sts = #{disp_sts},
         prod_mod_date = now(),
         prod_qty = #{prod_qty}
+        WHERE prod_id = #{prod_id}
+    </update>
+
+<!--    옵션 상품 판매, 재고 상태 수정-->
+    <update id="optionUpdate">
+        UPDATE option_product
+        SET
+        opt_prod_qty = #{opt_prod_qty},
+        opt_prod_sts = #{opt_prod_sts}
         WHERE prod_id = #{prod_id}
     </update>
 
@@ -51,7 +37,12 @@
         </where>
     </select>
 
-
+    <!-- 카테고리 리스트 -->
+    <select id="cateList" resultType="CategoryDto">
+        SELECT *
+        FROM category
+        ORDER BY cat_code
+    </select>
 
 
 
