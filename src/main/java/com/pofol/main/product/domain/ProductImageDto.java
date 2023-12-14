@@ -26,6 +26,8 @@ public class ProductImageDto {
 
   private String md_num;
 
+  private Long prod_id;
+
   public ProductImageDto(String ori_file_name, String ser_file_name, String upld_path, String rg_num) {
     this.ori_file_name = ori_file_name;
     this.ser_file_name = ser_file_name;
