@@ -69,14 +69,14 @@ public class AdminController {
     }
 
     // 상품 등록
-    @PostMapping("/productEnroll")
+    @PostMapping("hyoungJun/productEnroll")
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
         productService.productEnroll(productDto);
         redirectAttributes.addFlashAttribute("productEnroll_result", productDto.getProd_name() + " 상품이 등록되었습니다.");
-        return "redirect:/admin/productManage";
+        return "redirect:/admin/hyoungJun/productManage";
     }
 
-    @GetMapping("/productManage")
+    @GetMapping("/hyoungJun/productManage")
     public void productManageGET() {
         log.info("productManageGET");
     }

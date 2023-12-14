@@ -32,4 +32,5 @@ class ProductServiceImplTest {
         // then
         assertThat(productService.productCount()).isEqualTo(192);
     }
+
 }

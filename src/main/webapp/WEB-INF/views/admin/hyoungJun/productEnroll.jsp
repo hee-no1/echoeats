@@ -74,7 +74,7 @@
                         <div class="form-sub-wrap">
                             <div class="input-group">
                                 <div class="seller-input-wrap">
-                                    <input name="product.name" type="text"
+                                    <input name="prod_name" type="text"
                                            class="form-control" maxlength="99"
                                            title="상품명 입력">
                                 </div>
@@ -137,7 +137,7 @@
                                                         <input id="discount-interface" class="form-control"
                                                                placeholder="판매가에서" max="99" min="0"
                                                                minlength="1" maxlength="2"
-                                                               value="0">
+                                                               value="0" name="disc_rate">
                                                         <input name="discount-rate" type="hidden" value="0">
                                                     </div>
                                                     <span class="input-group-addon">%</span>
@@ -154,7 +154,7 @@
                                             </label>
                                             <div class="input-content">
                                                 <p class="text-info text-price">
-                                                    <span class="span_discount">0</span>
+                                                    <span class="span_discount" name="disc_price">0</span>
                                                     <em>원</em> (<span class="span_discounting">0</span> 할인)
                                                 </p>
                                             </div>
@@ -168,10 +168,10 @@
                             <div class="input-content">
                                 <div class="seller-input-toggle">
                                     <input type="radio" id="salePeriod-choice-type-true"
-                                           name="salePeriod-choice-type" value="true">
+                                           name="sales_sts" value="Y">
                                     <label for="salePeriod-choice-type-true">설정함</label>
                                     <input type="radio" id="salePeriod-choice-type-false"
-                                           name="salePeriod-choice-type" value="false">
+                                           name="sales_sts" value="N">
                                     <label for="salePeriod-choice-type-false">설정안함</label>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="숫자만 입력">
+                                                <input name="prod_qty" class="form-control" type="text" placeholder="숫자만 입력">
                                             </div>
                                             <span class="input-group-addon">개</span>
                                         </div>
@@ -267,10 +267,10 @@
                             <div class="input-content">
                                 <div class="seller-input-toggle">
                                     <input type="radio" id="option-choice-type-true"
-                                           name="option-choice-type" value="true">
+                                           name="is_opt" value="Y">
                                     <label for="option-choice-type-true">설정함</label>
                                     <input type="radio" id="option-choice-type-false"
-                                           name="option-choice-type" value="false">
+                                           name="is_opt" value="N">
                                     <label for="option-choice-type-false">설정안함</label>
                                 </div>
                             </div>
@@ -515,7 +515,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="brand-input-wrap">
-                                                <input class="form-control" type="text" placeholder="상품의 브랜드를 정확하게 입력해주세요.">
+                                                <input name="brand" class="form-control" type="text" placeholder="상품의 브랜드를 정확하게 입력해주세요.">
                                             </div>
                                         </div>
                                     </div>
@@ -529,7 +529,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="ex) 국산 , 필리핀">
+                                                <input name="origin" class="form-control" type="text" placeholder="ex) 국산 , 필리핀">
                                             </div>
                                         </div>
                                     </div>
@@ -543,7 +543,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="ex) 샛별배송">
+                                                <input name="dlvy_type" class="form-control" type="text" placeholder="ex) 샛별배송">
                                             </div>
                                         </div>
                                     </div>
@@ -557,7 +557,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="ex) 컬리">
+                                                <input name="seller" class="form-control" type="text" placeholder="ex) 컬리">
                                             </div>
                                         </div>
                                     </div>
@@ -571,7 +571,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="ex) 냉동 or 냉장">
+                                                <input name="pack_type" class="form-control" type="text" placeholder="ex) 냉동 or 냉장">
                                             </div>
                                         </div>
                                     </div>
@@ -585,7 +585,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="팩이면 1팩, 낱개면 1개">
+                                                <input name="sales_unit" class="form-control" type="text" placeholder="팩이면 1팩, 낱개면 1개">
                                             </div>
                                         </div>
                                     </div>
@@ -599,7 +599,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="단위까지 정확하게 입력">
+                                                <input name="weight" class="form-control" type="text" placeholder="단위까지 정확하게 입력">
                                             </div>
                                         </div>
                                     </div>
@@ -613,7 +613,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" name="expiration-date" autocomplete="off" readonly="readonly">
+                                                <input name="exp_date" class="form-control" name="expiration-date" autocomplete="off" readonly="readonly">
                                             </div>
                                         </div>
                                     </div>
@@ -627,7 +627,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input class="form-control" type="text" placeholder="안내할 사항을 입력">
+                                                <input name="as_guide" class="form-control" type="text" placeholder="안내할 사항을 입력">
                                             </div>
                                         </div>
                                     </div>
@@ -649,10 +649,10 @@
                             <div class="input-content">
                                 <div class="seller-input-toggle">
                                     <input type="radio" id="display-choice-type-true"
-                                           name="display-choice-type" value="true">
+                                           name="disp_sts" value="Y">
                                     <label for="display-choice-type-true">설정함</label>
                                     <input type="radio" id="display-choice-type-false"
-                                           name="display-choice-type" value="false">
+                                           name="disp_sts" value="N">
                                     <label for="display-choice-type-false">설정안함</label>
                                 </div>
                             </div>
