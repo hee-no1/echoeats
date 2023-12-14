@@ -12,7 +12,7 @@
   <header>
     <%@ include file="../include/header.jspf" %>
   </header>
-
+  <link rel="stylesheet" href="/resources/product/css/main-css.css">
   <style>
     h4 {
       font-weight: bolder;
