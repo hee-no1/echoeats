@@ -73,7 +73,7 @@
     </style>
 </head>
 <body class="sb-nav-fixed">
-<%@ include file="../../common/top_side_nav.jsp" %>
+<%@ include file="../include/top_side_nav.jspf" %>
 <div class="container-fluid">
     <div class="row" style="padding-top:50px; padding-bottom: 50px">
         <div class="col-sm-6">

@@ -1,6 +1,8 @@
 package com.pofol.main.orders.order.repository;
 
 import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
+
 import org.springframework.core.annotation.Order;
 
 import java.util.List;
@@ -23,5 +25,8 @@ public interface OrderRepository {
 		public abstract List<OrderDto> selectAllByUserIdAndPeriod(Map map)throws Exception;
 		public abstract String selectByOrderMainImg(Long ord_id);
 		public abstract OrderDto selectByOrderId(Long ord_id);
+	    
+	    public abstract List searchSelectPage(SearchOrderCondition sc)throws Exception;
+	    public abstract int searchResultCnt(SearchOrderCondition sc) throws Exception;
 
 }

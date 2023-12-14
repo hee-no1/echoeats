@@ -1,7 +1,8 @@
 package com.pofol.main.board.repository;
 
 import com.pofol.main.board.domain.FaqDto;
-import com.pofol.main.orders1.order.domain.SearchOrderCondition;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

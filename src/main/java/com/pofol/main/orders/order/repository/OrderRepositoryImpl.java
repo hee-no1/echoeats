@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
 
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
@@ -75,5 +76,14 @@ public class OrderRepositoryImpl implements OrderRepository {
 	public OrderDto selectByOrderId(Long ord_id) {
 		return session.selectOne(namespace + "selectByOrderId", ord_id);
 	}
-
+	
+	@Override
+	public List searchSelectPage(SearchOrderCondition sc) throws Exception {
+		return session.selectList(namespace+"searchSelectPage", sc);
+	}
+	
+	@Override
+	public int searchResultCnt(SearchOrderCondition sc) throws Exception {
+		return session.selectOne(namespace+"searchResultCnt", sc);
+	}
 }

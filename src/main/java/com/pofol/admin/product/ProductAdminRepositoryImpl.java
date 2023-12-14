@@ -1,6 +1,6 @@
 package com.pofol.admin.product;
 
-import com.pofol.main.orders1.order.domain.CodeTableDto;
+import com.pofol.main.orders.order.domain.CodeTableDto;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
