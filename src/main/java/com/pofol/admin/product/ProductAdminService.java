@@ -14,9 +14,9 @@ public interface ProductAdminService {
 
     List<ProductDto> getProductAdminList() throws Exception;
 
-    List<ProductDto> getProductAdminSearchList(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;
+    List<ProductDto> getProductAdminSearchList(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception;
 
-    Integer getProductAdminSearchCount(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;
+    Integer getProductAdminSearchCount(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception;
 
     List<CategoryDto> getCategoryList() throws Exception;
 

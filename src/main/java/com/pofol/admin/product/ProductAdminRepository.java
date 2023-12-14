@@ -27,10 +27,10 @@ public interface ProductAdminRepository {
     List<OptionProductDto> selectAllOption(Long prod_id) throws Exception;
 
     // 조건에 따른 상품 리스트 정렬 (관리자)
-    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;
+    List<ProductDto> searchSelectPage(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception;
 
     // 조건에 따른 상품 리스트 카운트 (관리자)
-    Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception;
+    Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception;
 
     // 상품관리자 페이지에 대 카테고리 + 중카테고리 정렬
     List<CategoryDto> categoryList() throws Exception;

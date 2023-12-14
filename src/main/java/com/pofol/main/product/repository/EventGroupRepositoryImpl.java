@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class EventGroupRepositoryImpl implements EventGroupRepository{
 
     private final SqlSession sqlSession;
-    private final String namespace = "com.pofol.main.product.domain.EventGroupDto.";
+    private final String namespace = "ecoeats.eventGroupMapper.";
 
     // 관리자 페이지에서 사용
     @Override

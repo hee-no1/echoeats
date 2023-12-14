@@ -19,22 +19,23 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
 
     private final SqlSession sqlSession;
 
-    private final String productAdminNamespace = "com.pofol.admin.product.ProductAdminRepository.";
-    private final String categoryNamespace = "com.pofol.main.product.category.CategoryDto.";
+    private final String productAdminNamespace = "ecoeats.productAdminMapper.";
+    private final String categoryNamespace = "ecoeats.categoryMapper.";
+    private final String productNamespace = "ecoeats.productMapper.";
 
     @Override
     public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
         return null;
     }
 
-    @Override
+    @Override // 상품 조회
     public ProductDto select(Long prod_id) throws Exception {
-        return sqlSession.selectOne(productAdminNamespace + "select", prod_id);
+        return sqlSession.selectOne(productNamespace + "selectProduct", prod_id);
     }
 
-    @Override
+    @Override // 전체 상품 조회
     public List<ProductDto> selectAll() throws Exception {
-        return sqlSession.selectList(productAdminNamespace + "selectAll");
+        return sqlSession.selectList(productNamespace + "selectAllProduct");
     }
 
     @Override
@@ -42,30 +43,30 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         return 0;
     }
 
-    @Override
+    @Override // 상품의 모든 옵션 상품 조회
     public List<OptionProductDto> selectAllOption(Long prod_id) throws Exception {
-        return sqlSession.selectList(productAdminNamespace + "selectOption", prod_id);
+        return sqlSession.selectList(productNamespace + "selectAllOptionProduct", prod_id);
     }
 
     @Override // 조건에 따른 상품 리스트 정렬 (관리자)
     public List<ProductDto> searchSelectPage(
-        SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
+        SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception {
 
         Map<String, Object> map = new HashMap<>();
         map.put("offset", searchProductAdminCondition.getOffset());
         map.put("pageSize", searchProductAdminCondition.getPageSize());
-        productFilter(searchProductAdminCondition, productFilterDto, map);
+        productFilter(searchProductAdminCondition, productFilterDto, Stock, map);
         return sqlSession.selectList(productAdminNamespace + "searchSelectPage", map);
     }
 
     @Override // 조건에 따른 상품 리스트 카운트 (관리자)
-    public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto) throws Exception {
+    public Integer searchResultCnt(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        productFilter(searchProductAdminCondition, productFilterDto, map);
+        productFilter(searchProductAdminCondition, productFilterDto, Stock, map);
         return sqlSession.selectOne(productAdminNamespace + "searchResultCnt", map);
     }
 
-    private void productFilter(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, Map<String, Object> map) {
+    private void productFilter(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock, Map<String, Object> map) {
         map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
         map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("stock_min", productFilterDto.getStock_min());
@@ -77,6 +78,7 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("price_max", productFilterDto.getPrice_max());
         map.put("bigCategory", productFilterDto.getBigCategory());
         map.put("midCategory", productFilterDto.getMidCategory());
+        map.put("Stock", Stock);
     }
 
     @Override // 카테고리 정렬

@@ -104,7 +104,7 @@ public class ProductListController {
         } catch (ExpiredProductException expiredProductException) {
             HandlerProductException handlerProductException = new HandlerProductException();
             handlerProductException.ExpiredProductExceptionHandler(expiredProductException);
-            return "redirect:/";
+            return "redirect:/main";
         }
         catch (Exception exception) {
             exception.printStackTrace();
