@@ -1,8 +1,6 @@
 package com.pofol.main.orders.sample.productSample;
 
-import com.pofol.main.orders.order.domain.ProductOrderCheckout;
-import com.pofol.main.product.basket.SelectedItemsDto;
-import com.pofol.main.product.basket.BasketRepository;
+import com.pofol.main.product.cart.CartRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +10,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/root-context.xml" })
-class BasketRepositoryImplTest {
+class CartRepositoryImplTest {
 
     @Autowired
-    BasketRepository basketRepository;
+    CartRepository cartRepository;
 
     @Test
     @DisplayName("product 테이블 & optionProduct 테이블 & productInfo 테이블 조인 후-> requiredProductDto로")

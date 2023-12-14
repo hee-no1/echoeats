@@ -69,6 +69,8 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     private void productFilter(SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock, Map<String, Object> map) {
         map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
         map.put("keyword", searchProductAdminCondition.getKeyword());
+        map.put("Stock", searchProductAdminCondition.getStock());
+        map.put("date_type", searchProductAdminCondition.getDate_type());
         map.put("stock_min", productFilterDto.getStock_min());
         map.put("stock_max", productFilterDto.getStock_max());
         map.put("selling", productFilterDto.getSelling());
@@ -78,7 +80,6 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("price_max", productFilterDto.getPrice_max());
         map.put("bigCategory", productFilterDto.getBigCategory());
         map.put("midCategory", productFilterDto.getMidCategory());
-        map.put("Stock", Stock);
     }
 
     @Override // 카테고리 정렬

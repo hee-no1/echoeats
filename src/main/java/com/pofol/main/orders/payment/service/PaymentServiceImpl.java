@@ -7,8 +7,8 @@ import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.domain.PaymentHistoryDto;
 import com.pofol.main.orders.payment.repository.PaymentHistoryRepository;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
-import com.pofol.main.product.basket.SelectedItemsDto;
-import com.pofol.main.product.basket.BasketRepository;
+import com.pofol.main.product.cart.SelectedItemsDto;
+import com.pofol.main.product.cart.CartRepository;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService{
 
-    private final BasketRepository basketRepository;
+    private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final PaymentHistoryRepository paymentHistoryRepository;
@@ -37,10 +37,10 @@ public class PaymentServiceImpl implements PaymentService{
             Integer qty = item.getQty();
             try{
                 if(opt_prod_id == null || opt_prod_id.isEmpty()){ //일반 상품일 때
-                    ProductDto prod = basketRepository.selectProduct(item.getProd_id());
+                    ProductDto prod = cartRepository.selectProduct(item.getProd_id());
                     dbTotPayPrice += prod.getDisc_price() * qty;
                 }else { //옵션 상품일 때
-                    OptionProductDto prod = basketRepository.selectOptionProduct(item.getOpt_prod_id());
+                    OptionProductDto prod = cartRepository.selectOptionProduct(item.getOpt_prod_id());
                     dbTotPayPrice += prod.getOpt_disc_price() * qty;
                 }
             } catch (Exception e) {

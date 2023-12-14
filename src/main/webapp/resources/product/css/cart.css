@@ -73,16 +73,6 @@ input[type=checkbox], input[type=radio] {
   padding: 0;
 }
 
-.css-agvwxo {
-  overflow: hidden;
-  position: absolute;
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  width: 1px;
-  height: 1px;
-}
-
 .css-79hxr7 {
   margin-right: 12px;
 }
@@ -178,12 +168,13 @@ input[type=checkbox], input[type=radio] {
 
 .css-agvwxo {
   overflow: hidden;
-  position: absolute;
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  width: 1px;
-  height: 1px;
+  /*position: absolute;*/
+  /*clip: rect(0 0 0 0);*/
+  /*-webkit-clip-path: inset(50%);*/
+  /*clip-path: inset(50%);*/
+  width: 17px;
+  height: 17px;
+  accent-color: #00c73c;
 }
 
 .css-79hxr7 {
