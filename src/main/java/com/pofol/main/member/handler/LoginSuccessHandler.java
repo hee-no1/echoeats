@@ -25,10 +25,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         System.out.println("---------------LoginSuccessHandler---------------");
 
+        //가로챈 주소를 보유
+        //사용자가 직접url로 /member/admin을 입력했을 때 필요
         RequestCache requestCache = new HttpSessionRequestCache();
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         System.out.println(savedRequest);
 
+
+        //현재 세션값 확인
         Enumeration<String> list = request.getSession().getAttributeNames();
         while(list.hasMoreElements()){
             String a= list.nextElement();
@@ -36,25 +40,22 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         }
 
-        String referer = request.getHeader("Referer");
-        System.out.println("로그인 success referer : "+ referer);
-
-
         HttpSession session = request.getSession();
-        session.setAttribute("greeting", authentication.getName() + "님 반갑습니다.");
-        session.setAttribute("result",  "성공에서 옴");
-        String referer1 = (String) session.getAttribute("referer");
+        String referer = (String) session.getAttribute("referer");
         session.removeAttribute("referer");
+        System.out.println("referer : "+ referer);
 
         //refer이 있다 = 정상적인(버튼을 클릭해서) 루트로 왔다
         //refer이 없다 = url로 진입
-        //savedRequest == null 내가 왜 사용했는지 기억 안 나서 일단 놔둠
-        if(savedRequest == null || referer1 != null){
+        //savedRequest는 가로챘을 때만 가지고 있다
+        if(referer != null){
             System.out.println("savedRequest == null 진입");
-            response.sendRedirect(referer1);
+            response.sendRedirect(referer);
         }else{
             System.out.println("savedRequest == null 통과");
             response.sendRedirect(savedRequest.getRedirectUrl());
+            //얘는 사용자가 직접 /member/admin을 입력했을 때 필요
+            //이 때는 referer가 null이고, savedRequest가 가로챈 주소를 가지고 있다
         }
     }
 
