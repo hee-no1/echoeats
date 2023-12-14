@@ -29,7 +29,7 @@
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(-45 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
             </button></div>
 
-            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}</div>
+            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}의 상품을 주문합니다</div>
 
             <c:forEach var="item" items="${items}">
                 <c:set var="prod" value="${item.productOrderCheckout}"/>

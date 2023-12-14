@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService{
             if(tot_ord_qty == 1){ //상품수량이 1개일 때
                 tot_prod_name += "상품을 주문합니다.";
             } else {//상품수량이 2개 이상일 때
-                tot_prod_name += " 외 " + (tot_ord_qty-1) +"개의 상품을 주문합니다.";
+                tot_prod_name += " 외 " + (tot_ord_qty-1) +"개";
             }
 
             oc.setTot_prod_name(tot_prod_name);
