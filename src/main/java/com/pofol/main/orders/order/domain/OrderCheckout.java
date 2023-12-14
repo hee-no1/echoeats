@@ -26,8 +26,7 @@ public class OrderCheckout {
     private MemberDto memberDto; //회원 정보
     //배송정보 Dto
     private DelNotesDto delNotesDto; //배송 요청 사항 Dto
-    //쿠폰 Dto
-    private List<CouponJoinDto> couponList;
+    private List<CouponJoinDto> couponList; //쿠폰 Dto
     //적립금 Dto
 
 

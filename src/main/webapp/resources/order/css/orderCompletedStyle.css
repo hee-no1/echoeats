@@ -154,14 +154,14 @@ svg:not(:root) {
     border-radius: 6px;
     background: rgb(248, 241, 255);
 }
-.css-152kj31 {
-    padding-right: 4px;
-    font-weight: 500;
-    letter-spacing: -0.5px;
-    -webkit-text-fill-color: transparent;
-    background: linear-gradient(170deg, rgb(82, 31, 239), rgb(228, 30, 235));
-    -webkit-background-clip: text;
-}
+/*.css-152kj31 {*/
+/*    padding-right: 4px;*/
+/*    font-weight: 500;*/
+/*    letter-spacing: -0.5px;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    background: linear-gradient(170deg, rgb(82, 31, 239), rgb(228, 30, 235));*/
+/*    -webkit-background-clip: text;*/
+/*}*/
 .css-il3y9x {
     font-weight: 500;
     letter-spacing: -0.5px;
@@ -228,11 +228,11 @@ svg:not(:root) {
     font-size: 18px;
     line-height: 24px;
     text-align: right;
-    color: rgb(95, 0, 128);
+    color: #00922c;
 }
 .css-98lqc0 {
     text-align: right;
-    color: rgb(95, 0, 128);
+    color: #00922c;
     display: block;
     width: auto;
     font-weight: normal;
@@ -267,7 +267,7 @@ svg:not(:root) {
 }
 .css-1erf9v6 span {
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #00922c;
 }
 .css-1pgxldh {
     text-align: center;
@@ -329,7 +329,7 @@ ol, ul {
     width: 100%;
     height: 52px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: #00c73c;
     border: 0px none;
     border-radius: 3px;
 }

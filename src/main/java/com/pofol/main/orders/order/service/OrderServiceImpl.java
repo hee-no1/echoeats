@@ -197,28 +197,29 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
-    public void modifyOrder(PaymentDto pd) {
+    public void modifyOrder(Long ord_id, String code_name) {
         System.out.println("modifyOrder");
         try {
             //주문 상세 table
-            List<OrderDetailDto> items = orderDetailRepository.selectList(pd.getOrd_id());
+            List<OrderDetailDto> items = orderDetailRepository.selectList(ord_id);
             for (OrderDetailDto item : items) {
-                item.setStatus(pd.getCode_name());
+                item.setCode_name(code_name);
                 orderDetailRepository.updateStatus(item);
                 System.out.println("item: "+item);
             }
 
             //주문 table
-            OrderDto orderDto = orderRepository.select(pd.getOrd_id());
+            OrderDto orderDto = orderRepository.select(ord_id);
             orderDto.setStatus(items);
             orderRepository.updateStatus(orderDto);
             System.out.println("orderDto: "+orderDto);
 
             //주문 이력 table
-            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(pd.getOrd_id());
+            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(ord_id);
             orderHistoryDto.setStatus(orderDto);
             orderHistoryRepository.insert(orderHistoryDto);
             System.out.println("orderHist: "+orderHistoryDto);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

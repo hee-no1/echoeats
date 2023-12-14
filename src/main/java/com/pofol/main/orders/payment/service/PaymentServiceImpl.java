@@ -1,5 +1,9 @@
 package com.pofol.main.orders.payment.service;
 
+import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.GradeRepository;
+import com.pofol.main.member.repository.MemberRepository;
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.repository.OrderRepository;
@@ -20,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService{
 
+    private final GradeRepository gradeRepository;
     private final BasketRepository basketRepository;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
@@ -65,17 +70,17 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public PaymentDto writePayment(PaymentDto pay) {
         System.out.println("pay: " + pay);
-        //결제 table 작성
         String mem_id = "you11"; //나중에 session에서 꺼내와야한다.
-        pay.setMemberData(mem_id);
         try {
-            System.out.println("payment insert 전"+pay);
+            //결제 table 작성
+            pay.setMemberData(mem_id);
+            //적립금 계산
+            GradeDto grade = gradeRepository.select_grade(mem_id);
+            pay.setReserves(pay.getTot_pay_price() * grade.getAcm_rate() / 100);
             paymentRepository.insert(pay);
-            System.out.println("payment insert 후"+pay);
 
             //결제이력 table 작성
             PaymentHistoryDto paymentHistoryDto = new PaymentHistoryDto(pay.getPay_id(), pay.getOrd_id(), pay.getMem_id(), pay.getCode_name(), pay.getPay_way(), pay.getTot_prod_name(), pay.getTot_pay_price(), pay.getPg_tid(), pay.getMem_id(), pay.getMem_id());
-            System.out.println("payHist: "+paymentHistoryDto);
             paymentHistoryRepository.insert(paymentHistoryDto);
             return pay;
         } catch (Exception e) {
@@ -99,5 +104,15 @@ public class PaymentServiceImpl implements PaymentService{
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public PaymentDto getPayment(Long ord_id) {
+        try {
+            PaymentDto paymentDto = paymentRepository.select(ord_id);
+            return paymentDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -8,4 +8,5 @@ public interface PaymentService {
     Boolean prevVerify(OrderCheckout oc);
     PaymentDto writePayment(PaymentDto pd);
     Boolean nextVerify(PaymentDto pd);
+    PaymentDto getPayment(Long ord_id);
 }
