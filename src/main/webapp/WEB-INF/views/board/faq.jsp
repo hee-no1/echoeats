@@ -1,7 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- FAQ 사용자 페이지 -->
 <html lang="ko">
@@ -10,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoEats</title>
     <%@ include file="../include/bootstrap.jspf" %>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <style>
         .card {
             border: white;

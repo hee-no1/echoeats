@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoEats</title>
+  <link rel="stylesheet" href="/resources/product/css/main-css.css">
   <%@ include file="../include/bootstrap.jspf" %>
   <style>
     .list-group-item a {
