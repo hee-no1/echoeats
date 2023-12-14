@@ -23,6 +23,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
     @Override
     public int insertMember(MemberDto memberDto) throws Exception {
+        System.out.println(memberDto.toString());
         return session.insert(namespace + "insert_member", memberDto);
     }
     @Override

@@ -37,6 +37,11 @@ public class OrderRepositoryImpl implements OrderRepository {
 	}// updateStatus
 
 	@Override
+	public int updateStatus(OrderDto dto) throws Exception {
+		return session.update(namespace+"updateStatus",dto);
+	}
+
+	@Override
 	public int delete(Long ord_id) throws Exception {
 		return session.delete(namespace + "delete", ord_id);
 	}

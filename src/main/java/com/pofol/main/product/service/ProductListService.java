@@ -2,6 +2,7 @@ package com.pofol.main.product.service;
 
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 
 import java.util.List;
@@ -10,6 +11,9 @@ public interface ProductListService {
 
   // 상품 조회
   ProductDto read(Long prod_id) throws Exception;
+
+  // 옵션 상품 조회
+  List<OptionProductDto> getOptionList(Long prod_id) throws Exception;
 
   // 전체 상품 리스트 조회
   List<ProductDto> getList() throws Exception;

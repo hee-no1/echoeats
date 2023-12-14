@@ -1,5 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 
 <html>
@@ -12,18 +13,20 @@
         <div id="top">
             <div id="header">
                 <div id="homeInfo">
-                    <c:if test="${result eq null}">
+                    <sec:authorize access="!isAuthenticated()">
                         <a>회원가입</a>
                         <div class="stick"></div>
                         <a href="/member/login_form">로그인</a>
                         <div class="stick"></div>
-                    </c:if>
-                    <c:if test="${result ne null}">
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                        <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
                         <a href="/member/admin">관리자</a>
                         <div class="stick"></div>
                         <a href="/logout">로그아웃</a>
                         <div class="stick"></div>
-                    </c:if>
+                    </sec:authorize>
+
                     <div>
                         <a>고객센터<span></span></a>
                     </div>
@@ -36,10 +39,10 @@
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
+                        <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">
+                        <a> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%--                        <div class="stick"></div>--%>
+<%--                        <a>뷰티컬리</a>--%>
 
                         <form action="/searchProduct" id="search-form">
                             <div id="search-center">
@@ -116,8 +119,6 @@
                 </div>
             </div>
         </div> <!--top -->
-    </div>
-</div>
 </body>
 </html>
 

@@ -227,7 +227,7 @@ a {
 
 .ganada-button {
   font-size: 14px;
-  color: rgb(95, 0, 128);
+  color: #00c73c;
   font-weight: 500;
 }
 
@@ -542,7 +542,7 @@ svg:not(:root) {
   letter-spacing: -1px;
   cursor: pointer;
   font-weight: 700;
-  color: rgb(95, 0, 128);
+  color: #333;
 }
 
 #best {

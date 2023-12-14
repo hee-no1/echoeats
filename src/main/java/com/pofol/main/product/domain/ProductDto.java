@@ -2,6 +2,7 @@ package com.pofol.main.product.domain;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -9,7 +10,6 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ProductDto {
 
   private Long prod_id; // 상품 ID
@@ -37,6 +37,10 @@ public class ProductDto {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date sel_end_date; // 판매 종료일
   private Long prod_desc_id; // 상품 상세
+  private Date rg_date;
+  private String rg_num;
+  private Date md_date;
+  private String md_num;
 
   private String brand; // 브랜드
   private String origin; // 원산지
@@ -47,4 +51,50 @@ public class ProductDto {
   private String weight; // 중량/용량
   private String exp_date; // 유통기한
   private String as_guide; // 안내사항
+
+  MultipartFile prod_img; // 상품 이미지 파일
+  
+      // 관리자 페이지에서 사용
+    private String bigCategory;
+    private String midCategory;
+
+  public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, Integer prod_price, Integer disc_rate, String sale_sts, Integer prod_qty, String is_exch, String is_opt, String short_desc, String long_desc, String disp_sts, String brand, String origin, String dlvy_type, String pack_type, String sales_unit, String weight, String exp_date, MultipartFile prod_img, String rg_num) {
+    this.evt_gp_id = evt_gp_id;
+    this.prod_img_id = prod_img_id;
+    this.cat_code = cat_code;
+    this.prod_name = prod_name;
+    this.prod_price = prod_price;
+    this.disc_rate = disc_rate;
+    this.sale_sts = sale_sts;
+    this.prod_qty = prod_qty;
+    this.is_exch = is_exch;
+    this.is_opt = is_opt;
+    this.short_desc = short_desc;
+    this.long_desc = long_desc;
+    this.disp_sts = disp_sts;
+    this.brand = brand;
+    this.origin = origin;
+    this.dlvy_type = dlvy_type;
+    this.pack_type = pack_type;
+    this.sales_unit = sales_unit;
+    this.weight = weight;
+    this.exp_date = exp_date;
+    this.prod_img = prod_img;
+    this.rg_num = rg_num;
+    this.md_num = rg_num;
+    this.disc_price = (this.prod_price * ((100-this.disc_rate) / 100)) / 10 * 10;
+  }
+
+    // 상품 관리자 페이지에서 update 용도
+    public ProductDto(Long prod_id, String sale_sts, String disp_sts, Integer prod_qty) {
+        this.prod_id = prod_id;
+        this.sale_sts = sale_sts;
+        this.disp_sts =disp_sts;
+        this.prod_qty = prod_qty;
+    }
+
+    public boolean isSaleExpired() {
+//        return sel_end_date != null && sel_end_date.before(new Date());
+        return false;
+    }
 }

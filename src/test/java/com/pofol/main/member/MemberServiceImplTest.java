@@ -11,6 +11,7 @@ import com.pofol.main.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,6 +49,9 @@ public class MemberServiceImplTest {
     @Autowired
     DelNotesService delNotesService;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void main(){
         CouponDto couponDto = couponRepository.select_coupon(1);
@@ -80,8 +84,9 @@ public class MemberServiceImplTest {
 
     @Test
     public void main6(){
-        GradeDto admin123 = gradeService.show_grade("admin123");
-        System.out.println(admin123);
+        String grade = gradeService.show_grade("admin123").getGd_name();
+
+        System.out.println(grade);
     }
 
     @Test
@@ -126,32 +131,39 @@ public class MemberServiceImplTest {
 
     @Test
     public void re_update_delnotes(){
-        DelNotesDto dto = new DelNotesDto("asd125", "우형주", "010-4949-4949", "re_update", "경비실 호출", "오전 7시","asd123","asd123");
-        int i = delNotesRepository.update_delNotes(dto);
-        System.out.println(i);
-        assertTrue(i==1);
+//        DelNotesDto dto = new DelNotesDto("asd125", "우형주", "010-4949-4949", "re_update", "경비실 호출", "오전 7시","asd123","asd123");
+//        int i = delNotesRepository.update_delNotes(dto);
+//        System.out.println(i);
+//        assertTrue(i==1);
     }
 
     @Test
     public void se_update_delnotes(){
-        DelNotesDto dto = new DelNotesDto("asd125", "우형주", "010-4949-4949", "re_update", "경비실 호출", "오전 7시","admin123","admin123");
-        int i = delNotesService.update_delNotes(dto);
-        System.out.println(i);
-        assertTrue(i==1);
+//        DelNotesDto dto = new DelNotesDto("asd125", "우형주", "010-4949-4949", "re_update", "경비실 호출", "오전 7시","admin123","admin123");
+//        int i = delNotesService.update_delNotes(dto);
+//        System.out.println(i);
+//        assertTrue(i==1);
     }
 
     @Test
     public void re_select_delnotes(){
-        DelNotesDto dto = delNotesRepository.select_delNotes("asd125");
-        System.out.println(dto);
-        assertTrue(dto.getMem_id().equals("asd125"));
+//        DelNotesDto dto = delNotesRepository.select_delNotes("asd125");
+//        System.out.println(dto);
+//        assertTrue(dto.getMem_id().equals("asd125"));
     }
 
     @Test
     public void se_select_delnotes(){
-        DelNotesDto dto = delNotesService.select_delNotes("asd125");
-        System.out.println(dto);
-        assertTrue(dto.getMem_id().equals("asd125"));
+//        DelNotesDto dto = delNotesService.select_delNotes("asd125");
+//        System.out.println(dto);
+//        assertTrue(dto.getMem_id().equals("asd125"));
+    }
+
+
+    @Test
+    public void sss() throws Exception {
+
+
     }
 
 

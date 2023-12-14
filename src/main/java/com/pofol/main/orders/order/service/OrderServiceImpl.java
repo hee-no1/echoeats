@@ -10,35 +10,49 @@ import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.domain.OrderHistoryDto;
+import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.DelNotesRepository;
+import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
-import com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto;
+import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
+import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
+import com.pofol.main.product.basket.SelectedItemsDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
 import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
 import com.pofol.main.orders.sample.productSample.SampleProductDto;
 import com.pofol.main.orders.sample.productSample.SampleProductRepository;
+import com.pofol.main.orders.order.domain.ProductOrderCheckout;
+import com.pofol.main.product.basket.BasketRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
-    private final SampleMemberRepository memRepo;
-    private final SampleProductRepository prodRepo;
+    private final MemberRepository memRepo;
+    private final DelNotesRepository delNotesRepository;
+    private final BasketRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
-
-    @Autowired
-    public OrderServiceImpl(SampleMemberRepository memRepo, SampleProductRepository prodRepo, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, OrderHistoryRepository orderHistoryRepository) {
-        this.memRepo = memRepo;
-        this.prodRepo = prodRepo;
-        this.orderRepository = orderRepository;
-        this.orderDetailRepository = orderDetailRepository;
-        this.orderHistoryRepository = orderHistoryRepository;
-    }
+    private final PaymentDiscountRepository paymentDiscountRepository;
 
     @Override
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -49,8 +63,8 @@ public class OrderServiceImpl implements OrderService{
 
         try{
             for (SelectedItemsDto item : items) {
-                SampleProductDto prod = prodRepo.selectRequiredProduct(item);
-                item.setSampleProductDto(prod);
+                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                item.setProductOrderCheckout(prod);
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
                     tot_prod_price += prod.getDisc_price() * item.getQty(); //총 주문금액 계산
@@ -79,7 +93,7 @@ public class OrderServiceImpl implements OrderService{
 
         //총 상품명 구하기
         SelectedItemsDto firstItem = items.get(0);
-        SampleProductDto firstProd = firstItem.getSampleProductDto();
+        ProductOrderCheckout firstProd = firstItem.getProductOrderCheckout();
         int tot_ord_qty = items.size(); //총 상품 수량
 
         try{
@@ -100,26 +114,35 @@ public class OrderServiceImpl implements OrderService{
 
         oc.setTot_prod_name(tot_prod_name);
 
-
-        //회원 정보 DB에서 꺼내오기
-        String mem_id = "you11"; //나중에 세션에서 가지고 온다.
+        //회원정보, 배송요청사항
         try {
-            SampleMemberDto mem = memRepo.selectMember(mem_id);
-            oc.setSampleMemberDto(mem);
+            //회원정보 가져오기
+            MemberDto mem = memRepo.selectMember(mem_id);
+            oc.setMemberDto(mem);
+
+            //배송요청사항 가져오기
+            DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
+            oc.setDelNotesDto(delNotes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
+
 
         return oc;
     }
 
 
     @Override
-    public void writeOrder(OrderCheckout oc) {
+    public Long writeOrder(OrderCheckout oc) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
 
-        String mem_id = "you11"; //회원id 가져오기
         //주문 table 작성
         OrderDto orderDto = new OrderDto(mem_id, oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), oc.getOrigin_prod_price() - oc.getTot_prod_price(), items.size(), oc.getDlvy_fee(), oc.getPay_way(), items.size(), mem_id, mem_id);
         try {
@@ -128,8 +151,8 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                SampleProductDto prod = prodRepo.selectRequiredProduct(item);
-                item.setSampleProductDto(prod);
+                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 
                 OrderDetailDto orderDetailDto;
@@ -145,11 +168,16 @@ public class OrderServiceImpl implements OrderService{
             OrderHistoryDto orderHistoryDto = new OrderHistoryDto(ord_id, mem_id, "ORDERING", oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), items.size(), oc.getPay_way(), mem_id, mem_id);
             orderHistoryRepository.insert(orderHistoryDto);
 
+            //할인 금액 정보 table 작성
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
+            paymentDiscountRepository.insert(paymentDiscountDto);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
 
+        return orderDto.getOrd_id();
     }
     
     /**
@@ -181,5 +209,35 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		return orderRepository.selectByOrderId(ord_id);
 	}
+
+
+    @Override
+    public void modifyOrder(PaymentDto pd) {
+        System.out.println("modifyOrder");
+        try {
+            //주문 상세 table
+            List<OrderDetailDto> items = orderDetailRepository.selectList(pd.getOrd_id());
+            for (OrderDetailDto item : items) {
+                item.setStatus(pd.getCode_name());
+                orderDetailRepository.updateStatus(item);
+                System.out.println("item: "+item);
+            }
+
+            //주문 table
+            OrderDto orderDto = orderRepository.select(pd.getOrd_id());
+            orderDto.setStatus(items);
+            orderRepository.updateStatus(orderDto);
+            System.out.println("orderDto: "+orderDto);
+
+            //주문 이력 table
+            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(pd.getOrd_id());
+            orderHistoryDto.setStatus(orderDto);
+            orderHistoryRepository.insert(orderHistoryDto);
+            System.out.println("orderHist: "+orderHistoryDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

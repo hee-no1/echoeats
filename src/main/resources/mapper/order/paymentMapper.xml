@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payment.repository.paymentMapper">
+    <insert id="insert" parameterType="PaymentDto">
+        INSERT INTO spring.payment
+        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, pay_way, rg_num, md_num)
+        VALUES
+        (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{pay_way},#{rg_num},#{md_num});
+    </insert>
+
+    <select id="select" parameterType="long" resultType="PaymentDto">
+        SELECT *
+        FROM spring.payment
+        WHERE
+        ord_id = #{ord_id};
+    </select>
+
+    <select id="selectOne" parameterType="long" resultType="PaymentDto">
+        SELECT *
+        FROM spring.payment
+        WHERE
+        code_name = 'PAYMENT_COMPLETE' and ord_id = #{ord_id};
+    </select>
+
+    <select id="selectTotalPrice" parameterType="PaymentDto" resultType="int">
+        SELECT sum(tot_pay_price)
+        FROM spring.payment
+        WHERE
+        pay_date between #{start_date} and #{end_date}
+        and code_name = 'PAYMENT_COMPLETE' and mem_id = #{mem_id}
+    </select>
+
+    <select id="selectPayment" parameterType="PaymentDto" resultType="PaymentDto">
+        SELECT mem_id, tot_pay_price, pay_date, code_name
+        FROM spring.payment
+        WHERE
+            pay_date between #{start_date} and #{end_date}
+          and code_name = 'PAYMENT_COMPLETE' and mem_id = #{mem_id}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE spring.payment
+        SET
+        code_name = #{code_name},
+        md_num = #{md_num}
+        WHERE pay_id = #{pay_id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM spring.payment WHERE pay_id = #{pay_id}
+    </delete>
+
+    <select id="selectAll" resultType="PaymentDto">
+        SELECT *
+        FROM spring.payment
+        ORDER BY rg_date DESC, ord_id DESC
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM spring.payment
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM spring.payment
+    </select>
+</mapper>

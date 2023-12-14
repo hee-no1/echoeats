@@ -18,8 +18,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<AddressDto> getAddress(String mem_id) throws Exception {
+    public List<AddressDto> getAddresses(String mem_id) throws Exception {
         return addressRepository.selectAllAddress(mem_id);
+    }
+
+    @Override
+    public AddressDto getAddress(String addr_id) throws Exception {
+        return addressRepository.selectAddress(addr_id);
     }
 
     @Override

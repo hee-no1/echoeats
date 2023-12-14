@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- FAQ 관리자 페이지 (등록,수정,삭제버튼) -->
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -11,9 +11,6 @@
     .list-group-item a {
       text-decoration: none;
       color: black;
-    }
-    .list-group-item:hover {
-      background-color: #FEF7FF;
     }
     .list-group-item:hover>a {
       font-weight: bold;
@@ -39,23 +36,6 @@
     h4 span {
       vertical-align: middle;
       font-size: small;
-    }
-    .main {
-      padding-bottom: 24px;
-      padding-top: 10px;
-    }
-    .faq {
-      display: flex;
-      width: 100%;
-      border-bottom: 1px solid rgb(51, 51, 51);
-      text-align: center;
-      height: 61px;
-    }
-    .faq_top {
-      padding: 10px;
-      font-size: 11pt;
-      vertical-align: middle;
-      font-weight: bolder;
     }
     .card {
       border: white;
@@ -86,32 +66,6 @@
       padding: 30px 30px 30px 70px;
       font-size: 14px;
     }
-    .btn_list {
-      padding-top: 45px;
-    }
-    .btn1 {
-      display: inline-block;
-      border: black;
-      width: 44px;
-      height: 44px;
-      border-radius: 0.5em;
-    }
-    .btn1:hover {
-      border: solid 1px darkgray;
-    }
-    .btn2 {
-      display: inline-block;
-      border: black;
-      width: 44px;
-      height: 44px;
-      border-radius: 0.5em;
-    }
-    .btn2:hover {
-      border: solid 1px darkgray;
-    }
-    .btns {
-      text-align: center;
-    }
     .faq_btn {
       padding: 0px 10px;
       text-align: center;
@@ -120,7 +74,7 @@
       height: 44px;
       border-radius: 3px;
       color: rgb(255, 255, 255);
-      background-color: #9A30AE;
+      background-color: #4CAF50;
       border: 0px none;
       font-size: small;
       float: right;
@@ -139,7 +93,6 @@
       <div class="center-left-header">고객센터</div> <!--메뉴 제목-->
       <ul class="left-menu-alllists">
         <li>
-          <!-- 관리자단에는 이 사이드 메뉴를 없애고 관리자 전용 메뉴를 넣어줄 것임-->
           <a class="left-menu-list">
             공지사항
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">

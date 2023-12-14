@@ -2,11 +2,13 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- FAQ 사용자 페이지 -->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 - 컬리</title>
+    <title>EcoEats</title>
     <%@ include file="../include/bootstrap.jspf" %>
     <style>
         .card {
@@ -44,6 +46,7 @@
             padding: 30px 30px 30px 70px;
             font-size: 14px;
         }
+
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectPratice.css">
 
@@ -80,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="active left-menu-list">
+                    <a class="active left-menu-list" href="/board/faq">
                         자주하는 질문
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
@@ -175,7 +178,7 @@
                 <div class="board-top-content">
                     <h2 class="Notice1">자주하는 질문
                     <span class="Notice2">고객님들께서 가장 자주하시는 질문을 모두 모았습니다.</span>
-                        <div id="option" class="dropdown" style="width: 180px; border-radius: 0; float: right; padding-bottom: 0.5cm;" >
+                        <div id="option" class="dropdown" style="width: 180px; border-radius: 0; padding-bottom: 0.5cm; position: absolute; right: 220; top: 200;" >
                             <select name="location" class="form-control">
                                 <option value="전체" selected="selected">전체</option>
                                 <option value="회원">회원</option>

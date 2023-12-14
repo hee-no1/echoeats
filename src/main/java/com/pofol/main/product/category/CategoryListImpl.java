@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class CategoryListImpl implements CategoryList {
 
-    private final String namespace = "com.pofol.main.product.category.CategoryDto.";
+    private final String namespace = "ecoeats.categoryMapper.";
 
     private final SqlSession sqlSession;
 
