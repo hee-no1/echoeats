@@ -45,7 +45,6 @@ public class AdminController {
 
     private final ProductService productService;
     private final CategoryList categoryList;
-    private final AwsS3ImgUploaderService awsS3ImgUploaderService;
 
     @GetMapping("/test")
     public String testGET(Model model) throws Exception {
