@@ -75,4 +75,29 @@ $(document).ready(function () {
         })
     }
 
+    const button_description = document.getElementsByClassName('efe6b6j0')[0];
+    const button_detail = document.getElementsByClassName('efe6b6j0')[1];
+    const button_review = document.getElementsByClassName('efe6b6j0')[2];
+    const button_inquiry = document.getElementsByClassName('efe6b6j0')[3];
+    const description = document.getElementById('description');
+    const detail = document.getElementById('detail');
+    const review = document.getElementById('review');
+    const inquiry = document.getElementById('inquiry');
+
+    button_description.addEventListener('click', () => {
+        window.scrollBy({top: description.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_detail.addEventListener('click', () => {
+        window.scrollBy({top: detail.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_review.addEventListener('click', () => {
+        window.scrollBy({top: review.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
+    button_inquiry.addEventListener('click', () => {
+        window.scrollBy({top: inquiry.getBoundingClientRect().top, behavior: 'smooth'});
+
+    });
 });

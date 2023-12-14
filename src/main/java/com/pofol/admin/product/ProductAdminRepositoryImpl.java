@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,11 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     @Override
     public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
         return null;
+    }
+
+    @Override
+    public ProductDto select(Long prod_id) throws Exception {
+        return sqlSession.selectOne(namespace + "select", prod_id);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("keyword_type", searchProductAdminCondition.getKeyword_type());
         map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("stock_min", productFilterDto.getStock_min());
-        map.put("stock_max", productFilterDto.getPrice_max());
+        map.put("stock_max", productFilterDto.getStock_max());
         map.put("selling", productFilterDto.getSelling());
         map.put("display", productFilterDto.getDisplay());
         map.put("option", productFilterDto.getOption());
@@ -74,5 +80,13 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     @Override // 상품의 상태를 변경한다 (판매상태 + 진열상태)
     public int update(ProductDto productDto) throws Exception {
         return sqlSession.update(namespace + "update", productDto);
+    }
+
+    @Override // 상품의 판매시작일 + 판매종료일 (판매기간에 따른 상품 상태 변경)
+    public List<ProductDto> selectSaleDate(String range, Date currentDate) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("range", range);
+        map.put("currentDate", currentDate);
+        return sqlSession.selectList(namespace + "selectSaleDate", map);
     }
 }

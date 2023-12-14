@@ -14,7 +14,7 @@ public class MemberDto {
     private String mem_gender;
 
     private String mem_birth;
-    private int point;
+    private Integer point;
     private String per_info_col;
     private String free_ship_recep;
 
@@ -28,10 +28,29 @@ public class MemberDto {
 
     public MemberDto() {
         this.point = 0;
-        this.gd_name = "일반";
+        this.gd_name = "씨앗";
         this.mem_code_id = "활성";
         this.free_ship_recep = "N";
         this.per_info_col = "N";
+        this.role = "USER";
+    }
+
+    //카카오
+    public  MemberDto(String mem_id, String mem_name, String mem_pwd){
+        this.mem_id = mem_id;
+        this.gd_name = "씨앗";
+        this.mem_code_id = "활성";
+        this.mem_pwd = mem_pwd;
+        this.mem_name = mem_name;
+        this.mem_email = "카카오";
+        this.mem_phone = "카카오";
+        this.mem_gender = "카";
+        this.mem_birth = "카카오";
+        this.point = 0;
+        this.per_info_col = "N";
+        this.free_ship_recep = "N";
+        this.rg_num = "admin123";
+        this.md_num = "admin123";
         this.role = "USER";
     }
 
@@ -240,4 +259,5 @@ public class MemberDto {
     public void setRole(String role) {
         this.role = role;
     }
+
 }

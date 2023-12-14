@@ -52,7 +52,7 @@ html, body {
     cursor: pointer;
 }
 #top > #header > #homeInfo > a:nth-of-type(1) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 #top > #header > #homeInfo span {
     width: 8px;
@@ -118,7 +118,7 @@ html, body {
 }
 #search > #search-bar > a {
     font-weight: bold;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     flex-shrink: 0;
     font-size: 18px;
     line-height: 1.33;
@@ -146,7 +146,7 @@ html, body {
     color: #b5b5b5;
 }
 #search > #search-bar > a:nth-of-type(2):hover {
-    color:  rgb(95, 0, 128);
+    color: #00c73c;
 }
 #search > #search-bar > a:nth-of-type(2)::after {
     content: "";
@@ -164,7 +164,7 @@ html, body {
     width: 400px;
     height: 48px;
     padding-left: 14px;
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #00c73c;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
@@ -406,7 +406,7 @@ button {
 
 .css-toq1xn {
     font-size: 14px;
-    color: #00c73c;
+    color: rgb(102, 102, 102);
     line-height: 19px;
     height: 19px;
     letter-spacing: -0.5px;
@@ -421,7 +421,7 @@ button {
     width: 350px;
     min-height: 38px;
     padding: 10px 14px 10px 16px;
-    background-color: rgba(189, 118, 255, 0.08);
+    background-color: #00c73c1f;
     border-radius: 4px;
     margin-top: 12px;
 }
@@ -434,7 +434,7 @@ button {
 }
 .css-1pf406l > strong {
     font-weight: 500;
-    color: #00c73c;
+    color: rgb(102, 102, 102);
 }
 .css-iqoq9n {
     margin-top: 20px;
@@ -688,7 +688,7 @@ button {
     height: 52px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: #00c73c;
     border: 0px none;
 }
 .css-14jnwd7 .cart-button {
@@ -882,4 +882,34 @@ img, legend {
 
 canvas, img, video {
     max-width: 100%;
+}
+
+.css-wvwj67 {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.css-nlkrd3 {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+    color: rgb(153, 153, 153);
+}
+
+.css-qcwr5d {
+    color: rgb(51, 51, 51);
+    letter-spacing: -0.5px;
+}
+
+.css-nlkrd3::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    margin: 0px 6px 0px 7px;
+    background-color: rgb(221, 221, 221);
+    vertical-align: -2px;
 }

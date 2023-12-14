@@ -12,7 +12,15 @@ public class SecurityUser implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
     private String mem_id;  // principal
     private String mem_pwd;  // credential
+    private String mem_name;
 
+    public String getMem_name() {
+        return mem_name;
+    }
+
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
