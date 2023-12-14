@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pofol.main.orders1.order.domain.CodeTableDto;
 import com.pofol.main.orders1.order.domain.PageHandler;
 import com.pofol.main.orders1.order.domain.SearchOrderCondition;
-import com.pofol.main.orders1.order.repository.OrderRepository;
+import com.pofol.main.orders1.order.repository.OrderRepository1;
 
 @Controller
 @RequestMapping("/admin1")
@@ -26,17 +26,18 @@ public class AdminController1 {
 	@Autowired
 	AdminOrderRepository adminOrdRpo;
 	@Autowired
-	OrderRepository ordRop;
+    OrderRepository1 ordRop;
 	
 	@GetMapping("/order/list")
     public String orderList(SearchOrderCondition sc, Model m, HttpServletRequest request){
 		System.out.println("AdminController.orderList()");
-		System.out.println("sc = "+sc);
 		
 		try {
 			int totalCnt = ordRop.searchResultCnt(sc);
 			PageHandler ph = new PageHandler(totalCnt, sc);
 			m.addAttribute("ph", ph);
+			if (totalCnt == 0)
+				return "/admin/order/orderList";
 			List list = ordRop.searchSelectPage(sc);
 			m.addAttribute("list", list);
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();

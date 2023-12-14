@@ -5,8 +5,14 @@
 <configuration>
 	<typeAliases>
 		<!-- Order -->
-		<typeAlias alias="OrderDto" type="com.pofol.main.orders1.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDto1" type="com.pofol.main.orders1.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDto" type="com.pofol.main.orders.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDetailDto" type="com.pofol.main.orders.order.domain.OrderDetailDto"/>
+		<typeAlias alias="OrderHistoryDto" type="com.pofol.main.orders.order.domain.OrderHistoryDto"/>
 		<!-- Payment -->
+		<typeAlias alias="PaymentDiscountDto" type="com.pofol.main.orders.payment.domain.PaymentDiscountDto"/>
+		<typeAlias alias="PaymentDto" type="com.pofol.main.orders.payment.domain.PaymentDto"/>
+		<typeAlias alias="PaymentHistoryDto" type="com.pofol.main.orders.payment.domain.PaymentHistoryDto"/>
 		<!-- CodeTable -->
 		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders1.order.domain.CodeTableDto"/>
 		<!-- paging -->
@@ -17,10 +23,28 @@
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
+		<typeAlias alias="CouponDto" type="com.pofol.main.member.dto.CouponDto"/>
+		<typeAlias alias="MemCouponDto" type="com.pofol.main.member.dto.MemCouponDto"/>
+		<typeAlias alias="CouponJoinDto" type="com.pofol.main.member.dto.CouponJoinDto"/>
+		<typeAlias alias="GradeDto" type="com.pofol.main.member.dto.GradeDto"/>
+		<typeAlias alias="DelNotesDto" type="com.pofol.main.member.dto.DelNotesDto"/>
 		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
-		<typeAlias alias="SampleProductDto" type="com.pofol.main.orders.sample.productSample.SampleProductDto"/>
-		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.orders.sample.cartDataSample.SelectedItemsDto"/>
+		<typeAlias alias="ProductOrderCheckout" type="com.pofol.main.orders.order.domain.ProductOrderCheckout"/>
+		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<!-- Mypage -->
+		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
+		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>
+		<typeAlias alias="InquiryPrdDto" type="com.pofol.main.orders.inquiry.domain.InquiryPrdDto"/>
+
+		<!-- product -->
 		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
+		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
+		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
+		<typeAlias alias="CategoryDto" type="com.pofol.main.product.category.CategoryDto"/>
+		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.basket.SelectedItemsDto"/>
+		<!-- product -->
 	</typeAliases>
 </configuration>

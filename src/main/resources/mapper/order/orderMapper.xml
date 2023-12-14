@@ -6,10 +6,10 @@
 	<insert id="insert">
 		INSERT INTO spring.order
 		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
-		tot_prod_disc, dlvy_fee, tot_prod_qty, pay_way, rg_num, md_num)
+		tot_prod_disc, tot_ord_qty, dlvy_fee, pay_way, ord_ing, rg_num, md_num)
 		VALUES
 		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
-		#{tot_prod_disc}, #{dlvy_fee}, #{tot_prod_qty}, #{pay_way}, #{rg_num}, #{md_num})
+		#{tot_prod_disc}, #{tot_ord_qty}, #{dlvy_fee}, #{pay_way},#{ord_ing}, #{rg_num}, #{md_num})
 		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
 			SELECT MAX(ord_id) FROM spring.order
 		</selectKey>
@@ -17,11 +17,11 @@
 	<insert id="insertAll">
 		INSERT INTO spring.order
 		(mem_id, tot_prod_name, tot_prod_price, tot_pay_price,
-		tot_prod_disc, dlvy_fee, tot_prod_qty, pay_way, rg_num, md_num,
+		tot_prod_disc, dlvy_fee, tot_ord_qty, pay_way, rg_num, md_num,
 		ord_date)
 		VALUES
 		(#{mem_id}, #{tot_prod_name}, #{tot_prod_price},#{tot_pay_price},
-		#{tot_prod_disc}, #{dlvy_fee}, #{tot_prod_qty}, #{pay_way}, #{rg_num}, #{md_num},
+		#{tot_prod_disc}, #{dlvy_fee}, #{tot_ord_qty}, #{pay_way}, #{rg_num}, #{md_num},
 		#{ord_date})
 		<selectKey keyProperty="ord_id" resultType="Long" order="AFTER">
 			SELECT MAX(ord_id) FROM spring.order
@@ -43,7 +43,7 @@
 		tot_pay_price = #{tot_pay_price},
 		tot_prod_disc = #{tot_prod_disc},
 		dlvy_fee = #{dlvy_fee},
-		tot_prod_qty = #{tot_prod_qty},
+		tot_ord_qty = #{tot_ord_qty},
 		pay_way = #{pay_way},
 		rg_num = #{rg_num},
 		md_date = current_timestamp,
@@ -58,9 +58,9 @@
 		ord_fail=#{ord_fail},
 		ord_cmplt = #{ord_cmplt},
 		prod_ing = #{prod_ing},
-		ord_prep_dlvy = #{ord_prep_dlvy},
-		ord_in_dlvy = #{ord_in_dlvy},
-		ord_dlvy = #{ord_dlvy},
+		dlvy_prep_ing = #{dlvy_prep_ing},
+		dlvy_ing = #{dlvy_ing},
+		dlvy_cmplt = #{dlvy_cmplt},
 		ord_cxl = #{ord_cxl},
 		ord_ex = #{ord_ex},
 		ord_rfnd = #{ord_rfnd},

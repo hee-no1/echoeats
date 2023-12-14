@@ -132,12 +132,12 @@
                 <div class="two">
                     <div class="two_gender">
                         <label>
-                            <input type="radio" name="gender" value="male">
+                            <input type="radio" name="gender" value="남자">
                             <span class="gender_checkbox"><div></div></span>
                             <span class="gender_text">남자</span>
                         </label>
                         <label>
-                            <input type="radio" name="gender" value="female">
+                            <input type="radio" name="gender" value="여자">
                             <span class="gender_checkbox"><div></div></span>
                             <span class="gender_text">여자</span>
                         </label>
@@ -479,8 +479,29 @@
         }
     })
 
-
     //가입하기
+    // $("#sign_in_button").on("click", ()=>{
+    //     let inputed = {
+    //         mem_id: $("#mem_id").val(),
+    //         addr: $("#addr").val(),
+    //         dtl_addr: $("#subAddr").val(),
+    //         def_addr: "Y"
+    //     }
+    //     console.log(inputed);
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "http://localhost:8080/address/detail",
+    //         data: JSON.stringify(inputed),
+    //         contentType: "application/json; charset=utf-8",
+    //         dataType: "json"
+    //     }).done(function () {
+    //
+    //     }).fail(function (error){
+    //         alert("회원가입에 실패하셨습니다.")
+    //         alert(JSON.stringify(error));
+    //     });
+    // })
+
     let index = {
         init: function() {
             $("#sign_in_button").on("click", ()=>{
@@ -495,7 +516,6 @@
                 mem_name:$("#mem_name").val(),
                 mem_email:$("#mem_email").val(),
                 mem_phone:$("#mem_phone").val(),
-                addr:$("#addr").val() + $("#subAddr").val(),
                 mem_gender:gender,
                 mem_birth:$("#mem_birthYYYY").val() + $("#mem_birthMM").val() + $("#mem_birthDD").val(),
                 per_info_col: per_info_col, free_ship_recep: free_ship_recep,
@@ -509,6 +529,19 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).done(function () {
+                let inputed = {
+                    mem_id: $("#mem_id").val(),
+                    addr: $("#addr").val(),
+                    dtl_addr: $("#subAddr").val(),
+                    def_addr: "Y"
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/address/detail",
+                    data: JSON.stringify(inputed),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                })
                 checkPwd();
                 // checkPhone();
                 if (idCheck == 0) {
@@ -533,9 +566,6 @@
         }
     }
     index.init();
-    // $("#sign_in_button").click(function(){
-    //     var inputed = $
-    // })
 
 
 </script>

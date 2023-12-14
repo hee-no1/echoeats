@@ -5,6 +5,8 @@ import com.pofol.main.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -20,8 +22,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int signin (MemberDto memberDto) throws Exception {
+        System.out.println(memberDto.toString());
          return memberRepository.insertMember(memberDto);
 
      }
+
+    @Override
+    public List<MemberDto> check_grade(String date)throws Exception {
+        return memberRepository.checkGrade(date);
+    }
 
 }

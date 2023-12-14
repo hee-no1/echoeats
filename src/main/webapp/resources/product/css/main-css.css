@@ -49,7 +49,7 @@ canvas, img, video {
     cursor: pointer;
 }
 #top > #header > #homeInfo > a:nth-of-type(1) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 #top > #header > #homeInfo span {
     width: 8px;
@@ -114,7 +114,7 @@ canvas, img, video {
 }
 #search > #search-bar > a {
     font-weight: bold;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     flex-shrink: 0;
     font-size: 18px;
     line-height: 1.33;
@@ -142,7 +142,7 @@ canvas, img, video {
     color: #b5b5b5;
 }
 #search > #search-bar > a:nth-of-type(2):hover {
-    color:  rgb(95, 0, 128);
+    color: #00c73c;
 }
 #search > #search-bar > a:nth-of-type(2)::after {
     content: "";
@@ -160,7 +160,7 @@ canvas, img, video {
     width: 400px;
     height: 48px;
     padding-left: 14px;
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #00c73c;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
@@ -197,21 +197,21 @@ canvas, img, video {
     right: 0;
 }
 #search > #search-bar > #search-right > button:nth-of-type(3):hover {
-    background: url(/resources/icons/kurly_cart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_cart_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2) {
     background: url(/resources/icons/kurly_heart.svg) 50% 50% no-repeat;
     right: 58px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(2):hover {
-    background: url(/resources/icons/kurly_heart_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_heart_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1) {
     background: url(/resources/icons/kurly_adressAdd.svg) 50% 50% no-repeat;
     right: 116px;
 }
 #search > #search-bar > #search-right > button:nth-of-type(1):hover {
-    background: url(/resources/icons/kurly_adressAdd_purple.svg) 50% 50% no-repeat;
+    background: url(/resources/icons/kurly_adressAdd_green.svg) 50% 50% no-repeat;
 }
 #search > #search-bar > #search-right > #tooltip{
     display: none;
@@ -240,9 +240,9 @@ canvas, img, video {
     width: 80px;
     height: 36px;
     border-radius: 3px;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #00c73c;
 }
 #search > #search-bar > #search-right > #tooltip button:nth-of-type(2) {
     display: block;
@@ -253,7 +253,7 @@ canvas, img, video {
     height: 36px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: #00c73c;
     border: 0px none;
 }
 #nev {
@@ -276,7 +276,7 @@ canvas, img, video {
     background: url(/resources/icons/kurly_hamburger.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category:hover > span:nth-of-type(1) {
-    background: url(/resources/icons/kurly_hamburger_purple.svg) 0px 0px / 16px 14px no-repeat;
+    background: url(/resources/icons/kurly_hamburger_green.svg) 0px 0px / 16px 14px no-repeat;
 }
 #nev > #category > span:nth-of-type(2) {
     font-size: 16px;
@@ -286,7 +286,7 @@ canvas, img, video {
     color: rgb(51, 51, 51);
 }
 #nev > #category:hover > span:nth-of-type(2) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 #nev > #meun {
     margin-left: 30px;
@@ -303,7 +303,7 @@ canvas, img, video {
 }
 #nev > #meun > ul > li > span:hover {
     cursor: pointer;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
     text-decoration: underline;
 }
 #nev > #nev-right {
@@ -323,7 +323,7 @@ canvas, img, video {
     cursor: pointer;
 }
 #nev > #nev-right > div > span:nth-of-type(1) {
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 main > div {
     position: relative;
@@ -533,7 +533,7 @@ main > div > #ad-page > div{
     top: 8px;
     opacity: 0.9;
     border-radius: 4px;
-    background-color: rgb(189, 118, 255);
+    background-color: #00c73c;
 
     display: flex;
     align-items: center;
@@ -925,7 +925,7 @@ ol, ul {
 }
 .css-1tby8gd {
     margin-left: 3px;
-    color: rgb(95, 0, 128);
+    color: #00c73c;
 }
 .css-zjik7 {
     display: flex;

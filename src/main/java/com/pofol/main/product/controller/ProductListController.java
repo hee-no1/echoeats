@@ -1,28 +1,37 @@
 package com.pofol.main.product.controller;
 
+import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.service.GradeService;
 import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
+import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.exception.ExpiredProductException;
+import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductListController {
 
     private final ProductListService productListService;
     private final CategoryList categoryList;
+    private final GradeService gradeService;
 
     // 이벤트 화면으로 (그냥 만듬)
     @GetMapping("/christmas")
@@ -32,7 +41,7 @@ public class ProductListController {
 
     // main 화면으로
     @GetMapping("/main")
-    public String main(Model model) {
+    public String goMain(Model model) {
         try {
             // 동적으로 만들 생각 해야함 (그룹으로 나눠서 상품 리스트 정렬)
             List<ProductDto> productList = productListService.getEventList(2L);
@@ -61,11 +70,44 @@ public class ProductListController {
             ProductDto product = productListService.read(prod_id);
             model.addAttribute("product", product);
 
+            // 옵션이 존재하는 상품일 시 옵션상품 조회
+            if (product.getIs_opt().equals("Y")) {
+                List<OptionProductDto> optionList = productListService.getOptionList(prod_id);
+                model.addAttribute("optionList", optionList);
+                model.addAttribute("option", "option");
+            }
+
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
             model.addAttribute("categoryList", bigCategoryProductList);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            // 회원 등급에 따른 적립금 계산
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String memberID = authentication.getName();
+
+            // 로그인 상태일 때 (적립금 계산)
+            if (!memberID.equals("anonymousUser")) {
+                GradeDto memberGrade = gradeService.show_grade(memberID);
+                model.addAttribute("memberGrade", memberGrade);
+
+                Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
+                model.addAttribute("saveMoney", saveMoney);
+            }
+
+            // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
+            if (product.isSaleExpired()) {
+                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
+            } else if (product.getDisp_sts().equals("N")) {
+                throw new ExpiredProductException("현재 판매중인 상품이 아닙니다.");
+            }
+
+        } catch (ExpiredProductException expiredProductException) {
+            HandlerProductException handlerProductException = new HandlerProductException();
+            handlerProductException.ExpiredProductExceptionHandler(expiredProductException);
+            return "redirect:/main";
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
         return "/product/product";
     }
@@ -74,15 +116,9 @@ public class ProductListController {
     @GetMapping("/category/{cat_code}")
     public String getCategoryProduct(@PathVariable String cat_code, SearchProductCondition sc, Model model, String type) {
 
-        System.out.println("type = " + type);
-
         try {
-            // 신상품, 혜택율, 높은 가격순, 낮은 가격순 정렬 타입
-            if (type != null) {
-                model.addAttribute("type", type);
-            }
-
-
+            // 정렬 타입 (신상품, 혜택율, 낮은 가격, 높은 가격)
+            model.addAttribute("type", type);
 
             // 카테고리 코드
             model.addAttribute("cat_code", cat_code);
@@ -126,9 +162,12 @@ public class ProductListController {
 
     // 상품 이름으로 검색한 상품리스트 정렬
     @GetMapping("/searchProduct")
-    public String getSearchProduct(SearchProductCondition sc, Model model) {
+    public String getSearchProduct(SearchProductCondition sc, Model model, String type) {
 
         try {
+            // 정렬 타입 (신상품, 혜택율, 낮은 가격, 높은 가격)
+            model.addAttribute("type", type);
+
             // 상품이름 검색 페이지
             model.addAttribute("pageType", "searchProduct");
 
@@ -140,7 +179,7 @@ public class ProductListController {
             model.addAttribute("totalCount", totalCount);
 
             // 검색한 상품 리스트 정렬
-            List<ProductDto> searchSelectProduct = productListService.getSearchSelectProduct(sc);
+            List<ProductDto> searchSelectProduct = productListService.getSearchSelectProduct(sc, type);
             model.addAttribute("productList", searchSelectProduct);
 
             // 페이징
@@ -158,4 +197,19 @@ public class ProductListController {
         return "/product/productList";
     }
 
+    // 상품 수량에 따라 상품 가격 계산
+    @ResponseBody
+    @PostMapping("/ProductCalculation")
+    public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
+
+        for (BasketDto basketDto : basketDtoList) {
+            if (basketDtoList.size() == 1) {
+                basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
+            } else {
+                basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
+            }
+        }
+
+        return basketDtoList;
+    }
 }
