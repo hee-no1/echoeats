@@ -45,56 +45,59 @@
         <label>상품 이미지</label>
     </div>
     <div class="form_section_content">
-        <input type="file" multiple id="fileItem" name='uploadFile' style="height: 30px;">
+        <form action="<c:url value='/image/upload'/>" method="post" enctype="multipart/form-data">
+        <input type="file" multiple id="fileItem" name='prod_img' style="height: 30px;">
         <div id="uploadResult">
 <%--            <div id="result_id">--%>
 <%--                <div class="imgDeleteBtn">x</div>--%>
 <%--                <img src="/upload?fileName=test.jpeg">--%>
 <%--            </div>--%>
         </div>
+            <button>등록</button>
+        </form>
     </div>
 </div>
 <script>
     /* 이미지 업로드 */
-    $("input[type='file']").on("change", function(e){
-        alert("동작");
-        // 이미지 존재시 삭제
-        if ($(".imgDeleteBtn").length > 0) {
-            deleteFile();
-        }
-
-        let formData = new FormData();
-        let fileInput = $('input[name="uploadFile"]');
-        let fileList = fileInput[0].files;
-        let fileObj = fileList[0];
-
-        if (!fileCheck(fileObj.name, fileObj.size)) {
-            return false;
-        }
-
-        for(let i = 0; i < fileList.length; i++){
-            formData.append("uploadFile", fileList[i]);
-        }
-
-        $.ajax({
-            url : 'admin/uploadAjaxAction',
-            processData : false,
-            contentType : false,
-            data : formData,
-            type : 'POST',
-            dataType : 'json',
-            mimeType: 'multipart/form-data',
-            success : function (result) {
-                alert("success");
-                console.log(result);
-                showUploadImage(result);
-            },
-            error : function (result) {
-                alert("fail");
-            }
-        });
-
-    });
+    // $("input[type='file']").on("change", function(e){
+    //     alert("동작");
+    //     // 이미지 존재시 삭제
+    //     if ($(".imgDeleteBtn").length > 0) {
+    //         deleteFile();
+    //     }
+    //
+    //     let formData = new FormData();
+    //     let fileInput = $('input[name="uploadFile"]');
+    //     let fileList = fileInput[0].files;
+    //     let fileObj = fileList[0];
+    //
+    //     if (!fileCheck(fileObj.name, fileObj.size)) {
+    //         return false;
+    //     }
+    //
+    //     for(let i = 0; i < fileList.length; i++){
+    //         formData.append("uploadFile", fileList[i]);
+    //     }
+    //
+    //     $.ajax({
+    //         url : 'admin/uploadAjaxAction',
+    //         processData : false,
+    //         contentType : false,
+    //         data : formData,
+    //         type : 'POST',
+    //         dataType : 'json',
+    //         mimeType: 'multipart/form-data',
+    //         success : function (result) {
+    //             alert("success");
+    //             console.log(result);
+    //             showUploadImage(result);
+    //         },
+    //         error : function (result) {
+    //             alert("fail");
+    //         }
+    //     });
+    // 
+    //});
 
     /* var, method related with attachFile */
     let regex = new RegExp("(.*?)\.(jpg|png|jpeg)$");
