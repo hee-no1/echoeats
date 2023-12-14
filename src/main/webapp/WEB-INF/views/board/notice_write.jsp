@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- 공지사항 등록 페이지 -->
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -59,9 +59,9 @@
       font-size: small;
     }
     .col-sm-6 {
-      max-width: 900px; /* Adjust as needed */
+      max-width: 900px;
       width: 100%;
-      margin: 0 auto; /* Center the column */
+      margin: 0 auto;
     }
     .back_btn:hover, .notice_btn:hover {
       background-color: #7F208D;

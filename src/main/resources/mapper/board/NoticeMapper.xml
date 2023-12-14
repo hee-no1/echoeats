@@ -49,12 +49,23 @@
         LIMIT #{offset}, #{pageSize}
     </select>
 
+    <sql id="searchBoardCondition">
+        <choose>
+            <when test='option=="T"'>
+                AND notice_title LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test='option=="A"'>
+                AND (notice_title LIKE CONCAT('%', #{keyword}, '%') OR notice_con LIKE CONCAT('%', #{keyword}, '%'))
+            </when>
+        </choose>
+    </sql>
+
     <select id="searchSelectPage" parameterType="SearchBoardCondition" resultType="NoticeDto">
         SELECT notice_id, notice_title, notice_con, notice_date
         FROM notice
         WHERE TRUE
-          AND notice_title LIKE concat('%', #{keyword}, '%')
-        ORDER BY notice_date DESC, notice_id DESC
+        <include refid="searchBoardCondition" />
+        ORDER BY notice_id DESC, notice_date DESC
         LIMIT #{offset}, #{pageSize}
     </select>
 
@@ -62,7 +73,7 @@
         SELECT count(*)
         FROM notice
         WHERE TRUE
-          AND notice_title LIKE concat('%', #{keyword}, '%')
+        <include refid="searchBoardCondition" />
     </select>
 
 

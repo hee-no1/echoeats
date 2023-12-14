@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:scriptlet> pageContext.setAttribute("newline", "\n"); </jsp:scriptlet>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- 공지사항 상세 조회 페이지 -->
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -50,30 +50,7 @@
       padding-top: 10px;
       text-align: center;
     }
-    .modify_btn {
-      padding: 0px 10px;
-      text-align: center;
-      overflow: hidden;
-      width: 120px;
-      height: 44px;
-      border-radius: 3px;
-      color: rgb(255, 255, 255);
-      background-color: #9A30AE;
-      border: 0px none;
-      font-size: 13px;
-    }
-    .delete_btn {
-      padding: 0px 10px;
-      text-align: center;
-      overflow: hidden;
-      width: 120px;
-      height: 44px;
-      border-radius: 3px;
-      color: rgb(255, 255, 255);
-      background-color: #9A30AE;
-      border: 0px none;
-      font-size: 13px;
-    }
+
     .list_btn {
       padding: 0px 10px;
       text-align: center;
@@ -82,13 +59,13 @@
       height: 44px;
       border-radius: 3px;
       color: rgb(255, 255, 255);
-      background-color: #9A30AE;
+      background-color: #4CAF50;
       border: 0px none;
       font-size: 13px;
       float: right;
     }
-    .modify_btn:hover, .delete_btn:hover, .list_btn:hover {
-      background-color: #7F208D; /* Darker color on hover */
+    .list_btn:hover {
+      background-color: #7F208D;
     }
   </style>
 </head>
@@ -106,19 +83,19 @@
         <table class="table">
           <tbody>
           <tr>
-            <td class="tbody_td" style="width: 10%; background-color: #FEF7FF; vertical-align: middle; text-align: left; padding-left: 20px;">
+            <td class="tbody_td" style="width: 10%; background-color: #4CAF50; vertical-align: middle; text-align: left; padding-left: 20px;">
               제목</td>
             <td style="text-align: left; vertical-align: middle; letter-spacing: -1px; padding-left: 20px;">
               ${notice.notice_title }</td>
           </tr>
           <tr>
-            <td class="tbody_td" style="width: 10%; background-color: #FEF7FF; vertical-align: middle; text-align: left; padding-left: 20px;">
+            <td class="tbody_td" style="width: 10%; background-color: #4CAF50; vertical-align: middle; text-align: left; padding-left: 20px;">
               작성자</td>
             <td style="text-align: left; vertical-align: middle; letter-spacing: -1px; padding-left: 20px;">
               에코잇츠</td>
           </tr>
           <tr>
-            <td class="tbody_td" style="width: 10%; background-color: #FEF7FF; vertical-align: middle; text-align: left; padding-left: 20px;">
+            <td class="tbody_td" style="width: 10%; background-color: #4CAF50; vertical-align: middle; text-align: left; padding-left: 20px;">
               작성일</td>
             <td class="date"style="text-align: left; vertical-align: middle; letter-spacing: -1px; padding-left: 20px;">
               ${notice.notice_date }</td>
@@ -133,28 +110,12 @@
           </tfoot>
         </table>
       </div>
-      <!-- 관리자 페이지로 옮겨야하는 수정, 삭제 버튼 -->
-        <button class="modify_btn" type="button" onclick="location.href='notice_modify?notice_id=${notice.notice_id }'">수정하기</button>
-        <button class="delete_btn" type="button" onclick="notice_delete()">삭제하기</button>
-      <button class="list_btn" type="button" onclick="location.href='notice'">목록</button>
+      <button class="list_btn" type="button" onclick="location.href='/board/notice?page=${page}&pageSize=${pageSize}'">목록</button>
     </div>
   </div>
   <div class="col-sm-2"></div>
 </div>
-
-
-<script>
-  function notice_delete() {
-    if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
-      location.href="deleteNotice?notice_id=${notice.notice_id }"  //공지사항 삭제 요청
-    } else {   //취소
-      return false;
-    }
-  }
-</script>
-
 </body>
-
 <footer>
   <%@ include file="../include/footer.jspf" %>
 </footer>

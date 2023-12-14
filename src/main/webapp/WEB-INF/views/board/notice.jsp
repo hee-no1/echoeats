@@ -1,12 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- 공지사항 사용자 페이지 -->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 - 컬리</title>
+    <title>공지사항 - 에코잇츠</title>
     <%@ include file="../include/bootstrap.jspf" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectPratice.css">
 </head>
@@ -14,7 +14,6 @@
     .table {
         width: 100%;
         text-align: center;
-        /* border: black; */
     }
     .table th {
         padding: 10px;
@@ -35,30 +34,14 @@
         text-decoration: none;
         color: black;
     }
-    .notice_btn {
-        padding: 0px 10px;
-        text-align: center;
-        overflow: hidden;
-        width: 120px;
-        height: 44px;
-        border-radius: 3px;
-        color: rgb(255, 255, 255);
-        background-color: #9a30ae;
-        border: 0px none;
-        font-size: small;
-        float: right;
-    }
-    .notice_btn:hover {
-        background-color: #7F208D; /* Darker color on hover */
-    }
+
     .board-container {
         width: 100%;
         height: 120px;
         margin: 0 auto;
-        /* border: 1px solid black; */
     }
     .search-container {
-        background-color: white; /* Alice blue */
+        background-color: white;
         width: 60%;
         height: 60px;
         border: 1px solid #4CAF50;
@@ -132,7 +115,7 @@
     }
 
     .paging-active {
-        background-color: rgb(216, 216, 216);
+        background-color: #4CAF50;
         border-radius: 5px;
         color: rgb(24, 24, 24);
     }
@@ -281,7 +264,6 @@
                             <select class="search-option" name="option">
                                 <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>
                                 <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>
-                                <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
                             </select>
 
                             <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}"
@@ -301,12 +283,11 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                    <c:if test="${not empty noticeList }">--%>
                         <c:forEach var="notice" items="${list}">
                             <tr>
                                 <td>${notice.notice_id }</td>
                                 <td>
-                                    <a class="n_title" href="notice_view?notice_id=${notice.notice_id}">${notice.notice_title }</a>
+                                    <a class="n_title" href="notice_view?notice_id=${notice.notice_id}&page=${page}&pageSize=${pageSize}">${notice.notice_title }</a>
                                 </td>
                                 <td>에코잇츠</td>
                                 <td class="date"><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" type="date"/></td>
@@ -334,11 +315,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 등록버튼,, 차후 관리자페이지로 이동시킬 것 -->
-            <button class="notice_btn" onclick="location.href='notice_write'" type="button">등록하기</button>
-
-
         </div>
     </div>
 </div>

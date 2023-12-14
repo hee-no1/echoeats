@@ -60,6 +60,6 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 
     @Override
     public List<NoticeDto> searchSelectPage(SearchBoardCondition sc) throws Exception {
-        return session.selectList(namespace + "selectPage", sc);
+        return session.selectList(namespace + "searchSelectPage", sc);
     }
 }
