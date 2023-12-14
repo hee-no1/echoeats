@@ -77,15 +77,6 @@ public class AdminController {
         redirectAttributes.addFlashAttribute(
                 "productEnroll_result",
                 productDto.getProd_name() + " 상품이 등록되었습니다.");
-        log.info("--------------imageUploadPOST----------------");
-        log.info("productDto : " + productDto);
-        log.info("productDto.getProd_img() : " + productDto.getProd_img());
-        log.info("productDto.getProd_img().getOriginalFilename() : " + productDto.getProd_img().getOriginalFilename());
-        log.info("productDto.getProd_img().getContentType() : " + productDto.getProd_img().getContentType());
-        log.info("productDto.getProd_img().getSize() : " + productDto.getProd_img().getSize());
-        String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
-                productDto.getProd_img(), "product");
-        log.info("imgUrl : " + imgUrl);
         return "redirect:/admin/hyoungJun/productManage";
     }
 
