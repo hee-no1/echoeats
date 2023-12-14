@@ -19,7 +19,7 @@
         FROM member AS a
                  JOIN `mem-coupon` AS b ON a.mem_id = b.mem_id
                  JOIN coupon AS c ON b.cp_id = c.cp_id
-        where a.mem_id = #{id}
+        where b.cp_sts = 'UNUSED' AND a.mem_id = #{id}
     </select>
     
 </mapper>

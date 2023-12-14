@@ -2,7 +2,9 @@ package com.pofol.main.orders.order.controller;
 
 
 import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.DelNotesService;
+import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
@@ -23,6 +25,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final DelNotesService delNotesService;
+    private final MemberService memberService;
 
     @GetMapping
     public String Order(){
@@ -71,14 +74,23 @@ public class OrderController {
         return "/order/orderCompleted";
     }
 
-    //팝업창
+    //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")
     public String receiverDetails(Model m){
-        DelNotesDto delNotes = delNotesService.getDelNotes();
-        m.addAttribute("delNotes", delNotes);
-        System.out.println("팝업창으로 들어가는 서버 모델" + delNotes);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+        try {
+            MemberDto member = memberService.select(mem_id);
+            DelNotesDto delNotes = delNotesService.getDelNotes();
+            m.addAttribute("member", member);
+            m.addAttribute("delNotes", delNotes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return "/order/receiverDetails";
     }
+
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")
@@ -87,7 +99,6 @@ public class OrderController {
         delNotesService.writeDelNotes(delNotesDto);
         return delNotesDto;
     }
-
 
     @ResponseBody
     @GetMapping("/checkout/getDelNotes")
