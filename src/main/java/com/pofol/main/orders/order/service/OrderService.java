@@ -1,6 +1,7 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.product.basket.SelectedItemsDto;
@@ -13,6 +14,6 @@ public interface OrderService {
     OrderCheckout writeCheckout(List<SelectedItemsDto> items);
     PaymentDiscountDto calculatePayment(PaymentDiscountDto pdd);
     Long writeOrder(OrderCheckout oc);
-    void modifyOrder(PaymentDto pd);
+    void modifyOrder(Long ord_id, String code_name);
 
 }

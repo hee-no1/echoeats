@@ -177,7 +177,6 @@
     let dlvy_fee = ${checkout.dlvy_fee};
     let pay_way = 'kakao';
 
-
     //쿠폰 리스트
     let couponDtoList = [];
     <c:forEach var="coupon" items="${checkout.couponList}" varStatus="loop">

@@ -41,6 +41,7 @@ function nameValue(input){
     let result = inputValue.slice(0,20)
     input.value = result;
 
+    //주문자 동일 버튼
     nameInputValue = (result === mem_name);
     if(nameInputValue && phoneInputValue){
         sameBuyerBtn.checked = true;
@@ -55,6 +56,7 @@ function phoneNumberValue(input){
     let result = inputValue.replace(/[^-0-9]/g,'').slice(0, 11);
     input.value = result;
 
+    //주문자 동일 버튼
     phoneInputValue = (result === mem_phone);
     if(nameInputValue && phoneInputValue){
         sameBuyerBtn.checked = true;
@@ -119,8 +121,6 @@ document.addEventListener("DOMContentLoaded", function() {
             delNotes.entryway_detail = document.getElementById('front-door-etc-field').value;
         }
 
-        //배송 완료 메세지 전송
-        // delNotes.msg = document.querySelector('input[name="deliveryCompleteMessage"]:checked').value;
 
         //유효성 검사
         if(delNotes.name === ''){
@@ -142,8 +142,6 @@ document.addEventListener("DOMContentLoaded", function() {
             //클릭했을 때 데이터를 서버에 저장 및 ajax로 주문서 페이지로 전송
             ajax();
         }
-
-
     });
 
 
@@ -164,11 +162,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     }
-
-
-
-
-
 });
 
 

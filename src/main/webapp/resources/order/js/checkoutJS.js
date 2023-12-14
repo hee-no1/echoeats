@@ -91,6 +91,7 @@ $("#couponBtn").click(function(){
     }
 });
 
+//쿠폰 버튼 클릭 시
 let couponListBtn = document.querySelectorAll(".couponListBtn");
 for (let i=0; i < couponListBtn.length ; i++){
     couponListBtn[i].addEventListener('click', function(){
@@ -109,7 +110,6 @@ for (let i=0; i < couponListBtn.length ; i++){
         $('.e1brt3tk0').append(addCouponDiv);
 
         ajaxData();
-
     })
 }
 
@@ -289,6 +289,8 @@ $(document).ready(function() {
             arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
         }
     });
+
+
 
     //결제 버튼 누르면
     $('#paymentBtn').click(function(){

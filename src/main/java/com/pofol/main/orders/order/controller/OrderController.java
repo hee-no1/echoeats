@@ -6,9 +6,11 @@ import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.basket.SelectedItemsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ public class OrderController {
     private final OrderService orderService;
     private final DelNotesService delNotesService;
     private final MemberService memberService;
+    private final PaymentService paymentService;
 
     @GetMapping
     public String Order(){
@@ -44,7 +47,8 @@ public class OrderController {
             return "/order/checkout";
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 
@@ -63,14 +67,20 @@ public class OrderController {
 
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id){
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
         try{
-            System.out.println(ord_id);
-            PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
-            orderService.modifyOrder(pd);
+            //주문 table 변경
+            orderService.modifyOrder(ord_id, "ORDER_COMPLETE");
+
+            //주문자 이름, 배송지
+
+            //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
+            PaymentDto payment = paymentService.getPayment(ord_id);
+            m.addAttribute("payment",payment);
             return "/order/orderCompleted";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 
@@ -87,7 +97,8 @@ public class OrderController {
             m.addAttribute("delNotes", delNotes);
             return "/order/receiverDetails";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 
