@@ -1,5 +1,9 @@
 package com.pofol.main.orders.order.service;
 
+import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.DelNotesRepository;
+import com.pofol.main.member.repository.MemberRepository;
 import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
@@ -13,7 +17,6 @@ import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
 import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import com.pofol.main.product.basket.BasketRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -24,19 +27,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
-    private final SampleMemberRepository memRepo;
+    private final MemberRepository memRepo;
+    private final DelNotesRepository delNotesRepository;
     private final BasketRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
     private final PaymentDiscountRepository paymentDiscountRepository;
 
-
     @Override
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
-//
+
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -98,15 +102,21 @@ public class OrderServiceImpl implements OrderService{
 
         oc.setTot_prod_name(tot_prod_name);
 
-
-        //회원 정보 DB에서 꺼내오기
-        String mem_id = "you11"; //나중에 세션에서 가지고 온다.
+        //회원정보, 배송요청사항
         try {
-            SampleMemberDto mem = memRepo.selectMember(mem_id);
-            oc.setSampleMemberDto(mem);
+            //회원정보 가져오기
+            MemberDto mem = memRepo.selectMember(mem_id);
+            oc.setMemberDto(mem);
+
+            //배송요청사항 가져오기
+            DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
+            oc.setDelNotesDto(delNotes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
+
 
         return oc;
     }
@@ -114,10 +124,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Long writeOrder(OrderCheckout oc) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
 
-        String mem_id = "you11"; //회원id 가져오기
         //주문 table 작성
         OrderDto orderDto = new OrderDto(mem_id, oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), oc.getOrigin_prod_price() - oc.getTot_prod_price(), items.size(), oc.getDlvy_fee(), oc.getPay_way(), items.size(), mem_id, mem_id);
         try {

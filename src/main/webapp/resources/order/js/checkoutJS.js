@@ -7,7 +7,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-
 let checkout = {
     selectedItems: selectedItems,
     tot_prod_name: tot_prod_name,
@@ -93,7 +92,6 @@ function updateValue(input){
     else{
         let result = inputValue.replace(/[^-0-9]/g,'');
         input.value = result;
-
     }
 
     ajaxData();
@@ -106,7 +104,68 @@ $("#allUseBtn").click(function(){
 
     ajaxData();
 });
+
+
 $(document).ready(function() {
+
+    let delNotesTag =
+        "<div id=\"NotFirst\" class=\"css-82a6rk e150alo80\"><span id=\"place\" class=\"css-11y0tcn efthce41\"></span><span class=\"css-bhczxb efthce40\"></span>\n" +
+        "<span id=\"entryway\" class=\"css-11y0tcn efthce41\"></span><span id=\"entrywayDetail\"></span>\n" +
+        "<div id=\"personData\" class=\"css-rqc9f e14u1xpe0\"></div>\n" +
+        "<div class=\"css-iqoq9n e1pxan880\"><button class=\"css-117jo2j e4nu7ef3 delNotesBtn\" type=\"button\" width=\"60\" height=\"30\" radius=\"3\"><span class=\"css-nytqmg e4nu7ef1\">수정</span></button></div></div></div>";
+
+
+    //배송 요청 사항
+    let popup;
+
+    $(document).on("click", ".delNotesBtn", function(){
+        popup = window.open("/order/checkout/receiverDetails", "delNotes", "width=600, height=800, left=100, top=50");
+
+        $(popup).on('beforeunload', function(){
+            alert("팝업창 닫힘");
+
+            $.ajax({
+                type: 'GET',
+                url: '/order/checkout/getDelNotes',
+                dataType: 'json',
+                success: function(delNotes){
+                    alert("success");
+                    let personData = document.getElementById("personData");
+                    if(personData === null){ //첫 주문
+                        $('#firstDelNotesDiv').remove();
+                        $("#delNotes").append(delNotesTag)
+                    }
+                    getDelNotesSuccess(delNotes)
+                },
+                error: function() {
+                    alert("error")
+                }
+            });
+        });
+    });
+
+    let getDelNotesSuccess = function (delNotes){
+        if(delNotes.entryway === 'PASSWORD'){
+            delNotes.entryway = '공동현관 비밀번호';
+        } else if(delNotes.entryway === 'FREE'){
+            delNotes.entryway = '자유 출입 가능';
+        } else if(delNotes.entryway === 'CALL_SECURITY_OFFICE'){
+            delNotes.entryway = '경비실 호출';
+        } else{
+            delNotes.entryway = '기타';
+        }
+
+
+        document.getElementById("place").innerText = delNotes.place;
+        document.getElementById("entryway").innerText = delNotes.entryway;
+
+        if(delNotes.entryway_detail === null || delNotes.entryway_detail !== ''){
+            document.getElementById("entrywayDetail").innerText = '(' + delNotes.entryway_detail + ')';
+        }else{
+            document.getElementById("entrywayDetail").innerText = '';
+        }
+        document.getElementById("personData").innerText = delNotes.name + ',' + delNotes.number;
+    }
 
 
     let orderData = {
@@ -179,8 +238,6 @@ $(document).ready(function() {
 
 
     //주문서 상품 목록
-    $('.totItems').show(); //페이지를 로드할 때 표시할 요소
-    $('.items').hide(); //페이지를 로드할 때 숨길 요소
     $('#prodDetailBtn').click(function(){
         let arrowBtn = document.getElementById("arrowBtn");
         let rotate = arrowBtn.getAttribute("transform");
@@ -197,6 +254,12 @@ $(document).ready(function() {
 
     //결제 버튼 누르면
     $('#paymentBtn').click(function(){
+
+        let personData = document.getElementById("personData");
+        if(personData === null){ //첫 주문
+            alert("배송 요청사항을 입력해주세요")
+            return;
+        }
 
         checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
