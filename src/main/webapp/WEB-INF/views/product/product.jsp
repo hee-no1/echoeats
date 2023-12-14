@@ -668,18 +668,22 @@
     <c:when test="${option eq 'option'}">
     <c:forEach var="optionList" items="${optionList}" varStatus="loop">
     productList[${loop.index}] = {
-        prod_id: ${optionList.prod_id},
+        prod_id : ${optionList.prod_id},
         opt_prod_id: '${optionList.opt_prod_id}',
-        opt_disc_price: ${optionList.opt_disc_price},
-        quantity: 0
+        opt_prod_name : '${optionList.opt_prod_name}',
+        opt_price : ${optionList.opt_price},
+        opt_disc_price : ${optionList.opt_disc_price},
+        qty : 0
     }
     </c:forEach>
     </c:when>
     <c:otherwise>
     productList[0] = {
-        prod_id: ${product.prod_id},
-        disc_price: ${product.disc_price},
-        quantity: 1
+        prod_id : ${product.prod_id},
+        prod_name : '${product.prod_name}',
+        prod_price : ${product.prod_price},
+        disc_price : ${product.disc_price},
+        qty : 1
     }
     </c:otherwise>
     </c:choose>

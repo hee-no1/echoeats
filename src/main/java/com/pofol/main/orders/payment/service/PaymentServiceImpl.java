@@ -11,8 +11,8 @@ import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.domain.PaymentHistoryDto;
 import com.pofol.main.orders.payment.repository.PaymentHistoryRepository;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
-import com.pofol.main.product.basket.SelectedItemsDto;
-import com.pofol.main.product.basket.BasketRepository;
+import com.pofol.main.product.cart.SelectedItemsDto;
+import com.pofol.main.product.cart.CartRepository;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService{
 
     private final GradeRepository gradeRepository;
-    private final BasketRepository basketRepository;
+    private final CartRepository basketRepository;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final PaymentHistoryRepository paymentHistoryRepository;

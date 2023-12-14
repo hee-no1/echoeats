@@ -3,7 +3,7 @@ package com.pofol.main.orders.order.domain;
 import com.pofol.main.member.dto.CouponJoinDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
-import com.pofol.main.product.basket.SelectedItemsDto;
+import com.pofol.main.product.cart.SelectedItemsDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

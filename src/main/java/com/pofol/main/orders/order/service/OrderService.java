@@ -4,7 +4,7 @@ import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
-import com.pofol.main.product.basket.SelectedItemsDto;
+import com.pofol.main.product.cart.SelectedItemsDto;
 
 import java.util.List;
 

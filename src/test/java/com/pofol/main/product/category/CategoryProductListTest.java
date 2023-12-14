@@ -27,7 +27,7 @@ public class CategoryProductListTest {
     @DisplayName("상품 등록할 때, 필요한 카테고리 리스트 테스트")
     @Test
     void enrollCategoryList() throws Exception {
-        System.out.println("categoryList = " + categoryList.enrollCategoryList());
+        System.out.println("categoryList = " + categoryList.cateList());
     }
 
 }
