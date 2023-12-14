@@ -44,7 +44,8 @@ public class OrderController {
             return "/order/checkout";
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 
@@ -70,7 +71,8 @@ public class OrderController {
             orderService.modifyOrder(pd);
             return "/order/orderCompleted";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 
@@ -87,7 +89,8 @@ public class OrderController {
             m.addAttribute("delNotes", delNotes);
             return "/order/receiverDetails";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "/order/errorPage";
         }
     }
 

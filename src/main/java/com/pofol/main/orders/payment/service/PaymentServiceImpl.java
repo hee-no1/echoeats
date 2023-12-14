@@ -32,31 +32,33 @@ public class PaymentServiceImpl implements PaymentService{
         int jsTotPayPrice = oc.getTot_pay_price(); //js에서 넘어온 실 결제 금액
         int dbTotPayPrice = 0; //
 
-        for (SelectedItemsDto item : items) {
-            String opt_prod_id = item.getOpt_prod_id();
-            Integer qty = item.getQty();
-            try{
-                if(opt_prod_id == null || opt_prod_id.isEmpty()){ //일반 상품일 때
+        try {
+            for (SelectedItemsDto item : items) {
+                String opt_prod_id = item.getOpt_prod_id();
+                Integer qty = item.getQty();
+
+                if (opt_prod_id == null || opt_prod_id.isEmpty()) { //일반 상품일 때
                     ProductDto prod = basketRepository.selectProduct(item.getProd_id());
                     dbTotPayPrice += prod.getDisc_price() * qty;
-                }else { //옵션 상품일 때
+                } else { //옵션 상품일 때
                     OptionProductDto prod = basketRepository.selectOptionProduct(item.getOpt_prod_id());
                     dbTotPayPrice += prod.getOpt_disc_price() * qty;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
             }
-        }
-        if(dbTotPayPrice < 40000){ //배송비 추가
-            dbTotPayPrice += 3000;
-        }
 
-        dbTotPayPrice -= (oc.getCoupon_disc() + oc.getPoint_used());
+            if (dbTotPayPrice < 40000) { //배송비 추가
+                dbTotPayPrice += 3000;
+            }
 
-        System.out.println("jsTotPayPrice = " + jsTotPayPrice);
-        System.out.println("dbTotPayPrice = " + dbTotPayPrice);
-        return jsTotPayPrice == dbTotPayPrice; //같으면 true, 다르면 false
+            dbTotPayPrice -= (oc.getCoupon_disc() + oc.getPoint_used());
+
+            System.out.println("jsTotPayPrice = " + jsTotPayPrice);
+            System.out.println("dbTotPayPrice = " + dbTotPayPrice);
+            return jsTotPayPrice == dbTotPayPrice; //같으면 true, 다르면 false
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -75,10 +77,10 @@ public class PaymentServiceImpl implements PaymentService{
             PaymentHistoryDto paymentHistoryDto = new PaymentHistoryDto(pay.getPay_id(), pay.getOrd_id(), pay.getMem_id(), pay.getCode_name(), pay.getPay_way(), pay.getTot_prod_name(), pay.getTot_pay_price(), pay.getPg_tid(), pay.getMem_id(), pay.getMem_id());
             System.out.println("payHist: "+paymentHistoryDto);
             paymentHistoryRepository.insert(paymentHistoryDto);
+            return pay;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return pay;
     }
 
 
@@ -91,10 +93,11 @@ public class PaymentServiceImpl implements PaymentService{
             OrderDto orderDto = orderRepository.select(pd.getOrd_id());
             dbTotPayPrice = orderDto.getTot_pay_price(); //주문table에서 실 결제 금액 가져옴(1차 검증 성공 후 db에 저장한 것)
 
+            System.out.println("2차 검증: "+(jsTotPayPrice==dbTotPayPrice));
+            return jsTotPayPrice == dbTotPayPrice; //같은면 true, 다르면 false
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println("2차 검증: "+(jsTotPayPrice==dbTotPayPrice));
-        return jsTotPayPrice == dbTotPayPrice; //같은면 true, 다르면 false
+
     }
 }

@@ -65,30 +65,25 @@ public class OrderServiceImpl implements OrderService{
                     tot_prod_price += prod.getOpt_disc_price() * item.getQty();
                     origin_prod_price += prod.getOpt_price() * item.getQty();
                 }
-
                 item.calculateProductTotal(); //각 상품별 총 주문금액과 원래 금액 계산
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        oc.setTot_prod_price(tot_prod_price);
-        oc.setOrigin_prod_price(origin_prod_price);
+            oc.setTot_prod_price(tot_prod_price);
+            oc.setOrigin_prod_price(origin_prod_price);
 
 
-        //배송비 구하기
-        if(tot_prod_price < 40000){
-            dlvy_fee = 3000;
-        }
-        oc.setDlvy_fee(dlvy_fee);
+            //배송비 구하기
+            if(tot_prod_price < 40000){
+                dlvy_fee = 3000;
+            }
+            oc.setDlvy_fee(dlvy_fee);
 
 
-        //총 상품명 구하기
-        SelectedItemsDto firstItem = items.get(0);
-        ProductOrderCheckout firstProd = firstItem.getProductOrderCheckout();
-        int tot_ord_qty = items.size(); //총 상품 수량
+            //총 상품명 구하기
+            SelectedItemsDto firstItem = items.get(0);
+            ProductOrderCheckout firstProd = firstItem.getProductOrderCheckout();
+            int tot_ord_qty = items.size(); //총 상품 수량
 
-        try{
             if(firstItem.getOpt_prod_id() == null){ //일반 상품일 때
                 tot_prod_name = firstProd.getProd_name();
             } else { //option 상품일 때
@@ -100,14 +95,11 @@ public class OrderServiceImpl implements OrderService{
             } else {//상품수량이 2개 이상일 때
                 tot_prod_name += " 외 " + (tot_ord_qty-1) +"개의 상품을 주문합니다.";
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        oc.setTot_prod_name(tot_prod_name);
+            oc.setTot_prod_name(tot_prod_name);
 
-        //회원정보, 배송요청사항, 쿠폰정보
-        try {
+
+            //회원정보, 배송요청사항, 쿠폰정보
             //회원정보 가져오기
             MemberDto mem = memRepo.selectMember(mem_id);
             oc.setMemberDto(mem);
@@ -119,12 +111,11 @@ public class OrderServiceImpl implements OrderService{
             //쿠폰 정보 가져오기
             List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
             oc.setCouponList(couponJoinDtos);
+            return oc;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        return oc;
     }
 
 
@@ -149,15 +140,12 @@ public class OrderServiceImpl implements OrderService{
             if(reserves_used != null){ //적립금 할인 금액이 입력시
                 discountPrice += reserves_used;
             }
+            pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
+
+            return pdd;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
-
-        System.out.println("계산후"+pdd);
-
-        return pdd;
     }
 
 
@@ -199,12 +187,12 @@ public class OrderServiceImpl implements OrderService{
             PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
+            return orderDto.getOrd_id();
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
-        return orderDto.getOrd_id();
     }
 
 
@@ -235,6 +223,4 @@ public class OrderServiceImpl implements OrderService{
             throw new RuntimeException(e);
         }
     }
-
-
 }
