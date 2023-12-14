@@ -1,36 +1,22 @@
 package com.pofol.main.orders.order.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
-import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDetailDto;
-import com.pofol.main.orders.order.domain.OrderDto;
-import com.pofol.main.orders.order.service.OrderDetailService;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.product.basket.SelectedItemsDto;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/order")
@@ -38,11 +24,9 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 
     private final OrderService orderService;
-    private final OrderDetailService ordDetService;
     private final DelNotesService delNotesService;
-    private final MemberService memService;
-    private final AddressService addrService;
-    
+    private final MemberService memberService;
+
     @GetMapping
     public String Order(){
         return "/order/cartSample";
@@ -53,127 +37,80 @@ public class OrderController {
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
-        OrderCheckout orderCheckout = orderService.writeCheckout(items);
-        System.out.println(orderCheckout);
-        m.addAttribute("checkout",orderCheckout);
+        try{
+            OrderCheckout orderCheckout = orderService.writeCheckout(items);
+            System.out.println(orderCheckout);
+            m.addAttribute("checkout",orderCheckout);
+            return "/order/checkout";
 
-        return "/order/checkout";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
     @ResponseBody
     @PostMapping("/calculatePayment")
-    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pd){
-        Integer coupon_disc = pd.getCoupon_disc(); // 쿠폰 사용 금액
-        Integer reserves_used = pd.getPoint_used(); // 적립금 사용 금액
-        int discountPrice = 0;
-        System.out.println(pd);
-
-        if(coupon_disc != null){ //쿠폰 할인 금액이 입력 돼 있을 때
-            discountPrice += coupon_disc;
-        }else if(reserves_used != null){ //적립금 할인 금액이 입력시
-            discountPrice += reserves_used;
+    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
+        try{
+            System.out.println("계산전"+ pdd);
+            PaymentDiscountDto paymentDiscountDto = orderService.calculatePayment(pdd);
+            return paymentDiscountDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        pd.setTot_pay_price(pd.getTot_prod_price() - discountPrice + pd.getDlvy_fee());
-
-        System.out.println(pd);
-        return pd;
     }
 
 
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id){
-        System.out.println(ord_id);
-        PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
-        orderService.modifyOrder(pd);
-        return "/order/orderCompleted";
+        try{
+            System.out.println(ord_id);
+            PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
+            orderService.modifyOrder(pd);
+            return "/order/orderCompleted";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    //팝업창
+    //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")
     public String receiverDetails(Model m){
-        DelNotesDto delNotes = delNotesService.getDelNotes();
-        m.addAttribute("delNotes", delNotes);
-        System.out.println("팝업창으로 들어가는 서버 모델" + delNotes);
-        return "/order/receiverDetails";
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+        try {
+            MemberDto member = memberService.select(mem_id);
+            DelNotesDto delNotes = delNotesService.getDelNotes();
+            m.addAttribute("member", member);
+            m.addAttribute("delNotes", delNotes);
+            return "/order/receiverDetails";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")
     public DelNotesDto writeDelNotes(@RequestBody DelNotesDto delNotesDto){
-        System.out.println(delNotesDto);
-        delNotesService.writeDelNotes(delNotesDto);
-        return delNotesDto;
+        try{
+            System.out.println(delNotesDto);
+            delNotesService.writeDelNotes(delNotesDto);
+            return delNotesDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     @ResponseBody
     @GetMapping("/checkout/getDelNotes")
     public DelNotesDto getDelNotes(){
-        return delNotesService.getDelNotes();
-    }
-    
-// ----------------------------------------------------------------------
-    @GetMapping("/order")
-    public String order(Integer period, Model m, HttpSession session){
-		System.out.println("OrderController.order()");
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		String id = authentication.getName();
-		// 회원id 정보 session or security
-		if (session.getAttribute("id") == null) {
-		    session.setAttribute("id", "you11");
-		}
-		String id = (String) session.getAttribute("id");
-		// period
-		if(period == null)
-			period = 90;
-		try {
-			Map map = new HashMap();
-	        map.put("id", id);
-	        map.put("period", period);
-	        // 주문 정보 가져오기
-			List<OrderDto> list = orderService.selectAllByUserIdAndPeriod(map);
-			//list = new ArrayList<>(list.subList(0, 10));
-			for(OrderDto dto : list) {
-				dto.setImg_url(orderService.selectByOrderMainImg(dto.getOrd_id()));
-				//System.out.println(orderService.selectByOrderMainImg(dto.getOrd_id()));
-			}
-			m.addAttribute("ordDtoList",list);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-    	return "/order/mypageOrder";
-    }
-	
-	@GetMapping("/order/{ord_id}")
-    public String orderDet(@PathVariable Long ord_id, Model m, HttpServletRequest request){
-		System.out.println("OrderController.order()");
-		System.out.println("OrderController.order().ord_id = "+ ord_id);
-		try {
-			// 주문번호에 대한 주문 상세들 List<ordDetDto>
-			List<OrderDetailDto> ordDetList = ordDetService.selectAllByOrdId(ord_id);
-			for(OrderDetailDto ordDetDto : ordDetList) {
-				ordDetDto.setImg_url(ordDetService.selectByOrderDetImg(ordDetDto.getOrd_det_id()));
-				ordDetDto.setColumn_sts(ordDetService.selectByCodeName(ordDetDto.getCode_name()));
-			}
-			m.addAttribute("ordDetList", ordDetList);
-			// 배송조회 ( 어디서갖고와야되나?? -> 배송테이블에서 갖고옴 )
-			// 결제정보
-			OrderDto ordDto = orderService.selectByOrderId(ord_id);
-			m.addAttribute("ordDto", ordDto);
-			// 주문정보 ( 주문번호, 회원이름, 결제일시=주문일시 )
-			MemberDto memDto = memService.select(ordDto.getMem_id());
-			m.addAttribute("mem_id", memDto.getMem_id());
-			// 배송정보 ( 배송지 배송요청사항 )
-//			AddressDto addrDto = addrService.getAddress(memDto.getMem_id());
-//			DelNotesDto dnDto = 
-			// 추가정보 ( 어디서갖고옴?? )
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    	return "/order/mypageOrderDet";
+        try{
+            return delNotesService.getDelNotes();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

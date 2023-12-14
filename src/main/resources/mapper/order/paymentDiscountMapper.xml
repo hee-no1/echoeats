@@ -5,9 +5,9 @@
 <mapper namespace="payment.repository.payDiscountMapper">
     <insert id="insert">
         INSERT INTO spring.pay_discount
-        (ord_id, prod_disc, coupon_disc,point_used)
+        (ord_id, prod_disc, coupon_disc,coupon_id, point_used)
         VALUES
-        (#{ord_id}, #{prod_disc}, #{coupon_disc}, #{point_used})
+        (#{ord_id}, #{prod_disc}, #{coupon_disc}, #{coupon_id}, #{point_used})
     </insert>
 
 <!--    resultType = OrderCheckoutDto로 해도 큰 상관은 없다. -->

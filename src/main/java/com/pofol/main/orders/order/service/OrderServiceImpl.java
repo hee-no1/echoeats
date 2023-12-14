@@ -1,29 +1,30 @@
 package com.pofol.main.orders.order.service;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
+import com.pofol.main.member.dto.CouponDto;
+import com.pofol.main.member.dto.CouponJoinDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.member.repository.DelNotesRepository;
 import com.pofol.main.member.repository.MemberRepository;
-import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDetailDto;
-import com.pofol.main.orders.order.domain.OrderDto;
-import com.pofol.main.orders.order.domain.OrderHistoryDto;
-import com.pofol.main.orders.order.domain.ProductOrderCheckout;
+import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
-import com.pofol.main.product.basket.BasketRepository;
 import com.pofol.main.product.basket.SelectedItemsDto;
-
+import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
+import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
+import com.pofol.main.orders.order.domain.ProductOrderCheckout;
+import com.pofol.main.product.basket.BasketRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +32,7 @@ public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memRepo;
     private final DelNotesRepository delNotesRepository;
+    private final CouponRepository couponRepository;
     private final BasketRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
@@ -104,7 +106,7 @@ public class OrderServiceImpl implements OrderService{
 
         oc.setTot_prod_name(tot_prod_name);
 
-        //회원정보, 배송요청사항
+        //회원정보, 배송요청사항, 쿠폰정보
         try {
             //회원정보 가져오기
             MemberDto mem = memRepo.selectMember(mem_id);
@@ -113,14 +115,49 @@ public class OrderServiceImpl implements OrderService{
             //배송요청사항 가져오기
             DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
             oc.setDelNotesDto(delNotes);
+
+            //쿠폰 정보 가져오기
+            List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
+            oc.setCouponList(couponJoinDtos);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-
-
-
         return oc;
+    }
+
+
+    @Override
+    public PaymentDiscountDto calculatePayment(PaymentDiscountDto pdd) {
+        Long coupon_id = pdd.getCoupon_id();// 쿠폰 id
+        int coupon_disc = 0; //쿠폰 사용 금액
+        Integer reserves_used = pdd.getPoint_used(); // 적립금 사용 금액
+        int discountPrice = 0; //할인 총 금액
+
+        try{
+            if(coupon_id != null){ //쿠폰 사용 시
+                CouponDto coupon = couponRepository.select_coupon(coupon_id);
+                if(coupon.getType().equals("cash")){ //쿠폰이 할인 금액일 때
+                    coupon_disc = coupon.getCash_rate();
+                }else { //쿠폰이 할인율일 때
+                    coupon_disc = pdd.getTot_prod_price() * coupon.getCash_rate() / 100;
+                }
+                pdd.setCoupon_disc(coupon_disc);
+                discountPrice += coupon_disc;
+            }
+            if(reserves_used != null){ //적립금 할인 금액이 입력시
+                discountPrice += reserves_used;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
+
+        System.out.println("계산후"+pdd);
+
+        return pdd;
     }
 
 
@@ -159,7 +196,7 @@ public class OrderServiceImpl implements OrderService{
             orderHistoryRepository.insert(orderHistoryDto);
 
             //할인 금액 정보 table 작성
-            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getPoint_used());
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
         } catch (Exception e) {
@@ -169,36 +206,6 @@ public class OrderServiceImpl implements OrderService{
 
         return orderDto.getOrd_id();
     }
-    
-    /**
-     * @param mem_id(유저ID)
-     * @param period(검색범위:현재기준-day)
-     * @return List<OrderDto>
-     * @feat : mypage에 주문리스트를 가져오는 메서드
-     **/ 
-	@Override
-	public List<OrderDto> selectAllByUserIdAndPeriod(Map map) throws Exception {
-		return orderRepository.selectAllByUserIdAndPeriod(map);
-	}
-	/**
-     * @param ord_id(주문ID)
-     * @return String
-     * @feat : mypage에 주문리스트 메인 이미지를 가져오는 메서드
-     **/ 
-	@Override
-	public String selectByOrderMainImg(Long ord_id) {
-		return orderRepository.selectByOrderMainImg(ord_id);
-	}
-	/**
-     * @param ord_id(주문ID)
-     * @return OrderDto
-     * @feat : mypage에 주문상세의 결제정보를 가져오는 메서드
-     **/ 
-	@Override
-	public OrderDto selectByOrderId(Long ord_id) {
-		// TODO Auto-generated method stub
-		return orderRepository.selectByOrderId(ord_id);
-	}
 
 
     @Override

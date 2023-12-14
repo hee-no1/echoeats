@@ -17,11 +17,36 @@ else if(entryway === '기타'){
 }
 
 
+//주문자 정보와 동일
+let sameBuyerBtn = document.getElementById("sameBuyer");
+
+if(name === mem_name && number === mem_phone){ //로드될때 주문자 정보와 동일하면 check되어있게
+    sameBuyerBtn.checked = true;
+}else{
+    sameBuyerBtn.checked = false;
+}
+sameBuyerBtn.addEventListener('click',function(){
+    if(sameBuyerBtn.checked){ //체크하면 주문자 정보와 동일하게 만들기
+        document.getElementById("receiver-name").value = mem_name;
+        document.getElementById("receiver-phone").value = mem_phone;
+    }
+});
+
+let nameInputValue;
+let phoneInputValue;
+
 //받으실분 입력란
 function nameValue(input){
     const inputValue = input.value;
     let result = inputValue.slice(0,20)
     input.value = result;
+
+    nameInputValue = (result === mem_name);
+    if(nameInputValue && phoneInputValue){
+        sameBuyerBtn.checked = true;
+    }else{
+        sameBuyerBtn.checked = false;
+    }
 }
 
 //휴대폰 입력란
@@ -29,7 +54,15 @@ function phoneNumberValue(input){
     const inputValue = input.value;
     let result = inputValue.replace(/[^-0-9]/g,'').slice(0, 11);
     input.value = result;
+
+    phoneInputValue = (result === mem_phone);
+    if(nameInputValue && phoneInputValue){
+        sameBuyerBtn.checked = true;
+    }else {
+        sameBuyerBtn.checked = false;
+    }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
 

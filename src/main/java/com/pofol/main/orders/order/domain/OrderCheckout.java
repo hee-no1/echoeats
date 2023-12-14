@@ -27,7 +27,7 @@ public class OrderCheckout {
     //배송정보 Dto
     private DelNotesDto delNotesDto; //배송 요청 사항 Dto
     //쿠폰 Dto
-    private List<CouponJoinDto> couponJoinDto;
+    private List<CouponJoinDto> couponList;
     //적립금 Dto
 
 
@@ -36,6 +36,7 @@ public class OrderCheckout {
     private String pay_way; //결제 방법
     private Integer prod_disc; //상품 할인 금액
     private Integer coupon_disc; //쿠폰 할인 금액
+    private Long coupon_id;
     private Integer point_used; //적립금 사용 금액
 
 
