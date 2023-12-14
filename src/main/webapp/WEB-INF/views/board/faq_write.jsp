@@ -1,21 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- FAQ 등록 페이지 -->
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoEats</title>
+  <link rel="stylesheet" href="/resources/product/css/main-css.css">
   <%@ include file="../include/bootstrap.jspf" %>
 
   <style>
     .list-group-item a {
       text-decoration: none;
       color: black;
-    }
-
-    .list-group-item:hover {
-      background-color: #FEF7FF;
     }
 
     .list-group-item:hover>a {
@@ -66,10 +63,6 @@
       border-width: 1px;
     }
 
-    .btn_list {
-      padding-top: 45px;
-    }
-
     .back_btn {
       padding: 0px 10px;
       text-align: center;
@@ -105,7 +98,6 @@
   <div class="row" style="padding-top:50px; padding-bottom: 50px">
     <div class="col-sm-2"></div>
     <div class="col-sm-2">
-<%--      <%@ include file = "../admin/adminSideNav.jspf" %>--%>
     </div>
     <div class="col-sm-6">
       <div class="main" style="border-bottom:2px solid black">
@@ -152,7 +144,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-sm-2"></div>
 </div>
 </body>

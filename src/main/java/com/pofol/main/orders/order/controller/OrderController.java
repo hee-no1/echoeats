@@ -2,12 +2,16 @@ package com.pofol.main.orders.order.controller;
 
 
 import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.DelNotesService;
+import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
+import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.product.cart.SelectedItemsDto;
+import com.pofol.main.orders.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,8 @@ public class OrderController {
 
     private final OrderService orderService;
     private final DelNotesService delNotesService;
+    private final MemberService memberService;
+    private final PaymentService paymentService;
 
     @GetMapping
     public String Order(){
@@ -33,64 +39,88 @@ public class OrderController {
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
-        OrderCheckout orderCheckout = orderService.writeCheckout(items);
-        System.out.println(orderCheckout);
-        m.addAttribute("checkout",orderCheckout);
+        try{
+            OrderCheckout orderCheckout = orderService.writeCheckout(items);
+            System.out.println(orderCheckout);
+            m.addAttribute("checkout",orderCheckout);
+            return "/order/checkout";
 
-        return "/order/checkout";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
 
 
     @ResponseBody
     @PostMapping("/calculatePayment")
-    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pd){
-        Integer coupon_disc = pd.getCoupon_disc(); // 쿠폰 사용 금액
-        Integer reserves_used = pd.getPoint_used(); // 적립금 사용 금액
-        int discountPrice = 0;
-        System.out.println(pd);
-
-        if(coupon_disc != null){ //쿠폰 할인 금액이 입력 돼 있을 때
-            discountPrice += coupon_disc;
-        }else if(reserves_used != null){ //적립금 할인 금액이 입력시
-            discountPrice += reserves_used;
+    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
+        try{
+            System.out.println("계산전"+ pdd);
+            PaymentDiscountDto paymentDiscountDto = orderService.calculatePayment(pdd);
+            return paymentDiscountDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        pd.setTot_pay_price(pd.getTot_prod_price() - discountPrice + pd.getDlvy_fee());
-
-        System.out.println(pd);
-        return pd;
     }
 
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id){
-        System.out.println(ord_id);
-        PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
-        orderService.modifyOrder(pd);
-        return "/order/orderCompleted";
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
+        try{
+            //주문 table 변경
+            orderService.modifyOrder(ord_id, "ORDER_COMPLETE");
+
+            //주문자 이름, 배송지
+
+            //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
+            PaymentDto payment = paymentService.getPayment(ord_id);
+            m.addAttribute("payment",payment);
+            return "/order/orderCompleted";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
 
-    //팝업창
+    //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")
     public String receiverDetails(Model m){
-        DelNotesDto delNotes = delNotesService.getDelNotes();
-        m.addAttribute("delNotes", delNotes);
-        System.out.println("팝업창으로 들어가는 서버 모델" + delNotes);
-        return "/order/receiverDetails";
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+        try {
+            MemberDto member = memberService.select(mem_id);
+            DelNotesDto delNotes = delNotesService.getDelNotes();
+            m.addAttribute("member", member);
+            m.addAttribute("delNotes", delNotes);
+            return "/order/receiverDetails";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
+
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")
     public DelNotesDto writeDelNotes(@RequestBody DelNotesDto delNotesDto){
-        System.out.println(delNotesDto);
-        delNotesService.writeDelNotes(delNotesDto);
-        return delNotesDto;
+        try{
+            System.out.println(delNotesDto);
+            delNotesService.writeDelNotes(delNotesDto);
+            return delNotesDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     @ResponseBody
     @GetMapping("/checkout/getDelNotes")
     public DelNotesDto getDelNotes(){
-        return delNotesService.getDelNotes();
+        try{
+            return delNotesService.getDelNotes();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

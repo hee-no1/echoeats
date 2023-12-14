@@ -1,10 +1,9 @@
-package com.pofol.main.orders1.order.admin;
+package com.pofol.admin.order;
 
 import java.util.List;
 
-import com.pofol.main.orders1.order.domain.CodeTableDto;
-import com.pofol.main.orders1.order.domain.OrderDto;
-import com.pofol.main.orders1.order.domain.SearchOrderCondition;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.main.orders.order.domain.OrderDto;
 
 public interface AdminOrderRepository {
 	

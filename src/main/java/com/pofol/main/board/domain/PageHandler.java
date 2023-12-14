@@ -1,9 +1,13 @@
-package com.pofol.main.orders1.order.domain;
+package com.pofol.main.board.domain;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageHandler {
-    private SearchOrderCondition sc;
+    private SearchBoardCondition sc;
+    //    private int pageSize = 10; // 한 페이지당 게시물 갯수
+    //    private int page; // 현재 페이지
+    //    private String  option;
+    //    private String  keyword;
     public  final int NAV_SIZE = 10; // page navigation size
     private int totalCnt; // 게시물의 총 갯수
     private int totalPage; // 전체 페이지의 갯수
@@ -13,20 +17,21 @@ public class PageHandler {
     private boolean showPrev = false; // 이전을 보여줄지의 여부. beginPage==1이 아니면 showPrev는 false
 
     public PageHandler(int totalCnt, Integer page) {
-        this(totalCnt, new SearchOrderCondition(page, 10));
+        this(totalCnt, new SearchBoardCondition(page, 10));
     }
 
     public PageHandler(int totalCnt, Integer page, Integer pageSize) {
-        this(totalCnt, new SearchOrderCondition(page, pageSize));
+        this(totalCnt, new SearchBoardCondition(page, pageSize));
     }
 
-    public PageHandler(int totalCnt, SearchOrderCondition sc) {
+    public PageHandler(int totalCnt, SearchBoardCondition sc) {
         this.totalCnt = totalCnt;
         this.sc = sc;
+
         doPaging(totalCnt, sc);
     }
 
-    private void doPaging(int totalCnt, SearchOrderCondition sc) {
+    private void doPaging(int totalCnt, SearchBoardCondition sc) {
         this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize()==0? 0:1);
         this.sc.setPage(Math.min(sc.getPage(), totalPage));  // page가 totalPage보다 크지 않게
         this.beginPage = (this.sc.getPage() -1) / NAV_SIZE * NAV_SIZE + 1; // 11 -> 11, 10 -> 1, 15->11. 따로 떼어내서 테스트
@@ -34,8 +39,8 @@ public class PageHandler {
         this.showPrev = beginPage!=1;
         this.showNext = endPage!=totalPage;
     }
-    
-    void print() { 
+
+    void print() {
         System.out.println("page="+ sc.getPage());
         System.out.print(showPrev? "PREV " : "");
 
@@ -45,11 +50,11 @@ public class PageHandler {
         System.out.println(showNext? " NEXT" : "");
     }
 
-    public SearchOrderCondition getSc() {
+    public SearchBoardCondition getSc() {
         return sc;
     }
 
-    public void setSc(SearchOrderCondition sc) {
+    public void setSc(SearchBoardCondition sc) {
         this.sc = sc;
     }
 
@@ -105,11 +110,17 @@ public class PageHandler {
         this.showPrev = showPrev;
     }
 
-	@Override
-	public String toString() {
-		return "PageHandler [sc=" + sc + ", NAV_SIZE=" + NAV_SIZE + ", totalCnt=" + totalCnt + ", totalPage="
-				+ totalPage + ", beginPage=" + beginPage + ", endPage=" + endPage + ", showNext=" + showNext
-				+ ", showPrev=" + showPrev + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "PageHandler{" +
+                "sc=" + sc +
+                ", totalCnt=" + totalCnt +
+                ", showNext=" + showNext +
+                ", beginPage=" + beginPage +
+                ", NAV_SIZE=" + NAV_SIZE +
+                ", totalPage=" + totalPage +
+                ", endPage=" + endPage +
+                ", showPrev=" + showPrev +
+                '}';
+    }
 }

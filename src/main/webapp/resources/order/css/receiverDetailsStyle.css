@@ -89,12 +89,9 @@ input[type=checkbox], input[type=radio] {
     padding: 0;
 }
 .css-agvwxo {
-    overflow: hidden;
-    position: absolute;
-    clip: rect(0px, 0px, 0px, 0px);
-    clip-path: inset(50%);
-    width: 1px;
-    height: 1px;
+    accent-color: #00a833;
+    width: 17px;
+    height: 17px;
 }
 html, button, input, select, textarea {
     font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
@@ -337,7 +334,7 @@ input[type=checkbox], input[type=radio] {
 }
 .css-x79f2o {
     margin: 0px 1vw 0px 6vw;
-    color: rgb(141, 76, 196);
+    color: #00a833;
     font-weight: 500;
     flex-shrink: 0;
 }
@@ -429,7 +426,7 @@ input[type=checkbox], input[type=radio] {
     height: 56px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: #00c73c;
     border: 0px none;
 }
 .css-1kuswgm > span {
@@ -446,7 +443,7 @@ input[type=checkbox], input[type=radio] {
     line-height: 16px;
     padding-bottom: 5px;
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #00a833;
 }
 .css-1xi0wk2 span {
     margin-right: 5px;
@@ -464,7 +461,7 @@ input[type=checkbox], input[type=radio] {
     display: flex;
     font-size: 12px;
     line-height: 16px;
-    color: rgb(95, 0, 128);
+    color: #00a833;
     margin-bottom: 4px;
 }
 

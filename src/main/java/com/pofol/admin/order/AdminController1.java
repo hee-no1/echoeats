@@ -1,4 +1,4 @@
-package com.pofol.main.orders1.order.admin;
+package com.pofol.admin.order;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,19 +14,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.pofol.main.orders1.order.domain.CodeTableDto;
-import com.pofol.main.orders1.order.domain.PageHandler;
-import com.pofol.main.orders1.order.domain.SearchOrderCondition;
-import com.pofol.main.orders1.order.repository.OrderRepository1;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.main.orders.order.domain.PageHandler;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
+import com.pofol.main.orders.order.repository.OrderRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin1")
 public class AdminController1 {
 	
-	@Autowired
-	AdminOrderRepository adminOrdRpo;
-	@Autowired
-    OrderRepository1 ordRop;
+	private final AdminOrderRepository adminOrdRpo;
+	private final OrderRepository ordRop;
 	
 	@GetMapping("/order/list")
     public String orderList(SearchOrderCondition sc, Model m, HttpServletRequest request){

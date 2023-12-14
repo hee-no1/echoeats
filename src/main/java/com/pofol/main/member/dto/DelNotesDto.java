@@ -24,4 +24,7 @@ public class DelNotesDto {
     private Date md_date;
     private String md_num;
 
+    private String mem_name; //회원 이름
+    private String mem_phone; //회원 전화번호
+
 }

@@ -11,12 +11,12 @@
 <div id="__next">
     <div class="css-129cqpp e12ad82f3">
         <h2 class="css-17mphey e12ad82f2">배송 요청사항</h2>
-<%--        <label class="css-1ugk09k e1dcessg3">--%>
-<%--            <input type="checkbox" class="css-agvwxo e1dcessg2" checked="">--%>
-<%--            <div class="css-79hxr7 e1dcessg1">--%>
+        <label class="css-1ugk09k e1dcessg3">
+            <input type="checkbox" id="sameBuyer" class="css-agvwxo e1dcessg2" checked="">
+            <div class="css-79hxr7 e1dcessg1">
 <%--                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#5f0080"></path><path d="M7 12.6667L10.3846 16L18 8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>--%>
-<%--            </div>--%>
-<%--            <span>주문자 정보와 동일</span></label>--%>
+            </div>
+            <span>주문자 정보와 동일</span></label>
     </div>
 
     <div class="css-lgy2fd e12ad82f1">
@@ -102,8 +102,12 @@
 </div>
 
 <script>
+    let name = '${delNotes.name}';
+    let number = '${delNotes.number}';
     let entryway = '${delNotes.column_sts}';
     let entryway_detail = '${delNotes.entryway_detail}';
+    let mem_name = '${member.mem_name}';
+    let mem_phone = '${member.mem_phone}';
 
 </script>
 

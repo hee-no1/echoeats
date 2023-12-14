@@ -5,9 +5,9 @@
 <mapper namespace="payment.repository.paymentMapper">
     <insert id="insert" parameterType="PaymentDto">
         INSERT INTO spring.payment
-        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, pay_way, rg_num, md_num)
+        (pay_id, ord_id, mem_id, code_name, tot_prod_name, tot_pay_price, reserves, pay_way, rg_num, md_num)
         VALUES
-        (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{pay_way},#{rg_num},#{md_num});
+        (#{pay_id},#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_pay_price},#{reserves},#{pay_way},#{rg_num},#{md_num});
     </insert>
 
     <select id="select" parameterType="long" resultType="PaymentDto">

@@ -1,4 +1,4 @@
-package com.pofol.main.orders1.order.admin;
+package com.pofol.admin.order;
 
 import java.util.List;
 
@@ -6,9 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pofol.main.orders1.order.domain.CodeTableDto;
-import com.pofol.main.orders1.order.domain.OrderDto;
-import com.pofol.main.orders1.order.domain.SearchOrderCondition;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.main.orders.order.domain.OrderDto;
 
 @Repository
 public class AdminOrderRepositoryImpl implements AdminOrderRepository {

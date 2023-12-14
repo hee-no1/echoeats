@@ -7,8 +7,8 @@ import com.pofol.main.member.dto.MemCouponDto;
 import java.util.List;
 
 public interface CouponRepository {
-    CouponDto select_coupon (int id);
-    MemCouponDto select_coupon_mapping(int id);
+    CouponDto select_coupon (Long id);
+    MemCouponDto select_coupon_mapping(Long id);
 
     List<CouponJoinDto> selectMembersWithCoupons(String id);
 }

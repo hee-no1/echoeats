@@ -12,13 +12,57 @@
                 <link rel="stylesheet" href="/resources/product/css/footer.css">
                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                 <script>
-                    $(function () {
+                    $(function(){
+                        $('.e4nu7ef3').click(function(e){
+                            location.href = "/mypage/inquiry/form";
+                        });
 
-                        /* $('.content').html(
-                            
-                        ); */
-
+                        $('.e1cfowvj5').click(function(e){
+                            let inquiry_id = $(this).data('inqid');
+                            let inqThis = this;
+                            $.ajax({
+                                type:'POST',       // 요청 메서드
+                                url: '/mypage/inquiry/listView',  // 요청 URI
+                                headers : { "content-type": "application/json"}, // 요청 헤더
+                                data : JSON.stringify({inquiry_id:inquiry_id}),
+                                dataType: 'json',
+                                success : function(result){
+                                    console.log("inquiry view OK");
+                                    let dto = result;
+                                    console.log(dto.inquiry_id);
+                                    show(inqThis, dto);
+                                },
+                                error   : function(){ alert("inquiry view error") } // 에러가 발생했을 때, 호출될 함수
+                            }); // $.ajax()
+                        });
                     });
+                    
+                    const show = (inqThis, inqDto) => {
+                        if( $(inqThis).find('.e1cfowvj0').length == 0 ) {
+                            let html ='';
+                            html +='<li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;">'
+                            html +='<div class="css-br5cai e1vd1n2i0"><div class="css-193iudv e94cdlt1">'
+                            html +='<span class="css-16ts9vc e94cdlt0">'+inqDto.type+'</span>'
+                            html +='<span class="css-a5dfz6 ecg7plp0"></span><span class="css-16ts9vc e94cdlt0">'+inqDto.det_type+'</span></div>'
+                            html +='<div class="css-zjik7 e82q4qc4"><span class="css-1ylw081 e1kayg9i0"></span>'
+                            html +='<div class="css-145c1ga e82q4qc3"><span type="QUESTION" class="css-190bjnp e82q4qc2">'+inqDto.content+'</span><br>'
+                            html +='<div class="css-1kl96ir ewad2cu1">'
+                            if(inqDto.imgList){
+                                for (elm of inqDto.imgList){
+                                    html +='<img src="'+elm+'" class="css-qe5ixm ewad2cu0">'
+                                }
+                            } 
+                            html +='</div></div></div>'
+                            html +='<div class="css-1oe9o3r eula2qn2">'
+                            if(!inqDto.rep_sts){
+                                html +='<button type="button" class="css-qv4hdm eula2qn1">수정</button><div class="css-ord49b eula2qn0"></div>'
+                                html +='<button type="button" class="css-qv4hdm eula2qn1">삭제</button></div></div></li>'                         
+                            }
+                            $(inqThis).find('.e1cfowvj3').after(html);
+                        } else  {
+                            $(inqThis).find('.e1cfowvj0').remove();
+                        }
+                    }
                 </script>
                 <style>
                     .css-luwwab {
@@ -120,6 +164,10 @@
                     }
                 </style>
                 <style>
+                    button[disabled], input[disabled] {
+                        cursor: default;
+                    }
+
                     .css-171zbec {
                         width: 820px;
                     }
@@ -372,11 +420,6 @@
                         padding-right: 32px;
                     }
 
-                    button[disabled],
-                    input[disabled] {
-                        cursor: default;
-                    }
-
                     .css-1636szt.Mui-disabled {
                         color: rgba(0, 0, 0, 0.26);
                     }
@@ -448,6 +491,8 @@
                     }
 
                     .css-rm6te4 textarea {
+                        font-size: 14px;
+                        font-weight: 400;
                         font-family: "Noto Sans", sans-serif;
                     }
 
@@ -533,6 +578,29 @@
                         width: 72px;
                     }
 
+                    .css-o4030c {
+                        overflow: hidden;
+                        display: flex;
+                        position: relative;
+                        border-radius: 6px;
+                        aspect-ratio: 1 / 1;
+                        height: 72px;
+                        width: 72px;
+                    }
+                    .css-idj2s4 {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .css-v96m37 {
+                        position: absolute;
+                        top: 0.375rem;
+                        right: 0.375rem;
+                        width: 1.125rem;
+                        height: 1.125rem;
+                        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBmaWxsPSIjMDAwIiBvcGFjaXR5PSIuNSIgY3g9IjkiIGN5PSI5IiByPSI5Ii8+CiAgICAgICAgPGcgc3Ryb2tlPSIjRkZGIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS13aWR0aD0iMS41Ij4KICAgICAgICAgICAgPHBhdGggZD0iTTEyLjI1OSAxMi4xMzUgNS43NjggNS42NDRNNS43NjIgMTIuMTMzbDYuNDk3LTYuNDk3Ii8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K") 0px 0px no-repeat;
+                    }
+
                     .css-j9ybaa {
                         width: 100%;
                         height: 100%;
@@ -548,6 +616,22 @@
                         background-size: cover;
                         background-position: center center;
                         background-repeat: no-repeat;
+                    }
+
+                    .css-114fr9p {
+                        width: 160px;
+                        height: 56px;
+                        padding: 0px 10px;
+                        text-align: center;
+                        letter-spacing: 0px;
+                        font-size: 16px;
+                        line-height: 20px;
+                        color: white;
+                        cursor: pointer;
+                        background-color: rgb(95, 0, 128);
+                        font-family: "Noto Sans", sans-serif;
+                        font-weight: 500;
+                        border-radius: 3px !important;
                     }
 
                     .css-175wokr span {
@@ -604,6 +688,13 @@
                     .css-2b29tl {
                         position: relative;
                         min-width: 1050px;
+                    }
+                    .placeholder {
+                        display: block;
+                    }   
+
+                    .placeholder.active {
+                        display: none;
                     }
                 </style>
             </head>
@@ -729,176 +820,229 @@
                                     </svg>
                                 </a>
                             </div>
+                            <style>
+                            .css-e23nfx {
+                                display: flex;
+                                width: 100%;
+                                padding: 20px 0px;
+                                border-bottom: 1px solid rgb(51, 51, 51);
+                                border-top: 2px solid rgb(51, 51, 51);
+                            }
+                            .css-1ym8aqm {
+                                -webkit-box-flex: 1;
+                                flex-grow: 1;
+                                text-align: center;
+                                line-height: 20px;
+                                font-weight: 400;
+                                color: rgb(51, 51, 51);
+                            }
+                            .css-16tcewl {
+                                flex-basis: 100px;
+                                text-align: center;
+                                line-height: 20px;
+                                font-weight: 400;
+                                color: rgb(51, 51, 51);
+                            }
+                            .css-l0r8ps {
+                                width: 100%;
+                                height: 200px;
+                                line-height: 200px;
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: rgb(51, 51, 51);
+                                text-align: center;
+                            }
+                            .css-15jhycr {
+                                position: relative;
+                                min-height: 44px;
+                                margin-top: 20px;
+                                text-align: center;
+                            }
+                            .css-1ibxj4m {
+                                display: block;
+                                padding: 0px 10px;
+                                text-align: center;
+                                overflow: hidden;
+                                width: 120px;
+                                height: 44px;
+                                border-radius: 3px;
+                                color: rgb(255, 255, 255);
+                                background-color: rgb(95, 0, 128);
+                                border: 0px none;
+                            }
+                            .css-15jhycr > button {
+                                position: absolute;
+                                bottom: 0px;
+                                right: 0px;
+                            }
+                            .css-nytqmg {
+                                display: inline-block;
+                                font-size: 16px;
+                                font-weight: 500;
+                            }
+                            .css-1ibxj4m span {
+                                font-size: 13px;
+                            }
+                            .css-1fttcpj {
+                                display: -webkit-box;
+                                display: -webkit-flex;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-flex-direction: column;
+                                -ms-flex-direction: column;
+                                flex-direction: column;
+                            }
+                            .css-e0dnmk {
+                                cursor: pointer;
+                            }
+                            .css-nfcc9b {
+                                display: flex;
+                                flex-direction: row;
+                            }
+                            .css-wqw6mu {
+                                color: rgb(76, 76, 76);
+                                width: 620px;
+                                padding: 20px;
+                                font-size: 14px;
+                                line-height: 22px;
+                                text-align: left;
+                                border-bottom: 1px solid rgb(244, 244, 244);
+                            }
+                            .css-4l2co {
+                                overflow: hidden;
+                                display: block;
+                                width: 580px;
+                                cursor: pointer;
+                            }
+                            .css-8e1vc1 {
+                                padding: 20px 0px;
+                                color: rgb(76, 76, 76);
+                                width: 100px;
+                                text-align: center;
+                                font-size: 14px;
+                                line-height: 22px;
+                                border-bottom: 1px solid rgb(244, 244, 244);
+                            }
+                            .css-14kcwq8 {
+                                color: rgb(153, 153, 153);
+                            }
+                            .css-d3v9zr {
+                                overflow: hidden;
+                            }
+                            .css-br5cai {
+                                padding: 20px 20px 30px;
+                                background-color: rgb(250, 250, 250);
+                            }
+                            .css-193iudv {
+                                display: flex;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                line-height: 20px;
+                                letter-spacing: -0.075em;
+                                margin-bottom: 20px;
+                            }
+                            .css-16ts9vc {
+                                font-size: 14px;
+                                font-family: "Noto Sans", serif;
+                                color: rgb(153, 153, 153);
+                            }
+                            .css-a5dfz6 {
+                                display: inline-block;
+                                width: 16px;
+                                height: 16px;
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0wIDBIMTZWMTZIMHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMzkgLTEzNTUpIHRyYW5zbGF0ZSgwIDY0KSB0cmFuc2xhdGUoMCAxMjcxKSB0cmFuc2xhdGUoMzM5IDIwKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBzdHJva2U9IiM5OTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTQgNUwxMCA1IDEwIDExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzM5IC0xMzU1KSB0cmFuc2xhdGUoMCA2NCkgdHJhbnNsYXRlKDAgMTI3MSkgdHJhbnNsYXRlKDMzOSAyMCkgcm90YXRlKDQ1IDcgOCkiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=");
+                                margin: 0px 5px;
+                            }
+                            .css-16ts9vc {
+                                font-size: 14px;
+                                font-family: "Noto Sans", serif;
+                                color: rgb(153, 153, 153);
+                            }
+                            .css-zjik7 {
+                                display: -webkit-box;
+                                display: -webkit-flex;
+                                display: -ms-flexbox;
+                                display: flex;
+                            }
+                            .css-1ylw081 {
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ0NSAtODc2KSB0cmFuc2xhdGUoNDIzIDI3NikgdHJhbnNsYXRlKDIgMzE2KSB0cmFuc2xhdGUoMjAgMjg0KSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIiBmaWxsPSIjQTg2NEQ4Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMS45NDYgNy41YzIuNDU2IDAgNC40NDYgMS45OSA0LjQ0NiA0LjQ0NiAwIC45MDctLjI3MSAxLjc1LS43MzcgMi40NTNsLjg0NS44NDMtMS4yNTggMS4yNTgtLjg0My0uODQ1Yy0uNzAzLjQ2Ni0xLjU0Ni43MzctMi40NTMuNzM3LTIuNDU1IDAtNC40NDYtMS45OS00LjQ0Ni00LjQ0NkM3LjUgOS40OTEgOS40OSA3LjUgMTEuOTQ2IDcuNXptMCAxLjc3OGMtMS40NzMgMC0yLjY2OCAxLjE5NS0yLjY2OCAyLjY2OHMxLjE5NSAyLjY2OCAyLjY2OCAyLjY2OGMuNDEyIDAgLjgwMi0uMDk0IDEuMTUtLjI2bC0uMzY5LS4zNyAxLjI1OC0xLjI1Ny4zNjkuMzY5Yy4xNjYtLjM0OC4yNi0uNzM4LjI2LTEuMTUgMC0xLjQ3My0xLjE5NS0yLjY2OC0yLjY2OC0yLjY2OHoiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=");
+                                background-position: center center;
+                                background-repeat: no-repeat;
+                                background-size: contain;
+                                width: 24px;
+                                height: 24px;
+                            }
+                            .css-145c1ga {
+                                width: 744px;
+                                margin-top: 3px;
+                                margin-left: 12px;
+                            }
+                            .css-190bjnp {
+                                font-size: 14px;
+                                line-height: normal;
+                                color: rgb(51, 51, 51);
+                            }
+                            .css-1kl96ir {
+                                max-width: 744px;
+                                margin-top: 20px;
+                            }
+                            .css-qe5ixm {
+                                min-width: 338px;
+                                max-width: 744px;
+                                height: 450px;
+                                margin: 10px 10px 0px 0px;
+                                vertical-align: middle;
+                                border-radius: 6px;
+                            }
+                            .css-1oe9o3r {
+                                width: 100%;
+                                display: flex;
+                                -webkit-box-pack: end;
+                                justify-content: flex-end;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                margin-top: 20px;
+                            }
+                            .css-qv4hdm {
+                                padding: 6px 10px;
+                                border: none;
+                                font-size: 13px;
+                                color: rgb(153, 153, 153);
+                                background-color: transparent;
+                            }
+                            .css-ord49b {
+                                width: 1px;
+                                height: 12px;
+                                background-color: rgb(238, 238, 238);
+                            }
+                            .css-qv4hdm {
+                                padding: 6px 10px;
+                                border: none;
+                                font-size: 13px;
+                                color: rgb(153, 153, 153);
+                                background-color: transparent;
+                            }
+                            </style>
                             <!-- Inquiry -->
                             <div class="css-171zbec eug5r8l0">
                                 <div class="css-j0lifa ed9qr673">
-                                    <div class="css-fhxb3m ed9qr672">
-                                        <h2 class="css-1268zpe ed9qr671">1:1 문의</h2>
-                                    </div>
-                                </div>
-                                <div class="css-185m8ch e1153ede0">
-                                    <form>
-                                        <div class="css-17bp14q e1vbjq4w3">
-                                            <div class="css-mm5tap e1vbjq4w2"><label data-testid="label-text">유형<span
-                                                        data-testid="label-required-text"
-                                                        class="css-hwfcu5 e1vbjq4w0">*</span></label></div>
-                                            <div class="css-12l4j2c e1vbjq4w1">
-                                                <div class="css-zjik7 epfrwk70">
-                                                    <div class="css-1a8mkrv e1u0xj870">
-                                                        <div>
-                                                            <div class="MuiFormControl-root css-tzsjye">
-                                                                <div variant="outlined"
-                                                                    class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl jss1 css-eg1co4">
-                                                                    <div tabindex="0" role="button"
-                                                                        aria-expanded="false" aria-haspopup="listbox"
-                                                                        aria-label="Without label"
-                                                                        class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-qiwgdb">
-                                                                        문의유형을 선택해주세요</div><input aria-hidden="true"
-                                                                        tabindex="-1"
-                                                                        class="MuiSelect-nativeInput css-1k3x8v3"
-                                                                        value=""><svg
-                                                                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1636szt"
-                                                                        focusable="false" aria-hidden="true"
-                                                                        viewBox="0 0 24 24"
-                                                                        data-testid="ArrowDropDownIcon">
-                                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                                    </svg>
-                                                                    <fieldset aria-hidden="true"
-                                                                        class="MuiOutlinedInput-notchedOutline css-igs3ac">
-                                                                        <legend class="css-nnbavb"><span
-                                                                                class="notranslate">&ZeroWidthSpace;</span>
-                                                                        </legend>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="css-1a8mkrv e1u0xj870">
-                                                        <div>
-                                                            <div class="MuiFormControl-root css-tzsjye">
-                                                                <div variant="outlined"
-                                                                    class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-formControl jss1 css-eg1co4">
-                                                                    <div role="button" aria-disabled="true"
-                                                                        aria-expanded="false" aria-haspopup="listbox"
-                                                                        aria-label="Without label"
-                                                                        class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiOutlinedInput-input MuiInputBase-input Mui-disabled css-qiwgdb">
-                                                                        상세유형을 선택해주세요</div><input aria-hidden="true"
-                                                                        tabindex="-1" disabled=""
-                                                                        class="MuiSelect-nativeInput css-1k3x8v3"
-                                                                        value=""><svg
-                                                                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1636szt"
-                                                                        focusable="false" aria-hidden="true"
-                                                                        viewBox="0 0 24 24"
-                                                                        data-testid="ArrowDropDownIcon">
-                                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                                    </svg>
-                                                                    <fieldset aria-hidden="true"
-                                                                        class="MuiOutlinedInput-notchedOutline css-igs3ac">
-                                                                        <legend class="css-nnbavb"><span
-                                                                                class="notranslate">&ZeroWidthSpace;</span>
-                                                                        </legend>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="css-17bp14q e1vbjq4w3">
-                                            <div class="css-mm5tap e1vbjq4w2"><label for="inquiry-subject"
-                                                    data-testid="label-text">제목<span data-testid="label-required-text"
-                                                        class="css-hwfcu5 e1vbjq4w0">*</span></label></div>
-                                            <div class="css-12l4j2c e1vbjq4w1">
-                                                <div class="css-1waqr6j e1uzxhvi6">
-                                                    <div height="44" class="css-t7kbxx e1uzxhvi3"><input
-                                                            data-testid="input-box" id="inquiry-subject" name="subject"
-                                                            placeholder="제목을 입력해주세요" type="text" height="44"
-                                                            class="css-1quw3ub e1uzxhvi2" value=""></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="css-rm6te4 e1fgvk594">
-                                            <div class="css-17bp14q e1vbjq4w3">
-                                                <div class="css-mm5tap e1vbjq4w2"><label for="inquiry-contents"
-                                                        data-testid="label-text">내용<span
-                                                            data-testid="label-required-text"
-                                                            class="css-hwfcu5 e1vbjq4w0">*</span></label></div>
-                                                <div class="css-12l4j2c e1vbjq4w1">
-                                                    <div class="css-0 e1tjt2bn7">
-                                                        <div class="css-1gua357 e1tjt2bn5"><textarea
-                                                                id="inquiry-contents" inputmode="text"
-                                                                aria-label="textarea-message" name="contents"
-                                                                class="css-5etceh e1tjt2bn1"></textarea>
-                                                            <div class="placeholder css-1ofzfyp e1tjt2bn6">
-                                                                <div class="css-168e7y9 e1fgvk593"><strong
-                                                                        class="css-c2iqrm e1fgvk592">1:1 문의 작성 전
-                                                                        확인해주세요!</strong>
-                                                                    <p class="css-nlv18q e1fgvk590">전화번호, 이메일, 주소, 계좌번호
-                                                                        등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다.</p>
-                                                                    <strong class="css-1sz9zst e1fgvk592">주문취소</strong>
-                                                                    <p class="css-1vtbu89 e1fgvk591">[주문완료] 상태일 경우에만 주문
-                                                                        취소 가능합니다. (배송준비중 이후 취소불가)</p>
-                                                                    <p class="css-1vtbu89 e1fgvk591">[마이컬리 &gt; 주문내역
-                                                                        상세페이지]에서 직접 취소하실 수 있습니다.</p>
-                                                                    <p class="css-1vtbu89 e1fgvk591">주문상품의 부분취소는 불가능합니다.
-                                                                        전체 주문 취소 후 다시 구매해주세요.</p><strong
-                                                                        class="css-1sz9zst e1fgvk592">배송</strong>
-                                                                    <p class="css-1vtbu89 e1fgvk591">배송일 및 배송시간 지정은
-                                                                        불가능합니다. (예약배송 포함)</p>
-                                                                    <p class="css-1vtbu89 e1fgvk591">주문 이후 주소지, 결제수단 변경
-                                                                        등 정보수정 불가능합니다.</p><strong
-                                                                        class="css-1sz9zst e1fgvk592">교환 / 반품</strong>
-                                                                    <p class="css-1vtbu89 e1fgvk591">[신선/냉장/냉동] 식품은 재판매가
-                                                                        불가한 상품으로 주문 착오로 인한 교환/환불은 어렵습니다.</p>
-                                                                    <p class="css-1vtbu89 e1fgvk591">단순 변심으로 인한 반품은 고객에게
-                                                                        반품비 청구됩니다.</p>
-                                                                </div>
-                                                            </div><span
-                                                                class="content-length-counter css-dbwxb9 e1tjt2bn0"><span><span
-                                                                        class="css-14kcwq8 e1tjt2bn2">0자 </span><span
-                                                                        class="css-14kcwq8 e1tjt2bn3">/
-                                                                        5000자</span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="css-17bp14q e1vbjq4w3">
-                                            <div class="css-mm5tap e1vbjq4w2"><label data-testid="label-text"></label>
-                                            </div>
-                                            <div class="css-12l4j2c e1vbjq4w1">
-                                                <div class="css-mlazth edd8l6o3">
-                                                    <div class="css-g8ewo8 e9bfpi41">
-                                                        <div class="css-175wokr e9bfpi40">
-                                                            <div class="css-0"><label for="photo-picker"
-                                                                    class="css-0 e1l8vpkx2"><button type="button"
-                                                                        class="css-j9ybaa e1l8vpkx0"><span
-                                                                            class="css-113ip0v e1tcjz8t0"></span></button><input
-                                                                        multiple="" type="file"
-                                                                        accept="image/jpg, image/jpeg, image/png, image/bmp"
-                                                                        class="css-eivff4 e1l8vpkx1"></label></div>
-                                                        </div>
-                                                        <div class="css-sqqcql edd8l6o2">
-                                                            <div class="css-7n55a5 edd8l6o1"><span
-                                                                    class="css-1xbds45 edd8l6o0"></span>30MB 이하의 이미지만
-                                                                업로드 가능합니다.</div>
-                                                            <div class="css-7n55a5 edd8l6o1"><span
-                                                                    class="css-1xbds45 edd8l6o0"></span>상품과 무관한 내용이거나 음란
-                                                                및 불법적인 내용은 통보없이 삭제 될 수 있습니다.</div>
-                                                            <div class="css-7n55a5 edd8l6o1"><span
-                                                                    class="css-1xbds45 edd8l6o0"></span>사진은 최대 8장까지
-                                                                등록가능합니다.</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="css-1spu0j4 ebvrvv11"><button type="submit" disabled=""
-                                                class="css-13kn1it ebvrvv10">등록</button></div>
-                                    </form>
-                                </div>
-                            </div>
+                                    <div class="css-fhxb3m ed9qr672"><h2 class="css-1268zpe ed9qr671">1:1 문의</h2></div></div>
+                                    <div class="css-e23nfx e16adls21"><div class="css-1ym8aqm e16adls20">제목</div><div width="100" class="css-16tcewl e16adls20">작성일</div>
+                                    <div width="100" class="css-16tcewl e16adls20">답변상태</div></div>
+                                    <c:forEach var="inqDto" items="${inqList}">
+                                        <ul class="css-1fttcpj e1cfowvj5" data-inqid="${inqDto.inquiry_id}"><li class="css-e0dnmk e1cfowvj3">
+                                            <div class="css-nfcc9b e1cfowvj4"><div class="css-wqw6mu e1cfowvj2">
+                                                <div class="css-14e35e e1vd1n2i2">${inqDto.title}</div></div>
+                                                <div class="css-8e1vc1 e1cfowvj2"><span class="css-14kcwq8 e1vd1n2i1">
+                                                    <fmt:formatDate value="${inqDto.rg_date }" pattern="yyyy-MM-dd" type="date"/></span></div>
+                                                <div class="css-8e1vc1 e1cfowvj2"><span color="#999" class="css-14kcwq8 e1hz5ei00">
+                                                    <c:if test="${inqDto.rep_sts == false}">답변대기</c:if>
+                                                    <c:if test="${inqDto.rep_sts == true}">답변완료</c:if></span></div></div></li></ul>
+                                    </c:forEach>
+                                    
+                                    <!-- <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;"><div class="css-br5cai e1vd1n2i0"><div class="css-193iudv e94cdlt1"><span class="css-16ts9vc e94cdlt0">서비스/오류/기타</span><span class="css-a5dfz6 ecg7plp0"></span><span class="css-16ts9vc e94cdlt0">기타(직접 입력)</span></div><div class="css-zjik7 e82q4qc4"><span class="css-1ylw081 e1kayg9i0"></span><div class="css-145c1ga e82q4qc3"><span type="QUESTION" class="css-190bjnp e82q4qc2">test</span><br><div class="css-1kl96ir ewad2cu1"><img src="https://lacms-board.kurly.com/board/inquiry/20231213/580d59dd-e89a-40b7-9be4-d3ffeeaf67e4.png" alt="" class="css-qe5ixm ewad2cu0"><img src="https://lacms-board.kurly.com/board/inquiry/20231213/f443389c-d2ec-444e-a9a7-ee6648e4e1ff.png" alt="" class="css-qe5ixm ewad2cu0"></div></div></div><div class="css-1oe9o3r eula2qn2"><button type="button" class="css-qv4hdm eula2qn1">수정</button><div class="css-ord49b eula2qn0"></div><button type="button" class="css-qv4hdm eula2qn1">삭제</button></div></div></li> -->
+                                    <!-- <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div> -->
+                                    <div class="css-15jhycr e3tf63e0"><button class="css-1ibxj4m e4nu7ef3" type="button" width="120" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">문의하기</span></button></div></div>
                         </div>
                     </div>
                     <%@include file="../include/footer.jspf" %>

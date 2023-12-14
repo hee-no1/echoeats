@@ -587,7 +587,7 @@ h3 {
     line-height: 20px;
     text-align: left;
     background: rgb(250, 250, 250);
-    color: rgb(204, 204, 204);
+    color: rgb(51, 51, 51);
 }
 .css-f2a03j {
     display: inline-block;
@@ -609,13 +609,7 @@ h3 {
 .css-1ie56gn {
     display: flex;
     flex-direction: row;
-    padding: 15px 20px;
-}
-.css-4ntluf {
-    display: inline-flex;
-    width: 16px;
-    margin-right: 10px;
-    padding-top: 5px;
+    padding: 15px 50px;
 }
 .css-esc77i {
     display: inline-flex;
@@ -637,7 +631,7 @@ h3 {
 .css-4ntluf {
     display: inline-flex;
     width: 16px;
-    margin-right: 10px;
+    margin-right: 40px;
     padding-top: 5px;
 }
 .css-esc77i {
@@ -655,18 +649,27 @@ h3 {
     width: 388px;
     font-size: 12px;
     line-height: 17px;
-    color: rgb(204, 204, 204);
+    color: rgb(150 144 144);
+}
+.css-kmlyvgdiv {
+    overflow: hidden;
+    width: 388px;
+    color: rgb(150 144 144);
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .css-1bfy7g3 {
     margin-bottom: 6px;
     font-size: 14px;
     line-height: 20px;
-    display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: rgb(204, 204, 204);
+    color: rgb(51, 51, 51);
     font-weight: 500;
+}
+.css-1bfy7g3div {
+    color: rgb(51, 51, 51);
 }
 
 

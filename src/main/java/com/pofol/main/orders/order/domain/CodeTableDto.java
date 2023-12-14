@@ -1,4 +1,4 @@
-package com.pofol.main.orders1.order.domain;
+package com.pofol.main.orders.order.domain;
 
 import java.util.Date;
 
