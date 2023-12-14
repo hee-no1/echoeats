@@ -54,4 +54,10 @@
         SELECT COUNT(*) FROM product
     </select>
 
+    <!-- 이미지 등록 -->
+    <insert id="insertImg" parameterType="ProductImgDto">
+        INSERT INTO product_image (prod_img_id, prod_id, ori_file_name, ser_file_name, upld_path, rg_num)
+        VALUES (#{prod_img_id}, #{prod_id}, #{ori_file_name}, #{ser_file_name}, #{upld_path}, #{rg_num})
+    </insert>
+
 </mapper>
