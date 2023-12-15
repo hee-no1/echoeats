@@ -1,5 +1,6 @@
 package com.pofol.main.product.repository;
 
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import org.apache.ibatis.session.SqlSession;
@@ -32,5 +33,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void insertImage(ProductImageDto productImageDto) throws Exception {
         session.insert(namespace + "insertImage", productImageDto);
+    }
+
+    @Override
+    public void insertOptionProduct(OptionProductDto optionProductDto) throws Exception {
+        session.insert(namespace + "insertOptionProduct", optionProductDto);
     }
 }
