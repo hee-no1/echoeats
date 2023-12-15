@@ -17,28 +17,29 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ProductListRepositoryImpl implements ProductListRepository {
 
-    private final String namespace = "com.pofol.main.product.repository.ProductListRepository.";
+    private final String productListNamespace = "ecoeats.productListMapper.";
+    private final String productNamespace = "ecoeats.productMapper.";
 
     private final SqlSession sqlSession;
 
     @Override // 상품 리스트 조회
     public ProductDto select(Long prod_id) throws Exception {
-        return sqlSession.selectOne(namespace + "select", prod_id);
+        return sqlSession.selectOne(productNamespace + "selectProduct", prod_id);
     }
 
-    @Override // 옵션 상푸 조회
+    @Override // 옵션 상품 조회
     public List<OptionProductDto> selectOption(Long prod_id) throws Exception {
-        return sqlSession.selectList(namespace + "selectOption", prod_id);
+        return sqlSession.selectList(productNamespace + "selectAllOptionProduct", prod_id);
     }
 
     @Override // 전체 진열 상품 리스트 조회 (필요하지 않을 가능성 높음)
     public List<ProductDto> selectAll() throws Exception {
-        return sqlSession.selectList(namespace + "selectAll");
+        return sqlSession.selectList(productListNamespace + "selectAll");
     }
 
     @Override // 이벤트 상품 리스트 조회
     public List<ProductDto> selectEvent(Long evt_gp_id) throws Exception {
-        return sqlSession.selectList(namespace + "selectEvent", evt_gp_id);
+        return sqlSession.selectList(productListNamespace + "selectEvent", evt_gp_id);
     }
 
     @Override // 카테고리 상품 리스트 조회
@@ -48,22 +49,22 @@ public class ProductListRepositoryImpl implements ProductListRepository {
         map.put("skip", sc.getSkip());
         map.put("pageSize", sc.getPageSize());
         map.put("type", type);
-        return sqlSession.selectList(namespace + "selectCategory", map);
+        return sqlSession.selectList(productListNamespace + "selectCategory", map);
     }
 
     @Override // 카테고리 상품 카운트
     public int selectCategoryCount(String cat_code) throws Exception {
-        return sqlSession.selectOne(namespace + "selectCategoryCount", cat_code);
+        return sqlSession.selectOne(productListNamespace + "selectCategoryCount", cat_code);
     }
 
     @Override // 할인율 상품 리스트 조회
     public List<ProductDto> selectRateProduct(Double rate) throws Exception {
-        return sqlSession.selectList(namespace + " selectRateProduct", rate);
+        return sqlSession.selectList(productListNamespace + " selectRateProduct", rate);
     }
 
     @Override // 가격 순 상품 리스트 조회 (높은 가격 or 낮은 가격)
     public List<ProductDto> selectProductPrice(Integer prod_price) throws Exception {
-        return sqlSession.selectList(namespace + "selectProductPrice", prod_price);
+        return sqlSession.selectList(productListNamespace + "selectProductPrice", prod_price);
     }
 
     @Override // 상품제목으로 검색한 상품 리스트 조회
@@ -73,12 +74,12 @@ public class ProductListRepositoryImpl implements ProductListRepository {
         map.put("pageSize", sc.getPageSize());
         map.put("keyword", sc.getKeyword());
         map.put("type", type);
-        return sqlSession.selectList(namespace + "searchSelectProduct", map);
+        return sqlSession.selectList(productListNamespace + "searchSelectProduct", map);
     }
 
     @Override // 상품 검색 리스트 카운트
     public int searchResultCount(SearchProductCondition sc) throws Exception {
-        return sqlSession.selectOne(namespace + "searchResultCount", sc);
+        return sqlSession.selectOne(productListNamespace + "searchResultCount", sc);
     }
 
     @Override // 전체 상품 리스트 카운트
@@ -88,6 +89,6 @@ public class ProductListRepositoryImpl implements ProductListRepository {
 
     @Override // 이벤트 그룹 이름과 설명
     public EventGroupDto eventEx(Long evt_gp_id) throws Exception {
-        return sqlSession.selectOne(namespace + "eventEx", evt_gp_id);
+        return sqlSession.selectOne(productListNamespace + "eventEx", evt_gp_id);
     }
 }

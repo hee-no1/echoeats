@@ -1,8 +1,6 @@
 package com.pofol.main.board.domain;
 
-import com.pofol.main.paging.PageDto;
-
-public class FaqDto extends PageDto {
+public class FaqDto {
     private int faq_id;
     private String faq_type;
     private String faq_title;

@@ -6,7 +6,6 @@ import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
-import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
@@ -104,7 +103,7 @@ public class ProductListController {
         } catch (ExpiredProductException expiredProductException) {
             HandlerProductException handlerProductException = new HandlerProductException();
             handlerProductException.ExpiredProductExceptionHandler(expiredProductException);
-            return "redirect:/";
+            return "redirect:/main";
         }
         catch (Exception exception) {
             exception.printStackTrace();
@@ -197,19 +196,5 @@ public class ProductListController {
         return "/product/productList";
     }
 
-    // 상품 수량에 따라 상품 가격 계산
-    @ResponseBody
-    @PostMapping("/ProductCalculation")
-    public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
 
-        for (BasketDto basketDto : basketDtoList) {
-            if (basketDtoList.size() == 1) {
-                basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
-            } else {
-                basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
-            }
-        }
-
-        return basketDtoList;
-    }
 }

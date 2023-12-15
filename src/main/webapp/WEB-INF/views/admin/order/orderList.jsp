@@ -18,8 +18,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
         <script>
             $(function(){
-                
-
                 $('.start_date').val(fullDate(0));
                 $('.end_date').val(fullDate(0));
                 $('select[name=rows]').val('${ph.sc.pageSize}');

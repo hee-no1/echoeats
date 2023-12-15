@@ -7,28 +7,34 @@ window.addEventListener('scroll', function() {
     }
 });
 
-
 let checkout = {
     selectedItems: selectedItems,
     tot_prod_name: tot_prod_name,
     tot_prod_price: tot_prod_price,
     origin_prod_price: origin_prod_price,
     dlvy_fee: dlvy_fee,
-    pay_way: pay_way,
+    pay_way: pay_way
 }
 console.log(checkout);
+
+
+//쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
+let coupon_id;
 
 //쿠폰, 적립금 ajax로 보내기
 let ajaxData = function(){
 
-    let tot_prod_price = document.getElementById('tot_prod_price').innerText;
-    let point_used = document.getElementById('inputPointUsed').value;
-    let dlvy_fee = document.getElementById('dlvy_fee').innerText;
+    let tot_prod_price_ajax = document.getElementById('tot_prod_price').innerText;
+    let coupon_id_ajax = coupon_id;
+    let point_used_ajax = document.getElementById('inputPointUsed').value;
+    let dlvy_fee_ajax = document.getElementById('dlvy_fee').innerText;
+
 
     let paymentDiscount = {
-        tot_prod_price: tot_prod_price,
-        point_used: point_used,
-        dlvy_fee: dlvy_fee
+        tot_prod_price: tot_prod_price_ajax,
+        coupon_id: coupon_id_ajax,
+        point_used: point_used_ajax,
+        dlvy_fee: dlvy_fee_ajax
     }
 
     let paymentData = {}
@@ -42,14 +48,24 @@ let ajaxData = function(){
             data: JSON.stringify(paymentDiscount),
             success: function(result){
                 paymentData = result;
+                //쿠폰
+                if(paymentData.coupon_disc === null){
+                    $("#signCoupon").html("");
+                    $("#outputCouponUsed").html(0);
+                }else {
+                    $("#signCoupon").html("-");
+                    $("#outputCouponUsed").html(paymentData.coupon_disc);
+                }
+
+                //적립금
                 if(paymentData.point_used === null) {
-                    $("#sign").html("");
+                    $("#signPoint").html("");
                     $("#outputPointUsed").html(0);
                 }else{
-                    $("#sign").html("-");
+                    $("#signPoint").html("-");
                     $("#outputPointUsed").html(paymentData.point_used);
                 }
-                //나중에 여기에 쿠폰도 추가해야한다.
+                //총 실 결제 금액
                 if(paymentData.tot_pay_price === null){
                     $("#tot_pay_price").html(0);
                 }else{
@@ -75,6 +91,27 @@ $("#couponBtn").click(function(){
     }
 });
 
+//쿠폰 버튼 클릭 시
+let couponListBtn = document.querySelectorAll(".couponListBtn");
+for (let i=0; i < couponListBtn.length ; i++){
+    couponListBtn[i].addEventListener('click', function(){
+
+        console.log("couponDto",couponDtoList[i]);
+        let addCouponDiv =
+            '<div class="css-kmlyvgdiv addCouponDiv">\n' +
+            '<strong class="css-1bfy7g3div">' + couponDtoList[i].cp_name + '</strong>\n' +
+            '<span class="css-bs5mk4">' + couponDtoList[i].cp_del_date +'</span>\n' +
+            '</div>'
+
+        coupon_id = couponDtoList[i].cp_id; //ajax, 결제버튼 클릭시 결제할인금액table
+
+        $('#couponList').hide();
+        $('.addCouponDiv').remove();
+        $('.e1brt3tk0').append(addCouponDiv);
+
+        ajaxData();
+    })
+}
 
 
 //적립금 입력
@@ -93,7 +130,6 @@ function updateValue(input){
     else{
         let result = inputValue.replace(/[^-0-9]/g,'');
         input.value = result;
-
     }
 
     ajaxData();
@@ -106,7 +142,68 @@ $("#allUseBtn").click(function(){
 
     ajaxData();
 });
+
+
 $(document).ready(function() {
+
+    let delNotesTag =
+        "<div id=\"NotFirst\" class=\"css-82a6rk e150alo80\"><span id=\"place\" class=\"css-11y0tcn efthce41\"></span><span class=\"css-bhczxb efthce40\"></span>\n" +
+        "<span id=\"entryway\" class=\"css-11y0tcn efthce41\"></span><span id=\"entrywayDetail\"></span>\n" +
+        "<div id=\"personData\" class=\"css-rqc9f e14u1xpe0\"></div>\n" +
+        "<div class=\"css-iqoq9n e1pxan880\"><button class=\"css-117jo2j e4nu7ef3 delNotesBtn\" type=\"button\" width=\"60\" height=\"30\" radius=\"3\"><span class=\"css-nytqmg e4nu7ef1\">수정</span></button></div></div></div>";
+
+
+    //배송 요청 사항
+    let popup;
+
+    $(document).on("click", ".delNotesBtn", function(){
+        popup = window.open("/order/checkout/receiverDetails", "delNotes", "width=600, height=800, left=100, top=50");
+
+        $(popup).on('beforeunload', function(){
+            alert("팝업창 닫힘");
+
+            $.ajax({
+                type: 'GET',
+                url: '/order/checkout/getDelNotes',
+                dataType: 'json',
+                success: function(delNotes){
+                    alert("success");
+                    let personData = document.getElementById("personData");
+                    if(personData === null){ //첫 주문
+                        $('#firstDelNotesDiv').remove();
+                        $("#delNotes").append(delNotesTag)
+                    }
+                    getDelNotesSuccess(delNotes)
+                },
+                error: function() {
+                    alert("error")
+                }
+            });
+        });
+    });
+
+    let getDelNotesSuccess = function (delNotes){
+        if(delNotes.entryway === 'PASSWORD'){
+            delNotes.entryway = '공동현관 비밀번호';
+        } else if(delNotes.entryway === 'FREE'){
+            delNotes.entryway = '자유 출입 가능';
+        } else if(delNotes.entryway === 'CALL_SECURITY_OFFICE'){
+            delNotes.entryway = '경비실 호출';
+        } else{
+            delNotes.entryway = '기타';
+        }
+
+
+        document.getElementById("place").innerText = delNotes.place;
+        document.getElementById("entryway").innerText = delNotes.entryway;
+
+        if(delNotes.entryway_detail === null || delNotes.entryway_detail !== ''){
+            document.getElementById("entrywayDetail").innerText = '(' + delNotes.entryway_detail + ')';
+        }else{
+            document.getElementById("entrywayDetail").innerText = '';
+        }
+        document.getElementById("personData").innerText = delNotes.name + ',' + delNotes.number;
+    }
 
 
     let orderData = {
@@ -179,8 +276,6 @@ $(document).ready(function() {
 
 
     //주문서 상품 목록
-    $('.totItems').show(); //페이지를 로드할 때 표시할 요소
-    $('.items').hide(); //페이지를 로드할 때 숨길 요소
     $('#prodDetailBtn').click(function(){
         let arrowBtn = document.getElementById("arrowBtn");
         let rotate = arrowBtn.getAttribute("transform");
@@ -195,12 +290,21 @@ $(document).ready(function() {
         }
     });
 
+
+
     //결제 버튼 누르면
     $('#paymentBtn').click(function(){
+
+        let personData = document.getElementById("personData");
+        if(personData === null){ //첫 주문
+            alert("배송 요청사항을 입력해주세요")
+            return;
+        }
 
         checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
         checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText*1;
+        checkout.coupon_id = coupon_id;
         checkout.point_used = document.getElementById("outputPointUsed").innerText*1;
         console.log("1차 검증 바로전 checkout = " + checkout);
 

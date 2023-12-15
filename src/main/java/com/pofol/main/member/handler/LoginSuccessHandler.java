@@ -1,5 +1,6 @@
 package com.pofol.main.member.handler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -25,8 +26,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         System.out.println("---------------LoginSuccessHandler---------------");
 
+
         //가로챈 주소를 보유
         //사용자가 직접url로 /member/admin을 입력했을 때 필요
+
         RequestCache requestCache = new HttpSessionRequestCache();
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         System.out.println(savedRequest);

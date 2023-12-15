@@ -5,9 +5,8 @@ import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-    import org.springframework.ui.Model;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,8 +22,15 @@ public class ProductAdminController {
 
     @GetMapping("/product/list")
     public String getAdminProductList(SearchProductAdminCondition searchProductAdminCondition,
-                                      Model model, ProductFilterDto productFilterDto) {
-        
+                                      Model model, ProductFilterDto productFilterDto,
+                                      String Stock,
+                                      HttpServletRequest request) {
+
+        String startDate = request.getParameter("start_date");
+        String endDate = request.getParameter("end_date");
+        System.out.println("startDate = " + startDate);
+        System.out.println("endDate = " + endDate);
+
         try {
             // 카테고리 정렬
             ObjectMapper objectMapper = new ObjectMapper();
@@ -33,19 +39,19 @@ public class ProductAdminController {
             model.addAttribute("categoryList", categoryList);
 
             // 페이징
-            Integer totalCount = productAdminService.getProductAdminSearchCount(searchProductAdminCondition, productFilterDto);
+            Integer totalCount = productAdminService.getProductAdminSearchCount(searchProductAdminCondition, productFilterDto, Stock);
             PageHandler pageHandler = new PageHandler(totalCount, searchProductAdminCondition);
             model.addAttribute("ph", pageHandler);
             model.addAttribute("totalCount", totalCount);
 
             // 상품 관리자 페이지에서 조건에 따라 상품조회
-            List<ProductDto> productAdminList = productAdminService.getProductAdminSearchList(searchProductAdminCondition, productFilterDto);
+            List<ProductDto> productAdminList = productAdminService.getProductAdminSearchList(searchProductAdminCondition, productFilterDto, Stock);
             model.addAttribute("product", productAdminList);
             model.addAttribute("category", list);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/";
+            return "redirect:/"; // 일단 index로 보냄 (나중에 변경할 것)
         }
 
         return "admin/product/productAdminList";
@@ -57,9 +63,9 @@ public class ProductAdminController {
                                      String saleStatus,
                                      String displayStatus) {
 
-        // 판매가 변경 + 판매기간 변경
+        // 판매가 변경 + 판매기간 변경 (추가해야함)
 
-        System.out.println("이거 실행 됨");
+        System.out.println("product/modify 실행 됨");
         
         try {
             ProductDto product = productAdminService.getProduct(selectProductId);
@@ -73,14 +79,15 @@ public class ProductAdminController {
 
             productAdminService.updateProductAdmin(product);
 
+            if (product.getIs_opt().equals("Y")) {
+
+            }
+
             return "redirect:/admin/product/list"; // (변경해야함)
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/admin/product/list";
         }
-
-
-
     }
     
     // 상품 그룹 관리 + main 페이지 그룹별 진열 관리
