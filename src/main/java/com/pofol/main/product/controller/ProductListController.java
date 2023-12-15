@@ -14,6 +14,7 @@ import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -85,13 +86,13 @@ public class ProductListController {
             String memberID = authentication.getName();
 
             // 로그인 상태일 때 (적립금 계산) + (회원 아이디 가져오기)
-            if (!memberID.equals("anonymousUser")) {
+            if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
 
                 Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
                 model.addAttribute("saveMoney", saveMoney);
-                
+
                 model.addAttribute("memberID", memberID);
             }
 
