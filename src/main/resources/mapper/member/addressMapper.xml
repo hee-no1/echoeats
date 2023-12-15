@@ -22,6 +22,12 @@
         SELECT * FROM address WHERE addr_id = #{addr_id}
     </select>
 
+<!--    주문에서 필요-->
+    <select id="selectDefaultAddress" parameterType="String" resultType="AddressDto">
+        SELECT * FROM address
+        WHERE mem_id = #{mem_id} AND def_addr = 'Y'
+    </select>
+
     <update id="update_address">
         UPDATE address
         SET dtl_addr = #{dtl_addr}, name = #{name}, phone = #{phone}, def_addr = #{def_addr}

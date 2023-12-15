@@ -30,6 +30,11 @@ public class AddressRepositoryImpl implements AddressRepository{
     }
 
     @Override
+    public AddressDto selectDefaultAddress(String mem_id) throws Exception {
+        return session.selectOne(namespace + "selectDefaultAddress", mem_id);
+    }
+
+    @Override
     public AddressDto selectAddress(String addr_id) throws Exception {
         return session.selectOne(namespace + "select_address",addr_id);
     }

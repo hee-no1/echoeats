@@ -24,7 +24,7 @@ class ProductServiceImplTest {
     @Test
     void productEnrollTest() throws Exception {
         // given
-        ProductDto product = new ProductDto(1L, "테스트", "911004", "테스트", 1000, 30, "Y", 1, "Y", "Y", "테스트테스트", "테스트테스트테스트테스트테스트테스트", "Y", "테스트원산지", "테스트배송", "테스트포장", "테스트 판매단위", "테스트무게", "테스트기간", "테스트", null, "");
+        ProductDto product = new ProductDto(1L, "테스트", "911004", "테스트", 1000, 30, "Y", 1, "Y", "Y", "테스트테스트", "테스트테스트테스트테스트테스트테스트", "Y", "테스트원산지", "테스트배송", "테스트포장", "테스트 판매단위", "테스트무게", "테스트기간", "테스트", null, "" , "");
 
         // when
         productService.productEnroll(product);

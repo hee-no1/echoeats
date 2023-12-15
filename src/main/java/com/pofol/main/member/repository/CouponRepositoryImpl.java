@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CouponRepositoryImpl implements CouponRepository{
@@ -29,4 +31,18 @@ public class CouponRepositoryImpl implements CouponRepository{
     public List<CouponJoinDto> selectMembersWithCoupons(String id) {
         return  session.selectList(namespace+"selectMembersWithCoupons", id);
     }
+
+    @Override
+    public MemCouponDto selectUnusedCoupon(Long cp_id, String mem_id) throws Exception{
+        Map<String,Object> map = new HashMap<>();
+        map.put("cp_id",cp_id);
+        map.put("mem_id",mem_id);
+        return session.selectOne(namespace+"selectUnusedCoupon",map);
+    }
+
+    @Override
+    public int updateMemberCouponStatus(MemCouponDto memCouponDto) {
+        return session.update(namespace + "updateMemberCouponStatus", memCouponDto);
+    }
+
 }

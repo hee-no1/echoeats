@@ -36,7 +36,6 @@ public class AwsS3ImgUploaderService {
     public String uploadImageToS3(MultipartFile img, String folderName)
             throws Exception { //이미지를 S3에 업로드하고 이미지의 url을 반환
         String originName = img.getOriginalFilename(); //원본 이미지 이름
-        System.out.println("uploadImageToS3.originName = "+originName);
         String ext = originName.substring(originName.lastIndexOf(".")); //확장자
         String changedName = folderName + "/" + generateFileName(img.getOriginalFilename());
         //새로 생성된 이미지 이름
