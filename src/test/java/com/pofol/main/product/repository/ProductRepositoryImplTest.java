@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.text.SimpleDateFormat;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.util.DateUtil.now;
 
@@ -18,6 +20,8 @@ class ProductRepositoryImplTest {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    ProductListRepository productListRepository;
 
     @DisplayName("상품 등록 테스트")
     @Test
@@ -36,5 +40,17 @@ class ProductRepositoryImplTest {
     @Test
     void select() throws Exception {
 //        new ProductDto(100007, 1, );
+    }
+
+    @DisplayName("Date 타입을 String 으로 가져와보기")
+    @Test
+    void selectStringDate() {
+//        try {
+//            ProductDto product = productListRepository.select(100100L);
+//            String prodRgDate = product.getProd_rg_date();
+//            System.out.println("prodRgDate = " + prodRgDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

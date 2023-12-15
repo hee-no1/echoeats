@@ -17,6 +17,7 @@ public class PaymentDto {
     private String code_name; //결제상태
     private String tot_prod_name; //총 상품명
     private Integer tot_pay_price; //실 결제 금액
+    private Integer reserves; //적립되는 금액
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pay_date; //결제 일시
     private String pay_way; //결제 방법

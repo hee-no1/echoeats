@@ -24,7 +24,7 @@
 
     <update id="update_address">
         UPDATE address
-        SET addr = #{addr}, dtl_addr = #{dtl_addr}, name = #{name}, phone = #{phone}, def_addr = #{def_addr}
+        SET dtl_addr = #{dtl_addr}, name = #{name}, phone = #{phone}, def_addr = #{def_addr}
         WHERE addr_id = #{addr_id}
     </update>
 
@@ -35,5 +35,20 @@
     <select id="count_address">
         SELECT count(*) FROM address WHERE mem_id = #{mem_id}
     </select>
+
+<!--    <update id="checkedUpdate" parameterType="map">-->
+<!--    <![CDATA[-->
+<!--        CREATE TRIGGER checkedUpdate-->
+<!--            BEFORE UPDATE ON address-->
+<!--            FOR EACH ROW-->
+<!--        BEGIN-->
+<!--            IF NEW.checked = 'Y' THEN-->
+<!--            UPDATE address-->
+<!--            SET checked = 'N'-->
+<!--            WHERE addr_id != NEW.addr_id AND mem_id = NEW.mem_id;-->
+<!--        END IF;-->
+<!--        END //-->
+<!--        ]]>-->
+<!--</update>-->
 
 </mapper>

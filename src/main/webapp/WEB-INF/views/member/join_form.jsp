@@ -8,8 +8,11 @@
     <script src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="/resources/css/member/join.css">
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
 </head>
 <body>
+
+<%@ include file="../include/header.jspf" %>
 
 <div class="css-pculus e1ovi4141">
     <div class="title">회원가입</div>

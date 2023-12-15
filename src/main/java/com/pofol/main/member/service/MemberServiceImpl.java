@@ -22,7 +22,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int signin (MemberDto memberDto) throws Exception {
-        System.out.println(memberDto.toString());
          return memberRepository.insertMember(memberDto);
 
      }
@@ -30,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<MemberDto> check_grade(String date)throws Exception {
         return memberRepository.checkGrade(date);
+    }
+
+    @Override
+    public int update_grade(MemberDto memberDto) throws Exception {
+        return memberRepository.updateGrade(memberDto);
     }
 
 }

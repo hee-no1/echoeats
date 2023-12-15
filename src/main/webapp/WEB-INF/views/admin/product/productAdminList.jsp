@@ -26,7 +26,7 @@
 
             $('select[name=rows]').change(function(){ // 다시 확인 할 것
                 const ps = $('select[name=rows]').val();
-                location.href = "/admin/product/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;
+                location.href = "/admin/product/list${ph.sc.getProductQueryString()}&pageSize="+ps;
             });
 
             $('.btnDate').click(function(e) {
@@ -241,7 +241,7 @@
                         <td colspan="3">
                             <ul class="mForm typeVer" id="eSearchFormPrice">
                                 <li>
-                                    <select class="fSelect" name="price">
+                                    <select class="fSelect" name="priceKind">
                                         <option value="product" selected="selected">판매가</option>
                                         <option value="custom">할인가</option>
                                     </select>
@@ -459,15 +459,15 @@
                     <c:if test="${ph.totalCnt!=null && ph.totalCnt!=0}">
                         <c:if test="${ph.showPrev}">
                             <li class="page-item">
-                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(ph.beginPage-1)}"/>">&lt;</a>
                             </li>
                         </c:if>
                         <c:forEach var="pageNumber" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <li class="page-item ${pageNumber == ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(pageNumber)}"/>">${pageNumber}</a></li>
+                            <li class="page-item ${pageNumber == ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(pageNumber)}"/>">${pageNumber}</a></li>
                         </c:forEach>
                         <c:if test="${ph.showNext}">
                             <li class="page-item">
-                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(ph.endPage+1)}"/>">&gt;</a>
                             </li>
                         </c:if>
                     </c:if>

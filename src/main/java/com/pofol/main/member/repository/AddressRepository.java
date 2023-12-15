@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AddressRepository {
     int insertAddress(AddressDto addressDto) throws Exception;  //주소 등록

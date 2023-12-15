@@ -54,13 +54,13 @@ public class MemberServiceImplTest {
 
     @Test
     public void main(){
-        CouponDto couponDto = couponRepository.select_coupon(1);
+        CouponDto couponDto = couponRepository.select_coupon(1L);
         System.out.println(couponDto);
     }
 
     @Test
     public void main2(){
-        MemCouponDto memCouponDto = couponRepository.select_coupon_mapping(1);
+        MemCouponDto memCouponDto = couponRepository.select_coupon_mapping(1L);
         System.out.println(memCouponDto);
     }
 

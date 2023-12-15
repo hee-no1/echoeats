@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pofol.main.member.dto.KakaoProfile;
 import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.dto.OAuthToken;
+import com.pofol.main.member.handler.LoginSuccessHandler;
 import com.pofol.main.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -37,9 +40,13 @@ public class KakaoController {
     @Autowired
     MemberRepository memberRepository;
 
+    @Autowired
+    LoginSuccessHandler loginSuccessHandler;
+
 
     @GetMapping(value = "/auth/kakao/callback",produces = "text/plain; charset=UTF-8")
-    public String kakaoCallback(String code) throws Exception {
+    public void kakaoCallback(String code, HttpServletRequest httprequest, HttpServletResponse httpresponse,
+                                Authentication authentication) throws Exception {
         //post방식으로 key : value 형식으로 데이터를 요청(카카오쪽으로)
         //post방식은 url이나 a태그로 요청 못함, 그래서 RestTemplate를 사용
         RestTemplate rt = new RestTemplate();
@@ -113,9 +120,11 @@ public class KakaoController {
 
         System.out.println("authenticate : "+authenticate);
 
+        loginSuccessHandler.onAuthenticationSuccess(httprequest, httpresponse,authenticate);
+
 
         //그냥 "main"으로 했을 때는 브라우저는 정상적으로 main으로 나오지만 url주소는 kakao/auth/callback/~~~~~ 이렇게 나온다
         //그래서 리다이렉트로 바꿈
-        return "redirect:http://localhost:8080/main";
+        //return "redirect:http://localhost:8080/main";
     }
 }

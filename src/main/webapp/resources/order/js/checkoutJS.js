@@ -13,21 +13,28 @@ let checkout = {
     tot_prod_price: tot_prod_price,
     origin_prod_price: origin_prod_price,
     dlvy_fee: dlvy_fee,
-    pay_way: pay_way,
+    pay_way: pay_way
 }
 console.log(checkout);
+
+
+//쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
+let coupon_id;
 
 //쿠폰, 적립금 ajax로 보내기
 let ajaxData = function(){
 
-    let tot_prod_price = document.getElementById('tot_prod_price').innerText;
-    let point_used = document.getElementById('inputPointUsed').value;
-    let dlvy_fee = document.getElementById('dlvy_fee').innerText;
+    let tot_prod_price_ajax = document.getElementById('tot_prod_price').innerText;
+    let coupon_id_ajax = coupon_id;
+    let point_used_ajax = document.getElementById('inputPointUsed').value;
+    let dlvy_fee_ajax = document.getElementById('dlvy_fee').innerText;
+
 
     let paymentDiscount = {
-        tot_prod_price: tot_prod_price,
-        point_used: point_used,
-        dlvy_fee: dlvy_fee
+        tot_prod_price: tot_prod_price_ajax,
+        coupon_id: coupon_id_ajax,
+        point_used: point_used_ajax,
+        dlvy_fee: dlvy_fee_ajax
     }
 
     let paymentData = {}
@@ -41,14 +48,24 @@ let ajaxData = function(){
             data: JSON.stringify(paymentDiscount),
             success: function(result){
                 paymentData = result;
+                //쿠폰
+                if(paymentData.coupon_disc === null){
+                    $("#signCoupon").html("");
+                    $("#outputCouponUsed").html(0);
+                }else {
+                    $("#signCoupon").html("-");
+                    $("#outputCouponUsed").html(paymentData.coupon_disc);
+                }
+
+                //적립금
                 if(paymentData.point_used === null) {
-                    $("#sign").html("");
+                    $("#signPoint").html("");
                     $("#outputPointUsed").html(0);
                 }else{
-                    $("#sign").html("-");
+                    $("#signPoint").html("-");
                     $("#outputPointUsed").html(paymentData.point_used);
                 }
-                //나중에 여기에 쿠폰도 추가해야한다.
+                //총 실 결제 금액
                 if(paymentData.tot_pay_price === null){
                     $("#tot_pay_price").html(0);
                 }else{
@@ -74,6 +91,27 @@ $("#couponBtn").click(function(){
     }
 });
 
+//쿠폰 버튼 클릭 시
+let couponListBtn = document.querySelectorAll(".couponListBtn");
+for (let i=0; i < couponListBtn.length ; i++){
+    couponListBtn[i].addEventListener('click', function(){
+
+        console.log("couponDto",couponDtoList[i]);
+        let addCouponDiv =
+            '<div class="css-kmlyvgdiv addCouponDiv">\n' +
+            '<strong class="css-1bfy7g3div">' + couponDtoList[i].cp_name + '</strong>\n' +
+            '<span class="css-bs5mk4">' + couponDtoList[i].cp_del_date +'</span>\n' +
+            '</div>'
+
+        coupon_id = couponDtoList[i].cp_id; //ajax, 결제버튼 클릭시 결제할인금액table
+
+        $('#couponList').hide();
+        $('.addCouponDiv').remove();
+        $('.e1brt3tk0').append(addCouponDiv);
+
+        ajaxData();
+    })
+}
 
 
 //적립금 입력
@@ -252,6 +290,8 @@ $(document).ready(function() {
         }
     });
 
+
+
     //결제 버튼 누르면
     $('#paymentBtn').click(function(){
 
@@ -264,6 +304,7 @@ $(document).ready(function() {
         checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
         checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText*1;
+        checkout.coupon_id = coupon_id;
         checkout.point_used = document.getElementById("outputPointUsed").innerText*1;
         console.log("1차 검증 바로전 checkout = " + checkout);
 

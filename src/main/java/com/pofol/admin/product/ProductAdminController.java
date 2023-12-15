@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -22,7 +23,13 @@ public class ProductAdminController {
     @GetMapping("/product/list")
     public String getAdminProductList(SearchProductAdminCondition searchProductAdminCondition,
                                       Model model, ProductFilterDto productFilterDto,
-                                      String Stock) {
+                                      String Stock,
+                                      HttpServletRequest request) {
+
+        String startDate = request.getParameter("start_date");
+        String endDate = request.getParameter("end_date");
+        System.out.println("startDate = " + startDate);
+        System.out.println("endDate = " + endDate);
 
         try {
             // 카테고리 정렬
