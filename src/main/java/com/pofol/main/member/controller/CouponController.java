@@ -24,7 +24,7 @@ public class CouponController {
         String id = authentication.getName();
 
         //회원이 보유한 쿠폰들을 가져온다
-        List<CouponJoinDto> coupon = couponService.getCoupon(id);
+        List<CouponJoinDto> coupon = couponService.getCouponJoin(id);
         System.out.println(coupon);
 
         for (CouponJoinDto couponJoinDto : coupon) {
