@@ -58,7 +58,7 @@ public class GradeTask {
             System.out.println(memberDto);
             String memId = memberDto.getMem_id();
             //회원id, 전 달 날짜, 하루를 더한 날짜를 이용해서 한 달동안 결제한 금액을 가져온다
-            PaymentDto paymentDto = new PaymentDto(memId, MonthMinusOneStr,dayPlusOneStr);//nullpointer나면 어떻게 하냐?
+            PaymentDto paymentDto = new PaymentDto(memId, MonthMinusOneStr,dayPlusOneStr);
             Integer i1 = paymentRepository.selectTotalPrice(paymentDto);
             System.out.println("i1 : "+i1);
             //결제한 금액, 등급dto를 등급을 계산
