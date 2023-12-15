@@ -22,6 +22,11 @@ public class AddressRepositoryImpl implements AddressRepository{
     public List<AddressDto> selectAllAddress(String mem_id) throws Exception {
         return session.selectList(namespace + "selectAll_address", mem_id);
     }
+    
+    @Override
+    public AddressDto selectDefaultAddress(String mem_id) throws Exception {
+        return session.selectOne(namespace + "selectDefaultAddress", mem_id);
+    }
 
     @Override
     public AddressDto selectAddress(String addr_id) throws Exception {

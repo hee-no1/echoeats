@@ -11,15 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
+import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
 import com.pofol.main.orders.inquiry.service.InquiryImgService;
 import com.pofol.main.orders.inquiry.service.InquiryPrdService;
 import com.pofol.main.orders.inquiry.service.InquiryService;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.main.orders.order.domain.OrderDetailDto;
+import com.pofol.main.orders.order.service.OrderDetailService;
+import com.pofol.util.AwsS3ImgUploaderService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,13 +39,17 @@ public class InquiryController {
 	private final InquiryImgService inqImgServ;
 	private final InquiryPrdService inqPrdServ;
 	
+	private final OrderDetailService ordDetServ;
+	
 	@GetMapping("/inquiry/form")
     public String inquiryForm(Long ord_det_id ,Model m, HttpServletRequest request){
 		System.out.println("inquiryForm");
-		if(ord_det_id != null)
-		System.out.println("inquiryForm.ord_det_id = "+ord_det_id);
 		try {
-			
+			if(ord_det_id != null) {
+				OrderDetailDto dto = ordDetServ.selectByOrderDetId(ord_det_id);
+				dto.setImg_url(ordDetServ.selectByOrderDetImg(ord_det_id));
+				m.addAttribute("ordDetDto", dto);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,14 +99,43 @@ public class InquiryController {
 	
 	@ResponseBody
 	@PostMapping("/inquiry/listView")
-    public ResponseEntity inquiryView(@RequestBody Map<String, Long> data, HttpSession session) throws Exception{
+    public ResponseEntity inquiryView(@RequestBody Map<String, Long> data, HttpSession session) {
 		try {
 			InquiryDto dto = inqServ.selectByinqId(data.get("inquiry_id"));
 			dto.setImgList(inqImgServ.selectAllByInqId(dto.getInquiry_id()));
+			dto.setType(inqServ.selectNametoSts(dto.getType()));
+			dto.setDet_type(inqServ.selectNametoSts(dto.getDet_type()));
 			return new ResponseEntity(dto, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@ResponseBody
+	@PostMapping("/inquiry/getDetType")
+	public ResponseEntity inquiryGetDetType(@RequestBody Map<String, String> data){
+		try {
+    		List<CodeTableDto> typeList = inqServ.selectCodeTypeByCodeName(data.get("inquiryType"));
+    		if (typeList == null) // dt = dateType
+				throw new Exception("inquiryGetDetType");
+    		return new ResponseEntity(typeList, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+    }
+	
+	@ModelAttribute
+    public void inquiryGetPageData(Model m){
+    	try {
+    		List<CodeTableDto> typeList = inqServ.selectCodeType(111);
+    		if (typeList == null) // dt = dateType
+				throw new Exception("selectCodeType(111) failed");
+    		
+    		m.addAttribute("typeList",typeList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 }

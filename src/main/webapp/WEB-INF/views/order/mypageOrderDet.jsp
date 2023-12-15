@@ -14,6 +14,10 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
         $(function(){
+            $('.content').on('click','.css-lwy3pd.e4nu7ef3',function(e){
+                let ordDetId = $(this).data('id');
+                location.href = "/mypage/inquiry/form?ord_det_id="+ordDetId;
+            });
             $('.content').html(
                 '<div class="css-j0lifa ed9qr673"><div class="css-fhxb3m ed9qr672">'+
                     '<h2 class="css-1268zpe ed9qr671">주문 내역 상세</h2></div></div>'+
@@ -22,7 +26,7 @@
                     //         '<img alt="" aria-hidden="true" src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2760%27%20height=%2760%27/%3e" style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span>'+
                     //         '<img alt="completedDeliveryImage" srcset="https://dos-img.kurly.com/delivery-complete/2023-11-19/59313f5a-4bdd-4fa2-8e61-6a7df1ee8db8.jpg 1x, https://dos-img.kurly.com/delivery-complete/2023-11-19/59313f5a-4bdd-4fa2-8e61-6a7df1ee8db8.jpg 2x" src="https://dos-img.kurly.com/delivery-complete/2023-11-19/59313f5a-4bdd-4fa2-8e61-6a7df1ee8db8.jpg" decoding="async" data-nimg="intrinsic" class="css-0" style="border-radius: 4px; cursor: pointer; position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover; object-position: center center;"></span>'+
                     //         '<div class="css-cp6cch eci1ktw1" style="margin-left: 20px;"><span class="css-1pdt6og eci1ktw2"><span>11/19(일)</span> 배송 완료되었습니다.</span><p class="css-1l950qo eci1ktw0">배송완료 시간 03:50</p></div></div>'+
-                            
+                    // 배송완료 후 정보        
                             '<div class="css-1bsokvi e1jm6dy15"><h3 class="css-yi2ox5 e1jm6dy14">주문번호 <span class="css-1qei3w8 e96hsmj0">${ordDto.ord_id}</span></h3>'+
                                 '<span class="css-1mlk737 e1jm6dy12">배송 또는 상품에 문제가 있나요?<a href="/mypage/inquiry/list" class="css-1s2o3jp e1jm6dy11"> 1:1 문의<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDkgMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJtMiA0IDUgNS01IDUiIHN0cm9rZT0iIzVGMDA4MCIgc3Ryb2tlLXdpZHRoPSIxLjMiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=" alt="purpleArrowRight" class="e1jm6dy10 css-cb2xrd eflljbi0"></a></span></div>'+
                                 '<c:forEach var="ordDetDto" items="${ordDetList}" varStatus="status">'+    
@@ -33,7 +37,7 @@
                                     '<div class="css-mrxscg ecmuszp10"><img src="${ordDetDto.img_url}" class="css-1ixzt3f ecmuszp9">'+
                                     '<div class="css-1t5xcqm ecmuszp8"><a data-testid="deal-name" href="/goods/5062898" class="css-15vlnp ecmuszp7">${ordDetDto.prod_name}</a>'+
                                     '<div class="css-s5xdrg ecmuszp5"><span data-testid="goods-price" class="css-1ngn8p4 ecmuszp4">${ordDetDto.prod_tot_price}원</span><span class="css-1ekh7sh ecmuszp2">${ordDetDto.prod_qty}개</span></div></div><span class="css-l71t3l ecmuszp1">${ordDetDto.column_sts}</span>'+
-                                    '<div class="css-ojh52s ecmuszp0"><button class="css-lwy3pd e4nu7ef3" type="button" width="96" height="36" radius="3"><span class="css-nytqmg e4nu7ef1">후기작성</span></button><button class="css-z4yl45 e4nu7ef3" type="button" width="96" height="36" radius="3"><span class="css-nytqmg e4nu7ef1">장바구니 담기</span></button></div></div>'+
+                                    '<div class="css-ojh52s ecmuszp0"><button class="css-lwy3pd e4nu7ef3" type="button" width="96" height="24" radius="3" data-id="${ordDetDto.ord_det_id}"><span class="css-nytqmg e4nu7ef1">교환</span></button><button class="css-lwy3pd e4nu7ef3" type="button" width="96" height="24" radius="3" data-id="${ordDetDto.ord_det_id}"><span class="css-nytqmg e4nu7ef1">환불</span></button><button class="css-z4yl45 e4nu7ef3" type="button" width="96" height="24" radius="3"><span class="css-nytqmg e4nu7ef1">리뷰작성</span></button></div></div>'+
                                 '</c:forEach>'+
                                 '<div class="css-1m7irn0 e1egl70z1"><button class="css-h6dssh e4nu7ef3" type="button" width="200" height="56" radius="3"><span class="css-nytqmg e4nu7ef1">전체 상품 다시 담기</span></button><button class="css-kvnzdd e4nu7ef3" type="button" disabled="" width="200" height="56" radius="3"><span class="css-nytqmg e4nu7ef1">전체 상품 주문 취소</span></button></div><span class="css-15leche e1egl70z0">주문취소는 [주문완료] 상태일 경우에만 가능합니다.</span>'+
                             '<div class="css-1bsokvi e1jm6dy15"><h3 class="css-yi2ox5 e1jm6dy14">배송조회</h3></div><ul class="css-hig5bx e1wlhoty1"><li class="css-6j27uj ec7o8km5">'+
@@ -113,7 +117,7 @@
             line-height: 22px;
         }
         .css-1pdt6og > span {
-            color: rgb(95, 0, 128);
+            color: #00c73c;
         }
         .css-1l950qo {
             margin-top: 4px;
@@ -249,7 +253,7 @@
             height: 36px;
             border-radius: 3px;
             color: rgb(255, 255, 255);
-            background-color: rgb(95, 0, 128);
+            background-color: #00c73c;
             border: 0px none;
         }
         .css-nytqmg {
@@ -270,9 +274,9 @@
             width: 96px;
             height: 36px;
             border-radius: 3px;
-            color: rgb(95, 0, 128);
+            color: #00c73c;
             background-color: rgb(255, 255, 255);
-            border: 1px solid rgb(95, 0, 128);
+            border: 1px solid #00c73c;
         }
         .css-1m7irn0 {
             display: flex;
@@ -288,9 +292,9 @@
             width: 200px;
             height: 56px;
             border-radius: 3px;
-            color: rgb(95, 0, 128);
+            color: #00c73c;
             background-color: rgb(255, 255, 255);
-            border: 1px solid rgb(95, 0, 128);
+            border: 1px solid #00c73c;
         }
         .css-1m7irn0 button span {
             font-weight: 500;
@@ -365,7 +369,7 @@
         }
         .css-1o0rwe3 {
             margin-left: 12px;
-            color: rgb(95, 0, 128);
+            color: #00c73c;
             text-decoration: underline;
         }
         .css-1bsokvi {
