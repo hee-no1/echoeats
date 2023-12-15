@@ -60,7 +60,7 @@ public class ProductDto {
     private String bigCategory;
     private String midCategory;
 
-    public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, Integer prod_price, Integer disc_rate, String sale_sts, Integer prod_qty, String is_exch, String is_opt, String short_desc, String long_desc, String disp_sts, String brand, String origin, String dlvy_type, String pack_type, String sales_unit, String weight, String exp_date, MultipartFile prod_img, String rg_num) {
+    public ProductDto(Long evt_gp_id, String prod_img_id, String cat_code, String prod_name, Integer prod_price, Integer disc_rate, String sale_sts, Integer prod_qty, String is_exch, String is_opt, String short_desc, String long_desc, String disp_sts, String brand, String origin, String dlvy_type, String pack_type, String sales_unit, String weight, String exp_date, MultipartFile prod_img, String rg_num, String md_num) {
         this.evt_gp_id = evt_gp_id;
         this.prod_img_id = prod_img_id;
         this.cat_code = cat_code;
@@ -83,7 +83,7 @@ public class ProductDto {
         this.exp_date = exp_date;
         this.prod_img = prod_img;
         this.rg_num = rg_num;
-        this.md_num = rg_num;
+        this.md_num = md_num;
         this.disc_price = (this.prod_price * ((100 - this.disc_rate) / 100)) / 10 * 10;
     }
 
