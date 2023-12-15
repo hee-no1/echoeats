@@ -41,11 +41,10 @@
         </div>
         <div type="recent" class="css-1y14kop e1k348230">
             <label class="css-1xkjo8k e1dcessg3">
-                <input type="checkbox" class="css-agvwxo e1dcessg2">
+                <input type="checkbox" class="css-agvwxo e1dcessg2" id="checkbox">
                 <div class="css-79hxr7 e1dcessg1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
                                 stroke="#ddd" fill="#fff"></path>
                         <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"></path>
@@ -63,20 +62,35 @@
     </div>
 </div>
 <script>
+    let checkbox = document.getElementById("checkbox");
+    let def_addr = "N";
+    let addr_id = document.getElementsByName("save_btn")[0].id;
+
+    //체크박스
+    checkbox.addEventListener("change", function (){
+        let svgPath = checkbox.parentElement.querySelector(".css-79hxr7 path");
+        if (checkbox.checked) {
+            svgPath.setAttribute("stroke", "#fff");
+            svgPath.setAttribute("fill", "#5f0080");
+            def_addr = "Y";
+        } else {
+            svgPath.setAttribute("stroke", "#ddd");
+            svgPath.setAttribute("fill", "#fff");
+            def_addr = "N";
+        }
+    })
     //주소 수정
     function sendData() {
-        let addr_id = document.getElementsByName("save_btn")[0].id;
-        let addr = document.getElementById("addr").innerText;
         let dtl_addr = document.getElementById("addressDetail").value;
         let name = document.getElementById("name").value;
         let phone = document.getElementById("mobile").value;
 
         let data = {
             addr_id: addr_id,
-            addr: addr,
             dtl_addr: dtl_addr,
             name: name,
-            phone: phone
+            phone: phone,
+            def_addr: def_addr
         }
         $.ajax({
             type: "POST",
@@ -96,7 +110,8 @@
     }
     //주소 삭제
     function deleteData(){
-
+        window.location.href = "/address/delete?addr_id=" + encodeURIComponent(addr_id);
+        window.close();
     }
 </script>
 </body>
