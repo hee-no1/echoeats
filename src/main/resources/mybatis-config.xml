@@ -42,6 +42,7 @@
 		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.cart.SelectedItemsDto"/>
 		<typeAlias alias="CartDto" type="com.pofol.main.product.cart.CartDto"/>
+		<!-- product -->
 
 		<!-- member -->
 		<typeAlias alias="PointDto" type="com.pofol.main.member.dto.PointDto"/>

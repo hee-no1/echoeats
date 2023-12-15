@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,8 +204,12 @@
                                                                     class="css-18y6jr4 e1hx75jb0"></button>
                                                         </div>
                                                         <div class="css-1jzvrpg e1bjklo12">
-                                                            <span class="css-fburr9 e1bjklo11">${optionList.opt_price}원</span>
-                                                            <span class="css-gqkxk8 e1bjklo10">${optionList.opt_disc_price}원</span>
+                                                            <span class="css-fburr9 e1bjklo11">
+                                                                <fmt:formatNumber value="${optionList.opt_price}" pattern="#,###"/>원
+                                                            </span>
+                                                            <span class="css-gqkxk8 e1bjklo10">
+                                                                <fmt:formatNumber value="${optionList.opt_disc_price}" pattern="#,###"/>원
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,7 +252,7 @@
                                                     0
                                                 </c:when>
                                                 <c:otherwise>
-                                                    ${product.disc_price}
+                                                    <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
                                                 </c:otherwise>
                                             </c:choose>
                                         </span>
@@ -280,11 +285,20 @@
                                                      alt class="css-0">
                                             </span>
                                 </button>
-                                <div class="css-14jnwd7 e10vtr1i0">
-                                    <button class="cart-button css-1qirdbn e4nu7ef3" type="button" radius="3">
-                                        <span class="css-nytqmg e4nu7ef1">장바구니 담기</span>
-                                    </button>
-                                </div>
+                                <sec:authorize access="isAuthenticated()">
+                                    <div class="css-14jnwd7 e10vtr1i0">
+                                        <button class="cart-button css-1qirdbn getCart" type="button" radius="3">
+                                            <span class="css-nytqmg e4nu7ef1">장바구니 담기</span>
+                                        </button>
+                                    </div>
+                                </sec:authorize>
+                                <sec:authorize access="!isAuthenticated()">
+                                    <div class="css-14jnwd7 e10vtr1i0">
+                                        <button class="cart-button css-1qirdbn getLogin" type="button" radius="3">
+                                            <span class="css-nytqmg e4nu7ef1">로그인</span>
+                                        </button>
+                                    </div>
+                                </sec:authorize>
                             </div>
                         </div>
                     </section>
@@ -664,6 +678,7 @@
 <script>
 
     let productList = [];
+<%--    <sec:authorize access="isAuthenticated()">--%>
     <c:choose>
     <c:when test="${option eq 'option'}">
     <c:forEach var="optionList" items="${optionList}" varStatus="loop">
@@ -673,6 +688,7 @@
         opt_prod_name : '${optionList.opt_prod_name}',
         opt_price : ${optionList.opt_price},
         opt_disc_price : ${optionList.opt_disc_price},
+        mem_id : '${memberID}',
         qty : 0
     }
     </c:forEach>
@@ -683,11 +699,13 @@
         prod_name : '${product.prod_name}',
         prod_price : ${product.prod_price},
         disc_price : ${product.disc_price},
+        mem_id : '${memberID}',
         qty : 1
     }
     </c:otherwise>
     </c:choose>
-
+<%--    </sec:authorize>--%>
+    console.log("productList : ", productList);
 </script>
 <script src="/resources/product/js/product.js"></script>
 </body>

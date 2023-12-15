@@ -1,58 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
     <title>장바구니</title>
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/cart.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <style>
-    /*드롭 다운 카테고리 (수정 필요)*/
-    nav {
-    overflow: hidden;
-    }
+        /*.css-1usz68g {*/
+        <%--    background-image: url(${cartProductList.prod_img_id});--%>
+        /*}*/
 
-    .dropdown {
-    float: left;
-    overflow: hidden;
-    }
+        /*드롭 다운 카테고리 (수정 필요)*/
+        nav {
+        overflow: hidden;
+        }
 
-    .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-    cursor: pointer;
-    }
+        .dropdown {
+        float: left;
+        overflow: hidden;
+        }
 
-    .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    }
+        .dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+        cursor: pointer;
+        }
 
-    .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    }
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        }
 
-    .dropdown-content a:hover {
-    background-color: #ddd;
-    }
+        .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        }
 
-    .dropdown:hover .dropdown-content {
-    display: block;
-    }
+        .dropdown-content a:hover {
+        background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+        display: block;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +115,7 @@
                                     <span>&nbsp;</span>
                                 </label>
                                     <a class="css-1u5t3pw esoayg810">
-                                        <span class="css-1usz68g esoayg89"></span>
+                                        <span class="css-1usz68g esoayg89" style="background-image: url(${cartProductList.prod_img_id});"></span>
                                     </a>
                                     <div class="css-14sb0pe esoayg88">
                                         <a class="css-e0dnmk esoayg87">
@@ -133,15 +139,15 @@
                                     </div>
                                     <div class="css-1gueo66 e1cqr3m40">
                                         <button type="button" aria-label="수량내리기" class="css-8azp8 e1hx75jb0"></button>
-                                        <div class="count css-6m57y0 e1cqr3m41">6</div>
+                                        <div class="count css-6m57y0 e1cqr3m41">${cartProductList.qty}</div>
                                         <button type="button" aria-label="수량올리기" class="css-18y6jr4 e1hx75jb0"></button>
                                     </div>
                                     <div class="css-5w3ssu esoayg84">
                                         <span aria-label="할인 가격" data-testid="product-price" class="css-zq4evb e2qzex51">
-                                            83,400원
+                                            <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
                                         </span>
                                         <span aria-label="판매 가격" data-testid="selling-price" class="css-cwmxfz e2qzex50">
-                                            89,400원
+                                            <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
                                         </span>
                                     </div>
                                     <button class="css-h5zdhc eudrkjx0" type="button" data-testid="delete">
@@ -230,8 +236,8 @@
                     </ul>
                     </sec:authorize>
                     <sec:authorize access="!isAuthenticated()">
-                        <button class="css-fwelhw e4nu7ef3" type="button" height="56"><span
-                                class="css-nytqmg e4nu7ef1">로그인</span>
+                        <button class="css-fwelhw e4nu7ef3 goLoginButton" type="button" height="56">
+                            <span class="css-nytqmg e4nu7ef1">로그인</span>
                         </button>
                         <ul class="css-19kxq7d">
                             <li class="css-1741abm ejr204i0">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
@@ -244,6 +250,46 @@
     </div>
     <%@ include file="../include/footer.jspf" %>
 </div>
+<script>
+
+    let cartProduct = [];
+
+<%--    <sec:authorize access="isAuthenticated()">--%>
+    <c:forEach var="cartProductList" items="${cartProductList}" varStatus="loop">
+    <c:choose>
+    <c:when test="${empty cartProductList.opt_prod_id}">
+    cartProduct[${loop.index}] = {
+        cart_id : ${cartProductList.cart_id},
+        prod_price : ${cartProductList.prod_price},
+        disc_price : ${cartProductList.disc_price},
+        total_price : ${cartProductList.total_price},
+        total_disc_price : ${cartProductList.total_disc_price},
+        qty : ${cartProductList.qty}
+    }
+    </c:when>
+    <c:otherwise>
+    cartProduct[${loop.index}] = {
+        cart_id : ${cartProductList.cart_id},
+        opt_price : ${cartProductList.opt_price},
+        opt_disc_price : ${cartProductList.opt_disc_price},
+        total_price : ${cartProductList.total_price},
+        total_disc_price : ${cartProductList.total_disc_price},
+        qty : ${cartProductList.qty}
+    }
+    </c:otherwise>
+    </c:choose>
+    </c:forEach>
+<%--    </sec:authorize>--%>
+
+
+
+
+
+
+
+
+
+</script>
 <script src="/resources/product/js/cart.js"></script>
 </body>
 </html>
