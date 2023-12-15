@@ -6,6 +6,7 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.service.ProductService;
+import com.pofol.util.AwsS3ImgUploaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -72,7 +73,9 @@ public class AdminController {
     @PostMapping("hyoungJun/productEnroll")
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
         productService.productEnroll(productDto);
-        redirectAttributes.addFlashAttribute("productEnroll_result", productDto.getProd_name() + " 상품이 등록되었습니다.");
+        redirectAttributes.addFlashAttribute(
+                "productEnroll_result",
+                productDto.getProd_name() + " 상품이 등록되었습니다.");
         return "redirect:/admin/hyoungJun/productManage";
     }
 

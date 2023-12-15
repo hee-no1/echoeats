@@ -84,17 +84,19 @@ public class MemberController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object a = authentication.getPrincipal();
         HttpSession session = request.getSession();
-        System.out.println(authentication);
+        System.out.println("authentication : "+authentication);
 
         //유저이름을 가져오기 위해서
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        System.out.println("securityUser : "+securityUser);
 
         // SecurityUser 객체에서 mem_name 가져오기
         String memName = securityUser.getMem_name();
+        System.out.println("memName : "+memName);
 
-        Object greeting = session.getAttribute("greeting");
+        //Object greeting = session.getAttribute("greeting");
 
-        return a.toString() + "     " + greeting + "    한글 테스트     "+ authentication.getName()+"의  이름은 "+memName;
+        return a.toString() + "     "  + "    한글 테스트     "+ authentication.getName()+"의  이름은 "+memName;
     }
 
 

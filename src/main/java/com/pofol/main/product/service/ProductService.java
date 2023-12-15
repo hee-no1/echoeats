@@ -1,13 +1,17 @@
 package com.pofol.main.product.service;
 
 import com.pofol.main.product.domain.ProductDto;
+import com.pofol.main.product.domain.ProductImageDto;
 
 public interface ProductService {
 
-  // 상품 등록
-  void productEnroll(ProductDto productDto) throws Exception;
+    // 상품 등록
+    void productEnroll(ProductDto productDto) throws Exception;
 
-  // 상품 수
-  int productCount() throws Exception;
+    // 상품 수
+    int productCount() throws Exception;
+
+    // 상품 이미지 등록
+    void productImageEnroll(ProductImageDto productImageDto) throws Exception;
 
 }

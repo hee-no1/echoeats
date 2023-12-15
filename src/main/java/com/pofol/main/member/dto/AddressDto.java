@@ -25,13 +25,13 @@ public class AddressDto {
         this.mem_id = mem_id;
         this.def_addr = def_addr;
     }
-    public AddressDto(int addr_id, String addr, String dtl_addr, String name, String phone, String type, String def_addr) {
+
+    // 업데이트 생성자
+    public AddressDto(int addr_id, String dtl_addr, String name, String phone, String def_addr) {
         this.addr_id = addr_id;
-        this.addr = addr;
         this.dtl_addr = dtl_addr;
         this.name = name;
         this.phone = phone;
-        this.type = type;
         this.def_addr = def_addr;
     }
 

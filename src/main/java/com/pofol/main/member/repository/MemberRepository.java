@@ -15,4 +15,5 @@ public interface MemberRepository {
     int checkId(String id) throws Exception;
     int checkEmail(String id) throws Exception;
     List<MemberDto> checkGrade(String date) throws Exception;
+    int updateGrade(MemberDto memberDto) throws Exception;
 }

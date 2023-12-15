@@ -7,5 +7,6 @@
 <a href="/order">order</a>&nbsp;&nbsp;
 <a href="/main">ecoeats(main)</a>&nbsp;&nbsp;
 <a href="/admin/product/list">productAdmin</a>&nbsp;&nbsp;
+<a href="/admin/hyoungJun/productEnroll">productEnroll</a>&nbsp;&nbsp;
 </body>
 </html>

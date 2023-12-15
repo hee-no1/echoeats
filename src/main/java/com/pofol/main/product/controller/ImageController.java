@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/image")
 @Slf4j
@@ -25,9 +27,11 @@ public class ImageController {
         log.info("productDto : " + productDto);
         log.info("productDto.getProd_img() : " + productDto.getProd_img());
         log.info("productDto.getProd_img().getOriginalFilename() : " + productDto.getProd_img().getOriginalFilename());
+        log.info("productDto.getProd_img().getContentType() : " + productDto.getProd_img().getContentType());
+        log.info("productDto.getProd_img().getSize() : " + productDto.getProd_img().getSize());
         String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                 productDto.getProd_img(), "product");
-        //productService.productEnroll(productDto);
+        log.info("imgUrl : " + imgUrl);
         return "redirect:/prodEnroll";
     }
 
