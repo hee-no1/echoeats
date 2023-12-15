@@ -23,21 +23,9 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         String referer = request.getHeader("Referer");
         System.out.println("Referer : "+referer);
 
-        RequestCache requestCache = new HttpSessionRequestCache();
-        SavedRequest savedRequest = requestCache.getRequest(request, response);
-        System.out.println("savedRequest : "+savedRequest);
-
-        //둘의 차이점은???
-        //버튼으로 눌렀을때만 referer에 값이 들어온다, url로 입력했을 때는 오지 않는다
-
-        HttpSession session = request.getSession();
-        session.setAttribute("result",  "거긴 안돼요");
-
+        //url로 입력했을 때 referer는 null
         if(referer == null){
-            referer="/member/info";
-        }
-        if (referer.startsWith("http://localhost:8080/auth/kakao")){
-            referer ="http://localhost:8080/main";
+            referer="/main";
         }
 
         response.sendRedirect(referer);

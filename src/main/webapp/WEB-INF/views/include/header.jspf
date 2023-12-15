@@ -21,9 +21,14 @@
                         <div class="stick"></div>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
-                        <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
-                        <a href="/member/admin">관리자</a>
-                        <div class="stick"></div>
+                        <sec:authorize access="hasAuthority('ADMIN')">
+                            <a href="/member/admin">관리자</a>
+                            <div class="stick"></div>
+                        </sec:authorize>
+                        <sec:authorize access="hasAuthority('USER')">
+                            <a href="/grade" class="mem_name"><sec:authentication property="principal.mem_name" /></a>
+                            <div class="stick"></div>
+                        </sec:authorize>
                         <a href="/logout">로그아웃</a>
                         <div class="stick"></div>
                     </sec:authorize>

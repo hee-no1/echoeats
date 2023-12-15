@@ -31,4 +31,9 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.checkGrade(date);
     }
 
+    @Override
+    public int update_grade(MemberDto memberDto) throws Exception {
+        return memberRepository.updateGrade(memberDto);
+    }
+
 }
