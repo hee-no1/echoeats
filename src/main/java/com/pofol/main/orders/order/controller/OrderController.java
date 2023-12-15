@@ -2,18 +2,19 @@ package com.pofol.main.orders.order.controller;
 
 
 import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemCouponDto;
 import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.service.CouponService;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.service.PaymentDiscountService;
 import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.basket.SelectedItemsDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
-    private final DelNotesService delNotesService;
     private final MemberService memberService;
+    private final DelNotesService delNotesService;
+    private final CouponService couponService;
+    private final OrderService orderService;
     private final PaymentService paymentService;
+    private final PaymentDiscountService paymentDiscountService;
 
     @GetMapping
     public String Order(){
@@ -69,9 +72,22 @@ public class OrderController {
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
         try{
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+            String mem_id = "you11";
+
             //주문 table 변경
             orderService.modifyOrder(ord_id, "ORDER_COMPLETE");
 
+            //사용한 쿠폰을 UNUSED로 update시켜줘야한다.
+            Long cp_id = paymentDiscountService.getPaymentDiscount(ord_id).getCoupon_id(); //paymentDiscount 테이블에서 coupon_id 가져오기
+
+            //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
+            if(cp_id != null){
+                couponService.modifyCouponStatus(cp_id, mem_id);
+            }
+
+            /*모델로 뷰 단에 넘겨줘야할 것*/
             //주문자 이름, 배송지
 
             //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기

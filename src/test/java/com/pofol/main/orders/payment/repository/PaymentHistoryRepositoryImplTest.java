@@ -1,5 +1,7 @@
 package com.pofol.main.orders.payment.repository;
 
+import com.pofol.main.member.dto.MemCouponDto;
+import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.orders.payment.domain.PaymentHistoryDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +40,5 @@ class PaymentHistoryRepositoryImplTest {
             System.out.println(paymentHistoryDto);
         }
     }
-
 
 }

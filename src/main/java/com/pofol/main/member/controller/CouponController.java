@@ -8,9 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -23,7 +21,7 @@ public class CouponController {
     public String boardJoin(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String id = authentication.getName();
-        List<CouponJoinDto> coupon = couponService.getCoupon(id);
+        List<CouponJoinDto> coupon = couponService.getCouponJoin(id);
         System.out.println(coupon);
         for (CouponJoinDto couponJoinDto : coupon) {
             if(couponJoinDto.getCp_sts().equals("UNUSED")){

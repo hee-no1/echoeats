@@ -11,4 +11,6 @@ public interface CouponRepository {
     MemCouponDto select_coupon_mapping(Long id);
 
     List<CouponJoinDto> selectMembersWithCoupons(String id);
+    MemCouponDto selectUnusedCoupon(Long cp_id, String mem_id) throws Exception;
+    int updateMemberCouponStatus(MemCouponDto memCouponDto);
 }
