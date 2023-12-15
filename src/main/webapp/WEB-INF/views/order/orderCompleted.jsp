@@ -13,12 +13,12 @@
             <div class="css-fnh15r e190vd4y4">
                 <img src="https://res.kurly.com/mobile/service/order/1909/img_success_order_end.gif" alt="" class="css-ypnlzr e1hwfd030">
                 <div class="css-yb4g98 e190vd4y3">
-                    <p class="css-14is9qy e190vd4y0">유재석님의 주문이 완료되었습니다.</p>
+                    <p class="css-14is9qy e190vd4y0">${mem_name}님의 주문이 완료되었습니다.</p>
                     <p class="css-114oz6p e190vd4y2">내일 새벽에 만나요!<br></p>
                 </div>
             </div>
             <div class="css-1va7zlz epyeklp6">
-                <div class="css-1l8u1wr epyeklp3">서울 종로구 종로 69 (서울 YMCA) 5층 522호</div>
+                <div class="css-1l8u1wr epyeklp3">${address.addr} ${address.dtl_addr}</div>
                 <div class="css-qnijoc epyeklp2"></div>
                 <div class="css-1hh4r05 epyeklp5">
                     <span class="css-1h6pllp epyeklp1">주문번호</span>

@@ -1,9 +1,11 @@
 package com.pofol.main.orders.order.controller;
 
 
+import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemCouponDto;
 import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.CouponService;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
@@ -27,6 +29,7 @@ import java.util.List;
 public class OrderController {
 
     private final MemberService memberService;
+    private final AddressService addressService;
     private final DelNotesService delNotesService;
     private final CouponService couponService;
     private final OrderService orderService;
@@ -76,22 +79,20 @@ public class OrderController {
 //        String mem_id = authentication.getName(); //회원id
             String mem_id = "you11";
 
-            //주문 table 변경
-            orderService.modifyOrder(ord_id, "ORDER_COMPLETE");
-
-            //사용한 쿠폰을 UNUSED로 update시켜줘야한다.
+            /* DB 데이터 */
+            orderService.modifyOrder(ord_id, "ORDER_COMPLETE"); //주문 table 변경
             Long cp_id = paymentDiscountService.getPaymentDiscount(ord_id).getCoupon_id(); //paymentDiscount 테이블에서 coupon_id 가져오기
-
-            //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
-            if(cp_id != null){
+            if(cp_id != null){  //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
                 couponService.modifyCouponStatus(cp_id, mem_id);
             }
 
-            /*모델로 뷰 단에 넘겨줘야할 것*/
-            //주문자 이름, 배송지
+            /* 모델로 뷰 단에 넘겨줘야할 것: 주문자 이름, 배송지 */
+            String mem_name = memberService.select(mem_id).getMem_name(); //주문자 이름
+            AddressDto address = addressService.getDefaultAddress(mem_id); //배송지
+            PaymentDto payment = paymentService.getPayment(ord_id); //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
 
-            //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
-            PaymentDto payment = paymentService.getPayment(ord_id);
+            m.addAttribute("mem_name", mem_name);
+            m.addAttribute("address", address);
             m.addAttribute("payment",payment);
             return "/order/orderCompleted";
         } catch (Exception e) {
@@ -99,6 +100,7 @@ public class OrderController {
             return "/order/errorPage";
         }
     }
+
 
     //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")

@@ -36,4 +36,9 @@ public class AddressServiceImpl implements AddressService {
     public int removeAddress(String addr_id) throws Exception {
         return addressRepository.deleteAddress(addr_id);
     }
+
+    @Override
+    public AddressDto getDefaultAddress(String mem_id) throws Exception {
+        return addressRepository.selectDefaultAddress(mem_id);
+    }
 }
