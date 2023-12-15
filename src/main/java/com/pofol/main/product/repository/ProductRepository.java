@@ -12,6 +12,9 @@ public interface ProductRepository {
     // product테이블 행 개수
     int count() throws Exception;
 
+    // product_image 테이블 행 개수
+    int countImage() throws Exception;
+
     // 상품 이미지 등록
     void insertImage(ProductImageDto productImageDto) throws Exception;
 
