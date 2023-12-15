@@ -13,4 +13,5 @@ public interface AddressService {
     AddressDto getAddress(String addr_id) throws Exception;     //주소 읽기
     int modifyAddress(AddressDto addressDto) throws Exception;  //주소 수정
     int removeAddress(String addr_id) throws Exception;
+    AddressDto getDefaultAddress(String mem_id) throws Exception;
 }
