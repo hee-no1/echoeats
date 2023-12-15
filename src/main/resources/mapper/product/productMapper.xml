@@ -38,11 +38,11 @@
 
 
     <!-- 상품 등록 -->
-    <insert id="insert" parameterType="ProductDto">
+    <insert id="insert" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="prod_id">
         INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, disc_rate, sale_sts, prod_qty,
-                             is_exch, is_opt, short_desc, long_desc, disp_sts, rg_num)
+                             is_exch, is_opt, short_desc, long_desc, disp_sts, rg_num, md_num)
         VALUES (#{evt_gp_id}, #{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{disc_rate}, #{sale_sts},
-                #{prod_qty}, #{is_exch}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num})
+                #{prod_qty}, #{is_exch}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num}, #{md_num})
     </insert>
 
     <!-- product테이블 행 개수 -->
@@ -53,8 +53,8 @@
 
     <!-- 이미지 등록 -->
     <insert id="insertImage">
-        INSERT INTO product_image (prod_img_id, prod_id, ori_file_name, ser_file_name, upld_path, rg_num)
-        VALUES (#{prod_img_id}, #{prod_id}, #{ori_file_name}, #{ser_file_name}, #{upld_path}, #{rg_num})
+        INSERT INTO product_image (prod_img_id, prod_id, ori_file_name, ser_file_name, rg_num, md_num)
+        VALUES (#{prod_img_id}, #{prod_id}, #{ori_file_name}, #{ser_file_name}, #{rg_num}, #{md_num})
     </insert>
 
     <!-- 옵션 insert-->

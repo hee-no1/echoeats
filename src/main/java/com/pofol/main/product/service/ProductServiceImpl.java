@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Objects;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -25,11 +27,16 @@ public class ProductServiceImpl implements ProductService {
             MultipartFile productImage = productDto.getProd_img();
             String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                     productDto.getProd_img(), "product");
+            System.out.println("----------------------------------");
+            System.out.println("imgUrl = " + imgUrl);
             ProductImageDto productImageDto = new ProductImageDto();
-            productImageDto.setProd_img_id(productDto.getProd_img_id());
+            productImageDto.setMd_num(productDto.getMd_num());
+            System.out.println("productImageDto = " + productImageDto);
+            productImageDto.setProd_img_id(imgUrl);
+            System.out.println("productDto.getProd_id() = " + productDto.getProd_id());
             productImageDto.setProd_id(productDto.getProd_id());
             productImageDto.setOri_file_name(productImage.getOriginalFilename());
-            productImageDto.setSer_file_name(imgUrl);
+            productImageDto.setSer_file_name(AwsS3ImgUploaderService.generateFileName(Objects.requireNonNull(productImage.getOriginalFilename())));
             productImageDto.setRg_num(productDto.getRg_num());
             productImageEnroll(productImageDto);
         } catch (Exception e) {
