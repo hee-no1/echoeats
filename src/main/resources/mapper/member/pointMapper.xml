@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.main.member.pointMapper">
+    <insert id="insert_point" parameterType="PointDto">
+        INSERT INTO point_his
+        (price, status, reason, his_end_date)
+        VALUES
+            (#{price}, #{status}, #{reason}, #{his_end_date})
+    </insert>
+
+    <select id="selectAll_point">
+        SELECT * FROM point_his WHERE mem_id = #{mem_id}
+    </select>
+
+    <select id="select_point">
+        SELECT * FROM point_his WHERE point_id = #{point_id}
+    </select>
+
+    <update id="update_point">
+        UPDATE point_his
+        SET price = #{price}, status = #{status}, reason = #{reason}, his_end_date = #{his_end_date}
+        WHERE point_id = #{point_id}
+    </update>
+
+    <select id="count_point">
+        SELECT count(*) FROM point_his WHERE mem_id = #{mem_id}
+    </select>
+</mapper>
