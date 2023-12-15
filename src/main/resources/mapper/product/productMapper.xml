@@ -51,6 +51,12 @@
         FROM product
     </select>
 
+    <!-- product_image -->
+    <select id="countImage" resultType="int">
+        SELECT COUNT(*)
+        FROM product_image
+    </select>
+
     <!-- 이미지 등록 -->
     <insert id="insertImage">
         INSERT INTO product_image (prod_img_id, prod_id, ori_file_name, ser_file_name, rg_num, md_num)
