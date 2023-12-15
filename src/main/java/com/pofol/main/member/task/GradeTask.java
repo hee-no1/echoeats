@@ -27,48 +27,46 @@ public class GradeTask {
     PaymentRepository paymentRepository;
 
 
-    //@Scheduled(cron = "0 40 14 * * *")
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
+    //@Scheduled(cron = "*/10 * * * * *")
     public void testMethod() throws Exception {
-        System.out.println("배치 실행중~~~~~~~~~~~~~~~~");
-
-        //오늘 날짜보다 한 달 전인 날짜를 가져온다
-        //이 날짜를 이용하여 member의 update_date와 일치한 회원들을 가져온다
-        //반복문 안에 회원들을 하나씩꺼내서 전월 사용한 금액을 조회한다
-        //등급 계산 메서드에 (결제금액, 등급Dto)를 넣는다
-        //리턴받은 등급을 그 회원의 등급에 update한다
+        System.out.println("================등급 갱신================");
 
 
 
-
-
+        //db에서 등급을 가져온다
         List<GradeDto> gradeDtos = gradeService.show_list();
 
-
+        //오늘 날짜를 가져온다(등급갱신일을 조회하는 데 사용)
         LocalDate currentDate = LocalDate.now();
 
+        //밑에 두 날짜는 한 달동안 총결제한 금액을 가져오는데 사용
+        //오늘 날짜에서 하루를 더함
         LocalDate dayPlusOne = currentDate.plusDays(1);
-
-        // 전 달 날짜 계산
+        //전 달 날짜
         LocalDate MonthMinusOne = currentDate.minusMonths(1);
 
-
+        //문자열로 조회하기 때문에 모두 문자열로 형변환
         String currentDateStr = String.valueOf(currentDate);
         String dayPlusOneStr = String.valueOf(dayPlusOne);
         String MonthMinusOneStr = String.valueOf(MonthMinusOne);
 
 
-
+        //등급갱신일이 오늘 날짜인 회원들을 조회
         List<MemberDto> memberDtos = memberService.check_grade(currentDateStr);
         for (MemberDto memberDto : memberDtos) {
             System.out.println(memberDto);
             String memId = memberDto.getMem_id();
+            //회원id, 전 달 날짜, 하루를 더한 날짜를 이용해서 한 달동안 결제한 금액을 가져온다
             PaymentDto paymentDto = new PaymentDto(memId, MonthMinusOneStr,dayPlusOneStr);//nullpointer나면 어떻게 하냐?
             Integer i1 = paymentRepository.selectTotalPrice(paymentDto);
             System.out.println("i1 : "+i1);
+            //결제한 금액, 등급dto를 등급을 계산
             String s = cal_grade(i1, gradeDtos);
             System.out.println(s);
+            //반환된 등급을 memberDto에 넣고
             memberDto.setGd_name(s);
+            //회원 등급 수정
             int update = memberService.update_grade(memberDto);
         }
 
@@ -93,29 +91,3 @@ public class GradeTask {
 
 
 }
-
-
-//    Map<String, Integer> result = list.stream()
-//            .sorted((a1, a2) -> Integer.compare(a1.getAge(), a2.getAge()))
-//            .collect(Collectors.toMap(A::getName, A::getAge));
-//
-
-
-
-////LocalDate currentDate = LocalDate.now();
-//
-//    // 주어진 날짜 문자열
-//    String dateString = "2023-01-12";
-//
-//    // 주어진 날짜 문자열을 LocalDate로 변환
-//    LocalDate currentDate = LocalDate.parse(dateString);
-//
-//    // 전 달 날짜 계산
-//    LocalDate lastMonthDate = currentDate.minusMonths(1);
-//
-//    // 날짜 포맷 지정 (예: "yyyy-MM-dd")
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//    // 전 달 날짜를 원하는 형식으로 출력
-//    String lastMonthDateString = lastMonthDate.format(formatter);
-//        System.out.println("전 달 날짜: " + lastMonthDateString);
