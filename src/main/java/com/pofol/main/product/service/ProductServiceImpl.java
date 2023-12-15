@@ -26,10 +26,10 @@ public class ProductServiceImpl implements ProductService {
             String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                     productDto.getProd_img(), "product");
             ProductImageDto productImageDto = new ProductImageDto();
+            productImageDto.setProd_img_id(productDto.getProd_img_id());
             productImageDto.setProd_id(productDto.getProd_id());
             productImageDto.setOri_file_name(productImage.getOriginalFilename());
-            productImageDto.setSer_file_name(String.valueOf(productDto.getProd_img()));
-            productImageDto.setUpld_path(imgUrl);
+            productImageDto.setSer_file_name(imgUrl);
             productImageDto.setRg_num(productDto.getRg_num());
             productImageEnroll(productImageDto);
         } catch (Exception e) {
