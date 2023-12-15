@@ -12,14 +12,10 @@ import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
-import com.pofol.main.product.basket.SelectedItemsDto;
-import com.pofol.main.orders.sample.memberSample.SampleMemberDto;
-import com.pofol.main.orders.sample.memberSample.SampleMemberRepository;
+import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.orders.order.domain.ProductOrderCheckout;
-import com.pofol.main.product.basket.BasketRepository;
+import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +28,7 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
-    private final BasketRepository basketRepo;
+    private final CartRepository basketRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;

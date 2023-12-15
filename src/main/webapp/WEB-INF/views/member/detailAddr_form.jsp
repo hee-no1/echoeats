@@ -29,7 +29,7 @@
                                                                      class="css-1quw3ub e1uzxhvi2" value=""></div>
             </div>
             <div class="css-a0w530 ecqulhg1"><label class="css-1wkyvs2 e1dcessg3"><input type="checkbox"
-                                                                                         class="css-agvwxo e1dcessg2">
+                                                                                         class="css-agvwxo e1dcessg2" id="checkbox">
                 <div class="css-79hxr7 e1dcessg1"><svg width="24" height="24" viewBox="0 0 24 24"
                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -43,42 +43,35 @@
         </div>
     </div>
 </div>
-<%--<script id="__NEXT_DATA__"--%>
-<%--        type="application/json">{"props":{"pageProps":{}},"page":"/address/shipping-address","query":{},"buildId":"Ap-OXxo_KV4QapbVKliCQ","assetPrefix":"https://res.kurly.com","nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}</script>--%>
-<%--<script id="clarity-script" data-nscript="afterInteractive">--%>
-<%--    (function (c, l, a, r, i, t, y) {--%>
-<%--        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };--%>
-<%--        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;--%>
-<%--        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);--%>
-<%--    })(window, document, "clarity", "script", "jbtozksiax");--%>
-<%--</script><next-route-announcer>--%>
-<%--    <p aria-live="assertive" id="__next-route-announcer__" role="alert"--%>
-<%--       style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap; overflow-wrap: normal;">--%>
-<%--        컬리 - 마켓컬리/뷰티컬리</p>--%>
-<%--</next-route-announcer>--%>
-<%--<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"--%>
-<%--        id="daum_postcode_script"></script>--%>
-<%--<script src="https://www.googletagmanager.com/gtag/js?id=G-BJ5N3PD9QG" id="google-tag-manager"--%>
-<%--        data-nscript="afterInteractive"></script>--%>
-<%--<script id="google-analytics" data-nscript="afterInteractive">--%>
-<%--    window.dataLayer = window.dataLayer || [];--%>
-<%--    function gtag() { window.dataLayer.push(arguments); }--%>
-<%--    gtag('js', new Date());--%>
-<%--    gtag('config', 'G-BJ5N3PD9QG', { 'user_id': '66c148dc-4fb3-4f41-b2b0-9eb371202ff1', 'debug_mode': true });--%>
-<%--</script>--%>
-<%--<script src="https://res.kurly.com/_next/static/chunks/48178-b0c6f77c0eda7dd3.js"></script>--%>
-<%--<script src="https://res.kurly.com/_next/static/chunks/55260-14372e7254ab98fe.js"></script>--%>
-<%--<script src="https://res.kurly.com/_next/static/chunks/80972-4251299749f1ab23.js"></script>--%>
-<%--<script--%>
-<%--        src="https://res.kurly.com/_next/static/chunks/pages/address/shipping-address/result-693bf2b8886548f5.js"></script>--%>
 <script>
+    let mem_id = "${mem_id}";
+    let checkbox = document.getElementById("checkbox");
+    let def_addr = "N";
+
+    //체크박스
+    checkbox.addEventListener("change", function (){
+        let svgPath = checkbox.parentElement.querySelector(".css-79hxr7 path");
+        if (checkbox.checked) {
+            svgPath.setAttribute("stroke", "#fff");
+            svgPath.setAttribute("fill", "#5f0080");
+            def_addr = "Y";
+        } else {
+            svgPath.setAttribute("stroke", "#ddd");
+            svgPath.setAttribute("fill", "#fff");
+            def_addr = "N";
+        }
+    })
+
     $("#save_btn").click(function sendData() {
         let addr = document.getElementById("addr").innerText;
         let dtl_addr = document.getElementById("addressDetail").value;
         let data = {
             dtl_addr: dtl_addr,
-            addr: addr
+            addr: addr,
+            def_addr: def_addr,
+            mem_id: mem_id
         };
+        console.log(data)
         $.ajax({
             type: "POST",
             url:"detail",

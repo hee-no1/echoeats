@@ -1,4 +1,4 @@
-package com.pofol.main.product.basket;
+package com.pofol.main.product.cart;
 
 import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import lombok.AllArgsConstructor;

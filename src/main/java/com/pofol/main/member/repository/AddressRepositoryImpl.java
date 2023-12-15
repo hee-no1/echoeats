@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AddressRepositoryImpl implements AddressRepository{
@@ -21,6 +22,11 @@ public class AddressRepositoryImpl implements AddressRepository{
     @Override
     public List<AddressDto> selectAllAddress(String mem_id) throws Exception {
         return session.selectList(namespace + "selectAll_address", mem_id);
+    }
+    
+    @Override
+    public AddressDto selectDefaultAddress(String mem_id) throws Exception {
+        return session.selectOne(namespace + "selectDefaultAddress", mem_id);
     }
 
     @Override
@@ -40,6 +46,6 @@ public class AddressRepositoryImpl implements AddressRepository{
 
     @Override
     public int deleteAddress(String addr_id) throws Exception {
-        return session.delete(namespace + "delete_address" + addr_id);
+        return session.delete(namespace + "delete_address",addr_id);
     }
 }

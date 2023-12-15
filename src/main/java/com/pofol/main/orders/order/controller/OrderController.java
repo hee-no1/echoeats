@@ -1,9 +1,17 @@
 package com.pofol.main.orders.order.controller;
 
+import com.pofol.main.orders.payment.service.PaymentDiscountService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.DelNotesDto;
-import com.pofol.main.member.dto.MemCouponDto;
 import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.CouponService;
@@ -13,13 +21,10 @@ import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
-import com.pofol.main.orders.payment.service.PaymentDiscountService;
+import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.orders.payment.service.PaymentService;
-import com.pofol.main.product.basket.SelectedItemsDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 

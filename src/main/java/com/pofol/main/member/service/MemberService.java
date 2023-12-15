@@ -12,4 +12,6 @@ public interface MemberService {
 
     List<MemberDto> check_grade(String date)throws Exception;
 
+    int update_grade(MemberDto memberDto) throws Exception;
+
 }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -8,19 +8,23 @@
     <link rel="icon" href="./favicon.ico">
     <title>컬리</title>
     <link rel="stylesheet" href="/resources/css/member/addr_form.css">
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <script src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
+
+<%@ include file="../include/header.jspf" %>
+
 <div class = "css-2b29tl">
     <div class = "css-1jgbowa epggjnz4">
         <div class = "css-1oynwoh epggjnz3">
             <div class = "css-1nmq3i1 epggjnz2">
                 <div class = "css-zjik7">
-                    <div class = "welcome">웰컴</div>
+                    <div class = "welcome">${memberDto.gd_name}</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
-                            김도형님
+                            ${memberDto.mem_name}
                         </strong>
                         <div class = "css-70qvj9">
                             <button class = "css-rlyyl8">다음 달 등급 확인</button>
@@ -291,7 +295,7 @@
             </div>
 
             <div class="css-1jdq78j e1cucsfi1">
-                <div class="css-wru9pk e1cucsfi0">선택</div>
+<%--                <div class="css-wru9pk e1cucsfi0">선택</div>--%>
                 <div class="css-3fr0n1 e1cucsfi0">주소</div>
                 <div class="css-gtglzf e1cucsfi0">받으실 분</div>
                 <div class="css-1aqlhfo e1cucsfi0">연락처</div>
@@ -302,18 +306,18 @@
                 <c:forEach var="addressDtos" items="${list}">
                 <li class="css-d35zkp erme1rh1">
                     <div>
-                        <div class="eeocvzp5 css-1bs5q0a e19svclq0">
-                            <label class="css-1xdhyk6 e1dcessg3">
-                                <input type="checkbox" class="css-agvwxo e1dcessg2" value="21937039" name="checkbox">
-                                <div class="css-79hxr7 e1dcessg1">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
-                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                                <span></span>
-                            </label>
-                        </div>
+<%--                        <div class="eeocvzp5 css-1bs5q0a e19svclq0">--%>
+<%--                            <label class="css-1xdhyk6 e1dcessg3">--%>
+<%--                                <input type="checkbox" class="css-agvwxo e1dcessg2" value="21937039" name="checkbox">--%>
+<%--                                <div class="css-79hxr7 e1dcessg1">--%>
+<%--                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>--%>
+<%--                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>--%>
+<%--                                    </svg>--%>
+<%--                                </div>--%>
+<%--                                <span></span>--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
                         <div class="eeocvzp4 css-8xfsdg e19svclq0">
                             <div>
                                 <c:if test="${addressDtos.def_addr.equals('Y')}"><div class="css-1b3iimx eeocvzp0">기본 배송지</div></c:if>
@@ -361,55 +365,46 @@
     }
     // 상세주소 페이지로 이동
     function moveToDetailedPage(addr) {
-        window.open("/address/detail?addr=" + encodeURIComponent(addr),"_blank","width=500, height=500")
+        detailPage = window.open("/address/detail?addr=" + encodeURIComponent(addr),"_blank","width=500, height=500")
+        $(detailPage).on('beforeunload',function (){
+            location.reload();
+        })
     }
     //주소업데이트 페이지로 이동
     update_btns = document.getElementsByName("update_btn");
     update_btns.forEach(function (btn){
         btn.addEventListener('click',function moveToUpdatePage() {
             var addr_id = btn.id;
-            window.open("/address/update?addr_id=" + encodeURIComponent(addr_id),"_blank","width=500, height=500")
+           updatePage=  window.open("/address/update?addr_id=" + encodeURIComponent(addr_id),"_blank","width=500, height=500")
+            $(updatePage).on('beforeunload',function (){
+                location.reload();
+            })
         })
     })
-    //checked
-    let checkboxes = document.getElementsByName("checkbox");
-
-    // checkboxes.forEach(function (checkbox){
-    //     checkbox.addEventListener("change", function(){
-    //         let parentDiv = checkbox.parentElement;
-    //         let svgPath = parentDiv.querySelector(".css-79hxr7 path");
+    // //checked
+    // let checkboxes = document.getElementsByName("checkbox");
+    // checkboxes.forEach(function (checkbox) {
+    //     checkbox.addEventListener("change", function () {
+    //         let svgPath = checkbox.parentElement.querySelector(".css-79hxr7 path");
     //
-    //         if(checkbox.checked){
-    //             svgPath.setAttribute("stroke","#fff");
-    //             svgPath.setAttribute("fill","#5f0080");
+    //         checkboxes.forEach(function (otherCheckbox) {
+    //             if (otherCheckbox !== checkbox) {
+    //                 otherCheckbox.checked = false;
+    //                 let otherSvgPath = otherCheckbox.parentElement.querySelector(".css-79hxr7 path");
+    //                 otherSvgPath.setAttribute("stroke", "#ddd");
+    //                 otherSvgPath.setAttribute("fill", "#fff");
+    //             }
+    //         });
+    //
+    //         if (checkbox.checked) {
+    //             svgPath.setAttribute("stroke", "#fff");
+    //             svgPath.setAttribute("fill", "#5f0080");
     //         } else {
-    //             svgPath.setAttribute("stroke","#ddd");
-    //             svgPath.setAttribute("fill","#fff");
+    //             svgPath.setAttribute("stroke", "#ddd");
+    //             svgPath.setAttribute("fill", "#fff");
     //         }
-    //     })
-    // })
-    checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener("change", function () {
-            let svgPath = checkbox.parentElement.querySelector(".css-79hxr7 path");
-
-            checkboxes.forEach(function (otherCheckbox) {
-                if (otherCheckbox !== checkbox) {
-                    otherCheckbox.checked = false;
-                    let otherSvgPath = otherCheckbox.parentElement.querySelector(".css-79hxr7 path");
-                    otherSvgPath.setAttribute("stroke", "#ddd");
-                    otherSvgPath.setAttribute("fill", "#fff");
-                }
-            });
-
-            if (checkbox.checked) {
-                svgPath.setAttribute("stroke", "#fff");
-                svgPath.setAttribute("fill", "#5f0080");
-            } else {
-                svgPath.setAttribute("stroke", "#ddd");
-                svgPath.setAttribute("fill", "#fff");
-            }
-        });
-    });
+    //     });
+    // });
 </script>
 </body>
 </html>

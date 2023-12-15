@@ -52,4 +52,9 @@ public class MemberRepositoryImpl implements MemberRepository {
         return session.selectList(namespace+"checkGrade",date);
     }
 
+    @Override
+    public int updateGrade(MemberDto memberDto) throws Exception {
+        return session.update(namespace+"updateGrade", memberDto);
+    }
+
 }

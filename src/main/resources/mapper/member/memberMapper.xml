@@ -49,4 +49,10 @@
         where update_date = #{date}
     </select>
 
+    <update id="updateGrade" parameterType="MemberDto">
+        UPDATE member
+        SET   gd_name = #{gd_name}
+        WHERE mem_id =#{mem_id}
+    </update>
+
 </mapper>

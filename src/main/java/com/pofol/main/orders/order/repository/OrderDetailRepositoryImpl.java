@@ -69,4 +69,9 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
 	public String selectByCodeName(String code_name) {
 		return session.selectOne(namespace+"selectByCodeName", code_name);
 	}
+
+	@Override
+	public OrderDetailDto selectByOrderDetId(Long ord_det_id) {
+		return session.selectOne(namespace+"selectByOrderDetId", ord_det_id);
+	}
 }
