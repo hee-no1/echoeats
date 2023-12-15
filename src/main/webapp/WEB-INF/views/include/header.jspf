@@ -41,7 +41,7 @@
                 <div id="search">
                     <div id="search-bar">
                         <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">
-                        <a> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/main"> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <%--                        <div class="stick"></div>--%>
 <%--                        <a>뷰티컬리</a>--%>
 

@@ -664,6 +664,7 @@
 <script>
 
     let productList = [];
+    <sec:authorize access="isAuthenticated()">
     <c:choose>
     <c:when test="${option eq 'option'}">
     <c:forEach var="optionList" items="${optionList}" varStatus="loop">
@@ -673,6 +674,7 @@
         opt_prod_name : '${optionList.opt_prod_name}',
         opt_price : ${optionList.opt_price},
         opt_disc_price : ${optionList.opt_disc_price},
+        mem_id : '${memberID}',
         qty : 0
     }
     </c:forEach>
@@ -683,11 +685,13 @@
         prod_name : '${product.prod_name}',
         prod_price : ${product.prod_price},
         disc_price : ${product.disc_price},
+        mem_id : '${memberID}',
         qty : 1
     }
     </c:otherwise>
     </c:choose>
-
+    </sec:authorize>
+    console.log("productList : ", productList);
 </script>
 <script src="/resources/product/js/product.js"></script>
 </body>

@@ -84,13 +84,15 @@ public class ProductListController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String memberID = authentication.getName();
 
-            // 로그인 상태일 때 (적립금 계산)
+            // 로그인 상태일 때 (적립금 계산) + (회원 아이디 가져오기)
             if (!memberID.equals("anonymousUser")) {
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
 
                 Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
                 model.addAttribute("saveMoney", saveMoney);
+                
+                model.addAttribute("memberID", memberID);
             }
 
             // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
