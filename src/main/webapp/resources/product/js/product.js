@@ -1,7 +1,7 @@
 let cartProduct = productList;
 
 const productAjax = function (action, productQuantity, discountPrice, productQuantityHtml, i) {
-
+    console.log(productList)
     // 총 상품 가격
     let totalPrice = document.querySelector('.css-x4cdgl');
 
@@ -26,7 +26,7 @@ const productAjax = function (action, productQuantity, discountPrice, productQua
             for (let j = 0; j < cartProduct.length; j++) {
                 totalProductPrice += cartProduct[j].total_price;
             }
-            totalPrice.textContent = totalProductPrice;
+            totalPrice.textContent = totalProductPrice.toLocaleString();
             let {qty} = cartProduct[i];
             productQuantityHtml.textContent = qty;
         },
@@ -49,6 +49,7 @@ const productAjax = function (action, productQuantity, discountPrice, productQua
 // 장바구니에 상품 담는 기능
 const saveProductAjax = function () {
 
+    console.log("cart",cartProduct);
     $.ajax({
         type: 'POST',
         url: '/cart/saveProduct',
@@ -61,7 +62,7 @@ const saveProductAjax = function () {
             alert("장바구니에 담겼습니다.");
         },
         error: function () {
-            alert("error");
+            alert("장바구니 에러.");
         }
     })
 }
@@ -77,19 +78,26 @@ const saveProductAjax = function () {
 
 
 
-
-
 $(document).ready(function () {
+
+    // 로그인 버튼 누를 시 로그인 화면으로
+    const getLogin = document.querySelector('.getLogin');
+    if (getLogin !== null) {
+        getLogin.addEventListener('click', function () {
+            window.location.href = '/member/login_form';
+        })
+    }
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')
 
     for (let i = 0; i < upButton.length; i++) {
         upButton[i].addEventListener("click", function () {
-            let productQuantity = document.querySelectorAll('.count')[i].textContent
-            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.match(/\d+/)[0];
-            let productQuantityHtml = document.querySelectorAll('.count')[i];
 
+            let productQuantity = document.querySelectorAll('.count')[i].textContent
+            let productQuantityHtml = document.querySelectorAll('.count')[i];
+            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.replace(/\D/g, '');
+            console.log(discountPrice)
             productAjax('increase', productQuantity, discountPrice, productQuantityHtml, i);
         })
     }
@@ -101,8 +109,8 @@ $(document).ready(function () {
         downButton[i].addEventListener("click", function () {
 
             let productQuantity = document.querySelectorAll('.count')[i].textContent
-            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.match(/\d+/)[0];
             let productQuantityHtml = document.querySelectorAll('.count')[i];
+            let discountPrice = document.querySelectorAll('.css-gqkxk8')[i].textContent.replace(/\D/g, '');
 
             if (downButton.length === 1) {
                 if (productQuantity === '1') {
@@ -119,19 +127,11 @@ $(document).ready(function () {
     }
 
 
-
-
-
-
-
-
-
-
     // 장바구니 담기 버튼
     const cartButton = document.querySelector(".cart-button")
 
     cartButton.addEventListener('click', function () {
-
+        console.log("1111", cartProduct)
         let qtyCount = 0;
         for (let i = 0; i < cartProduct.length; i++) {
             if (cartProduct[i].qty === 0) {
@@ -143,17 +143,6 @@ $(document).ready(function () {
             saveProductAjax();
         }
     })
-
-
-
-
-
-
-
-
-
-
-
 
 
     // 상품 상세 페이지

@@ -7,6 +7,7 @@ import com.pofol.main.product.category.CategoryList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController {
 
-    private final CartRepository cartRepository;
     private final GradeService gradeService;
     private final CartService cartService;
     private final CategoryList categoryList;
@@ -37,7 +37,6 @@ public class CartController {
                 cartDto.setTotal_price(cartDto.getOpt_disc_price() * cartDto.getQty());
             }
         }
-
         return cartDtoList;
     }
 
@@ -59,7 +58,7 @@ public class CartController {
             model.addAttribute("cartProductList", cartProductList);
 
             // 회원 등급 가져오기
-            if (!memberID.equals("anonymousUser")) {
+            if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
             }
@@ -76,9 +75,14 @@ public class CartController {
     @PostMapping("/saveProduct")
     public ResponseEntity<String> saveProductCart(@RequestBody List<CartDto> cartDtoList) {
 
-        System.out.println("save/Product 실행됨");
-        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication instanceof AnonymousAuthenticationToken){
+            return ResponseEntity.badRequest().body("로그인 이후 이용");
+        }
+
         for (CartDto cartDto : cartDtoList) {
+
             if (cartDto.getQty() != 0) {
                 try {
                     cartService.saveCartProduct(cartDto);
@@ -87,9 +91,32 @@ public class CartController {
                     return ResponseEntity.badRequest().body("장바구니 담기 실패");
                 }
             }
-
         }
-        System.out.println("last 실행");
         return ResponseEntity.ok("장바구니 담기 성공");
+    }
+
+    // 장바구니 상품 수량 변경에 따른 가격 변동
+    @ResponseBody
+    @PostMapping("/CartCalculation")
+    public CartDto getCartProductCount(@RequestBody CartDto cartDto) {
+
+        Integer prodPrice = cartDto.getProd_price();
+        Integer prodDiscPrice = cartDto.getDisc_price();
+        Integer optPrice = cartDto.getOpt_price();
+        Integer optDiscPrice = cartDto.getOpt_disc_price();
+        Integer qty = cartDto.getQty();
+
+        if (prodPrice != null && prodDiscPrice != null) {
+
+            cartDto.setTotal_price(prodPrice * qty);
+            cartDto.setTotal_disc_price(prodDiscPrice * qty);
+
+        } else if (optPrice != null && optDiscPrice != null) {
+
+            cartDto.setTotal_price(optPrice * qty);
+            cartDto.setTotal_disc_price(optDiscPrice * qty);
+        }
+
+        return cartDto;
     }
 }
