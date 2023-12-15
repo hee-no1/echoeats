@@ -35,6 +35,17 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        if (productDto.getOptionProductList() != null) {
+            productDto.getOptionProductList().forEach(optionProductDto -> {
+                optionProductDto.setProd_id(productDto.getProd_id());
+                try {
+                    productRepository.insertOptionProduct(optionProductDto);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 
     @Override
