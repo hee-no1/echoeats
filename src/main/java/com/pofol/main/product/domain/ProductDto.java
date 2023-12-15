@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -53,6 +54,7 @@ public class ProductDto {
     private String as_guide; // 안내사항
 
     MultipartFile prod_img; // 상품 이미지 파일
+    List<OptionProductDto> optionProductList; // 옵션 상품 리스트
 
     // 관리자 페이지에서 사용
     private String bigCategory;
