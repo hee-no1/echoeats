@@ -13,17 +13,17 @@ public class DelNotesRepositoryImpl implements DelNotesRepository{
 
     private static String namespace = "com.pofol.main.member.delNotesMapper.";
     @Override
-    public int insert_delNotes(DelNotesDto dto) {
+    public int insert_delNotes(DelNotesDto dto) throws Exception{
         return session.insert(namespace+"insert_delNotes", dto);
     }
 
     @Override
-    public int update_delNotes(DelNotesDto dto) {
-        return session.update(namespace="update_delNotes", dto);
+    public int update_delNotes(DelNotesDto dto) throws Exception {
+        return session.update(namespace+"update_delNotes", dto);
     }
 
     @Override
-    public DelNotesDto select_delNotes(String mem_id) {
+    public DelNotesDto select_delNotes(String mem_id) throws Exception {
         return session.selectOne(namespace+"select_delNotes", mem_id);
     }
 }

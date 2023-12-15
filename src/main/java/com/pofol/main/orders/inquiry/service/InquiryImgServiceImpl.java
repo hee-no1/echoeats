@@ -7,45 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
+import com.pofol.main.orders.inquiry.repository.InquiryImgRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryPrdRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryRepository;
+
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class InquiryImgServiceImpl implements InquiryImgService {
 
-	@Autowired
-	private SqlSession session;
-	private static String namespace = "repository.inquiryImgMapper.";
-
+	private final InquiryImgRepository inqImgRepo;
+	
 	@Override
-	public int insert(InquiryImgDto dto) throws Exception {
-		return session.insert(namespace + "insert", dto);
+	public List<String> selectAllByInqId(Long inquiry_id) {
+		return inqImgRepo.selectAllByInqId(inquiry_id);
 	}
 
-	@Override
-	public InquiryImgDto select(Long inquiry_img_id) throws Exception {
-		return session.selectOne(namespace + "select", inquiry_img_id);
-	}
-
-	@Override
-	public int update(InquiryImgDto dto) throws Exception {
-		return session.update(namespace + "update", dto);
-	}// updateStatus
-
-	@Override
-	public int delete(Long inquiry_img_id) throws Exception {
-		return session.delete(namespace + "delete", inquiry_img_id);
-	}
-
-	@Override
-	public List<InquiryImgDto> selectAll() throws Exception {
-		return session.selectList(namespace + "selectAll");
-	}
-
-	@Override
-	public int deleteAll() throws Exception {
-		return session.delete(namespace + "deleteAll");
-	}
-
-	@Override
-	public int count() throws Exception {
-		return session.selectOne(namespace + "count");
-	}
 }

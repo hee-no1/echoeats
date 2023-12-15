@@ -26,7 +26,7 @@
 
             $('select[name=rows]').change(function(){ // 다시 확인 할 것
                 const ps = $('select[name=rows]').val();
-                location.href = "/admin/product/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;
+                location.href = "/admin/product/list${ph.sc.getProductQueryString()}&pageSize="+ps;
             });
 
             $('.btnDate').click(function(e) {
@@ -36,7 +36,14 @@
 
                 let interval = e.target.closest('a.btnDate').getAttribute('date-interval');
 
-                $('.start_date').val(fullDate(-interval));
+                if (interval !== '-1') {
+                    $('.start_date').val(fullDate(-interval));
+                    $('.duet-date__input').prop('disabled', false)
+                } else {
+                    $('.duet-date__input').prop('disabled', true)
+                }
+                console.log("날짜계산", interval)
+                console.log(typeof interval)
             });
 
             $('#search_button').click(function(e){
@@ -49,6 +56,7 @@
             });
 
             $('.duet-date-picker-grid').click(function(e){
+                $('.duet-date__input').prop('disabled', false)
                 $('.btnDate').removeClass('selected');
             });
         });
@@ -91,15 +99,15 @@
             --bs-pagination-border-width: 1px;
             --bs-pagination-border-color: #dee2e6;
             --bs-pagination-border-radius: 0.375rem;
-            --bs-pagination-hover-color: #1b1e26;
+            --bs-pagination-hover-color: #00c73c;
             --bs-pagination-hover-bg: #e9ecef;
             --bs-pagination-hover-border-color: #dee2e6;
-            --bs-pagination-focus-color: #1b1e26;
+            --bs-pagination-focus-color: #00c73c;
             --bs-pagination-focus-bg: #e9ecef;
             --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             --bs-pagination-active-color: #fff;
-            --bs-pagination-active-bg: #1b1e26;
-            --bs-pagination-active-border-color: #1b1e26;
+            --bs-pagination-active-bg: #00c73c;
+            --bs-pagination-active-border-color: #00c73c;
             --bs-pagination-disabled-color: #6c757d;
             --bs-pagination-disabled-bg: #fff;
             --bs-pagination-disabled-border-color: #dee2e6;
@@ -134,15 +142,10 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-<%--                                        <c:forEach var="ct" items="${ksList}">--%>
-<%--                                            <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                        </c:forEach>--%>
-
                                         <option value="ProductName">상품명</option>
                                         <option value="ProductNumber">상품번호</option>
                                         <option value="DeliveryType">배송속성</option>
                                         <option value="Brand">브랜드</option>
-
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword" id="sBaseSearchBox" style="width:400px;">
                                     <a href="#none" class="btnIcon icoPlus"><span>추가</span></a>
@@ -168,26 +171,19 @@
                         <th scope="row">상품등록일</th>
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
-<%--                                <c:forEach var="ct" items="${dtList}">--%>
-<%--                                    <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                </c:forEach>--%>
-
                                 <option value="ProductRegisterDate">상품등록일</option>
                                 <option value="ProductModifyDate">상품수정일</option>
                                 <option value="saleStartDate">판매시작일</option>
                                 <option value="saleEndDate">판매종료일</option>
-
                             </select>
-<%--                            <c:forEach var="ct" items="${diList}">--%>
-<%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
-<%--                            </c:forEach>--%>
+
                             <a href="#none" class="btnDate" date-interval="0"><span>오늘</span></a>
                             <a href="#none" class="btnDate" date-interval="3"><span>3일</span></a>
                             <a href="#none" class="btnDate" date-interval="7"><span>7일</span></a>
                             <a href="#none" class="btnDate" date-interval="30"><span>1개월</span></a>
                             <a href="#none" class="btnDate" date-interval="90"><span>3개월</span></a>
                             <a href="#none" class="btnDate" date-interval="365"><span>1년</span></a>
-                            <a href="#none" class="btnDate" date-interval="9999"><span>전체</span></a>
+                            <a href="#none" class="btnDate" date-interval="-1"><span>전체</span></a>
 
                             <div class="duet-date-picker-grid  duet-date-theme-ec-new  sun">
                                 <duet-date-picker first-day-of-week="0" name="start_date" identifier="startDate"
@@ -222,9 +218,9 @@
                         <th scope="row">재고상태</th>
                         <td colspan="3">
                             <label class="gSingleLabel eSelected"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="A" checked="&quot;checked&quot;"> 전체</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="재고정상"> 재고정상</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="재고부족"> 재고부족</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="품절"> 품절</label>
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockNormal"> 재고정상</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockLack"> 재고부족</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="Stock" value="stockOut"> 품절</label>
                         </td>
                     </tr>
                     <tr>
@@ -245,7 +241,7 @@
                         <td colspan="3">
                             <ul class="mForm typeVer" id="eSearchFormPrice">
                                 <li>
-                                    <select class="fSelect" name="price">
+                                    <select class="fSelect" name="priceKind">
                                         <option value="product" selected="selected">판매가</option>
                                         <option value="custom">할인가</option>
                                     </select>
@@ -261,8 +257,8 @@
                         <th scope="row">옵션상품</th>
                         <td colspan="3">
                             <label class="gSingleLabel eSelected"><input type="radio" class="fChk eDisplayStatus" name="option" value="A" checked="&quot;checked&quot;"> 전체</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="T"> 옵션있음</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="F"> 옵션없음</label>
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="Y"> 옵션있음</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="option" value="N"> 옵션없음</label>
                         </td>
                     </tr>
                     <tr>
@@ -284,26 +280,28 @@
                     <img src="//img.echosting.cafe24.com/suio/ico_loading.gif" alt="">
                 </div> -->
             </div>
-        </form> <!--option -->
+
         <div id="tabNumber" class="tabCont">
             <div class="mCtrl typeHeader">
                 <div class="gTop">
-                    <select>
-                        <option value="">판매전</option>
-                        <option value="">판매중</option>
-                        <option value="">판매중지</option>
-                        <option value="">판매종료</option>
-                        <option value="">판매금지</option>
+                    <select class="btnNormal" name="saleStatus">
+                        <option value="">판매변경</option>
+                        <option value="판매전">판매전</option>
+                        <option value="판매중">판매중</option>
+                        <option value="판매중지">판매중지</option>
+                        <option value="판매종료">판매종료</option>
+                        <option value="판매금지">판매금지</option>
                     </select>
-                    <select>
-                        <option value="">진열함</option>
-                        <option value="">진열안함</option>
+                    <select class="btnNormal" name="displayStatus">
+                        <option value="">진열변경</option>
+                        <option value="Y">진열함</option>
+                        <option value="N">진열안함</option>
                     </select>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl"><span>판매가 변경</span></a>
+                       class="btnNormal"><span>판매가 변경</span></a>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
                        class="btnNormal"><span>판매기간 변경</span></a>
-                    <button type="submit">수정</button>
+                    <button type="submit" class="btnNormal" id="updateButton"><span>수정</span></button>
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
@@ -406,7 +404,7 @@
                                         <c:set var="parentCode" value="${category.parent_code}"/>
                                     </c:if>
                                 </c:forEach>
-                                <td scope="col" class="w24"><input type="checkbox" id="allChk"></td>
+                                <td scope="col" class="w24"><input type="checkbox" id="allChk" name="selectProductId" value="${product.prod_id}"></td>
                                 <td scope="col" class="w50" style="display:none;">No</td>
                                 <td scope="col" class="w120" style="">${product.prod_id}</td>
                                 <td scope="col" class="w150" style="">${product.prod_name}</td>
@@ -414,11 +412,11 @@
                                 <td scope="col" class="w95" style="">${product.disp_sts}</td>
                                 <td scope="col" class="w95" style="">
                                     <c:choose>
-                                        <c:when test="${product.prod_qty eq 0}">
-                                            품절
-                                        </c:when>
                                         <c:when test="${product.prod_qty > 50}">
                                             재고정상
+                                        </c:when>
+                                        <c:when test="${product.prod_qty eq 0}">
+                                            품절
                                         </c:when>
                                         <c:otherwise>
                                             재고부족
@@ -461,21 +459,22 @@
                     <c:if test="${ph.totalCnt!=null && ph.totalCnt!=0}">
                         <c:if test="${ph.showPrev}">
                             <li class="page-item">
-                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(ph.beginPage-1)}"/>">&lt;</a>
                             </li>
                         </c:if>
                         <c:forEach var="pageNumber" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <li class="page-item ${pageNumber == ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(pageNumber)}"/>">${pageNumber}</a></li>
+                            <li class="page-item ${pageNumber == ph.sc.page? "active" : ""}"><a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(pageNumber)}"/>">${pageNumber}</a></li>
                         </c:forEach>
                         <c:if test="${ph.showNext}">
                             <li class="page-item">
-                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                                <a class="page-link" href="<c:url value="/admin/product/list${ph.sc.getProductQueryString(ph.endPage+1)}"/>">&gt;</a>
                             </li>
                         </c:if>
                     </c:if>
                 </ul>
             </div>
         </div>
+        </form> <!--option -->
     </div> <!-- context -->
 
     <footer class="py-4 bg-light mt-auto">
@@ -495,59 +494,6 @@
 <script>
 
     let categoryList = JSON.parse('${categoryList}');
-
-    let cate1Array = [];
-    let cate2Array = [];
-    let cate1Object = {};
-    let cate2Object = {};
-
-    let cate1Select = $('#eCategory1');
-    let cate2Select = $('#eCategory2');
-
-    $(document).ready(function(){
-        console.log(cate1Array);
-        console.log(cate2Array);
-    });
-
-    // 카테고리 배열 초기화 메서드
-    const makeCategoryArray = function(obj, array, categoryList, tier) {
-        for (let i = 0; i < categoryList.length; i++) {
-            if (categoryList[i].tier === tier) {
-                obj = {};
-                obj.cat_name = categoryList[i].cat_name;
-                obj.cat_code = categoryList[i].cat_code;
-                obj.parent_code = categoryList[i].parent_code;
-
-                array.push(obj);
-            }
-        }
-    }
-
-    // 배열 초기화
-    makeCategoryArray(cate1Object, cate1Array, categoryList, '1');
-    makeCategoryArray(cate2Object, cate2Array, categoryList, '2');
-
-    // 대분류 목록
-    for (let i = 0; i < cate1Array.length; i++) {
-        cate1Select.append('<option value="' + cate1Array[i].cat_code + '">' + cate1Array[i].cat_name + '</option>');
-    }
-
-    // 대분류 선택시 중분류 목록
-    $(cate1Select).on("change", function () {
-        let selectVal = $(this).find("option:selected").val();
-        cate2Select.children().remove();
-        cate2Select.append('<option selected value="none">- 중분류 선택 -</option>');
-        for(let i = 0; i < cate2Array.length; i++) {
-            if (cate2Array[i].parent_code === selectVal) {
-                cate2Select.append('<option value="' + cate2Array[i].cat_code + '">' + cate2Array[i].cat_name + '</option>');
-            }
-        }
-    });
-
-
-
-
-
 
     const pickers = document.querySelectorAll(".duet-date-picker")
     pickers.forEach(picker => {
@@ -578,5 +524,6 @@
 <script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
 <script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
 <script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
+<script src="/resources/product/js/productAdmin.js"></script>
 </body>
 </html>

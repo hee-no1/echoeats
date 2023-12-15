@@ -22,7 +22,9 @@ public class InquiryPrdDto {
     private String rg_num;
     private Date md_date;
     private String md_num;
-
+    
+    private String prod_img_id;
+    
     public InquiryPrdDto(Long inquiry_id, Long ord_id, Long ord_det_id,Date ord_date,
                           String prod_name, int prod_qty, int prod_tot_price,
                           String rg_num) {

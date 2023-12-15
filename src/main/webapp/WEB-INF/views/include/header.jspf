@@ -8,6 +8,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <div id="wrap">
     <div id="wrap-center">
         <div id="top">
@@ -39,10 +40,10 @@
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo.svg" alt="마켓컬리 로고">
-                        <a>마켓컬리</a>
-                        <div class="stick"></div>
-                        <a>뷰티컬리</a>
+                        <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">
+                        <a> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%--                        <div class="stick"></div>--%>
+<%--                        <a>뷰티컬리</a>--%>
 
                         <form action="/searchProduct" id="search-form">
                             <div id="search-center">
@@ -72,8 +73,10 @@
                             <button href="#">
                                 <span class="blind">찜하기</span>
                             </button>
-                            <button href="#">
-                                <span class="blind">장바구니</span>
+                            <button>
+                                <a href="/cart" style="width: 100%; height: 100%; display: inline-block">
+                                    <span class="blind">장바구니</span>
+                                </a>
                             </button>
                         </div>
                     </div>
@@ -113,7 +116,7 @@
                 </div>
                 <div id="nev-right">
                     <div>
-                        <span>샛별・택배</span>
+                        <span>에코・택배</span>
                         <span>배송안내</span>
                     </div>
                 </div>

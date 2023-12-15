@@ -23,7 +23,7 @@ class PaymentRepositoryImplTest {
 
     @Test
     void insert() throws Exception {
-        PaymentDto paymentDto = new PaymentDto("imp1234", 10000000022L, "you11", "PAYMENT_COMPLETE", "빼빼로외 3개", 30000, "kakao", "you11", "you11");
+        PaymentDto paymentDto = new PaymentDto("imp123435", 10000000765L, "you11", "PAYMENT_COMPLETE", "빼빼로외 3개", 30000,"kakao", "you11", "you11");
         int insert = paymentRepository.insert(paymentDto);
         assertThat(insert).isEqualTo(1);
     }

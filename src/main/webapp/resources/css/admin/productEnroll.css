@@ -1,180 +1,697 @@
 @charset "UTF-8";
-*{
-    margin: 0;
-    padding:0;
-}
-a{
-    text-decoration: none;
-}
-ul{
-    list-style: none;
-}
-/* 화면 전체 wrap */
-.wrapper{
-    width: 100%;
-}
-/* content wrap */
-.wrap{
-    width : 1080px;
-    margin: auto;
-}
-/* 홈페이지 기능 네비 */
-.top_gnb_area{
-    width: 100%;
-    height: 50px;
-    background-color: #f0f0f1;
-    position:relative;
-}
-.top_gnb_area .list{
-    position: absolute;
-    top: 0px;
-    right: 0;
-
-}
-.top_gnb_area .list li{
-    list-style: none;
-    float : left;
-    padding: 13px 15px 0 10px;
-    font-weight: 900;
-    cursor: pointer;
+* {
+    box-sizing: border-box;
 }
 
-/* 관리제 페이지 상단 현페이지 정보 */
-.admin_top_wrap{
-    height:110px;
-    line-height: 110px;
-    background-color: #5080bd;
-    margin-bottom:15px;
-}
-.admin_top_wrap>span{
-    margin-left: 30px;
-    display:inline-block;
-    color: white;
-    font-size: 50px;
-    font-weight: bolder;
-}
-/* 관리자 wrap(네비+컨텐츠) */
-.admin_wrap{
-
-
+body {
+    font-family: 나눔고딕, NanumGothic, Helvetica Neue, Helvetica, AppleSDGothicNeo-Regular, Arial, 맑은고딕, malgun gothic, 돋움, dotum, sans-serif;
+    line-height: 20px;
+    font-size: 13px;
 }
 
-/* 관리자페이지 네비 영역 */
-.admin_navi_wrap{
-    width: 20%;
-    height: 300px;
-    float:left;
-    height: 100%;
-}
-.admin_navi_wrap li{
+div {
     display: block;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-}
-.admin_navi_wrap li a{
-    display: block;
-    height: 100%;
-    width: 95%;
-    margin: 0 auto;
-    cursor: pointer;
-    font-size: 30px;
-    font-weight: bolder;
-}
-.admin_navi_wrap li a:link {color: black;}
-.admin_navi_wrap li a:visited {color: black;}
-.admin_navi_wrap li a:active {color: black;}
-.admin_navi_wrap li a:hover {color: black;}
-
-.admin_list_01{
-    background-color: #c8c8c8;
 }
 
-
-/* 관리자페이지 컨텐츠 영역 */
-.admin_content_wrap{
-    width: 80%;
-    float:left;
-    height: 100%;
-    height: 700px;
-
+.container {
+    padding: 0;
 }
-/* 관리자 컨텐츠 제목 영역 */
-.admin_content_subject{
-    font-size: 40px;
-    font-weight: bolder;
-    padding-left: 15px;
-    background-color: #6AAFE6;
-    height: 80px;
-    line-height: 80px;
-    color: white;
+
+.seller-content {
+    /*padding: 0 0 0 210px;*/
+    padding: 0;
 }
-/* 관리자 컨텐츠 메인 영역 */
-.form_section{
-    width: 95%;
-    margin-left: 2%;
-    margin-top: 20px;
+
+.seller-sub-title {
+    position: relative;
+    border-bottom: 1px solid #e3e7ee;
+    background-color: #fff;
+    height: 60px;
+    font-size: 13px;
+}
+
+.seller-sub-title::after {
+    content: "";
+    display: table;
+}
+
+.seller-sub-title::before {
+    content: "";
+    display: table;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.seller-sub-title > .pull-left > h2.title {
+    display: inline-block;
+    padding-left: 56px;
+    line-height: 59px;
+    font-size: 20px;
+    color: #303236;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+.seller-sub-content {
+    padding: 10px 25px 8px;
+}
+
+.form-section {
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 10px;
     border: 1px solid #dbdde2;
-    background-color: #efefef;
 }
-.form_section_title{
+
+.form-section > .title-line {
     padding: 20px 35px;
+    display: flex;
 }
-.form_section_title label{
-    display: block;
-    font-size: 20px;
-    font-weight: 800;
+
+.form-section > .title-line:before, .form-section > .title-line::after {
+    content: "";
+    display: table;
 }
-.form_section_content{
-    padding: 20px 35px;
-    border-top: 1px solid #dbdde2;
+
+.title-line:before {
+    content: "";
+    display: table;
 }
-.form_section_content input{
-    width: 98%;
-    height: 25px;
-    font-size: 20px;
-    padding: 5px 1%;
+
+.form-section > .title-line > .control-label {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 7px 5px 7px 0;
+    color: #303236;
+    /*width: 16.66666667%;*/
+    /*float: left;*/
+    clear: left;
 }
-.form_section_content select{
-    width: 98%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
+
+.form-section > .form-section-sub {
+    padding: 0 35px;
+    border-top: 1px solid #e2e6ee;
+    display: none;
 }
-/* 카테고리 css 설정 */
-.form_section_content select {
+
+.form-section > .form-section-sub > .form-sub-wrap {
+    margin-top: -1px;
+    padding-top: 15px;
+    padding-bottom: 16px;
+    border-top: 1px solid #e3e7ee;
+}
+
+.form-section > .form-section-sub > .form-sub-wrap:last-child {
+    padding-bottom: 20px;
+}
+
+.form-section > .form-section-sub > .form-sub-wrap:first-child {
+    border-top: 0;
+    padding-top: 21px;
+}
+
+.form-sub-wrap::before {
+    content: "";
+    display: table;
+}
+
+.form-sub-wrap::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.form-sub-wrap select {
     width: 92%;
     height: 35px;
     font-size: 20px;
     text-align-last: center;
     margin-left: 5px;
 }
-.cate_wrap span {
-    font-weight: 600;
+
+.set-option {
+    position: relative;
+    padding: 0 55px 0 0;
+    width: 100%;
+    line-height: 34px;
+    min-height: 34px;
+    text-align: right;
 }
-.cate_wrap:not(:first-child) {
-    margin-top: 20px;
+
+.title-line > label {
+    display: inline-block;
+    cursor: default;
 }
-/* 버튼 영역 */
-.btn_section{
+
+.set-option > .btn::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 8px;
+    background: url(/resources/icons/sp_arrow.png) no-repeat -20px 0;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
     text-align: center;
-    margin: 80px 0;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 4px 15px;
+    font-size: 1rem;
+    line-height: 24px;
+    border-radius: 0;
+    user-select: none;
 }
-.btn{
-    min-width: 180px;
-    padding: 4px 30px;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 40px;
+
+.btn-group > .btn {
+    min-width: 60px;
 }
-.enroll_btn{
-    background-color: #dbdde2;
-    margin-left:15px;
+
+.set-option > .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-color: #b9bdc7;
+    background-position: 0 0;
+    min-width: 0;
 }
-#enrollBtn:hover {
-    background-color: #c9cbd0;
+
+.set-option > .btn.active::before {
+    content: "";
+    background-position: 0 0;
 }
+
+.form-control {
+    display: table;
+    padding: 4px 10px;
+    height: 34px;
+    font-size: 12px;
+    line-height: 24px;
+    background-color: #f8f9fd;
+    background-image: none;
+    border: 1px solid #dbdde2;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    background-color: #fff;
+}
+
+.form-control:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.seller-input-wrap > .form-control {
+    padding-right: 30px;
+    position: relative;
+}
+
+.input-group-addon {
+    display: table-cell;
+    color: #4d5159;
+    background-color: #f8f9fd;
+    padding: 4px 10px;
+    line-height: 24px;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    border: 1px solid #dbdde2;
+    border-radius: 0;
+    width: 1%;
+}
+
+.input-group-addon:last-child {
+    margin-left: 0;
+}
+
+.form-sub-wrap > .input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.control-label {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 0;
+    width: 180px;
+    clear: left;
+    color: #303236;
+    font-weight: 400;
+    float: left;
+}
+
+.control-label + .input-content {
+    padding-left: 185px;
+}
+
+.form-inline {
+    margin-bottom: -10px;
+    content: "";
+    display: table;
+}
+
+@media (min-width: 768px) {
+    .form-inline .input-group .input-group-addon {
+        width: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-inline .form-group {
+        display: inline-block;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+}
+
+.form-group > .text-primary {
+    color: #00c73c;
+}
+
+.mg-reset {
+    margin: 0 !important;
+}
+
+/* 옵션 영역 */
+.seller-input-toggle {
+    background-color: #fff;
+    display: table;
+    table-layout: fixed;
+    margin-right: 10px; /* 각 버튼 사이의 간격을 위한 마진 설정 */
+}
+
+.seller-input-toggle > input {
+    position: absolute;
+    display: table-cell;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.seller-input-toggle > input + label {
+    display: table-cell;
+    padding: 4px 20px;
+    margin-bottom: 0;
+    color: #767a83;
+    border: 1px solid #dbdde2;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.seller-input-toggle label {
+    background-color: inherit;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.seller-input-toggle > input[type="radio"]:checked + label {
+    /* 라디오 버튼이 체크된 경우의 스타일 */
+    background-color: #00c73c;
+    border-color: #00ae34;
+    color: #fff;
+}
+
+.seller-input-toggle {
+    display: table;
+    table-layout: fixed;
+}
+
+@media (min-width: 768px) {
+    .seller-input-toggle > input + label {
+        min-width: 115px;
+    }
+}
+
+.form-sub-detail {
+    margin: 0 -35px;
+    padding: 0 35px;
+    background-color: #f8f9fd;
+}
+
+.form-sub-detail:after,
+.form-sub-detail:before {
+    content: " ";
+    display: table;
+}
+
+.form-sub-detail > .control-label {
+    color: #767a83;
+    float: left;
+    width: 180px;
+}
+
+.form-sub-detail-wrap {
+    padding: 15px 0;
+}
+
+.form-control-static {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+    word-break: break-all;
+}
+
+.sub-text {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.form-control-static > .text-primary {
+    color: #00c73c;
+}
+
+.total-price:before, .total-price:after {
+    content: "";
+    display: table;
+}
+
+p {
+    margin: 5px 0 0;
+}
+
+.input-content > .text-price {
+    margin-top: 0;
+}
+
+.input-content > .text-price > span {
+    display: inline-block;
+    font-family: tahoma, sans-serif;
+    font-size: 24px;
+    line-height: 34px;
+    vertical-align: bottom;
+}
+
+.btn-primary2, .btn-primary2:hover {
+    color: #666;
+    background-color: #fff;
+    border-color: #dbdde2;
+}
+
+.btn-primary2:active, .btn-primary2:focus {
+    color: #00c73c!important;
+    border-color: #00c73c!important;
+    background-color: #fff!important;
+}
+
+.form-sub-detail .form-control {
+    background-color: #fff;
+}
+
+.form-sub-detail .input-group-addon {
+    background-color: #fff;
+}
+
+.form-group.dash > .input-group > .input-group-addon {
+    background-color: #f8f9fd;
+    border-width: 0;
+}
+
+@media (min-width: 768px) {
+    .form-group.dash {
+        margin-left: -10px;
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .seller-icon {
+        background: url(/resources/icons/sp_icon_pc.png) no-repeat;
+    }
+}
+
+.seller-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icon-minus {
+    width: 12px;
+    height: 12px;
+    background-position: -70px -130px;
+}
+
+.icon-plus {
+    width: 14px;
+    height: 14px;
+    background-position: -30px -130px;
+}
+
+.btn-single {
+    color: #fff;
+    background-color: #697185;
+    border-color: #5b6376;
+}
+
+.btn-default {
+    color: #666;
+    background-color: #fff!important;
+    border-color: #b9bdc7;
+}
+
+.col-sm-3, .col-sm-6 {
+    position: relative;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+@media (min-width: 768px) {
+    .col-sm-2, .col-sm-3, .col-sm-6 {
+        float: left;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-sm-3 {
+        width: 25%;
+    }
+}
+
+.seller-option-input > .option-wrap {
+    display: table;
+    width: 100%;
+    vertical-align: bottom;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.seller-option-input .option-wrap:first-child label {
+    display: inherit;
+    height: 23px;
+}
+
+.form-sub-detail-wrap.seller-option-list {
+    border-top: 1px solid #e3e7ee;
+}
+
+.option-wrap .btn {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+}
+
+.btn-single:hover {
+    color: #fff;
+    background-color: #535969;
+    border-color: #404653;
+}
+
+.btn-block {
+    display: block;
+    width: 100%
+}
+
+.btn-default:hover {
+    color: #666;
+    background-color: #e6e6e6;
+    border-color: #b9bdc7;
+}
+
+.form-sub-detail-wrap .btn-primary {
+    color: #fff;
+    background-color: #00c73c;
+    border-color: #00ae34;
+    font-size: 13px;
+}
+
+.seller-option-input > .option-wrap:last-child {
+    margin-bottom: 10px;
+}
+
+.seller-option-list > .form-inline {
+    display: block;
+}
+
+.pull-right {
+    float: right!important;
+}
+
+.btn.dropdown-toggle {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.input-group-btn:first-child>.btn {
+    margin-right: -1px;
+}
+
+.input-group-btn .btn.btn-sm {
+    height: 30px;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 2px 10px;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 0;
+}
+
+.form-control.input-sm {
+    height: 30px;
+}
+
+.input-group-btn.btn {
+    min-width: 45px;
+}
+
+.seller-option-list .form-inline .form-group {
+    margin-right: 5px;
+}
+
+.form-inline+div {
+    margin-top: 10px;
+}
+
+.clearfix:before {
+    content: "";
+    display: table;
+}
+
+.btn-default2 {
+    color: #fff;
+    background-color: #8991a3;
+    border-color: #727b90;
+}
+
+.seller-grid-area {
+    margin: 10px 0 0;
+    grid-template-rows: 56px 56px 56px 56px;
+    grid-template-columns: 131.27px 131.27px 131.27px 131.27px 131.27px 131.27px;
+}
+
+.ag-theme-fresh {
+    font-size: 13px;
+    color: #555;
+    font-family: tahoma,Helvetica Neue,Helvetica,Arial,나눔고딕,NanumGothic,맑은고딕,malgun gothic,돋움,dotum,sans-serif;
+}
+
 .ck-content {
     height: 170px;
 }
 
+.seller-btn-area {
+    margin: 15px auto 37px;
+    position: relative;
+    text-align: center;
+}
+
+@media (min-width: 768px)
+.seller-btn-area .btn {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.seller-btn-area .btn {
+    margin-bottom: 5px;
+}
+
+.btn-group-xlg .btn {
+    min-width: 180px;
+    padding: 4px 30px;
+    font-size: 16px;
+    line-height: 36px;
+}
+
+.btn-group-xlg > .btn-primary {
+    background-color : #00c73c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.deleteBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    background-color: #d32f2f;
+}
+
+table input[type="checkbox"] {
+    appearance: auto;
+}
+
+.brand-input-wrap > input {
+    width : 270px;
+}
+
+#result-card img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+    margin: auto;
+}
+#result-card {
+    position: relative;
+}
+.img-delete-btn{
+    position: absolute;
+    top: 0;
+    right: 5%;
+    background-color: #ef7d7d;
+    color: wheat;
+    font-weight: 900;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: 26px;
+    text-align: center;
+    border: none;
+    display: block;
+    cursor: pointer;
+}

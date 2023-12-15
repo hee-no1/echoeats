@@ -15,22 +15,18 @@ public class FaqController {
     @Autowired
     private FaqService faqService;
 
-//    @GetMapping(value = "/notice")
-//    public String noticePage() {
-//        return "board/notice";
-//    }
+    // FAQ 사용자 페이지
     @RequestMapping(value = "/faq")
     public String faqPage() {
-        System.out.println("FAQ 조회 페이지");
         return "board/faq";
     }
+    // FAQ 관리자 페이지
     @RequestMapping("/faq_admin")
     public String faq_admin(){
-        System.out.println(">>FAQ 관리자 페이지");
         return "board/faq_admin";
     }
 
-    // 메서드의 반환값이 HTTP 응답의 body에 쓰여짐 (JSON으로 변환하여 클라이언트에 전송)
+    // AJAX 로 FAQ 목록 가져오기
     @ResponseBody
     @RequestMapping(value = "/faqlist", method = RequestMethod.POST)
     public List<FaqDto> getFaqList(@RequestBody FaqDto dto) {
@@ -43,11 +39,12 @@ public class FaqController {
         return list;
     }
 
+    // FAQ 작성 페이지
     @RequestMapping("/faq_write")
     public String faq_write() {
-        System.out.println("FAQ 작성 페이지");
         return "board/faq_write";
     }
+    // FAQ 등록 페이지
     @RequestMapping(value = "/insertFaq", method = RequestMethod.POST)
     public String faq_register(FaqDto dto) {
         System.out.println("FAQ 입력");
@@ -57,10 +54,9 @@ public class FaqController {
         return "redirect:/board/faq_admin";
     }
 
-    // FAQ 세부사항을 수정할 수 있는 페이지를 표시
+    // FAQ 수정 페이지
     @RequestMapping("/faq_modify")
     public String faq_modify(FaqDto dto, Model model) {
-        System.out.println(">>FAQ 페이지 수정 페이지");
         FaqDto faq = faqService.selectFaq(dto);
         model.addAttribute("faq", faq);
 
@@ -69,7 +65,7 @@ public class FaqController {
         return "board/faq_modify";
     }
 
-    // FAQ 업데이트 시 양식 제출을 처리하는 역할 (DB 처리)
+    // FAQ 수정 시 양식 제출을 처리하는 역할 (DB 처리)
     @RequestMapping(value = "/updateFaq", method = RequestMethod.POST)
     public String updateNotice(FaqDto dto, int faq_id) {
         System.out.println("===> FAQ 수정");
@@ -80,6 +76,7 @@ public class FaqController {
 
         return "redirect:/board/faq_admin";
     }
+    // FAQ 삭제 페이지
     @RequestMapping("/deleteFaq")
     public String deleteFaq(FaqDto dto) {
         System.out.println(">> FAQ 삭제");
