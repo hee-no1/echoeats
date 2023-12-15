@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
+import com.pofol.main.orders.order.domain.CodeTableDto;
 @Repository
 public class InquiryRepositoryImpl implements InquiryRepository {
 
@@ -23,7 +24,12 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	public InquiryDto selectByinqId(Long inquiry_id) {
 		return session.selectOne(namespace+"selectByinqId", inquiry_id);
 	}
-
+	
+	@Override
+	public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception{
+		return session.selectList(namespace + "selectCodeType", code_type);
+	}
+	
 	@Override
 	public int insert(InquiryDto dto) throws Exception {
 		return session.insert(namespace + "insert", dto);
@@ -57,6 +63,16 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	@Override
 	public int count() throws Exception {
 		return session.selectOne(namespace + "count");
+	}
+
+	@Override
+	public List<CodeTableDto> selectCodeTypeByCodeName(String code_name) throws Exception {
+		return session.selectList(namespace + "selectCodeTypeByCodeName",code_name);
+	}
+
+	@Override
+	public String selectNametoSts(String code_name) throws Exception {
+		return session.selectOne(namespace + "selectNametoSts", code_name);
 	}
 
 }

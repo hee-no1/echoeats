@@ -1,12 +1,22 @@
 package com.pofol.main.orders.order.controller;
 
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pofol.main.member.dto.DelNotesDto;
-import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDto;
+import com.pofol.main.orders.order.service.OrderDetailService;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
@@ -34,7 +44,6 @@ public class OrderController {
         return "/order/cartSample";
     }
 
-
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
@@ -51,7 +60,6 @@ public class OrderController {
         }
     }
 
-
     @ResponseBody
     @PostMapping("/calculatePayment")
     public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
@@ -63,7 +71,6 @@ public class OrderController {
             throw new RuntimeException(e);
         }
     }
-
 
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){

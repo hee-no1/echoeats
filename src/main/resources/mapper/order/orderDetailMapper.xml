@@ -44,6 +44,12 @@
         WHERE code_name= #{code_name}
     </select>
     
+    <select id="selectByOrderDetId" resultType="OrderDetailDto">
+        SELECT *
+        FROM order_detail
+        WHERE ord_det_id= #{ord_det_id}
+    </select>
+    
     <update id="updateStatus" parameterType="long">
         UPDATE spring.order_detail
         SET
