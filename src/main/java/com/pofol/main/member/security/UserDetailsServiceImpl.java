@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         System.out.println("---------------UserDetailsService---------------");
 
-        //db에서 유저 정보를 가져온다
+
         MemberDto vo2 = null;
         try {
             vo2 = service.select(mem_id);

@@ -27,7 +27,6 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
         String referer = request.getHeader("Referer");
         System.out.println("로그아웃 referer : " + referer);
-       // request.getSession().setAttribute("SPRING_SECURITY_SAVED_REQUEST", referer);
 
 
 

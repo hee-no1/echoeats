@@ -49,10 +49,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         //refer이 없다 = url로 진입
         //savedRequest는 가로챘을 때만 가지고 있다
         if(referer != null){
-            System.out.println("savedRequest == null 진입");
             response.sendRedirect(referer);
         }else{
-            System.out.println("savedRequest == null 통과");
             response.sendRedirect(savedRequest.getRedirectUrl());
             //얘는 사용자가 직접 /member/admin을 입력했을 때 필요
             //이 때는 referer가 null이고, savedRequest가 가로챈 주소를 가지고 있다
