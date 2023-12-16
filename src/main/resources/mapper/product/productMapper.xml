@@ -51,10 +51,16 @@
         FROM product
     </select>
 
-    <!-- product_image -->
+    <!-- product_image 테이블 행 개수-->
     <select id="countImage" resultType="int">
         SELECT COUNT(*)
         FROM product_image
+    </select>
+
+    <!-- option_product 테이블 행 개수-->
+    <select id="countOption" resultType="int">
+        SELECT COUNT(*)
+        FROM option_product
     </select>
 
     <!-- 이미지 등록 -->
@@ -64,9 +70,9 @@
     </insert>
 
     <!-- 옵션 insert-->
-    <insert id="insertOption" parameterType="OptionProductDto">
-        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, rg_num)
-        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{rg_num})
+    <insert id="insertOption" parameterType="OptionProductDto" useGeneratedKeys="true" keyProperty="prod_id">
+        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, opt_prod_qty, opt_prod_sts, rg_num)
+        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{opt_prod_qty}, #{opt_prod_sts}, #{rg_num})
     </insert>
 
 </mapper>
