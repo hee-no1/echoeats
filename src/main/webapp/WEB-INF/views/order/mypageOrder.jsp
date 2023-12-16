@@ -14,7 +14,11 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
         $(function(){
-			
+        	$('.content').on('click','.ordDetView',function(e){
+                e.preventDefault();
+                location.href = "/mypage/order/"+e.target.dataset.ordid;
+            });
+		
         	$('.content').html(
                 '<div class="css-j0lifa ed9qr673"><div class="css-fhxb3m ed9qr672"><h2 class="css-1268zpe ed9qr671">주문 내역</h2>'+
                         '<span class="css-a3vgo2 ed9qr670">최대 지난 3년간의 주문 내역까지 확인할 수 있어요</span></div>'+
@@ -28,13 +32,21 @@
                                     '</div></div></div></div></div></div>'+
                 '<div class="css-1dmsa3j e1jm6dy15"></div>'+
                 '<div class="css-1c8nox e1ykq6gv1">'+
-                '<div class="css-4wlxei e1437c6414">'+
+                '<c:forEach var="ordDto" items="${ordDtoList}" varStatus="status">'+
+                    '<div class="css-4wlxei e1437c6414">'+
                         '<div class="css-1hbtwy0 e1437c6413">'+
-                            '<span class="css-asma03 e1437c6412">2023.11.18 (22시 32분)</span><a class="css-l9y4tx e1437c6411">주문내역 상세보기</a>'+
+                            '<span class="css-asma03 e1437c6412">'+
+                                "<fmt:formatDate value='${ordDto.ord_date}' pattern='yyyy-MM-dd' type='date'/>"+
+                                "(<fmt:formatDate value='${ordDto.ord_date}' pattern='HH:mm' type='time'/>)"+
+                                '</span><a class="css-l9y4tx e1437c6411 ordDetView" data-ordId="${ordDto.ord_id}">주문내역 상세보기</a>'+
                         '</div>'+
                         '<div class="css-7apail e1437c6410">'+
-                            '<div class="css-fhxb3m e1437c649"><img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1653040871523l0.jpg" alt="[킷캣] 미니 오리지널 웨이퍼 405g (9g x 45개입) 상품 이미지" class="css-1oc1pau e1437c648">'+
-                                '<div class="css-1fttcpj e1437c647"><dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">상품명</dt><dd class="css-1o8e829 e1437c643">[킷캣] 미니 오리지널 웨이퍼 405g (9g x 45개입) 외 1건</dd></dl><dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">주문번호</dt><dd class="css-1i58pf4 e1437c644">2324322320175</dd></dl><dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">결제방법</dt><dd class="css-1i58pf4 e1437c644">카카오페이</dd></dl><dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">결제금액</dt><dd class="css-1i58pf4 e1437c644">11,980원</dd></dl>'+
+                            '<div class="css-fhxb3m e1437c649"><img src="${ordDto.img_url}" class="css-1oc1pau e1437c648">'+
+                                '<div class="css-1fttcpj e1437c647">'+
+                                    '<dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">상품명</dt><dd class="css-1o8e829 e1437c643"><c:out value="${ordDto.tot_prod_name}"/></dd></dl>'+
+                                    '<dl class="css-1ccl3pq e1437c646"><dt class="css-dzjp62 e1437c645">주문번호</dt><dd class="css-1i58pf4 e1437c644">${ordDto.ord_id}</dd></dl><dl class="css-1ccl3pq e1437c646">'+
+                                    '<dt class="css-dzjp62 e1437c645">결제방법</dt><dd class="css-1i58pf4 e1437c644">${ordDto.pay_way}</dd></dl><dl class="css-1ccl3pq e1437c646">'+
+                                    '<dt class="css-dzjp62 e1437c645">결제금액</dt><dd class="css-1i58pf4 e1437c644">${ordDto.tot_pay_price}원</dd></dl>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="css-s5xdrg e1437c642"><span class="css-1fdt947 e1437c641">배송완료</span>'+
@@ -42,7 +54,9 @@
                                 '</div>'+
                             '</div>'+
                         '</div>'+
-                    '</div></div>'
+                    '</div>'+
+                '</c:forEach>'+
+                '</div>'
             );
         	
         });

@@ -6,6 +6,7 @@ import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.service.ProductService;
+import com.pofol.util.AwsS3ImgUploaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +51,7 @@ public class AdminController {
     @GetMapping("/test")
     public String testGET(Model model) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.enrollCategoryList();
+        List<CategoryDto> list = categoryList.cateList();
         String categoryListJson = objectMapper.writeValueAsString(list);
         model.addAttribute("categoryList", categoryListJson);
         return "/admin/hyoungJun/test";
@@ -63,7 +66,7 @@ public class AdminController {
     @GetMapping("/hyoungJun/productEnroll")
     public void prodEnrollGET(Model model) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.enrollCategoryList();
+        List<CategoryDto> list = categoryList.cateList();
         String categoryListJson = objectMapper.writeValueAsString(list);
         model.addAttribute("categoryList", categoryListJson);
     }
@@ -71,8 +74,12 @@ public class AdminController {
     // 상품 등록
     @PostMapping("hyoungJun/productEnroll")
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
+        productDto.setRg_num("admin");
+        productDto.setMd_num("admin");
         productService.productEnroll(productDto);
-        redirectAttributes.addFlashAttribute("productEnroll_result", productDto.getProd_name() + " 상품이 등록되었습니다.");
+        redirectAttributes.addFlashAttribute(
+                "productEnroll_result",
+                productDto.getProd_name() + " 상품이 등록되었습니다.");
         return "redirect:/admin/hyoungJun/productManage";
     }
 

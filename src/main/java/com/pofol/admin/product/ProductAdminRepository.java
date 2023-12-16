@@ -1,13 +1,12 @@
 package com.pofol.admin.product;
 
-import com.pofol.main.orders1.order.domain.CodeTableDto;
-import com.pofol.main.orders1.order.domain.OrderDto;
+import java.util.Date;
+import java.util.List;
+
+import com.pofol.main.orders.order.domain.CodeTableDto;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
-
-import java.util.Date;
-import java.util.List;
 
 public interface ProductAdminRepository {
 

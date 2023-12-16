@@ -2,50 +2,63 @@ package com.pofol.main.orders.inquiry.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
-@Repository
+import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
+import com.pofol.main.orders.inquiry.repository.InquiryImgRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryPrdRepository;
+import com.pofol.main.orders.inquiry.repository.InquiryRepository;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.util.AwsS3ImgUploaderService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class InquiryServiceImpl implements InquiryService {
-
-	@Autowired
-	private SqlSession session;
-	private static String namespace = "repository.inquiryMapper.";
-
+	
+	private final InquiryRepository inqRepo;
+	private final InquiryPrdRepository inqPrdRepo;
+	private final InquiryImgRepository inqImgRepo;
+	
+	private final AwsS3ImgUploaderService awsS3ImgUploaderService;
+	
 	@Override
-	public int insert(InquiryDto dto) throws Exception {
-		return session.insert(namespace + "insert", dto);
+//	@Transactional(rollbackFor=Exception.class) 
+	public int insert(InquiryDto inqDto) throws Exception {
+		inqRepo.insert(inqDto);
+		for(MultipartFile file:inqDto.getImageFile()) {
+	   		String url = awsS3ImgUploaderService.uploadImageToS3(file,"inquiry");
+	   		InquiryImgDto inqImgDto = new InquiryImgDto(inqDto.getInquiry_id(),url,inqDto.getMem_id());
+	   		inqImgRepo.insert(inqImgDto);
+   	}
+		return 1;
 	}
 
 	@Override
-	public InquiryDto select(Long inquiry_id) throws Exception {
-		return session.selectOne(namespace + "select", inquiry_id);
+	public List<InquiryDto> selectAllByUserId(String mem_id) throws Exception {
+		return inqRepo.selectAllByUserId(mem_id);
 	}
 
 	@Override
-	public int update(InquiryDto dto) throws Exception {
-		return session.update(namespace + "update", dto);
-	}// updateStatus
-
-	@Override
-	public int delete(Long inquiry_id) throws Exception {
-		return session.delete(namespace + "delete", inquiry_id);
+	public InquiryDto selectByinqId(Long inquiry_id) {
+		return inqRepo.selectByinqId(inquiry_id);
 	}
 
 	@Override
-	public List<InquiryDto> selectAll() throws Exception {
-		return session.selectList(namespace + "selectAll");
+	public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
+		return inqRepo.selectCodeType(code_type);
 	}
 
 	@Override
-	public int deleteAll() throws Exception {
-		return session.delete(namespace + "deleteAll");
+	public List<CodeTableDto> selectCodeTypeByCodeName(String code_name) throws Exception {
+		return inqRepo.selectCodeTypeByCodeName(code_name);
 	}
 
 	@Override
-	public int count() throws Exception {
-		return session.selectOne(namespace + "count");
+	public String selectNametoSts(String code_name) throws Exception {
+		return inqRepo.selectNametoSts(code_name);
 	}
 }

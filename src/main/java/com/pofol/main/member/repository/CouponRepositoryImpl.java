@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CouponRepositoryImpl implements CouponRepository{
@@ -16,12 +18,12 @@ public class CouponRepositoryImpl implements CouponRepository{
 
     private static String namespace = "com.pofol.main.member.couponMapper.";
     @Override
-    public CouponDto select_coupon(int id) {
+    public CouponDto select_coupon(Long id) {
         return session.selectOne(namespace+"select_coupon", id);
     }
 
     @Override
-    public MemCouponDto select_coupon_mapping(int id) {
+    public MemCouponDto select_coupon_mapping(Long id) {
         return session.selectOne(namespace+"select_coupon_mapping", id);
     }
 
@@ -29,4 +31,18 @@ public class CouponRepositoryImpl implements CouponRepository{
     public List<CouponJoinDto> selectMembersWithCoupons(String id) {
         return  session.selectList(namespace+"selectMembersWithCoupons", id);
     }
+
+    @Override
+    public MemCouponDto selectUnusedCoupon(Long cp_id, String mem_id) throws Exception{
+        Map<String,Object> map = new HashMap<>();
+        map.put("cp_id",cp_id);
+        map.put("mem_id",mem_id);
+        return session.selectOne(namespace+"selectUnusedCoupon",map);
+    }
+
+    @Override
+    public int updateMemberCouponStatus(MemCouponDto memCouponDto) {
+        return session.update(namespace + "updateMemberCouponStatus", memCouponDto);
+    }
+
 }

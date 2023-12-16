@@ -54,4 +54,24 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
     public int count() throws Exception{
         return session.selectOne(namespace+"count");
     }
+
+	@Override
+	public List<OrderDetailDto> selectAllByOrdId(Long ord_id) {
+		return session.selectList(namespace+"selectAllByOrdId", ord_id);
+	}
+
+	@Override
+	public String selectByOrderDetImg(Long ord_det_id) {
+		return session.selectOne(namespace+"selectByOrderDetImg", ord_det_id);
+	}
+
+	@Override
+	public String selectByCodeName(String code_name) {
+		return session.selectOne(namespace+"selectByCodeName", code_name);
+	}
+
+	@Override
+	public OrderDetailDto selectByOrderDetId(Long ord_det_id) {
+		return session.selectOne(namespace+"selectByOrderDetId", ord_det_id);
+	}
 }

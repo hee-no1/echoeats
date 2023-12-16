@@ -54,13 +54,13 @@ public class MemberServiceImplTest {
 
     @Test
     public void main(){
-        CouponDto couponDto = couponRepository.select_coupon(1);
+        CouponDto couponDto = couponRepository.select_coupon(1L);
         System.out.println(couponDto);
     }
 
     @Test
     public void main2(){
-        MemCouponDto memCouponDto = couponRepository.select_coupon_mapping(1);
+        MemCouponDto memCouponDto = couponRepository.select_coupon_mapping(1L);
         System.out.println(memCouponDto);
     }
 
@@ -72,7 +72,7 @@ public class MemberServiceImplTest {
 
     @Test
     public void main4(){
-        List<CouponJoinDto> admin123 = couponService.getCoupon("user123");
+        List<CouponJoinDto> admin123 = couponService.getCouponJoin("user123");
         System.out.println(admin123);
     }
 
@@ -164,6 +164,12 @@ public class MemberServiceImplTest {
     public void sss() throws Exception {
 
 
+    }
+
+    @Test
+    public void selectUnusedCouponTest() throws Exception{
+        MemCouponDto you11 = couponRepository.selectUnusedCoupon(12L, "you11");
+        System.out.println(you11);
     }
 
 

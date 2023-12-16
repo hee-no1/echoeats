@@ -14,6 +14,13 @@
 		</selectKey>
 	</insert>
 	
+	<select id="selectAllByInqId" resultType="string">
+		SELECT file_name
+		FROM inquiry_img
+		WHERE
+		inquiry_id=#{inquiry_id}
+	</select>
+	
 	<select id="select" resultType="InquiryImgDto">
 		SELECT *
 		FROM inquiry_img

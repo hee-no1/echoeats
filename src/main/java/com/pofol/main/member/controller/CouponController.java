@@ -8,9 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -21,10 +19,14 @@ public class CouponController {
 
     @GetMapping("/coupon")
     public String boardJoin(Model model) {
+        //현재 인증된 회원의 아이디를 가져온다
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String id = authentication.getName();
-        List<CouponJoinDto> coupon = couponService.getCoupon(id);
+
+        //회원이 보유한 쿠폰들을 가져온다
+        List<CouponJoinDto> coupon = couponService.getCouponJoin(id);
         System.out.println(coupon);
+
         for (CouponJoinDto couponJoinDto : coupon) {
             if(couponJoinDto.getCp_sts().equals("UNUSED")){
                 couponJoinDto.setCp_sts("사용가능");

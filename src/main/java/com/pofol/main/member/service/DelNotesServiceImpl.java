@@ -1,7 +1,9 @@
 package com.pofol.main.member.service;
 
 import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.repository.DelNotesRepository;
+import com.pofol.main.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class DelNotesServiceImpl implements  DelNotesService{
 
     private final DelNotesRepository delNotesRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public void writeDelNotes(DelNotesDto dto) {
@@ -46,7 +49,6 @@ public class DelNotesServiceImpl implements  DelNotesService{
         DelNotesDto delNotesDto;
         try {
             delNotesDto = delNotesRepository.select_delNotes(mem_id);
-            System.out.println(delNotesDto);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

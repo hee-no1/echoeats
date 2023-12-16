@@ -157,7 +157,7 @@
 </style>
 
 <body class="sb-nav-fixed">
-<%@include file="../../admin/include/top_side_nav.jspf" %>
+<%@ include file="../include/top_side_nav.jspf" %>
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">

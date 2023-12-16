@@ -6,7 +6,6 @@ import com.pofol.main.product.PageHandler;
 import com.pofol.main.product.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
-import com.pofol.main.product.domain.BasketDto;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
@@ -15,6 +14,7 @@ import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -85,13 +85,15 @@ public class ProductListController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String memberID = authentication.getName();
 
-            // 로그인 상태일 때 (적립금 계산)
-            if (!memberID.equals("anonymousUser")) {
+            // 로그인 상태일 때 (적립금 계산) + (회원 아이디 가져오기)
+            if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
 
                 Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
                 model.addAttribute("saveMoney", saveMoney);
+
+                model.addAttribute("memberID", memberID);
             }
 
             // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
@@ -197,19 +199,5 @@ public class ProductListController {
         return "/product/productList";
     }
 
-    // 상품 수량에 따라 상품 가격 계산
-    @ResponseBody
-    @PostMapping("/ProductCalculation")
-    public List<BasketDto> productCalculation(@RequestBody List<BasketDto> basketDtoList) {
 
-        for (BasketDto basketDto : basketDtoList) {
-            if (basketDtoList.size() == 1) {
-                basketDto.setTotal_price(basketDto.getDisc_price() * basketDto.getQuantity());
-            } else {
-                basketDto.setTotal_price(basketDto.getOpt_disc_price() * basketDto.getQuantity());
-            }
-        }
-
-        return basketDtoList;
-    }
 }

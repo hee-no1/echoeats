@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         System.out.println("---------------UserDetailsService---------------");
 
-        //db에서 유저 정보를 가져온다
+
         MemberDto vo2 = null;
         try {
             vo2 = service.select(mem_id);
@@ -48,9 +48,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         securityUser.setUsername(vo2.getMem_id());
         String pwd = vo2.getMem_pwd();
-        //pwd = bCryptPasswordEncoder.encode(pwd);
         securityUser.setPassword(pwd);
-        // securityUser.setName("AA");
         securityUser.setMem_name(vo2.getMem_name());
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

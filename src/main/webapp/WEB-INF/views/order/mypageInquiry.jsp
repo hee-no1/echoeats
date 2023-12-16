@@ -12,13 +12,130 @@
                 <link rel="stylesheet" href="/resources/product/css/footer.css">
                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                 <script>
+                    var formData = new FormData();
+
                     $(function () {
 
+                        $('textarea[name=content]').on('focus input', function (e) {
+                            e.preventDefault();
+                            $('.placeholder').addClass('active');
+                        });
+
+                        $('textarea[name=content]').on('blur', function (e) {
+                            e.preventDefault();
+                            if ($('textarea[name=content]').val() === '') {
+                                $('.placeholder').removeClass('active');
+                            }
+                        });
+
                         $('textarea[name=content]').change(function(){
-                            console.log($('textarea[name=content]').val());
+                            //console.log($('textarea[name=content]').val());
                         });
                         
+                        $('.fileSelect').click(function (e) {
+                            e.preventDefault();
+                            if ($(".fileElem").length) {
+                                $(".fileElem").click();
+                            }
+                        });
+                        
+                        $('.ebvrvv11').click(function (e) {
+                            e.preventDefault();
+
+                            var form = document.getElementById('formElem');
+                            var formElements = form.elements;
+
+                            for (var i = 0; i < formElements.length; i++) {
+                                var element = formElements[i];
+                                
+                                if ((element.tagName === 'INPUT' || element.tagName === 'SELECT' ||
+                                element.tagName === 'TEXTAREA' ) && element.name) {
+                                    formData.set(element.name, element.value);
+                                }
+                            }
+                            // let entries = formData.entries();
+                            // for (const pair of entries) {
+                            //     console.log(pair[0]+ ', ' + pair[1]); 
+                            // }
+
+                            $.ajax({
+                                url: '/mypage/inquiry/form/submit',
+                                type: 'POST',
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                success: function(response) {
+                                    console.log('Files uploaded successfully:', response);
+                                    location.href = "/mypage/inquiry/list";
+                                },
+                                error: function(error) {
+                                    console.error('Error uploading files:', error);
+                                }
+                            });
+                        });
+
+                        $('.e9bfpi40').on('click', '.css-v96m37', function (e) {
+                            e.preventDefault();
+                            const file = $(this).closest('.e5xt3dr1').find('img').data('file');
+                            formData.delete('imageFile[]', file);
+                            $(this).closest('.e5xt3dr1').remove();
+                        });
+
+                        $(".inquiry_type").change(function () {
+                            var selectedValue = $(this).val();
+                            console.log(selectedValue);
+                            $.ajax({
+                                type:'POST',       // 요청 메서드
+                                url: '/mypage/inquiry/getDetType', 
+                                headers : { "content-type": "application/json"}, // 요청 헤더
+                                data : JSON.stringify({ inquiryType: selectedValue }),
+                                dataType: 'json',
+                                success: function(response) {
+                                    $(".inquiry_detType").empty();
+                                    $(".inquiry_detType").append('<option value="INQUIRY_DET_TYPE0">상세유형을 선택해주세요</option>');
+                                    for (var i = 0; i < response.length; i++) {
+                                        $(".inquiry_detType").append('<option value="' + response[i].code_name + '">' + response[i].column_sts + '</option>');
+                                    }
+                                },
+                                error: function(error) { console.error('Error inquiry_detType:', error); }
+                            });
+                        });
                     });
+
+                    function handleFiles(files) {
+                        let list = $('.e9bfpi40');
+                        let last = $('.lastfile');
+                        for (let i = 0; i < files.length; i++) {
+                            
+                            const div = $('<div>', {
+                                class: 'css-o4030c e5xt3dr1',
+                            });
+                            const img = $('<img>', {
+                                src: window.URL.createObjectURL(files[i]),
+                                class: 'css-idj2s4 e5xt3dr4',
+                            });
+                            img.data('file', files[i]);
+                            img.onload = function () {
+                                window.URL.revokeObjectURL(this.src);
+                            };
+                            const button = $('<button>', {
+                                type: 'button',
+                                class: 'css-v96m37 e5xt3dr2',
+                            });
+
+                            formData.append('imageFile', files[i]);
+
+                            div.append(img, button);
+                            list.append(div);
+                            list.append(last);
+                        }
+                    }
+
+                    function updateCharacterCount() {
+                            let charCount = $('textarea[name=content]').val().length;
+                            $('.e1tjt2bn2').html(charCount + '자');
+                    }
+
                 </script>
                 <style>
                     .css-luwwab {
@@ -120,6 +237,10 @@
                     }
                 </style>
                 <style>
+                    button[disabled], input[disabled] {
+                        cursor: default;
+                    }
+
                     .css-171zbec {
                         width: 820px;
                     }
@@ -175,6 +296,120 @@
                         width: 640px;
                     }
 
+                    .css-1s0wpjg {
+                        width: 100%;
+                        margin-top: 14px;
+                        margin-bottom: 8px;
+                    }
+                    .css-hg1hqm {
+                        padding-bottom: 7px;
+                    }
+                    .css-1t8m5sv {
+                        color: rgb(51, 51, 51);
+                        font-size: 14px;
+                        line-height: 18px;
+                        font-weight: bold;
+                        letter-spacing: -0.025em;
+                    }
+                    .css-41sae7 {
+                        color: rgb(153, 153, 153);
+                        font-size: 12px;
+                        margin-left: 9px;
+                    }
+                    .css-acf2e7 {
+                        padding: 16px 0px;
+                    }
+                    .css-s5xdrg {
+                        display: -webkit-box;
+                        display: -webkit-flex;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-align-items: center;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                    }
+                    .css-i3divb {
+                        overflow: hidden;
+                        width: 48px;
+                        height: 48px;
+                        flex-shrink: 0;
+                        border-radius: 4px;
+                        /* background: url("https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff85dca3193dfce31add0852dbb.svg") 50% 50% no-repeat rgb(245, 245, 245); */
+                    }
+                    .css-1xpcw2r {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        /* background-image: url("https://img-cf.kurly.com/shop/data/goods/1614169006174l0.jpg"); */
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: 50% 50%;
+                    }
+                    .css-fizf2i {
+                        width: 100%;
+                        height: 44px;
+                        border-radius: 3px;
+                        border: 1px solid rgb(221, 221, 221);
+                        background-color: white;
+                        color: rgb(51, 51, 51);
+                        font-size: 14px;
+                    }
+                    .css-1s0wpjg + button {
+                        margin-bottom: 4px;
+                    }
+                    .css-sjc8qp {
+                        -webkit-box-flex: 1;
+                        flex-grow: 1;
+                        margin-left: 16px;
+                    }
+                    .css-1k84x92 {
+                        overflow: hidden;
+                        max-width: 362px;
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: rgb(51, 51, 51);
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    .css-12q1qh7 {
+                        margin-top: 2px;
+                        max-width: 362px;
+                        font-size: 12px;
+                        line-height: 18px;
+                        color: rgb(153, 153, 153);
+                    }
+                    .css-132xckz {
+                        flex-shrink: 0;
+                        width: 68px;
+                        font-size: 12px;
+                        text-align: right;
+                    }
+                    .css-kb65nz {
+                        flex-shrink: 0;
+                        width: 100px;
+                        font-size: 14px;
+                        color: rgb(51, 51, 51);
+                        text-align: right;
+                    }
+                    .css-1efi8gv {
+                        font-weight: bold;
+                    }
+                    .css-ln2l5t {
+                        display: block;
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 16px;
+                        border: 0px;
+                        background: url("https://res.kurly.com/kurly/ico/2021/delete-personal-inquiry_30_30.svg") 0px 0px no-repeat;
+                    }
+                    .css-ln2l5t span {
+                        overflow: hidden;
+                        position: absolute;
+                        width: 1px;
+                        height: 1px;
+                        clip: rect(0px, 0px, 0px, 0px);
+                    }
                     .css-zjik7 {
                         display: -webkit-box;
                         display: -webkit-flex;
@@ -372,11 +607,6 @@
                         padding-right: 32px;
                     }
 
-                    button[disabled],
-                    input[disabled] {
-                        cursor: default;
-                    }
-
                     .css-1636szt.Mui-disabled {
                         color: rgba(0, 0, 0, 0.26);
                     }
@@ -535,6 +765,29 @@
                         width: 72px;
                     }
 
+                    .css-o4030c {
+                        overflow: hidden;
+                        display: flex;
+                        position: relative;
+                        border-radius: 6px;
+                        aspect-ratio: 1 / 1;
+                        height: 72px;
+                        width: 72px;
+                    }
+                    .css-idj2s4 {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .css-v96m37 {
+                        position: absolute;
+                        top: 0.375rem;
+                        right: 0.375rem;
+                        width: 1.125rem;
+                        height: 1.125rem;
+                        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBmaWxsPSIjMDAwIiBvcGFjaXR5PSIuNSIgY3g9IjkiIGN5PSI5IiByPSI5Ii8+CiAgICAgICAgPGcgc3Ryb2tlPSIjRkZGIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS13aWR0aD0iMS41Ij4KICAgICAgICAgICAgPHBhdGggZD0iTTEyLjI1OSAxMi4xMzUgNS43NjggNS42NDRNNS43NjIgMTIuMTMzbDYuNDk3LTYuNDk3Ii8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K") 0px 0px no-repeat;
+                    }
+
                     .css-j9ybaa {
                         width: 100%;
                         height: 100%;
@@ -550,6 +803,22 @@
                         background-size: cover;
                         background-position: center center;
                         background-repeat: no-repeat;
+                    }
+
+                    .css-114fr9p {
+                        width: 160px;
+                        height: 56px;
+                        padding: 0px 10px;
+                        text-align: center;
+                        letter-spacing: 0px;
+                        font-size: 16px;
+                        line-height: 20px;
+                        color: white;
+                        cursor: pointer;
+                        background-color: rgb(95, 0, 128);
+                        font-family: "Noto Sans", sans-serif;
+                        font-weight: 500;
+                        border-radius: 3px !important;
                     }
 
                     .css-175wokr span {
@@ -607,6 +876,13 @@
                         position: relative;
                         min-width: 1050px;
                     }
+                    .placeholder {
+                        display: block;
+                    }   
+
+                    .placeholder.active {
+                        display: none;
+                    }
                 </style>
             </head>
 
@@ -661,7 +937,7 @@
                                                     </g>
                                                 </g>
                                             </svg></a></li>
-                                    <li><a class="active css-g4g0eu ecbxmj0">1:1 문의<svg
+                                    <li><a class="active css-g4g0eu ecbxmj0" href="<c:url value='/mypage/inquiry/list'/>">1:1 문의<svg
                                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                                 viewBox="0 0 24 24">
                                                 <defs>
@@ -739,7 +1015,7 @@
                                     </div>
                                 </div>
                                 <div class="css-185m8ch e1153ede0">
-                                    <form>
+                                    <form id="formElem">
                                         <div class="css-17bp14q e1vbjq4w3">
                                             <div class="css-mm5tap e1vbjq4w2"><label data-testid="label-text">유형<span
                                                         data-testid="label-required-text"
@@ -761,24 +1037,42 @@
                                                                 }
                                                             </style>
                                                             <select name="type" class="inquiry_type">
-                                                                <option value="test1">test1</option>
-                                                                <option value="test2">test2</option>
-                                                                <option value="test3">test3</option>
+                                                                <option value="INQUIRY_TYPE0">문의유형을 선택해주세요</option>
+                                                                <c:forEach var="type" items="${typeList}">
+                                                                    <option value="${type.code_name}">${type.column_sts}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="css-1a8mkrv e1u0xj870">
                                                         <div>
                                                             <select name="det_type" class="inquiry_detType">
-                                                                <option value="test1">test1</option>
-                                                                <option value="test2">test2</option>
-                                                                <option value="test3">test3</option>
+                                                                <option value="INQUIRY_DET_TYPE0">상세유형을 선택해주세요</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> <!-- 유형-->
+                                        <c:if test="${not empty ordDetDto}">
+                                        <div class="css-17bp14q e1vbjq4w3">
+                                            <div class="css-mm5tap e1vbjq4w2">
+                                                <label data-testid="label-text">상품<span data-testid="label-required-text" class="css-hwfcu5 e1vbjq4w0">*</span></label></div>
+                                                <div class="css-12l4j2c e1vbjq4w1"><div class="css-1s0wpjg e1fxpk0q6">
+                                                    <div class="css-0 e1fxpk0q5"><div class="css-hg1hqm e1fxpk0q4">
+                                                        <span class="css-1t8m5sv e1fxpk0q3">2023.11.18</span>
+                                                        <span class="css-41sae7 e1fxpk0q2">주문번호${ordDetDto.ord_id}</span></div>
+                                                        <div class="css-0 e1fxpk0q1">
+                                                                <div class="css-acf2e7 e1c5gg6v10">
+                                                                <div class="css-s5xdrg e1c5gg6v9"><div class="css-i3divb e1c5gg6v8">
+                                                                <img src="${ordDetDto.img_url}" class="css-1xpcw2r e1c5gg6v7"></img></div>
+                                                                <div class="css-sjc8qp e1c5gg6v6"><p class="css-1k84x92 e1c5gg6v5">${ordDetDto.prod_name}</p>
+                                                                <p class="css-12q1qh7 e1c5gg6v4">${ordDetDto.prod_name}</p></div><p class="css-132xckz e1c5gg6v3">${ordDetDto.prod_qty}</p>
+                                                                <p class="css-kb65nz e1c5gg6v2"><span class="css-1efi8gv e1c5gg6v1">${ordDetDto.prod_tot_price}</span>원</p><button type="button" class="css-ln2l5t e1c5gg6v0"><span>삭제</span></button></div></div>
+                                                            </div></div></div>
+                                                                <!-- <button type="button" class="css-fizf2i ezcpx2u6">주문상품 선택</button> -->
+                                                            </div></div>
+                                        </c:if>
                                         <div class="css-17bp14q e1vbjq4w3">
                                             <div class="css-mm5tap e1vbjq4w2"><label for="inquiry-subject"
                                                     data-testid="label-text">제목<span data-testid="label-required-text"
@@ -791,7 +1085,7 @@
                                                             class="css-1quw3ub e1uzxhvi2" value=""></div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> <!-- 제목 -->
                                         <div class="css-rm6te4 e1fgvk594">
                                             <div class="css-17bp14q e1vbjq4w3">
                                                 <div class="css-mm5tap e1vbjq4w2"><label for="inquiry-contents"
@@ -803,7 +1097,7 @@
                                                         <div class="css-1gua357 e1tjt2bn5"><textarea
                                                                 id="inquiry-contents" inputmode="text"
                                                                 aria-label="textarea-message" name="content"
-                                                                class="css-5etceh e1tjt2bn1"></textarea>
+                                                                class="css-5etceh e1tjt2bn1" oninput="updateCharacterCount()"></textarea>
                                                             <div class="placeholder css-1ofzfyp e1tjt2bn6">
                                                                 <div class="css-168e7y9 e1fgvk593"><strong
                                                                         class="css-c2iqrm e1fgvk592">1:1 문의 작성 전
@@ -845,13 +1139,13 @@
                                                 <div class="css-mlazth edd8l6o3">
                                                     <div class="css-g8ewo8 e9bfpi41">
                                                         <div class="css-175wokr e9bfpi40">
-                                                            <div class="css-0"><label for="photo-picker"
+                                                            <div class="css-0 lastfile"><label for="photo-picker"
                                                                     class="css-0 e1l8vpkx2"><button type="button"
-                                                                        class="css-j9ybaa e1l8vpkx0"><span
+                                                                        class="css-j9ybaa e1l8vpkx0 fileSelect"><span
                                                                             class="css-113ip0v e1tcjz8t0"></span></button><input
                                                                         multiple="" type="file"
                                                                         accept="image/jpg, image/jpeg, image/png, image/bmp"
-                                                                        class="css-eivff4 e1l8vpkx1"></label></div>
+                                                                        class="css-eivff4 e1l8vpkx1 fileElem" onchange="handleFiles(this.files)"></label></div>
                                                         </div>
                                                         <div class="css-sqqcql edd8l6o2">
                                                             <div class="css-7n55a5 edd8l6o1"><span
@@ -868,8 +1162,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="css-1spu0j4 ebvrvv11"><button type="submit" disabled=""
-                                                class="css-13kn1it ebvrvv10">등록</button></div>
+                                        <div class="css-1spu0j4 ebvrvv11"><button type="button"
+                                                class="css-114fr9p ebvrvv10">등록</button></div>
                                     </form>
                                 </div>
                             </div>

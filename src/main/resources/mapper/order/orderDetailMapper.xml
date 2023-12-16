@@ -7,23 +7,49 @@
         INSERT INTO spring.order_detail
         (ord_id, mem_id, prod_id, opt_prod_id, code_name, prod_name, prod_qty, prod_tot_price, pack_type, rg_num, md_num)
         VALUES
-        (#{ord_id},#{mem_id},#{prod_id},#{opt_prod_id},#{code_name},#{prod_name},#{prod_qty},#{prod_tot_price},#{pack_type},#{rg_num},#{md_num});
+        (#{ord_id},#{mem_id},#{prod_id},#{opt_prod_id},#{code_name},#{prod_name},#{prod_qty},#{prod_tot_price},#{pack_type},#{rg_num},#{md_num})
     </insert>
 
     <select id="select" parameterType="long" resultType="OrderDetailDto">
         SELECT *
         FROM spring.order_detail
         WHERE
-        ord_det_id=#{ord_det_id};
+        ord_det_id=#{ord_det_id}
     </select>
 
     <select id="selectList" resultType="OrderDetailDto">
         SELECT *
         FROM spring.order_detail
         WHERE
-        ord_id=#{ord_id};
+        ord_id=#{ord_id}
+    </select>
+    
+    <select id="selectAllByOrdId" resultType="OrderDetailDto">
+        SELECT *
+        FROM spring.order_detail
+        WHERE
+        ord_id=#{ord_id}
     </select>
 
+	<select id="selectByOrderDetImg" resultType="string">
+        SELECT pi.upld_path
+		FROM product_image pi
+		JOIN order_detail od ON pi.prd_id = od.prod_id
+		WHERE od.ord_det_id = #{ord_det_id}
+    </select>
+    
+	<select id="selectByCodeName" resultType="string">
+        SELECT column_sts
+        FROM code_table
+        WHERE code_name= #{code_name}
+    </select>
+    
+    <select id="selectByOrderDetId" resultType="OrderDetailDto">
+        SELECT *
+        FROM order_detail
+        WHERE ord_det_id= #{ord_det_id}
+    </select>
+    
     <update id="updateStatus" parameterType="long">
         UPDATE spring.order_detail
         SET

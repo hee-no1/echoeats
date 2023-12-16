@@ -1,18 +1,31 @@
 package com.pofol.main.orders.order.controller;
 
+import java.util.List;
+import com.pofol.main.orders.payment.service.PaymentDiscountService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.DelNotesDto;
+import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.service.AddressService;
+import com.pofol.main.member.service.CouponService;
 import com.pofol.main.member.service.DelNotesService;
+import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
-import com.pofol.main.product.basket.SelectedItemsDto;
+import com.pofol.main.product.cart.SelectedItemsDto;
+import com.pofol.main.orders.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -21,8 +34,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
+    private final MemberService memberService;
+    private final AddressService addressService;
     private final DelNotesService delNotesService;
+    private final CouponService couponService;
+    private final OrderService orderService;
+    private final PaymentService paymentService;
+    private final PaymentDiscountService paymentDiscountService;
 
     @GetMapping
     public String Order(){
@@ -34,64 +52,100 @@ public class OrderController {
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, Model m){
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
-        OrderCheckout orderCheckout = orderService.writeCheckout(items);
-        System.out.println(orderCheckout);
-        m.addAttribute("checkout",orderCheckout);
+        try{
+            OrderCheckout orderCheckout = orderService.writeCheckout(items);
+            System.out.println(orderCheckout);
+            m.addAttribute("checkout",orderCheckout);
+            return "/order/checkout";
 
-        return "/order/checkout";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
 
 
     @ResponseBody
     @PostMapping("/calculatePayment")
-    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pd){
-        Integer coupon_disc = pd.getCoupon_disc(); // 쿠폰 사용 금액
-        Integer reserves_used = pd.getPoint_used(); // 적립금 사용 금액
-        int discountPrice = 0;
-        System.out.println(pd);
-
-        if(coupon_disc != null){ //쿠폰 할인 금액이 입력 돼 있을 때
-            discountPrice += coupon_disc;
-        }else if(reserves_used != null){ //적립금 할인 금액이 입력시
-            discountPrice += reserves_used;
+    public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
+        try{
+            System.out.println("계산전"+ pdd);
+            PaymentDiscountDto paymentDiscountDto = orderService.calculatePayment(pdd);
+            return paymentDiscountDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        pd.setTot_pay_price(pd.getTot_prod_price() - discountPrice + pd.getDlvy_fee());
-
-        System.out.println(pd);
-        return pd;
     }
 
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id){
-        System.out.println(ord_id);
-        PaymentDto pd = new PaymentDto(ord_id, "PAYMENT_COMPLETE");
-        orderService.modifyOrder(pd);
-        return "/order/orderCompleted";
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
+        try{
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+            String mem_id = "you11";
+
+            /* DB 데이터 */
+            orderService.modifyOrder(ord_id, "ORDER_COMPLETE"); //주문 table 변경
+            Long cp_id = paymentDiscountService.getPaymentDiscount(ord_id).getCoupon_id(); //paymentDiscount 테이블에서 coupon_id 가져오기
+            if(cp_id != null){  //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
+                couponService.modifyCouponStatus(cp_id, mem_id);
+            }
+
+            /* 모델로 뷰 단에 넘겨줘야할 것: 주문자 이름, 배송지 */
+            String mem_name = memberService.select(mem_id).getMem_name(); //주문자 이름
+            AddressDto address = addressService.getDefaultAddress(mem_id); //배송지
+            PaymentDto payment = paymentService.getPayment(ord_id); //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
+
+            m.addAttribute("mem_name", mem_name);
+            m.addAttribute("address", address);
+            m.addAttribute("payment",payment);
+            return "/order/orderCompleted";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
 
-    //팝업창
+
+    //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")
     public String receiverDetails(Model m){
-        DelNotesDto delNotes = delNotesService.getDelNotes();
-        m.addAttribute("delNotes", delNotes);
-        System.out.println("팝업창으로 들어가는 서버 모델" + delNotes);
-        return "/order/receiverDetails";
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String mem_id = authentication.getName(); //회원id
+        String mem_id = "you11";
+        try {
+            MemberDto member = memberService.select(mem_id);
+            DelNotesDto delNotes = delNotesService.getDelNotes();
+            m.addAttribute("member", member);
+            m.addAttribute("delNotes", delNotes);
+            return "/order/receiverDetails";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/order/errorPage";
+        }
     }
+
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")
     public DelNotesDto writeDelNotes(@RequestBody DelNotesDto delNotesDto){
-        System.out.println(delNotesDto);
-        delNotesService.writeDelNotes(delNotesDto);
-        return delNotesDto;
+        try{
+            System.out.println(delNotesDto);
+            delNotesService.writeDelNotes(delNotesDto);
+            return delNotesDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     @ResponseBody
     @GetMapping("/checkout/getDelNotes")
     public DelNotesDto getDelNotes(){
-        return delNotesService.getDelNotes();
+        try{
+            return delNotesService.getDelNotes();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

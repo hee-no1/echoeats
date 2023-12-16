@@ -1,8 +1,11 @@
 package com.pofol.main.member.controller;
 
 import com.pofol.main.member.dto.AddressDto;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.AddressService;
+import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,22 +20,27 @@ import java.util.List;
 public class AddressController {
     @Autowired
     AddressService addressService;
+    @Autowired
+    MemberService memberService;
 
     //배송지 관리 페이지
     @GetMapping("/")
     public String address(HttpServletRequest request, Model m) throws Exception {
-        if(!loginCheck(request)){
-            return "member/login_form";
-        }else{
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            List<AddressDto> addressDtos = addressService.getAddresses(authentication.getName());
-            m.addAttribute("list",addressDtos);
-            return "member/addr_form";}
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<AddressDto> addressDtos = addressService.getAddresses(authentication.getName());
+        m.addAttribute("list",addressDtos);
+        MemberDto memberDto = memberService.select(authentication.getName());
+        m.addAttribute("memberDto",memberDto);
+        return "member/addr_form";
     }
 
     // 상세주소 페이지
     @GetMapping("/detail")
-    public String detailAddr() {return "member/detailAddr_form";}
+    public String detailAddr(Model m) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        m.addAttribute("mem_id",authentication.getName());
+        return "member/detailAddr_form";
+    }
 
     // 주소, 상세주소 등록
     @PostMapping("/detail")
@@ -60,15 +67,11 @@ public class AddressController {
         return addressDto;
     }
 
-    @PostMapping("/delete")
-    public String deleteAddr(@RequestParam(name = "addr_id") String addr_id) throws Exception {
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public ResponseEntity<String> deleteAddr(@RequestParam(name = "addr_id") String addr_id) throws Exception {
         addressService.removeAddress(addr_id);
-        return "redirect:/address/";
-    }
-
-    private boolean loginCheck(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        return session!=null && session.getAttribute("mem_id")!=null;
+        return ResponseEntity.ok("success");
     }
 
 }
