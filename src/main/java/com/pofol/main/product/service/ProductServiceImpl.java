@@ -8,6 +8,7 @@ import com.pofol.util.AwsS3ImgUploaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
@@ -21,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final AwsS3ImgUploaderService awsS3ImgUploaderService;
 
+    @Transactional
     @Override
     public void productEnroll(ProductDto productDto) {
         try {
@@ -41,16 +43,33 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e);
         }
 
-        if (productDto.getOptionProductList() != null) {
+        if (productDto.getOptionProductList() != null && !productDto.getOptionProductList().isEmpty()) {
             log.info("-----------옵션 상품등록 시작-----------");
-            productDto.getOptionProductList().forEach(optionProductDto -> {
-                optionProductDto.setProd_id(productDto.getProd_id());
+            char optionName = 'A';
+            for (OptionProductDto option : productDto.getOptionProductList()) {
+                option.setOpt_prod_id(String.valueOf(productDto.getProd_id() + optionName++));
+                option.setOpt_prod_name(option.getOpt_prod_name());
+                option.setOpt_price(option.getOpt_price());
+                option.setOpt_prod_qty(option.getOpt_prod_qty());
+                option.setOpt_prod_sts(option.getOpt_prod_sts());
+                option.setRg_num(productDto.getRg_num());
+                option.setMd_num(productDto.getMd_num());
                 try {
-                    productRepository.insertOptionProduct(optionProductDto);
+                    productRepository.insertOption(option);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            });
+            }
+        } else {
+            log.info("-----------옵션 상품등록 안했을 때 -----------");
+            OptionProductDto defaultOption = new OptionProductDto();
+            defaultOption.setOpt_prod_id(productDto.getProd_id() + "A");
+            defaultOption.setOpt_prod_name(defaultOption.getOpt_prod_name());
+            defaultOption.setOpt_price(defaultOption.getOpt_price());
+            defaultOption.setOpt_prod_qty(defaultOption.getOpt_prod_qty());
+            defaultOption.setOpt_prod_sts(defaultOption.getOpt_prod_sts());
+            defaultOption.setRg_num(productDto.getRg_num());
+            defaultOption.setMd_num(productDto.getMd_num());
         }
     }
 
@@ -70,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void optionProductEnroll(OptionProductDto optionProductDto) throws Exception {
-        productRepository.insertOptionProduct(optionProductDto);
+        productRepository.insertOption(optionProductDto);
     }
 
 }
