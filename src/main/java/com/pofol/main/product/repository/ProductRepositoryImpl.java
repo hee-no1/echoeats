@@ -40,8 +40,10 @@ public class ProductRepositoryImpl implements ProductRepository {
         session.insert(namespace + "insertImage", productImageDto);
     }
 
+    // 상품 옵션 등록(INSERT)
     @Override
     public void insertOptionProduct(OptionProductDto optionProductDto) throws Exception {
         session.insert(namespace + "insertOptionProduct", optionProductDto);
     }
+
 }
