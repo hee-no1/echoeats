@@ -34,7 +34,7 @@
 		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>
 		<typeAlias alias="InquiryPrdDto" type="com.pofol.main.orders.inquiry.domain.InquiryPrdDto"/>
 		<!-- product -->
-		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
+		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.domain.SearchProductCondition"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
 		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
 		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
