@@ -23,17 +23,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void productEnroll(ProductDto productDto) {
         try {
+            log.info("-----------상품 이미지등록 시작-----------");
             productRepository.insert(productDto);
             MultipartFile productImage = productDto.getProd_img();
             String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                     productDto.getProd_img(), "product");
-            System.out.println("----------------------------------");
-            System.out.println("imgUrl = " + imgUrl);
             ProductImageDto productImageDto = new ProductImageDto();
             productImageDto.setMd_num(productDto.getMd_num());
-            System.out.println("productImageDto = " + productImageDto);
             productImageDto.setProd_img_id(imgUrl);
-            System.out.println("productDto.getProd_id() = " + productDto.getProd_id());
             productImageDto.setProd_id(productDto.getProd_id());
             productImageDto.setOri_file_name(productImage.getOriginalFilename());
             productImageDto.setSer_file_name(AwsS3ImgUploaderService.generateFileName(Objects.requireNonNull(productImage.getOriginalFilename())));
