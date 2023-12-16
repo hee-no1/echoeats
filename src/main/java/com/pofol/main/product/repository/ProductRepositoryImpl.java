@@ -34,6 +34,11 @@ public class ProductRepositoryImpl implements ProductRepository {
         return session.selectOne(namespace + "countImage");
     }
 
+    @Override
+    public int countOption() throws Exception {
+        return session.selectOne(namespace + "countOption");
+    }
+
     // 상품 이미지 등록(INSERT)
     @Override
     public void insertImage(ProductImageDto productImageDto) throws Exception {
@@ -42,8 +47,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     // 상품 옵션 등록(INSERT)
     @Override
-    public void insertOptionProduct(OptionProductDto optionProductDto) throws Exception {
-        session.insert(namespace + "insertOptionProduct", optionProductDto);
+    public void insertOption(OptionProductDto optionProductDto) throws Exception {
+        session.insert(namespace + "insertOption", optionProductDto);
     }
 
 }
