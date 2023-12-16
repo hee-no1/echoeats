@@ -1,5 +1,6 @@
 package com.pofol.main.product.service;
 
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.repository.ProductRepository;
@@ -41,6 +42,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         if (productDto.getOptionProductList() != null) {
+            log.info("-----------옵션 상품등록 시작-----------");
             productDto.getOptionProductList().forEach(optionProductDto -> {
                 optionProductDto.setProd_id(productDto.getProd_id());
                 try {
@@ -64,6 +66,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void productImageEnroll(ProductImageDto productImageDto) throws Exception {
         productRepository.insertImage(productImageDto);
+    }
+
+    @Override
+    public void optionProductEnroll(OptionProductDto optionProductDto) throws Exception {
+        productRepository.insertOptionProduct(optionProductDto);
     }
 
 }
