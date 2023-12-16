@@ -147,7 +147,7 @@
                                             <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
                                         </span>
                                         <span aria-label="판매 가격" data-testid="selling-price" class="css-cwmxfz e2qzex50">
-                                            <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
+                                            <fmt:formatNumber value="${cartProductList.total_price}" pattern="#,###"/>원
                                         </span>
                                     </div>
                                     <button class="css-h5zdhc eudrkjx0" type="button" data-testid="delete">
@@ -183,7 +183,7 @@
                     <div class="css-oft680 e15fcx0p3">
                         <h3 class="css-1guaarh e15fcx0p2">배송지</h3>
                         <div class="css-50yi3o e15fcx0p1">
-                            <p class="css-xxfxl7 e1tweaw11">나의 집주소가 나와요</p>
+                            <p class="css-xxfxl7 e1tweaw11">${address} ${detailAddress}</p>
                             <div class="css-s6py67">
                                 <span type="direct" class="css-z4mca9 e1jlkvf51">에코배송</span>
                             </div>
