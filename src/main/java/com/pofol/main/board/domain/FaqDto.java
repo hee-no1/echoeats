@@ -1,6 +1,7 @@
 package com.pofol.main.board.domain;
 
 public class FaqDto {
+    // 썸네일 이미지 추가해야,,
     private int faq_id;
     private String faq_type;
     private String faq_title;

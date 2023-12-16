@@ -451,7 +451,7 @@
     </head>
     <body class="sb-nav-fixed">
     	<%@include file="../include/header.jspf" %>
-    	<%@include file="../include/mypageOrder_Incldue.jsp" %>
+    	<%@include file="../include/mypageOrder_Include.jsp" %>
     	<%@include file="../include/footer.jspf" %>
     </body>
 </html>
