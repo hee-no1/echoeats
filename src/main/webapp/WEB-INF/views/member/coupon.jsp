@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <html lang="ko">
 <head>
@@ -11,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/member/coupon.css">
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dhurjati&family=Orbit&family=Rethink+Sans&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -23,7 +26,9 @@
                     <div class = "welcome">웰컴</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
-                            이희원님
+                            <sec:authorize access="isAuthenticated()">
+                                <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+                            </sec:authorize>
                         </strong>
                         <div class = "css-70qvj9">
                             <button class = "css-rlyyl8">다음 달 등급 확인</button>
@@ -276,15 +281,108 @@
                     <h2 class="css-1268zpe ed9qr671">쿠폰</h2>
                 </div>
             </div>
-            <div class="css-1l6d6kz e1rh3gjt3">
-                <div class="css-zjik7 e1rh3gjt2">
-                    <div class="css-1gddiza e1uzxhvi6">
-                        <div class="css-176lya2 e1uzxhvi3"><input data-testid="input-box" placeholder="발급된 쿠폰번호를 입력해 주세요"
-                                                                  type="text" class="css-u52dqk e1uzxhvi2" value=""></div>
-                    </div><button class="css-nrfvjw e1rh3gjt0">쿠폰 등록</button>
+
+
+
+
+
+
+            <div class="download_coupon">
+
+
+
+                <input type="checkbox" id="check">
+                <label for="check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+
+
+                <div class="sidebar">
+                    <ul>
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back" id="1"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back" id="2"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back" id="3"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back" id="4"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back" id="5"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back"><span>coupon</span></div>
+                        </li>
+
+                        <li class="coupon">
+                            <div class="coupon_front">
+                                <div>쿠폰명</div>
+                                <div>할인ddddddddd 10%</div>
+                                <div>사용 기간</div>
+                            </div>
+                            <div class="coupon_back"><span>coupon</span></div>
+                        </li>
+
+                    </ul>
                 </div>
-                <p class="css-b0usrz e1rh3gjt1">쿠폰에 하이픈 '-'이 포함되어 있을 경우, 하이픈 '-'을 반드시 입력해주세요.</p>
+
+
+
             </div>
+
+
+
+
             <div data-testid="summary" class="css-1ky9cuc e3geg1y2">
                 <p class="css-16z9rvt e3geg1y1">쿠폰은 적용 가능한 상품이 따로 적용되어 있는 경우 해당 상품 구매 시에만 사용이 가능합니다.</p>
                 <p class="css-1x6sdw1 e3geg1y0">사용가능쿠폰: ${coupon.size()}장</p>
@@ -364,6 +462,9 @@
 
 
             </table>
+
+
+
         </div>
 
 
@@ -372,5 +473,52 @@
 
 </div>
 <%@ include file="../include/footer.jspf" %>
+<script>
+    function getRandomColor(){
+        const elements = "0123456789ABCDEF";
+        let color = "#";
+
+        for(let i = 0 ; i<6 ; i++){
+            color += elements[Math.floor(Math.random()*16)];
+        }
+        return color;
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        const coupons = document.querySelectorAll(".coupon");
+
+        coupons.forEach(function(coupon){
+            const coupon_front = coupon.querySelector(".coupon_front");
+            const RandomColor = getRandomColor();
+
+            coupon_front.style.backgroundColor = RandomColor;
+        });
+    });
+
+
+//     쿠폰에 이벤트 추가
+    $('.coupon_back').on('click', function (){
+        var clickedId = $(this).attr('id');
+
+        $.ajax({
+            url: "coupon_dw",
+            method: "GET",
+            data: { id: clickedId },
+            dataType: "json",
+            success: function(data) {
+                alert(data);
+
+
+            },
+            error: function(error) {
+
+                console.error('Error:', error);
+            }
+        });
+
+    });
+
+
+</script>
 </body>
 </html>
