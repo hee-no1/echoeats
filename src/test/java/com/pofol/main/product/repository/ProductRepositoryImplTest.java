@@ -1,5 +1,6 @@
 package com.pofol.main.product.repository;
 
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.swing.text.html.Option;
 import java.text.SimpleDateFormat;
 
 import static org.assertj.core.api.Assertions.*;
@@ -48,6 +50,20 @@ class ProductRepositoryImplTest {
 
         // then
         assertThat(productRepository.countImage()).isEqualTo(3);
+    }
+
+    @DisplayName("옵션 상품 등록 테스트")
+    @Test
+    void insertOptionTest() throws Exception {
+        // given
+        OptionProductDto option = new OptionProductDto("100241A", 100241L, "나홀로집에크리스마스쿠키", 10000, 2000, 200, "Y", "100241A");
+
+        // when
+        productRepository.insertOption(option);
+
+        //then
+        assertThat(productRepository.countOption()).isEqualTo(8);
+
     }
 
     @DisplayName("상픔 리스트 테스트")
