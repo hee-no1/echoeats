@@ -13,11 +13,7 @@
     <select id="selectAll_address" resultType="AddressDto">
         SELECT * FROM address WHERE mem_id = #{mem_id}
     </select>
-	
-	<select id="selectDefaultAddress" resultType="AddressDto">
-        SELECT * FROM address WHERE mem_id = #{mem_id} AND def_addr = 'Y'
-    </select>
-	
+
     <select id="select_address" resultType="AddressDto">
         SELECT * FROM address WHERE addr_id = #{addr_id}
     </select>
