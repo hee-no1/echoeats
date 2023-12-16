@@ -1,5 +1,6 @@
 package com.pofol.main.product.service;
 
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 
@@ -13,5 +14,8 @@ public interface ProductService {
 
     // 상품 이미지 등록
     void productImageEnroll(ProductImageDto productImageDto) throws Exception;
+
+    // 옵션 상품 등록
+    void optionProductEnroll(OptionProductDto optionProductDto) throws Exception;
 
 }
