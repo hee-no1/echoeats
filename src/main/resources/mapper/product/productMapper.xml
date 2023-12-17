@@ -71,8 +71,8 @@
 
     <!-- 옵션 insert-->
     <insert id="insertOption" parameterType="OptionProductDto" useGeneratedKeys="true" keyProperty="prod_id">
-        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, opt_prod_qty, opt_prod_sts, rg_num)
-        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{opt_prod_qty}, #{opt_prod_sts}, #{rg_num})
+        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, opt_prod_qty, opt_prod_sts, rg_num, md_num)
+        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{opt_prod_qty}, #{opt_prod_sts}, #{rg_num}, #{md_num})
     </insert>
 
 </mapper>
