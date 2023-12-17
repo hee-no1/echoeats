@@ -101,6 +101,14 @@ public class CartServiceImpl implements CartService{
             cartDto.setTotal_price(optPrice * qty);
             cartDto.setTotal_disc_price(optDiscPrice * qty);
         }
+
+        // 장바구니 상품 수량변경 데이터에 저장
+        try {
+            cartRepository.updateCartProduct(cartDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return cartDto;
     }
 

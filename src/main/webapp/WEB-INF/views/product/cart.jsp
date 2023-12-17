@@ -73,7 +73,7 @@
             <div class="css-20o6z0 e149z643">
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
-                        <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                        <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
                         <span> 전체선택 (0/1)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
@@ -108,10 +108,10 @@
 
 
 <%--                    <c:if test="">--%>
-                        <c:forEach var="cartProductList" items="${cartProductList}">
-                            <ul class="cartList">
+                        <ul class="cartList">
+                            <c:forEach var="cartProductList" items="${cartProductList}">
                                 <li class="css-1d6kgf6 esoayg811"><label class="css-14td1km e1dcessg3">
-                                    <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                                    <input type="checkbox" class="css-agvwxo e1dcessg2 cartProductCheck">&nbsp;&nbsp;
                                     <span>&nbsp;</span>
                                 </label>
                                     <a class="css-1u5t3pw esoayg810">
@@ -154,8 +154,9 @@
                                         <span class="css-6mgkir e5h3i930"></span>
                                     </button>
                                 </li>
-                            </ul>
-                        </c:forEach>
+                            </c:forEach>
+                        </ul>
+
 <%--                    </c:if>--%>
 
 
@@ -169,7 +170,7 @@
             <div class="css-20o6z0 e149z643">
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
-                        <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                        <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
                         <span> 전체선택 (0/1)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
@@ -260,6 +261,7 @@
     <c:when test="${empty cartProductList.opt_prod_id}">
     cartProduct[${loop.index}] = {
         cart_id : ${cartProductList.cart_id},
+        prod_id : ${cartProductList.prod_id},
         prod_price : ${cartProductList.prod_price},
         disc_price : ${cartProductList.disc_price},
         total_price : ${cartProductList.total_price},
@@ -270,6 +272,7 @@
     <c:otherwise>
     cartProduct[${loop.index}] = {
         cart_id : ${cartProductList.cart_id},
+        opt_prod_id : '${cartProductList.opt_prod_id}',
         opt_price : ${cartProductList.opt_price},
         opt_disc_price : ${cartProductList.opt_disc_price},
         total_price : ${cartProductList.total_price},

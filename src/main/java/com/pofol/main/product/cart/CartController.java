@@ -117,8 +117,17 @@ public class CartController {
     // 장바구니에 상품 삭제
     @ResponseBody
     @PostMapping("/removeProduct")
-    public ResponseEntity<String> removeCartProduct() {
+    public ResponseEntity<String> removeCartProduct(@RequestBody CartDto cartDto) {
+        System.out.println("cartDtoList = " + cartDto);
+        try {
+//            for (CartDto cartDto : cartDtoList) {
+                cartService.removeCartProduct(cartDto);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("장바구니 삭제 실패");
+        }
 
-        return null;
+        return ResponseEntity.ok("장바구니 삭제 성공");
     }
 }
