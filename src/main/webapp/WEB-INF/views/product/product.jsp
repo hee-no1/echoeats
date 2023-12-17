@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/resources/product/css/main-css.css">
+    <link rel="stylesheet" href="/resources/product/css/header-css.css">
     <link rel="stylesheet" href="/resources/product/css/product-css.css"/>
     <link rel="stylesheet" href="/resources/product/css/pro_detail.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
@@ -15,53 +15,6 @@
     <style>
         .css-1c36ywl {
             background: url(${product.prod_img_id}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
-        }
-
-        /*드롭 다운 카테고리 (수정 필요)*/
-        nav {
-            overflow: hidden;
-        }
-
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-
-        .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
         }
     </style>
 </head>
@@ -85,11 +38,13 @@
                                     ${product.disc_rate}%
                                 </span>
                             <span class="css-9pf1ze e1q8tigr2"></span>
-                            <span class="css-1x9cx9j e1q8tigr1">${product.disc_price}원</span>
+                            <span class="css-1x9cx9j e1q8tigr1">
+                                <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>원
+                            </span>
                         </h2>
                         <span class="css-1e1rd4p e1q8tigr0">
                                 <span>
-                                   ${product.prod_price}원
+                                    <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>원
                                 </span>
                                 <button type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" widht="21" height="21"
@@ -233,8 +188,12 @@
                                                                 class="css-18y6jr4 e1hx75jb0"></button>
                                                     </div>
                                                     <div class="css-1jzvrpg e1bjklo12">
-                                                        <span class="css-fburr9 e1bjklo11">${product.prod_price}원</span>
-                                                        <span class="css-gqkxk8 e1bjklo10">${product.disc_price}원</span>
+                                                        <span class="css-fburr9 e1bjklo11">
+                                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>원
+                                                        </span>
+                                                        <span class="css-gqkxk8 e1bjklo10">
+                                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>원
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,7 +233,7 @@
                             <div class="css-gnxbjx e10vtr1i2">
                                 <button class="css-3z91zj e4nu7ef3" type="button" width="56" height="56" radius="3">
                                             <span class="css-nytqmg e4nu7ef1">
-                                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yNS44MDcgNy44NjNhNS43NzcgNS43NzcgMCAwIDAtOC4xNzIgMEwxNiA5LjQ5N2wtMS42MzUtMS42MzRhNS43NzkgNS43NzkgMCAxIDAtOC4xNzMgOC4xNzJsMS42MzQgMS42MzQgNy40NjYgNy40NjdhMSAxIDAgMCAwIDEuNDE1IDBzMCAwIDAgMGw3LjQ2Ni03LjQ2N2gwbDEuNjM0LTEuNjM0YTUuNzc3IDUuNzc3IDAgMCAwIDAtOC4xNzJ6IiBzdHJva2U9IiM1RjAwODAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
+                                                <img src="/resources/icons/kurly_heart_green.svg"
                                                      alt class="css-0">
                                             </span>
                                 </button>

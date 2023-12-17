@@ -2,8 +2,8 @@ package com.pofol.main.product.controller;
 
 import com.pofol.main.member.dto.GradeDto;
 import com.pofol.main.member.service.GradeService;
-import com.pofol.main.product.PageHandler;
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.PageHandler;
+import com.pofol.main.product.domain.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
@@ -158,6 +158,7 @@ public class ProductListController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/main";
         }
         return "/product/productList";
     }
@@ -199,5 +200,57 @@ public class ProductListController {
         return "/product/productList";
     }
 
+    // 신상품 상품 리스트 페이지로 이동
+    @GetMapping("/newProduct")
+    public String getNewProductPage(SearchProductCondition sc, Model model) {
+
+        try {
+            // 상품이름 검색 페이지
+            model.addAttribute("pageType", "new");
+
+            // 전체 상품 카운트
+            int totalCount = productListService.getAllProductCount();
+            model.addAttribute("totalCount", totalCount);
+
+            // 전체 상품 리스트
+            List<ProductDto> allProductList = productListService.getAllProductList();
+            model.addAttribute("productList", allProductList);
+
+            // 페이징
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
+            model.addAttribute("pageHandler", pageHandler);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/main";
+        }
+        return "/product/productList";
+    }
+
+    // 베스트 상품 리스트 페이지로 이동
+    @GetMapping("/best")
+    public String getBestProductPage(SearchProductCondition sc, Model model) {
+
+        try {
+            // 상품이름 검색 페이지
+            model.addAttribute("pageType", "best");
+
+            // 전체 상품 카운트
+            int totalCount = productListService.getAllProductCount();
+            model.addAttribute("totalCount", totalCount);
+
+            // 전체 상품 리스트
+            List<ProductDto> allProductList = productListService.getAllProductList();
+            model.addAttribute("productList", allProductList);
+
+            // 페이징
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
+            model.addAttribute("pageHandler", pageHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/main";
+        }
+        return "/product/productList";
+    }
 
 }

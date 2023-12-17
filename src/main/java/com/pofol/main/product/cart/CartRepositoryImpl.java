@@ -21,9 +21,19 @@ public class CartRepositoryImpl implements CartRepository {
         return sqlSession.selectOne(namespace + "selectProductOrderCheckout", selectedItemsDto);
     }
 
-    @Override
+    @Override // 장바구니에 상품 데이터 저장
     public int insertCartProduct(CartDto cartDto) throws Exception {
         return sqlSession.insert(namespace + "insertCartProduct", cartDto);
+    }
+
+    @Override // 이미 담긴 상품 담을 시 수량 증가
+    public int updateCartProduct(CartDto cartDto) throws Exception {
+        return sqlSession.update(namespace + "updateCartProduct", cartDto);
+    }
+
+    @Override
+    public int deleteCartProduct(CartDto cartDto) throws Exception {
+        return sqlSession.delete(namespace + "deleteCartProduct", cartDto);
     }
 
     @Override // 장바구니에 담긴 상품 리스트 정렬
