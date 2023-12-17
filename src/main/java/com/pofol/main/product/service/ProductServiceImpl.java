@@ -55,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
                 option.setOpt_prod_id(productDto.getProd_id() + String.valueOf(optionName++));
                 log.info("productDto.getProd_id() : {}", productDto.getProd_id());
                 log.info("opt_prod_id : {}", option.getOpt_prod_id());
+                option.setProd_id(productDto.getProd_id());
                 option.setOpt_prod_name(option.getOpt_prod_name());
                 option.setOpt_price(option.getOpt_price());
                 option.setOpt_prod_qty(option.getOpt_prod_qty());

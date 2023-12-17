@@ -39,9 +39,9 @@
 
     <!-- 상품 등록 -->
     <insert id="insert" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="prod_id">
-        INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, disc_rate, sale_sts, prod_qty,
+        INSERT INTO product (prod_img_id, cat_code, prod_name, prod_price, disc_rate, sale_sts, prod_qty,
                              is_exch, is_opt, short_desc, long_desc, disp_sts, rg_num, md_num)
-        VALUES (#{evt_gp_id}, #{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{disc_rate}, #{sale_sts},
+        VALUES (#{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{disc_rate}, #{sale_sts},
                 #{prod_qty}, #{is_exch}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num}, #{md_num})
     </insert>
 
