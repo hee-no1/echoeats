@@ -1,6 +1,8 @@
 package com.pofol.main.product.cart;
 
+import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.GradeService;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
@@ -24,20 +26,20 @@ public class CartController {
     private final GradeService gradeService;
     private final CartService cartService;
     private final CategoryList categoryList;
+    private final AddressService addressService;
 
-    // 상품 수량에 따라 상품 가격 계산
+    // 상품 수량에 따라 상품 가격 계산 (상품 상세 페이지)
     @ResponseBody
     @PostMapping("/ProductCalculation")
-    public List<CartDto> productCalculation(@RequestBody List<CartDto> cartDtoList) {
+    public ResponseEntity<List<CartDto>> productCalculation(@RequestBody List<CartDto> cartDtoList) {
 
-        for (CartDto cartDto : cartDtoList) {
-            if (cartDtoList.size() == 1) {
-                cartDto.setTotal_price(cartDto.getDisc_price() * cartDto.getQty());
-            } else {
-                cartDto.setTotal_price(cartDto.getOpt_disc_price() * cartDto.getQty());
-            }
+        try {
+            List<CartDto> productCount = cartService.goCartProductCount(cartDtoList);
+            return new ResponseEntity<>(productCount, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(cartDtoList);
         }
-        return cartDtoList;
     }
 
     // 장바구니 페이지로 가기
@@ -57,14 +59,19 @@ public class CartController {
             List<CartDto> cartProductList = cartService.getCartProductList(memberID);
             model.addAttribute("cartProductList", cartProductList);
 
-            // 회원 등급 가져오기
+            // 회원 등급 + 배송지 가져오기
             if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
+
+                AddressDto defaultAddress = addressService.getDefaultAddress(memberID);
+                model.addAttribute("address", defaultAddress.getAddr());
+                model.addAttribute("detailAddress", defaultAddress.getDtl_addr());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/main";
         }
 
         return "/product/cart";
@@ -82,7 +89,6 @@ public class CartController {
         }
 
         for (CartDto cartDto : cartDtoList) {
-
             if (cartDto.getQty() != 0) {
                 try {
                     cartService.saveCartProduct(cartDto);
@@ -98,25 +104,30 @@ public class CartController {
     // 장바구니 상품 수량 변경에 따른 가격 변동
     @ResponseBody
     @PostMapping("/CartCalculation")
-    public CartDto getCartProductCount(@RequestBody CartDto cartDto) {
+    public ResponseEntity<CartDto> getCartProductCount(@RequestBody CartDto cartDto) {
+        try {
+            CartDto cartProductPrice = cartService.getCartProductPrice(cartDto);
+            return new ResponseEntity<>(cartProductPrice, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(cartDto);
+        }
+    }
 
-        Integer prodPrice = cartDto.getProd_price();
-        Integer prodDiscPrice = cartDto.getDisc_price();
-        Integer optPrice = cartDto.getOpt_price();
-        Integer optDiscPrice = cartDto.getOpt_disc_price();
-        Integer qty = cartDto.getQty();
-
-        if (prodPrice != null && prodDiscPrice != null) {
-
-            cartDto.setTotal_price(prodPrice * qty);
-            cartDto.setTotal_disc_price(prodDiscPrice * qty);
-
-        } else if (optPrice != null && optDiscPrice != null) {
-
-            cartDto.setTotal_price(optPrice * qty);
-            cartDto.setTotal_disc_price(optDiscPrice * qty);
+    // 장바구니에 상품 삭제
+    @ResponseBody
+    @PostMapping("/removeProduct")
+    public ResponseEntity<String> removeCartProduct(@RequestBody CartDto cartDto) {
+        System.out.println("cartDtoList = " + cartDto);
+        try {
+//            for (CartDto cartDto : cartDtoList) {
+                cartService.removeCartProduct(cartDto);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("장바구니 삭제 실패");
         }
 
-        return cartDto;
+        return ResponseEntity.ok("장바구니 삭제 성공");
     }
 }

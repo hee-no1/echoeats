@@ -1,32 +1,115 @@
 const showHideButton = document.querySelector(".css-lvqq7y");
 const goLoginButton = document.querySelector('.goLoginButton');
-let productCheck = document.querySelectorAll('.css-agvwxo');
+const allCartCheck = document.querySelectorAll('.allCartCheck');
+const productCartCheck = document.querySelectorAll(".cartProductCheck");
+const removeButton = document.querySelectorAll('.css-h5zdhc');
+const cartOrderForm = document.querySelector('#cartOrderForm');
+const orderButton = document.querySelector('.orderButton');
 
-// 장바구니 상품 체크한 데이터 최종상품 가격에 반영
-// 이거 해야함
-const productCheckAjax = function () {
-
-    $.ajax({
-        type: 'POST',
-        url: '/cart/saveProduct',
-        headers: {
-            "content-type": "application/json"
-        },
-        dataType: 'json',
-        data: JSON.stringify(cartProduct),
-        success: function () {
-            alert("success");
-        },
-        error: function () {
-            alert("error");
-        }
+// 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
+const allCheck = function (value) {
+    allCartCheck.forEach(function (checkbox) {
+        checkbox.checked = value;
     })
+}
+
+// 전체 체크상태에서 상품 체크박스 해제시 전체선택 체크박스도 해제되는 기능
+const cartCheckbox = function () {
+    let checkCount = 0;
+    for (let i = 0; i < productCartCheck.length; i++) {
+        if (productCartCheck[i].checked) {
+            checkCount++;
+            if (checkCount === productCartCheck.length) {
+                allCheck(true);
+            } else {
+                allCheck(false);
+            }
+        }
+    }
+}
+
+const addHiddenInput = function (i, index) {
+
+    let newInput1 = document.createElement('input');
+    let newInput2 = document.createElement('input');
+
+    newInput1.type = 'hidden';
+    newInput1.name = 'items[' + index +'].prod_id';
+    newInput1.value = cartProduct[i].prod_id;
+    newInput2.type = 'hidden';
+    newInput2.name = 'items[' + index +'].qty';
+    newInput2.value = cartProduct[i].qty;
+
+    if (cartProduct[i].opt_prod_id !== null && cartProduct[i].opt_prod_id !== undefined) {
+        let newInput3 = document.createElement('input');
+        newInput3.type = 'hidden';
+        newInput3.name = 'items[' + index +'].opt_prod_id';
+        newInput3.value = cartProduct[i].opt_prod_id;
+
+        return [newInput1, newInput2, newInput3];
+    }
+    return [newInput1, newInput2];
+}
+
+const makeInputHidden = function () {
+
+    let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+    if (hiddenInputs !== null) {
+        hiddenInputs.forEach(function (input) {
+            input.remove();
+        })
+    }
+
+    let index = 0;
+    for (let j = 0; j < productCartCheck.length; j++) {
+        if (productCartCheck[j].checked) {
+            const hiddenInput = addHiddenInput(j, index);
+            for (let j = 0; j < hiddenInput.length; j++) {
+                cartOrderForm.appendChild(hiddenInput[j])
+            }
+            index++;
+        }
+    }
 }
 
 
 
 
 
+
+
+
+
+
+
+
+
+// ajax 로 삭제하는 기능
+// 장바구니 상품 삭제
+// 체크박스 체크 된거 삭제기능 추가해야함
+const productRemoveAjax = function (i) {
+
+    let cartList = document.querySelectorAll('.css-1d6kgf6');
+    let cartProductCheck = document.querySelectorAll('.cartProductCheck');
+
+    $.ajax({
+        type: 'POST',
+        url: '/cart/removeProduct',
+        headers: {
+            "content-type": "application/json"
+        },
+        dataType: 'text',
+        data: JSON.stringify(cartProduct[i]),
+        success: function () {
+            cartList[i].style.display = 'none';
+            cartProductCheck[i].checked = false;
+            cartProductCheck[i].disabled = true;
+        },
+        error: function () {
+            alert("error");
+        }
+    })
+}
 
 // 장바구니 상품 수량 계산
 const productCountAjax = function (action, productQuantity, productQuantityHtml, i) {
@@ -49,12 +132,20 @@ const productCountAjax = function (action, productQuantity, productQuantityHtml,
         dataType: 'json',
         data: JSON.stringify(cartProduct[i]),
         success: function (result) {
+            cartProduct[i].total_price = result.total_price;
+            cartProduct[i].total_disc_price = result.total_disc_price;
+            cartProduct[i].qty = result.qty;
             let {qty} = result;
             let {total_disc_price} = result;
             let {total_price} = result;
             productQuantityHtml.textContent = qty;
             totalDiscPrice[i].innerText = total_disc_price.toLocaleString() + "원";
             totalPrice[i].innerText = total_price.toLocaleString() + "원";
+
+            let aaa = cartOrderForm.querySelectorAll('input[type="hidden"]')
+            // for (let j = 0; j < aaa.length; j++) {
+            //     if (aaa.)
+            // }
         },
         error: function () {
             alert("error");
@@ -102,18 +193,30 @@ $(document).ready(function () {
 
 
 
+    // 전체체크박스 클릭 시 전체선택o + 전체선택x
+    // 여기에 전체상품 가격 보여줘야함
+    for (let i = 0; i < allCartCheck.length; i++) {
+        allCartCheck[i].addEventListener('change', function () {
 
+            productCartCheck.forEach(function (checkbox) {
+                checkbox.checked = allCartCheck[i].checked;
+            })
+            allCheck(allCartCheck[i].checked);
 
-
-
-
-
-    // 장바구니 상품의 체크박스 누를 시 총 가격 계산
-    for (let i = 0; i < productCheck.length; i++) {
-        productCheck[i].addEventListener('change', function () {
-            // productCheckAjax();
+            makeInputHidden();
         })
     }
+    
+    // 장바구니 상품 체크박스
+    // 여기에 체크한 상품들 가격 보여줘야함
+    for (let i = 0; i < productCartCheck.length; i++) {
+        productCartCheck[i].addEventListener('change', function () {
+            cartCheckbox();
+
+            makeInputHidden();
+        })
+    }
+    
 
 
 
@@ -123,19 +226,15 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // 장바구니 상품 주문하기 버튼
+    orderButton.addEventListener('click', function () {
+        let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+        if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+            alert('장바구니 상품을 선택해 주세요.')
+            return;
+        }
+        orderButton.type = 'submit';
+    })
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')
@@ -146,6 +245,8 @@ $(document).ready(function () {
             let productQuantityHtml = document.querySelectorAll('.count')[i];
 
             productCountAjax('increase', productQuantity, productQuantityHtml, i);
+
+            makeInputHidden();
         })
     }
 
@@ -163,9 +264,29 @@ $(document).ready(function () {
             }
 
             productCountAjax('decrease', productQuantity, productQuantityHtml, i);
+
+            makeInputHidden();
         })
     }
 
+
+
+
+
+
+
+
+    // 장바구니 x버튼으로 상품 삭제
+    // 여러개 삭제할 시 기능 추가해야함
+    for (let i = 0; i < removeButton.length; i++) {
+
+        removeButton[i].addEventListener('click', function () {
+            if (!confirm("정말로 삭제하시겠습니까?")) {
+                return;
+            }
+            productRemoveAjax(i);
+        })
+    }
 })
 
 

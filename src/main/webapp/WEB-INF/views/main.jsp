@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,54 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
-    <style>
-        /*드롭 다운 카테고리 (수정 필요)*/
-        nav {
-            overflow: hidden;
-        }
-
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-
-        .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-    </style>
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
@@ -99,7 +50,7 @@
                     <a href="${pageContext.request.contextPath}/product/${product.prod_id}" class="goProductEx">
                         <div class="image-container">
                             <span><img src="${product.prod_img_id}"></span>
-                            <div class="product-sticker"><span>골라담기특가</span></div>
+<%--                            <div class="product-sticker"><span>골라담기특가</span></div>--%>
                         </div>
                         <div>
                             <button type="button" class="putProductButton">
@@ -116,11 +67,18 @@
                             <h3 class="product-name">${product.prod_name}</h3>
                             <div class="content-row">
                                 <div class="product-price">
-                                    <div><span class="dimmed-price">${product.prod_price}<span class="won">원</span></span></div>
+                                    <div>
+                                        <span class="dimmed-price">
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
+                                    </div>
                                     <div class="discount">
                                         <span class="discount-rate">${product.disc_rate}%</span>
-                                        <span class="sales-price">${product.disc_price}<span
-                                                class="won">원</span></span>
+                                        <span class="sales-price">
+                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +165,7 @@
                     <a href="${pageContext.request.contextPath}/product/${eventOneList.prod_id}">
                         <div class="image-container">
                             <span><img src="${eventOneList.prod_img_id}"></span>
-                            <div class="product-sticker"><span>골라담기특가</span></div>
+<%--                            <div class="product-sticker"><span>골라담기특가</span></div>--%>
                         </div>
                         <div>
                             <button type="button">
@@ -224,11 +182,18 @@
                             <h3 class="product-name">${eventOneList.prod_name}</h3>
                             <div class="content-row">
                                 <div class="product-price">
-                                    <div><span class="dimmed-price">${eventOneList.prod_price}<span class="won">원</span></span></div>
+                                    <div>
+                                        <span class="dimmed-price">
+                                            <fmt:formatNumber value="${eventOneList.prod_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
+                                    </div>
                                     <div class="discount">
                                         <span class="discount-rate">${eventOneList.disc_rate}%</span>
-                                        <span class="sales-price">${eventOneList.disc_price}<span
-                                                class="won">원</span></span>
+                                        <span class="sales-price">
+                                            <fmt:formatNumber value="${eventOneList.disc_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +239,7 @@
                     <a href="${pageContext.request.contextPath}/product/${product.prod_id}">
                         <div class="image-container">
                             <span><img src="${product.prod_img_id}"></span>
-                            <div class="product-sticker"><span>골라담기특가</span></div>
+<%--                            <div class="product-sticker"><span>골라담기특가</span></div>--%>
                         </div>
                         <div>
                             <button type="button">
@@ -291,11 +256,18 @@
                             <h3 class="product-name">${product.prod_name}</h3>
                             <div class="content-row">
                                 <div class="product-price">
-                                    <div><span class="dimmed-price">6,980<span class="won">원</span></span></div>
+                                    <div>
+                                        <span class="dimmed-price">
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
+                                    </div>
                                     <div class="discount">
                                         <span class="discount-rate">${product.disc_rate}%</span>
-                                        <span class="sales-price">${product.prod_price}<span
-                                                class="won">원</span></span>
+                                        <span class="sales-price">
+                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -340,7 +312,7 @@
                         <a href="${pageContext.request.contextPath}/product/${product.prod_id}">
                             <div class="image-container">
                                 <span><img src="${product.prod_img_id}"></span>
-                                <div class="product-sticker"><span>골라담기특가</span></div>
+<%--                                <div class="product-sticker"><span>골라담기특가</span></div>--%>
                             </div>
                             <div>
                                 <button type="button">
@@ -357,11 +329,17 @@
                                 <h3 class="product-name">${product.prod_name}</h3>
                                 <div class="content-row">
                                     <div class="product-price">
-                                        <div><span class="dimmed-price">6,980<span class="won">원</span></span></div>
+                                        <div><span class="dimmed-price">
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
+                                            <span class="won">원</span>
+                                        </span>
+                                        </div>
                                         <div class="discount">
                                             <span class="discount-rate">${product.disc_rate}%</span>
-                                            <span class="sales-price">${product.prod_price}<span
-                                                    class="won">원</span></span>
+                                            <span class="sales-price">
+                                                <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
+                                                <span class="won">원</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

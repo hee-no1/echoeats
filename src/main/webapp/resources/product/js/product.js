@@ -128,21 +128,24 @@ $(document).ready(function () {
 
 
     // 장바구니 담기 버튼
-    const cartButton = document.querySelector(".cart-button")
+    const cartButton = document.querySelector(".getCart")
 
-    cartButton.addEventListener('click', function () {
-        console.log("1111", cartProduct)
-        let qtyCount = 0;
-        for (let i = 0; i < cartProduct.length; i++) {
-            if (cartProduct[i].qty === 0) {
-                qtyCount++
+    if (cartButton !== null) {
+        cartButton.addEventListener('click', function () {
+            console.log("1111", cartProduct)
+            let qtyCount = 0;
+            for (let i = 0; i < cartProduct.length; i++) {
+                if (cartProduct[i].qty === 0) {
+                    qtyCount++
+                }
             }
-        }
 
-        if (qtyCount !== cartProduct.length) {
-            saveProductAjax();
-        }
-    })
+            if (qtyCount !== cartProduct.length) {
+                saveProductAjax();
+            }
+        })
+    }
+
 
 
     // 상품 상세 페이지
