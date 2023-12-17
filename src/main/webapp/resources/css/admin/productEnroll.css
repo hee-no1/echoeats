@@ -695,3 +695,19 @@ table input[type="checkbox"] {
     display: block;
     cursor: pointer;
 }
+
+.css-o4030c {
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    border-radius: 6px;
+    aspect-ratio: 1 / 1;
+    height: 72px;
+    width: 72px;
+}
+
+.css-idj2s4 {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

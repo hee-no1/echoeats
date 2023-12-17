@@ -45,22 +45,40 @@
                 #{prod_qty}, #{is_exch}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num}, #{md_num})
     </insert>
 
+    <!-- 상품 등록(상세 정보들) -->
+    <insert id="insertInfo" parameterType="ProductDto" >
+        INSERT INTO product_info (prod_id, prod_desc_id, brand, origin, dlvy_type, seller, pack_type, sales_unit, weight, exp_date, as_guide)
+        VALUES (#{prod_id}, #{prod_desc_id}, #{brand}, #{origin}, #{dlvy_type}, #{seller}, #{pack_type}, #{sales_unit}, #{weight}, #{exp_date}, #{as_guide})
+    </insert>
+
     <!-- product테이블 행 개수 -->
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM product
     </select>
 
+    <!-- product_image 테이블 행 개수-->
+    <select id="countImage" resultType="int">
+        SELECT COUNT(*)
+        FROM product_image
+    </select>
+
+    <!-- option_product 테이블 행 개수-->
+    <select id="countOption" resultType="int">
+        SELECT COUNT(*)
+        FROM option_product
+    </select>
+
     <!-- 이미지 등록 -->
-    <insert id="insertImage">
+    <insert id="insertImage" parameterType="ProductImageDto" useGeneratedKeys="true" keyProperty="prod_id">
         INSERT INTO product_image (prod_img_id, prod_id, ori_file_name, ser_file_name, rg_num, md_num)
         VALUES (#{prod_img_id}, #{prod_id}, #{ori_file_name}, #{ser_file_name}, #{rg_num}, #{md_num})
     </insert>
 
     <!-- 옵션 insert-->
-    <insert id="insertOption" parameterType="OptionProductDto">
-        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, rg_num)
-        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{rg_num})
+    <insert id="insertOption" parameterType="OptionProductDto" useGeneratedKeys="true" keyProperty="prod_id">
+        INSERT INTO option_product (opt_prod_id, prod_id, opt_prod_name, opt_price, opt_disc_price, opt_prod_qty, opt_prod_sts, rg_num, md_num)
+        VALUES (#{opt_prod_id}, #{prod_id}, #{opt_prod_name}, #{opt_price}, #{opt_disc_price}, #{opt_prod_qty}, #{opt_prod_sts}, #{rg_num}, #{md_num})
     </insert>
 
 </mapper>
