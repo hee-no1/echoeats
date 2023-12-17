@@ -105,9 +105,6 @@
 
 
 
-
-
-<%--                    <c:if test="">--%>
                         <ul class="cartList">
                             <c:forEach var="cartProductList" items="${cartProductList}">
                                 <li class="css-1d6kgf6 esoayg811"><label class="css-14td1km e1dcessg3">
@@ -157,7 +154,7 @@
                             </c:forEach>
                         </ul>
 
-<%--                    </c:if>--%>
+
 
 
 
@@ -225,7 +222,8 @@
                 </div>
                 <div class="css-8qz8ia e1mybczi1">
                     <sec:authorize access="isAuthenticated()">
-                    <button class="css-fwelhw e4nu7ef3" type="button" height="56"><span
+                    <form id="cartOrderForm" action="${pageContext.request.contextPath}/order/checkout" method="post">
+                    <button class="css-fwelhw e4nu7ef3" type="submit" height="56"><span
                         class="css-nytqmg e4nu7ef1">주문하기</span>
                     </button>
                     <ul class="css-19kxq7d">
@@ -235,6 +233,7 @@
                         <li class="css-1741abm ejr204i0">쿠폰, 적립금 사용 금액을 제외한 실 결제 금액 기준으로 최종 산정됩니다.</li>
                         <li class="css-1741abm ejr204i0">상품별로 적립금 지급 기준이 다를 수 있습니다. (상품 상세 페이지에서 확인 가능합니다)</li>
                     </ul>
+                    </form>
                     </sec:authorize>
                     <sec:authorize access="!isAuthenticated()">
                         <button class="css-fwelhw e4nu7ef3 goLoginButton" type="button" height="56">
@@ -255,7 +254,6 @@
 
     let cartProduct = [];
 
-<%--    <sec:authorize access="isAuthenticated()">--%>
     <c:forEach var="cartProductList" items="${cartProductList}" varStatus="loop">
     <c:choose>
     <c:when test="${empty cartProductList.opt_prod_id}">
@@ -272,6 +270,7 @@
     <c:otherwise>
     cartProduct[${loop.index}] = {
         cart_id : ${cartProductList.cart_id},
+        prod_id : ${cartProductList.prod_id},
         opt_prod_id : '${cartProductList.opt_prod_id}',
         opt_price : ${cartProductList.opt_price},
         opt_disc_price : ${cartProductList.opt_disc_price},
@@ -282,8 +281,6 @@
     </c:otherwise>
     </c:choose>
     </c:forEach>
-<%--    </sec:authorize>--%>
-
 
 
 
