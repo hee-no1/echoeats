@@ -18,4 +18,7 @@ public interface ProductService {
     // 옵션 상품 등록
     void optionProductEnroll(OptionProductDto optionProductDto) throws Exception;
 
+    // 상품 정보 등록
+    void productInfoEnroll(ProductDto productDto) throws Exception;
+
 }

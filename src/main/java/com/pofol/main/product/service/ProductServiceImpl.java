@@ -27,10 +27,13 @@ public class ProductServiceImpl implements ProductService {
     public void productEnroll(ProductDto productDto) {
         try {
             log.info("-----------상품 이미지등록 시작-----------");
-            productRepository.insert(productDto);
+            log.info("{}", productDto);
+            // productRepository.insert(productDto);
             MultipartFile productImage = productDto.getProd_img();
             String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
                     productDto.getProd_img(), "product");
+            productDto.setProd_img_id(imgUrl);
+            productRepository.insert(productDto);
             ProductImageDto productImageDto = new ProductImageDto();
             productImageDto.setMd_num(productDto.getMd_num());
             productImageDto.setProd_img_id(imgUrl);
@@ -38,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
             productImageDto.setOri_file_name(productImage.getOriginalFilename());
             productImageDto.setSer_file_name(AwsS3ImgUploaderService.generateFileName(Objects.requireNonNull(productImage.getOriginalFilename())));
             productImageDto.setRg_num(productDto.getRg_num());
+            log.info("{}", productImageDto);
             productImageEnroll(productImageDto);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -45,9 +49,12 @@ public class ProductServiceImpl implements ProductService {
 
         if (productDto.getOptionProductList() != null && !productDto.getOptionProductList().isEmpty()) {
             log.info("-----------옵션 상품등록 시작-----------");
+            log.info("{}, {}", productDto.getProd_id(), productDto.getOptionProductList());
             char optionName = 'A';
             for (OptionProductDto option : productDto.getOptionProductList()) {
-                option.setOpt_prod_id(String.valueOf(productDto.getProd_id() + optionName++));
+                option.setOpt_prod_id(productDto.getProd_id() + String.valueOf(optionName++));
+                log.info("productDto.getProd_id() : {}", productDto.getProd_id());
+                log.info("opt_prod_id : {}", option.getOpt_prod_id());
                 option.setOpt_prod_name(option.getOpt_prod_name());
                 option.setOpt_price(option.getOpt_price());
                 option.setOpt_prod_qty(option.getOpt_prod_qty());
@@ -55,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
                 option.setRg_num(productDto.getRg_num());
                 option.setMd_num(productDto.getMd_num());
                 try {
-                    productRepository.insertOption(option);
+                    optionProductEnroll(option);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -70,6 +77,11 @@ public class ProductServiceImpl implements ProductService {
             defaultOption.setOpt_prod_sts(defaultOption.getOpt_prod_sts());
             defaultOption.setRg_num(productDto.getRg_num());
             defaultOption.setMd_num(productDto.getMd_num());
+            try {
+                optionProductEnroll(defaultOption);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -92,4 +104,8 @@ public class ProductServiceImpl implements ProductService {
         productRepository.insertOption(optionProductDto);
     }
 
+    @Override
+    public void productInfoEnroll(ProductDto productDto) throws Exception {
+        productRepository.insertInfo(productDto);
+    }
 }

@@ -9,6 +9,9 @@ public interface ProductRepository {
     // 상품 등록
     void insert(ProductDto productDto) throws Exception;
 
+    // 상품 정보 등록
+    void insertInfo(ProductDto productDto) throws Exception;
+
     // product테이블 행 개수
     int count() throws Exception;
 

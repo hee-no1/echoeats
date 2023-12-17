@@ -51,4 +51,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         session.insert(namespace + "insertOption", optionProductDto);
     }
 
+    @Override
+    public void insertInfo(ProductDto productDto) throws Exception {
+        session.insert(namespace + "insertInfo", productDto);
+    }
 }
