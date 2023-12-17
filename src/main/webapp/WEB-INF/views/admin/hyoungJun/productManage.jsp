@@ -24,7 +24,7 @@
             if(result === ''){
                 return;
             }
-            alert("상품'"+ eResult +"'을 등록하였습니다.");
+            alert(eResult);
         }
     });
 </script>
