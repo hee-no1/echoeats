@@ -56,13 +56,13 @@ class ProductRepositoryImplTest {
     @Test
     void insertOptionTest() throws Exception {
         // given
-        OptionProductDto option = new OptionProductDto("100241A", 100241L, "나홀로집에크리스마스쿠키", 10000, 2000, 200, "Y", "100241A");
+        OptionProductDto option = new OptionProductDto("100241B", 100241L, "나홀로집에크리스마스쿠키", 10000, 2000, 200, "Y", "100241A");
 
         // when
         productRepository.insertOption(option);
 
         //then
-        assertThat(productRepository.countOption()).isEqualTo(8);
+        assertThat(productRepository.countOption()).isEqualTo(9);
 
     }
 
