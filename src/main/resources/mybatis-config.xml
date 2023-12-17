@@ -33,6 +33,8 @@
 		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
 		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>
 		<typeAlias alias="InquiryPrdDto" type="com.pofol.main.orders.inquiry.domain.InquiryPrdDto"/>
+		<typeAlias alias="MyQnaDto" type="com.pofol.main.board.domain.MyQnaDto"/>
+
 		<!-- product -->
 		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.SearchProductCondition"/>
 		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
@@ -43,6 +45,10 @@
 		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.cart.SelectedItemsDto"/>
 		<typeAlias alias="CartDto" type="com.pofol.main.product.cart.CartDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.basket.SelectedItemsDto"/>
+		<typeAlias alias="ProQnaDto" type="com.pofol.main.board.domain.ProQnaDto"/>
+
+		<!-- product -->
 
 		<!-- member -->
 		<typeAlias alias="PointDto" type="com.pofol.main.member.dto.PointDto"/>

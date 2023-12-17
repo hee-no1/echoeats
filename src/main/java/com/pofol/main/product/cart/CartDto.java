@@ -22,6 +22,7 @@ public class CartDto {
 
     private Integer qty; // 수량
     private Integer total_price; // (상품 or 옵션상품) x 수량
+    private Integer total_disc_price; // (상품 or 옵션상품) x 수량 -> 할인가
 
     private String prod_img_id; // 나중에 id(번호) 로 변경할 것
 
@@ -35,8 +36,5 @@ public class CartDto {
         this.prod_id = prod_id;
         this.qty = qty;
     }
-
-    public void setTotal_price(Integer total_price) { // 다시 생각할 것
-        this.total_price = total_price;
-    }
+    
 }
