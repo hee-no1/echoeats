@@ -223,7 +223,7 @@
                 <div class="css-8qz8ia e1mybczi1">
                     <sec:authorize access="isAuthenticated()">
                     <form id="cartOrderForm" action="${pageContext.request.contextPath}/order/checkout" method="post">
-                    <button class="css-fwelhw e4nu7ef3" type="submit" height="56"><span
+                    <button class="css-fwelhw e4nu7ef3 orderButton" type="button" height="56"><span
                         class="css-nytqmg e4nu7ef1">주문하기</span>
                     </button>
                     <ul class="css-19kxq7d">

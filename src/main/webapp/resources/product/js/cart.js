@@ -4,6 +4,7 @@ const allCartCheck = document.querySelectorAll('.allCartCheck');
 const productCartCheck = document.querySelectorAll(".cartProductCheck");
 const removeButton = document.querySelectorAll('.css-h5zdhc');
 const cartOrderForm = document.querySelector('#cartOrderForm');
+const orderButton = document.querySelector('.orderButton');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = function (value) {
@@ -83,8 +84,9 @@ const makeInputHidden = function () {
 
 
 
-
-// 장바구니 상품 삭제 + (체크박스 된거 삭제기능 추가해야함)
+// ajax 로 삭제하는 기능
+// 장바구니 상품 삭제
+// 체크박스 체크 된거 삭제기능 추가해야함
 const productRemoveAjax = function (i) {
 
     let cartList = document.querySelectorAll('.css-1d6kgf6');
@@ -192,7 +194,7 @@ $(document).ready(function () {
 
 
     // 전체체크박스 클릭 시 전체선택o + 전체선택x
-    // 여기에 ajax함수 넣어서 가격 보여줘야함
+    // 여기에 전체상품 가격 보여줘야함
     for (let i = 0; i < allCartCheck.length; i++) {
         allCartCheck[i].addEventListener('change', function () {
 
@@ -206,7 +208,7 @@ $(document).ready(function () {
     }
     
     // 장바구니 상품 체크박스
-    // 여기에 ajax함수 넣어서 가격 보여줘야함
+    // 여기에 체크한 상품들 가격 보여줘야함
     for (let i = 0; i < productCartCheck.length; i++) {
         productCartCheck[i].addEventListener('change', function () {
             cartCheckbox();
@@ -224,22 +226,15 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // 장바구니 상품 주문하기 버튼
+    orderButton.addEventListener('click', function () {
+        let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+        if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+            alert('장바구니 상품을 선택해 주세요.')
+            return;
+        }
+        orderButton.type = 'submit';
+    })
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')
