@@ -18,7 +18,6 @@ public class DeliveryDto {
     private String rg_num;
     private String md_num;
 
-    //dto -> 뷰
 
 
 }
