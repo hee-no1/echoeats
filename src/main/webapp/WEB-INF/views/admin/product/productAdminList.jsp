@@ -38,16 +38,18 @@
 
                 if (interval !== '-1') {
                     $('.start_date').val(fullDate(-interval));
+                    $('.end_date').val(fullDate(0));
                     $('.duet-date__input').prop('disabled', false)
                 } else {
                     $('.duet-date__input').prop('disabled', true)
+                    $('duet-date-picker[name=start_date]').val('');
+                    $('duet-date-picker[name=end_date]').val('');
                 }
-                console.log("날짜계산", interval)
-                console.log(typeof interval)
             });
 
             $('#search_button').click(function(e){
                 e.preventDefault();
+                search();
                 if($('select[name=keyword_type]').val()=='choice'){
                     alert("검색어 항목을 선택해주세요.")
                     return;
@@ -72,7 +74,7 @@
             }
             if('${ph.sc.start_date}'!=''){
                 const startDate = "<fmt:formatDate value='${ph.sc.start_date}' pattern='yyyy-MM-dd' type='date'/>";
-                $('duet-date-picker[name=start_date]').val(startDate);
+                $('duet-date-picker[name=startDate]').val(startDate);
             }
             if('${ph.sc.end_date}'!=''){
                 const endtDate = "<fmt:formatDate value='${ph.sc.end_date}' pattern='yyyy-MM-dd' type='date'/>";
@@ -183,14 +185,14 @@
                             <a href="#none" class="btnDate" date-interval="30"><span>1개월</span></a>
                             <a href="#none" class="btnDate" date-interval="90"><span>3개월</span></a>
                             <a href="#none" class="btnDate" date-interval="365"><span>1년</span></a>
-                            <a href="#none" class="btnDate" date-interval="-1"><span>전체</span></a>
+                            <a href="#none" class="btnDate selected" date-interval="-1"><span>전체</span></a>
 
                             <div class="duet-date-picker-grid  duet-date-theme-ec-new  sun">
                                 <duet-date-picker first-day-of-week="0" name="start_date" identifier="startDate"
-                                                  class="duet-date-picker start hydrated changePicker start_date" ></duet-date-picker>
+                                                  class="duet-date-picker start hydrated changePicker start_date" disabled></duet-date-picker>
                                 <span>~</span>
                                 <duet-date-picker first-day-of-week="0" name="end_date" identifier="endDate"
-                                                  class="duet-date-picker end hydrated changePicker end_date" direction="left"></duet-date-picker>
+                                                  class="duet-date-picker end hydrated changePicker end_date" direction="left" disabled></duet-date-picker>
                             </div>
                         </td>
                     </tr>
@@ -198,7 +200,7 @@
                         <th scope="row">판매상태</th>
                         <td colspan="3">
                             <label class="gSingleLabel eSelected"><input type="radio" class="fChk eDisplayStatus" name="selling" value="A" checked="&quot;checked&quot;"> 전체</label>&nbsp;
-                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="selling" value="판매대기"> 판매대기</label>&nbsp;
+                            <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="selling" value="판매전"> 판매전</label>&nbsp;
                             <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="selling" value="판매중"> 판매중</label>&nbsp;
                             <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="selling" value="판매중지"> 판매중지</label>&nbsp;
                             <label class="gSingleLabel"><input type="radio" class="fChk eDisplayStatus" name="selling" value="판매종료"> 판매종료</label>&nbsp;
@@ -268,7 +270,7 @@
 
             <div class="mOptionToogle">
                 <div class="ctrl" style="float:right;position:relative;">
-                    <span class=""><button type="button" class="eOrdToogle" textopen="상세검색 열기" textclose="상세검색 닫기">상세검색 열기</button></span>
+<%--                    <span class=""><button type="button" class="eOrdToogle" textopen="상세검색 열기" textclose="상세검색 닫기">상세검색 열기</button></span>--%>
                 </div>
             </div>
             <div class="mButton gCenter">
@@ -369,7 +371,7 @@
             </div>
             <div id="searchResultList" class="mBoard typeOrder typeList gScroll gCellSingle">
                 <table border="1" summary="" class="thead">
-                    <caption>전체주문 조회 목록</caption>
+                    <caption>전체상품 조회 목록</caption>
                     <thead>
                     <tr>
                         <th scope="col" class="w24"><input type="checkbox" id="allChk"></th>
