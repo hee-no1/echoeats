@@ -26,6 +26,53 @@
         where b.cp_sts = 'UNUSED' AND a.mem_id = #{id}
     </select>
 
+
+
+
+
+
+    <select id="select_downloadList" resultType="map" >
+        select * from coupon_download as a
+          join coupon c on c.cp_id = a.cp_id
+    </select>
+
+    <select id="select_couponList" resultType="CouponDto">
+        select * from coupon
+    </select>
+
+    <update id="update_cp_qty" parameterType="CouponJoinDto">
+        UPDATE `mem-coupon`
+        SET cp_qty = cp_qty + 1
+        WHERE mem_id = #{mem_id} and cp_id=#{cp_id}
+    </update>
+
+    <insert id="insert_memCoupon" parameterType="MemCouponDto">
+        insert into `mem-coupon` (cp_id, mem_id, cp_qty, cp_sts, cp_del_date, rg_num, md_num)
+        values (#{cp_id}, #{mem_id}, #{cp_qty}, #{cp_sts}, #{cp_del_date}, #{rg_num}, #{md_num});
+    </insert>
+
+    <update id="update_minus_cp_qty" parameterType="int">
+        update coupon_download
+        set  cp_qty= cp_qty-1
+        where dw_id = #{dw_id}
+    </update>
+
+    <select id="select_coupon_download_cp_qty" parameterType="int" resultType="int">
+        select  cp_qty from coupon_download
+        where dw_id = #{dw_id}
+    </select>
+
+    <insert id="insert_cp_dw_hi" parameterType="map">
+        insert into coupon_download_history ( mem_id, dw_id)
+        values (#{mem_id}, #{dw_id})
+    </insert>
+
+    <select id="select_downloaded_dw_id" parameterType="String" resultType="int">
+        select a.dw_id from coupon_download as a
+        join coupon_download_history as b
+        on a.dw_id = b.dw_id
+        where b.mem_id = #{mem_id}
+    </select>
     <update id="updateMemberCouponStatus" parameterType="MemCouponDto">
         UPDATE `mem-coupon`
         SET

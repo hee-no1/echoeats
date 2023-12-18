@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         }
 
         request.getSession().setAttribute("errormsg", errormsg);
+
+        //회원이 입력했던 아이디
+        String username = request.getParameter("mem_id");
+        System.out.println("username : "+username);
+        request.getSession().setAttribute("input_id", username);
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + Arrays.toString(entry.getValue()));
+        }
+
 
 
         response.sendRedirect("/member/login_form");

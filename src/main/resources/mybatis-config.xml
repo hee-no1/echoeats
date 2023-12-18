@@ -51,5 +51,6 @@
 		<!-- member -->
 		<typeAlias alias="PointDto" type="com.pofol.main.member.dto.PointDto"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<typeAlias alias="CouponDownloadDto" type="com.pofol.main.member.dto.CouponDownloadDto"/>
 	</typeAliases>
 </configuration>
