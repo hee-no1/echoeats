@@ -725,7 +725,7 @@ label.eSelected {
     width: 14px;
     height: 14px;
     outline: none;
-    background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+    background-image: url(/resources/admin/order/img/sfix_icon_form.png);
     background-repeat: no-repeat;
     -webkit-appearance: none;
     appearance: none;
@@ -740,7 +740,7 @@ input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+    background-image: url(/resources/admin/order/img/sfix_icon_form.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     outline: 0;
@@ -996,9 +996,6 @@ html:lang(ko) .btnNormal span {
 .mBoard tbody th[scope*='col'], .mBoard tbody td[scope*='col'] {
     text-align: center;
 }
-.mBoard tbody td[scope*='col'] {
-    box-sizing: content-box;
-}
 
 html:lang(ko) .mBoard thead th,
 html:lang(ko) .mBoard thead~tbody td,
@@ -1052,7 +1049,7 @@ table .rowChk[type="checkbox"] {
     width: 14px;
     height: 14px;
     outline: none;
-    background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+    background-image: url(/resources/admin/order/img/sfix_icon_form.png);
     background-repeat: no-repeat;
     -webkit-appearance: none;
     appearance: none;

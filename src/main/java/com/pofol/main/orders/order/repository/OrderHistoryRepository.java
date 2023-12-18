@@ -10,6 +10,7 @@ public interface OrderHistoryRepository {
     OrderHistoryDto select(Long ord_hist_id) throws Exception;
     List<OrderHistoryDto> selectList(Long ord_id) throws Exception;
     OrderHistoryDto selectOne(Long ord_id) throws Exception;
+    OrderHistoryDto selectMaxByOrdId(Long ord_id) throws Exception;
     int delete(Long ord_hist_id) throws Exception;
     int deleteList(Long ord_id) throws Exception;
     List<OrderHistoryDto> selectAll() throws Exception;

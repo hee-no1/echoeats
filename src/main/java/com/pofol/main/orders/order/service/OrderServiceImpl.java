@@ -13,12 +13,12 @@ import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
-import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -223,4 +223,34 @@ public class OrderServiceImpl implements OrderService{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * @param mem_id(유저ID)
+     * @param period(검색범위:현재기준-day)
+     * @return List<OrderDto>
+     * @feat : mypage에 주문리스트를 가져오는 메서드
+     **/ 
+	@Override
+	public List<OrderDto> selectAllByUserIdAndPeriod(Map map) throws Exception {
+		return orderRepository.selectAllByUserIdAndPeriod(map);
+	}
+	/**
+     * @param ord_id(주문ID)
+     * @return String
+     * @feat : mypage에 주문리스트 메인 이미지를 가져오는 메서드
+     **/ 
+	@Override
+	public String selectByOrderMainImg(Long ord_id) {
+		return orderRepository.selectByOrderMainImg(ord_id);
+	}
+	/**
+     * @param ord_id(주문ID)
+     * @return OrderDto
+     * @feat : mypage에 주문상세의 결제정보를 가져오는 메서드
+     **/ 
+	@Override
+	public OrderDto selectByOrderId(Long ord_id) {
+		// TODO Auto-generated method stub
+		return orderRepository.selectByOrderId(ord_id);
+	}
 }

@@ -87,9 +87,9 @@
 	</select>
 	
 	<select id="selectByOrderMainImg" resultType="string">
-		SELECT pi.upld_path
+		SELECT pi.prod_img_id
 		FROM product_image pi
-		JOIN order_detail od ON pi.prd_id = od.prod_id
+		JOIN order_detail od ON pi.prod_id = od.prod_id
 		JOIN (
 		    SELECT MIN(ord_det_id) ord_det_id
 		    FROM order_detail

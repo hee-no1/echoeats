@@ -1,6 +1,8 @@
 package com.pofol.main.orders.order.repository;
 
 import com.pofol.main.orders.order.domain.OrderDetailDto;
+import com.pofol.main.orders.order.domain.SearchOrderCondition;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -54,7 +56,12 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
     public int count() throws Exception{
         return session.selectOne(namespace+"count");
     }
-
+    
+    @Override
+	public int update(OrderDetailDto orderDetailDto) throws Exception {
+		return session.update(namespace+"update", orderDetailDto);
+	}
+    
 	@Override
 	public List<OrderDetailDto> selectAllByOrdId(Long ord_id) {
 		return session.selectList(namespace+"selectAllByOrdId", ord_id);
@@ -69,14 +76,25 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
 	public String selectByCodeName(String code_name) {
 		return session.selectOne(namespace+"selectByCodeName", code_name);
 	}
-
+	
 	@Override
 	public OrderDetailDto selectByOrderDetId(Long ord_det_id) {
 		return session.selectOne(namespace+"selectByOrderDetId", ord_det_id);
 	}
 
-    @Override
-    public List<OrderDetailDto> selectForDelivery() {
-        return session.selectList(namespace+"selectForDelivery");
-    }
+  @Override
+  public List<OrderDetailDto> selectForDelivery() {
+      return session.selectList(namespace+"selectForDelivery");
+  }
+  
+	@Override
+	public List searchSelectPage(SearchOrderCondition sc) throws Exception {
+		return session.selectList(namespace+"searchSelectPage", sc);
+	}
+	
+	@Override
+	public int searchResultCnt(SearchOrderCondition sc) throws Exception {
+		return session.selectOne(namespace+"searchResultCnt", sc);
+	}
+
 }

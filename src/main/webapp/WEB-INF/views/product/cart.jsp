@@ -73,7 +73,7 @@
             <div class="css-20o6z0 e149z643">
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
-                        <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                        <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
                         <span> 전체선택 (0/1)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
@@ -105,13 +105,10 @@
 
 
 
-
-
-<%--                    <c:if test="">--%>
-                        <c:forEach var="cartProductList" items="${cartProductList}">
-                            <ul class="cartList">
+                        <ul class="cartList">
+                            <c:forEach var="cartProductList" items="${cartProductList}">
                                 <li class="css-1d6kgf6 esoayg811"><label class="css-14td1km e1dcessg3">
-                                    <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                                    <input type="checkbox" class="css-agvwxo e1dcessg2 cartProductCheck">&nbsp;&nbsp;
                                     <span>&nbsp;</span>
                                 </label>
                                     <a class="css-1u5t3pw esoayg810">
@@ -147,16 +144,17 @@
                                             <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
                                         </span>
                                         <span aria-label="판매 가격" data-testid="selling-price" class="css-cwmxfz e2qzex50">
-                                            <fmt:formatNumber value="${cartProductList.total_disc_price}" pattern="#,###"/>원
+                                            <fmt:formatNumber value="${cartProductList.total_price}" pattern="#,###"/>원
                                         </span>
                                     </div>
                                     <button class="css-h5zdhc eudrkjx0" type="button" data-testid="delete">
                                         <span class="css-6mgkir e5h3i930"></span>
                                     </button>
                                 </li>
-                            </ul>
-                        </c:forEach>
-<%--                    </c:if>--%>
+                            </c:forEach>
+                        </ul>
+
+
 
 
 
@@ -169,7 +167,7 @@
             <div class="css-20o6z0 e149z643">
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
-                        <input type="checkbox" class="css-agvwxo e1dcessg2">&nbsp;&nbsp;
+                        <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
                         <span> 전체선택 (0/1)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
@@ -183,7 +181,7 @@
                     <div class="css-oft680 e15fcx0p3">
                         <h3 class="css-1guaarh e15fcx0p2">배송지</h3>
                         <div class="css-50yi3o e15fcx0p1">
-                            <p class="css-xxfxl7 e1tweaw11">나의 집주소가 나와요</p>
+                            <p class="css-xxfxl7 e1tweaw11">${address} ${detailAddress}</p>
                             <div class="css-s6py67">
                                 <span type="direct" class="css-z4mca9 e1jlkvf51">에코배송</span>
                             </div>
@@ -224,7 +222,8 @@
                 </div>
                 <div class="css-8qz8ia e1mybczi1">
                     <sec:authorize access="isAuthenticated()">
-                    <button class="css-fwelhw e4nu7ef3" type="button" height="56"><span
+                    <form id="cartOrderForm" action="${pageContext.request.contextPath}/order/checkout" method="post">
+                    <button class="css-fwelhw e4nu7ef3 orderButton" type="button" height="56"><span
                         class="css-nytqmg e4nu7ef1">주문하기</span>
                     </button>
                     <ul class="css-19kxq7d">
@@ -234,6 +233,7 @@
                         <li class="css-1741abm ejr204i0">쿠폰, 적립금 사용 금액을 제외한 실 결제 금액 기준으로 최종 산정됩니다.</li>
                         <li class="css-1741abm ejr204i0">상품별로 적립금 지급 기준이 다를 수 있습니다. (상품 상세 페이지에서 확인 가능합니다)</li>
                     </ul>
+                    </form>
                     </sec:authorize>
                     <sec:authorize access="!isAuthenticated()">
                         <button class="css-fwelhw e4nu7ef3 goLoginButton" type="button" height="56">
@@ -254,12 +254,12 @@
 
     let cartProduct = [];
 
-<%--    <sec:authorize access="isAuthenticated()">--%>
     <c:forEach var="cartProductList" items="${cartProductList}" varStatus="loop">
     <c:choose>
     <c:when test="${empty cartProductList.opt_prod_id}">
     cartProduct[${loop.index}] = {
         cart_id : ${cartProductList.cart_id},
+        prod_id : ${cartProductList.prod_id},
         prod_price : ${cartProductList.prod_price},
         disc_price : ${cartProductList.disc_price},
         total_price : ${cartProductList.total_price},
@@ -270,6 +270,8 @@
     <c:otherwise>
     cartProduct[${loop.index}] = {
         cart_id : ${cartProductList.cart_id},
+        prod_id : ${cartProductList.prod_id},
+        opt_prod_id : '${cartProductList.opt_prod_id}',
         opt_price : ${cartProductList.opt_price},
         opt_disc_price : ${cartProductList.opt_disc_price},
         total_price : ${cartProductList.total_price},
@@ -279,8 +281,6 @@
     </c:otherwise>
     </c:choose>
     </c:forEach>
-<%--    </sec:authorize>--%>
-
 
 
 

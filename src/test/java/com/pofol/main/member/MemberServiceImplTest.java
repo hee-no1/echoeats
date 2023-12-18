@@ -4,6 +4,7 @@ import com.pofol.main.member.dto.*;
 import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.member.repository.DelNotesRepository;
 import com.pofol.main.member.repository.GradeRepository;
+import com.pofol.main.member.repository.MemberRepository;
 import com.pofol.main.member.service.CouponService;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.GradeService;
@@ -14,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.pofol.main.member.repository.MemberRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class) // Junit5
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
@@ -32,12 +35,17 @@ public class MemberServiceImplTest {
 //       int result = memberRepository.insertMember(memberDto);
 //       assertTrue(result ==1);
 //    }
-    @Autowired
-    CouponService couponService;
+
+
     @Autowired
     MemberRepository memberRepository;
     @Autowired
     MemberService memberService;
+
+
+
+    @Autowired
+    CouponService couponService;
 
     @Autowired
     GradeRepository gradeRepository;
@@ -161,16 +169,117 @@ public class MemberServiceImplTest {
 
 
     @Test
-    public void sss() throws Exception {
+    public void re_select_downloadList() throws Exception {
+        List<CouponDownloadDto> couponDownloadDtos = couponRepository.select_downloadList();
+        System.out.println(couponDownloadDtos);
 
-
+        assertTrue(couponDownloadDtos.size() == 3);
     }
 
+    @Test
+    public void se_select_downloadList() throws Exception {
+        List<CouponDownloadDto> couponDownloadDtos = couponService.showDownloadList();
+        System.out.println(couponDownloadDtos);
+
+        assertTrue(couponDownloadDtos.size() == 3);
+    }
+
+    @Test
+    public void re_select_couponList() throws Exception {
+        List<CouponDto> couponDtos = couponRepository.select_couponList();
+        System.out.println(couponDtos);
+    }
+
+//    @Test
+//    public void re_update_cp_qty() throws Exception {
+//        CouponJoinDto couponJoinDto = new CouponJoinDto();
+//        couponJoinDto.setMem_id("user123");
+//        couponJoinDto.setCp_id(9L);
+//        int i = couponRepository.update_cp_qty(couponJoinDto);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+
+//    @Test
+//    public void se_update_cp_qty() throws Exception {
+//        CouponJoinDto couponJoinDto = new CouponJoinDto();
+//        couponJoinDto.setMem_id("user123");
+//        couponJoinDto.setCp_id(9L);
+//        int i = couponService.update_cp_qty(couponJoinDto);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+//
+//    @Test
+//    public void re_insert_memCoupon()throws Exception {
+//        MemCouponDto memCouponDto = new MemCouponDto("user123",12l);
+//        int i = couponRepository.insert_memCoupon(memCouponDto);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+
+//    @Test
+//    public void se_insert_memCoupon()throws Exception {
+//        MemCouponDto memCouponDto = new MemCouponDto("user123",13l);
+//        int i = couponService.insert_memCoupon(memCouponDto);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+//
+//    @Test
+//    public void re_update_minus_cp_qty() throws Exception {
+//        int i = couponRepository.update_minus_cp_qty(1);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+//
+//    @Test
+//    public void re_insert_cp_dw_hi() throws Exception{
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("mem_id", "user123");
+//        map.put("dw_id", 2);
+//        int i = couponRepository.insert_cp_dw_hi(map);
+//        System.out.println(i);
+//        assertTrue(i==1);
+//    }
+
+    @Test
+    public void re_select_downloaded_dw_id(){
+        List<Integer> result = couponRepository.select_downloaded_dw_id("admin123");
+        System.out.println(result);
+        assertTrue(result.size()==2);
+    }
+
+    @Test
+    public void se_select_downloaded_dw_id(){
+        List<Integer> result = couponService.select_downloaded_dw_id("admin123");
+        System.out.println(result);
+        assertTrue(result.size()==2);
+    }
+
+    @Test
+    public void re_select_coupon_download_cp_qry(){
+        int i = couponRepository.select_coupon_download_cp_qty(2);
+        System.out.println(i);
+    }
+
+
+//    @Test
+//    public void sssss() throws Exception {
+//        MemberDto memberDto = memberRepository.selectMember("asd123");
+//        String encode = bCryptPasswordEncoder.encode(memberDto.getMem_pwd());
+//        memberDto.setMem_pwd(encode);
+//        int i = memberRepository.updateMember(memberDto);
+//        System.out.println(i);
+//
+//        System.out.println(memberDto);
+//    }
     @Test
     public void selectUnusedCouponTest() throws Exception{
         MemCouponDto you11 = couponRepository.selectUnusedCoupon(12L, "you11");
         System.out.println(you11);
     }
+
 
 
 }

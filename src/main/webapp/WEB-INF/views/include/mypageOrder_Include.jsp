@@ -173,7 +173,7 @@
                     </li>
 
                     <li>
-                        <a class=" css-g4g0eu ecbxmj0">상품 문의
+                        <a href="/mypage/myqna" class=" css-g4g0eu ecbxmj0">상품 문의
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                                 <defs>
                                     <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
