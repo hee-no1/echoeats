@@ -1,6 +1,6 @@
 package com.pofol.main.orders.delivery.repository;
 
-import com.pofol.main.orders.delivery.domain.DeliveryDetailDto;
+import com.pofol.main.orders.delivery.domain.DeliveryDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -10,18 +10,18 @@ import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
-public class DeliveryDetailRepositoryImpl implements DeliveryDetailRepository {
+public class DeliveryRepositoryImpl implements DeliveryRepository {
 
     private final SqlSession session;
-    private String namespace = "delivery.repository.deliveryDetailMapper.";
+    private String namespace = "delivery.repository.deliveryMapper.";
 
     @Override
-    public int insert(DeliveryDetailDto deliveryDetailDto) {
-        return session.insert(namespace+"insert", deliveryDetailDto);
+    public int insert(DeliveryDto deliveryDto) {
+        return session.insert(namespace+"insert", deliveryDto);
     }
 
     @Override
-    public DeliveryDetailDto select(Long ord_det_id) {
+    public DeliveryDto select(Long ord_det_id) {
         return session.selectOne(namespace+"select", ord_det_id);
     }
 

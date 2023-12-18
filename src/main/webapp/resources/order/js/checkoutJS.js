@@ -126,8 +126,6 @@ document.getElementById('AddrBtn').addEventListener('click', function(){
     if(confirm("배송지 페이지로 이동하여\n다른 배송지로 변경하시겠습니까?")){
         window.location.href = '/address/';
     }
-
-
 });
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -177,7 +177,7 @@
 <%@include file="../include/top_side_nav.jspf" %>
 <div id="layoutSidenav_content">
     <div class="container">
-        <h2 class="mTitle">전체 주문 조회</h2>
+        <h2 class="mTitle">전체 배송 조회</h2>
         <form action="<c:url value=''/>" class="optionArea" method="get">
             <div class="mOption">
                 <table border="1">
