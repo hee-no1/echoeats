@@ -34,6 +34,8 @@ public class ProductServiceImpl implements ProductService {
                     productDto.getProd_img(), "product");
             productDto.setProd_img_id(imgUrl);
             productRepository.insert(productDto);
+            productDto.setRg_num(String.valueOf(productDto.getProd_id()));
+            productDto.setMd_num(productDto.getRg_num());
             ProductImageDto productImageDto = new ProductImageDto();
             productImageDto.setMd_num(productDto.getMd_num());
             productImageDto.setProd_img_id(imgUrl);
@@ -52,38 +54,42 @@ public class ProductServiceImpl implements ProductService {
             log.info("{}, {}", productDto.getProd_id(), productDto.getOptionProductList());
             char optionName = 'A';
             for (OptionProductDto option : productDto.getOptionProductList()) {
-                option.setOpt_prod_id(productDto.getProd_id() + String.valueOf(optionName++));
-                log.info("productDto.getProd_id() : {}", productDto.getProd_id());
-                log.info("opt_prod_id : {}", option.getOpt_prod_id());
-                option.setProd_id(productDto.getProd_id());
-                option.setOpt_prod_name(option.getOpt_prod_name());
-                option.setOpt_price(option.getOpt_price());
-                option.setOpt_prod_qty(option.getOpt_prod_qty());
-                option.setOpt_prod_sts(option.getOpt_prod_sts());
-                option.setRg_num(productDto.getRg_num());
-                option.setMd_num(productDto.getMd_num());
-                try {
-                    optionProductEnroll(option);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                if(option.getOpt_prod_name() != null && !option.getOpt_prod_name().isEmpty()) {
+                    option.setOpt_prod_id(productDto.getProd_id() + String.valueOf(optionName++));
+                    log.info("productDto.getProd_id() : {}", productDto.getProd_id());
+                    log.info("opt_prod_id : {}", option.getOpt_prod_id());
+                    option.setProd_id(productDto.getProd_id());
+                    option.setOpt_prod_name(option.getOpt_prod_name());
+                    option.setOpt_price(option.getOpt_price());
+                    option.setOpt_prod_qty(option.getOpt_prod_qty());
+                    option.setOpt_prod_sts(option.getOpt_prod_sts());
+                    option.setRg_num(productDto.getRg_num());
+                    option.setMd_num(productDto.getMd_num());
+                    try {
+                        optionProductEnroll(option);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-        } else {
-            log.info("-----------옵션 상품등록 안했을 때 -----------");
-            OptionProductDto defaultOption = new OptionProductDto();
-            defaultOption.setOpt_prod_id(productDto.getProd_id() + "A");
-            defaultOption.setOpt_prod_name(defaultOption.getOpt_prod_name());
-            defaultOption.setOpt_price(defaultOption.getOpt_price());
-            defaultOption.setOpt_prod_qty(defaultOption.getOpt_prod_qty());
-            defaultOption.setOpt_prod_sts(defaultOption.getOpt_prod_sts());
-            defaultOption.setRg_num(productDto.getRg_num());
-            defaultOption.setMd_num(productDto.getMd_num());
-            try {
-                optionProductEnroll(defaultOption);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
         }
+//        else {
+//            log.info("-----------옵션 상품등록 안했을 때 -----------");
+//            OptionProductDto defaultOption = new OptionProductDto();
+//            defaultOption.setOpt_prod_id(productDto.getProd_id() + "A");
+//            defaultOption.setProd_id(productDto.getProd_id());
+//            defaultOption.setOpt_prod_name(defaultOption.getOpt_prod_name());
+//            defaultOption.setOpt_price(defaultOption.getOpt_price());
+//            defaultOption.setOpt_prod_qty(defaultOption.getOpt_prod_qty());
+//            defaultOption.setOpt_prod_sts(defaultOption.getOpt_prod_sts());
+//            defaultOption.setRg_num(productDto.getRg_num());
+//            defaultOption.setMd_num(productDto.getMd_num());
+//            try {
+//                optionProductEnroll(defaultOption);
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
     }
 
     @Override

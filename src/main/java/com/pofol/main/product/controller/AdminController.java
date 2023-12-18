@@ -80,8 +80,6 @@ public class AdminController {
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
         log.info("productEnrollPOST 진입");
         log.info("{}", productDto);
-        productDto.setRg_num("admin");
-        productDto.setMd_num("admin");
         productService.productEnroll(productDto);
         log.info("{} 상품 등록 완료", productDto.getProd_name());
         productService.productInfoEnroll(productDto);
