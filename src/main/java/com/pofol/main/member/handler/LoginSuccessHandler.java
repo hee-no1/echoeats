@@ -52,6 +52,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         //refer이 없다 = url로 진입
         //savedRequest는 가로챘을 때만 가지고 있다
         if(referer != null){
+            //로그인버튼 2번 누르고 카카오 로그인
+            if (referer.equals("http://localhost:8080/member/login_form")){
+                referer ="http://localhost:8080/main";
+            }
             response.sendRedirect(referer);
         }else{
             response.sendRedirect(savedRequest.getRedirectUrl());

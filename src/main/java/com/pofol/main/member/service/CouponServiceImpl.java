@@ -1,5 +1,6 @@
 package com.pofol.main.member.service;
 
+import com.pofol.main.member.dto.CouponDownloadDto;
 import com.pofol.main.member.dto.CouponDto;
 import com.pofol.main.member.dto.CouponJoinDto;
 import com.pofol.main.member.dto.MemCouponDto;
@@ -18,13 +19,42 @@ public class CouponServiceImpl implements CouponService{
     private final CouponRepository couponRepository;
     @Override
     public List<CouponJoinDto> getCouponJoin(String id) {
-        try{
+
+       try{
             return couponRepository.selectMembersWithCoupons(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<CouponDownloadDto> showDownloadList() {
+        return couponRepository.select_downloadList();
+    }
+
+    @Override
+    public int update_cp_qty(CouponJoinDto couponJoinDto) {
+        return couponRepository.update_cp_qty(couponJoinDto);
+    }
+
+    @Override
+    public int insert_memCoupon(MemCouponDto memCouponDto) {
+        return couponRepository.insert_memCoupon(memCouponDto);
+    }
+
+    @Override
+    public int update_minus_cp_qty(int dw_id) {
+        return couponRepository.update_minus_cp_qty(dw_id);
+    }
+
+    @Override
+    public List<Integer> select_downloaded_dw_id(String mem_id) {
+        return couponRepository.select_downloaded_dw_id(mem_id);
+    }
+
+        
+    
 
     @Override
     public CouponDto getCoupon(Long coupon_id) {
