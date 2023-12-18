@@ -2,8 +2,6 @@ package com.pofol.main.orders.order.controller;
 
 import java.util.List;
 
-import com.pofol.main.member.dto.MemberDto;
-import com.pofol.main.orders.payment.service.PaymentDiscountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +22,9 @@ import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.service.PaymentDiscountService;
 import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.cart.SelectedItemsDto;
-import lombok.RequiredArgsConstructor;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +45,6 @@ public class OrderController {
     public String Order(){
         return "/order/cartSample";
     }
-
 
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
