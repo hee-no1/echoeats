@@ -12,7 +12,11 @@
     </select>
 
 
-
+    <select id="selectUnusedCoupon" parameterType="map" resultType="MemCouponDto">
+        select *
+        from `mem-coupon`
+        where cp_sts = 'UNUSED' and cp_id = #{cp_id} and mem_id = #{mem_id};
+    </select>
 
     <select id="selectMembersWithCoupons" parameterType="String" resultType="CouponJoinDto">
         SELECT a.mem_id,c.cp_id, b.cp_qty, b.cp_sts, DATE_FORMAT(b.cp_del_date, '%Y.%m.%d %H시까지') AS cp_del_date, c.cp_name, c.cash_rate, c.min_amt, c.max_disc_amt, c.type
@@ -21,6 +25,7 @@
                  JOIN coupon AS c ON b.cp_id = c.cp_id
         where b.cp_sts = 'UNUSED' AND a.mem_id = #{id}
     </select>
+
 
 
 
@@ -68,6 +73,16 @@
         on a.dw_id = b.dw_id
         where b.mem_id = #{mem_id}
     </select>
+    <update id="updateMemberCouponStatus" parameterType="MemCouponDto">
+        UPDATE `mem-coupon`
+        SET
+            cp_qty = #{cp_qty},
+            cp_sts = #{cp_sts},
+            md_date = current_timestamp
+        WHERE
+            mem_id = #{mem_id} AND cp_id = #{cp_id}
+
+    </update>
     
 </mapper>
 

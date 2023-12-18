@@ -263,6 +263,7 @@ public class MemberServiceImplTest {
         System.out.println(i);
     }
 
+
 //    @Test
 //    public void sssss() throws Exception {
 //        MemberDto memberDto = memberRepository.selectMember("asd123");
@@ -273,6 +274,12 @@ public class MemberServiceImplTest {
 //
 //        System.out.println(memberDto);
 //    }
+    @Test
+    public void selectUnusedCouponTest() throws Exception{
+        MemCouponDto you11 = couponRepository.selectUnusedCoupon(12L, "you11");
+        System.out.println(you11);
+    }
+
 
 
 }

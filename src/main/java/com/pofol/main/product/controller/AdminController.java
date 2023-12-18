@@ -3,6 +3,7 @@ package com.pofol.main.product.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.service.ProductService;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,7 +49,6 @@ public class AdminController {
 
     private final ProductService productService;
     private final CategoryList categoryList;
-    private final AwsS3ImgUploaderService awsS3ImgUploaderService;
 
     @GetMapping("/test")
     public String testGET(Model model) throws Exception {
@@ -64,28 +67,28 @@ public class AdminController {
     // 상품 등록 페이지 접속
     @GetMapping("/hyoungJun/productEnroll")
     public void prodEnrollGET(Model model) throws Exception {
+        log.info("prodEnrollGET 진입");
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.cateList();
-        String categoryListJson = objectMapper.writeValueAsString(list);
+        String categoryListJson = objectMapper.writeValueAsString(
+                new ArrayList<>(categoryList.cateList())
+        );
         model.addAttribute("categoryList", categoryListJson);
     }
 
     // 상품 등록
     @PostMapping("hyoungJun/productEnroll")
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
+        log.info("productEnrollPOST 진입");
+        log.info("{}", productDto);
+        productDto.setRg_num("admin");
+        productDto.setMd_num("admin");
         productService.productEnroll(productDto);
+        log.info("{} 상품 등록 완료", productDto.getProd_name());
+        productService.productInfoEnroll(productDto);
+        log.info("{} 상품 정보 등록 완료", productDto.getProd_name());
         redirectAttributes.addFlashAttribute(
                 "productEnroll_result",
                 productDto.getProd_name() + " 상품이 등록되었습니다.");
-        log.info("--------------imageUploadPOST----------------");
-        log.info("productDto : " + productDto);
-        log.info("productDto.getProd_img() : " + productDto.getProd_img());
-        log.info("productDto.getProd_img().getOriginalFilename() : " + productDto.getProd_img().getOriginalFilename());
-        log.info("productDto.getProd_img().getContentType() : " + productDto.getProd_img().getContentType());
-        log.info("productDto.getProd_img().getSize() : " + productDto.getProd_img().getSize());
-        String imgUrl = awsS3ImgUploaderService.uploadImageToS3(
-                productDto.getProd_img(), "product");
-        log.info("imgUrl : " + imgUrl);
         return "redirect:/admin/hyoungJun/productManage";
     }
 

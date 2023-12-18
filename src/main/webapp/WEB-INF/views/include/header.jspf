@@ -39,14 +39,14 @@
                     <div class="menu">
                         <div>공지사항</div>
                         <div>자주하는 질문</div>
-                        <div>1:1 문의</div>
+                        <div><a href="<c:url value='/mypage/inquiry/list'/>">1:1 문의</a></div>
                         <div>대량주문 문의</div>
                     </div>
                 </div>
                 <div id="search">
                     <div id="search-bar">
-                        <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">
-                        <a> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%--                        <img src="/resources/icons/kurly_logo_updated.svg" alt="ecoeats 로고">--%>
+                        <a href="/main" style="margin-left: 0; font-size: 30px;"> Ecoeats</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <%--                        <div class="stick"></div>--%>
 <%--                        <a>뷰티컬리</a>--%>
 
@@ -96,9 +96,19 @@
                             <i class="fa fa-caret-down"></i>
                         </span>
                             <div class="dropdown-content">
-                                <c:forEach var="categoryList" items="${categoryList}">
-                                    <a href="/category/${categoryList.cat_code}">${categoryList.cat_name}</a>
-                                </c:forEach>
+                                <a href="/category/907">채소</a>
+                                <a href="/category/908">과일/견과/쌀</a>
+                                <a href="/category/909">수산/해산/건어물</a>
+                                <a href="/category/910">정육/계란</a>
+                                <a href="/category/911">국/반찬/메인요리</a>
+                                <a href="/category/912">샐러드/간편식</a>
+                                <a href="/category/913">면/양념/오일</a>
+                                <a href="/category/914">생수/음료/우유/커피</a>
+                                <a href="/category/915">간식/과자/떡</a>
+                                <a href="/category/916">베이커리/치즈/델리</a>
+<%--                                <c:forEach var="categoryList" items="${categoryList}">--%>
+<%--                                    <a href="/category/${categoryList.cat_code}">${categoryList.cat_name}</a>--%>
+<%--                                </c:forEach>--%>
                             </div>
                         </div>
                     </nav>
@@ -106,10 +116,10 @@
                 <div id="meun">
                     <ul>
                         <li>
-                            <span href="#">신상품</span>
+                            <span class="newProduct">신상품</span>
                         </li>
                         <li>
-                            <span href="#">베스트</span>
+                            <span class="bestProduct">베스트</span>
                         </li>
                         <li>
                             <span href="#">알뜰쇼핑</span>
@@ -129,6 +139,14 @@
         </div> <!--top -->
     </div>
 </div>
+<script>
+    document.querySelector(".bestProduct").addEventListener("click", function () {
+        window.location.href = "/best"
+    })
+    document.querySelector(".newProduct").addEventListener("click", function () {
+        window.location.href = "/newProduct"
+    })
+</script>
 </body>
 </html>
 

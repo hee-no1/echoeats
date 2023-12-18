@@ -5,6 +5,8 @@ import com.pofol.main.board.domain.PageHandler;
 import com.pofol.main.board.domain.SearchBoardCondition;
 import com.pofol.main.board.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,10 @@ public class NoticeController {
     // 공지사항 조회 페이지
     @RequestMapping(value = "/notice")
     public String notice(SearchBoardCondition sc, Model m) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String id = authentication.getName();
+
+        System.out.println(id);
         try {
             int totalCnt = noticeService.getSearchResultCnt(sc);
             m.addAttribute("totalCnt", totalCnt);

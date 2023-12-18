@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-sub-wrap">
                                 <span>중분류</span>
-                                <select class="cate2">
+                                <select class="cate2" name="cat_code">
                                     <option selected value="none">선택</option>
                                 </select>
                             </div>
@@ -155,7 +155,8 @@
                                                 </label>
                                                 <div class="input-content">
                                                     <p class="text-info text-price">
-                                                        <span class="span_discount" name="disc_price">0</span>
+                                                        <span class="span_discount" >0</span>
+                                                        <input type="hidden" name="disc_price" value="">
                                                         <em>원</em> (<span class="span_discounting">0</span> 할인)
                                                     </p>
                                                 </div>
@@ -403,33 +404,33 @@
                                                 <tbody>
                                                 <tr>
                                                     <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
+                                                    <td><input type="text" name="optionProductList[0].opt_prod_name"></td>
+                                                    <td><input type="text" name="optionProductList[0].opt_price"></td>
+                                                    <td><input type="text" name="optionProductList[0].opt_prod_qty"></td>
+                                                    <td><input type="text" name="optionProductList[0].opt_prod_sts"></td>
+                                                    <td><input type="text" value="Y"></td>
                                                     <td>
                                                         <button class="deleteBtn">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
+                                                    <td><input type="text" name="optionProductList[1].opt_prod_name"></td>
+                                                    <td><input type="text" name="optionProductList[1].opt_price"></td>
+                                                    <td><input type="text" name="optionProductList[1].opt_prod_qty"></td>
+                                                    <td><input type="text" name="optionProductList[1].opt_prod_sts"></td>
+                                                    <td><input type="text" value="Y"></td>
                                                     <td>
                                                         <button class="deleteBtn">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
+                                                    <td><input type="text" name="optionProductList[2].opt_prod_name"></td>
+                                                    <td><input type="text" name="optionProductList[2].opt_price"></td>
+                                                    <td><input type="text" name="optionProductList[2].opt_prod_qty"></td>
+                                                    <td><input type="text" name="optionProductList[2].opt_prod_sts"></td>
+                                                    <td><input type="text" value="Y"></td>
                                                     <td>
                                                         <button class="deleteBtn">Delete</button>
                                                     </td>

@@ -16,4 +16,9 @@ public interface CouponService {
 
     int update_minus_cp_qty(int dw_id);
     List<Integer> select_downloaded_dw_id(String mem_id);
+
+    CouponDto getCoupon(Long coupon_id);
+    MemCouponDto getUnusedCoupon(Long cp_id, String mem_id);
+    void modifyCouponStatus(Long cp_id, String mem_id);
+
 }

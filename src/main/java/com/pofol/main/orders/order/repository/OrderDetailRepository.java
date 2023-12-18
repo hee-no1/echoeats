@@ -19,6 +19,8 @@ public interface OrderDetailRepository {
     public abstract String selectByOrderDetImg(Long ord_det_id);
 	// mypage에서 주문상세의 배송상태를 code테이블에서 가져오는 메서드
     public abstract String selectByCodeName(String code_name);
+    // inquiry에서 주문상세를 가져오는 메서드
+    public abstract OrderDetailDto selectByOrderDetId(Long ord_det_id);
 
 
 }

@@ -2,8 +2,8 @@ package com.pofol.main.product.controller;
 
 import com.pofol.main.member.dto.GradeDto;
 import com.pofol.main.member.service.GradeService;
-import com.pofol.main.product.PageHandler;
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.PageHandler;
+import com.pofol.main.product.domain.SearchProductCondition;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
 import com.pofol.main.product.domain.EventGroupDto;
@@ -14,6 +14,7 @@ import com.pofol.main.product.exception.HandlerProductException;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -84,13 +85,15 @@ public class ProductListController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String memberID = authentication.getName();
 
-            // 로그인 상태일 때 (적립금 계산)
-            if (!memberID.equals("anonymousUser")) {
+            // 로그인 상태일 때 (적립금 계산) + (회원 아이디 가져오기)
+            if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
 
                 Integer saveMoney = product.getDisc_price() * memberGrade.getAcm_rate() / 100;
                 model.addAttribute("saveMoney", saveMoney);
+
+                model.addAttribute("memberID", memberID);
             }
 
             // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
@@ -155,6 +158,7 @@ public class ProductListController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/main";
         }
         return "/product/productList";
     }
@@ -196,5 +200,57 @@ public class ProductListController {
         return "/product/productList";
     }
 
+    // 신상품 상품 리스트 페이지로 이동
+    @GetMapping("/newProduct")
+    public String getNewProductPage(SearchProductCondition sc, Model model) {
+
+        try {
+            // 상품이름 검색 페이지
+            model.addAttribute("pageType", "new");
+
+            // 전체 상품 카운트
+            int totalCount = productListService.getAllProductCount();
+            model.addAttribute("totalCount", totalCount);
+
+            // 전체 상품 리스트
+            List<ProductDto> allProductList = productListService.getAllProductList();
+            model.addAttribute("productList", allProductList);
+
+            // 페이징
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
+            model.addAttribute("pageHandler", pageHandler);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/main";
+        }
+        return "/product/productList";
+    }
+
+    // 베스트 상품 리스트 페이지로 이동
+    @GetMapping("/best")
+    public String getBestProductPage(SearchProductCondition sc, Model model) {
+
+        try {
+            // 상품이름 검색 페이지
+            model.addAttribute("pageType", "best");
+
+            // 전체 상품 카운트
+            int totalCount = productListService.getAllProductCount();
+            model.addAttribute("totalCount", totalCount);
+
+            // 전체 상품 리스트
+            List<ProductDto> allProductList = productListService.getAllProductList();
+            model.addAttribute("productList", allProductList);
+
+            // 페이징
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
+            model.addAttribute("pageHandler", pageHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/main";
+        }
+        return "/product/productList";
+    }
 
 }

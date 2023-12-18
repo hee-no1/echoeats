@@ -40,5 +40,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public String selectByCodeName(String code_name) {
 		return orderDetailRepository.selectByCodeName(code_name);
 	}
+	/**
+     * @param ord_det_id
+     * @return OrderDetailDto
+     * @feat : inquiry에서 주문상세를 가져오는 메서드
+     **/
+	@Override
+	public OrderDetailDto selectByOrderDetId(Long ord_det_id) {
+		return orderDetailRepository.selectByOrderDetId(ord_det_id);
+	}
 
 }
