@@ -121,6 +121,14 @@ document.getElementById("allUseBtn").addEventListener('click', function(){
     ajaxData();
 })
 
+//배송지 변경
+document.getElementById('AddrBtn').addEventListener('click', function(){
+    if(confirm("배송지 페이지로 이동하여\n다른 배송지로 변경하시겠습니까?")){
+        window.location.href = '/address/';
+    }
+
+
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -253,14 +261,14 @@ document.addEventListener("DOMContentLoaded", function () {
     $('#prodDetailBtn').click(function(){
         let arrowBtn = document.getElementById("arrowBtn");
         let rotate = arrowBtn.getAttribute("transform");
-        if(rotate === "rotate(-45 15.5 16.5)"){
+        if(rotate === "rotate(135 15.5 16.5)"){
             $('.totItems').hide(); //클릭 시 첫 번째 요소 숨김
             $('.items').show(); //클릭 시 두 번째 요소 표시
-            arrowBtn.setAttribute("transform", "rotate(135 15.5 16.5)");
+            arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
         }else{
             $('.totItems').show(); //클릭 시 첫 번째 요소 숨김
             $('.items').hide(); //클릭 시 두 번째 요소 표시
-            arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
+            arrowBtn.setAttribute("transform", "rotate(135 15.5 16.5)");
         }
     });
 

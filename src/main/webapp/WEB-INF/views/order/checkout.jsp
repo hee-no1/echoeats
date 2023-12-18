@@ -28,7 +28,7 @@
         <div class="css-ixlb9s epvroj94">
         <div class="css-zo1i6f edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">주문 상품</h3>
             <button data-testid="fold-button" id="prodDetailBtn" class="css-lvqq7y e17cst860">
-                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(-45 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(135 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
             </button></div>
 
             <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}의 상품을 주문합니다</div>
@@ -41,13 +41,15 @@
                             <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
-                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.disc_price}원</span></span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
+                                    <fmt:formatNumber value="${prod.disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:when>
                         <c:otherwise>
                             <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1646377916155l0.jpg" alt="[KF365] 1+등급 무항생제 대란 20구" class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.opt_prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
-                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.opt_disc_price}원</span></span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
+                                    <fmt:formatNumber value="${prod.opt_disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:otherwise>
                     </c:choose>
 
@@ -76,7 +78,7 @@
             <div class="css-5d6nlw e17yjk9v4">
                 <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">배송지</span>
                     <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">${address.addr} ${address.dtl_addr}</p>
-                        <div class="css-iqoq9n e17yjk9v0"><button class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
+                        <div class="css-iqoq9n e17yjk9v0"><button id="AddrBtn" class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
             <div id="checkout-shipping-details" class="css-1y0xj4c e1pxan881">
                 <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span>
             <c:choose>
