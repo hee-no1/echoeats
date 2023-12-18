@@ -9,7 +9,7 @@
         VALUES
         (#{ord_id},#{mem_id},#{prod_id},#{opt_prod_id},#{code_name},#{prod_name},#{prod_qty},#{prod_tot_price},#{pack_type},#{rg_num},#{md_num})
     </insert>
-
+	
     <select id="select" parameterType="long" resultType="OrderDetailDto">
         SELECT *
         FROM spring.order_detail
@@ -44,11 +44,27 @@
         WHERE code_name= #{code_name}
     </select>
     
+    <select id="selectCodeType" resultType="CodeTableDto">
+		SELECT *
+		FROM spring.code_table
+		WHERE
+		code_type=#{code_type}
+		order by code_type desc, code_no
+	</select>
+    
     <select id="selectByOrderDetId" resultType="OrderDetailDto">
         SELECT *
         FROM order_detail
         WHERE ord_det_id= #{ord_det_id}
     </select>
+    
+    <update id="update" parameterType="long">
+        UPDATE order_detail
+        SET
+            code_name = #{code_name},
+            md_date = current_timestamp
+        WHERE ord_det_id = #{ord_det_id}
+    </update>
     
     <update id="updateStatus" parameterType="long">
         UPDATE spring.order_detail
@@ -61,24 +77,80 @@
 
 
     <delete id="delete">
-        DELETE FROM spring.order_detail WHERE ord_det_id = #{ord_det_id}
+        DELETE FROM order_detail WHERE ord_det_id = #{ord_det_id}
     </delete>
 
     <delete id="deleteList">
-        DELETE FROM spring.order_detail WHERE ord_id = #{ord_id}
+        DELETE FROM order_detail WHERE ord_id = #{ord_id}
     </delete>
 
     <select id="selectAll" resultType="OrderDetailDto">
         SELECT *
-        FROM spring.order_detail
-        ORDER BY rg_date DESC, ord_id DESC
+        FROM order_detail
+        ORDER BY rg_date DESC, ord_det_id DESC
     </select>
 
     <delete id="deleteAll">
-        DELETE FROM spring.order_detail
+        DELETE FROM order_detail
     </delete>
 
     <select id="count" resultType="int">
-        SELECT count(*) FROM spring.order_detail
+        SELECT count(*) FROM order_detail
+    </select>
+    
+    <sql id="searchCondition">
+       	<choose>
+       		<when test='date_type=="OSO_ORD_DATE"'>
+       			AND ord_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+       		</when>
+       		<otherwise>
+       		</otherwise>
+       	</choose>
+       	<choose>
+	        <when test='keyword_type=="order_id"'>
+       			AND ord_id LIKE concat('%', #{keyword}, '%')
+       		</when>
+       		<otherwise>
+       		</otherwise>
+       	</choose>
+	</sql>
+	
+	<sql id="optProdIdNullChk">
+       	<choose>
+       		<when test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+       			AND sp.prod_id = od.prod_id
+       		</when>
+       		<otherwise>
+       			AND sp.prod_id = od.prod_id and sop.opt_prod_id = od.opt_prod_id
+       		</otherwise>
+       	</choose>
+	</sql>
+	
+    <select id="searchSelectPage" parameterType="SearchOrderCondition" resultType="OrderDetailDto">
+	    select od.*, CASE 
+	            WHEN od.opt_prod_id IS NULL THEN sp.prod_qty
+	            ELSE sop.opt_prod_qty
+        	END AS real_prod_qty
+        from product as sp
+        join order_detail as od
+        on sp.prod_id  = od.prod_id
+        left join option_product as sop
+        on sp.prod_id = sop.prod_id and sp.is_opt = 'Y'
+        WHERE true
+        	<include refid="searchCondition"/>
+        	AND sp.prod_id = od.prod_id
+        	AND (
+        		od.opt_prod_id IS NULL
+        		OR sop.opt_prod_id = od.opt_prod_id
+        	)
+	    ORDER BY ord_date DESC, ord_det_id DESC
+	    LIMIT #{offset}, #{pageSize}
+    </select>
+    
+    <select id="searchResultCnt" parameterType="SearchOrderCondition" resultType="int">
+	    SELECT count(*)
+        FROM order_detail
+        WHERE true
+           	<include refid="searchCondition"/>
     </select>
 </mapper>

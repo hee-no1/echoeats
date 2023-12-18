@@ -34,11 +34,6 @@ public class AddressServiceImpl implements AddressService {
     public List<AddressDto> getAddresses(String mem_id) throws Exception {
         return addressRepository.selectAllAddress(mem_id);
     }
-    
-    @Override
-	public AddressDto getDefaultAddress(String mem_id) throws Exception {
-		return addressRepository.selectDefaultAddress(mem_id);
-	}
 
     @Override
     public AddressDto getAddress(String addr_id) throws Exception {
@@ -81,4 +76,9 @@ public class AddressServiceImpl implements AddressService {
         }
         return addressRepository.deleteAddress(addr_id);
     }
+
+    @Override
+	public AddressDto getDefaultAddress(String mem_id) throws Exception {
+		return addressRepository.selectDefaultAddress(mem_id);
+	}
 }

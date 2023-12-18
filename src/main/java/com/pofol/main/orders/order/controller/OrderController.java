@@ -12,22 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pofol.main.member.dto.DelNotesDto;
-import com.pofol.main.member.service.AddressService;
+import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.service.DelNotesService;
 import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.service.OrderDetailService;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.domain.PaymentDto;
-import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.orders.payment.service.PaymentService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import com.pofol.main.product.cart.SelectedItemsDto;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/order")
@@ -107,7 +102,6 @@ public class OrderController {
             return "/order/errorPage";
         }
     }
-
 
     @ResponseBody
     @PostMapping("/checkout/delNotes")

@@ -33,7 +33,7 @@ public class InquiryServiceImpl implements InquiryService {
 	   		String url = awsS3ImgUploaderService.uploadImageToS3(file,"inquiry");
 	   		InquiryImgDto inqImgDto = new InquiryImgDto(inqDto.getInquiry_id(),url,inqDto.getMem_id());
 	   		inqImgRepo.insert(inqImgDto);
-   	}
+		}
 		return 1;
 	}
 
@@ -46,7 +46,7 @@ public class InquiryServiceImpl implements InquiryService {
 	public InquiryDto selectByinqId(Long inquiry_id) {
 		return inqRepo.selectByinqId(inquiry_id);
 	}
-
+	
 	@Override
 	public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
 		return inqRepo.selectCodeType(code_type);

@@ -30,6 +30,7 @@ public class OrderDetailDto {
     private String rg_num;
     private String md_num;
     
+    private Integer real_prod_qty;// 실 재고수량;
     private String column_sts; // code_name에 대한 한글명
     private String img_url; // 주문상세 상품이미지
 

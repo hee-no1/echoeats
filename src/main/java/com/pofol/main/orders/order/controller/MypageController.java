@@ -36,7 +36,7 @@ public class MypageController {
     private final MemberService memService;
     private final AddressService addrService;
     private final DelNotesService delNotesService;
-    
+
     @GetMapping("/order")
     public String order(Integer period, Model m, HttpSession session){
 		System.out.println("OrderController.order()");
@@ -63,12 +63,12 @@ public class MypageController {
 			}
 			m.addAttribute("ordDtoList",list);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
     	return "/order/mypageOrder";
     }
-	
+
 	@GetMapping("/order/{ord_id}")
     public String orderDet(@PathVariable Long ord_id, Model m, HttpServletRequest request){
 		System.out.println("OrderController.order()");
@@ -91,8 +91,10 @@ public class MypageController {
 			// 배송정보 ( 배송지 배송요청사항 )
 			AddressDto addrDto = addrService.getDefaultAddress(memDto.getMem_id());
 			DelNotesDto dnDto = delNotesService.getDelNotes(); // mem_id에 대한 배송요청
+			System.out.println("addrDto = "+addrDto);
+			System.out.println("dnDto = "+dnDto);
 			// 추가정보 ( 어디서갖고옴?? )
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -21,7 +21,7 @@
     <select id="select_address" resultType="AddressDto">
         SELECT * FROM address WHERE addr_id = #{addr_id}
     </select>
-
+	
     <update id="update_address">
         UPDATE address
         SET dtl_addr = #{dtl_addr}, name = #{name}, phone = #{phone}, def_addr = #{def_addr}
