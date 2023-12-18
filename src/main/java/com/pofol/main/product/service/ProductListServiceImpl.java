@@ -1,12 +1,11 @@
 package com.pofol.main.product.service;
 
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.repository.ProductListRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -98,6 +97,16 @@ public class ProductListServiceImpl implements ProductListService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<ProductDto> getAllProductList() throws Exception {
+        return productListRepository.selectAll();
+    }
+
+    @Override
+    public int getAllProductCount() throws Exception {
+        return productListRepository.count();
     }
 
 

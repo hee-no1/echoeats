@@ -211,6 +211,7 @@ $(document).ready(function() {
         pay_method : 'kakaopay'
     };
 
+
     //결제 버튼 클릭 이벤트
     $(".payBtnList").on('click', function (e){
        if(e.target.id === 'kakaopayBtn'){
@@ -259,7 +260,6 @@ $(document).ready(function() {
                '</div>';
            $(".css-gd125q").append(checkbox);
 
-
        } else if(e.target.id === 'mobiliansBtn'){
            $('#mobiliansBtn').removeClass('css-1wlyg0y');
            $('#mobiliansBtn').addClass('css-1pvbmgb');
@@ -272,7 +272,6 @@ $(document).ready(function() {
            $(".css-nemdq9").remove()
        }
     });
-
 
 
     //주문서 상품 목록

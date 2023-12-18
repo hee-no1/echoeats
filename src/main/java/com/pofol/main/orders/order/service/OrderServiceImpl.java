@@ -1,9 +1,7 @@
 package com.pofol.main.orders.order.service;
 
-import com.pofol.main.member.dto.CouponDto;
-import com.pofol.main.member.dto.CouponJoinDto;
-import com.pofol.main.member.dto.DelNotesDto;
-import com.pofol.main.member.dto.MemberDto;
+import com.pofol.main.member.dto.*;
+import com.pofol.main.member.repository.AddressRepository;
 import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.member.repository.DelNotesRepository;
 import com.pofol.main.member.repository.MemberRepository;
@@ -27,6 +25,7 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memRepo;
+    private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
     private final CartRepository basketRepo;
@@ -95,10 +94,14 @@ public class OrderServiceImpl implements OrderService{
             oc.setTot_prod_name(tot_prod_name);
 
 
-            //회원정보, 배송요청사항, 쿠폰정보
+            //회원정보, 배송지, 배송요청사항, 쿠폰정보
             //회원정보 가져오기
             MemberDto mem = memRepo.selectMember(mem_id);
             oc.setMemberDto(mem);
+
+            //배송지
+            AddressDto address = addressRepository.selectDefaultAddress(mem_id);
+            oc.setAddressDto(address);
 
             //배송요청사항 가져오기
             DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);

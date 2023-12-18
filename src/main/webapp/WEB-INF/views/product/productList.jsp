@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,56 +11,6 @@
     <link rel="stylesheet" href="/resources/product/css/productList-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
     <title>ecoeats - best</title>
-    <style>
-        /*드롭 다운 카테고리 (수정 필요)*/
-        nav {
-            overflow: hidden;
-        }
-
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-
-        .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        /*드롭다운 css 끝*/
-
-    </style>
 </head>
 
 <body>
@@ -95,7 +46,12 @@
             <c:if test="${pageType eq 'searchProduct'}">
                 <h3 id="best">'${searchContent}'에 대한 검색결과</h3>
             </c:if>
-
+            <c:if test="${pageType eq 'best'}">
+                <h3 id="best">베스트</h3>
+            </c:if>
+            <c:if test="${pageType eq 'new'}">
+                <h3 id="best">신상품</h3>
+            </c:if>
 
             <c:choose>
                 <c:when test="${pageType eq 'searchProduct' and totalCount eq 0}">
@@ -829,7 +785,7 @@
                                             <div class="e1c07x4812 css-tou8lf e3um3060">
                                     <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
                                         <img alt="상품 이미지" sizes="100vw"
-                                            <%--                                        srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"--%>
+                                            <%--srcset="https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 640w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 750w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 828w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1080w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1200w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 1920w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 2048w, https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/product/image/3df368c8-e124-4d06-a9e9-af4c10d01b53.jpeg 3840w"--%>
                                              src="${productList.prod_img_id}"
                                              decoding="async" data-nimg="fill" class="css-0"
                                              style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
@@ -848,20 +804,25 @@
                                             </button>
                                         </div>
                                         <div class="css-1kpzrna e1c07x489">
-                                                <%--                                <span class="css-1qd61ut e1ms5t9c1">--%>
-                                                <%--                                                                    <span class="css-1vdqr5b e1ms5t9c0">샛별배송</span>--%>
-                                                <%--                                </span>--%>
+                                            <span class="css-1qd61ut e1ms5t9c1">
+                                                <span class="css-1vdqr5b e1ms5t9c0">에코배송</span>
+                                            </span>
                                             <span class="css-1dry2r1 e1c07x488">${productList.prod_name}</span>
                                             <p class="css-1wejlc3 e1c07x486">${productList.short_desc}</p>
                                             <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
-                                                <div><span
-                                                        class="dimmed-price css-18tpqqq ei5rudb1">${productList.prod_price}<span
-                                                        class="won">원</span></span>
+                                                <div>
+                                                    <span class="dimmed-price css-18tpqqq ei5rudb1">
+                                                        <fmt:formatNumber value="${productList.prod_price}" pattern="#,###"/>
+                                                        <span class="won">원</span>
+                                                    </span>
                                                 </div>
                                                 <div class="discount">
                                                     <span class="discount-rate css-19lkxd2 ei5rudb0">${productList.disc_rate}%</span>
-                                                    <span class="sales-price css-18tpqqq ei5rudb1">${productList.disc_price}<span
-                                                            class="won">원</span></span></div>
+                                                    <span class="sales-price css-18tpqqq ei5rudb1">
+                                                        <fmt:formatNumber value="${productList.disc_price}" pattern="#,###"/>
+                                                        <span class="won">원</span>
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div class="review-count css-xezqwk e1c07x482"><span
                                                     class="css-mz5g71 e1c07x481">

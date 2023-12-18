@@ -1,5 +1,6 @@
 package com.pofol.main.orders.order.domain;
 
+import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.CouponJoinDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
@@ -24,7 +25,7 @@ public class OrderCheckout {
     private Integer origin_prod_price; //총 원래 상품 금액
     private Integer dlvy_fee; //배송비
     private MemberDto memberDto; //회원 정보
-    //배송정보 Dto
+    private AddressDto addressDto;//배송정보 Dto
     private DelNotesDto delNotesDto; //배송 요청 사항 Dto
     private List<CouponJoinDto> couponList; //쿠폰 Dto
     //적립금 Dto
