@@ -39,4 +39,12 @@ public class DeliveryDto {
         this.rg_num = mem_id;
         this.md_num = mem_id;
     }
+
+    //insert용도
+    public void setMember(String mem_id){
+        this.mem_id = mem_id;
+        this.rg_num = mem_id;
+        this.md_num = mem_id;
+    }
+
 }

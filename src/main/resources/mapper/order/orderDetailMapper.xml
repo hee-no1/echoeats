@@ -67,7 +67,7 @@
         order by od.ord_det_id desc
     </select>
     
-    <update id="update" parameterType="long">
+    <update id="update" parameterType="OrderDetailDto">
         UPDATE order_detail
         SET
             code_name = #{code_name},
@@ -75,7 +75,7 @@
         WHERE ord_det_id = #{ord_det_id}
     </update>
     
-    <update id="updateStatus" parameterType="long">
+    <update id="updateStatus" parameterType="OrderDetailDto">
         UPDATE spring.order_detail
         SET
             code_name = #{code_name},

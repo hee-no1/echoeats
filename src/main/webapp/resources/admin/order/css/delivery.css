@@ -1035,3 +1035,11 @@ table .rowChk[type="checkbox"] {
     margin: 16px 0 0;
     text-align: center;
 }
+.btnPrep{
+    border-width: 1px;
+    border-color: #949494;
+    background-color: #fff;
+}
+.btnPrep:hover{
+    background-color: #eafbfd;
+}
