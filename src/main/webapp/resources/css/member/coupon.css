@@ -1025,3 +1025,14 @@ input[id="check"]:checked + label + div{
 .coupon_front > div{
     width: 100%;
 }
+
+
+.coupon_count {
+    position: absolute;
+    background: #252102;
+    color: white;
+    border-radius: 7px;
+    width: 33px;
+    transform: translate(8%, -91%);
+    text-align: center;
+}

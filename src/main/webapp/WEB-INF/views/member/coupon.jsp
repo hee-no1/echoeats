@@ -285,8 +285,6 @@
 
 
 
-
-
             <div class="download_coupon">
 
 
@@ -301,77 +299,33 @@
 
                 <div class="sidebar">
                     <ul>
-                        <li class="coupon">
+                        <li class="coupon" id="dw_id 1">
+                            <span class="coupon_count">수량</span>
                             <div class="coupon_front">
                                 <div>쿠폰명</div>
                                 <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
+                                <div class="cp_del_date">2023-12-25 15:30:00</div>
                             </div>
-                            <div class="coupon_back" id="1"><span>coupon</span></div>
+                            <div class="coupon_back active" id="10"><span>coupon</span></div>
                         </li>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back" id="2"><span>coupon</span></div>
-                        </li>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back" id="3"><span>coupon</span></div>
-                        </li>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back" id="4"><span>coupon</span></div>
-                        </li>
+                        <c:forEach var="download" items="${download}">
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back" id="5"><span>coupon</span></div>
-                        </li>
+                            <li class="coupon" id="dw_id ${download.dw_id}">
+                                <span class="coupon_count">${download.cp_qty}</span>
+                                <div class="coupon_front">
+                                    <div>${download.cp_name}</div>
+                                    <div>${download.cash_rate}</div>
+                                    <div class="cp_del_date">${download.cp_del_date}</div>
+                                </div>
+                                <div class="coupon_back active" id="${download.cp_id}"><span>coupon</span></div>
+                            </li>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back"><span>coupon</span></div>
-                        </li>
+                        </c:forEach>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back"><span>coupon</span></div>
-                        </li>
 
-                        <li class="coupon">
-                            <div class="coupon_front">
-                                <div>쿠폰명</div>
-                                <div>할인ddddddddd 10%</div>
-                                <div>사용 기간</div>
-                            </div>
-                            <div class="coupon_back"><span>coupon</span></div>
-                        </li>
 
                     </ul>
                 </div>
@@ -397,21 +351,7 @@
                     <th class="css-1ug13y3 e1rqxz0z0">사용여부</th>
                 </tr>
                 </thead>
-                <tbody data-testid="coupon-detail" class="css-1deckd1 e1rjzgz00">
-                <tr data-testid="coupon-item" class="css-141m64i e1tgnahe2">
-                    <td class="css-q2jm29 evod6yc1">
-                        <p class="css-1sg7btz evod6yc0">엘지생활건강 15% 쿠폰 (최대 1만원)</p>
-                        <div data-testid="price-condition" class="css-3apn08 e1y0jaxm0">29,000원 이상 주문 시 최대 10,000원 할인
-                        </div>
-                        <p data-testid="payment-condition" class="css-3apn08 er3hb6s0">컬리상품 한정, 특정상품 한정</p><button
-                            class="css-1xwjhen e1mgczsm0">사용조건 보기</button>
-                    </td>
-                    <td class="css-44wg63 e1tgnahe1">할인</td>
-                    <td class="css-44wg63 e1tgnahe1">15%</td>
-                    <td class="css-44wg63 e1tgnahe1">23.12.07 11시까지</td>
-                    <td class="css-qlipgp e1tgnahe0">미사용</td>
-                </tr>
-                </tbody>
+
 
 
                 <tbody data-testid="coupon-detail" class="css-1deckd1 e1rjzgz00">
@@ -493,28 +433,160 @@
 
             coupon_front.style.backgroundColor = RandomColor;
         });
+
+        //받았던 쿠폰들은 다시 다운 받지 못하게 한다
+        var alreadyDownloadedArray = <%= request.getAttribute("already_downloaded") %>;
+        // 이제 alreadyDownloadedArray 변수에는 Java에서 전달한 List<Integer>의 내용이 JavaScript 배열로 저장됩니다.
+
+        // JavaScript에서 데이터 사용 예제
+        for (var i = 0; i < alreadyDownloadedArray.length; i++) {
+            console.log("Downloaded Item: " + alreadyDownloadedArray[i]);
+        }
+        const uniqueData = Array.from(new Set(alreadyDownloadedArray));
+        console.log(uniqueData);
+
+
+        uniqueData.forEach(number=> {
+            var dwId1Tag = $('#dw_id\\ ' + number);
+            let couponBackTag = dwId1Tag.find('.coupon_back');
+            let couponFrontTag = dwId1Tag.find('.coupon_front');
+            var isActive = couponBackTag.hasClass('active');
+            if (isActive) {
+                couponBackTag.removeClass('active').addClass('non');
+            }
+
+            couponBackTag.css("background-color", "gray");
+            couponFrontTag.css("background-color", "gray");
+            couponBackTag.css('cursor', 'default');
+            couponFrontTag.css('cursor', 'default');
+        });
+
+
+
+
     });
 
 
 //     쿠폰에 이벤트 추가
     $('.coupon_back').on('click', function (){
-        var clickedId = $(this).attr('id');
+        var currentId = $(this).attr('class');
+        if(currentId.includes('active')){
+            alert('활성');
 
-        $.ajax({
-            url: "coupon_dw",
-            method: "GET",
-            data: { id: clickedId },
-            dataType: "json",
-            success: function(data) {
-                alert(data);
+            var cp_del_date = $(this).siblings('.coupon_front').find('.cp_del_date').text();
+            console.log(cp_del_date);
+
+            //dw_id 얻기
+            var couponId = $(this).closest('.coupon').attr('id');
+
+            // id에서 숫자 부분만 추출 (dw_id 뒤의 숫자)
+            var dw_id = couponId.split(' ')[1];
+            alert('dw_id : '+dw_id)
+
+            var clickedId = $(this).attr('id');
+
+            $.ajax({
+                url: "coupon_dw",
+                method: "GET",
+                data: {
+                    cp_id: clickedId,
+                    cp_del_date: cp_del_date,
+                    dw_id : dw_id
+                },
+                dataType: "json",
+                success: function(data) {
 
 
-            },
-            error: function(error) {
+                    console.log(data.download_cp_qty);
+                    let download_cp_qty = data.download_cp_qty;
 
-                console.error('Error:', error);
-            }
-        });
+                    //컨트롤러에서 받아온 dw_id를 사용하여
+                    var download_dw_id = $('#dw_id\\ ' + data.download_dw_id);
+                    download_dw_id.find('.coupon_count').text(download_cp_qty);
+
+
+
+                    //data에는 내가 받았던 dw_id들이 들어있다
+                    console.log(data);
+                    let downloaded_dw_id_list =  data.downloaded_dw_id_list;
+
+                    //나중에는 필요 없지만 일단 중복제거를 한다
+                    const uniqueData = Array.from(new Set(downloaded_dw_id_list));
+                    console.log(uniqueData);
+                    //하나씩 꺼내서 dw_id 에 해당하는 태그를 선택
+                    uniqueData.forEach(number=> {
+                        var dwId1Tag = $('#dw_id\\ ' + number);
+                        let couponBackTag = dwId1Tag.find('.coupon_back');
+                        let couponFrontTag = dwId1Tag.find('.coupon_front');
+                        var isActive = couponBackTag.hasClass('active');
+                        if (isActive) {
+                            couponBackTag.removeClass('active').addClass('non');
+                        }
+
+                        couponBackTag.css("background-color", "gray");
+                        couponFrontTag.css("background-color", "gray");
+                        couponBackTag.css('cursor', 'default');
+                        couponFrontTag.css('cursor', 'default');
+                    });
+
+
+
+
+                    //대공사
+                    //밑에 문제는 반복문이 돌 때 마다 각각 바디에 하나씩 들어간다(어 총 3개씩 3번)
+                    //목표 하나의 쿠폰을 받을 때는 하나의 쿠폰만 마지막 태그에 추가
+
+                    let couponData = data.coupon_detail;
+                    console.log(couponData);
+
+
+                    // Create the new tbody element
+                    var newTbody = $("<tbody data-testid='coupon-detail' class='css-1deckd1 e1rjzgz00'></tbody>");
+
+// Create the new tr element
+                    var newTr = $("<tr data-testid='coupon-item' class='css-141m64i e1tgnahe2'></tr>");
+
+// Append td elements to the new tr
+                    newTr.append("<td class='css-q2jm29 evod6yc1'>" +
+                        "<p class='css-1sg7btz evod6yc0'>" + couponData.cp_name + "</p>" +
+                        "<div data-testid='price-condition' class='css-3apn08 e1y0jaxm0'>" + couponData.min_amt + "원 이상 주문 시" +
+                        "<c:if test='${couponData.max_disc_amt != 0}'>" +
+                        "최대 " + couponData.max_disc_amt + "원 할인" +
+                        "</c:if>" +
+                        "</div>" +
+                        "<p data-testid='payment-condition' class='css-3apn08 er3hb6s0'>컬리상품 한정, 특정상품 한정</p>" +
+                        "<button class='css-1xwjhen e1mgczsm0'>사용조건 보기</button>" +
+                        "</td>");
+
+                    newTr.append("<td class='css-44wg63 e1tgnahe1'>할인</td>");
+                    newTr.append("<td class='css-44wg63 e1tgnahe1'>" +
+                        (couponData.type === 'rate' ? couponData.cash_rate + "%" :
+                            (couponData.type === 'cash' ? couponData.cash_rate + "원" : "")) +
+                        "</td>");
+                    newTr.append("<td class='css-44wg63 e1tgnahe1'>" + couponData.cp_del_date + "</td>");
+                    newTr.append("<td class='css-qlipgp e1tgnahe0'>" + couponData.cp_sts + "</td>");
+
+
+                    newTbody.append(newTr);
+
+
+                    $("table.css-171zbec.e1rqxz0z3").append(newTbody);
+
+
+
+
+                },
+                error: function(error) {
+
+                    console.error('Error:', error);
+                }
+            });
+
+        }else{
+            alert('비활성');
+        }
+
+
 
     });
 
