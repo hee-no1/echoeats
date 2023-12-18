@@ -22,10 +22,8 @@ public interface OrderDetailRepository {
 	// mypage에서 주문상세의 배송상태를 code테이블에서 가져오는 메서드
     public abstract String selectByCodeName(String code_name)throws Exception;
     // inquiry에서 주문상세를 가져오는 메서드
+    List<OrderDetailDto> selectForDelivery();
     public abstract OrderDetailDto selectByOrderDetId(Long ord_det_id) throws Exception;
-    
     public abstract List searchSelectPage(SearchOrderCondition sc)throws Exception;
     public abstract int searchResultCnt(SearchOrderCondition sc) throws Exception;
-	
-
 }

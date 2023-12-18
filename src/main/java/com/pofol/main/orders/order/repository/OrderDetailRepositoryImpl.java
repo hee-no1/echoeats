@@ -82,6 +82,11 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
 		return session.selectOne(namespace+"selectByOrderDetId", ord_det_id);
 	}
 
+  @Override
+  public List<OrderDetailDto> selectForDelivery() {
+      return session.selectList(namespace+"selectForDelivery");
+  }
+  
 	@Override
 	public List searchSelectPage(SearchOrderCondition sc) throws Exception {
 		return session.selectList(namespace+"searchSelectPage", sc);
@@ -91,4 +96,5 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
 	public int searchResultCnt(SearchOrderCondition sc) throws Exception {
 		return session.selectOne(namespace+"searchResultCnt", sc);
 	}
+
 }
