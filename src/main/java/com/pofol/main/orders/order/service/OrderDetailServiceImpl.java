@@ -50,4 +50,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return orderDetailRepository.selectByOrderDetId(ord_det_id);
 	}
 
+	/**
+	 * @return List<OrderDetailDto>
+	 * @feat : 관리자 배송 페이지에서 주문상세를 가져오는 메서드
+	 */
+	@Override
+	public List<OrderDetailDto> selectForDelivery() {
+		return orderDetailRepository.selectForDelivery();
+	}
+
 }

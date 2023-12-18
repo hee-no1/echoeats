@@ -252,9 +252,9 @@
             <div class="mCtrl typeHeader">
                 <div class="gTop">
                     <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl btnPrep" data-code_name="PRODUCT_PREPARING"><span>상품준비중 처리</span></a>
+                       class="btnCtrl btnPrep" data-code_name="DELIVERING"><span>배송중 처리</span></a>
                     <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
-                       class="btnNormal btnPrep" data-code_name="DELIVERY_PREPARING"><span>배송준비중 처리</span></a>
+                       class="btnNormal btnPrep" data-code_name="DELIVERY_COMPLETE"><span>배송완료 처리</span></a>
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
@@ -291,50 +291,52 @@
                     <tbody>
                     <tr>
                         <th scope="col" class="w24"><input type="checkbox" class="allChk all"></th>
-                        <th scope="col" class="w90" style="">상품주문번호</th>
-                        <th scope="col" class="w90" style="">주문번호</th>
-                        <th scope="col" class="w60" style="">주문자</th>
-                        <th scope="col" class="w95" style="">상품명</th>
-                        <th scope="col" class="w120" style="">운송장번호</th>
-                        <th scope="col" class="w60" style="">배송상태</th>
-                        <th scope="col" class="w120" style="">배송시작일</th>
-                        <th scope="col" class="w120" style="">베송완료일</th>
-                        <th scope="col" class="w60" style="">포장타입</th>
-                        <th scope="col" class="w60" style="">배송속성</th>
+                        <th scope="col" class="w120" style="">상품주문번호</th>
+                        <th scope="col" class="w120" style="">주문번호</th>
+                        <th scope="col" class="w100" style="">주문자</th>
+                        <th scope="col" class="w120" style="">택배사</th>
+                        <th scope="col" class="w210" style="">상품명</th>
+                        <th scope="col" class="w75" style="">포장타입</th>
+                        <th scope="col" class="w200" style="">운송장번호</th>
+                        <th scope="col" class="w190" style="">배송상태</th>
+                        <th scope="col" class="w140" style="">배송시작일</th>
+                        <th scope="col" class="w140" style="">베송완료일</th>
+                        <th scope="col" class="w80" style="">배송속성</th>
                     </tr>
                     </tbody>
                 </table>
                 <table border="1">
-<%--                    <c:if test="${not empty list}">--%>
-                        <tbody><tbody>
-<%--                    <c:forEach var="dto" items="${list}">--%>
+                    <c:if test="${not empty list}">
+                        <tbody>
+                    <c:forEach var="item" items="${list}">
                         <tr>
-<%--                            <td scope="col" class="w24" data-id="${dto.ord_det_id}" data-code="${dto.code_name}"><input type="checkbox" class="allChk"></td>--%>
-<%--                            <td scope="col" class="w90" style=""><fmt:formatDate value="${dto.ord_date}" pattern="yyyy-MM-dd" type="date"/>--%>
-<%--                                (<fmt:formatDate value='${dto.ord_date}' pattern='HH:mm' type='time'/>)</td>--%>
-<%--                            <td scope="col" class="w90" style="">${dto.ord_id}</td>--%>
-<%--                            <td scope="col" class="w120 ord_det_id" style="">${dto.ord_det_id}</td>--%>
-<%--                            <td scope="col" class="w60" style="">${dto.column_sts}</td>--%>
-<%--                            <td scope="col" class="w80" style="">${dto.mem_id}</td>--%>
-<%--                            <td scope="col" class="w120" style="">${dto.prod_name}</td>--%>
-<%--                            <td scope="col" class="w45 prod_qty" style="">${dto.prod_qty}</td>--%>
-<%--                            <td scope="col" class="w45 real_prod_qty" style="">${dto.real_prod_qty}</td>--%>
-<%--                            <td scope="col" class="w105" style="">${dto.prod_tot_price}</td>--%>
-<%--                            <td scope="col" class="w45" style="">${dto.pack_type}</td>--%>
-<%--                            <td scope="col" class="w60" style="">${dto.dlvy_attr}</td>--%>
-<%--                            <td scope="col" class="w90" style=""><fmt:formatDate value="${dto.ex_rfund_date}" pattern="yyyy-MM-dd" type="date"/>--%>
-<%--                                (<fmt:formatDate value='${dto.ex_rfund_date}' pattern='HH:mm' type='time'/>)</td>--%>
+                            <td scope="col" class="w24" data-id="${item.ord_det_id}" data-code="${item.code_name}"><input type="checkbox" class="allChk"></td>
+                            <td scope="col" class="w120" style="">${item.ord_det_id}</td>
+                            <td scope="col" class="w120" style="">${item.ord_id}</td>
+                            <td scope="col" class="w100" style="">${item.mem_name}</td>
+                            <td scope="col" class="w120" style="">에코딜리버리</td>
+                            <td scope="col" class="w210" style="">${item.prod_name}</td>
+                            <td scope="col" class="w75 real_prod_qty" style="">${item.pack_type}</td>
+                            <td scope="col" class="w200" style="">
+                                <input type="text" class="w180">
+                            </td> <!--운송장번호-->
+                            <td scope="col" class="w190" style="">${item.code_name}</td>
+                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>
+                                (<fmt:formatDate value='${dto.dlvy_start_date}' pattern='HH:mm' type='time'/>)</td>
+                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>
+                                (<fmt:formatDate value='${dto.dlvy_cmplt_date}' pattern='HH:mm' type='time'/>)</td>
+                            <td scope="col" class="w80" style="">${item.dlvy_attr}</td>
                         </tr>
-<%--                    </c:forEach>--%>
+                    </c:forEach>
                     </tbody>
-<%--                    </c:if>--%>
-<%--                    <c:if test="${empty list}">--%>
+                    </c:if>
+                    <c:if test="${empty list}">
                         <tbody class="empty">
                         <tr>
                             <td colspan="15">검색된 주문내역이 없습니다.</td>
                         </tr>
                         </tbody>
-<%--                    </c:if>--%>
+                    </c:if>
                 </table>
 
             </div>

@@ -14,4 +14,5 @@ public interface OrderDetailService {
     public abstract String selectByCodeName(String code_name);
     // inquiry에서 주문상세를 가져오는 메서드
 	public abstract OrderDetailDto selectByOrderDetId(Long ord_det_id);
+    List<OrderDetailDto> selectForDelivery();
 }

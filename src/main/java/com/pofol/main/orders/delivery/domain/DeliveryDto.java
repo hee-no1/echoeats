@@ -1,9 +1,15 @@
 package com.pofol.main.orders.delivery.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeliveryDto {
     private Long waybill_num;
     private Long ord_det_id;
@@ -17,7 +23,4 @@ public class DeliveryDto {
     private String pack_type;
     private String rg_num;
     private String md_num;
-
-
-
 }

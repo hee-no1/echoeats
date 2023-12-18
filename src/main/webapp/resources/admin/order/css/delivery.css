@@ -962,21 +962,20 @@ html:lang(ko) .btnNormal span {
     text-align: center;
     background-color: #fff;
 }
-
+.mBoard tbody th[scope*='col'], .mBoard tbody td[scope*='col'] {
+    text-align: center;
+}
 .mBoard.gScroll th,
 .mBoard.gScroll td {
     border-right-width: 0;
 }
-
 .mBoard.typeOrder th,
 .mBoard.typeOrder td {
     padding-left: 4px;
     padding-right: 4px;
 }
 
-.mBoard tbody th[scope*='col'], .mBoard tbody td[scope*='col'] {
-    text-align: center;
-}
+
 
 html:lang(ko) .mBoard thead th,
 html:lang(ko) .mBoard thead~tbody td,

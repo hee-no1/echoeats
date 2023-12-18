@@ -18,7 +18,7 @@ public class DeliveryDetailDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dlvy_start_date; //배송시작일
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dlvy_cmply_date; //배송완료일
+    private Date dlvy_cmplt_date; //배송완료일
     private String dlvy_attr; //배송속성
     private String pack_type; //포장타입
     private String rg_num;
