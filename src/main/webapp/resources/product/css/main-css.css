@@ -973,6 +973,11 @@ footer {
     font-weight: normal;
     text-align: left;
 }
+
+#wrap-center {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+}
+
 /*드롭 다운 카테고리 (수정 필요)*/
 nav {
     overflow: hidden;
