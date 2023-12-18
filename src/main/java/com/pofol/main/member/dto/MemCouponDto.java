@@ -1,23 +1,38 @@
 package com.pofol.main.member.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MemCouponDto {
     private int own_cp_id;  //PK,  AUTO_INCREMENT
-    private int cp_id;   //FK,쿠폰 아이디
+    private Long cp_id;   //FK,쿠폰 아이디
     private String mem_id;  //FK, 회원 아이디
     private int cp_qty;  //쿠폰 수량
     private String cp_sts;  //쿠폰 상태
     private Date cp_del_date;  //쿠폰 소멸 일시
     private Date rg_date;
-    private int rg_num;    //디폴트 값 존재해서 생성자에 넣지 않음
+    private String rg_num;    //디폴트 값 존재해서 생성자에 넣지 않음
     private Date md_date;
-    private int md_num;
+    private String md_num;
 
     private MemberDto memberDto;
     private CouponDto couponDto;
 
     public MemCouponDto() {
+    }
+
+    public MemCouponDto( String mem_id, Long cp_id) throws ParseException {
+        this.cp_id = cp_id;
+        this.mem_id = mem_id;
+        this.cp_qty = 1;
+        this.cp_sts = "UNUSED";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = "2023-12-23 12:23:00";
+        this.cp_del_date = dateFormat.parse(dateString);
+        this.rg_num = "admin123";
+        this.md_num = "admin123";
     }
 
     public MemCouponDto(int cp_qty, String cp_sts, Date cp_del_date, MemberDto memberDto, CouponDto couponDto) {
@@ -28,7 +43,7 @@ public class MemCouponDto {
         this.couponDto = couponDto;
     }
 
-    public MemCouponDto(int cp_id, String mem_id, int cp_qty, String cp_sts, Date cp_del_date, int rg_num, int md_num) {
+    public MemCouponDto(Long cp_id, String mem_id, int cp_qty, String cp_sts, Date cp_del_date, String rg_num, String md_num) {
         this.cp_id = cp_id;
         this.mem_id = mem_id;
         this.cp_qty = cp_qty;
@@ -46,11 +61,11 @@ public class MemCouponDto {
         this.own_cp_id = own_cp_id;
     }
 
-    public int getCp_id() {
+    public Long getCp_id() {
         return cp_id;
     }
 
-    public void setCp_id(int cp_id) {
+    public void setCp_id(Long cp_id) {
         this.cp_id = cp_id;
     }
 
@@ -94,11 +109,11 @@ public class MemCouponDto {
         this.rg_date = rg_date;
     }
 
-    public int getRg_num() {
+    public String getRg_num() {
         return rg_num;
     }
 
-    public void setRg_num(int rg_num) {
+    public void setRg_num(String rg_num) {
         this.rg_num = rg_num;
     }
 
@@ -110,11 +125,11 @@ public class MemCouponDto {
         this.md_date = md_date;
     }
 
-    public int getMd_num() {
+    public String getMd_num() {
         return md_num;
     }
 
-    public void setMd_num(int md_num) {
+    public void setMd_num(String md_num) {
         this.md_num = md_num;
     }
 
