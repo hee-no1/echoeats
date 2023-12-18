@@ -43,9 +43,9 @@
 		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.cart.SelectedItemsDto"/>
 		<typeAlias alias="CartDto" type="com.pofol.main.product.cart.CartDto"/>
 		<!-- product -->
-		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.basket.SelectedItemsDto"/>
 		<!-- member -->
 		<typeAlias alias="PointDto" type="com.pofol.main.member.dto.PointDto"/>
 		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<typeAlias alias="CouponDownloadDto" type="com.pofol.main.member.dto.CouponDownloadDto"/>
 	</typeAliases>
 </configuration>
