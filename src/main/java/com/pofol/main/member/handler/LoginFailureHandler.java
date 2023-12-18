@@ -33,6 +33,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         }
 
         request.getSession().setAttribute("errormsg", errormsg);
+
+        //회원이 입력했던 아이디
         String username = request.getParameter("mem_id");
         System.out.println("username : "+username);
         request.getSession().setAttribute("input_id", username);
