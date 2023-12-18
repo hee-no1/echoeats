@@ -699,3 +699,35 @@ table input[type="checkbox"] {
 .set-option > .btn {
     background-color: #ffffff!important;
 }
+
+#myTable td {
+    padding: 0;
+}
+
+#myTable td input {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fffff5;
+}
+
+#myTable td {
+    background-color: #fffff5;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}
+
+#checkbox-td {
+    background-color: #ffffff!important;
+}
+
+td:nth-child(1) {
+    background-color: #ffffff!important;
+}
