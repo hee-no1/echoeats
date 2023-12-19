@@ -750,7 +750,7 @@
                                                     </g>
                                                 </g>
                                             </svg></a></li>
-                                    <li><a class="active css-g4g0eu ecbxmj0">1:1 문의<svg
+                                    <li><a class="active css-g4g0eu ecbxmj0" href="<c:url value='/mypage/inquiry/list'/>">1:1 문의<svg
                                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                                 viewBox="0 0 24 24">
                                                 <defs>
@@ -1039,9 +1039,10 @@
                                                     <c:if test="${inqDto.rep_sts == false}">답변대기</c:if>
                                                     <c:if test="${inqDto.rep_sts == true}">답변완료</c:if></span></div></div></li></ul>
                                     </c:forEach>
-                                    
+                                    <c:if test="${empty inqList}">
+                                        <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
+                                    </c:if>
                                     <!-- <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;"><div class="css-br5cai e1vd1n2i0"><div class="css-193iudv e94cdlt1"><span class="css-16ts9vc e94cdlt0">서비스/오류/기타</span><span class="css-a5dfz6 ecg7plp0"></span><span class="css-16ts9vc e94cdlt0">기타(직접 입력)</span></div><div class="css-zjik7 e82q4qc4"><span class="css-1ylw081 e1kayg9i0"></span><div class="css-145c1ga e82q4qc3"><span type="QUESTION" class="css-190bjnp e82q4qc2">test</span><br><div class="css-1kl96ir ewad2cu1"><img src="https://lacms-board.kurly.com/board/inquiry/20231213/580d59dd-e89a-40b7-9be4-d3ffeeaf67e4.png" alt="" class="css-qe5ixm ewad2cu0"><img src="https://lacms-board.kurly.com/board/inquiry/20231213/f443389c-d2ec-444e-a9a7-ee6648e4e1ff.png" alt="" class="css-qe5ixm ewad2cu0"></div></div></div><div class="css-1oe9o3r eula2qn2"><button type="button" class="css-qv4hdm eula2qn1">수정</button><div class="css-ord49b eula2qn0"></div><button type="button" class="css-qv4hdm eula2qn1">삭제</button></div></div></li> -->
-                                    <!-- <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div> -->
                                     <div class="css-15jhycr e3tf63e0"><button class="css-1ibxj4m e4nu7ef3" type="button" width="120" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">문의하기</span></button></div></div>
                         </div>
                     </div>

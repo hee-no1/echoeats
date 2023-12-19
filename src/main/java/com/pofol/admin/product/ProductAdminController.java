@@ -21,15 +21,8 @@ public class ProductAdminController {
     private final ProductAdminService productAdminService;
 
     @GetMapping("/product/list")
-    public String getAdminProductList(SearchProductAdminCondition searchProductAdminCondition,
-                                      Model model, ProductFilterDto productFilterDto,
-                                      String Stock,
-                                      HttpServletRequest request) {
-
-        String startDate = request.getParameter("start_date");
-        String endDate = request.getParameter("end_date");
-        System.out.println("startDate = " + startDate);
-        System.out.println("endDate = " + endDate);
+    public String getAdminProductList(SearchProductAdminCondition sc,
+                                      Model model, ProductFilterDto productFilterDto, String Stock) {
 
         try {
             // 카테고리 정렬
@@ -39,13 +32,13 @@ public class ProductAdminController {
             model.addAttribute("categoryList", categoryList);
 
             // 페이징
-            Integer totalCount = productAdminService.getProductAdminSearchCount(searchProductAdminCondition, productFilterDto, Stock);
-            PageHandler pageHandler = new PageHandler(totalCount, searchProductAdminCondition);
+            Integer totalCount = productAdminService.getProductAdminSearchCount(sc, productFilterDto, Stock);
+            PageHandler pageHandler = new PageHandler(totalCount, sc);
             model.addAttribute("ph", pageHandler);
             model.addAttribute("totalCount", totalCount);
 
             // 상품 관리자 페이지에서 조건에 따라 상품조회
-            List<ProductDto> productAdminList = productAdminService.getProductAdminSearchList(searchProductAdminCondition, productFilterDto, Stock);
+            List<ProductDto> productAdminList = productAdminService.getProductAdminSearchList(sc, productFilterDto, Stock);
             model.addAttribute("product", productAdminList);
             model.addAttribute("category", list);
 
@@ -79,9 +72,9 @@ public class ProductAdminController {
 
             productAdminService.updateProductAdmin(product);
 
-            if (product.getIs_opt().equals("Y")) {
-
-            }
+//            if (product.getIs_opt().equals("Y")) {
+//
+//            }
 
             return "redirect:/admin/product/list"; // (변경해야함)
         } catch (Exception e) {

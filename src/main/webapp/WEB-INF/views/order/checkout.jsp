@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,7 @@
 <c:set var="member" value="${checkout.memberDto}" />
 <c:set var="items" value="${checkout.selectedItems}" />
 <c:set var="delNotes" value="${checkout.delNotesDto}" />
+<c:set var="address" value="${checkout.addressDto}"/>
 
 <body>
 <div class="css-1ykiyus e146m4rf2">
@@ -73,7 +75,7 @@
                         <div class="css-82a6rk ev65imb1"><span class="css-2s3epn er4y7r80">장바구니, 홈에서</span><span class="css-4zleql er4y7r80">배송지를 변경할 수 있어요</span></div><button class="css-157xhr7 ev65imb0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.6154 12.8154L3 3" stroke="#fff" stroke-linecap="round"></path><path d="M3 12.8154L12.6242 3" stroke="#fff" stroke-linecap="round"></path></svg></button></div></div></div>
             <div class="css-5d6nlw e17yjk9v4">
                 <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">배송지</span>
-                    <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">서울 종로구 종로 69 (서울 YMCA) 5층 522호</p>
+                    <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">${address.addr} ${address.dtl_addr}</p>
                         <div class="css-iqoq9n e17yjk9v0"><button class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
             <div id="checkout-shipping-details" class="css-1y0xj4c e1pxan881">
                 <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span>
@@ -132,7 +134,10 @@
             <div class="css-17t7y0p edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">적립금</h3></div>
                 <%-- 적립금 내용 --%>
                 <div class="css-pkhh3q e150alo82"><span class="css-ln1csn e150alo81">적립금</span><div class="css-82a6rk e150alo80">
-                    <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4"><span id="point" class="money">4000</span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
+                    <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4">
+                        <span id="point">
+                        <fmt:formatNumber value="4000" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
+
                     <%-- 사용할 적립금 입력 --%>
                     <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">
                         <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed"></div></div>
@@ -149,17 +154,35 @@
                 </div></div></div>
                 <ul class="css-wx42bm e4nb37r0"><li>※ 카카오페이, 토스, 네이버페이, 페이코 결제 시, 결제하신 수단으로만 환불되는 점 양해부탁드립니다.</li><li>※ 고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 토스 페이먼츠의 구매안전(에스크로) 서비스를 이용하실 수 있습니다.</li></ul><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">개인정보 수집/제공</h3></div><div class="css-37px7p eh5sxvr5"><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">개인정보 수집∙이용 및 처리 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">전자지급 결제대행 서비스 이용약관 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><strong class="css-87vide eh5sxvr4">위 내용을 확인 하였으며 결제에 동의합니다.</strong></div><p class="css-1tak4sl eh5sxvr3">주문완료 상태일 경우에만 주문 취소가 가능하며, 상품 미배송 시 결제하신 수단으로 환불됩니다.</p>
                 <%-- 결제하기 버튼 --%>
-                <div class="css-1azakc el0c5j40"><button class="css-1lha8en e4nu7ef3" type="button" width="240" height="56" radius="3" id="paymentBtn"><span class="css-nytqmg e4nu7ef1"><span id="payment" class="money">${checkout.tot_prod_price + checkout.dlvy_fee}</span>원 결제하기</span></button></div></div>
+                <div class="css-1azakc el0c5j40"><button class="css-1lha8en e4nu7ef3" type="button" width="240" height="56" radius="3" id="paymentBtn"><span class="css-nytqmg e4nu7ef1">
+                    <span id="payment" class="money">
+                        <fmt:formatNumber value="${checkout.tot_prod_price + checkout.dlvy_fee}" pattern="#,###"/></span>원 결제하기</span></button></div></div>
 
         <%-- 결제 금액 라인 --%>
         <div class="css-1rz7w0y epvroj91"><div class="css-9i9om4 epvroj90"><div class="css-6hge48 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 금액</h3></div>
-            <div class="css-hdnk73 e12lli9y0"><div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">주문금액</div><div><span class="css-2pg1ps eahaaoi10 money" id="tot_prod_price">${checkout.tot_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="origin_prod_price"><span class="css-rfpchb eahaaoi3"></span>${checkout.origin_prod_price}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div><div><span class="css-2pg1ps eahaaoi10 money" id="prod_disc"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><span class = "money">${checkout.origin_prod_price - checkout.tot_prod_price}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10 money" id="dlvy_fee"><span class="css-rfpchb eahaaoi3"><c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span>${checkout.dlvy_fee}</span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="signCoupon"></span><span id="outputCouponUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3" id="signPoint"></span><span id="outputPointUsed" class="money">0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
-                <div class="css-1hgn7mh eahaaoi7"><div class="css-1rmc3ba eahaaoi11">최종결제금액</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span><span id = "tot_pay_price" class="money">${checkout.tot_prod_price + checkout.dlvy_fee}</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+            <div class="css-hdnk73 e12lli9y0"><div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">주문금액</div>
+                <div><span class="css-2pg1ps eahaaoi10 money" id="tot_prod_price">
+                    <fmt:formatNumber value="${checkout.tot_prod_price}" pattern="#,###"/></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품금액</div></div>
+                    <div><span class="css-2pg1ps eahaaoi10 money" id="origin_prod_price"><fmt:formatNumber value="${checkout.origin_prod_price}" pattern="#,###"/></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-sk644d eahaaoi9"><div class="css-zjik7 eahaaoi0"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path></svg><div class="css-1rmc3ba eahaaoi11">상품할인금액</div></div>
+                    <div><span class="css-2pg1ps eahaaoi10 money" id="prod_disc"><span class="css-rfpchb eahaaoi3">
+                    <c:if test="${checkout.tot_prod_price != checkout.origin_prod_price}">-</c:if></span><fmt:formatNumber value="${checkout.origin_prod_price - checkout.tot_prod_price}" pattern="#,###"/></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">배송비</div><div><span class="css-2pg1ps eahaaoi10 money" id="dlvy_fee"><span class="css-rfpchb eahaaoi3">
+                    <c:if test="${checkout.dlvy_fee == 3000}">+</c:if></span><span><fmt:formatNumber value="${checkout.dlvy_fee}" pattern="#,###"/></span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-1bj5qaf eahaaoi12"><div class="css-1rmc3ba eahaaoi11">쿠폰할인</div><div class="css-0"><span class="css-2pg1ps eahaaoi10">
+                    <span class="css-rfpchb eahaaoi3" id="signCoupon"></span><span id="outputCouponUsed"> 0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-1hvttuk eahaaoi12"><div class="css-1rmc3ba eahaaoi11">적립금</div><div><span class="css-2pg1ps eahaaoi10">
+                    <span class="css-rfpchb eahaaoi3" id="signPoint"></span><span id="outputPointUsed"> 0</span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
+
+                <div class="css-1hgn7mh eahaaoi7"><div class="css-1rmc3ba eahaaoi11">최종결제금액</div><div><span class="css-2pg1ps eahaaoi10"><span class="css-rfpchb eahaaoi3"></span>
+                    <span id = "tot_pay_price">
+                        <fmt:formatNumber value="${checkout.tot_prod_price + checkout.dlvy_fee}" pattern="#,###"/></span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
                 <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div></div>
            </div></div></div>

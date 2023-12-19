@@ -15,68 +15,53 @@ let checkout = {
     dlvy_fee: dlvy_fee,
     pay_way: pay_way
 }
-console.log(checkout);
 
+let coupon_id; //쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
 
-//쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
-let coupon_id;
+let ajaxData = function(){ //쿠폰, 적립금 ajax로 보내기
 
-//쿠폰, 적립금 ajax로 보내기
-let ajaxData = function(){
-
-    let tot_prod_price_ajax = document.getElementById('tot_prod_price').innerText;
-    let coupon_id_ajax = coupon_id;
-    let point_used_ajax = document.getElementById('inputPointUsed').value;
-    let dlvy_fee_ajax = document.getElementById('dlvy_fee').innerText;
-
-
+    //ajax로 보낼 데이터
     let paymentDiscount = {
-        tot_prod_price: tot_prod_price_ajax,
-        coupon_id: coupon_id_ajax,
-        point_used: point_used_ajax,
-        dlvy_fee: dlvy_fee_ajax
+        tot_prod_price: tot_prod_price, //주문 금액
+        coupon_id: coupon_id, //쿠폰 id
+        point_used: document.getElementById('inputPointUsed').value, //사용한 적립금
+        dlvy_fee: dlvy_fee //배송비
     }
 
-    let paymentData = {}
-
-    $(document).ready(function(){
-        $.ajax({
-            type:'POST',
-            url: '/order/calculatePayment',
-            headers:{"content-type":"application/json"},
-            dataType:'json',
-            data: JSON.stringify(paymentDiscount),
-            success: function(result){
-                paymentData = result;
-                //쿠폰
-                if(paymentData.coupon_disc === null){
-                    $("#signCoupon").html("");
-                    $("#outputCouponUsed").html(0);
-                }else {
-                    $("#signCoupon").html("-");
-                    $("#outputCouponUsed").html(paymentData.coupon_disc);
-                }
-
-                //적립금
-                if(paymentData.point_used === null) {
-                    $("#signPoint").html("");
-                    $("#outputPointUsed").html(0);
-                }else{
-                    $("#signPoint").html("-");
-                    $("#outputPointUsed").html(paymentData.point_used);
-                }
-                //총 실 결제 금액
-                if(paymentData.tot_pay_price === null){
-                    $("#tot_pay_price").html(0);
-                }else{
-                    $("#tot_pay_price").html(paymentData.tot_pay_price);
-                    $("#payment").html(paymentData.tot_pay_price);
-                }
-            },
-            error: function(){ alert("error!!" ); }
-        })
-    });
-}
+    $.ajax({
+        type:'POST',
+        url: '/order/calculatePayment',
+        headers:{"content-type":"application/json"},
+        dataType:'json',
+        data: JSON.stringify(paymentDiscount),
+        success: function(paymentData){
+            //쿠폰
+            if(paymentData.coupon_disc === null){
+                $("#signCoupon").html("");
+                $("#outputCouponUsed").html(0);
+            }else {
+                $("#signCoupon").html("-");
+                $("#outputCouponUsed").html(paymentData.coupon_disc.toLocaleString());
+            }
+            //적립금
+            if(paymentData.point_used === null) {
+                $("#signPoint").html("");
+                $("#outputPointUsed").html(0);
+            }else{
+                $("#signPoint").html("-");
+                $("#outputPointUsed").html(paymentData.point_used.toLocaleString());
+            }
+            //총 실 결제 금액
+            if(paymentData.tot_pay_price === null){
+                $("#tot_pay_price").html(0);
+            }else{
+                $("#tot_pay_price").html(paymentData.tot_pay_price.toLocaleString());
+                $("#payment").html(paymentData.tot_pay_price.toLocaleString());
+            }
+        },
+        error: function(){ alert("error!!" ); }
+    })
+};
 
 //쿠폰 list
 $('#couponList').hide(); //페이지를 로드할 때 숨길 요소
@@ -116,11 +101,8 @@ for (let i=0; i < couponListBtn.length ; i++){
 
 //적립금 입력
 function updateValue(input){
-
     const inputValue = input.value;
-
-    let point = document.getElementById('point').innerHTML;
-    console.log(point);
+    let point = document.getElementById('point').innerText.replace(/,/g, "");
 
     if(inputValue === '0'){
         input.value = '';
@@ -128,23 +110,19 @@ function updateValue(input){
         input.value = point;
     }
     else{
-        let result = inputValue.replace(/[^-0-9]/g,'');
-        input.value = result;
+        input.value = inputValue.replace(/[^-0-9]/g, '');
     }
-
     ajaxData();
 }
 
 //적립금 모두 사용 버튼
-$("#allUseBtn").click(function(){
-    let point = document.getElementById('point').innerHTML;
-    document.getElementById('inputPointUsed').value = point;
-
+document.getElementById("allUseBtn").addEventListener('click', function(){
+    document.getElementById('inputPointUsed').value = document.getElementById('point').innerHTML.replace(/,/g, "");
     ajaxData();
-});
+})
 
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function () {
 
     let delNotesTag =
         "<div id=\"NotFirst\" class=\"css-82a6rk e150alo80\"><span id=\"place\" class=\"css-11y0tcn efthce41\"></span><span class=\"css-bhczxb efthce40\"></span>\n" +
@@ -152,30 +130,26 @@ $(document).ready(function() {
         "<div id=\"personData\" class=\"css-rqc9f e14u1xpe0\"></div>\n" +
         "<div class=\"css-iqoq9n e1pxan880\"><button class=\"css-117jo2j e4nu7ef3 delNotesBtn\" type=\"button\" width=\"60\" height=\"30\" radius=\"3\"><span class=\"css-nytqmg e4nu7ef1\">수정</span></button></div></div></div>";
 
-
     //배송 요청 사항
     let popup;
-
-    $(document).on("click", ".delNotesBtn", function(){
+    $(document).on("click", ".delNotesBtn", function () {
         popup = window.open("/order/checkout/receiverDetails", "delNotes", "width=600, height=800, left=100, top=50");
 
-        $(popup).on('beforeunload', function(){
-            alert("팝업창 닫힘");
-
+        $(popup).on('beforeunload', function () {
             $.ajax({
                 type: 'GET',
                 url: '/order/checkout/getDelNotes',
                 dataType: 'json',
-                success: function(delNotes){
+                success: function (delNotes) {
                     alert("success");
                     let personData = document.getElementById("personData");
-                    if(personData === null){ //첫 주문
+                    if (personData === null) { //첫 주문
                         $('#firstDelNotesDiv').remove();
                         $("#delNotes").append(delNotesTag)
                     }
                     getDelNotesSuccess(delNotes)
                 },
-                error: function() {
+                error: function () {
                     alert("error")
                 }
             });
@@ -204,12 +178,14 @@ $(document).ready(function() {
         }
         document.getElementById("personData").innerText = delNotes.name + ',' + delNotes.number;
     }
+});
 
 
     let orderData = {
         pg : 'kakaopay',
         pay_method : 'kakaopay'
     };
+
 
     //결제 버튼 클릭 이벤트
     $(".payBtnList").on('click', function (e){
@@ -259,7 +235,6 @@ $(document).ready(function() {
                '</div>';
            $(".css-gd125q").append(checkbox);
 
-
        } else if(e.target.id === 'mobiliansBtn'){
            $('#mobiliansBtn').removeClass('css-1wlyg0y');
            $('#mobiliansBtn').addClass('css-1pvbmgb');
@@ -272,7 +247,6 @@ $(document).ready(function() {
            $(".css-nemdq9").remove()
        }
     });
-
 
 
     //주문서 상품 목록
@@ -301,11 +275,11 @@ $(document).ready(function() {
             return;
         }
 
-        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText*1;
+        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
-        checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText*1;
+        checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
         checkout.coupon_id = coupon_id;
-        checkout.point_used = document.getElementById("outputPointUsed").innerText*1;
+        checkout.point_used = document.getElementById("outputPointUsed").innerText.replace(/,/g, "");
         console.log("1차 검증 바로전 checkout = " + checkout);
 
         //넘어가야하는 것
@@ -374,5 +348,5 @@ $(document).ready(function() {
             alert("error: " + JSON.stringify(error.response))
         });
     }
-});
+
 

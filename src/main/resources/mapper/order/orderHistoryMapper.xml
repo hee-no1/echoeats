@@ -29,6 +29,16 @@
         FROM spring.order_history
         WHERE code_name = "ORDERING" and ord_id = #{ord_id}
     </select>
+    
+    <select id="selectMaxByOrdId" resultType="OrderHistoryDto">
+        SELECT oh.*
+		FROM order_history oh
+		JOIN (
+		    SELECT MAX(ord_hist_id) AS ord_hist_id
+		    FROM order_history
+		    WHERE ord_id = #{ord_id}
+		) max ON oh.ord_hist_id = max.ord_hist_id;
+    </select>
 
     <delete id="delete" parameterType="long">
         DELETE FROM spring.order_history WHERE ord_hist_id = #{ord_hist_id}

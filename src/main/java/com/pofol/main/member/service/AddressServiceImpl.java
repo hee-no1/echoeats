@@ -76,4 +76,9 @@ public class AddressServiceImpl implements AddressService {
         }
         return addressRepository.deleteAddress(addr_id);
     }
+
+    @Override
+	public AddressDto getDefaultAddress(String mem_id) throws Exception {
+		return addressRepository.selectDefaultAddress(mem_id);
+	}
 }

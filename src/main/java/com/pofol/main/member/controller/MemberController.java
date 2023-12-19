@@ -5,6 +5,7 @@ import com.pofol.main.member.repository.MemberRepository;
 import com.pofol.main.member.security.SecurityUser;
 import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,6 +43,7 @@ public class MemberController {
 
         //referer - o 버튼으로 들어옴
         //referer - x url
+        //loginsuccesshandler를 위해 존재
         if(referer != null){
             session.setAttribute("referer", referer);
         }else {
@@ -49,21 +51,40 @@ public class MemberController {
         }
         System.out.println("referer  :  "+referer);
 
+        //로그인 실패 메세지
+        //로그인 실패 - 홈페이지 - 로그인 페이지 - 문구가 없어지지 않고 여전히 있음
+        String errormsg = (String)session.getAttribute("errormsg");
+        if(errormsg != null){
+            model.addAttribute("errormsg", errormsg);
+            session.removeAttribute("errormsg");
+        }
+        String input_id = (String) session.getAttribute("input_id");
+        if(input_id != null){
+            model.addAttribute("input_id", input_id);
+            session.removeAttribute("input_id");
+        }
+
         //2. 게시판 - 로그인 - 게시판
         // 그냥 로그인 버튼을 클릭했을 경우 login success에서 referer이나 savedRequest는 생기지 않는다(가로챘을때는 생김)
         //그래서 referer을 세션에 저장해서 로그인 성공했을 경우 referer쪽으로 보낸다
         //12월11일 로그인 - url에 로그인 폼 - 500에러 (referer nullpoint)
         if (authentication != null) {
             if(referer == null){
-                return "main";
+                System.out.println("들옴");
+
+                return "redirect:http://localhost:8080/main";
+                //return "main";
+
+                //referer ="http://localhost:8080/main"
             }
-            //model.addAttribute("msg","이미 인증된 회원입니다");
             if(referer.equals("http://localhost:8080/member/login_form")){
                 return "main";
+            }else {
+                return "redirect:" + referer;
             }
-            return "redirect:" +referer;
+        }else {
+            return "member/login_form";
         }
-        return "member/login_form";
     }
 
 
@@ -83,21 +104,28 @@ public class MemberController {
 
 
     @GetMapping(value = "/info", produces = "text/plain; charset=UTF-8")
-    public @ResponseBody String info(HttpServletRequest request) {
+    public @ResponseBody String info(HttpServletRequest request,Authentication authentication2) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object a = authentication.getPrincipal();
         HttpSession session = request.getSession();
-        System.out.println(authentication);
+        System.out.println("authentication : "+authentication);
 
-        //유저이름을 가져오기 위해서
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        if(authentication instanceof AnonymousAuthenticationToken){
+            //여기는 인증이 안되었을 때만 실행
+        }
+        System.out.println("authentication2 : " + authentication2);
 
-        // SecurityUser 객체에서 mem_name 가져오기
-        String memName = securityUser.getMem_name();
+//        //유저이름을 가져오기 위해서
+//        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+//        System.out.println("securityUser : "+securityUser);
+//
+//        // SecurityUser 객체에서 mem_name 가져오기
+//        String memName = securityUser.getMem_name();
+//        System.out.println("memName : "+memName);
 
-        Object greeting = session.getAttribute("greeting");
+        //Object greeting = session.getAttribute("greeting");
 
-        return a.toString() + "     " + greeting + "    한글 테스트     "+ authentication.getName()+"의  이름은 "+memName;
+        return a.toString() + "     "  + "    한글 테스트     "+ authentication.getName()+"의  이름은 ";
     }
 
 
@@ -113,13 +141,7 @@ public class MemberController {
         System.out.println("컨트롤러 referer : " + referer);
     }
 
-    @GetMapping("/main_test")
-    public String member_test(HttpServletRequest request, Model model) {
-        Object result = request.getSession().getAttribute("result");
-        System.out.println(result);
-        model.addAttribute("result", result);
-        return "include/header";
-    }
+
 
     @GetMapping("/board")
     public String boardJoin() {

@@ -27,23 +27,10 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
         String referer = request.getHeader("Referer");
         System.out.println("로그아웃 referer : " + referer);
-       // request.getSession().setAttribute("SPRING_SECURITY_SAVED_REQUEST", referer);
-
-        Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-        while(attributeNames.hasMoreElements()){
-            String a = attributeNames.nextElement();
-            System.out.println("로그아웃 세션 확인 : "+ a + "  :   "+ request.getSession().getAttribute(a));
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("result", null);
 
 
-        if (referer == null) {
-            //setDefaultTargetUrl("http://localhost:8080/member/info");
-            referer = "http://localhost:8080/member/info";
-        }
-        if(referer.equals("http://localhost:8080/member/login_form") || referer.startsWith("http://localhost:8080/auth/kakao")){
+
+        if(referer == null || referer.equals("http://localhost:8080/member/login_form")){
             referer ="http://localhost:8080/main";
         }
         setDefaultTargetUrl(referer);

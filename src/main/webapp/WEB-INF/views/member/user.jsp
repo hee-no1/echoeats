@@ -30,6 +30,11 @@ ${result}
     <!-- 현재 사용자가 인증되어 있을 때 보이는 내용 -->
     <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
 </sec:authorize>
+<sec:authentication property="principal.authorities" />
+
+<sec:authorize access="hasAuthority('ADMIN')">
+    <h1>ADMIN2</h1>
+</sec:authorize>
 <script>
     $(document).ready(function () {
         // 현재 사용자의 mem_name 값을 가져옴

@@ -1,6 +1,6 @@
 package com.pofol.main.product.service;
 
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
@@ -35,4 +35,10 @@ public interface ProductListService {
 
   // 상품 검색 리스트 카운트
   Integer getSearchResultCount(SearchProductCondition sc) throws Exception;
+
+  // 전체 상품 리스트 정렬
+  List<ProductDto> getAllProductList() throws Exception;
+
+  // 전체 상품 카운트
+  int getAllProductCount() throws Exception;
 }

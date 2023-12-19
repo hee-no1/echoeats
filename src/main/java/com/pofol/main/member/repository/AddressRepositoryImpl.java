@@ -38,4 +38,9 @@ public class AddressRepositoryImpl implements AddressRepository{
     public int deleteAddress(String addr_id) throws Exception {
         return session.delete(namespace + "delete_address",addr_id);
     }
+
+    @Override
+    public AddressDto selectDefaultAddress(String mem_id) throws Exception {
+        return session.selectOne(namespace + "selectDefaultAddress", mem_id);
+    }
 }

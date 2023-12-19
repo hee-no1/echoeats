@@ -72,4 +72,27 @@
 		SELECT count(*) FROM inquiry
 	</select>
 	
+	<select id="selectNametoSts" resultType="string">
+		SELECT column_sts
+		FROM code_table
+		WHERE
+		code_name=#{code_name}
+	</select>
+
+	<select id="selectCodeType" resultType="CodeTableDto">
+		SELECT *
+		FROM code_table
+		WHERE
+		code_type=#{code_type}
+		order by code_type desc, code_no
+	</select>
+
+	<select id="selectCodeTypeByCodeName" resultType="CodeTableDto">
+		SELECT *
+		FROM code_table
+		WHERE code_type IN (SELECT sum(code_type + code_no) as sum
+				FROM code_table
+				WHERE code_name = #{code_name})
+		ORDER BY code_type DESC, code_no
+	</select>
 </mapper>

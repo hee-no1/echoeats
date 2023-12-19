@@ -53,10 +53,10 @@
                                     formData.set(element.name, element.value);
                                 }
                             }
-                            let entries = formData.entries();
-                            for (const pair of entries) {
-                                console.log(pair[0]+ ', ' + pair[1]); 
-                            }
+                            // let entries = formData.entries();
+                            // for (const pair of entries) {
+                            //     console.log(pair[0]+ ', ' + pair[1]); 
+                            // }
 
                             $.ajax({
                                 url: '/mypage/inquiry/form/submit',
@@ -66,13 +66,12 @@
                                 processData: false,
                                 success: function(response) {
                                     console.log('Files uploaded successfully:', response);
+                                    location.href = "/mypage/inquiry/list";
                                 },
                                 error: function(error) {
                                     console.error('Error uploading files:', error);
                                 }
                             });
-
-                            location.href = "/mypage/inquiry/list";
                         });
 
                         $('.e9bfpi40').on('click', '.css-v96m37', function (e) {
@@ -80,6 +79,26 @@
                             const file = $(this).closest('.e5xt3dr1').find('img').data('file');
                             formData.delete('imageFile[]', file);
                             $(this).closest('.e5xt3dr1').remove();
+                        });
+
+                        $(".inquiry_type").change(function () {
+                            var selectedValue = $(this).val();
+                            console.log(selectedValue);
+                            $.ajax({
+                                type:'POST',       // 요청 메서드
+                                url: '/mypage/inquiry/getDetType', 
+                                headers : { "content-type": "application/json"}, // 요청 헤더
+                                data : JSON.stringify({ inquiryType: selectedValue }),
+                                dataType: 'json',
+                                success: function(response) {
+                                    $(".inquiry_detType").empty();
+                                    $(".inquiry_detType").append('<option value="INQUIRY_DET_TYPE0">상세유형을 선택해주세요</option>');
+                                    for (var i = 0; i < response.length; i++) {
+                                        $(".inquiry_detType").append('<option value="' + response[i].code_name + '">' + response[i].column_sts + '</option>');
+                                    }
+                                },
+                                error: function(error) { console.error('Error inquiry_detType:', error); }
+                            });
                         });
                     });
 
@@ -918,7 +937,7 @@
                                                     </g>
                                                 </g>
                                             </svg></a></li>
-                                    <li><a class="active css-g4g0eu ecbxmj0">1:1 문의<svg
+                                    <li><a class="active css-g4g0eu ecbxmj0" href="<c:url value='/mypage/inquiry/list'/>">1:1 문의<svg
                                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                                 viewBox="0 0 24 24">
                                                 <defs>
@@ -1018,41 +1037,38 @@
                                                                 }
                                                             </style>
                                                             <select name="type" class="inquiry_type">
-                                                                <option value="test1">test1</option>
-                                                                <option value="test2">test2</option>
-                                                                <option value="test3">test3</option>
+                                                                <option value="INQUIRY_TYPE0">문의유형을 선택해주세요</option>
+                                                                <c:forEach var="type" items="${typeList}">
+                                                                    <option value="${type.code_name}">${type.column_sts}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="css-1a8mkrv e1u0xj870">
                                                         <div>
                                                             <select name="det_type" class="inquiry_detType">
-                                                                <option value="test1">test1</option>
-                                                                <option value="test2">test2</option>
-                                                                <option value="test3">test3</option>
+                                                                <option value="INQUIRY_DET_TYPE0">상세유형을 선택해주세요</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div> <!-- 유형-->
-                                        <c:if test="${empty prdList}">
+                                        <c:if test="${not empty ordDetDto}">
                                         <div class="css-17bp14q e1vbjq4w3">
                                             <div class="css-mm5tap e1vbjq4w2">
                                                 <label data-testid="label-text">상품<span data-testid="label-required-text" class="css-hwfcu5 e1vbjq4w0">*</span></label></div>
                                                 <div class="css-12l4j2c e1vbjq4w1"><div class="css-1s0wpjg e1fxpk0q6">
                                                     <div class="css-0 e1fxpk0q5"><div class="css-hg1hqm e1fxpk0q4">
                                                         <span class="css-1t8m5sv e1fxpk0q3">2023.11.18</span>
-                                                        <span class="css-41sae7 e1fxpk0q2">주문번호2324322320175</span></div>
+                                                        <span class="css-41sae7 e1fxpk0q2">주문번호${ordDetDto.ord_id}</span></div>
                                                         <div class="css-0 e1fxpk0q1">
-                                                            <c:forEach var="prdDto" items="${prdList}">
                                                                 <div class="css-acf2e7 e1c5gg6v10">
                                                                 <div class="css-s5xdrg e1c5gg6v9"><div class="css-i3divb e1c5gg6v8">
-                                                                <img src="https://img-cf.kurly.com/shop/data/goods/1614169006174l0.jpg" class="css-1xpcw2r e1c5gg6v7"></img></div>
-                                                                <div class="css-sjc8qp e1c5gg6v6"><p class="css-1k84x92 e1c5gg6v5">[해태] 미니 자유시간 380g</p>
-                                                                <p class="css-12q1qh7 e1c5gg6v4">[해태] 미니 자유시간 380g</p></div><p class="css-132xckz e1c5gg6v3">1개</p>
-                                                                <p class="css-kb65nz e1c5gg6v2"><span class="css-1efi8gv e1c5gg6v1">10,000</span>원</p><button type="button" class="css-ln2l5t e1c5gg6v0"><span>삭제</span></button></div></div>
-                                                            </c:forEach>
+                                                                <img src="${ordDetDto.img_url}" class="css-1xpcw2r e1c5gg6v7"></img></div>
+                                                                <div class="css-sjc8qp e1c5gg6v6"><p class="css-1k84x92 e1c5gg6v5">${ordDetDto.prod_name}</p>
+                                                                <p class="css-12q1qh7 e1c5gg6v4">${ordDetDto.prod_name}</p></div><p class="css-132xckz e1c5gg6v3">${ordDetDto.prod_qty}</p>
+                                                                <p class="css-kb65nz e1c5gg6v2"><span class="css-1efi8gv e1c5gg6v1">${ordDetDto.prod_tot_price}</span>원</p><button type="button" class="css-ln2l5t e1c5gg6v0"><span>삭제</span></button></div></div>
                                                             </div></div></div>
                                                                 <!-- <button type="button" class="css-fizf2i ezcpx2u6">주문상품 선택</button> -->
                                                             </div></div>

@@ -3,7 +3,6 @@ package com.pofol.main.orders.inquiry.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
@@ -11,6 +10,8 @@ import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
 import com.pofol.main.orders.inquiry.repository.InquiryImgRepository;
 import com.pofol.main.orders.inquiry.repository.InquiryPrdRepository;
 import com.pofol.main.orders.inquiry.repository.InquiryRepository;
+import com.pofol.main.orders.order.domain.CodeTableDto;
+import com.pofol.util.AwsS3ImgUploaderService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,15 +23,16 @@ public class InquiryServiceImpl implements InquiryService {
 	private final InquiryPrdRepository inqPrdRepo;
 	private final InquiryImgRepository inqImgRepo;
 	
+	private final AwsS3ImgUploaderService awsS3ImgUploaderService;
+	
 	@Override
 //	@Transactional(rollbackFor=Exception.class) 
-	public int insert(InquiryDto dto) throws Exception {
-		inqRepo.insert(dto);
-		InquiryImgDto inqImgDto;
-		for(MultipartFile file : dto.getImageFile()) {
-			String file_name ="";//
-			inqImgDto = new InquiryImgDto(dto.getInquiry_id(),file_name,dto.getRg_num() );
-			inqImgRepo.insert(inqImgDto);
+	public int insert(InquiryDto inqDto) throws Exception {
+		inqRepo.insert(inqDto);
+		for(MultipartFile file:inqDto.getImageFile()) {
+	   		String url = awsS3ImgUploaderService.uploadImageToS3(file,"inquiry");
+	   		InquiryImgDto inqImgDto = new InquiryImgDto(inqDto.getInquiry_id(),url,inqDto.getMem_id());
+	   		inqImgRepo.insert(inqImgDto);
 		}
 		return 1;
 	}
@@ -43,5 +45,20 @@ public class InquiryServiceImpl implements InquiryService {
 	@Override
 	public InquiryDto selectByinqId(Long inquiry_id) {
 		return inqRepo.selectByinqId(inquiry_id);
+	}
+	
+	@Override
+	public List<CodeTableDto> selectCodeType(Integer code_type) throws Exception {
+		return inqRepo.selectCodeType(code_type);
+	}
+
+	@Override
+	public List<CodeTableDto> selectCodeTypeByCodeName(String code_name) throws Exception {
+		return inqRepo.selectCodeTypeByCodeName(code_name);
+	}
+
+	@Override
+	public String selectNametoSts(String code_name) throws Exception {
+		return inqRepo.selectNametoSts(code_name);
 	}
 }

@@ -1,6 +1,6 @@
 package com.pofol.main.product.repository;
 
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.SearchProductCondition;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;

@@ -38,7 +38,7 @@ let phoneInputValue;
 //받으실분 입력란
 function nameValue(input){
     const inputValue = input.value;
-    let result = inputValue.slice(0,20)
+    let result = inputValue.replace(/[^ㄱ-ㅎ가-힣a-zA-Z]/g, '').slice(0,20);
     input.value = result;
 
     //주문자 동일 버튼
