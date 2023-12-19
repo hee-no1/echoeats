@@ -12,16 +12,18 @@ public class PointDto {
     private String rg_num;
     private String md_date;
     private String md_num;
+    private String mem_id;
 
     public PointDto(){}
-    public PointDto(int point_id, int price, String status, String reason, Date his_end_date) {
+    public PointDto(int point_id, int price, String status, String reason, Date his_end_date, String mem_id) {
         this.point_id = point_id;
         this.price = price;
         this.status = status;
         this.reason = reason;
         this.his_end_date = his_end_date;
+        this.mem_id = mem_id;
     }
-    public PointDto(int point_id, int price, String status, String reason, Date his_end_date, String rg_date, String rg_num, String md_date, String md_num) {
+    public PointDto(int point_id, int price, String status, String reason, Date his_end_date, String rg_date, String rg_num, String md_date, String md_num, String mem_id) {
         this.point_id = point_id;
         this.price = price;
         this.status = status;
@@ -31,7 +33,17 @@ public class PointDto {
         this.rg_num = rg_num;
         this.md_date = md_date;
         this.md_num = md_num;
+        this.mem_id = mem_id;
     }
+
+    public String getMem_id() {
+        return mem_id;
+    }
+
+    public void setMem_id(String mem_id) {
+        this.mem_id = mem_id;
+    }
+
     public int getPoint_id() {
         return point_id;
     }
@@ -86,14 +98,16 @@ public class PointDto {
     public void setMd_num(String md_num) {
         this.md_num = md_num;
     }
+
     @Override
     public String toString() {
         return "PointDto{" +
-                "point_hist_id=" + point_id +
+                "point_id=" + point_id +
                 ", price=" + price +
                 ", status='" + status + '\'' +
                 ", reason='" + reason + '\'' +
                 ", his_end_date=" + his_end_date +
+                ", mem_id='" + mem_id + '\'' +
                 '}';
     }
 }
