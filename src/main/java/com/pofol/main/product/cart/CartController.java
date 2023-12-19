@@ -95,11 +95,11 @@ public class CartController {
                     cartService.saveCartProduct(cartDto);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
                 }
             }
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Successfully put in the shopping cart");
     }
 
     // 장바구니 상품 수량 변경에 따른 가격 변동
@@ -132,9 +132,9 @@ public class CartController {
 //            }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete shopping cart");
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Successful deletion of shopping cart");
     }
 }
