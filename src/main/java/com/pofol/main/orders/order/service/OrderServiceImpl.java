@@ -10,7 +10,6 @@ import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
-import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.product.cart.CartRepository;
@@ -28,7 +27,7 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
-    private final CartRepository basketRepo;
+    private final CartRepository cartRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
@@ -50,7 +49,7 @@ public class OrderServiceImpl implements OrderService{
 
         try{
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
@@ -165,7 +164,7 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 

@@ -38,14 +38,14 @@
                 <div class="css-bd9p1l e17a7yib10 items" style="display: none">
                     <c:choose>
                         <c:when test = "${empty prod.opt_prod_id}">
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}"  class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
                             <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
                                     <fmt:formatNumber value="${prod.disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:when>
                         <c:otherwise>
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1646377916155l0.jpg" alt="[KF365] 1+등급 무항생제 대란 20구" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}" class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.opt_prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
                             <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
