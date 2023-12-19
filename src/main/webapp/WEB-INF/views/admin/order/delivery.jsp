@@ -291,14 +291,14 @@
                     <tbody>
                     <tr>
                         <th scope="col" class="w24"><input type="checkbox" class="allChk all"></th>
-                        <th scope="col" class="w120" style="">상품주문번호</th>
-                        <th scope="col" class="w120" style="">주문번호</th>
+                        <th scope="col" class="w130" style="">상품주문번호</th>
+                        <th scope="col" class="w130" style="">주문번호</th>
                         <th scope="col" class="w100" style="">주문자</th>
                         <th scope="col" class="w120" style="">택배사</th>
-                        <th scope="col" class="w210" style="">상품명</th>
+                        <th scope="col" class="w220" style="">상품명</th>
                         <th scope="col" class="w75" style="">포장타입</th>
                         <th scope="col" class="w200" style="">운송장번호</th>
-                        <th scope="col" class="w190" style="">배송상태</th>
+                        <th scope="col" class="w140" style="">배송상태</th>
                         <th scope="col" class="w140" style="">배송시작일</th>
                         <th scope="col" class="w140" style="">베송완료일</th>
                         <th scope="col" class="w80" style="">배송속성</th>
@@ -312,22 +312,25 @@
                         <tr>
                             <td scope="col" class="w24" data-id="${item.ord_det_id}" >
                                 <input type="checkbox" name="dlvyChk" class="allChk" data-id="${item.ord_det_id}" data-packtype="${item.pack_type}" data-status="${item.code_name}"></td> <!-- dataset속성은 소문자로만-->
-                            <td scope="col" class="w120" style="">${item.ord_det_id}</td>
-                            <td scope="col" class="w120" style="">${item.ord_id}</td>
+                            <td scope="col" class="w130" style="">${item.ord_det_id}</td>
+                            <td scope="col" class="w130" style="">${item.ord_id}</td>
                             <td scope="col" class="w100" style="">${item.mem_name}</td>
                             <td scope="col" class="w120" style="">에코딜리버리</td>
-                            <td scope="col" class="w210" style="">${item.prod_name}</td>
+                            <td scope="col" class="w220" style="">${item.prod_name}</td>
                             <td scope="col" class="w75 packType" style="">${item.pack_type}</td>
-                            <td scope="col" class="w200" style=""> <!--운송장번호-->
-<%--                                <c:if test="${}">--%>
-                                <input type="text" placeholder="숫자 12자리를 입력해주세요." class="w180 waybillnum" oninput="updateValue(this)">
-<%--                                </c:if>--%>
+                            <td scope="col" class="w200 waybillvalue" style=""> <!--운송장번호-->
+                            <c:if test="${empty item.waybill_num}">
+                                <input type="text" placeholder="숫자 12자리를 입력해주세요." class="w170 waybillnum" oninput="updateValue(this)">
+                            </c:if>
+                            <c:if test="${not empty item.waybill_num}">
+                                ${item.waybill_num}
+                            </c:if>
                             </td>
-                            <td scope="col" class="w190" style="">${item.code_name}</td>
-                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>
-                                (<fmt:formatDate value='${dto.dlvy_start_date}' pattern='HH:mm' type='time'/>)</td>
-                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>
-                                (<fmt:formatDate value='${dto.dlvy_cmplt_date}' pattern='HH:mm' type='time'/>)</td>
+                            <td scope="col" class="w140" style="">${item.column_sts}</td>
+                            <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
+                                <fmt:formatDate value='${item.dlvy_start_date}' pattern='HH:mm:ss' type='time'/></td>
+                            <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
+                                <fmt:formatDate value='${item.dlvy_cmplt_date}' pattern='HH:mm:ss' type='time'/></td>
                             <td scope="col" class="w80" style="">${item.dlvy_attr}</td>
                         </tr>
                     </c:forEach>

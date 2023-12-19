@@ -14,11 +14,20 @@ function updateValue(input){
 document.getElementById("deliveringBtn").addEventListener('click', function(){
     //.allChk 체크박스에 check된 것만 가지고 온다.
     let list = document.querySelectorAll('input[name="dlvyChk"]:checked');
+    if(list.length === 0 ){
+        alert("체크된 항목이 없습니다.")
+        return;
+    }
+
     let waybillNumArr = []; //운송장 번호 입력할 배열
 
     try{
-        list.forEach((item,index,list) => {
+        list.forEach((item) => {
             //먼저 dlvyChk 체크박스에 dateset으로 운송장 번호를 등록해야한다.
+            //0. 배송상태가 "DELIVERY_PREPARING"인지 확인
+            if(item.dataset.status !== "DELIVERY_PREPARING"){
+                throw new Error("배송상태가 올바르지 않습니다. 다시 선택해주세요.")
+            }
             //1. 클릭한 checkbox와 같은 tr에 있는 .waybillNum을 가져오고 싶다.
             let waybillNum = item.closest('tr').querySelector('.waybillnum').value;
 
@@ -63,19 +72,47 @@ document.getElementById("deliveringBtn").addEventListener('click', function(){
             pack_type: item.dataset.packtype
         });
     });
-    console.log(ajaxData);
-    ajax(ajaxData)
+
+    ajax(ajaxData,"registerWaybillNum")
 });
 
-let ajax = function(ajaxData){
+//배송 완료 처리 -> 운송장번호 하나라도 상태가 배송완료로 바뀌면 같은 운송장번호를 가진 주문상세의 상태도 모두 바뀐다.
+document.getElementById("deliveryCompleteBtn").addEventListener('click', function(){
+
+    let list = document.querySelectorAll('input[name="dlvyChk"]:checked');
+    if(list.length === 0 ){
+        alert("체크된 항목이 없습니다.")
+        return;
+    }
+    let ajaxSet = new Set();
+
+    try{
+        list.forEach((item) => {
+            if(item.dataset.status !== "DELIVERING"){
+                throw new Error("배송상태가 올바르지 않습니다. 다시 선택해주세요")
+            }
+            let waybillNum = item.closest('tr').querySelector('.waybillvalue').innerText;
+            ajaxSet.add(waybillNum);
+        });
+    }catch (e) {
+        alert(e.message)
+    }
+    console.log("set", ajaxSet);
+    let ajaxData = Array.from(ajaxSet);
+    ajax(ajaxData,"DeliveryComplete")
+});
+
+
+let ajax = function(ajaxData, url){
     $.ajax({
         type:'POST',
-        url: '/admin/delivery/registerWaybillNum',
+        url: '/admin/delivery/'+url,
         headers:{"content-type": "application/json"},
         dataType: 'text',
         data : JSON.stringify(ajaxData),
         success: function(result){
             alert("✅"+ result);
+            location.reload();
         },
         error: function (result){
             alert("🔥"+ result);

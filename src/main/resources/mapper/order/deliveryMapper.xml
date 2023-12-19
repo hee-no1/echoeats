@@ -23,7 +23,13 @@
         ORDER BY rg_date DESC, ord_id DESC
     </select>
 
-    <update id="updateStatus" parameterType="map">
+    <select id="selectListByWaybillNum" resultType="DeliveryDto">
+        select *
+        from delivery
+        where waybill_num = #{waybill_num};
+    </select>
+
+    <update id="updateStatus" parameterType="DeliveryDto">
         UPDATE spring.delivery
         SET
             dlvy_cmplt_date = current_timestamp,

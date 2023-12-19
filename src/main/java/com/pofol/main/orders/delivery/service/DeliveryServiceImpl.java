@@ -8,6 +8,8 @@ import com.pofol.main.orders.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DeliveryServiceImpl implements DeliveryService{
@@ -22,6 +24,24 @@ public class DeliveryServiceImpl implements DeliveryService{
             delivery.setOrd_id(ord_id);
             deliveryRepository.insert(delivery);
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void modifyDelivery(DeliveryDto delivery) {
+        try {
+            deliveryRepository.update(delivery);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<DeliveryDto> selectListByWaybillNum(Long waybill_num) {
+        try {
+            return deliveryRepository.selectListByWaybillNum(waybill_num);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
