@@ -16,6 +16,9 @@
         .css-1c36ywl {
             background: url(${product.prod_img_id}) 0% 0% / cover, url(https://res.kurly.com/_next/static/images/noimg-150x195-2c819ff….svg) 50% 50% / contain no-repeat rgb(245, 245, 245);
         }
+        #nev > #meun > ul  {
+            padding-top: 0;
+        }
     </style>
 </head>
 <body>

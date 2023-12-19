@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -52,35 +54,17 @@ public class ProductAdminController {
 
     // 관리자 페이지에서 상품상태 수정 + 이력 insert
     @PostMapping("product/modify")
-    public String AdminProductModify(Long selectProductId,
-                                     String saleStatus,
-                                     String displayStatus) {
+    public String AdminProductModify(Long[] selectProductId, ProductStatusUpdate productStatusUpdate) {
 
         // 판매가 변경 + 판매기간 변경 (추가해야함)
-
-        System.out.println("product/modify 실행 됨");
-        
         try {
-            ProductDto product = productAdminService.getProduct(selectProductId);
-
-            if (!saleStatus.isEmpty()) {
-                product.setSale_sts(saleStatus);
-            }
-            if (!displayStatus.isEmpty()) {
-                product.setDisp_sts(displayStatus);
-            }
-
-            productAdminService.updateProductAdmin(product);
-
-//            if (product.getIs_opt().equals("Y")) {
-//
-//            }
-
-            return "redirect:/admin/product/list"; // (변경해야함)
+            List<ProductDto> severalProduct = productAdminService.getSeveralProduct(selectProductId);
+            productAdminService.updateProductStatus(severalProduct, productStatusUpdate);
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/admin/product/list";
         }
+            return "redirect:/admin/product/list"; // (변경해야함)
     }
     
     // 상품 그룹 관리 + main 페이지 그룹별 진열 관리

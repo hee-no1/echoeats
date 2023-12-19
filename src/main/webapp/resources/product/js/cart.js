@@ -5,6 +5,7 @@ const productCartCheck = document.querySelectorAll(".cartProductCheck");
 const removeButton = document.querySelectorAll('.css-h5zdhc');
 const cartOrderForm = document.querySelector('#cartOrderForm');
 const orderButton = document.querySelector('.orderButton');
+const goAddressPage = document.querySelector('.css-122i3z7');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = function (value) {
@@ -141,11 +142,6 @@ const productCountAjax = function (action, productQuantity, productQuantityHtml,
             productQuantityHtml.textContent = qty;
             totalDiscPrice[i].innerText = total_disc_price.toLocaleString() + "원";
             totalPrice[i].innerText = total_price.toLocaleString() + "원";
-
-            let aaa = cartOrderForm.querySelectorAll('input[type="hidden"]')
-            // for (let j = 0; j < aaa.length; j++) {
-            //     if (aaa.)
-            // }
         },
         error: function () {
             alert("error");
@@ -180,7 +176,12 @@ $(document).ready(function () {
         })
     }
 
-
+    // 배송지 변경 클릭 시 배송지 화면으로 이동
+    if (goAddressPage !== null) {
+        goAddressPage.addEventListener('click', function () {
+            window.location.href = '/address/'
+        })
+    }
 
 
 
@@ -217,6 +218,26 @@ $(document).ready(function () {
         })
     }
     
+    // 선택삭제 버튼
+    // 체크한것들 전부 삭제해야함
+    const selectRemoveButton = document.querySelectorAll('.css-0');
+
+    for (let i = 0; i < selectRemoveButton.length; i++) {
+        selectRemoveButton[i].addEventListener('click', function () {
+
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
