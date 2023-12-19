@@ -81,7 +81,6 @@ public class CartController {
     // 장바구니에 상품 저장
     @ResponseBody
     @PostMapping("/saveProduct")
-    @Transactional
     public ResponseEntity<String> saveProductCart(@RequestBody List<CartDto> cartDtoList) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
