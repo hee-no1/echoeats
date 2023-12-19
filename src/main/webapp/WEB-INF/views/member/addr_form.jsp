@@ -40,7 +40,7 @@
                     <a href="/member/membership" class="css-1qcjshh">
                             <span class="css-1fid7vq">
                                 <span class="css-3a5cil">NEW</span>
-                                <span class="css-1kxzrwz">컬리멤버스</span>
+                                <span class="css-1kxzrwz">에코멤버스</span>
                                 <span class="css-10yg44e">월 1,900원으로 10배 쿠폰 받기</span>
                             </span>
                     </a>
@@ -51,7 +51,7 @@
             <div class="css-1jemrvf epggjnz1">
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-1bm0yf4 e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">적립금 · 컬리캐시
+                        <div class="css-157zkrj e1ugk4rt5">적립금 · 에코캐시
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-1omzzwx e1ugk4rt3">바로가기
@@ -71,7 +71,7 @@
                 </div>
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-1bm0yf4 e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">나의 컬리 스타일
+                        <div class="css-157zkrj e1ugk4rt5">나의 에코 스타일
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-1omzzwx e1ugk4rt3">등록하기
@@ -84,7 +84,7 @@
             <div class="css-1jemrvf epggjnz1">
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-13d66fq e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">컬리 퍼플 박스
+                        <div class="css-157zkrj e1ugk4rt5">에코 그린 박스
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-17cmttl e1ugk4rt3">알아보기</div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-13d66fq e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">컬리멤버스
+                        <div class="css-157zkrj e1ugk4rt5">에코멤버스
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-17cmttl e1ugk4rt3">혜택받기</div>
@@ -228,7 +228,7 @@
                 </li>
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">나의 컬리 스타일
+                    <a class=" css-g4g0eu ecbxmj0">나의 에코 스타일
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -295,7 +295,7 @@
             </div>
 
             <div class="css-1jdq78j e1cucsfi1">
-<%--                <div class="css-wru9pk e1cucsfi0">선택</div>--%>
+                <div class="css-wru9pk e1cucsfi0"><!--선택--></div>
                 <div class="css-3fr0n1 e1cucsfi0">주소</div>
                 <div class="css-gtglzf e1cucsfi0">받으실 분</div>
                 <div class="css-1aqlhfo e1cucsfi0">연락처</div>
@@ -306,7 +306,7 @@
                 <c:forEach var="addressDtos" items="${list}">
                 <li class="css-d35zkp erme1rh1">
                     <div>
-<%--                        <div class="eeocvzp5 css-1bs5q0a e19svclq0">--%>
+                        <div class="eeocvzp5 css-1bs5q0a e19svclq0">
 <%--                            <label class="css-1xdhyk6 e1dcessg3">--%>
 <%--                                <input type="checkbox" class="css-agvwxo e1dcessg2" value="21937039" name="checkbox">--%>
 <%--                                <div class="css-79hxr7 e1dcessg1">--%>
@@ -317,7 +317,7 @@
 <%--                                </div>--%>
 <%--                                <span></span>--%>
 <%--                            </label>--%>
-<%--                        </div>--%>
+                        </div>
                         <div class="eeocvzp4 css-8xfsdg e19svclq0">
                             <div>
                                 <c:if test="${addressDtos.def_addr.equals('Y')}"><div class="css-1b3iimx eeocvzp0">기본 배송지</div></c:if>

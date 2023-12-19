@@ -17,102 +17,102 @@
     <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
     <script>
-        $(function(){
-            $('.start_date').val(fullDate(0));
-            $('.end_date').val(fullDate(0));
-            $('select[name=rows]').val('${ph.sc.pageSize}');
+        <%--$(function(){--%>
+        <%--    $('.start_date').val(fullDate(0));--%>
+        <%--    $('.end_date').val(fullDate(0));--%>
+        <%--    $('select[name=rows]').val('${ph.sc.pageSize}');--%>
 
-            SearchCondition();
+        <%--    SearchCondition();--%>
 
-            $('.btnPrep').click(function(){
-                let code = $(this).data('code_name');
-                let cnt = 0;
-                $('input.allChk').each(function(){
+        <%--    $('.btnPrep').click(function(){--%>
+        <%--        let code = $(this).data('code_name');--%>
+        <%--        let cnt = 0;--%>
+        <%--        $('input.allChk').each(function(){--%>
 
-                    if($(this).data('chk')){
-                        cnt++;
-                        let id = $(this).closest('td').data('id');
-                        let cd = $(this).closest('td').data('code');
-                        if(code === cd){
-                            alert("[주문상세번호]:"+id+"\n상태가 같습니다");
-                            return false;
-                        }
-                        if(code === 'DELIVERY_PREPARING'){
-                            let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);
-                            let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);
+        <%--            if($(this).data('chk')){--%>
+        <%--                cnt++;--%>
+        <%--                let id = $(this).closest('td').data('id');--%>
+        <%--                let cd = $(this).closest('td').data('code');--%>
+        <%--                if(code === cd){--%>
+        <%--                    alert("[주문상세번호]:"+id+"\n상태가 같습니다");--%>
+        <%--                    return false;--%>
+        <%--                }--%>
+        <%--                if(code === 'DELIVERY_PREPARING'){--%>
+        <%--                    let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);--%>
+        <%--                    let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);--%>
 
-                            if(real_prod_qty < prod_qty ){
-                                alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");
-                                return false;
-                            }
-                        }
+        <%--                    if(real_prod_qty < prod_qty ){--%>
+        <%--                        alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");--%>
+        <%--                        return false;--%>
+        <%--                    }--%>
+        <%--                }--%>
 
-                        $.ajax({
-                            type:'PATCH',
-                            url:"/admin/orderDetail/modify?ord_det_id="+id+"&code_name="+code,
-                            success:function(result){
-                                console.log('orderDetail modefiy ok:', result);
-                                location.reload();
-                            },
-                            error:function(error){
-                                console.error('orderDetail modefiy error:', error);
-                            },
-                        });
-                    }
-                });
-                if(cnt ==0)
-                    alert("변경할 데이터를 선택해 주세요");
-            });
+        <%--                $.ajax({--%>
+        <%--                    type:'PATCH',--%>
+        <%--                    url:"/admin/orderDetail/modify?ord_det_id="+id+"&code_name="+code,--%>
+        <%--                    success:function(result){--%>
+        <%--                        console.log('orderDetail modefiy ok:', result);--%>
+        <%--                        location.reload();--%>
+        <%--                    },--%>
+        <%--                    error:function(error){--%>
+        <%--                        console.error('orderDetail modefiy error:', error);--%>
+        <%--                    },--%>
+        <%--                });--%>
+        <%--            }--%>
+        <%--        });--%>
+        <%--        if(cnt ==0)--%>
+        <%--            alert("변경할 데이터를 선택해 주세요");--%>
+        <%--    });--%>
 
-            $('input.allChk').click(function(){
+        <%--    $('input.allChk').click(function(){--%>
 
-                let all = $(this).hasClass('all');
-                let v = $(this).data('chk');
-                if(!all){
-                    if(v)
-                        $(this).css('background-position', '0 0');
-                    else
-                        $(this).css('background-position', '-50px 0');
-                    $(this).data('chk', !v);
-                }else{
-                    if(v)
-                        $('input.allChk').css('background-position', '0 0');
-                    else
-                        $('input.allChk').css('background-position', '-50px 0');
-                    $('input.allChk').data('chk', !v);
-                }
+        <%--        let all = $(this).hasClass('all');--%>
+        <%--        let v = $(this).data('chk');--%>
+        <%--        if(!all){--%>
+        <%--            if(v)--%>
+        <%--                $(this).css('background-position', '0 0');--%>
+        <%--            else--%>
+        <%--                $(this).css('background-position', '-50px 0');--%>
+        <%--            $(this).data('chk', !v);--%>
+        <%--        }else{--%>
+        <%--            if(v)--%>
+        <%--                $('input.allChk').css('background-position', '0 0');--%>
+        <%--            else--%>
+        <%--                $('input.allChk').css('background-position', '-50px 0');--%>
+        <%--            $('input.allChk').data('chk', !v);--%>
+        <%--        }--%>
 
-            });
+        <%--    });--%>
 
-            $('select[name=rows]').change(function(){
-                const ps = $('select[name=rows]').val();
-                <%--location.href = "/admin/orderDetail/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;--%>
-            });
+        <%--    $('select[name=rows]').change(function(){--%>
+        <%--        const ps = $('select[name=rows]').val();--%>
+        <%--        &lt;%&ndash;location.href = "/admin/orderDetail/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;&ndash;%&gt;--%>
+        <%--    });--%>
 
-            $('.btnDate').click(function(e) {
-                e.preventDefault();
-                $('.btnDate').removeClass('selected');
-                $(this).addClass('selected');
+        <%--    $('.btnDate').click(function(e) {--%>
+        <%--        e.preventDefault();--%>
+        <%--        $('.btnDate').removeClass('selected');--%>
+        <%--        $(this).addClass('selected');--%>
 
-                let interval = e.target.closest('a.btnDate').getAttribute('date-interval');
+        <%--        let interval = e.target.closest('a.btnDate').getAttribute('date-interval');--%>
 
-                $('.start_date').val(fullDate(-interval));
-                $('.end_date').val(fullDate(0));
-            });
+        <%--        $('.start_date').val(fullDate(-interval));--%>
+        <%--        $('.end_date').val(fullDate(0));--%>
+        <%--    });--%>
 
-            $('#search_button').click(function(e){
-                e.preventDefault();
-                if($('select[name=keyword_type]').val()=='choice'){
-                    alert("검색어 항목을 선택해주세요.")
-                    return;
-                }
-                $('.optionArea').submit();
-            });
+        <%--    $('#search_button').click(function(e){--%>
+        <%--        e.preventDefault();--%>
+        <%--        if($('select[name=keyword_type]').val()=='choice'){--%>
+        <%--            alert("검색어 항목을 선택해주세요.")--%>
+        <%--            return;--%>
+        <%--        }--%>
+        <%--        $('.optionArea').submit();--%>
+        <%--    });--%>
 
-            $('.duet-date-picker-grid').click(function(e){
-                $('.btnDate').removeClass('selected');
-            });
-        });
+        <%--    $('.duet-date-picker-grid').click(function(e){--%>
+        <%--        $('.btnDate').removeClass('selected');--%>
+        <%--    });--%>
+        <%--});--%>
         <%--const SearchCondition = () => {--%>
         <%--    if('${ph.sc.date_type}'!=''){--%>
         <%--        $('select[name=date_type]').val('${ph.sc.date_type}').prop("selected", true);--%>
@@ -133,14 +133,14 @@
         <%--    }--%>
         <%--}--%>
 
-        const fullDate = (d) => {
-            const today = new Date();
-            today.setDate(today.getDate() + d);
-            const day = today.getDate();
-            const month = today.getMonth() + 1;
-            const year = today.getFullYear();
-            return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
-        }
+        // const fullDate = (d) => {
+        //     const today = new Date();
+        //     today.setDate(today.getDate() + d);
+        //     const day = today.getDate();
+        //     const month = today.getMonth() + 1;
+        //     const year = today.getFullYear();
+        //     return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+        // }
     </script>
     <style>
         .pagination, .datatable-pagination ul {
@@ -177,7 +177,7 @@
 <%@include file="../include/top_side_nav.jspf" %>
 <div id="layoutSidenav_content">
     <div class="container">
-        <h2 class="mTitle">전체 주문 조회</h2>
+        <h2 class="mTitle">전체 배송 조회</h2>
         <form action="<c:url value=''/>" class="optionArea" method="get">
             <div class="mOption">
                 <table border="1">
@@ -251,10 +251,10 @@
             </div>
             <div class="mCtrl typeHeader">
                 <div class="gTop">
-                    <a href="#eNaverCheckoutOrderStatus" data-status="eShipStartBtn" id="eShipStartBtn"
-                       class="btnCtrl btnPrep" data-code_name="DELIVERING"><span>배송중 처리</span></a>
-                    <a href="#eNaverCheckoutOrderStatus" data-status="eSaveAllInvoiceNo" id="eSaveAllInvoiceNo"
-                       class="btnNormal btnPrep" data-code_name="DELIVERY_COMPLETE"><span>배송완료 처리</span></a>
+                    <input type="button" data-status="eShipStartBtn" id="deliveringBtn"
+                       class="btnCtrl btnPrep" data-code_name="DELIVERING" value="배송중 처리">
+                    <input type="button" data-status="eSaveAllInvoiceNo" id="deliveryCompleteBtn"
+                       class="btnNormal btnPrep" data-code_name="DELIVERY_COMPLETE" value="배송완료 처리">
                 </div>
             </div>
             <div class="mCtrl typeSetting setting">
@@ -291,14 +291,14 @@
                     <tbody>
                     <tr>
                         <th scope="col" class="w24"><input type="checkbox" class="allChk all"></th>
-                        <th scope="col" class="w120" style="">상품주문번호</th>
-                        <th scope="col" class="w120" style="">주문번호</th>
+                        <th scope="col" class="w130" style="">상품주문번호</th>
+                        <th scope="col" class="w130" style="">주문번호</th>
                         <th scope="col" class="w100" style="">주문자</th>
                         <th scope="col" class="w120" style="">택배사</th>
-                        <th scope="col" class="w210" style="">상품명</th>
+                        <th scope="col" class="w220" style="">상품명</th>
                         <th scope="col" class="w75" style="">포장타입</th>
                         <th scope="col" class="w200" style="">운송장번호</th>
-                        <th scope="col" class="w190" style="">배송상태</th>
+                        <th scope="col" class="w140" style="">배송상태</th>
                         <th scope="col" class="w140" style="">배송시작일</th>
                         <th scope="col" class="w140" style="">베송완료일</th>
                         <th scope="col" class="w80" style="">배송속성</th>
@@ -310,21 +310,27 @@
                         <tbody>
                     <c:forEach var="item" items="${list}">
                         <tr>
-                            <td scope="col" class="w24" data-id="${item.ord_det_id}" data-code="${item.code_name}"><input type="checkbox" class="allChk"></td>
-                            <td scope="col" class="w120" style="">${item.ord_det_id}</td>
-                            <td scope="col" class="w120" style="">${item.ord_id}</td>
+                            <td scope="col" class="w24" data-id="${item.ord_det_id}" >
+                                <input type="checkbox" name="dlvyChk" class="allChk" data-id="${item.ord_det_id}" data-packtype="${item.pack_type}" data-status="${item.code_name}"></td> <!-- dataset속성은 소문자로만-->
+                            <td scope="col" class="w130" style="">${item.ord_det_id}</td>
+                            <td scope="col" class="w130" style="">${item.ord_id}</td>
                             <td scope="col" class="w100" style="">${item.mem_name}</td>
                             <td scope="col" class="w120" style="">에코딜리버리</td>
-                            <td scope="col" class="w210" style="">${item.prod_name}</td>
-                            <td scope="col" class="w75 real_prod_qty" style="">${item.pack_type}</td>
-                            <td scope="col" class="w200" style="">
-                                <input type="text" class="w180">
-                            </td> <!--운송장번호-->
-                            <td scope="col" class="w190" style="">${item.code_name}</td>
-                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>
-                                (<fmt:formatDate value='${dto.dlvy_start_date}' pattern='HH:mm' type='time'/>)</td>
-                            <td class="w140" style=""><fmt:formatDate value="${dto.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>
-                                (<fmt:formatDate value='${dto.dlvy_cmplt_date}' pattern='HH:mm' type='time'/>)</td>
+                            <td scope="col" class="w220" style="">${item.prod_name}</td>
+                            <td scope="col" class="w75 packType" style="">${item.pack_type}</td>
+                            <td scope="col" class="w200 waybillvalue" style=""> <!--운송장번호-->
+                            <c:if test="${empty item.waybill_num}">
+                                <input type="text" placeholder="숫자 12자리를 입력해주세요." class="w170 waybillnum" oninput="updateValue(this)">
+                            </c:if>
+                            <c:if test="${not empty item.waybill_num}">
+                                ${item.waybill_num}
+                            </c:if>
+                            </td>
+                            <td scope="col" class="w140" style="">${item.column_sts}</td>
+                            <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
+                                <fmt:formatDate value='${item.dlvy_start_date}' pattern='HH:mm:ss' type='time'/></td>
+                            <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
+                                <fmt:formatDate value='${item.dlvy_cmplt_date}' pattern='HH:mm:ss' type='time'/></td>
                             <td scope="col" class="w80" style="">${item.dlvy_attr}</td>
                         </tr>
                     </c:forEach>
@@ -399,5 +405,6 @@
     });
 
 </script>
+<script src="/resources/admin/order/js/delivery.js"></script>
 </body>
 </html>

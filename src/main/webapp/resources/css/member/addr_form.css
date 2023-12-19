@@ -116,7 +116,8 @@
     text-align: center;
 }
 .css-1kxzrwz {
-    color: rgb(95, 0, 128);
+    /*color: rgb(95, 0, 128);*/
+    color: #00C73C;
 }
 .css-1nwlk7l:last-of-type + a {
     margin-top: 12px;
@@ -174,7 +175,8 @@
 .css-1omzzwx {
     font-weight: 700;
     font-size: 20px;
-    color: rgb(95, 0, 128);
+    /*color: rgb(95, 0, 128);*/
+    color: #00C73C;
     margin-top: 20px;
 }
 /* .css-mmvz9h {
@@ -213,7 +215,8 @@
 .css-17cmttl {
     font-weight: 700;
     font-size: 20px;
-    color: rgb(95, 0, 128);
+    /*color: rgb(95, 0, 128);*/
+    color: #00C73C;
 }
 
 
@@ -274,7 +277,7 @@ canvas, img, video {
 }
 .css-g4g0eu.active, .css-g4g0eu:hover {
     background-color: rgb(250, 250, 250);
-    color: rgb(95, 0, 128);
+    color: #00C73C;
     font-weight: 500;
 }
 .css-g4g0eu {
@@ -646,7 +649,8 @@ input[type=checkbox], input[type=radio] {
     flex-basis: 100px;
 }
 .css-z4mca9 {
-    color: rgb(95, 0, 128);
+    /*color: rgb(95, 0, 128);*/
+    color: #00C73C;
     font-size: 14px;
 }
 .css-1bs5q0a {
@@ -718,7 +722,8 @@ svg:not(:root) {
     height: 44px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    /*background-color: rgb(95, 0, 128);*/
+    background-color: #00C73C;
     border: 0px none;
 }
 .css-1roqgte > span {

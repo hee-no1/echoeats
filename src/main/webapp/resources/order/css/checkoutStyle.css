@@ -910,6 +910,7 @@ input[type=checkbox], input[type=radio] {
     height: 44px;
 }
 .css-16axygr input {
+    text-align: left;
     border-radius: 3px;
     font-size: 14px;
     height: 44px;
