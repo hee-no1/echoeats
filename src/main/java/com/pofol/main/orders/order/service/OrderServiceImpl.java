@@ -14,6 +14,8 @@ import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,9 +38,9 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -149,9 +151,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Long writeOrder(OrderCheckout oc) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
 
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();

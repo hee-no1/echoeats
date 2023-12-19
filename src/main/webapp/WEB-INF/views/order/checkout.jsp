@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,7 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/resources/product/css/footer.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -20,6 +22,8 @@
 <c:set var="address" value="${checkout.addressDto}"/>
 
 <body>
+<%@ include file="../include/header.jspf" %>
+
 <div class="css-1ykiyus e146m4rf2">
     <div class="css-1uom1od e146m4rf0">
         <h2 class="css-10owlr e146m4rf1">주문서</h2>
@@ -186,10 +190,14 @@
                     <span id = "tot_pay_price">
                         <fmt:formatNumber value="${checkout.tot_prod_price + checkout.dlvy_fee}" pattern="#,###"/></span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
-                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div></div>
+<%--                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div>--%>
+            </div>
            </div></div></div>
 
-    </div></div></div>
+    </div></div>
+    <%@ include file="../include/footer.jspf" %>
+</div>
+
 <script>
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">

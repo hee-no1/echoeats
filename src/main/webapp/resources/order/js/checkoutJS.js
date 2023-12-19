@@ -110,7 +110,7 @@ function updateValue(input){
         input.value = point;
     }
     else{
-        input.value = inputValue.replace(/[^-0-9]/g, '');
+        input.value = inputValue.replace(/\D/g, '');
     }
     ajaxData();
 }
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 url: '/order/checkout/getDelNotes',
                 dataType: 'json',
                 success: function (delNotes) {
-                    alert("success");
+                    // alert("success");
                     let personData = document.getElementById("personData");
                     if (personData === null) { //첫 주문
                         $('#firstDelNotesDiv').remove();
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     getDelNotesSuccess(delNotes)
                 },
                 error: function () {
-                    alert("error")
+                    // alert("error")
                 }
             });
         });
@@ -297,12 +297,14 @@ document.addEventListener("DOMContentLoaded", function () {
             dataType: 'text',
             data : JSON.stringify(checkout),
             success: function(result){
-                alert("✅ 1차 검증 성공 = " + result);
+                // alert("✅ 1차 검증 성공 = " + result);
                 orderData.ord_id = result*1;
                 requestPay();
 
             },
-            error: function(){alert("🔥 1차 검증 실패 또는 서버 오류")}
+            error: function(){
+                // alert("🔥 1차 검증 실패 또는 서버 오류")
+            }
         });
     })
 
@@ -319,12 +321,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, rsp => {
             if (rsp.success) {
                 // axios로 HTTP 요청, 결제 성공시 서버로 전송
-                alert("success")
+                // alert("success")
                 console.log("rsp",rsp);
                 writePayment(rsp);
 
             } else {
-                alert("fail")
+                // alert("fail")
                 writePayment(rsp);
             }
         });
@@ -346,12 +348,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }).then(response  => {
             // 서버 결제 API 성공시 로직
-            alert("success: " +JSON.stringify(response.data))
+            // alert("success: " +JSON.stringify(response.data))
             //주문번호
             window.location.href = '/order/completed/'+orderData.ord_id;
 
         }).catch(error => {
-            alert("error: " + JSON.stringify(error.response))
+            alert("결제에 실패하셨습니다. 다시 시도해주세요.")
+            // alert("error: " + JSON.stringify(error.response))
         });
     }
 

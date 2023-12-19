@@ -2,6 +2,8 @@ package com.pofol.main.orders.order.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,9 +81,9 @@ public class OrderController {
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
         try{
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-            String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//            String mem_id = "you11";
 
             /* DB 데이터 */
             orderService.modifyOrder(ord_id, "ORDER_COMPLETE"); //주문 table 변경
@@ -101,7 +103,7 @@ public class OrderController {
             return "/order/orderCompleted";
         } catch (Exception e) {
             e.printStackTrace();
-            return "/order/errorPage";
+            return "main";
         }
     }
 
@@ -109,9 +111,9 @@ public class OrderController {
     //팝업창, 배송 요청 사항
     @GetMapping("/checkout/receiverDetails")
     public String receiverDetails(Model m){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
         try {
             MemberDto member = memberService.select(mem_id);
             DelNotesDto delNotes = delNotesService.getDelNotes();
