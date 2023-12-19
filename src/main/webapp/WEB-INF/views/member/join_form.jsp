@@ -31,7 +31,8 @@
                       </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_id" name="memberId" placeholder="8~16자 영문, 숫자 조합해주세요">
+                    <input type="text" id="mem_id" name="memberId" placeholder="아이디를 입력해주세요">
+                    <div id="idErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
                     <button id="idCheck_btn"><span>중복확인</span></button>
@@ -45,7 +46,8 @@
                             </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_pwd" placeholder="8~16자 영문, 숫자 조합해주세요">
+                    <input type="text" id="mem_pwd" placeholder="비밀번호를 입력해주세요">
+                    <div id="pwdErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
 
@@ -60,6 +62,7 @@
                 </div>
                 <div class="two">
                     <input type="text" id="mem_pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
+                    <div id="pwd2ErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
 
@@ -88,6 +91,7 @@
                 </div>
                 <div class="two">
                     <input type="text" id="mem_email" placeholder="예: marketkurly@kurly.com">
+                    <div id="emailErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
                     <button id="emailCheck_btn"><span>중복확인</span></button>
@@ -102,6 +106,7 @@
                 </div>
                 <div class="two">
                     <input type="text" id="mem_phone" placeholder="숫자만 입력해주세요">
+                    <div id="phoneErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
                     <button type="button" disabled><span>인증번호 받기</span></button>
@@ -174,33 +179,6 @@
                 <div class="three">
                 </div>
             </div>
-            <div class="form_in addtional">
-                <div class="one">
-                    <label class="one_label">
-                        추가입력사항
-                        <span class="one_span">
-                            </span></label>
-                </div>
-                <div class="two">
-                    <div>
-                        <label>
-                            <input type="radio" id="friend">
-                            <span><div></div></span>
-                            <span>친구초대 추천인 아이디</span>
-                        </label>
-                        <label>
-                            <input type="radio">
-                            <span><div></div></span>
-                            <span>참여 이벤트명</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="three">
-
-                </div>
-            </div>
-            <div>추천인 아이디 or 참여 이벤트명</div>
-            <%--        </form>--%>
         </div>
         <div class="mini_space"></div>
         <div class="checkbox">
@@ -261,21 +239,6 @@
                         </label>
                         <span>(선택)</span>
                     </div>
-                    <div class="event_sms">
-                        <label>
-                            <input type="checkbox" name="checkbox" id="checkbox3">
-                            <div></div>
-                            <span>SMS</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="checkbox" id="checkbox4">
-                            <div></div>
-                            <span>이메일</span>
-                        </label>
-                    </div>
-                    <div class="event_Phrase">
-                        <p>동의 시 한 달간[5%적립]+[2만원 이상 무료배송]첫 주문 후 안내</p>
-                    </div>
                 </div>
                 <div>
                     <div>
@@ -298,55 +261,101 @@
 </div>
 
 <script>
-
     const form1 = document.getElementsByClassName('form')[0];
     const friend = document.getElementById('friend');
 
-    function fun() {
-        const div1 = document.createElement('div');
-        div1.textContent = "새로 생긴div"
-        div1.setAttribute('class', 'newdiv');
-        console.log(div1)
-        form1.appendChild(div1)
-    }
-
-    friend.addEventListener('change', fun)
-
     // 아이디, 비밀번호, 전화번호, 이름 정규표현식
-    function regMemberid(mem_id) { //영문자 또는 숫자 6~16자
-        var regExp = /^[A-za-z0-9]{6,15}/g;
+    function regMemberid(mem_id) {
+        //영문자 또는 숫자 6~16자
+        var regExp = /^[A-za-z0-9]{6,15}$/;
         return regExp.test(mem_id);
     }
 
-    function regPassword(mem_pwd) { //8~16자 영문, 숫자 조합
-        var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+    function regPassword(mem_pwd) {
+        //8~16자 영문, 숫자 조합
+        var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z\S]{8,16}$/;
         return regExp.test(mem_pwd);
     }
 
-    function regPhoneNumber(mem_phone) { //전화번호
-        var regExp = /^01(?:0|1|[6-9])-(?:\d{3})-\d{5}$/;
+    function regPhoneNumber(mem_phone) {
+        // 전화번호 형식: 01X-XXXX-XXXX 또는 01X-XXX-XXXX
+        var regExp = /^01[0-9]\d{7,8}$/;
         return regExp.test(mem_phone);
     }
 
-    function regMemberName(mem_name) { //이름
-        var regExp = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
-        return regExp.test(mem_name);
-    }
+    // function regMemberName(mem_name) { //이름
+    //     var regExp = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+    //     return regExp.test(mem_name);
+    // }
 
     function regMemberEmail(mem_email) { //이메일
         var regExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return regExp.test(mem_email);
     }
+    //아이디 정규식 체크
+    $("#idErrorMsg").text("").hide();
+    document.getElementById('mem_id').addEventListener('input', function() {
+        var mem_id = this.value;
+
+        if (!regMemberid(mem_id)) {
+        $("#idErrorMsg").text("영문자 또는 숫자 6~16자로 해주세요.").show();
+    } else {
+        $("#idErrorMsg").text("").hide();
+    }
+    });
+
+    //비밀번호 정규식 체크
+    $("#pwdErrorMsg").text("").hide();
+    document.getElementById('mem_pwd').addEventListener('input', function() {
+        var mem_pwd = this.value;
+
+        if (!regPassword(mem_pwd)) {
+            $("#pwdErrorMsg").text("8~16자 영문, 숫자 조합으로 해주세요.").show();
+        } else {
+            $("#pwdErrorMsg").text("").hide();
+        }
+    });
+    //비밀번호 일치 체크
+    $("#pwd2ErrorMsg").text("").hide();
+    document.getElementById('mem_pwd2').addEventListener('input', function() {
+        let mem_pwd2 = document.getElementById('mem_pwd2').value;
+        let mem_pwd = document.getElementById('mem_pwd').value;
+        if(mem_pwd !== mem_pwd2){
+            $("#pwd2ErrorMsg").text("비밀번호를 일치하게 입력해주세요.").show();
+        } else {
+            $("#pwd2ErrorMsg").text("").hide();
+        }
+    });
+    //이메일 정규식 체크
+    $("#emailErrorMsg").text("").hide();
+    document.getElementById('mem_email').addEventListener('input', function() {
+        var mem_email = this.value;
+
+        if (!regMemberEmail(mem_email)) {
+            $("#emailErrorMsg").text("올바르지 않은 이메일형식입니다.").show();
+        } else {
+            $("#emailErrorMsg").text("").hide();
+        }
+    });
+    //전화번호 정규식 체크
+    $("#phoneErrorMsg").text("").hide();
+    document.getElementById('mem_phone').addEventListener('input', function() {
+        var mem_phone = this.value;
+
+        if (!regPhoneNumber(mem_phone)) {
+            $("#phoneErrorMsg").text("01X-XXX-XXXX 또는 01X-XXXX-XXXX입니다.").show();
+        } else {
+            $("#phoneErrorMsg").text("").hide();
+        }
+    });
 
     var idCheck = 0;
     var pwdCheck = 0;
     var phoneCheck = 0;
     var info = 0
     var emailCheck = 0;
-    // var nameCheck = 0;
-    // var pwdCheck2 = 0;
 
-    // 아이디 체크
+    // 아이디 중복 체크
     $("#idCheck_btn").click(function () {
         var inputed = $('#mem_id').val();
         console.log(inputed);
@@ -364,26 +373,13 @@
                     alert("영문자 또는 숫자 6~16자로 해주세요.")
                     idCheck = 0;
                 } else if (data == 0 && regMemberid(inputed)) {
-                    alert("사용가능한. 아이디이십니다.")
+                    alert("사용가능한 아이디이십니다.")
                     idCheck = 1;
+                    $("#idCheck_btn").prop("disabled", true).css("background-color", "#CCCCCC");
                 }
             },
         })
-    });   //아이디 체크
-
-    // //비밀번호 체크
-    function checkPwd() {
-        if ($("#mem_pwd").val() === $("#mem_pwd2").val()) {
-            pwdCheck = 1;
-        }
-    }
-    //번호 정규식 체크
-    // function checkPhone() {
-    //     if(regPhoneNumber($("#mem_phone").val())==true){
-    //         phoneCheck = 1;
-    //     }
-    // }
-
+    });
     // 이메일 체크
     $("#emailCheck_btn").click(function () {
         var inputed = $('#mem_email').val();
@@ -395,18 +391,34 @@
             dataType: "json",
             success: function (data) {
                 if (data == 1) {
-                    alert("이메일이가 중복되었어요.")
+                    alert("이메일이 중복되었습니다.")
                     emailCheck = 0;
                 } else if (regMemberEmail(inputed) == false) {
-                    alert("골뱅이도 넣고 이메일처럼 해주세요")
+                    alert("올바르지 않은 이메일 형식입니다.")
                     emailCheck = 0;
                 } else if (data == 0 && regMemberEmail(inputed)) {
-                    alert("사용가능한. 이메일이십니다.")
+                    alert("사용가능한 이메일이십니다.")
                     emailCheck = 1;
+                    $("#emailCheck_btn").prop("disabled", true).css("background-color", "#CCCCCC");
                 }
             },
         })
-    });   //이메일 체크
+    });
+
+    //비밀번호 체크
+    function checkPwd() {
+        if ($("#mem_pwd").val() === $("#mem_pwd2").val()) {
+            pwdCheck = 1;
+        }
+    }
+    //번호 정규식 체크
+    function checkPhone() {
+        if(regPhoneNumber($("#mem_phone").val())){
+            phoneCheck = 1;
+        }
+    }
+
+
 
     //주소검색 api
     function kakaopost() {
@@ -421,7 +433,6 @@
     //체크박스
     checkboxs = document.getElementsByName('checkbox');
     checkall = document.getElementById('all_check');
-
     checkall.onchange = function () {
         if (checkall.checked) {
             for (let i = 0; i < checkboxs.length; i++) {
@@ -431,6 +442,16 @@
             for (let i = 0; i < checkboxs.length; i++) {
                 checkboxs[i].checked = false;
             }
+        }
+        if(checkbox1.checked){
+            per_info_col = "Y";
+        }else {
+            per_info_col = "N";
+        }
+        if(checkbox2.checked){
+            free_ship_recep = "Y";
+        }else {
+            free_ship_recep = "N";
         }
     }
     checkboxs.forEach(function (checkbox) {
@@ -465,46 +486,33 @@
     //개인정보수집동의
     checkbox1 = document.getElementById("checkbox1");
     checkbox2 = document.getElementById("checkbox2");
+    let info1 = document.getElementById("info1");
+    let info2 = document.getElementById("info2");
+    let info3 = document.getElementById("info3");
+
     let per_info_col = "N";
     let free_ship_recep = "N";
+
     checkbox1.addEventListener('change', function () {
-        if(checkbox1.checked == true){
+        if(checkbox1.checked){
             per_info_col = "Y";
         }else {
             per_info_col = "N";
         }
     })
     checkbox2.addEventListener('change', function () {
-        if(checkbox2.checked == true){
+        if(checkbox2.checked){
             free_ship_recep = "Y";
         }else {
             free_ship_recep = "N";
         }
     })
 
+    //이용약관동의 필수체크
+    function infoCheck(){
+        return (info1.checked && info2.checked && info3.checked);
+    }
     //가입하기
-    // $("#sign_in_button").on("click", ()=>{
-    //     let inputed = {
-    //         mem_id: $("#mem_id").val(),
-    //         addr: $("#addr").val(),
-    //         dtl_addr: $("#subAddr").val(),
-    //         def_addr: "Y"
-    //     }
-    //     console.log(inputed);
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "http://localhost:8080/address/detail",
-    //         data: JSON.stringify(inputed),
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "json"
-    //     }).done(function () {
-    //
-    //     }).fail(function (error){
-    //         alert("회원가입에 실패하셨습니다.")
-    //         alert(JSON.stringify(error));
-    //     });
-    // })
-
     let index = {
         init: function() {
             $("#sign_in_button").on("click", ()=>{
@@ -546,29 +554,34 @@
                     dataType: "json"
                 })
                 checkPwd();
-                // checkPhone();
+                checkPhone();
                 if (idCheck == 0) {
                     alert("id중복확인 눌러주세요")
                 } else if (pwdCheck == 0) {
                     alert("비밀번호가 동일하지않습니다.")
                 }
-                    // else if (phoneCheck == 0) {
-                    //     alert("허용되지 않는 전화번호입니다.")
-                // }
-                else if (emailCheck == 0) {
-                    alert("email중복확인 눌러주세요.")
-                } else if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1) {
-                    alert("회원가입이 완료되었습니다.")
-                    location.href = "/main";
+                  else if (phoneCheck == 0) {
+                    alert("허용되지 않는 전화번호입니다.")
                 }
-                }).fail(function (error){
-                    alert("회원가입에 실패하셨습니다.")
-                    alert(JSON.stringify(error));
-                });
+                  else if (emailCheck == 0) {
+                    alert("email중복확인 눌러주세요.")
+                }
+                  else if (!infoCheck()){
+                    alert("필수이용약관을 동의해주세요")
+                }
+                  else if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1 && infoCheck()) {
+                    alert("회원가입이 완료되었습니다.")
+                    location.href = "http://localhost:8080/main";
+                }
+            }).fail(function (error){
+                alert("회원가입에 실패하셨습니다.")
+                alert(JSON.stringify(error));
+            });
             // })
         }
     }
     index.init();
+
 
 
 </script>

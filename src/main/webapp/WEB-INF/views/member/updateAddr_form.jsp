@@ -109,9 +109,26 @@
         })
     }
     //주소 삭제
+    // function deleteData(){
+    //     window.location.href = "/address/delete?addr_id=" + encodeURIComponent(addr_id);
+    //     window.close();
+    // }
     function deleteData(){
-        window.location.href = "/address/delete?addr_id=" + encodeURIComponent(addr_id);
-        window.close();
+        let deleteUrl = "/address/delete?addr_id=" + encodeURIComponent(addr_id);
+        $.ajax({
+            type: "GET",
+            url: deleteUrl,
+            success: function(response) {
+                console.log(response);
+                alert("삭제 성공");
+                window.close();
+                // 또는 필요한 경우 부모 창 등을 리로드할 수 있습니다.
+            },
+            error: function(error){
+                console.log(error);
+                // 오류 처리 로직을 추가할 수 있습니다.
+            }
+        });
     }
 </script>
 </body>
