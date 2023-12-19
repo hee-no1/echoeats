@@ -7,6 +7,7 @@ import com.pofol.main.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -28,6 +29,8 @@ public class MemberController {
     MemberService memberService;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/login_form", method = RequestMethod.GET)
     public String loginGET(HttpServletRequest request,HttpServletResponse response, Model model, Authentication authentication) {
@@ -132,7 +135,8 @@ public class MemberController {
     @PostMapping("/join")
     @ResponseBody
     public MemberDto join(@RequestBody MemberDto memberDto) throws Exception{
-        System.out.println(memberDto.toString());
+        String encode = bCryptPasswordEncoder.encode(memberDto.getMem_pwd());
+        memberDto.setMem_pwd(encode);
         memberService.signin(memberDto);
         return memberDto;
     }
@@ -144,8 +148,6 @@ public class MemberController {
         if(mem_id == null || mem_id.isEmpty()){
             return -1;
         } else {
-            System.out.println(mem_id);
-            System.out.println(memberRepository.checkId(mem_id));
             return memberRepository.checkId(mem_id);}
     }
     //이메일 체크
@@ -155,8 +157,6 @@ public class MemberController {
         if(mem_email == null || mem_email.isEmpty()){
             return -1;
         } else {
-            System.out.println(mem_email);
-            System.out.println(memberRepository.checkEmail(mem_email));
             return memberRepository.checkEmail(mem_email);
         }
     }
