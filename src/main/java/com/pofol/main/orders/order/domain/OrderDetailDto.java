@@ -36,7 +36,11 @@ public class OrderDetailDto {
 
     //[view] 배송List
     private String mem_name; //주문자
-
+    private Long waybill_num; //운송장 번호
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dlvy_start_date; //배송시작일
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dlvy_cmplt_date; //배송종료일
     //insert 용도, option상품일때
     public OrderDetailDto(Long ord_id, String mem_id, Long prod_id, String opt_prod_id, String code_name, String prod_name, Integer prod_qty, Integer prod_tot_price, String pack_type, String rg_num, String md_num) {
         this.ord_id = ord_id;
