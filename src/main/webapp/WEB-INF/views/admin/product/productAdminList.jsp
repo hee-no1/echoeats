@@ -49,7 +49,7 @@
 
             $('#search_button').click(function(e){
                 e.preventDefault();
-                search();
+
                 if($('select[name=keyword_type]').val()=='choice'){
                     alert("검색어 항목을 선택해주세요.")
                     return;
