@@ -40,12 +40,12 @@
     </div>
     <div id="main-01"> <!-- 슈퍼빅세일특가 -->
         <div class="SectionTitle">
-            <a href="/christmas"><span>🎄${eventEx.evt_gp_name}🎄</span>
+            <a href="/christmas"><span>🎄${eventNo1.evt_gp_name}🎄</span>
                 <span><img src="/resources/icons/arrow_right.svg"></span></a>
-            <p>${eventEx.evt_gp_dtl}</p>
+            <p>${eventNo1.evt_gp_dtl}</p>
         </div>
         <div class="SectionContent">
-            <c:forEach var="product" items="${productList}" begin="0" end="3">
+            <c:forEach var="product" items="${productList1}" begin="0" end="3">
                 <div class="content">
                     <a href="${pageContext.request.contextPath}/product/${product.prod_id}" class="goProductEx">
                         <div class="image-container">
@@ -121,8 +121,8 @@
     <div id="main-02">
         <div id="main-02-left">
             <div>
-                <h2>${eventExOne.evt_gp_name}</h2>
-                <h3>${eventExOne.evt_gp_dtl}</h3>
+                <h2>${eventNo2.evt_gp_name}</h2>
+                <h3>${eventNo2.evt_gp_dtl}</h3>
                 <div>
                     <div class="lottie-timer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36"
@@ -160,7 +160,7 @@
             </div>
         </div>
         <div id="main-02-right">
-            <c:forEach items="${eventOneList}" var="eventOneList" begin="0" end="2">
+            <c:forEach items="${productList2}" var="eventOneList" begin="0" end="2">
                 <div class="content">
                     <a href="${pageContext.request.contextPath}/product/${eventOneList.prod_id}">
                         <div class="image-container">
@@ -229,12 +229,12 @@
 
     <div id="main-01"> <!-- 슈퍼빅세일특가 -->
         <div class="SectionTitle">
-            <a href="#"><span>🎄${eventEx.evt_gp_name}🎄</span>
+            <a href="#"><span>🎄${eventNo3.evt_gp_name}🎄</span>
                 <span><img src="/resources/icons/arrow_right.svg"></span></a>
-            <p>${eventEx.evt_gp_dtl}</p>
+            <p>${eventNo3.evt_gp_dtl}</p>
         </div>
         <div class="SectionContent">
-            <c:forEach var="product" items="${productList}" begin="0" end="3">
+            <c:forEach var="product" items="${productList3}" begin="0" end="3">
                 <div class="content">
                     <a href="${pageContext.request.contextPath}/product/${product.prod_id}">
                         <div class="image-container">
@@ -302,12 +302,12 @@
 
         <div id="main-01"> <!-- 슈퍼빅세일특가 -->
             <div class="SectionTitle">
-                <a href="#"><span>🎄${eventEx.evt_gp_name}🎄</span>
+                <a href="#"><span>🎄${eventNo4.evt_gp_name}🎄</span>
                     <span><img src="/resources/icons/arrow_right.svg"></span></a>
-                <p>${eventEx.evt_gp_dtl}</p>
+                <p>${eventNo4.evt_gp_dtl}</p>
             </div>
             <div class="SectionContent">
-                <c:forEach var="product" items="${productList}" begin="0" end="3">
+                <c:forEach var="product" items="${productList4}" begin="0" end="3">
                     <div class="content">
                         <a href="${pageContext.request.contextPath}/product/${product.prod_id}">
                             <div class="image-container">
