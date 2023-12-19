@@ -40,7 +40,7 @@
     </div>
     <div id="main-01"> <!-- 슈퍼빅세일특가 -->
         <div class="SectionTitle">
-            <a href="/christmas"><span>🎄${eventNo1.evt_gp_name}🎄</span>
+            <a href="/christmas"><span>🎅${eventNo1.evt_gp_name}🎄</span>
                 <span><img src="/resources/icons/arrow_right.svg"></span></a>
             <p>${eventNo1.evt_gp_dtl}</p>
         </div>
@@ -165,7 +165,7 @@
                     <a href="${pageContext.request.contextPath}/product/${eventOneList.prod_id}">
                         <div class="image-container">
                             <span><img src="${eventOneList.prod_img_id}"></span>
-<%--                            <div class="product-sticker"><span>골라담기특가</span></div>--%>
+                            <div class="product-sticker"><span>일일특가</span></div>
                         </div>
                         <div>
                             <button type="button">
@@ -229,7 +229,7 @@
 
     <div id="main-01"> <!-- 슈퍼빅세일특가 -->
         <div class="SectionTitle">
-            <a href="#"><span>🎄${eventNo3.evt_gp_name}🎄</span>
+            <a href="#"><span>✨${eventNo3.evt_gp_name}✨</span>
                 <span><img src="/resources/icons/arrow_right.svg"></span></a>
             <p>${eventNo3.evt_gp_dtl}</p>
         </div>
@@ -302,7 +302,7 @@
 
         <div id="main-01"> <!-- 슈퍼빅세일특가 -->
             <div class="SectionTitle">
-                <a href="#"><span>🎄${eventNo4.evt_gp_name}🎄</span>
+                <a href="#"><span>🙇‍♀️️${eventNo4.evt_gp_name}🙇‍♂️</span>
                     <span><img src="/resources/icons/arrow_right.svg"></span></a>
                 <p>${eventNo4.evt_gp_dtl}</p>
             </div>
