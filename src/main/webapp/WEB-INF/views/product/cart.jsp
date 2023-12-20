@@ -59,6 +59,8 @@
         .dropdown:hover .dropdown-content {
         display: block;
         }
+
+
     </style>
 </head>
 <body>
@@ -168,7 +170,7 @@
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
                         <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
-                        <span> 전체선택 (0/1)</span>
+                        <span class="all-select"> 전체선택 (0/1)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
                     <button disabled="" class="css-0 e149z640">선택삭제</button>
@@ -195,27 +197,38 @@
                 <div class="css-1t6so8j em21elb0">
                     <div class="css-8jmoub ea1mry77">
                         <span class="css-vmo0an ea1mry76">상품금액</span>
-                        <span class="css-iinokh ea1mry74">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        <span class="css-iinokh ea1mry74">
+                            <input type="hidden" >
+                            <span class="css-hfgifi ea1mry72" id="product-origin-price">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        </span>
                     </div>
                     <div class="css-t4mc5m ea1mry77">
                         <span class="css-vmo0an ea1mry76">상품할인금액</span>
-                        <span class="css-iinokh ea1mry74">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        <span class="css-iinokh ea1mry74">
+                            <input type="hidden">
+                            <span class="css-hfgifi ea1mry72" id="product-discount-amount">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        </span>
                     </div>
                     <div class="css-t4mc5m ea1mry77">
                         <span class="css-vmo0an ea1mry76">배송비</span>
-                        <span class="css-iinokh ea1mry74">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        <span class="css-iinokh ea1mry74">
+                            <input type="hidden">
+                            <span class="css-hfgifi ea1mry72" id="shipping-cost">0<span class="css-hfgifi ea1mry72">원</span></span>
+                        </span>
                     </div>
                     <div class="css-7ygxxm eepcpbj4">
                         <span class="css-vmo0an eepcpbj3">결제예정금액</span>
                         <span class="css-da7gr8 eepcpbj2">
-                            <strong class="css-xmbce4 eepcpbj0">0</strong>
-                            <span class="css-aro4zf eepcpbj1">원</span>
+                            <strong class="css-xmbce4 eepcpbj0">
+                                <input type="hidden">
+                            </strong>
+                            <span class="css-aro4zf eepcpbj1" id="total-payable">0<span class="css-aro4zf eepcpbj1">원</span></span>
                         </span>
                     </div>
                     <sec:authorize access="isAuthenticated()">
                         <div class="css-bi9ql0 e142afjf3">
                             <span class="css-1q66xvk e142afjf2">적립</span>최대
-                            <strong class="css-f3vz0n e142afjf1">(계산해서 넣을 것)원 적립</strong>
+                            <strong class="css-f3vz0n e142afjf1 save-money">0원 적립</strong>
                             <span class="css-1me0y21 e142afjf0">${memberGrade.gd_name} ${memberGrade.acm_rate}%</span>
                         </div>
                     </sec:authorize>
@@ -282,12 +295,9 @@
     </c:choose>
     </c:forEach>
 
-
-
-
-
-
-
+    <c:if test="${not empty memberGrade}">
+    let memberGradeMoney = ${memberGrade.acm_rate};
+    </c:if>
 
 </script>
 <script src="/resources/product/js/cart.js"></script>
