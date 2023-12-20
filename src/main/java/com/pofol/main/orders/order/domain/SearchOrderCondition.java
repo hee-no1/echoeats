@@ -7,6 +7,11 @@ import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class SearchOrderCondition {
     private Integer page = 1;
     private Integer pageSize = DEFAULT_PAGE_SIZE;
@@ -21,8 +26,6 @@ public class SearchOrderCondition {
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 50;
-
-    public SearchOrderCondition(){}
 
     public SearchOrderCondition(Integer page, Integer pageSize) {
         this(page, pageSize, "");
@@ -44,25 +47,19 @@ public class SearchOrderCondition {
                 .queryParam("page",     page)
                 .queryParam("pageSize", pageSize)
                 .queryParam("date_type", date_type)
-                .queryParam("start_date", start_date)
-                .queryParam("end_date", end_date)
+                .queryParam("start_date", dateFormat(start_date))
+                .queryParam("end_date", dateFormat(end_date))
                 .queryParam("keyword_type", keyword_type)
                 .queryParam("keyword",  keyword)
                 .build().toString();
     }
     
     public String getQueryStringWithoutPS() {
-    	if(!(start_date==null || end_date==null))
-    	{
-	    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	    	String str = format.format(start_date);
-	    	str = format.format(end_date);
-    	}
         return UriComponentsBuilder.newInstance()
                 .queryParam("page",     page)
                 .queryParam("date_type", date_type)
-                .queryParam("start_date", start_date)
-                .queryParam("end_date", end_date)
+                .queryParam("start_date", dateFormat(start_date))
+                .queryParam("end_date", dateFormat(end_date))
                 .queryParam("keyword_type", keyword_type)
                 .queryParam("keyword",  keyword)
                 .build().toString();
@@ -129,11 +126,11 @@ public class SearchOrderCondition {
 	public Integer getOffset() {
         return (page-1)*pageSize;
     }
-
-	@Override
-	public String toString() {
-		return "SearchCondition [page=" + page + ", pageSize=" + pageSize + ", date_type=" + date_type + ", start_date="
-				+ start_date + ", end_date=" + end_date + ", keyword_type=" + keyword_type + ", keyword=" + keyword
-				+ "]";
+	
+	private String dateFormat(Date date) {
+		if(date==null)
+			return "";
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	return format.format(date);
 	}
 }

@@ -22,7 +22,7 @@ public class InquiryImgServiceImpl implements InquiryImgService {
 	public List<String> selectAllByInqId(Long inquiry_id) {
 		return inqImgRepo.selectAllByInqId(inquiry_id);
 	}
-
+	
 	@Override
 	public int insert(InquiryImgDto dto) throws Exception {
 		return inqImgRepo.insert(dto);
@@ -57,5 +57,4 @@ public class InquiryImgServiceImpl implements InquiryImgService {
 	public int count() throws Exception {
 		return 0;
 	}
-
 }

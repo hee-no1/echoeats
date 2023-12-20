@@ -1,3 +1,5 @@
+const startPageDate = document.querySelectorAll('.duet-date-picker');
+
 // 관리자 페이지에서 상품 수정 버튼
 const updateButton = document.querySelector('#updateButton');
 
@@ -50,3 +52,10 @@ $(cate1Select).on("change", function () {
         }
     }
 });
+
+$(document).ready(function () {
+
+    for (let i = 0; i < startPageDate.length; i++) {
+        startPageDate[i].value = '';
+    }
+})

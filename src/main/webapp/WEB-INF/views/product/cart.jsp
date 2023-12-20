@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="/resources/product/css/footer.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <style>
-        /*.css-1usz68g {*/
-        <%--    background-image: url(${cartProductList.prod_img_id});--%>
-        /*}*/
-
         /*드롭 다운 카테고리 (수정 필요)*/
         nav {
         overflow: hidden;

@@ -1,5 +1,8 @@
 package com.pofol.main.member.dto;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemCouponDto {
+
     private Long own_cp_id;  //PK,  AUTO_INCREMENT
     private Long cp_id;   //FK,쿠폰 아이디
     private String mem_id;  //FK, 회원 아이디
@@ -24,6 +28,19 @@ public class MemCouponDto {
     private MemberDto memberDto;
     private CouponDto couponDto;
 
+
+    public MemCouponDto( String mem_id, Long cp_id) throws ParseException {
+        this.cp_id = cp_id;
+        this.mem_id = mem_id;
+        this.cp_qty = 1;
+        this.cp_sts = "UNUSED";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = "2023-12-23 12:23:00";
+        this.cp_del_date = dateFormat.parse(dateString);
+        this.rg_num = "admin123";
+        this.md_num = "admin123";
+    }
 
     public MemCouponDto(int cp_qty, String cp_sts, Date cp_del_date, MemberDto memberDto, CouponDto couponDto) {
         this.cp_qty = cp_qty;

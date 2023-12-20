@@ -44,53 +44,6 @@
         ORDER BY cat_code
     </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--    <상품 데이터 insert문>-->
-    <!--    <insert id="">-->
-    <!--        INSERT INTO product (evt_gp_id, prod_img_id, cat_code, prod_name, prod_price, rate, sale_sts, prod_qty, is_opt, short_desc, long_desc, disp_sts, prod_mod_date, sel_str_date, sel_end_date)-->
-    <!--        VALUES (1, 'imgUrl', '907', '테스트 상품', 10000, 10, '할인중', 100, 'N', '테스트', '테스트', 'N', now(), now(), now());-->
-    <!--        SET @lastProdID = LAST_INSERT_ID();-->
-    <!--        INSERT INTO product_info (prod_id) VALUES (@lastProdfID);-->
-    <!--        INSERT INTO option_product (opt_prod_id, prod_id) VALUES (CONCAT(@lastProdID, 'A') ,@lastProdID);-->
-    <!--    </insert>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <sql id="searchCondition">
         <choose>
             <when test='keyword_type == "ProductName"'>
@@ -114,20 +67,22 @@
                 AND c.parent_code = #{bigCategory}
             </when>
         </choose>
-        <choose>
-            <when test='date_type == "ProductRegisterDate"'>
-                AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "ProductModifyDate"'>
-                AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "saleStartDate"'>
-                AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-            <when test='date_type == "saleEndDate"'>
-                AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
-            </when>
-        </choose>
+        <if test='start_date != "" and end_date != "" and start_date != null and end_date != null'>
+            <choose>
+                <when test='date_type == "ProductRegisterDate"'>
+                    AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "ProductModifyDate"'>
+                    AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "saleStartDate"'>
+                    AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "saleEndDate"'>
+                    AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+            </choose>
+        </if>
         <if test='selling != null and selling != "" and selling != "A"'>
             AND p.sale_sts = #{selling}
         </if>

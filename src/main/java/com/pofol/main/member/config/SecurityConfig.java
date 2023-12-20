@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()//인증이 필요한 url지정
                 .antMatchers("/member/user").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/member/admin").hasAuthority("ADMIN")
+                .antMatchers("/order/checkout").hasAuthority("USER")
                // .antMatchers("/member/login_form").anonymous()
                 .anyRequest().permitAll()
                 .and()

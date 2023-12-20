@@ -8,6 +8,7 @@ const orderButton = document.querySelector('.orderButton');
 const saveMoney = document.querySelector('.save-money');
 const choiceDelete = document.querySelectorAll('.css-0');
 const allSelect = document.querySelector('.allSelect');
+const goAddressPage = document.querySelector('.css-122i3z7');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = (isChecked) => {
@@ -192,6 +193,13 @@ $(document).ready(function () {
         });
         updateCartTotals();
     };
+  
+    // 배송지 변경 클릭 시 배송지 화면으로 이동
+    if (goAddressPage !== null) {
+        goAddressPage.addEventListener('click', function () {
+            window.location.href = '/address/'
+        })
+    }
 
     // 전체체크박스 클릭 시 전체선택o + 전체선택x
     allCartCheck.forEach((checkbox) => {
@@ -332,12 +340,4 @@ $(document).ready(function () {
             });
         });
     }
-
-
-
 });
-
-
-
-
-

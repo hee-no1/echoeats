@@ -11,6 +11,7 @@ import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.exception.ExpiredProductException;
 import com.pofol.main.product.exception.HandlerProductException;
+import com.pofol.main.product.service.EventGroupService;
 import com.pofol.main.product.service.ProductListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class ProductListController {
     private final ProductListService productListService;
     private final CategoryList categoryList;
     private final GradeService gradeService;
+    private final EventGroupService eventGroupService;
 
     // 이벤트 화면으로 (그냥 만듬)
     @GetMapping("/christmas")
@@ -44,14 +46,30 @@ public class ProductListController {
     public String goMain(Model model) {
         try {
             // 동적으로 만들 생각 해야함 (그룹으로 나눠서 상품 리스트 정렬)
-            List<ProductDto> productList = productListService.getEventList(2L);
-            model.addAttribute("productList", productList);
-            EventGroupDto eventEx = productListService.getEventEx(2L);
-            model.addAttribute("eventEx", eventEx);
-            EventGroupDto eventExOne = productListService.getEventEx(3L);
-            model.addAttribute("eventExOne", eventExOne);
-            List<ProductDto> eventOneList = productListService.getEventList(1L);
-            model.addAttribute("eventOneList", eventOneList);
+
+            // 1번 상품 정렬 칸
+            EventGroupDto eventNo1 = eventGroupService.getEvent(2L);
+            model.addAttribute("eventNo1", eventNo1);
+            List<ProductDto> productList1 = productListService.getEventList(2L);
+            model.addAttribute("productList1", productList1);
+
+            // 2번 상품 정렬 칸
+            EventGroupDto eventNo2 = eventGroupService.getEvent(3L);
+            model.addAttribute("eventNo2", eventNo2);
+            List<ProductDto> productList2 = productListService.getEventList(1L);
+            model.addAttribute("productList2", productList2);
+
+            // 3번 상품 정렬 칸
+            EventGroupDto eventNo3 = eventGroupService.getEvent(4L);
+            model.addAttribute("eventNo3", eventNo3);
+            List<ProductDto> productList3 = productListService.getEventList(2L);
+            model.addAttribute("productList3", productList3);
+
+            // 4번 상품 정렬 칸
+            EventGroupDto eventNo4 = eventGroupService.getEvent(5L);
+            model.addAttribute("eventNo4", eventNo4);
+            List<ProductDto> productList4 = productListService.getEventList(2L);
+            model.addAttribute("productList4", productList4);
 
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
             List<CategoryDto> bigCategoryProductList = categoryList.bigCateList();
