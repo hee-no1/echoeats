@@ -1,3 +1,4 @@
+//스크롤
 window.addEventListener('scroll', function() {
     let scrollPosition = window.scrollY;
     // 특정 스크롤 위치 이상일 때
@@ -83,20 +84,31 @@ for (let i=0; i < couponListBtn.length ; i++){
 
         console.log("couponDto",couponDtoList[i]);
         let addCouponDiv =
+            '<div id="addCoupon">' +
             '<div class="css-kmlyvgdiv addCouponDiv">\n' +
-            '<strong class="css-1bfy7g3div">' + couponDtoList[i].cp_name + '</strong>\n' +
+            '<strong class="css-1bfy7g3div">' +'✅ '+ couponDtoList[i].cp_name + '</strong>\n' +
             '<span class="css-bs5mk4">' + couponDtoList[i].cp_del_date +'</span>\n' +
-            '</div>'
+            '</div>' +
+            '<button id="deleteCouponBtn" class="css-h5zdhc" type="button" data-testid="delete">' +
+            '<span class="css-6mgkir e5h3i930"></span>' +
+            '</button></div>'
 
         coupon_id = couponDtoList[i].cp_id; //ajax, 결제버튼 클릭시 결제할인금액table
 
         $('#couponList').hide();
-        $('.addCouponDiv').remove();
+        $('#addCoupon').remove();
         $('.e1brt3tk0').append(addCouponDiv);
 
         ajaxData();
     })
 }
+
+//쿠폰 삭제 버튼 클릭시
+$(document).on('click',"#deleteCouponBtn", function(){
+    $("#addCoupon").remove();
+    coupon_id = null;
+    ajaxData();
+})
 
 
 //적립금 입력
@@ -117,7 +129,7 @@ function updateValue(input){
 
 //적립금 모두 사용 버튼
 document.getElementById("allUseBtn").addEventListener('click', function(){
-    document.getElementById('inputPointUsed').value = document.getElementById('point').innerHTML.replace(/,/g, "");
+    document.getElementById('inputPointUsed').value = document.getElementById('point').innerText.replace(/,/g, "");
     ajaxData();
 })
 
