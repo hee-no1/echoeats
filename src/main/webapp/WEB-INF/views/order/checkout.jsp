@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,8 +8,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>주문서</title>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/resources/product/css/footer.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -20,6 +22,8 @@
 <c:set var="address" value="${checkout.addressDto}"/>
 
 <body>
+<%@ include file="../include/header.jspf" %>
+
 <div class="css-1ykiyus e146m4rf2">
     <div class="css-1uom1od e146m4rf0">
         <h2 class="css-10owlr e146m4rf1">주문서</h2>
@@ -28,26 +32,28 @@
         <div class="css-ixlb9s epvroj94">
         <div class="css-zo1i6f edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">주문 상품</h3>
             <button data-testid="fold-button" id="prodDetailBtn" class="css-lvqq7y e17cst860">
-                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(-45 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(135 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
             </button></div>
 
-            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}의 상품을 주문합니다</div>
+            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name} 상품을 주문합니다.</div>
 
             <c:forEach var="item" items="${items}">
                 <c:set var="prod" value="${item.productOrderCheckout}"/>
                 <div class="css-bd9p1l e17a7yib10 items" style="display: none">
                     <c:choose>
                         <c:when test = "${empty prod.opt_prod_id}">
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}"  class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
-                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.disc_price}원</span></span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
+                                    <fmt:formatNumber value="${prod.disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:when>
                         <c:otherwise>
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1646377916155l0.jpg" alt="[KF365] 1+등급 무항생제 대란 20구" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}" class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.opt_prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
-                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">${prod.opt_disc_price}원</span></span>
+                            <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
+                                    <fmt:formatNumber value="${prod.opt_disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:otherwise>
                     </c:choose>
 
@@ -76,7 +82,7 @@
             <div class="css-5d6nlw e17yjk9v4">
                 <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">배송지</span>
                     <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">${address.addr} ${address.dtl_addr}</p>
-                        <div class="css-iqoq9n e17yjk9v0"><button class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
+                        <div class="css-iqoq9n e17yjk9v0"><button id="AddrBtn" class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
             <div id="checkout-shipping-details" class="css-1y0xj4c e1pxan881">
                 <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span>
             <c:choose>
@@ -140,7 +146,7 @@
 
                     <%-- 사용할 적립금 입력 --%>
                     <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">
-                        <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed"></div></div>
+                        <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed" autocomplete="off"></div></div>
                         <button id="allUseBtn" class="css-197i5eo e4nu7ef3" type="button" width="100" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">모두사용</span></button></div><div class="css-54a39b e1gm2j0y1">사용 시 적립금이 먼저 소진됩니다.</div><div class="css-1waf5ak ezr038b1"></div></div></div><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 수단</h3></div><div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">결제수단 선택</span>
                 <div class="css-82a6rk e150alo80">
                     <div class="css-gd125q e4nb37r1"><div><div class="css-18dvwsu ef0cmoa0">
@@ -184,10 +190,14 @@
                     <span id = "tot_pay_price">
                         <fmt:formatNumber value="${checkout.tot_prod_price + checkout.dlvy_fee}" pattern="#,###"/></span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
-                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div></div>
+<%--                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div>--%>
+            </div>
            </div></div></div>
 
-    </div></div></div>
+    </div></div>
+    <%@ include file="../include/footer.jspf" %>
+</div>
+
 <script>
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">

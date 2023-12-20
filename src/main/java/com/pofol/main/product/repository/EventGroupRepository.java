@@ -7,4 +7,6 @@ public interface EventGroupRepository {
     int insert(EventGroupDto eventGroupDto) throws Exception;
 
     int delete(Long evt_gp_id) throws Exception;
+
+    EventGroupDto select(Long evt_gp_id) throws Exception;
 }

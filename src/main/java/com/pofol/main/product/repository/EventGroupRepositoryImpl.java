@@ -22,4 +22,10 @@ public class EventGroupRepositoryImpl implements EventGroupRepository{
     public int delete(Long evt_gp_id) throws Exception {
         return sqlSession.delete(namespace + "delete", evt_gp_id);
     }
+
+    @Override
+    public EventGroupDto select(Long evt_gp_id) throws Exception {
+        return sqlSession.selectOne(namespace + "select", evt_gp_id);
+    }
+
 }

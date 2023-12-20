@@ -51,7 +51,6 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
     @Override // 조건에 따른 상품 리스트 정렬 (관리자)
     public List<ProductDto> searchSelectPage(
         SearchProductAdminCondition searchProductAdminCondition, ProductFilterDto productFilterDto, String Stock) throws Exception {
-
         Map<String, Object> map = new HashMap<>();
         map.put("offset", searchProductAdminCondition.getOffset());
         map.put("pageSize", searchProductAdminCondition.getPageSize());
@@ -71,6 +70,8 @@ public class ProductAdminRepositoryImpl implements ProductAdminRepository{
         map.put("keyword", searchProductAdminCondition.getKeyword());
         map.put("Stock", searchProductAdminCondition.getStock());
         map.put("date_type", searchProductAdminCondition.getDate_type());
+        map.put("start_date", searchProductAdminCondition.getStart_date());
+        map.put("end_date", searchProductAdminCondition.getEnd_date());
         map.put("stock_min", productFilterDto.getStock_min());
         map.put("stock_max", productFilterDto.getStock_max());
         map.put("selling", productFilterDto.getSelling());

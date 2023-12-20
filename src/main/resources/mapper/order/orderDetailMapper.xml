@@ -59,15 +59,16 @@
     </select>
 
     <select id="selectForDelivery" resultType="OrderDetailDto">
-        select od.*, m.mem_name
+        select od.*, ct.column_sts, m.mem_name, d.waybill_num, d.dlvy_start_date, d.dlvy_cmplt_date
         from order_detail as od
                  join code_table as ct on od.code_name = ct.code_name
                  left join member as m on od.mem_id = m.mem_id
+                 left join delivery as d on od.ord_det_id = d.ord_det_id
         where ct.code_type = 1
         order by od.ord_det_id desc
     </select>
     
-    <update id="update" parameterType="long">
+    <update id="update" parameterType="OrderDetailDto">
         UPDATE order_detail
         SET
             code_name = #{code_name},
@@ -75,7 +76,7 @@
         WHERE ord_det_id = #{ord_det_id}
     </update>
     
-    <update id="updateStatus" parameterType="long">
+    <update id="updateStatus" parameterType="OrderDetailDto">
         UPDATE spring.order_detail
         SET
             code_name = #{code_name},

@@ -153,12 +153,12 @@ document.addEventListener("DOMContentLoaded", function() {
             dataType:'json',
             data: JSON.stringify(delNotes),
             success: function(result){
-                alert("success" + result);
+                // alert("success" + result);
                 // 창 닫기
                 window.close();
             },
             error: function() {
-                alert("error")
+                // alert("error")
             }
         })
     }

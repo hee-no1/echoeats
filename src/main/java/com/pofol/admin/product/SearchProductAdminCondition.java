@@ -21,6 +21,7 @@ public class SearchProductAdminCondition {
     private Date end_date;
     private String keyword_type = "";
     private String keyword = "";
+    private Integer offset;
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
@@ -38,8 +39,6 @@ public class SearchProductAdminCondition {
     private String price_min;
     private String price_max;
     private String option;
-    private String saleStatus;
-    private String displayStatus;
     private String searchSorting;
     private String rows;
 
@@ -92,8 +91,6 @@ public class SearchProductAdminCondition {
                 .queryParam("price_min", price_min)
                 .queryParam("price_max", price_max)
                 .queryParam("option", option)
-                .queryParam("saleStatus", saleStatus)
-                .queryParam("displayStatus", displayStatus)
                 .queryParam("searchSorting", searchSorting)
                 .queryParam("rows", rows)
                 .queryParam("page", page)
@@ -117,8 +114,6 @@ public class SearchProductAdminCondition {
             .queryParam("price_min", price_min)
             .queryParam("price_max", price_max)
             .queryParam("option", option)
-            .queryParam("saleStatus", saleStatus)
-            .queryParam("displayStatus", displayStatus)
             .queryParam("searchSorting", searchSorting)
             .queryParam("rows", rows)
             .queryParam("page", page)
@@ -202,20 +197,16 @@ public class SearchProductAdminCondition {
         this.option = option;
     }
 
-    public void setSaleStatus(String saleStatus) {
-        this.saleStatus = saleStatus;
-    }
-
-    public void setDisplayStatus(String displayStatus) {
-        this.displayStatus = displayStatus;
-    }
-
     public void setSearchSorting(String searchSorting) {
         this.searchSorting = searchSorting;
     }
 
     public void setRows(String rows) {
         this.rows = rows;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 
     @Override
