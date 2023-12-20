@@ -1,10 +1,7 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.member.dto.*;
-import com.pofol.main.member.repository.AddressRepository;
-import com.pofol.main.member.repository.CouponRepository;
-import com.pofol.main.member.repository.DelNotesRepository;
-import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.member.repository.*;
 import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
@@ -18,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
+    private final PointRepository pointRepository;
     private final CartRepository cartRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
@@ -93,22 +93,28 @@ public class OrderServiceImpl implements OrderService{
             oc.setTot_prod_name(tot_prod_name);
 
 
-            //회원정보, 배송지, 배송요청사항, 쿠폰정보
             //회원정보 가져오기
-            MemberDto mem = memRepo.selectMember(mem_id);
-            oc.setMemberDto(mem);
+            oc.setMemberDto(memRepo.selectMember(mem_id));
 
             //배송지
-            AddressDto address = addressRepository.selectDefaultAddress(mem_id);
-            oc.setAddressDto(address);
+            oc.setAddressDto(addressRepository.selectDefaultAddress(mem_id));
 
             //배송요청사항 가져오기
-            DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
-            oc.setDelNotesDto(delNotes);
+            oc.setDelNotesDto(delNotesRepository.select_delNotes(mem_id));
 
-            //쿠폰 정보 가져오기
-            List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
+            //쿠폰 정보 가져오기. (단, 총 주문 금액이 쿠폰 사용 가능한 최소 금액보다 클 경우에만 사용 가능)
+            List<CouponJoinDto> couponJoinDtos =  Collections.synchronizedList(couponRepository.selectMembersWithCoupons(mem_id));
+            Iterator<CouponJoinDto> it = couponJoinDtos.iterator();
+            while (it.hasNext()){
+                if(tot_prod_price < it.next().getMin_amt()){
+                    it.remove();
+                }
+            }
             oc.setCouponList(couponJoinDtos);
+
+            //적립금 정보 가져오기
+            oc.setAvailablePoint(pointRepository.availablePoint(mem_id));
+
             return oc;
 
         } catch (Exception e) {

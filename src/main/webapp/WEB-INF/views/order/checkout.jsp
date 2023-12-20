@@ -127,7 +127,11 @@
                             <button  class="couponListBtn">
                                 <div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"></span>
                                     <div class="css-kmlyvg e1ro4vie3">
-                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}</strong>
+                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}
+<%--                                            <c:if test="${coupon.min_amt ne 0}">--%>
+<%--                                                &nbsp;(${coupont.min_amt}이상 주문시 사용 가능)--%>
+<%--                                            </c:if>--%>
+                                        </strong>
                                         <span class="css-bs5mk4 e1ro4vie0 coupon${coupon.cp_id}">${coupon.cp_del_date} 만료</span>
                                     </div>
                                 </div>
@@ -142,7 +146,7 @@
                 <div class="css-pkhh3q e150alo82"><span class="css-ln1csn e150alo81">적립금</span><div class="css-82a6rk e150alo80">
                     <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4">
                         <span id="point">
-                        <fmt:formatNumber value="4000" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
+                        <fmt:formatNumber value="${checkout.availablePoint}" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
 
                     <%-- 사용할 적립금 입력 --%>
                     <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">

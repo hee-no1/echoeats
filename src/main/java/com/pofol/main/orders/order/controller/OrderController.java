@@ -2,6 +2,8 @@ package com.pofol.main.orders.order.controller;
 
 import java.util.List;
 
+import com.pofol.main.member.dto.PointDto;
+import com.pofol.main.member.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.DelNotesDto;
 import com.pofol.main.member.dto.MemberDto;
-import com.pofol.main.member.service.AddressService;
-import com.pofol.main.member.service.CouponService;
-import com.pofol.main.member.service.DelNotesService;
-import com.pofol.main.member.service.MemberService;
 import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
@@ -39,6 +37,7 @@ public class OrderController {
     private final AddressService addressService;
     private final DelNotesService delNotesService;
     private final CouponService couponService;
+    private final PointService pointService;
     private final OrderService orderService;
     private final PaymentService paymentService;
     private final PaymentDiscountService paymentDiscountService;
@@ -51,7 +50,6 @@ public class OrderController {
     //장바구니를 통해 넘어오는 정보
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, HttpSession session){
-
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
         try{
             OrderCheckout orderCheckout = orderService.writeCheckout(items);
@@ -66,8 +64,10 @@ public class OrderController {
 
     @GetMapping("/checkout")
     public String showCheckout(Model m, HttpSession session){
-
         OrderCheckout checkout = (OrderCheckout) session.getAttribute("checkout");
+        if (checkout == null) {
+            return "redirect:/cart";
+        }
         m.addAttribute("checkout", checkout);
         return "/order/checkout";
     }
@@ -95,7 +95,8 @@ public class OrderController {
 
             /* DB 데이터 */
             orderService.modifyOrder(ord_id, "ORDER_COMPLETE"); //주문 table 변경
-            Long cp_id = paymentDiscountService.getPaymentDiscount(ord_id).getCoupon_id(); //paymentDiscount 테이블에서 coupon_id 가져오기
+            PaymentDiscountDto paymentDiscount = paymentDiscountService.getPaymentDiscount(ord_id);//paymentDiscount 테이블에서 coupon_id 가져오기
+            Long cp_id = paymentDiscount.getCoupon_id();
             if(cp_id != null){  //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
                 couponService.modifyCouponStatus(cp_id, mem_id);
             }
@@ -104,6 +105,18 @@ public class OrderController {
             String mem_name = memberService.select(mem_id).getMem_name(); //주문자 이름
             AddressDto address = addressService.getDefaultAddress(mem_id); //배송지
             PaymentDto payment = paymentService.getPayment(ord_id); //실 결제 금액, 적립금 (,주문번호) <- 결제 table에서 가지고 오기
+
+            //사용한 적립금 db에 insert
+            Integer pointUsed = paymentDiscount.getPoint_used();
+            if(pointUsed != 0){
+                PointDto point = new PointDto(pointUsed, "사용", "구매 시 사용", mem_id, ord_id);
+                pointService.regPoint(point);
+            }
+            //결제 후 등급에 따라 생성된 적립금 insert
+            if(payment.getTot_pay_price() != 0){ //적립금 db에 저장, 적립금이 0일때는 굳이 insert할 필요없다.
+                PointDto point = new PointDto(payment.getReserves(), "적립", "구매적립", mem_id, ord_id);
+                pointService.regPoint(point);
+            }
 
             m.addAttribute("mem_name", mem_name);
             m.addAttribute("address", address);

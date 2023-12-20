@@ -114,6 +114,7 @@ public class PointDto {
     public void setOrd_id(Long ord_id) {
         this.ord_id = ord_id;
     }
+
     @Override
     public String toString() {
         return "PointDto{" +
@@ -123,6 +124,7 @@ public class PointDto {
                 ", reason='" + reason + '\'' +
                 ", his_end_date=" + his_end_date +
                 ", mem_id='" + mem_id + '\'' +
+                ", ord_id=" + ord_id +
                 '}';
     }
 }
