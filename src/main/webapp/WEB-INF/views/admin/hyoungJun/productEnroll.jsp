@@ -140,7 +140,7 @@
                                                                placeholder="판매가에서" max="99" min="0"
                                                                minlength="1" maxlength="2"
                                                                value="0" name="disc_rate"
-                                                               type="number">
+                                                               type="text">
                                                         <input name="discount-rate" type="hidden" value="0">
                                                     </div>
                                                     <span class="input-group-addon">%</span>

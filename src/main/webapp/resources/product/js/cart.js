@@ -193,7 +193,7 @@ $(document).ready(function () {
         });
         updateCartTotals();
     };
-  
+
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
         goAddressPage.addEventListener('click', function () {
@@ -218,6 +218,7 @@ $(document).ready(function () {
     orderButton.addEventListener('click', function () {
         let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
         if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+            console.log(hiddenInputs.length);
             alert('장바구니 상품을 선택해 주세요.')
             return;
         }
@@ -279,7 +280,7 @@ $(document).ready(function () {
         let productAmount = 0;
         let discountAmount = 0;
         let shippingCost = 3000; // 배송비
-
+        makeInputHidden();
         productCartCheck.forEach((checkbox, index) => {
             if (checkbox.checked) {
                 let qty = cartProduct[index].qty;
@@ -326,14 +327,14 @@ $(document).ready(function () {
 
     for (let i = 0; i < choiceDelete.length; i++) {
         choiceDelete[i].addEventListener('click', (e) => {
-            console.log(choiceDelete[i].disabled);
+            if (!confirm("정말로 삭제하시겠습니까?")) {
+                return;
+            }
             e.preventDefault();
             const checkboxes = document.querySelectorAll('.cartProductCheck');
             let j = 0;
             checkboxes.forEach(function (checkbox) {
                 if (checkbox.checked) {
-                    // const cartList = checkbox.closest('.css-1d6kgf6');
-                    // cartList.remove();
                     productRemoveAjax(j);
                 }
                 j++;
