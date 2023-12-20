@@ -46,7 +46,7 @@
                             </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_pwd" placeholder="비밀번호를 입력해주세요">
+                    <input type="password" id="mem_pwd" placeholder="비밀번호를 입력해주세요">
                     <div id="pwdErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
@@ -61,7 +61,7 @@
                             </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
+                    <input type="password" id="mem_pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
                     <div id="pwd2ErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
