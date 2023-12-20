@@ -26,7 +26,10 @@
         where b.cp_sts = 'UNUSED' AND a.mem_id = #{id}
     </select>
 
-
+    <select id="member_cp_qty_count" parameterType="String" resultType="int">
+        select COALESCE(SUM(cp_qty), 0) from `mem-coupon`
+        where mem_id = #{mem_id}
+    </select>
 
 
 
