@@ -66,8 +66,13 @@ public class CartController {
                 model.addAttribute("memberGrade", memberGrade);
 
                 AddressDto defaultAddress = addressService.getDefaultAddress(memberID);
-                model.addAttribute("address", defaultAddress.getAddr());
-                model.addAttribute("detailAddress", defaultAddress.getDtl_addr());
+                if (defaultAddress != null) {
+                    model.addAttribute("address", defaultAddress.getAddr());
+                    model.addAttribute("detailAddress", defaultAddress.getDtl_addr());
+                } else {
+                    model.addAttribute("address", "배송지를 설정하세요.");
+                    model.addAttribute("addressSetting", "no");
+                }
             }
 
         } catch (Exception e) {
@@ -89,16 +94,13 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
         }
 
-        for (CartDto cartDto : cartDtoList) {
-            if (cartDto.getQty() != 0) {
-                try {
-                    cartService.saveCartProduct(cartDto);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
-                }
-            }
+        try {
+            cartService.saveCartProduct(cartDtoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
         }
+
         return ResponseEntity.ok().body("Successfully put in the shopping cart");
     }
 

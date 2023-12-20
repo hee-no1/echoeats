@@ -196,9 +196,11 @@ $(document).ready(function () {
 
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
-        goAddressPage.addEventListener('click', function () {
-            window.location.href = '/address/'
-        })
+        for (let i = 0; i < goAddressPage.length; i++) {
+            goAddressPage[i].addEventListener('click', function () {
+                window.location.href = '/address/'
+            })
+        }
     }
 
     // 전체체크박스 클릭 시 전체선택o + 전체선택x

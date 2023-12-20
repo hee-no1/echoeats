@@ -2,6 +2,7 @@ package com.pofol.main.orders.order.service;
 
 import com.pofol.main.member.dto.*;
 import com.pofol.main.member.repository.*;
+import com.pofol.main.member.service.PointService;
 import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
-    private final PointRepository pointRepository;
+    private final PointService pointService;
     private final CartRepository cartRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
@@ -113,7 +114,7 @@ public class OrderServiceImpl implements OrderService{
             oc.setCouponList(couponJoinDtos);
 
             //적립금 정보 가져오기
-            oc.setAvailablePoint(pointRepository.availablePoint(mem_id));
+            oc.setAvailablePoint(pointService.getAvailablePoint(mem_id));
 
             return oc;
 
