@@ -5,7 +5,7 @@ const productCartCheck = document.querySelectorAll(".cartProductCheck");
 const removeButton = document.querySelectorAll('.css-h5zdhc');
 const cartOrderForm = document.querySelector('#cartOrderForm');
 const orderButton = document.querySelector('.orderButton');
-const goAddressPage = document.querySelector('.css-122i3z7');
+const goAddressPage = document.querySelectorAll('.addressButton');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = function (value) {
@@ -178,9 +178,11 @@ $(document).ready(function () {
 
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
-        goAddressPage.addEventListener('click', function () {
-            window.location.href = '/address/'
-        })
+        for (let i = 0; i < goAddressPage.length; i++) {
+            goAddressPage[i].addEventListener('click', function () {
+                window.location.href = '/address/'
+            })
+        }
     }
 
 
@@ -248,14 +250,16 @@ $(document).ready(function () {
 
 
     // 장바구니 상품 주문하기 버튼
-    orderButton.addEventListener('click', function () {
-        let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
-        if (hiddenInputs.length === null || hiddenInputs.length === 0) {
-            alert('장바구니 상품을 선택해 주세요.')
-            return;
-        }
-        orderButton.type = 'submit';
-    })
+    if (orderButton !== null) {
+        orderButton.addEventListener('click', function () {
+            let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+            if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+                alert('장바구니 상품을 선택해 주세요.')
+                return;
+            }
+            orderButton.type = 'submit';
+        })
+    }
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')

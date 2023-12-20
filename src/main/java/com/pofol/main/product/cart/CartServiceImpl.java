@@ -2,6 +2,8 @@ package com.pofol.main.product.cart;
 
 import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,16 +33,27 @@ public class CartServiceImpl implements CartService{
 
     @Override // 장바구니에 상품을 저장
     public int saveCartProduct(CartDto cartDto) throws Exception {
+
+
+//    for (CartDto cartDto : cartDtoList) {
+//        String optProdId = cartDto.getOpt_prod_id();
+//        Long prodId = cartDto.getProd_id();
+//        Integer qty = cartDto.getQty();
+//    }
+
+
+
+
         // 선택한 상품의 상품 아이디
         String optProdId = cartDto.getOpt_prod_id();
         Long prodId = cartDto.getProd_id();
         Integer qty = cartDto.getQty();
 
         List<CartDto> cartProduct = cartRepository.selectAllCartProduct(cartDto.getMem_id());
-        System.out.println("cartDto = " + cartDto);
+
         for (CartDto cp : cartProduct) {
 
-            // update (이미 담긴 상품을 또 담을 시 수량 증가)
+//          update (이미 담긴 상품을 또 담을 시 수량 증가)
             if (optProdId != null && cp.getOpt_prod_id() != null && cp.getOpt_prod_id().equals(optProdId)) {
                 cartDto.setQty(cp.getQty() + qty);
                 return  cartRepository.updateCartProduct(cartDto);
@@ -49,7 +62,7 @@ public class CartServiceImpl implements CartService{
                 return  cartRepository.updateCartProduct(cartDto);
             }
         }
-        // 새로운 상품이면 장바구니에 insert
+//      새로운 상품이면 장바구니에 insert
         return cartRepository.insertCartProduct(cartDto);
     }
 
@@ -85,6 +98,11 @@ public class CartServiceImpl implements CartService{
     @Override // 장바구니 상품 수량 계산
     public CartDto getCartProductPrice(CartDto cartDto) throws Exception {
 
+        // 회원 아이디 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String memberID = authentication.getName();
+        cartDto.setMem_id(memberID);
+        
         Integer prodPrice = cartDto.getProd_price();
         Integer prodDiscPrice = cartDto.getDisc_price();
         Integer optPrice = cartDto.getOpt_price();

@@ -181,8 +181,15 @@
                             <div class="css-s6py67">
                                 <span type="direct" class="css-z4mca9 e1jlkvf51">에코배송</span>
                             </div>
-                            <button class="css-122i3z7 e4nu7ef3" type="button" height="36" radius="3">
-                                <span class="css-nytqmg e4nu7ef1">배송지 변경</span>
+                            <button class="css-122i3z7 e4nu7ef3 addressButton" type="button" height="36" radius="3">
+                                <span class="css-nytqmg e4nu7ef1">
+                                    <c:if test="${addressSetting ne 'no'}">
+                                        배송지 변경
+                                    </c:if>
+                                    <c:if test="${addressSetting eq 'no'}">
+                                        배송지 설정
+                                    </c:if>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -219,9 +226,17 @@
                 <div class="css-8qz8ia e1mybczi1">
                     <sec:authorize access="isAuthenticated()">
                     <form id="cartOrderForm" action="${pageContext.request.contextPath}/order/checkout" method="post">
-                    <button class="css-fwelhw e4nu7ef3 orderButton" type="button" height="56"><span
-                        class="css-nytqmg e4nu7ef1">주문하기</span>
-                    </button>
+
+                    <c:if test="${addressSetting ne 'no'}">
+                        <button class="css-fwelhw e4nu7ef3 orderButton" type="button" height="56">
+                            <span class="css-nytqmg e4nu7ef1">주문하기</span>
+                        </button>
+                    </c:if>
+                    <c:if test="${addressSetting eq 'no'}">
+                        <button class="css-fwelhw e4nu7ef3 addressButton" type="button" height="56">
+                            <span class="css-nytqmg e4nu7ef1">배송지 설정</span>
+                        </button>
+                    </c:if>
                     <ul class="css-19kxq7d">
                         <li class="css-1741abm ejr204i0">쿠폰/적립금은 주문서에서 사용 가능합니다</li>
                         <li class="css-1741abm ejr204i0">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
