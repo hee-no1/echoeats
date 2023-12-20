@@ -159,7 +159,6 @@ $(document).ready(function () {
             } else {
                 cartProduct.style.display = "none"
                 upDownButton.setAttribute("transform", "rotate(135 15.5 16.5)")
-
             }
         });
     })
@@ -340,6 +339,21 @@ $(document).ready(function () {
                 }
                 j++;
             });
+            makeInputHidden();
         });
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const redirectToProductDetail = (prodId) => {
+        window.location.href = 'product/' + prodId; // URL 이동
+    };
+
+    const productLinks = document.querySelectorAll('.css-e0dnmk.esoayg87');
+    productLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const prodId = this.getAttribute('data-prod-id');
+            redirectToProductDetail(prodId);
+        });
+    });
 });
