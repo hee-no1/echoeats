@@ -1,6 +1,9 @@
 package com.pofol.main.member.handler;
 
+import com.pofol.main.member.repository.CouponRepository;
+import com.pofol.main.member.service.CouponService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -21,10 +24,27 @@ import java.util.List;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
+    @Autowired
+    CouponService couponService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         System.out.println("---------------LoginSuccessHandler---------------");
+
+        //String username = request.getParameter("mem_id");
+        String username = authentication.getName();
+        if(username != null){
+            System.out.println("username : "+username);
+            //nullpointer 에러 발생
+            //회원가입 후 로그인 할 때
+            int cp_qty = couponService.member_cp_qty_count(username);
+            System.out.println(cp_qty);
+            request.getSession().setAttribute("mem_have_cp_qty", cp_qty);
+
+        }
+
+
 
 
         //가로챈 주소를 보유

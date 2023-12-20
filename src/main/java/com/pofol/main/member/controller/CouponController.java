@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.ContentHandler;
 import java.text.ParseException;
 import java.util.*;
@@ -60,18 +61,19 @@ public class CouponController {
         model.addAttribute("download", couponDownloadDtos);
 
         model.addAttribute("coupon", coupon);
-        return "member/coupon";
+
+        model.addAttribute("mypage", "coupon");
+        return "member/mypage";
     }
 
 
     @GetMapping("/coupon_dw")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> coupon_dwGet(long cp_id, int dw_id, Authentication authentication) throws ParseException {
+    public ResponseEntity<Map<String, Object>> coupon_dwGet(long cp_id, int dw_id, Authentication authentication, HttpServletRequest request) throws ParseException {
         System.out.println(cp_id);
         System.out.println(dw_id);
         //쿠폰id 로 일단 회원 보유 여부를 따진다
         //있으면 -> 수량을 update,  없으면 -> insert
-
 
         if(authentication.getName() != null){
 
@@ -153,6 +155,11 @@ public class CouponController {
                     responseMap.put("download_cp_qty", download_cp_qty);  //내가 받은 쿠폰의 남은 수량
                     responseMap.put("download_dw_id", dw_id);  //내가 다운받은 쿠폰 아이디 (수량 최신화를 위해 사용)
                     responseMap.put("coupon_detail", couponJoinDto1);
+
+                    //현재 보유중인 쿠폰 수량 최신화
+                    int mem_have_cp_qty = couponService.member_cp_qty_count(authentication.getName());
+                    request.getSession().setAttribute("mem_have_cp_qty", mem_have_cp_qty);
+                    responseMap.put("mem_have_cp_qty", mem_have_cp_qty);
 
                     return new ResponseEntity<>(responseMap, HttpStatus.OK);
 

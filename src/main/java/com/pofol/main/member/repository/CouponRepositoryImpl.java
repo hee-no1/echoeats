@@ -87,4 +87,9 @@ public class CouponRepositoryImpl implements CouponRepository{
         return session.update(namespace + "updateMemberCouponStatus", memCouponDto);
     }
 
+    @Override
+    public int member_cp_qty_count(String mem_id) {
+        return session.selectOne(namespace+"member_cp_qty_count", mem_id);
+    }
+
 }
