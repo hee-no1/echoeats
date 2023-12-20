@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ecoeats.productAdminMapper">
+
+<!--    상품 판매, 진열, 재고 상태 수정-->
+    <update id="update" parameterType="ProductDto">
+        UPDATE product
+        SET
+        sale_sts = #{sale_sts},
+        disp_sts = #{disp_sts},
+        prod_mod_date = now(),
+        prod_qty = #{prod_qty}
+        WHERE prod_id = #{prod_id}
+    </update>
+
+<!--    옵션 상품 판매, 재고 상태 수정-->
+    <update id="optionUpdate">
+        UPDATE option_product
+        SET
+        opt_prod_qty = #{opt_prod_qty},
+        opt_prod_sts = #{opt_prod_sts}
+        WHERE prod_id = #{prod_id}
+    </update>
+
+<!--    상품 판매시작일 + 판매종료일 가져오기-->
+    <select id="selectSaleDate" parameterType="map" resultType="ProductDto">
+        SELECT sel_str_date, sel_end_date
+        FROM product
+        <where>
+            <if test='range == "start"'>
+                AND sel_str_date &lt;= #{currentDate}
+            </if>
+            <if test='range == "end"'>
+                AND sel_end_date &lt;= #{currentDate}
+            </if>
+        </where>
+    </select>
+
+    <!-- 카테고리 리스트 -->
+    <select id="cateList" resultType="CategoryDto">
+        SELECT *
+        FROM category
+        ORDER BY cat_code
+    </select>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='keyword_type == "ProductName"'>
+                AND p.prod_name LIKE concat('%',#{keyword} ,'%')
+            </when>
+            <when test='keyword_type == "ProductNumber"'>
+                AND p.prod_id = #{keyword}
+            </when>
+            <when test='keyword_type == "DeliveryType"'>
+                AND i.dlvy_type = #{keyword}
+            </when>
+            <when test='keyword_type == "Brand"'>
+                AND i.brand = #{keyword}
+            </when>
+        </choose>
+        <choose>
+            <when test='midCategory != null and midCategory != ""'>
+                AND p.cat_code = #{midCategory}
+            </when>
+            <when test='midCategory == null and midCategory == ""'>
+                AND c.parent_code = #{bigCategory}
+            </when>
+        </choose>
+        <if test='start_date != "" and end_date != "" and start_date != null and end_date != null'>
+            <choose>
+                <when test='date_type == "ProductRegisterDate"'>
+                    AND p.prod_rg_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "ProductModifyDate"'>
+                    AND p.prod_mod_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "saleStartDate"'>
+                    AND p.sel_str_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+                <when test='date_type == "saleEndDate"'>
+                    AND p.sel_end_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
+                </when>
+            </choose>
+        </if>
+        <if test='selling != null and selling != "" and selling != "A"'>
+            AND p.sale_sts = #{selling}
+        </if>
+        <if test='display != null and display != "" and display != "A"'>
+            AND p.disp_sts = #{display}
+        </if>
+        <if test='Stock != null and Stock != "" and Stock != "A"'>
+            <if test='Stock == "stockNormal"'>
+                AND p.prod_qty >= 51
+            </if>
+            <if test='Stock == "stockLack"'>
+                AND p.prod_qty BETWEEN 1 AND 50
+            </if>
+            <if test='Stock == "stockOut"'>
+                AND p.prod_qty = 0
+            </if>
+        </if>
+        <choose>
+            <when test='stock_min != null and stock_min != "" and stock_max != null and stock_max != ""'>
+                AND p.prod_qty BETWEEN #{stock_min} AND #{stock_max}
+            </when>
+            <when test='stock_min != null and stock_min != ""'>
+                AND p.prod_qty >= #{stock_min}
+            </when>
+            <when test='stock_max != null and stock_max != ""'>
+                AND p.prod_qty &lt;= #{stock_max}
+            </when>
+        </choose>
+        <choose>
+            <when test='price == "product"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.prod_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.prod_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.prod_price &lt;= #{price_max}
+                </if>
+            </when>
+            <when test='price == "custom"'>
+                <if test='price_min != null and price_min != "" and price_max != null and price_max != ""'>
+                    AND p.disc_price BETWEEN #{price_min} AND #{price_max}
+                </if>
+                <if test='price_min != null and price_min != ""'>
+                    AND p.disc_price >= #{price_min}
+                </if>
+                <if test='price_max != null and price_max != ""'>
+                    AND p.disc_price &lt;= #{price_max}
+                </if>
+            </when>
+        </choose>
+        <if test='option != null and option != "" and option != "A"'>
+            AND p.is_opt = #{option}
+        </if>
+    </sql>
+
+<!--    상품 목록 카운트 (관리자)-->
+    <select id="searchResultCnt" parameterType="map" resultType="int">
+        SELECT count(*)
+        FROM product p, product_info i, category c
+        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+        <include refid="searchCondition"/>
+    </select>
+
+    <!--    상품 목록 검색 (관리자)-->
+    <select id="searchSelectPage" parameterType="map" resultType="ProductDto">
+        SELECT *
+        FROM product p, product_info i, category c
+        WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
+        <include refid="searchCondition"/>
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- Order -->
+		<typeAlias alias="OrderDto" type="com.pofol.main.orders.order.domain.OrderDto"/>
+		<typeAlias alias="OrderDetailDto" type="com.pofol.main.orders.order.domain.OrderDetailDto"/>
+		<typeAlias alias="OrderHistoryDto" type="com.pofol.main.orders.order.domain.OrderHistoryDto"/>
+		<!-- Payment -->
+		<typeAlias alias="PaymentDiscountDto" type="com.pofol.main.orders.payment.domain.PaymentDiscountDto"/>
+		<typeAlias alias="PaymentDto" type="com.pofol.main.orders.payment.domain.PaymentDto"/>
+		<typeAlias alias="PaymentHistoryDto" type="com.pofol.main.orders.payment.domain.PaymentHistoryDto"/>
+		<!-- Delivery -->
+		<typeAlias alias="DeliveryDto" type="com.pofol.main.orders.delivery.domain.DeliveryDto"/>
+		<!-- CodeTable -->
+		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders.order.domain.CodeTableDto"/>
+		<!-- paging -->
+		<typeAlias alias="SearchOrderCondition" type="com.pofol.main.orders.order.domain.SearchOrderCondition"/>
+		<typeAlias alias="FaqDto" type="com.pofol.main.board.domain.FaqDto"/>
+		<typeAlias alias="NoticeDto" type="com.pofol.main.board.domain.NoticeDto"/>
+		<typeAlias alias="SearchBoardCondition" type="com.pofol.main.board.domain.SearchBoardCondition"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
+		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
+		<typeAlias alias="MemberDto" type="com.pofol.main.member.dto.MemberDto"/>
+		<typeAlias alias="CouponDto" type="com.pofol.main.member.dto.CouponDto"/>
+		<typeAlias alias="MemCouponDto" type="com.pofol.main.member.dto.MemCouponDto"/>
+		<typeAlias alias="CouponJoinDto" type="com.pofol.main.member.dto.CouponJoinDto"/>
+		<typeAlias alias="GradeDto" type="com.pofol.main.member.dto.GradeDto"/>
+		<typeAlias alias="DelNotesDto" type="com.pofol.main.member.dto.DelNotesDto"/>
+		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
+		<typeAlias alias="ProductOrderCheckout" type="com.pofol.main.orders.order.domain.ProductOrderCheckout"/>
+		<!-- Mypage -->
+		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
+		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>
+		<typeAlias alias="InquiryPrdDto" type="com.pofol.main.orders.inquiry.domain.InquiryPrdDto"/>
+		<typeAlias alias="MyQnaDto" type="com.pofol.main.board.domain.MyQnaDto"/>
+
+		<!-- product -->
+		<typeAlias alias="SearchProductCondition" type="com.pofol.main.product.domain.SearchProductCondition"/>
+		<typeAlias alias="ProductDto" type="com.pofol.main.product.domain.ProductDto"/>
+		<typeAlias alias="ProductImageDto" type="com.pofol.main.product.domain.ProductImageDto"/>
+		<typeAlias alias="EventGroupDto" type="com.pofol.main.product.domain.EventGroupDto"/>
+		<typeAlias alias="SearchProductAdminCondition" type="com.pofol.admin.product.SearchProductAdminCondition"/>
+		<typeAlias alias="CategoryDto" type="com.pofol.main.product.category.CategoryDto"/>
+		<typeAlias alias="OptionProductDto" type="com.pofol.main.product.domain.OptionProductDto"/>
+		<typeAlias alias="SelectedItemsDto" type="com.pofol.main.product.cart.SelectedItemsDto"/>
+		<typeAlias alias="CartDto" type="com.pofol.main.product.cart.CartDto"/>
+		<typeAlias alias="ProQnaDto" type="com.pofol.main.board.domain.ProQnaDto"/>
+		<!-- product -->
+
+		<!-- member -->
+		<typeAlias alias="PointDto" type="com.pofol.main.member.dto.PointDto"/>
+		<typeAlias alias="AddressDto" type="com.pofol.main.member.dto.AddressDto"/>
+		<typeAlias alias="CouponDownloadDto" type="com.pofol.main.member.dto.CouponDownloadDto"/>
+	</typeAliases>
+</configuration>

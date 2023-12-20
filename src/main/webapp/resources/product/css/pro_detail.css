@@ -1,0 +1,927 @@
+.css-8sw7yu {
+  line-height: 19px;
+  font-weight: 400;
+  color: rgb(153, 153, 153);
+  text-align: start;
+}
+.css-83ihkd {
+  display: block;
+  padding-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 21px;
+  color: rgb(51, 51, 51);
+  text-align: start;
+}
+.css-12iohw3 {
+  padding: 20px 0px 40px;
+  text-align: start;
+}
+.css-16ax551 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 41px;
+  letter-spacing: -0.5px;
+  color: rgb(51, 51, 51);
+  text-align: start;
+}
+.css-14dfl2x {
+  border-top: 1px solid rgb(51, 51, 51);
+  text-align: start;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 버튼 4개 */
+.css-1le17tz {
+  z-index: 20;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  box-shadow: inset 0 -0.5px 0 0 #ddd;
+  background-color: #fff;
+  margin-top: 50px;
+
+  justify-content: center;
+    display: flex;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+.css-tse2s2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 60px;
+  width: 1000px;
+}
+.css-1tzhzcg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-width: 1px 0 1px 1px;
+  border-color: #eee;
+  border-style: solid;
+  background-color: #fafafa;
+}
+.css-1t0ft7s {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+.css-1tzhzcg .name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+}
+
+
+
+
+
+
+
+
+
+/* 상품 상세 */
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+}
+.css-0{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.css-18eozqj:first-of-type {
+  padding-top: 40px;
+}
+
+.css-1d3w5wq {
+  width: 100%;
+}
+.css-8k5a6c {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  max-width: 1010px;
+  padding: 0px 10px;
+  margin: 0px auto;
+}
+.css-12peuyp {
+  width: 100%;
+}
+element.style {
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  inset: 0px;
+}
+.css-12peuyp > span {
+  position: unset !important;
+}
+element.style {
+  position: absolute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  margin: auto;
+  display: block;
+  width: 0px;
+  height: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+.css-12peuyp > span .autoImage {
+  object-fit: contain !important;
+  position: relative !important;
+  height: auto !important;
+}
+.css-1zjvv7 {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+img, legend {
+  border: 0;
+  vertical-align: top;
+}
+
+
+
+/* 상품 상세 */
+.css-18eozqj {
+  position: relative;
+  width: 1010px;
+  padding-bottom: 100px;
+}
+.css-8k5a6c {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  max-width: 1010px;
+  padding: 0px 10px;
+  margin: 0px auto;
+}
+.css-186pvss {
+  padding: 72px 0px;
+  border-top: 1px solid rgb(238, 238, 238);
+  font-family: "Noto Sans";
+}
+.css-nd38pl {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 41px;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: rgb(102, 102, 102);
+}
+.css-1lb3ltj {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top: 36px;
+  font-size: 13px;
+  color: rgb(51, 51, 51);
+  line-height: 18px;
+  letter-spacing: -0.5px;
+}
+ol, ul {
+  list-style-type: none;
+      list-style:none;
+}
+.css-1exh1as:nth-of-type(1) {
+  padding-top: 18px;
+}
+.css-1exh1as {
+  width: 180px;
+  padding: 0px 18px 18px;
+  background-color: rgb(247, 247, 247);
+  word-break: break-all;
+  white-space: pre-line;
+}
+.css-15ohb0b:nth-of-type(2) {
+  padding-top: 18px;
+}
+.css-15ohb0b {
+  display: flex;
+  width: 325px;
+  padding: 0px 18px 18px;
+  color: rgb(102, 102, 102);
+  white-space: pre-line;
+}
+.css-1exh1as:nth-of-type(3) {
+  padding-top: 18px;
+}
+
+.css-15ohb0b:nth-of-type(4) {
+  padding-top: 18px;
+}
+.css-1bprc16 {
+  width: 100%;
+  background-color: rgb(250, 250, 250);
+  padding: 18px;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+.css-1bprc16 .title {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.css-1bprc16 .title > svg {
+  margin-right: 6px;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+.css-1bprc16 .title > span {
+  color: rgb(51, 51, 51);
+  font-size: 13px;
+  line-height: 19px;
+}
+.css-1bprc16 .description {
+  color: rgb(153, 153, 153);
+  font-size: 13px;
+  line-height: 18px;
+  padding-top: 2px;
+  word-break: break-word;
+}
+.css-1vt9a6q {
+  padding: 100px 0px 88px;
+  border-top: 1px solid rgb(238, 238, 238);
+}
+.css-1azakc {
+  text-align: center;
+}
+.css-1wepwlf {
+  font-weight: 400;
+  font-size: 33px;
+  color: rgb(102, 102, 102);
+}
+.css-4xwwak {
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 21px;
+}
+.css-12dlzwv {
+  width: 315px;
+  padding-top: 59px;
+}
+.css-it4xr {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+  text-align: center;
+}
+.css-it4xr::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0px auto 10px;
+  background: url(https://res.kurly.com/pc/ico/1910/01_check.svg) 50% 50% no-repeat;
+}
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+}
+*, :after, :before, legend, td, th {
+  padding: 0;
+}
+.css-164ekbt {
+  padding-top: 22px;
+  font-weight: 300;
+  font-size: 16px;
+  color: rgb(51, 51, 51);
+  line-height: 25px;
+  text-align: center;
+}
+.css-1ldxevt {
+  display: block;
+  padding-top: 7px;
+  font-size: 11px;
+  color: rgb(102, 102, 102);
+}
+.css-csns7h {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+  text-align: center;
+}
+.css-r24z76 {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+  text-align: center;
+}
+.css-1s9l9oc {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+  text-align: center;
+}
+.css-iktv7d {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+  text-align: center;
+}
+
+/* 고객 행복 센터 */
+.css-o0wurt {
+  padding: 60px 5px 0px;
+  border-top: 1px solid rgb(221, 221, 221);
+}
+.css-rbx0sz {
+  font-weight: 500;
+  font-size: 28px;
+  color: rgb(102, 102, 102);
+}
+.css-1vh38tr {
+  padding-top: 31px;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgb(102, 102, 102);
+  line-height: 23px;
+}
+.css-ekock0 {
+  display: block;
+  padding-top: 6px;
+  font-weight: 300;
+  font-size: 16px;
+}
+.css-15889fd {
+  display: flex;
+  padding: 59px 0px 71px;
+}
+.css-18zkc1e {
+  flex-shrink: 0;
+  width: 340px;
+}
+.css-x0he4f {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+  line-height: 27px;
+}
+strong {
+  font-weight: 700;
+}
+.css-x0he4f::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  margin: 5px 10px 0px 0px;
+  background-color: #00c73c;
+  vertical-align: top;
+}
+.css-1qjuprf {
+  display: block;
+  padding-top: 9px;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 25px;
+}
+.css-xjrpkm {
+  display: block;
+  padding-top: 13px;
+  font-weight: 300;
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+  line-height: 22px;
+}
+.css-xwfhcz {
+  display: flex;
+  position: relative;
+  padding: 14px 0px 17px;
+  border-top: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  border-image: initial;
+  border-bottom: none;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 27px;
+}
+.css-1whdyd5 {
+  width: 179px;
+  padding-left: 29px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+}
+.css-1l0p3iw {
+  white-space: pre-line;
+}
+.css-1t0iw3m {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  margin-top: -14px;
+  padding-right: 20px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: #00c73c;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+}
+.css-1t0iw3m::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 8px;
+  width: 14px;
+  height: 8px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAQCAYAAAFyyC95AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHKADAAQAAAABAAAAEAAAAAChTRmjAAABQklEQVQ4EaVTAVLCQAzMweuUR1jRZ+hQRp6BwCfU12np9rppclwhameYXJLdzSUXpJMuyfjp+UHaTh1mnQViCOjBaJQxQcAFG3m7d3qjM8Qbad/xswCw9UYW4BJkAFAmErQ7+f7o2z2cpH0iuGZRqpHtD3I6Hqj2Ta9rApZwks0iSZrmygpW4CibZ1YggbhZW+vLgXOPl5UdyDjEJ75O5CpTG8vVAgQIohd9IFOBx4mE6b9+DlOtTY0EWE/KT6bPMUeukSCmRDgl+VG2+7m3dcSSDL8H3Nwo4IYPlTFtXJOx0uquIgF1bAtWqgT+xccF2G7WX656ZR/Mif8Vvq45Xv06KNZxRKP6iHYMkY4jhca+/LoxCBsRiWCsJs4XHZaAOVHgsPvERxfuZkEK1gojFy1EnXBBEnLh3R38o7x8/fYvdAbtFvI3sJI0yAAAAABJRU5ErkJggg==) 100% 50% / 14px 8px no-repeat;
+  transform: rotate(180deg);
+}
+.css-zym26p {
+  display: flex;
+  padding: 39px 0px 40px;
+  border-top: 1px solid rgb(221, 221, 221);
+}
+.css-ro4hvg {
+  width: 340px;
+  padding-left: 31px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 25px;
+}
+.css-13xsn2p {
+  padding: 2px 20px 0px 0px;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 22px;
+  white-space: pre-line;
+}
+.css-13ttlil {
+  display: block;
+  padding-top: 22px;
+}
+.css-e6zvdp:first-of-type {
+  padding-top: 0px;
+}
+.css-e6zvdp {
+  display: block;
+  padding: 30px 0px 6px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #00c73c;
+  line-height: 22px;
+}
+.css-1pcbtdr {
+  display: block;
+}
+.css-1pcbtdr::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin: 9px 4px 0px 0px;
+  border-radius: 100%;
+  background-color: rgb(51, 51, 51);
+  vertical-align: 4px;
+}
+.css-xwfhcz {
+  display: flex;
+  position: relative;
+  padding: 14px 0px 17px;
+  border-top: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  border-image: initial;
+  border-bottom: none;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 27px;
+}
+.css-1whdyd5 {
+  width: 179px;
+  padding-left: 29px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #00c73c;
+}
+.css-1l0p3iw {
+  white-space: pre-line;
+}
+.css-1oekmga {
+  font-weight: 500;
+  color: rgb(102, 102, 102);
+}
+.css-1t0iw3m {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  margin-top: -14px;
+  padding-right: 20px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: #00c73c;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+}
+html, button, input, select, textarea {
+  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+}
+.css-1t0iw3m::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 8px;
+  width: 14px;
+  height: 8px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAQCAYAAAFyyC95AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHKADAAQAAAABAAAAEAAAAAChTRmjAAABQklEQVQ4EaVTAVLCQAzMweuUR1jRZ+hQRp6BwCfU12np9rppclwhameYXJLdzSUXpJMuyfjp+UHaTh1mnQViCOjBaJQxQcAFG3m7d3qjM8Qbad/xswCw9UYW4BJkAFAmErQ7+f7o2z2cpH0iuGZRqpHtD3I6Hqj2Ta9rApZwks0iSZrmygpW4CibZ1YggbhZW+vLgXOPl5UdyDjEJ75O5CpTG8vVAgQIohd9IFOBx4mE6b9+DlOtTY0EWE/KT6bPMUeukSCmRDgl+VG2+7m3dcSSDL8H3Nwo4IYPlTFtXJOx0uquIgF1bAtWqgT+xccF2G7WX656ZR/Mif8Vvq45Xv06KNZxRKP6iHYMkY4jhca+/LoxCBsRiWCsJs4XHZaAOVHgsPvERxfuZkEK1gojFy1EnXBBEnLh3R38o7x8/fYvdAbtFvI3sJI0yAAAAABJRU5ErkJggg==) 100% 50% / 14px 8px no-repeat;
+  transform: rotate(180deg);
+}
+.css-zym26p {
+  display: flex;
+  padding: 39px 0px 40px;
+  border-top: 1px solid rgb(221, 221, 221);
+}
+.css-mve3d0 {
+  display: flex;
+  position: relative;
+  padding: 14px 0px 17px;
+  border: 1px solid rgb(221, 221, 221);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 27px;
+}
+
+
+
+
+
+
+/* 리뷰 */
+.css-18eozqj {
+  position: relative;
+  width: 1010px;
+  padding-bottom: 100px;
+}
+.css-ek0k8o {
+  padding: 72px 0px;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+.css-16ax551 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 41px;
+  letter-spacing: -0.5px;
+  color: rgb(51, 51, 51);
+}
+.css-12iohw3 {
+  padding: 20px 0px 40px;
+}
+.css-164jd3n {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: rgb(102, 102, 102);
+}
+.css-eoh0f0 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: rgb(102, 102, 102);
+}
+.css-104t16y {
+  position: relative;
+  padding-left: 11px;
+  font-weight: 400;
+  color: rgb(153, 153, 153);
+}
+.css-104t16y::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: -1px;
+  width: 10px;
+  height: 21px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMyIgaGVpZ2h0PSIzIiB2aWV3Qm94PSIwIDAgMyAzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMi45NTYgMS41OTZDMi45NTYgMC45MTIgMi4zOTIgMC4zNDggMS42OTYgMC4zNDhDMS4wMTIgMC4zNDggMC40NDggMC45MTIgMC40NDggMS41OTZDMC40NDggMi4yOTIgMS4wMTIgMi44NDQgMS42OTYgMi44NDRDMi4zOTIgMi44NDQgMi45NTYgMi4yOTIgMi45NTYgMS41OTZaIiBmaWxsPSIjOTk5OTk5Ii8+Cjwvc3ZnPgo=) 50% 50% no-repeat;
+  line-height: 21px;
+}
+.css-1sktziu {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration-line: underline;
+  color: rgb(76, 76, 76);
+  margin-top: 6px;
+  margin-left: 11px;
+}
+.css-14dfl2x {
+  border-top: 1px solid rgb(51, 51, 51);
+}
+.css-benyte {
+  padding: 21px 20px 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+.css-1gq7k31 {
+  display: inline-block;
+  height: 22px;
+  width: 42px;
+  border-radius: 4px;
+  background-color: rgb(244, 244, 244);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  color: rgb(102, 102, 102);
+  vertical-align: 2px;
+}
+.css-qbpq7v {
+  margin-left: 9px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  color: rgb(51, 51, 51);
+}
+.css-1e9xl0r {
+  position: relative;
+  width: 100%;
+  padding-top: 119px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+.css-58rf7i {
+  margin-top: 15px;
+  margin-bottom: 28px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(181, 181, 181);
+}
+.css-1hx620j {
+  width: 138px;
+  height: 44px;
+  border-radius: 22px;
+  background-color: #00c73c;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgb(255, 255, 255);
+}
+html, button, input, select, textarea {
+  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+}
+button {
+  border-radius: 0;
+}
+button, input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button, select {
+  text-transform: none;
+}
+button {
+  overflow: visible;
+  background-color: transparent;
+  border: none;
+}
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/* 상품 문의 */
+.css-18eozqj {
+  position: relative;
+  width: 1010px;
+  padding-bottom: 100px;
+}
+.css-30tvht {
+  margin-bottom: 60px;
+}
+.css-17juoyc {
+  position: absolute;
+  right: 0px;
+}
+.css-17juoyc button {
+  border-radius: 3px;
+}
+.css-mhrz8m {
+  display: block;
+  padding: 0px 10px;
+  text-align: center;
+  overflow: hidden;
+  width: 120px;
+  height: 40px;
+  border-radius: 3px;
+  color: rgb(255, 255, 255);
+  background-color: #00c73c;
+  border: 0px none;
+}
+.css-17juoyc span {
+  font-size: 14px;
+}
+.css-nytqmg {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+}
+.css-pncj1z {
+  padding-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+.css-83ihkd {
+  display: block;
+  padding-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 21px;
+  color: rgb(51, 51, 51);
+}
+.css-8sw7yu {
+  line-height: 19px;
+  font-weight: 400;
+  color: rgb(153, 153, 153);
+}
+.css-owypta {
+  padding-left: 10px;
+}
+.css-owypta::before {
+  display: inline-block;
+  width: 2px;
+  height: 2px;
+  margin: 11px 6px 0px -10px;
+  background: rgb(153, 153, 153);
+  vertical-align: top;
+  content: "";
+}
+.css-1d3w5wq {
+  width: 100%;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.css-1xukm34 {
+  height: 58px;
+  border-top: 2px solid rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+}
+.css-1xukm34 tr .title {
+  width: 710px;
+}
+.css-1xukm34 tr th {
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: rgb(51, 51, 51);
+}
+.css-1xukm34 tr .author, .css-1xukm34 tr .created-date, .css-1xukm34 tr .status {
+  width: 100px;
+}
+.css-1xukm34 tr th {
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: rgb(51, 51, 51);
+}
+.css-7uttip td {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+  padding: 117px 0px;
+  text-align: center;
+  cursor: default;
+}
+.css-18ad0gx {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.css-rzcdhr:disabled {
+  background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-disabled.svg);
+  cursor: default;
+}
+button[disabled], input[disabled] {
+  cursor: default;
+}
+.css-rzcdhr {
+  width: 44px;
+  height: 44px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-activated.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.css-7qb0sc {
+  overflow: hidden;
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+
+
+
+
+
+
+
+

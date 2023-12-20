@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ecoeats.cartMapper">
+
+    <select id="selectProductOrderCheckout" parameterType="SelectedItemsDto" resultType="ProductOrderCheckout">
+        select sp.prod_id,sp.prod_img_id, sp.prod_name, sp.prod_price, sp.disc_price, spi.pack_type, spi.dlvy_type, sop.opt_prod_id, sop.opt_prod_name, sop.opt_price, sop.opt_disc_price
+        from product as sp
+        join product_info as spi
+        on sp.prod_id  = spi.prod_id
+        left join option_product as sop
+        on sp.prod_id = sop.prod_id and sp.is_opt = 'Y'
+        <where>
+            <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id}
+            </if>
+            <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
+                sp.prod_id = #{prod_id} and sop.opt_prod_id = #{opt_prod_id}
+            </if>
+        </where>
+    </select>
+
+    <!--    장바구니 DB에 데이터 저장-->
+    <insert id="insertCartProduct" parameterType="CartDto">
+        INSERT INTO cart (prod_id, opt_prod_id, qty, mem_id)
+        VALUES (#{prod_id}, #{opt_prod_id}, #{qty}, #{mem_id})
+    </insert>
+
+<!--    이미 있는 상품을 장바구니에 담을 시 수량 증가-->
+    <update id="updateCartProduct" parameterType="CartDto">
+        UPDATE cart
+        SET qty = #{qty}
+        <where>
+            <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+                prod_id = #{prod_id}
+            </if>
+            <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
+                opt_prod_id = #{opt_prod_id}
+            </if>
+        </where>
+    </update>
+
+    <!--    장바구니에서 상품 삭제-->
+    <delete id="deleteCartProduct" parameterType="CartDto">
+        DELETE FROM cart
+        <where>
+            <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
+                prod_id = #{prod_id}
+            </if>
+            <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
+                opt_prod_id = #{opt_prod_id}
+            </if>
+        </where>
+    </delete>
+
+    <!--    장바구니에 담긴 상품 리스트 정렬-->
+    <select id="selectAllCartProduct" parameterType="string" resultType="CartDto">
+        SELECT *
+        FROM cart as c
+        JOIN product as p
+        ON c.prod_id = p.prod_id
+        LEFT JOIN option_product as o
+        ON c.opt_prod_id = o.opt_prod_id AND  p.is_opt = 'Y'
+        WHERE mem_id = #{mem_id}
+        ORDER BY c.cart_id DESC
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+    <select id="selectProduct" parameterType="long" resultType="ProductDto">
+        select prod_id, prod_name, prod_price, disc_price
+        from product
+        where prod_id = #{prod_id};
+    </select>
+
+    <select id="selectOptionProduct" parameterType="string" resultType="OptionProductDto">
+        select opt_prod_id, opt_prod_name, opt_price, opt_disc_price
+        from option_product
+        where opt_prod_id = #{opt_prod_id};
+    </select>
+
+
+</mapper>

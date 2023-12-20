@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order.repository.orderHistoryMapper">
+    <insert id="insert" parameterType="OrderHistoryDto">
+        INSERT INTO spring.order_history
+        (ord_id, mem_id, code_name, tot_prod_name, tot_prod_price, tot_pay_price, tot_ord_qty, pay_way, rg_num, md_num)
+        VALUES
+        (#{ord_id},#{mem_id},#{code_name},#{tot_prod_name},#{tot_prod_price},#{tot_pay_price},#{tot_ord_qty},#{pay_way},#{rg_num},#{md_num});
+    </insert>
+
+    <select id="select" parameterType="long" resultType="OrderHistoryDto">
+        SELECT *
+        FROM spring.order_history
+        WHERE
+        ord_hist_id = #{ord_hist_id};
+    </select>
+
+    <select id="selectList" resultType="OrderHistoryDto">
+        SELECT *
+        FROM spring.order_history
+        WHERE
+        ord_id=#{ord_id};
+    </select>
+
+    <select id="selectOne" resultType="OrderHistoryDto">
+        SELECT *
+        FROM spring.order_history
+        WHERE code_name = "ORDERING" and ord_id = #{ord_id}
+    </select>
+    
+    <select id="selectMaxByOrdId" resultType="OrderHistoryDto">
+        SELECT oh.*
+		FROM order_history oh
+		JOIN (
+		    SELECT MAX(ord_hist_id) AS ord_hist_id
+		    FROM order_history
+		    WHERE ord_id = #{ord_id}
+		) max ON oh.ord_hist_id = max.ord_hist_id;
+    </select>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM spring.order_history WHERE ord_hist_id = #{ord_hist_id}
+    </delete>
+
+    <delete id="deleteList" parameterType="long">
+        DELETE FROM spring.order_history WHERE ord_id = #{ord_id}
+    </delete>
+
+    <select id="selectAll" resultType="OrderHistoryDto">
+        SELECT *
+        FROM spring.order_history
+        ORDER BY rg_date DESC, ord_id DESC
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM spring.order_history
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM spring.order_history
+    </select>
+</mapper>
