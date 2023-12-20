@@ -101,9 +101,22 @@
 
 
     $('.login_button').on("click", function (){
+        console.log('클릭')
+        abc();
+
+    });
+    $('#loginform input').on('keydown', function (event) {
+        if (event.which === 13) {
+            console.log('엔터');
+            abc();
+        }
+    });
+
+
+    function abc(){
         let id_reg = /^[a-zA-Z](?=.*[0-9])[a-zA-Z0-9_]{6,16}$/;
         let pwd_reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$/;
-         let form = $('#loginform');
+        let form = $('#loginform');
 
         let id = $('input[name="mem_id"]').val();
         let pwd = $('input[name="mem_pwd"]').val();
@@ -114,11 +127,9 @@
         }else {
             form.attr("method", "post");
             form.attr("action", "/login").submit();
-       }
+        }
+    }
 
-
-
-    });
 
     $('.sign_in_button').on("click", function (){
         console.log('회원가입')
