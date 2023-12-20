@@ -127,7 +127,11 @@
                             <button  class="couponListBtn">
                                 <div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"></span>
                                     <div class="css-kmlyvg e1ro4vie3">
-                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}</strong>
+                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}
+<%--                                            <c:if test="${coupon.min_amt ne 0}">--%>
+<%--                                                &nbsp;(${coupont.min_amt}이상 주문시 사용 가능)--%>
+<%--                                            </c:if>--%>
+                                        </strong>
                                         <span class="css-bs5mk4 e1ro4vie0 coupon${coupon.cp_id}">${coupon.cp_del_date} 만료</span>
                                     </div>
                                 </div>
