@@ -280,6 +280,13 @@ public class MemberServiceImplTest {
         System.out.println(you11);
     }
 
+    @Test
+    public void re_member_cp_qty_count(){
+        int i = couponRepository.member_cp_qty_count("user123");
+        System.out.println(i);
+        //assertTrue(i == 5);
+    }
+
 
 
 }

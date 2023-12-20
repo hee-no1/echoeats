@@ -28,4 +28,5 @@ public interface CouponRepository {
     int select_coupon_download_cp_qty(int dw_id);
     MemCouponDto selectUnusedCoupon(Long cp_id, String mem_id) throws Exception;
     int updateMemberCouponStatus(MemCouponDto memCouponDto);
+    int member_cp_qty_count(String mem_id);
 }

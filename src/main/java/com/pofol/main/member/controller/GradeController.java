@@ -24,7 +24,9 @@ public class GradeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("id", authentication.getName());
         model.addAttribute("grade", gradeDtos);
-        return "member/grade";
+
+        model.addAttribute("mypage","grade");
+        return "member/mypage";
     }
 
     @GetMapping("/grade_data")
