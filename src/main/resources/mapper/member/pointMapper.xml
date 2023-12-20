@@ -5,9 +5,9 @@
 <mapper namespace="com.pofol.main.member.pointMapper">
     <insert id="insert_point" parameterType="PointDto">
         INSERT INTO point
-        (price, status, reason, his_end_date)
+        (price, status, reason, mem_id, ord_id)
         VALUES
-            (#{price}, #{status}, #{reason}, #{his_end_date})
+            (#{price}, #{status}, #{reason}, #{mem_id}, #{ord_id})
     </insert>
 
     <select id="selectAll_point" resultType="PointDto">

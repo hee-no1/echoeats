@@ -13,8 +13,18 @@ public class PointDto {
     private String md_date;
     private String md_num;
     private String mem_id;
+    private Long ord_id;
 
     public PointDto(){}
+
+    public PointDto(int price, String status, String reason, String mem_id, Long ord_id) {
+        this.price = price;
+        this.status = status;
+        this.reason = reason;
+        this.mem_id = mem_id;
+        this.ord_id = ord_id;
+    }
+
     public PointDto(int point_id, int price, String status, String reason, Date his_end_date, String mem_id) {
         this.point_id = point_id;
         this.price = price;
@@ -99,6 +109,14 @@ public class PointDto {
         this.md_num = md_num;
     }
 
+    public Long getOrd_id() {
+        return ord_id;
+    }
+
+    public void setOrd_id(Long ord_id) {
+        this.ord_id = ord_id;
+    }
+
     @Override
     public String toString() {
         return "PointDto{" +
@@ -108,6 +126,7 @@ public class PointDto {
                 ", reason='" + reason + '\'' +
                 ", his_end_date=" + his_end_date +
                 ", mem_id='" + mem_id + '\'' +
+                ", ord_id=" + ord_id +
                 '}';
     }
 }

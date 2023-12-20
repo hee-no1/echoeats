@@ -28,7 +28,7 @@ public class OrderCheckout {
     private AddressDto addressDto;//배송정보 Dto
     private DelNotesDto delNotesDto; //배송 요청 사항 Dto
     private List<CouponJoinDto> couponList; //쿠폰 Dto
-    //적립금 Dto
+    private Integer availablePoint; //사용 가능한 총 적립금
 
 
     /* 주문서 -> 결제 */
