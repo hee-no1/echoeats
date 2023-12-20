@@ -73,7 +73,7 @@
 </div>
 <script>
     document.getElementById("orderDetailBtn").addEventListener('click',function (){
-       window.location.href = "/order";
+       window.location.href = "/mypage/order";
     });
     document.getElementById("continueBtn").addEventListener('click',function (){
         window.location.href = "/main";

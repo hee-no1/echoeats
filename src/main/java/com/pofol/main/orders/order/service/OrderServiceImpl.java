@@ -86,9 +86,7 @@ public class OrderServiceImpl implements OrderService{
                 tot_prod_name = firstProd.getOpt_prod_name();
             }
 
-            if(tot_ord_qty == 1){ //상품수량이 1개일 때
-                tot_prod_name += "상품을 주문합니다.";
-            } else {//상품수량이 2개 이상일 때
+            if(tot_ord_qty > 1){ //상품수량이 1개일 때
                 tot_prod_name += " 외 " + (tot_ord_qty-1) +"개";
             }
 

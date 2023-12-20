@@ -569,10 +569,24 @@ button, input, optgroup, select, textarea {
 }
 .css-kmlyvgdiv {
     overflow: hidden;
-    width: 388px;
+    width: 500px;
     color: rgb(150 144 144);
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 45px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+.css-6mgkir {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMSA5Ljc2MiAyMC4yMzggOSAxNSAxNC4yMzggOS43NjIgOSA5IDkuNzYyIDE0LjIzOCAxNSA5IDIwLjIzOGwuNzYyLjc2MkwxNSAxNS43NjIgMjAuMjM4IDIxbC43NjItLjc2MkwxNS43NjIgMTV6IiBmaWxsPSIjQ0NDIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+Cg==);
+    background-size: cover;
+    background-position: center center;
+}
+.css-h5zdhc {
+    width: 30px;
+    height: 30px;
+    margin-left: 9px;
 }
 .css-1bfy7g3 {
     margin-bottom: 6px;
@@ -615,6 +629,7 @@ button, input, optgroup, select, textarea {
 .css-y9957 {
     /*color: #00c73c;*/
     font-size: 12px;
+    margin-top: 30px;
 }
 .css-s5xdrg {
     display: -webkit-box;
