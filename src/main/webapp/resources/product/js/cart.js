@@ -196,9 +196,11 @@ $(document).ready(function () {
 
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
-        goAddressPage.addEventListener('click', function () {
-            window.location.href = '/address/'
-        })
+        for (let i = 0; i < goAddressPage.length; i++) {
+            goAddressPage[i].addEventListener('click', function () {
+                window.location.href = '/address/'
+            })
+        }
     }
 
     // 전체체크박스 클릭 시 전체선택o + 전체선택x
@@ -215,15 +217,16 @@ $(document).ready(function () {
     });
 
     // 장바구니 상품 주문하기 버튼
-    orderButton.addEventListener('click', function () {
-        let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
-        if (hiddenInputs.length === null || hiddenInputs.length === 0) {
-            console.log(hiddenInputs.length);
-            alert('장바구니 상품을 선택해 주세요.')
-            return;
-        }
-        orderButton.type = 'submit';
-    })
+    if (orderButton !== null) {
+        orderButton.addEventListener('click', function () {
+            let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+            if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+                alert('장바구니 상품을 선택해 주세요.')
+                return;
+            }
+            orderButton.type = 'submit';
+        })
+    }
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')
@@ -265,7 +268,6 @@ $(document).ready(function () {
     // 장바구니 x버튼으로 상품 삭제
     // 여러개 삭제할 시 기능 추가해야함
     for (let i = 0; i < removeButton.length; i++) {
-
         removeButton[i].addEventListener('click', function () {
             if (!confirm("정말로 삭제하시겠습니까?")) {
                 return;

@@ -32,6 +32,12 @@ public class CartDto {
         this.qty = qty;
     }
 
+    public CartDto(String mem_id, Long prod_id, String opt_prod_id) {
+        this.mem_id = mem_id;
+        this.prod_id = prod_id;
+        this.opt_prod_id = opt_prod_id;
+    }
+
     public CartDto(Long prod_id, Integer qty) {
         this.prod_id = prod_id;
         this.qty = qty;

@@ -46,7 +46,7 @@ public class ProductAdminController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/"; // 일단 index로 보냄 (나중에 변경할 것)
+            return "redirect:/"; // 일단 index로 보냄 (관리자 홈으로 나중에 변경할 것)
         }
 
         return "admin/product/productAdminList";
