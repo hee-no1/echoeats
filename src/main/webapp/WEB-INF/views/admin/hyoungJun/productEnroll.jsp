@@ -172,10 +172,10 @@
                             <div class="input-content">
                                 <div class="seller-input-toggle">
                                     <input type="radio" id="salePeriod-choice-type-true"
-                                           name="sale_sts" value="Y">
+                                           name="sale_sts" value="판매중">
                                     <label for="salePeriod-choice-type-true">설정함</label>
                                     <input type="radio" id="salePeriod-choice-type-false"
-                                           name="sale_sts" value="N">
+                                           name="sale_sts" value="판매전">
                                     <label for="salePeriod-choice-type-false">설정안함</label>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@
                                                 <label for="choice_option_name0">옵션명</label>
                                                 <div class="seller-input-wrap">
                                                     <input type="text" class="form-control" id="choice_option_name0"
-                                                           placeholder="예시:컬러" maxlength="25">
+                                                           placeholder="최소 2개이상 입력" maxlength="25" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -771,6 +771,8 @@
         $('.span_discounting').html(discountingPrice);
 
         discountInput.val(sendDiscountRate);
+
+        $('input[name="disc_price"]').val(discountedPrice);
     });
 
     // 가격을 다시 입력했을 때 할인된 가격이 바뀌는 이벤트
