@@ -40,21 +40,31 @@ public class PointRepositoryImpl implements PointRepository{
 
     @Override
     public int sumPoint(String mem_id) throws Exception {
-        return session.selectOne(namespace + "sum_point", mem_id);
+        Integer sumPoint = session.selectOne(namespace + "sum_point", mem_id);
+        return sumPoint != null ? sumPoint : 0;
     }
 
     @Override
-    public int availablePoint(String mem_id) throws Exception {
-        return session.selectOne(namespace + "available_point",mem_id);
+    public int accumulatePoint(String mem_id) throws Exception {
+        Integer accumulatePoint = session.selectOne(namespace + "accumulate_point",mem_id);
+        return accumulatePoint != null ? accumulatePoint : 0;
+    }
+
+    @Override
+    public int usePoint(String mem_id) throws Exception {
+        Integer usePoint = session.selectOne(namespace + "use_point",mem_id);
+        return usePoint != null ? usePoint : 0;
     }
 
     @Override
     public int countPoint(String mem_id) throws Exception {
-        return session.selectOne(namespace + "count_point", mem_id);
+        Integer countPoint = session.selectOne(namespace + "count_point", mem_id);
+        return countPoint != null ? countPoint : 0;
     }
 
     @Override
     public int preExtinctPoint(String mem_id) throws Exception {
-        return session.selectOne(namespace + "preExtinct_point", mem_id);
+        Integer preExtinctPoint = session.selectOne(namespace + "preExtinct_point", mem_id);
+        return preExtinctPoint != null ? preExtinctPoint : 0;
     }
 }

@@ -44,7 +44,17 @@ public class PointServiceImpl implements PointService{
 
     @Override   //사용가능한 총 적립금
     public int getAvailablePoint(String mem_id) throws Exception {
-        return pointRepository.availablePoint(mem_id);
+        return pointRepository.accumulatePoint(mem_id) - pointRepository.usePoint(mem_id);
+    }
+
+    @Override
+    public int getAccumulatePoint(String mem_id) throws Exception {
+        return pointRepository.accumulatePoint(mem_id);
+    }
+
+    @Override
+    public int getUsePoint(String mem_id) throws Exception {
+        return pointRepository.usePoint(mem_id);
     }
 
     @Override
@@ -56,4 +66,6 @@ public class PointServiceImpl implements PointService{
     public int getPreExtinctPoint(String mem_id) throws Exception {
         return pointRepository.preExtinctPoint(mem_id);
     }
+
+
 }
