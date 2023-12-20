@@ -113,7 +113,7 @@
                                         <span class="css-1usz68g esoayg89" style="background-image: url(${cartProductList.prod_img_id});"></span>
                                     </a>
                                     <div class="css-14sb0pe esoayg88">
-                                        <a class="css-e0dnmk esoayg87">
+                                        <a class="css-e0dnmk esoayg87" data-prod-id="${cartProductList.prod_id}">
                                             <p class="css-efcx1u esoayg86">
                                                 <c:choose>
                                                     <c:when test="${not empty cartProductList.opt_prod_id}">
