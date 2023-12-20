@@ -15,4 +15,6 @@ public interface PointService {
     int getAvailablePoint(String mem_id) throws Exception;  //총 사용가능한 적립금 금액
     int getCountPoint(String mem_id) throws Exception;  //적립금 총 갯수
     int getPreExtinctPoint(String mem_id) throws Exception; //소멸예정 적립금
+    int getAccumulatePoint(String mem_id) throws Exception; //상태가 적립인 금액
+    int getUsePoint(String mem_id) throws Exception;    //사용한 적립금액
 }
