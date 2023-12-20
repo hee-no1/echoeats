@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,8 +8,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>주문서</title>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link href="/resources/order/css/checkoutStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/resources/product/css/footer.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -20,6 +22,8 @@
 <c:set var="address" value="${checkout.addressDto}"/>
 
 <body>
+<%@ include file="../include/header.jspf" %>
+
 <div class="css-1ykiyus e146m4rf2">
     <div class="css-1uom1od e146m4rf0">
         <h2 class="css-10owlr e146m4rf1">주문서</h2>
@@ -31,21 +35,21 @@
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use id="arrowBtn" stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(135 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
             </button></div>
 
-            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name}의 상품을 주문합니다</div>
+            <div class="css-r6muhy e1fjdxoo1 totItems">${checkout.tot_prod_name} 상품을 주문합니다.</div>
 
             <c:forEach var="item" items="${items}">
                 <c:set var="prod" value="${item.productOrderCheckout}"/>
                 <div class="css-bd9p1l e17a7yib10 items" style="display: none">
                     <c:choose>
                         <c:when test = "${empty prod.opt_prod_id}">
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637153888985l0.jpg" alt="[농심] 신라면 멀티 5입" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}"  class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
                             <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
                                     <fmt:formatNumber value="${prod.disc_price * item.qty}" pattern="#,###"/>원</span></span>
                         </c:when>
                         <c:otherwise>
-                            <img src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1646377916155l0.jpg" alt="[KF365] 1+등급 무항생제 대란 20구" class="css-17jyui4 e17a7yib9">
+                            <img src="${prod.prod_img_id}" class="css-17jyui4 e17a7yib9">
                             <span class="css-10nl60h e17a7yib8"><span class="css-9j7jhp e17a7yib7">${prod.opt_prod_name}</span></span>
                             <span class="css-1efb5i1 e17a7yib5">${item.qty}개</span>
                             <span class="css-1j31gob e17a7yib4"><span class="css-jnogx7 e17a7yib1">
@@ -123,8 +127,12 @@
                             <button  class="couponListBtn">
                                 <div class="css-1ie56gn e1ro4vie6"><span class="css-4ntluf e1ro4vie5"></span>
                                     <div class="css-kmlyvg e1ro4vie3">
-                                        <strong class="css-1bfy7g3 e1ro4vie2 coupon${coupon.cp_id}">${coupon.cp_name}</strong>
-                                        <span class="css-bs5mk4 e1ro4vie0 coupon${coupon.cp_id}">${coupon.cp_del_date} 만료</span>
+                                        <strong class="css-1bfy7g3 e1ro4vie2">${coupon.cp_name}</strong><br>
+                                        ${coupon.min_amt}원 이상 주문 시
+                                        <c:if test="${coupon.max_disc_amt != 0}">
+                                            최대 ${coupon.max_disc_amt}원 할인
+                                        </c:if>
+                                        <span class="css-bs5mk4 e1ro4vie0">${coupon.cp_del_date} 만료</span>
                                     </div>
                                 </div>
                             </button>
@@ -138,11 +146,11 @@
                 <div class="css-pkhh3q e150alo82"><span class="css-ln1csn e150alo81">적립금</span><div class="css-82a6rk e150alo80">
                     <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4">
                         <span id="point">
-                        <fmt:formatNumber value="4000" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
+                        <fmt:formatNumber value="${checkout.availablePoint}" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
 
                     <%-- 사용할 적립금 입력 --%>
                     <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">
-                        <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed"></div></div>
+                        <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed" autocomplete="off"></div></div>
                         <button id="allUseBtn" class="css-197i5eo e4nu7ef3" type="button" width="100" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">모두사용</span></button></div><div class="css-54a39b e1gm2j0y1">사용 시 적립금이 먼저 소진됩니다.</div><div class="css-1waf5ak ezr038b1"></div></div></div><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 수단</h3></div><div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">결제수단 선택</span>
                 <div class="css-82a6rk e150alo80">
                     <div class="css-gd125q e4nb37r1"><div><div class="css-18dvwsu ef0cmoa0">
@@ -186,10 +194,14 @@
                     <span id = "tot_pay_price">
                         <fmt:formatNumber value="${checkout.tot_prod_price + checkout.dlvy_fee}" pattern="#,###"/></span></span><span class="css-158icaa eahaaoi8">원</span></div></div>
 
-                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div></div>
+<%--                <div class="css-i93a3v eahaaoi5"><span class="css-5lws00 eahaaoi4">적립</span>구매 시<div class="css-1xkempz eahaaoi6">0원(5%)</div></div>--%>
+            </div>
            </div></div></div>
 
-    </div></div></div>
+    </div></div>
+    <%@ include file="../include/footer.jspf" %>
+</div>
+
 <script>
     let selectedItems = []
     <c:forEach var="item" items="${items}" varStatus="loop">

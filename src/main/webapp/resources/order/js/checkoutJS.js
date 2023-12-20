@@ -1,3 +1,4 @@
+//스크롤
 window.addEventListener('scroll', function() {
     let scrollPosition = window.scrollY;
     // 특정 스크롤 위치 이상일 때
@@ -83,20 +84,31 @@ for (let i=0; i < couponListBtn.length ; i++){
 
         console.log("couponDto",couponDtoList[i]);
         let addCouponDiv =
+            '<div id="addCoupon">' +
             '<div class="css-kmlyvgdiv addCouponDiv">\n' +
-            '<strong class="css-1bfy7g3div">' + couponDtoList[i].cp_name + '</strong>\n' +
+            '<strong class="css-1bfy7g3div">' +'✅ '+ couponDtoList[i].cp_name + '</strong>\n' +
             '<span class="css-bs5mk4">' + couponDtoList[i].cp_del_date +'</span>\n' +
-            '</div>'
+            '</div>' +
+            '<button id="deleteCouponBtn" class="css-h5zdhc" type="button" data-testid="delete">' +
+            '<span class="css-6mgkir e5h3i930"></span>' +
+            '</button></div>'
 
         coupon_id = couponDtoList[i].cp_id; //ajax, 결제버튼 클릭시 결제할인금액table
 
         $('#couponList').hide();
-        $('.addCouponDiv').remove();
+        $('#addCoupon').remove();
         $('.e1brt3tk0').append(addCouponDiv);
 
         ajaxData();
     })
 }
+
+//쿠폰 삭제 버튼 클릭시
+$(document).on('click',"#deleteCouponBtn", function(){
+    $("#addCoupon").remove();
+    coupon_id = null;
+    ajaxData();
+})
 
 
 //적립금 입력
@@ -110,14 +122,14 @@ function updateValue(input){
         input.value = point;
     }
     else{
-        input.value = inputValue.replace(/[^-0-9]/g, '');
+        input.value = inputValue.replace(/\D/g, '');
     }
     ajaxData();
 }
 
 //적립금 모두 사용 버튼
 document.getElementById("allUseBtn").addEventListener('click', function(){
-    document.getElementById('inputPointUsed').value = document.getElementById('point').innerHTML.replace(/,/g, "");
+    document.getElementById('inputPointUsed').value = document.getElementById('point').innerText.replace(/,/g, "");
     ajaxData();
 })
 
@@ -147,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 url: '/order/checkout/getDelNotes',
                 dataType: 'json',
                 success: function (delNotes) {
-                    alert("success");
+                    // alert("success");
                     let personData = document.getElementById("personData");
                     if (personData === null) { //첫 주문
                         $('#firstDelNotesDiv').remove();
@@ -156,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     getDelNotesSuccess(delNotes)
                 },
                 error: function () {
-                    alert("error")
+                    // alert("error")
                 }
             });
         });
@@ -297,12 +309,14 @@ document.addEventListener("DOMContentLoaded", function () {
             dataType: 'text',
             data : JSON.stringify(checkout),
             success: function(result){
-                alert("✅ 1차 검증 성공 = " + result);
+                // alert("✅ 1차 검증 성공 = " + result);
                 orderData.ord_id = result*1;
                 requestPay();
 
             },
-            error: function(){alert("🔥 1차 검증 실패 또는 서버 오류")}
+            error: function(){
+                // alert("🔥 1차 검증 실패 또는 서버 오류")
+            }
         });
     })
 
@@ -319,12 +333,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, rsp => {
             if (rsp.success) {
                 // axios로 HTTP 요청, 결제 성공시 서버로 전송
-                alert("success")
+                // alert("success")
                 console.log("rsp",rsp);
                 writePayment(rsp);
 
             } else {
-                alert("fail")
+                // alert("fail")
                 writePayment(rsp);
             }
         });
@@ -346,12 +360,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }).then(response  => {
             // 서버 결제 API 성공시 로직
-            alert("success: " +JSON.stringify(response.data))
+            // alert("success: " +JSON.stringify(response.data))
             //주문번호
             window.location.href = '/order/completed/'+orderData.ord_id;
 
         }).catch(error => {
-            alert("error: " + JSON.stringify(error.response))
+            alert("결제에 실패하셨습니다. 다시 시도해주세요.")
+            // alert("error: " + JSON.stringify(error.response))
         });
     }
 

@@ -11,7 +11,8 @@ public interface PointRepository {
     int updatePoint(PointDto pointDto) throws Exception;    //적립금 수정
     int deletePoint(String point_id) throws Exception;  //적립금 소멸
     int sumPoint(String mem_id) throws Exception;   //지금까지 적립된 총 금액
-    int availablePoint(String mem_id) throws Exception; //사용가능한 총 적립금액;
+    int accumulatePoint(String mem_id) throws Exception; //적립한 총 적립금액;
+    int usePoint(String mem_id) throws Exception; //사용한 총 적립금액
     int countPoint(String mem_id) throws Exception; //적립금 총 갯수
     int preExtinctPoint(String mem_id) throws Exception;    //소멸예정 총 적립금액
 }

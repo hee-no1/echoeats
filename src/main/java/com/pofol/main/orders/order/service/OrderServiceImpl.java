@@ -1,22 +1,23 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.member.dto.*;
-import com.pofol.main.member.repository.AddressRepository;
-import com.pofol.main.member.repository.CouponRepository;
-import com.pofol.main.member.repository.DelNotesRepository;
-import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.member.repository.*;
+import com.pofol.main.member.service.PointService;
 import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
-import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,8 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
-    private final CartRepository basketRepo;
+    private final PointService pointService;
+    private final CartRepository cartRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
@@ -37,9 +39,9 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -50,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 
         try{
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
@@ -85,31 +87,35 @@ public class OrderServiceImpl implements OrderService{
                 tot_prod_name = firstProd.getOpt_prod_name();
             }
 
-            if(tot_ord_qty == 1){ //상품수량이 1개일 때
-                tot_prod_name += "상품을 주문합니다.";
-            } else {//상품수량이 2개 이상일 때
+            if(tot_ord_qty > 1){ //상품수량이 1개일 때
                 tot_prod_name += " 외 " + (tot_ord_qty-1) +"개";
             }
 
             oc.setTot_prod_name(tot_prod_name);
 
 
-            //회원정보, 배송지, 배송요청사항, 쿠폰정보
             //회원정보 가져오기
-            MemberDto mem = memRepo.selectMember(mem_id);
-            oc.setMemberDto(mem);
+            oc.setMemberDto(memRepo.selectMember(mem_id));
 
             //배송지
-            AddressDto address = addressRepository.selectDefaultAddress(mem_id);
-            oc.setAddressDto(address);
+            oc.setAddressDto(addressRepository.selectDefaultAddress(mem_id));
 
             //배송요청사항 가져오기
-            DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
-            oc.setDelNotesDto(delNotes);
+            oc.setDelNotesDto(delNotesRepository.select_delNotes(mem_id));
 
-            //쿠폰 정보 가져오기
-            List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
+            //쿠폰 정보 가져오기. (단, 총 주문 금액이 쿠폰 사용 가능한 최소 금액보다 클 경우에만 사용 가능)
+            List<CouponJoinDto> couponJoinDtos =  Collections.synchronizedList(couponRepository.selectMembersWithCoupons(mem_id));
+            Iterator<CouponJoinDto> it = couponJoinDtos.iterator();
+            while (it.hasNext()){
+                if(tot_prod_price < it.next().getMin_amt()){
+                    it.remove();
+                }
+            }
             oc.setCouponList(couponJoinDtos);
+
+            //적립금 정보 가져오기
+            oc.setAvailablePoint(pointService.getAvailablePoint(mem_id));
+
             return oc;
 
         } catch (Exception e) {
@@ -150,9 +156,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Long writeOrder(OrderCheckout oc) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
 
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
@@ -165,7 +171,7 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 
