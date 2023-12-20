@@ -34,8 +34,8 @@ public class ProductServiceImpl implements ProductService {
                     productDto.getProd_img(), "product");
             productDto.setProd_img_id(imgUrl);
             productRepository.insert(productDto);
-            productDto.setRg_num(String.valueOf(productDto.getProd_id()));
-            productDto.setMd_num(productDto.getRg_num());
+            productDto.setRg_num("ecoeats");
+            productDto.setMd_num("ecoeats");
             ProductImageDto productImageDto = new ProductImageDto();
             productImageDto.setMd_num(productDto.getMd_num());
             productImageDto.setProd_img_id(imgUrl);
