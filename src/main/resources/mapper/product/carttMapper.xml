@@ -45,10 +45,10 @@
         DELETE FROM cart
         <where>
             <if test='opt_prod_id == null or opt_prod_id.isEmpty()'>
-                prod_id = #{prod_id}
+                prod_id = #{prod_id} AND mem_id = #{mem_id}
             </if>
             <if test='opt_prod_id != null and !opt_prod_id.isEmpty()'>
-                opt_prod_id = #{opt_prod_id}
+                opt_prod_id = #{opt_prod_id} AND mem_id = #{mem_id}
             </if>
         </where>
     </delete>

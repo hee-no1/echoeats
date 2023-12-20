@@ -6,6 +6,7 @@ const removeButton = document.querySelectorAll('.css-h5zdhc');
 const cartOrderForm = document.querySelector('#cartOrderForm');
 const orderButton = document.querySelector('.orderButton');
 const goAddressPage = document.querySelectorAll('.addressButton');
+const selectRemoveButton = document.querySelectorAll('.css-0');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = function (value) {
@@ -222,13 +223,16 @@ $(document).ready(function () {
     
     // 선택삭제 버튼
     // 체크한것들 전부 삭제해야함
-    const selectRemoveButton = document.querySelectorAll('.css-0');
-
-    for (let i = 0; i < selectRemoveButton.length; i++) {
-        selectRemoveButton[i].addEventListener('click', function () {
-
-        })
-    }
+    // for (let i = 0; i < selectRemoveButton.length; i++) {
+    //     selectRemoveButton[i].addEventListener('click', function () {
+    //
+    //         for (let j = 0; j < productCartCheck.length; j++) {
+    //             if (productCartCheck[j].checked) {
+    //                 productRemoveAjax(j);
+    //             }
+    //         }
+    //     })
+    // }
 
 
 
@@ -304,7 +308,6 @@ $(document).ready(function () {
     // 장바구니 x버튼으로 상품 삭제
     // 여러개 삭제할 시 기능 추가해야함
     for (let i = 0; i < removeButton.length; i++) {
-
         removeButton[i].addEventListener('click', function () {
             if (!confirm("정말로 삭제하시겠습니까?")) {
                 return;

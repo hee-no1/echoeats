@@ -94,24 +94,13 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
         }
 
-//        try {
-//            cartService.saveCartProduct(cartDtoList);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        
-        
-        for (CartDto cartDto : cartDtoList) {
-            if (cartDto.getQty() != 0) {
-                try {
-                    cartService.saveCartProduct(cartDto);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
-                }
-            }
+        try {
+            cartService.saveCartProduct(cartDtoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
         }
+
         return ResponseEntity.ok().body("Successfully put in the shopping cart");
     }
 
