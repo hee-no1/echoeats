@@ -12,6 +12,8 @@
 		<typeAlias alias="PaymentDiscountDto" type="com.pofol.main.orders.payment.domain.PaymentDiscountDto"/>
 		<typeAlias alias="PaymentDto" type="com.pofol.main.orders.payment.domain.PaymentDto"/>
 		<typeAlias alias="PaymentHistoryDto" type="com.pofol.main.orders.payment.domain.PaymentHistoryDto"/>
+		<!-- Delivery -->
+		<typeAlias alias="DeliveryDto" type="com.pofol.main.orders.delivery.domain.DeliveryDto"/>
 		<!-- CodeTable -->
 		<typeAlias alias="CodeTableDto" type="com.pofol.main.orders.order.domain.CodeTableDto"/>
 		<!-- paging -->

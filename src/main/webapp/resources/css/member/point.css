@@ -12,16 +12,6 @@ div {
 .u75ne34 {
     line-height: 1;
 }
-.u75ne30 {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    min-width: 0;
-    box-sizing: border-box;
-    font: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
-}
 body, html {
     font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Apple SD Gothic Neo,Helvetica,Noto Sans KR,malgun gothic,맑은 고딕,sans-serif;
     color: #333;
@@ -364,4 +354,8 @@ svg:not(:root) {
 }
 .q1m3k72 {
     z-index: 5;
+}
+@media
+body {(min-width: 1280px)
+    background-color: rgba(0,0,0,.4);
 }

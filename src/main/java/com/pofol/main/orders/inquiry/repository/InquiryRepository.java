@@ -18,7 +18,7 @@ public interface InquiryRepository {
 	public abstract List<InquiryDto> selectAll() throws Exception;
     public abstract int deleteAll() throws Exception;
     public abstract int count() throws Exception;
+    
     public abstract String selectNametoSts(String code_name) throws Exception;
 	public abstract List<CodeTableDto> selectCodeTypeByCodeName(String code_name)throws Exception;
-
 }

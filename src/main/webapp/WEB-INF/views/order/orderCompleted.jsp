@@ -1,12 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
 <head>
     <title>OrderCompleted</title>
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link href="/resources/order/css/orderCompletedStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/resources/product/css/footer.css">
 </head>
 <body>
+<%@ include file="../include/header.jspf" %>
 <div class="css-ugqv3j e146m4rf2">
     <div class="css-1uom1od e146m4rf0">
         <div class="css-1icxyy0 e1ax7ftx3">
@@ -41,8 +44,7 @@
                 </div>
                 <div class="css-1a1jcfo ea1mry77">
                     <span class="css-vmo0an ea1mry76">적립금</span>
-                    <span class="css-13515y6 ea1mry75"><span class="css-r9z3y0 ea1mry74">+${payment.reserves}<span class="css-hfgifi ea1mry72">원</span></span>
-                                <span class="css-98lqc0 ea1mry70">적립금은 배송완료 7일후 적립</span></span></div></div>
+                    <span class="css-13515y6 ea1mry75"><span class="css-r9z3y0 ea1mry74">+${payment.reserves}<span class="css-hfgifi ea1mry72">원</span></span</span></div></div>
             <div class="css-1mnvac e1ax7ftx1">
                 <div class="css-phyjhi ervvhjr3">
                     <div style="max-width: 67px;">
@@ -60,13 +62,23 @@
                 </ul>
             </div>
             <div class="css-a0s0c2 e1ax7ftx0">
-                <button class="css-o6ldsh e4nu7ef3" type="button">
+                <button id="orderDetailBtn"class="css-o6ldsh e4nu7ef3" type="button">
                     <span class="css-nytqmg e4nu7ef1">주문 상세보기</span></button>
-                <button class="css-6682oh e4nu7ef3" type="button">
+                <button id="continueBtn" class="css-6682oh e4nu7ef3" type="button">
                     <span class="css-nytqmg e4nu7ef1">쇼핑 계속하기</span></button>
             </div>
         </div>
     </div>
+    <%@ include file="../include/footer.jspf" %>
 </div>
+<script>
+    document.getElementById("orderDetailBtn").addEventListener('click',function (){
+       window.location.href = "/order";
+    });
+    document.getElementById("continueBtn").addEventListener('click',function (){
+        window.location.href = "/main";
+    });
+
+</script>
 </body>
 </html>

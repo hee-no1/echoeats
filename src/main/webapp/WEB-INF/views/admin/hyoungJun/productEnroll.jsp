@@ -201,7 +201,7 @@
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <input name="sel_str_date" autocomplete="off"
-                                                                       readonly="readonly" class="form-control">
+                                                                       readonly="readonly" class="form-control"><
                                                                 <span class="input-group-addon">
                                                             <a role="button" href></a>
                                                         </span>

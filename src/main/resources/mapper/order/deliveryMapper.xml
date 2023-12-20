@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="delivery.repository.deliveryMapper">
+    <insert id="insert" parameterType="DeliveryDto">
+        INSERT INTO spring.delivery
+        (ord_det_id, ord_id, waybill_num, mem_id, dlvy_sts, pack_type, rg_num, md_num)
+        VALUES
+        (#{ord_det_id},#{ord_id},#{waybill_num},#{mem_id},#{dlvy_sts},#{pack_type},#{rg_num},#{md_num})
+    </insert>
+
+    <select id="select" parameterType="long" resultType="DeliveryDto">
+        SELECT *
+        FROM spring.delivery
+        WHERE
+        ord_det_id=#{ord_det_id}
+    </select>
+
+    <select id="selectAll" resultType="DeliveryDto">
+        SELECT *
+        FROM spring.delivery
+        ORDER BY rg_date DESC, ord_id DESC
+    </select>
+
+    <select id="selectListByWaybillNum" resultType="DeliveryDto">
+        select *
+        from delivery
+        where waybill_num = #{waybill_num};
+    </select>
+
+    <update id="updateStatus" parameterType="DeliveryDto">
+        UPDATE spring.delivery
+        SET
+            dlvy_cmplt_date = current_timestamp,
+            dlvy_sts = #{dlvy_sts},
+            md_num = #{md_num},
+            md_date = current_timestamp
+        WHERE ord_det_id = #{ord_det_id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM spring.delivery WHERE ord_det_id = #{ord_det_id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM spring.delivery
+    </delete>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM spring.delivery
+    </select>
+</mapper>

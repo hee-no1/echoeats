@@ -10,4 +10,8 @@ public interface PointRepository {
     PointDto selectPoint(String point_id) throws Exception; //사용자 보유 적립금 하나 읽기
     int updatePoint(PointDto pointDto) throws Exception;    //적립금 수정
     int deletePoint(String point_id) throws Exception;  //적립금 소멸
+    int sumPoint(String mem_id) throws Exception;   //지금까지 적립된 총 금액
+    int availablePoint(String mem_id) throws Exception; //사용가능한 총 적립금액;
+    int countPoint(String mem_id) throws Exception; //적립금 총 갯수
+    int preExtinctPoint(String mem_id) throws Exception;    //소멸예정 총 적립금액
 }

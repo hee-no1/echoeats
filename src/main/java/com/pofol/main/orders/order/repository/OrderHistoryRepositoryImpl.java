@@ -36,7 +36,11 @@ public class OrderHistoryRepositoryImpl implements OrderHistoryRepository{
     public OrderHistoryDto selectOne(Long ord_id) throws Exception {
         return session.selectOne(namespace+"selectOne",ord_id);
     }
-
+    @Override
+	public OrderHistoryDto selectMaxByOrdId(Long ord_id) throws Exception {
+		return session.selectOne(namespace+"selectMaxByOrdId",ord_id);
+	}
+    
     @Override
     public int delete(Long ord_hist_id) throws Exception {
         return session.delete(namespace+"delete",ord_hist_id);

@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +36,10 @@ public class CartController {
 
         try {
             List<CartDto> productCount = cartService.goCartProductCount(cartDtoList);
-            return new ResponseEntity<>(productCount, HttpStatus.OK);
+            return ResponseEntity.ok(productCount);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(cartDtoList);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(cartDtoList);
         }
     }
 
@@ -85,7 +86,7 @@ public class CartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication instanceof AnonymousAuthenticationToken){
-            return ResponseEntity.badRequest().body("로그인 이후 이용");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
         }
 
         for (CartDto cartDto : cartDtoList) {
@@ -94,11 +95,11 @@ public class CartController {
                     cartService.saveCartProduct(cartDto);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return ResponseEntity.badRequest().body("장바구니 담기 실패");
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
                 }
             }
         }
-        return ResponseEntity.ok("장바구니 담기 성공");
+        return ResponseEntity.ok().body("Successfully put in the shopping cart");
     }
 
     // 장바구니 상품 수량 변경에 따른 가격 변동
@@ -107,10 +108,10 @@ public class CartController {
     public ResponseEntity<CartDto> getCartProductCount(@RequestBody CartDto cartDto) {
         try {
             CartDto cartProductPrice = cartService.getCartProductPrice(cartDto);
-            return new ResponseEntity<>(cartProductPrice, HttpStatus.OK);
+            return ResponseEntity.ok(cartProductPrice);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(cartDto);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(cartDto);
         }
     }
 
@@ -118,16 +119,22 @@ public class CartController {
     @ResponseBody
     @PostMapping("/removeProduct")
     public ResponseEntity<String> removeCartProduct(@RequestBody CartDto cartDto) {
-        System.out.println("cartDtoList = " + cartDto);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication instanceof AnonymousAuthenticationToken){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
+        }
+
         try {
 //            for (CartDto cartDto : cartDtoList) {
                 cartService.removeCartProduct(cartDto);
 //            }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("장바구니 삭제 실패");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete shopping cart");
         }
 
-        return ResponseEntity.ok("장바구니 삭제 성공");
+        return ResponseEntity.ok().body("Successful deletion of shopping cart");
     }
 }

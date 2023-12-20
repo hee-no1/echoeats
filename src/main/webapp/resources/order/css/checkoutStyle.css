@@ -18,6 +18,7 @@ body, button, input, select, textarea {
 }
 
 body {
+    font-weight: normal;
     margin: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -26,6 +27,15 @@ body {
     user-select: none;
     background-color: #fff;
     -webkit-tap-highlight-color: transparent;
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
 }
 
 :root {
@@ -91,14 +101,15 @@ html {
     padding: 28px 0px;
     font-size: 16px;
     line-height: 24px;
-    font-weight: 500;
+    /*font-weight: 500;*/
+    font-weight: 600;
     text-align: center;
     border-bottom: 1px solid rgb(244, 244, 244);
 }
 
 .css-1ddzp0m {
     padding: 16px 0px;
-    font-weight: 500;
+    /*font-weight: 500;*/
     font-size: 20px;
     color: rgb(51, 51, 51);
     line-height: 29px;
@@ -176,13 +187,6 @@ svg:not(:root) {
     margin-top: 75px;
     border-bottom: 1px solid rgb(51, 51, 51);
 }
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-shoa2s {
     padding: 10px 0px;
 }
@@ -196,7 +200,8 @@ svg:not(:root) {
     display: inline-block;
     width: 160px;
     margin-right: 30px;
-    font-weight: 500;
+    /*font-weight: 500;*/
+    font-weight: 600;
     font-size: 14px;
     line-height: 44px;
     color: rgb(51, 51, 51);
@@ -232,13 +237,6 @@ svg:not(:root) {
     align-items: center;
     margin-top: 75px;
     border-bottom: 1px solid rgb(51, 51, 51);
-}
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
 }
 .css-bjn8wh {
     position: relative;
@@ -314,10 +312,6 @@ html, button, input, select, textarea {
 button {
     border-radius: 0;
 }
-body, button, input, select, textarea {
-    font-size: 14px;
-    color: #333;
-}
 button, input[type=button], input[type=reset], input[type=submit] {
     -webkit-appearance: button;
     cursor: pointer;
@@ -336,37 +330,8 @@ button, input, optgroup, select, textarea {
     margin: 0;
     -webkit-tap-highlight-color: transparent;
 }
-*, :after, :before {
-    box-sizing: border-box;
-    margin: 0;
-}
 *, :after, :before, legend, td, th {
     padding: 0;
-}
-user agent stylesheet
-button {
-    appearance: auto;
-    text-rendering: auto;
-    color: buttontext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    cursor: default;
-    box-sizing: border-box;
-    background-color: buttonface;
-    margin: 0em;
-    padding-block: 1px;
-    padding-inline: 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 .css-5d6nlw {
     border-bottom: 1px solid rgb(244, 244, 244);
@@ -380,17 +345,6 @@ button {
 }
 .css-5d6nlw > div > span:first-of-type {
     line-height: 24px;
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-82a6rk {
     flex: 1 1 0%;
@@ -448,17 +402,6 @@ button {
 }
 .css-1y0xj4c > div > span:first-of-type {
     line-height: 24px;
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-82a6rk {
     flex: 1 1 0%;
@@ -539,38 +482,11 @@ button {
     margin-top: 75px;
     border-bottom: 1px solid rgb(51, 51, 51);
 }
-h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-1gshg9u {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding-top: 20px;
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-1uj3loi {
     position: relative;
@@ -728,30 +644,12 @@ h3 {
     vertical-align: top;
     max-width: none;
 }
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-pkhh3q {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding-top: 20px;
     border-top: 1px solid rgb(244, 244, 244);
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-hkq262 {
     display: flex;
@@ -829,30 +727,12 @@ input[type=checkbox], input[type=radio] {
     justify-content: flex-start;
     gap: 8px;
 }
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-pkhh3q {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding-top: 20px;
     border-top: 1px solid rgb(244, 244, 244);
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-iptwzv {
     padding: 13px 0px 8px;
@@ -910,6 +790,7 @@ input[type=checkbox], input[type=radio] {
     height: 44px;
 }
 .css-16axygr input {
+    text-align: left;
     border-radius: 3px;
     font-size: 14px;
     height: 44px;
@@ -980,29 +861,11 @@ input[type=checkbox], input[type=radio] {
     margin-top: 75px;
     border-bottom: 1px solid rgb(51, 51, 51);
 }
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-1gshg9u {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding-top: 20px;
-}
-.css-ln1csn {
-    display: inline-block;
-    width: 160px;
-    margin-right: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 44px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.32px;
-    vertical-align: top;
 }
 .css-gd125q {
     width: 414px;
@@ -1280,13 +1143,6 @@ input[type=checkbox], input[type=radio] {
     line-height: 18px;
     color: rgb(51, 51, 51);
 }
-*, :after, :before {
-    box-sizing: border-box;
-    margin: 0;
-}
-*, :after, :before, legend, td, th {
-    padding: 0;
-}
 ul {
     display: block;
     list-style-type: disc;
@@ -1294,7 +1150,6 @@ ul {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 40px;
 }
 ol, ul {
     list-style-type: none;
@@ -1322,13 +1177,6 @@ ol, ul {
     align-items: center;
     margin-top: 75px;
     border-bottom: 1px solid rgb(51, 51, 51);
-}
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
 }
 .css-37px7p {
     padding: 20px 0px;
@@ -1415,13 +1263,6 @@ b, optgroup, strong {
     -webkit-box-align: center;
     align-items: center;
 }
-.css-1ddzp0m {
-    padding: 16px 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(51, 51, 51);
-    line-height: 29px;
-}
 .css-hdnk73 {
     width: 100%;
     padding: 17px 16px 18px 18px;
@@ -1477,7 +1318,7 @@ b, optgroup, strong {
 }
 .css-rfpchb {
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 6px;
 }
 .css-158icaa {
     margin-left: 4px;

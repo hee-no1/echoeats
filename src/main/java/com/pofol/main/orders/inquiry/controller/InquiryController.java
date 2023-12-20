@@ -16,17 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.pofol.main.orders.inquiry.domain.InquiryDto;
-import com.pofol.main.orders.inquiry.domain.InquiryImgDto;
 import com.pofol.main.orders.inquiry.service.InquiryImgService;
 import com.pofol.main.orders.inquiry.service.InquiryPrdService;
 import com.pofol.main.orders.inquiry.service.InquiryService;
 import com.pofol.main.orders.order.domain.CodeTableDto;
 import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.service.OrderDetailService;
-import com.pofol.util.AwsS3ImgUploaderService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,7 +47,7 @@ public class InquiryController {
 				dto.setImg_url(ordDetServ.selectByOrderDetImg(ord_det_id));
 				m.addAttribute("ordDetDto", dto);
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
     	return "/order/mypageInquiry";
@@ -125,14 +122,14 @@ public class InquiryController {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
     }
-	
+
 	@ModelAttribute
     public void inquiryGetPageData(Model m){
     	try {
     		List<CodeTableDto> typeList = inqServ.selectCodeType(111);
     		if (typeList == null) // dt = dateType
 				throw new Exception("selectCodeType(111) failed");
-    		
+
     		m.addAttribute("typeList",typeList);
 		} catch (Exception e) {
 			e.printStackTrace();
