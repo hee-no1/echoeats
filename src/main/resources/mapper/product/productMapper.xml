@@ -36,7 +36,6 @@
         WHERE prod_id = #{prod_id}
     </select>
 
-
     <!-- 상품 등록 -->
     <insert id="insert" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="prod_id">
         INSERT INTO product (prod_img_id, cat_code, prod_name, prod_price, disc_rate, disc_price, sale_sts, prod_qty,
