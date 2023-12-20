@@ -36,19 +36,18 @@
         WHERE prod_id = #{prod_id}
     </select>
 
-
     <!-- 상품 등록 -->
     <insert id="insert" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="prod_id">
-        INSERT INTO product (prod_img_id, cat_code, prod_name, prod_price, disc_rate, sale_sts, prod_qty,
-                             is_exch, is_opt, short_desc, long_desc, disp_sts, rg_num, md_num)
-        VALUES (#{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{disc_rate}, #{sale_sts},
-                #{prod_qty}, #{is_exch}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num}, #{md_num})
+        INSERT INTO product (prod_img_id, cat_code, prod_name, prod_price, disc_rate, disc_price, sale_sts, prod_qty,
+                             is_opt, short_desc, long_desc, disp_sts, rg_num, md_num)
+        VALUES (#{prod_img_id}, #{cat_code}, #{prod_name}, #{prod_price}, #{disc_rate}, #{disc_price}, #{sale_sts},
+                #{prod_qty}, #{is_opt}, #{short_desc}, #{long_desc}, #{disp_sts}, #{rg_num}, #{md_num})
     </insert>
 
     <!-- 상품 등록(상세 정보들) -->
     <insert id="insertInfo" parameterType="ProductDto" >
-        INSERT INTO product_info (prod_id, prod_desc_id, brand, origin, dlvy_type, seller, pack_type, sales_unit, weight, exp_date, as_guide)
-        VALUES (#{prod_id}, #{prod_desc_id}, #{brand}, #{origin}, #{dlvy_type}, #{seller}, #{pack_type}, #{sales_unit}, #{weight}, #{exp_date}, #{as_guide})
+        INSERT INTO product_info (prod_id, brand, origin, dlvy_type, seller, pack_type, sales_unit, weight, exp_date, as_guide)
+        VALUES (#{prod_id}, #{brand}, #{origin}, #{dlvy_type}, #{seller}, #{pack_type}, #{sales_unit}, #{weight}, #{exp_date}, #{as_guide})
     </insert>
 
     <!-- product테이블 행 개수 -->
