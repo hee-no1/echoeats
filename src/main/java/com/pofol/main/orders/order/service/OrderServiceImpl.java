@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -37,11 +38,11 @@ public class OrderServiceImpl implements OrderService{
     private final PaymentDiscountRepository paymentDiscountRepository;
 
     @Override
+    @Transactional
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
-//        String mem_id = "you11";
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -68,13 +69,11 @@ public class OrderServiceImpl implements OrderService{
             oc.setTot_prod_price(tot_prod_price);
             oc.setOrigin_prod_price(origin_prod_price);
 
-
             //배송비 구하기
             if(tot_prod_price < 40000){
                 dlvy_fee = 3000;
             }
             oc.setDlvy_fee(dlvy_fee);
-
 
             //총 상품명 구하기
             SelectedItemsDto firstItem = items.get(0);
@@ -125,6 +124,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
+    @Transactional
     public PaymentDiscountDto calculatePayment(PaymentDiscountDto pdd) {
         Long coupon_id = pdd.getCoupon_id();// 쿠폰 id
         int coupon_disc = 0; //쿠폰 사용 금액
@@ -136,8 +136,11 @@ public class OrderServiceImpl implements OrderService{
                 CouponDto coupon = couponRepository.select_coupon(coupon_id);
                 if(coupon.getType().equals("cash")){ //쿠폰이 할인 금액일 때
                     coupon_disc = coupon.getCash_rate();
-                }else { //쿠폰이 할인율일 때
+                }else { //쿠폰이 할인율일 때(최대 사용 금액이 존재)
                     coupon_disc = pdd.getTot_prod_price() * coupon.getCash_rate() / 100;
+                    if(coupon_disc > coupon.getMax_disc_amt()){ //최대 사용 금액보다 쿠폰할인 금액이 클 경우
+                        coupon_disc = coupon.getMax_disc_amt();
+                    }
                 }
                 pdd.setCoupon_disc(coupon_disc);
                 discountPrice += coupon_disc;
@@ -147,18 +150,18 @@ public class OrderServiceImpl implements OrderService{
             }
             pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
 
-            return pdd;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return pdd;
     }
 
 
     @Override
+    @Transactional
     public Long writeOrder(OrderCheckout oc) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
-//        String mem_id = "you11";
 
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
@@ -192,16 +195,17 @@ public class OrderServiceImpl implements OrderService{
             PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
-            return orderDto.getOrd_id();
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+
+        return orderDto.getOrd_id();
     }
 
 
     @Override
+    @Transactional
     public void modifyOrder(Long ord_id, String code_name) {
         System.out.println("modifyOrder");
         try {
