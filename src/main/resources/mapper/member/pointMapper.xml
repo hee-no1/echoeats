@@ -18,15 +18,19 @@
         SELECT * FROM point WHERE point_id = #{point_id}
     </select>
 
-    <select id="sum_point" resultType="int">
-        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id}
+    <select id="sum_point" resultType="Integer">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "적립" OR status = "소멸"
     </select>
 
-    <select id="available_point" resultType="int">
+    <select id="accumulate_point" resultType="int">
         SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "적립"
     </select>
 
-    <select id="preExtinct_point" resultType="int">
+    <select id="use_point" resultType="int">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "사용"
+    </select>
+
+    <select id="preExtinct_point" resultType="Integer">
         SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND his_end_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()
     </select>
 
@@ -36,7 +40,7 @@
         WHERE point_id = #{point_id}
     </update>
 
-    <select id="count_point" resultType="int">
+    <select id="count_point" resultType="Integer">
         SELECT count(*) FROM point WHERE mem_id = #{mem_id}
     </select>
 </mapper>

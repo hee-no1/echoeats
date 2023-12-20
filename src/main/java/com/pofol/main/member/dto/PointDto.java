@@ -108,11 +108,9 @@ public class PointDto {
     public void setMd_num(String md_num) {
         this.md_num = md_num;
     }
-
     public Long getOrd_id() {
         return ord_id;
     }
-
     public void setOrd_id(Long ord_id) {
         this.ord_id = ord_id;
     }
