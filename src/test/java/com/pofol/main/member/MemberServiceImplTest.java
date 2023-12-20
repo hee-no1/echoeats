@@ -31,7 +31,7 @@ public class MemberServiceImplTest {
     CouponRepository couponRepository;
 //    @Test
 //    public void signin() throws Exception {
-//        MemberDto memberDto = new MemberDto("asdfasdfqs","asdf","Doe","asdf@naver.com","01030359787","상남자","1998/10/12","종각역","Y","a","a","asdfasdfqs","asdfasdfqs","asdfasdfqs","asdfasdfqs","a","a");
+//        MemberDto memberDto = new MemberDto("asdfasdfqs","asdf","Doe","asdf@naver.com","01030359787","남자","1998/10/12","종각역","Y","a","a","asdfasdfqs","asdfasdfqs","asdfasdfqs","asdfasdfqs","a","a");
 //       int result = memberRepository.insertMember(memberDto);
 //       assertTrue(result ==1);
 //    }
