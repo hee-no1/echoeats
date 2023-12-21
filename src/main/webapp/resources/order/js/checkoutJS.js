@@ -304,8 +304,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
-        checkout.tot_pay_price = tot_pay_price;
+        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
+        // checkout.tot_pay_price = tot_pay_price;
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
         checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
         checkout.coupon_id = coupon_id;
