@@ -9,6 +9,8 @@ const saveMoney = document.querySelector('.save-money');
 const choiceDelete = document.querySelectorAll('.css-0');
 const allSelect = document.querySelector('.allSelect');
 const goAddressPage = document.querySelector('.css-122i3z7');
+const selectedProduct = document.getElementsByClassName('selected-product');
+const wholeProduct = document.getElementsByClassName('whole-product');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = (isChecked) => {
@@ -191,7 +193,7 @@ $(document).ready(function () {
             checkbox.checked = isChecked;
         });
         updateCartTotals();
-    };
+    }
 
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
@@ -344,14 +346,14 @@ $(document).ready(function () {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const redirectToProductDetail = (prodId) => {
         window.location.href = 'product/' + prodId; // URL 이동
     };
 
     const productLinks = document.querySelectorAll('.css-e0dnmk.esoayg87');
     productLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             const prodId = this.getAttribute('data-prod-id');
             redirectToProductDetail(prodId);
         });
