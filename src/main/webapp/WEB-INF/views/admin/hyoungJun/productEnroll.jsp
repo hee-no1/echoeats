@@ -104,7 +104,8 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력" type="number">
+                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력"
+                                                       type="number">
                                             </div>
                                             <span class="input-group-addon">원</span>
                                         </div>
@@ -196,14 +197,14 @@
                                     <div class="form-inline">
                                         <div class="form-group">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-primary2">3일</button>
-                                                <button type="button" class="btn btn-primary2">5일</button>
-                                                <button type="button" class="btn btn-primary2">7일</button>
-                                                <button type="button" class="btn btn-primary2">15일</button>
-                                                <button type="button" class="btn btn-primary2">30일</button>
-                                                <button type="button" class="btn btn-primary2">60일</button>
-                                                <button type="button" class="btn btn-primary2">90일</button>
-                                                <button type="button" class="btn btn-primary2">120일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="3">3일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="5">5일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="7">7일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="15">15일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="30">30일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="60">60일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="90">90일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="120">120일</button>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -1089,6 +1090,32 @@
 
     productPriceInput.addEventListener('keyup', togglePriceWarning);
     productPriceInput.addEventListener('keyup', togglePriceUnitWarning);
+
+    // 달력 날짜 버튼 선택
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-primary2').forEach(button => {
+            button.addEventListener('click', function () {
+                const days = parseInt(this.getAttribute('data-days'));
+                const startDate = new Date();
+                const endDate = new Date();
+
+                console.log(days);
+                endDate.setDate(startDate.getDate() + days);
+
+                const formatDate = (date) => {
+                    const year = date.getFullYear();
+                    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    console.log(month);
+                    const day = ('0' + date.getDate()).slice(-2);
+                    console.log(year + '-' + month + '-' + day)
+                    return year + '-' + month + '-' + day;
+                };
+
+                document.querySelector('input[name="sel_str_date"]').value = formatDate(startDate);
+                document.querySelector('input[name="sel_end_date"]').value = formatDate(endDate);
+            });
+        });
+    });
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
