@@ -42,7 +42,7 @@ public class OrderController {
 
     @GetMapping
     public String Order(){
-        return "/order/cartSample";
+        return "redirect:/main";
     }
 
     //장바구니를 통해 넘어오는 정보
@@ -103,9 +103,9 @@ public class OrderController {
             if(cp_id != null){  //paymentDiscount 테이블에 coupon_id가 있을 때만 쿠폰 테이블 변경
                 couponService.modifyCouponStatus(cp_id, mem_id);
             }
-            //추가할 거 있음!!!
-//            int mem_have_cp_qty = couponService.member_cp_qty_count(authentication.getName());
-//            request.getSession().setAttribute("mem_have_cp_qty", mem_have_cp_qty);
+
+            int mem_have_cp_qty = couponService.member_cp_qty_count(authentication.getName());
+            session.setAttribute("mem_have_cp_qty", mem_have_cp_qty);
 
             /* 모델로 뷰 단에 넘겨줘야할 것: 주문자 이름, 배송지 */
             String mem_name = memberService.select(mem_id).getMem_name(); //주문자 이름
