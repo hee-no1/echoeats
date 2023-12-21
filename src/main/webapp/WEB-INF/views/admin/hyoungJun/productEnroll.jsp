@@ -200,11 +200,16 @@
                                                 <button type="button" class="btn btn-primary2" data-days="3">3일</button>
                                                 <button type="button" class="btn btn-primary2" data-days="5">5일</button>
                                                 <button type="button" class="btn btn-primary2" data-days="7">7일</button>
-                                                <button type="button" class="btn btn-primary2" data-days="15">15일</button>
-                                                <button type="button" class="btn btn-primary2" data-days="30">30일</button>
-                                                <button type="button" class="btn btn-primary2" data-days="60">60일</button>
-                                                <button type="button" class="btn btn-primary2" data-days="90">90일</button>
-                                                <button type="button" class="btn btn-primary2" data-days="120">120일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="15">15일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="30">30일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="60">60일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="90">90일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="120">120일
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -229,8 +234,8 @@
                                                             <input name="sel_end_date" autocomplete="off"
                                                                    readonly="readonly" class="form-control">
                                                             <span class="input-group-addon">
-                                                            <a role="button" href></a>
-                                                        </span>
+                                                                <a role="button" href></a>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,18 +261,22 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input name="prod_qty" class="form-control" type="text"
+                                                <input name="prod_qty" class="form-control" type="number"
                                                        placeholder="숫자만 입력">
                                             </div>
                                             <span class="input-group-addon">개</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어
-                                            자동으로 입력됩니다.</p>
-                                    </div>
+<%--                                    <div class="form-group">--%>
+<%--                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어--%>
+<%--                                            자동으로 입력됩니다.</p>--%>
+<%--                                    </div>--%>
                                 </div>
                             </div>
+                            <p class="has-error error-msg sub-text text-danger qty-warn">
+                                <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                필수 정보입니다.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1116,6 +1125,19 @@
             });
         });
     });
+
+    // 재고수량 유효성검사
+    let qtyCheck = false;
+
+    const qtyNameInput = document.querySelector('[name="prod_qty"]');
+    const qtyWarning = document.querySelector('.qty-warn');
+
+    function toggleQtyWarning() {
+        qtyCheck = qtyNameInput.value.length > 0;
+        qtyWarning.style.display = qtyCheck ? 'none' : 'block';
+    }
+
+    qtyNameInput.addEventListener('keyup', toggleQtyWarning);
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
