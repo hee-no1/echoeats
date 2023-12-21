@@ -1280,6 +1280,19 @@
 
     expNameInput.addEventListener('keyup', toggleExpWarning);
 
+    // 안내사항 유효성 검사
+    let guideCheck = false;
+
+    const guideNameInput = document.querySelector('[name="as_guide"]');
+    const guideWarning = document.querySelector('.guide-warn');
+
+    function toggleGuideWarning() {
+        guideCheck = guideNameInput.value.length > 0;
+        guideWarning.style.display = guideCheck ? 'none' : 'block';
+    }
+
+    guideNameInput.addEventListener('keyup', toggleGuideWarning);
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
