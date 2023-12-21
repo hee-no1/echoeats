@@ -48,7 +48,7 @@
 
             <div class="css-1jemrvf epggjnz1">
                 <div class="css-1lomzjv epggjnz0">
-                    <button class="css-1bm0yf4 e1ugk4rt6">
+                    <button class="css-1bm0yf4 e1ugk4rt6" id="point_btn">
                         <div class="css-157zkrj e1ugk4rt5">적립금
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
@@ -125,7 +125,7 @@
 
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">배송지 관리
+                    <a class=" css-g4g0eu ecbxmj0" href="/address/">배송지 관리
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -165,7 +165,7 @@
                 </li>
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">적립금
+                    <a class=" css-g4g0eu ecbxmj0" id="point2_btn">적립금
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -234,6 +234,9 @@
         <c:when test="${mypage eq 'grade'}">
             <%@ include file="grade.jsp" %>
         </c:when>
+        <c:when test="${mypage eq 'address'}">
+            <%@ include file="addr_form.jsp" %>
+        </c:when>
         <c:otherwise>
             <!-- 다른 값에 대한 기본 처리나 예외 처리를 여기에 추가 -->
         </c:otherwise>
@@ -259,6 +262,12 @@
     });
     $('#myPageTopCp').on("click", function () {
         window.location.href = "/coupon";
+    });
+    $('#point_btn').on("click", function(){
+        window.open("/point/all","_blank")
+    });
+    $('#point2_btn').on("click", function(){
+        window.open("/point/all","_blank")
     });
 
 </script>
