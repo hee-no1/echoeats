@@ -517,6 +517,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger brand-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -1138,6 +1142,19 @@
     }
 
     qtyNameInput.addEventListener('keyup', toggleQtyWarning);
+
+    // 브랜드 유효성검사
+    let brandCheck = false;
+
+    const brandNameInput = document.querySelector('[name="brand"]');
+    const brandWarning = document.querySelector('.brand-warn');
+
+    function toggleBrandWarning() {
+        brandCheck = brandNameInput.value.length > 0;
+        brandWarning.style.display = brandCheck ? 'none' : 'block';
+    }
+
+    brandNameInput.addEventListener('keyup', toggleBrandWarning);
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
