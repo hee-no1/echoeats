@@ -82,12 +82,21 @@ let couponListBtn = document.querySelectorAll(".couponListBtn");
 for (let i=0; i < couponListBtn.length ; i++){
     couponListBtn[i].addEventListener('click', function(){
 
-        console.log("couponDto",couponDtoList[i]);
-        let addCouponDiv =
+        let addCouponDivName =
             '<div id="addCoupon">' +
             '<div class="css-kmlyvgdiv addCouponDiv">\n' +
-            '<strong class="css-1bfy7g3div">' +'✅ '+ couponDtoList[i].cp_name + '</strong>\n' +
-            '<span class="css-bs5mk4">' + couponDtoList[i].cp_del_date +'</span>\n' +
+            '<strong class="css-1bfy7g3div">' +'✅ '+ couponDtoList[i].cp_name + '</strong><br>\n' +
+            '<span class="css-bs5mk4">' + couponDtoList[i].min_amt +'원 이상 주문 시\n' ;
+
+        let addCouponDivMax ;
+        if(couponDtoList[i].max_disc_amt !== 0){
+            addCouponDivMax = '최대'+couponDtoList[i].max_disc_amt;
+        }else {
+            addCouponDivMax = couponDtoList[i].cash_rate;
+        }
+
+        let addCouponDivDate =
+            '원 할인 (' + couponDtoList[i].cp_del_date +')' +'</span>\n' +
             '</div>' +
             '<button id="deleteCouponBtn" class="css-h5zdhc" type="button" data-testid="delete">' +
             '<span class="css-6mgkir e5h3i930"></span>' +
@@ -97,7 +106,7 @@ for (let i=0; i < couponListBtn.length ; i++){
 
         $('#couponList').hide();
         $('#addCoupon').remove();
-        $('.e1brt3tk0').append(addCouponDiv);
+        $('.e1brt3tk0').append(addCouponDivName + addCouponDivMax + addCouponDivDate);
 
         ajaxData();
     })
@@ -109,27 +118,29 @@ $(document).on('click',"#deleteCouponBtn", function(){
     coupon_id = null;
     ajaxData();
 })
-
-
+let tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "")*1;
+let point = document.getElementById('point').innerText.replace(/,/g, "")*1;
 //적립금 입력
 function updateValue(input){
-    const inputValue = input.value;
-    let point = document.getElementById('point').innerText.replace(/,/g, "");
+    const inputValue = input.value*1;
 
-    if(inputValue === '0'){
+    if(inputValue === 0){
         input.value = '';
-    }else if(inputValue*1 > point*1){
-        input.value = point;
-    }
-    else{
-        input.value = inputValue.replace(/\D/g, '');
+    }else if(inputValue > point || inputValue > tot_pay_price){
+        input.value = Math.min(point, tot_pay_price);
+    } else{
+        input.value = input.value.replace(/\D/g, '');
     }
     ajaxData();
 }
 
 //적립금 모두 사용 버튼
 document.getElementById("allUseBtn").addEventListener('click', function(){
-    document.getElementById('inputPointUsed').value = document.getElementById('point').innerText.replace(/,/g, "");
+    if(point > tot_pay_price){
+        document.getElementById('inputPointUsed').value = tot_pay_price;
+    }else {
+        document.getElementById('inputPointUsed').value = point;
+    }
     ajaxData();
 })
 
@@ -293,12 +304,13 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
+        // checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
+        checkout.tot_pay_price = tot_pay_price;
         checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
         checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
         checkout.coupon_id = coupon_id;
         checkout.point_used = document.getElementById("outputPointUsed").innerText.replace(/,/g, "");
-        console.log("1차 검증 바로전 checkout = " + checkout);
+        // console.log("1차 검증 바로전 checkout = " + checkout);
 
         //넘어가야하는 것
         //총 상품명, 총 주문금액, 총 실결제 금액,총 상품할인 금액, 배송비, 결제 방법, 회원 아이디는 서버에서 세션으로 받는다.
@@ -311,7 +323,11 @@ document.addEventListener("DOMContentLoaded", function () {
             success: function(result){
                 // alert("✅ 1차 검증 성공 = " + result);
                 orderData.ord_id = result*1;
-                requestPay();
+                if(checkout.tot_pay_price === '0'){
+;                    window.location.href = "/order/completed/"+orderData.ord_id;
+                }else{
+                    requestPay();
+                }
 
             },
             error: function(){

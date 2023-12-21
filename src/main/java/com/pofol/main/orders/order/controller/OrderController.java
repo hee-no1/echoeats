@@ -22,9 +22,7 @@ import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.cart.SelectedItemsDto;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -77,7 +75,7 @@ public class OrderController {
     @PostMapping("/calculatePayment")
     public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
         try{
-            System.out.println("계산전"+ pdd);
+
             PaymentDiscountDto paymentDiscountDto = orderService.calculatePayment(pdd);
             return paymentDiscountDto;
         } catch (Exception e) {
@@ -87,12 +85,16 @@ public class OrderController {
 
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m){
-        try{
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session){
+        System.out.println("orderController complete/ord_id");
+        if(session.getAttribute("checkout") == null){
+            return "redirect:/cart";
+        }
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
-//            String mem_id = "you11";
 
+        try{
             /* DB 데이터 */
             orderService.modifyOrder(ord_id, "ORDER_COMPLETE"); //주문 table 변경
             PaymentDiscountDto paymentDiscount = paymentDiscountService.getPaymentDiscount(ord_id);//paymentDiscount 테이블에서 coupon_id 가져오기
@@ -125,6 +127,8 @@ public class OrderController {
             m.addAttribute("mem_name", mem_name);
             m.addAttribute("address", address);
             m.addAttribute("payment",payment);
+            System.out.println("session"+session);
+            session.setAttribute("checkout",null); //세션 종료, url로 치던 뒤로가기로 하던 주문완료 페이지에는 들어올 수 없게
             return "/order/orderCompleted";
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +142,7 @@ public class OrderController {
     public String receiverDetails(Model m){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
-//        String mem_id = "you11";
+
         try {
             MemberDto member = memberService.select(mem_id);
             DelNotesDto delNotes = delNotesService.getDelNotes();
