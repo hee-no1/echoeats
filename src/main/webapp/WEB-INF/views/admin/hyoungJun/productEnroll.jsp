@@ -33,659 +33,628 @@
 <div id="layoutSidenav_content">
 
     <!-- contents-area -->
-    <form action="<c:url value='/admin/hyoungJun/productEnroll'/>" method="post" id="enrollForm" enctype="multipart/form-data">
-<%--        <form action="<c:url value='/admin/hyoungJun/productEnroll'/>" method="post" enctype="multipart/form-data">--%>
-            <div class="seller-content">
-                <div id="productFormNavbar" class="seller-sub-title">
-                    <div class="pull-left">
-                        <h2 class="title">상품등록</h2>
+    <form action="<c:url value='/admin/hyoungJun/productEnroll'/>" method="post" id="enrollForm"
+          enctype="multipart/form-data">
+        <%--        <form action="<c:url value='/admin/hyoungJun/productEnroll'/>" method="post" enctype="multipart/form-data">--%>
+        <div class="seller-content">
+            <div id="productFormNavbar" class="seller-sub-title">
+                <div class="pull-left">
+                    <h2 class="title">상품등록</h2>
+                </div>
+            </div>
+            <div class="seller-sub-content">
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">카테고리</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <span>대분류</span>
+                            <select class="cate1">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <span>중분류</span>
+                            <select class="cate2" name="cat_code">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="seller-sub-content">
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">카테고리</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">상품명</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
                         </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <span>대분류</span>
-                                <select class="cate1">
-                                    <option selected value="none">선택</option>
-                                </select>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <span>중분류</span>
-                                <select class="cate2">
-                                    <option selected value="none">선택</option>
-                                </select>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-group">
+                                <div class="seller-input-wrap">
+                                    <input name="prod_name" type="text"
+                                           class="form-control" maxlength="99"
+                                           title="상품명 입력">
+                                </div>
+                                <span class="input-group-addon"><span class="text-primary">0</span>/100</span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">상품명</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">판매가</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
                         </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <div class="input-group">
-                                    <div class="seller-input-wrap">
-                                        <input name="prod_name" type="text"
-                                               class="form-control" maxlength="99"
-                                               title="상품명 입력">
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">판매가</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력">
+                                            </div>
+                                            <span class="input-group-addon">원</span>
+                                        </div>
                                     </div>
-                                    <span class="input-group-addon"><span class="text-primary">0</span>/100</span>
+                                    <div class="form-group">
+                                        <span class="text-sub">원</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">판매가</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">할인</label>
+                            <div class="input-content">
+                                <div class="seller-input-toggle">
+                                    <input type="radio" id="discount-choice-type-true"
+                                           name="discount-choice-type" value="true">
+                                    <label for="discount-choice-type-true">설정함</label>
+                                    <input type="radio" id="discount-choice-type-false"
+                                           name="discount-choice-type" value="false">
+                                    <label for="discount-choice-type-false">설정안함</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <label class="control-label">판매가</label>
+                        <div class="form-sub-detail">
+                            <div class="form-sub-detail-wrap">
+                                <label class="control-label">기본할인</label>
+                                <div class="input-content">
+                                    <div class="form-control-static">
+                                        <span class="sub-text text-primary">판매가에서 즉시 할인이 가능하고 할인된 가격으로 상품을 판매할 수 있습니다.</span>
+                                    </div>
+                                    <div>
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="seller-input-wrap">
+                                                        <input id="discount-interface" class="form-control"
+                                                               placeholder="판매가에서" max="99" min="0"
+                                                               minlength="1" maxlength="2"
+                                                               value="0" name="disc_rate"
+                                                               type="text">
+                                                        <input name="discount-rate" type="hidden" value="0">
+                                                    </div>
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="text-sub">할인</span>
+                                            </div>
+                                        </div>
+                                        <hr class="line">
+                                        <div class="total-price">
+                                            <label class="control-label">
+                                                <span class="text info">할인가</span>
+                                            </label>
+                                            <div class="input-content">
+                                                <p class="text-info text-price">
+                                                    <span class="span_discount">0</span>
+                                                    <input type="hidden" name="disc_price" value="">
+                                                    <em>원</em> (<span class="span_discounting">0</span> 할인)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">판매기간</label>
+                            <div class="input-content">
+                                <div class="seller-input-toggle">
+                                    <input type="radio" id="salePeriod-choice-type-true"
+                                           name="sale_sts" value="판매중">
+                                    <label for="salePeriod-choice-type-true">설정함</label>
+                                    <input type="radio" id="salePeriod-choice-type-false"
+                                           name="sale_sts" value="판매전">
+                                    <label for="salePeriod-choice-type-false">설정안함</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-detail">
+                            <div class="form-sub-detail-wrap">
+                                <label class="control-label">기간설정</label>
                                 <div class="input-content">
                                     <div class="form-inline">
                                         <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="prod_price" class="form-control" placeholder="숫자만 입력">
-                                                </div>
-                                                <span class="input-group-addon">원</span>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary2">3일</button>
+                                                <button type="button" class="btn btn-primary2">5일</button>
+                                                <button type="button" class="btn btn-primary2">7일</button>
+                                                <button type="button" class="btn btn-primary2">15일</button>
+                                                <button type="button" class="btn btn-primary2">30일</button>
+                                                <button type="button" class="btn btn-primary2">60일</button>
+                                                <button type="button" class="btn btn-primary2">90일</button>
+                                                <button type="button" class="btn btn-primary2">120일</button>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <span class="text-sub">원</span>
+                                            <div class="seller-calendar">
+                                                <div class="form-inline">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input name="sel_str_date" autocomplete="off"
+                                                                   readonly="readonly" class="form-control">
+                                                            <span class="input-group-addon">
+                                                            <a role="button" href></a>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group dash">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">~</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input name="sel_end_date" autocomplete="off"
+                                                                   readonly="readonly" class="form-control">
+                                                            <span class="input-group-addon">
+                                                            <a role="button" href></a>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">할인</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">재고수량</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="prod_qty" class="form-control" type="text"
+                                                       placeholder="숫자만 입력">
+                                            </div>
+                                            <span class="input-group-addon">개</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어
+                                            자동으로 입력됩니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">옵션</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">옵션 유무</label>
+                            <div class="input-content">
+                                <div class="seller-input-toggle">
+                                    <input type="radio" id="option-choice-type-true"
+                                           name="is_opt" value="Y">
+                                    <label for="option-choice-type-true">설정함</label>
+                                    <input type="radio" id="option-choice-type-false"
+                                           name="is_opt" value="N">
+                                    <label for="option-choice-type-false">설정안함</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-detail" id="option-div">
+                            <div class="form-sub-detail-wrap">
+                                <label class="control-label">옵션 입력</label>
                                 <div class="input-content">
-                                    <div class="seller-input-toggle">
-                                        <input type="radio" id="discount-choice-type-true"
-                                               name="discount-choice-type" value="true">
-                                        <label for="discount-choice-type-true">설정함</label>
-                                        <input type="radio" id="discount-choice-type-false"
-                                               name="discount-choice-type" value="false">
-                                        <label for="discount-choice-type-false">설정안함</label>
+                                    <div class="seller-option-input">
+                                        <div class="option-wrap">
+                                            <div class="col-sm-3">
+                                                <label for="choice_option_name0">옵션명</label>
+                                                <div class="seller-input-wrap">
+                                                    <input type="text" class="form-control" id="choice_option_name0"
+                                                           placeholder="최소 2개이상 입력" maxlength="25" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="choice_option_value0">옵션값</label>
+                                                <div class="seller-input-wrap">
+                                                    <input type="text" class="form-control"
+                                                           id="choice_option_value0"
+                                                           placeholder="예시 : 빨강, 노랑(,로 구분)">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="hidden-xs"></label>
+                                                <a role="button" href class="btn btn-default">
+                                                    <i class="seller-icon icon-minus"></i>
+                                                </a>
+                                                <a role="button" href class="btn btn-single">
+                                                    <i class="seller-icon icon-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="option-wrap">
+                                            <div class="col-sm-3">
+                                                <a role="button" href="#" class="btn btn-primary btn-block"
+                                                   id="applyOptionList">
+                                                    옵션목록으로 적용 ↓
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-9"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-sub-detail">
-                                <div class="form-sub-detail-wrap">
-                                    <label class="control-label">기본할인</label>
-                                    <div class="input-content">
-                                        <div class="form-control-static">
-                                            <span class="sub-text text-primary">판매가에서 즉시 할인이 가능하고 할인된 가격으로 상품을 판매할 수 있습니다.</span>
+                            <div class="form-sub-detail-wrap seller-option-list">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label class="control-label">옵션 목록</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 input-content">
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <a role="button" href
+                                               class="btn btn-default btn-sm"
+                                               id="choice-delete">
+                                                선택삭제
+                                            </a>
                                         </div>
-                                        <div>
+                                        <div class="pull-right">
                                             <div class="form-inline">
+                                                <div class="form-group">
+                                                    옵션가
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-default
+                                                        btn-sm dropdown-toggle"
+                                                                    data-toggle="dropdown" type="button"
+                                                                    aria-expanded="false">+ <span
+                                                                    class="caret"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="seller-input-wrap">
+                                                            <input type="tel" class="form-control input-sm"
+                                                                   maxlength="12">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">재고수량</div>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="seller-input-wrap">
-                                                            <input id="discount-interface" class="form-control"
-                                                                   placeholder="판매가에서" max="99" min="0"
-                                                                   minlength="1" maxlength="2"
-                                                                   value="0" name="disc_rate">
-                                                            <input name="discount-rate" type="hidden" value="0">
+                                                            <input type="tel" class="form-control input-sm"
+                                                                   maxlength="12">
                                                         </div>
-                                                        <span class="input-group-addon">%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">사용여부</div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-default
+                                                        btn-sm dropdown-toggle"
+                                                                    data-toggle="dropdown" type="button"
+                                                                    aria-expanded="false">Y <span
+                                                                    class="caret"></span>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <span class="text-sub">할인</span>
-                                                </div>
-                                            </div>
-                                            <hr class="line">
-                                            <div class="total-price">
-                                                <label class="control-label">
-                                                    <span class="text info">할인가</span>
-                                                </label>
-                                                <div class="input-content">
-                                                    <p class="text-info text-price">
-                                                        <span class="span_discount" name="disc_price">0</span>
-                                                        <em>원</em> (<span class="span_discounting">0</span> 할인)
-                                                    </p>
+                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록
+                                                        일괄수정</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">판매기간</label>
-                                <div class="input-content">
-                                    <div class="seller-input-toggle">
-                                        <input type="radio" id="salePeriod-choice-type-true"
-                                               name="sales_sts" value="Y">
-                                        <label for="salePeriod-choice-type-true">설정함</label>
-                                        <input type="radio" id="salePeriod-choice-type-false"
-                                               name="sales_sts" value="N">
-                                        <label for="salePeriod-choice-type-false">설정안함</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-detail">
-                                <div class="form-sub-detail-wrap">
-                                    <label class="control-label">기간설정</label>
-                                    <div class="input-content">
-                                        <div class="form-inline">
-                                            <div class="form-group">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary2">3일</button>
-                                                    <button type="button" class="btn btn-primary2">5일</button>
-                                                    <button type="button" class="btn btn-primary2">7일</button>
-                                                    <button type="button" class="btn btn-primary2">15일</button>
-                                                    <button type="button" class="btn btn-primary2">30일</button>
-                                                    <button type="button" class="btn btn-primary2">60일</button>
-                                                    <button type="button" class="btn btn-primary2">90일</button>
-                                                    <button type="button" class="btn btn-primary2">120일</button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="seller-calendar">
-                                                    <div class="form-inline">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input name="sel_str_date" autocomplete="off"
-                                                                       readonly="readonly" class="form-control">
-                                                                <span class="input-group-addon">
-                                                            <a role="button" href></a>
-                                                        </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group dash">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">~</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input name="sel_end_date" autocomplete="off"
-                                                                       readonly="readonly" class="form-control">
-                                                                <span class="input-group-addon">
-                                                            <a role="button" href></a>
-                                                        </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">재고수량</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="prod_qty" class="form-control" type="text"
-                                                           placeholder="숫자만 입력">
-                                                </div>
-                                                <span class="input-group-addon">개</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어
-                                                자동으로 입력됩니다.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">옵션</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <label class="control-label">옵션 유무</label>
-                                <div class="input-content">
-                                    <div class="seller-input-toggle">
-                                        <input type="radio" id="option-choice-type-true"
-                                               name="is_opt" value="Y">
-                                        <label for="option-choice-type-true">설정함</label>
-                                        <input type="radio" id="option-choice-type-false"
-                                               name="is_opt" value="N">
-                                        <label for="option-choice-type-false">설정안함</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-detail">
-                                <div class="form-sub-detail-wrap">
-                                    <label class="control-label">옵션 입력</label>
-                                    <div class="input-content">
-                                        <div class="seller-option-input">
-                                            <div class="option-wrap">
-                                                <div class="col-sm-3">
-                                                    <label for="choice_option_name0">옵션명</label>
-                                                    <div class="seller-input-wrap">
-                                                        <input type="text" class="form-control" id="choice_option_name0"
-                                                               placeholder="예시:컬러" maxlength="25">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label for="choice_option_value0">옵션값</label>
-                                                    <div class="seller-input-wrap">
-                                                        <input type="text" class="form-control"
-                                                               id="choice_option_value0"
-                                                               placeholder="예시 : 빨강, 노랑(,로 구분)">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <label class="hidden-xs"></label>
-                                                    <a role="button" href class="btn btn-default">
-                                                        <i class="seller-icon icon-minus"></i>
-                                                    </a>
-                                                    <a role="button" href class="btn btn-single">
-                                                        <i class="seller-icon icon-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="option-wrap">
-                                                <div class="col-sm-3">
-                                                    <a role="button" href class="btn btn-primary btn-block">
-                                                        옵션목록으로 적용 ↓
-                                                    </a>
-                                                </div>
-                                                <div class="col-sm-9"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-sub-detail-wrap seller-option-list">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <label class="control-label">옵션 목록</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 input-content">
-                                        <div class="clearfix">
-                                            <div class="pull-left">
-                                                <a role="button" href
-                                                   class="btn btn-default btn-sm">
-                                                    선택삭제
-                                                </a>
-                                            </div>
-                                            <div class="pull-right">
-                                                <div class="form-inline">
-                                                    <div class="form-group">
-                                                        옵션가
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                        data-toggle="dropdown" type="button"
-                                                                        aria-expanded="false">+ <span
-                                                                        class="caret"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="seller-input-wrap">
-                                                                <input type="tel" class="form-control input-sm"
-                                                                       maxlength="12">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">재고수량</div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="seller-input-wrap">
-                                                                <input type="tel" class="form-control input-sm"
-                                                                       maxlength="12">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">사용여부</div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                        data-toggle="dropdown" type="button"
-                                                                        aria-expanded="false">Y <span
-                                                                        class="caret"></span>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <a role="button" href class="btn btn-default2 btn-sm">선택목록
-                                                            일괄수정</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="seller-grid-area ag-theme-fresh has-space-top"
-                                             style="width:100%; height: 300px;">
-                                            <table id="myTable">
-                                                <thead>
-                                                <tr>
-                                                    <th><input type="checkbox" id="checkAll" checked>
-                                                        <label for="checkAll"></label></th>
-                                                    <th>옵션명</th>
-                                                    <th>옵션가</th>
-                                                    <th>재고수량</th>
-                                                    <th>판매상태</th>
-                                                    <th>사용여부</th>
-                                                    <th>삭제</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td>
-                                                        <button class="deleteBtn">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td>
-                                                        <button class="deleteBtn">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td><input type="text"></td>
-                                                    <td>
-                                                        <button class="deleteBtn">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="seller-grid-area ag-theme-fresh has-space-top"
+                                         style="width:100%; height: 300px;">
+                                        <table id="myTable">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" id="checkAll">
+                                                    <label for="checkAll"></label></th>
+                                                <th>옵션명</th>
+                                                <th>옵션가</th>
+                                                <th>옵션할인된가격</th>
+                                                <th>재고수량</th>
+                                                <th>판매상태</th>
+                                                <th>사용여부</th>
+                                                <th>삭제</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        </div>
-                                        <div class="btn-block"></div>
+                                            </tbody>
+                                        </table>
+
                                     </div>
+                                    <div class="btn-block"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">상품 이미지</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">상품 이미지</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
                         </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap" id="img-wrap-wrap">
-                                <div class="input-content" id="img-wrap">
-                                    <input type="file" id="fileItem" name="prod_img" style="height: 30px;"
-                                           accept="image/jpg, image/jpeg, image/png, image/bmp"
-                                            class="img-input" onchange="handleFiles(this.files)">
-                                    <div id="upload-result">
-                                        <div id="result-card">
-                                            <div class="img-delete-btn"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap" id="img-wrap-wrap">
+                            <div class="input-content" id="img-wrap">
+                                <input type="file" id="fileItem" name="prod_img" style="height: 30px;"
+                                       accept="image/jpg, image/jpeg, image/png, image/bmp"
+                                       class="img-input" onchange="handleFiles(this.files)">
                             </div>
                         </div>
                     </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">소개글</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <textarea name="short_desc" id="short_desc_textarea"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">소개글</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
                         </div>
                     </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">상세설명</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <textarea name="long_desc" id="long_desc_textarea"></textarea>
-                                            </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <textarea name="short_desc" id="short_desc_textarea"></textarea>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">상품 주요정보</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <label class="control-label">브랜드</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="brand-input-wrap">
-                                                    <input name="brand" class="form-control" type="text"
-                                                           placeholder="상품의 브랜드를 정확하게 입력해주세요.">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">원산지</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="origin" class="form-control" type="text"
-                                                           placeholder="ex) 국산 , 필리핀">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">배송 타입</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="dlvy_type" class="form-control" type="text"
-                                                           placeholder="ex) 샛별배송">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">판매자</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="seller" class="form-control" type="text"
-                                                           placeholder="ex) 컬리">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">포장타입</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="pack_type" class="form-control" type="text"
-                                                           placeholder="ex) 냉동 or 냉장">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">판매단위</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="sales_unit" class="form-control" type="text"
-                                                           placeholder="팩이면 1팩, 낱개면 1개">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">중량/용량</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="weight" class="form-control" type="text"
-                                                           placeholder="단위까지 정확하게 입력">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">유통기한</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="exp_date" class="form-control"
-                                                           autocomplete="off" readonly="readonly">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label">안내사항</label>
-                                <div class="input-content">
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="seller-input-wrap">
-                                                    <input name="as_guide" class="form-control" type="text"
-                                                           placeholder="안내할 사항을 입력">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-section">
-                        <div class="title-line" role="button">
-                            <label class="col-sm-2 control-label">전시상태</label>
-                            <div class="set-option">
-                                <a href class="btn active"></a>
-                            </div>
-                        </div>
-                        <div class="form-section-sub">
-                            <div class="form-sub-wrap">
-                                <label class="control-label">전시상태</label>
-                                <div class="input-content">
-                                    <div class="seller-input-toggle">
-                                        <input type="radio" id="display-choice-type-true"
-                                               name="disp_sts" value="Y">
-                                        <label for="display-choice-type-true">설정함</label>
-                                        <input type="radio" id="display-choice-type-false"
-                                               name="disp_sts" value="N">
-                                        <label for="display-choice-type-false">설정안함</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="seller-btn-area btn-group-xlg">
-                    <button type="button" class="btn btn-default" id="cancelBtn">취소</button>
-                    <button type="submit" class="btn btn-primary">
-                        <span class="content" id="enrollBtn">저장하기</span>
-                    </button>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">상세설명</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <textarea name="long_desc" id="long_desc_textarea"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">상품 주요정보</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">브랜드</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="brand-input-wrap">
+                                                <input name="brand" class="form-control" type="text"
+                                                       placeholder="상품의 브랜드를 정확하게 입력해주세요.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">원산지</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="origin" class="form-control" type="text"
+                                                       placeholder="ex) 국산 , 필리핀">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">배송 타입</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="dlvy_type" class="form-control" type="text"
+                                                       placeholder="ex) 샛별배송">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">판매자</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="seller" class="form-control" type="text"
+                                                       placeholder="ex) 컬리">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">포장타입</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="pack_type" class="form-control" type="text"
+                                                       placeholder="ex) 냉동 or 냉장">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">판매단위</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="sales_unit" class="form-control" type="text"
+                                                       placeholder="팩이면 1팩, 낱개면 1개">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">중량/용량</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="weight" class="form-control" type="text"
+                                                       placeholder="단위까지 정확하게 입력">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">유통기한</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="exp_date" class="form-control"
+                                                       placeholder="ex) 상온 상태 시 2년 이내">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">안내사항</label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="as_guide" class="form-control" type="text"
+                                                       placeholder="안내할 사항을 입력">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="title-line" role="button">
+                        <label class="col-sm-2 control-label">전시상태</label>
+                        <div class="set-option">
+                            <a href class="btn active"></a>
+                        </div>
+                    </div>
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">전시상태</label>
+                            <div class="input-content">
+                                <div class="seller-input-toggle">
+                                    <input type="radio" id="display-choice-type-true"
+                                           name="disp_sts" value="Y">
+                                    <label for="display-choice-type-true">설정함</label>
+                                    <input type="radio" id="display-choice-type-false"
+                                           name="disp_sts" value="N">
+                                    <label for="display-choice-type-false">설정안함</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
-<%--    </form>--%>
+            <div class="seller-btn-area btn-group-xlg">
+                <button type="button" class="btn btn-default" id="cancelBtn">취소</button>
+                <button type="submit" class="btn btn-primary">
+                    <span class="content" id="enrollBtn">저장하기</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <%--    </form>--%>
 </div>
 
 <script>
@@ -719,20 +688,16 @@
         $("input[name='sel_end_date']").datepicker(config);
     });
 
-    $(function () {
-        $("input[name='exp_date']").datepicker(config);
-    });
-
     let enrollForm = document.getElementById('enrollForm');
 
     // 취소버튼
-    $('#cancelBtn').click(function () {
+    $('#cancelBtn').click(() => {
         location.href = '/admin/productManage';
         enrollForm.submit();
     });
 
     // 등록 버튼
-    $('#enrollBtn').click(function (e) {
+    $('#enrollBtn').click((e) => {
         e.preventDefault();
         enrollForm.submit();
     });
@@ -784,7 +749,7 @@
     });
 
     // 할인율 input설정
-    $('#discount-interface').on("PropertyChange change keyup paste input", function () {
+    $('#discount-interface').on("PropertyChange change keyup paste input", () => {
         let userInput = $('#discount-interface');
         let discountInput = $('input[name="discount-rate"]');
 
@@ -796,6 +761,8 @@
         let productPrice = $("input[name='prod_price']").val();
         // 할인된 가격
         let discountedPrice = Math.floor(productPrice * (1 - sendDiscountRate));
+        let discountedInput = $("input[name='disc_price']").val();
+        discountedInput.value = discountedPrice;
         // 할인 얼마나 됐는지
         let discountingPrice = productPrice - discountedPrice;
 
@@ -804,6 +771,8 @@
         $('.span_discounting').html(discountingPrice);
 
         discountInput.val(sendDiscountRate);
+
+        $('input[name="disc_price"]').val(discountedPrice);
     });
 
     // 가격을 다시 입력했을 때 할인된 가격이 바뀌는 이벤트
@@ -829,7 +798,7 @@
     });
 
     // 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
-    $(document).ready(function () {
+    $(document).ready(() => {
         $('.set-option').click(function (event) {
             // <a> 태그의 기본 동작 방지
             event.preventDefault();
@@ -841,27 +810,15 @@
     });
 
     // 상품명 글자수 표시
-    $(document).ready(function () {
-        $('.form-control').on('input', function () {
+    $(document).ready(() => {
+        $('.form-control').on('input', () => {
             let textLength = $(this).val().length;
             $(this).closest('.input-group').find('.text-primary').text(textLength);
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('checkAll').addEventListener('change', function () {
-            console.log('Checkbox state changed');
-            let checkboxes = document.querySelectorAll('#myTable tbody input[type="checkbox"]');
-            console.log(checkboxes);
-            for (let checkbox of checkboxes) {
-                checkbox.checked = this.checked;
-                console.log(checkbox.checked = this.checked);
-            }
-        });
-    });
-
     let table = document.getElementById('myTable');
-    table.addEventListener('click', function (e) {
+    table.addEventListener('click', (e) => {
         if (e.target.classList.contains('deleteBtn')) {
             let row = e.target.closest('tr');
             table.deleteRow(row.rowIndex);
@@ -869,14 +826,14 @@
     });
 
     /* 이미지 업로드 */
-    $("input[type='file']").on("change", function (e) {
+    $("input[type='file']").on("change", (e) => {
 
         let formData = new FormData();
         let fileInput = $('input[name="prod_img"]');
         let fileList = fileInput[0].files;
         let fileObj = fileList[0];
 
-        if(!fileCheck(fileObj.name, fileObj.size)){
+        if (!fileCheck(fileObj.name, fileObj.size)) {
             return false;
         }
 
@@ -884,11 +841,11 @@
 
         $.ajax({
             url: '/admin/uploadAjaxAction',
-            processData : false,
-            contentType : false,
-            data : formData,
-            type : 'POST',
-            dataType : 'json'
+            processData: false,
+            contentType: false,
+            data: formData,
+            type: 'POST',
+            dataType: 'json'
         });
 
     });
@@ -896,14 +853,14 @@
     let regex = new RegExp("(.*?)\.(jpg|png|jpeg)$");
     let maxSize = 1048576; //1MB
 
-    function fileCheck(fileName, fileSize){
+    function fileCheck(fileName, fileSize) {
 
-        if(fileSize >= maxSize){
+        if (fileSize >= maxSize) {
             alert("파일 사이즈 초과");
             return false;
         }
 
-        if(!regex.test(fileName)){
+        if (!regex.test(fileName)) {
             alert("해당 종류의 파일은 업로드할 수 없습니다.");
             return false;
         }
@@ -951,6 +908,145 @@
             list.append(last);
         }
     }
+
+    // 옵션관련
+    document.getElementById('applyOptionList').addEventListener('click', (e) => {
+        e.preventDefault();
+        let optionValues = document.getElementById('choice_option_value0').value.split(',');
+        let table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+        optionValues.forEach((value, index) => {
+            let row = table.insertRow();
+
+            // Checkbox Cell
+            let checkboxCell = row.insertCell(0);
+            checkboxCell.innerHTML = '<input type="checkbox" class="checkbox-td">';
+
+            // Option Name Cell
+            let optionNameCell = row.insertCell(1);
+            optionNameCell.innerHTML = '<input type="text" name="optionProductList[' + index + '].opt_prod_name" value="' + value.trim() + '">';
+
+            // Option Price Cell
+            let optionPriceCell = row.insertCell(2);
+            optionPriceCell.innerHTML = '<input type="number" name="optionProductList[' + index + '].opt_price">';
+
+            // Option Discount Price
+            let optionDiscountPriceCell = row.insertCell(3);
+            optionDiscountPriceCell.innerHTML = '<input type="number" name="optionProductList[' + index + '].opt_disc_price" value="">'
+
+            // Stock Quantity Cell
+            let stockQtyCell = row.insertCell(4);
+            stockQtyCell.innerHTML = '<input type="number" name="optionProductList[' + index + '].opt_prod_qty">';
+
+            // Sales Status Cell
+            let salesStatusCell = row.insertCell(5);
+            //salesStatusCell.innerHTML = '<input type="text" name="optionProductList[' + index + '].opt_prod_sts">';
+            salesStatusCell.innerHTML = '<select name="optionProductList[' + index + '].opt_prod_sts">' +
+                '<option value="">판매상태</option>' +
+                '<option value="판매전">판매전</option>' +
+                '<option value="판매중">판매중</option></select>';
+
+            // Usage Status Cell
+            let usageStatusCell = row.insertCell(6);
+            usageStatusCell.innerHTML = '<input type="text" value="Y">';
+
+            // Adding Delete Functionality
+            let deleteButtonCell = row.insertCell(7);
+            let deleteButton = document.createElement('button');
+            deleteButton.innerHTML = 'Delete';
+            deleteButton.className = 'deleteBtn';
+            deleteButton.onclick = function (e) {
+                e.stopPropagation();
+                this.closest('tr').remove(); // Removes the closest tr element (the row)
+            };
+            deleteButtonCell.appendChild(deleteButton);
+        });
+
+        // 만약 어느 한줄이라도 delete 버튼을 누르면
+        // 있던 table안의 <input>을 전부 삭제한다
+        // 그리고 존재했던 <input>태그들은 다시 재배치해서 <input>태그를 넣는다.
+    });
+
+    // 선택삭제
+    document.getElementById('choice-delete').addEventListener('click', (e) => {
+        e.preventDefault();
+        const checkboxes = document.querySelectorAll('#myTable tbody input[type="checkbox"]');
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                let row = checkbox.closest('tr');
+                row.parentNode.removeChild(row);
+            }
+        });
+    });
+
+
+    let checkAll = document.querySelector('#checkAll');
+
+    checkAll.addEventListener('click', () => {
+
+        const isChecked = checkAll.checked;
+
+        if (isChecked) {
+            const checkboxes = document.querySelectorAll(`#myTable tbody input[type="checkbox"]`);
+
+            for (const checkbox of checkboxes) {
+                checkbox.checked = true;
+            }
+        } else {
+            const checkboxes = document.querySelectorAll(`#myTable tbody input[type="checkbox"]`);
+            for (const checkbox of checkboxes) {
+                checkbox.checked = false;
+            }
+        }
+    })
+
+    // 전체 선택 삭제 버튼 : 하나라도 체크박스가 선택안되면 체크 해제
+    document.addEventListener('DOMContentLoaded', () => {
+        let checkboxes = document.querySelectorAll(`#myTable tbody input[type="checkbox"]`);
+        //const checkAll = document.querySelector(`#checkAll`);
+        for (let checkbox of checkboxes) {
+            checkbox.addEventListener('change', () => {
+                const totalCount = checkboxes.length;
+                const checkedCount = document.querySelectorAll('#myTable tbody input[type="checkbox"]:checked').length;
+                console.log("totalCount : " + totalCount);
+                console.log("checkdeCount : " + checkedCount);
+                console.log(checkedCount);
+                checkAll.checked = totalCount === checkedCount;
+            });
+        }
+
+        checkAll.addEventListener('change', () => {
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('checkAll').addEventListener('change', function () {
+            console.log('Checkbox state changed');
+            let checkboxes = document.querySelectorAll('#myTable tbody input[type="checkbox"]');
+            console.log(checkboxes);
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+                console.log(checkbox.checked = this.checked);
+            }
+        });
+    });
+
+    // 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
+
+    let optionTrueChoice = document.getElementById('option-choice-type-true');
+    let optionFalseChoice = document.getElementById('option-choice-type-false');
+    let optionDetail = document.getElementById('option-div');
+
+    optionFalseChoice.addEventListener('click', () => {
+        optionDetail.style.display = 'none';
+    });
+
+    optionTrueChoice.addEventListener('click', () => {
+        optionDetail.style.display = 'block';
+    });
 
 </script>
 </body>

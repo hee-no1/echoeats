@@ -1,24 +1,26 @@
 package com.pofol.main.orders.order.service;
 
 import com.pofol.main.member.dto.*;
-import com.pofol.main.member.repository.AddressRepository;
-import com.pofol.main.member.repository.CouponRepository;
-import com.pofol.main.member.repository.DelNotesRepository;
-import com.pofol.main.member.repository.MemberRepository;
+import com.pofol.main.member.repository.*;
+import com.pofol.main.member.service.PointService;
 import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
-import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
-import com.pofol.main.orders.order.domain.ProductOrderCheckout;
 import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -28,18 +30,19 @@ public class OrderServiceImpl implements OrderService{
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
-    private final CartRepository basketRepo;
+    private final PointService pointService;
+    private final CartRepository cartRepo;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
     private final PaymentDiscountRepository paymentDiscountRepository;
 
     @Override
+    @Transactional
     public OrderCheckout writeCheckout(List<SelectedItemsDto> items) {
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
@@ -50,7 +53,7 @@ public class OrderServiceImpl implements OrderService{
 
         try{
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
@@ -66,13 +69,11 @@ public class OrderServiceImpl implements OrderService{
             oc.setTot_prod_price(tot_prod_price);
             oc.setOrigin_prod_price(origin_prod_price);
 
-
             //배송비 구하기
             if(tot_prod_price < 40000){
                 dlvy_fee = 3000;
             }
             oc.setDlvy_fee(dlvy_fee);
-
 
             //총 상품명 구하기
             SelectedItemsDto firstItem = items.get(0);
@@ -85,31 +86,35 @@ public class OrderServiceImpl implements OrderService{
                 tot_prod_name = firstProd.getOpt_prod_name();
             }
 
-            if(tot_ord_qty == 1){ //상품수량이 1개일 때
-                tot_prod_name += "상품을 주문합니다.";
-            } else {//상품수량이 2개 이상일 때
+            if(tot_ord_qty > 1){ //상품수량이 1개일 때
                 tot_prod_name += " 외 " + (tot_ord_qty-1) +"개";
             }
 
             oc.setTot_prod_name(tot_prod_name);
 
 
-            //회원정보, 배송지, 배송요청사항, 쿠폰정보
             //회원정보 가져오기
-            MemberDto mem = memRepo.selectMember(mem_id);
-            oc.setMemberDto(mem);
+            oc.setMemberDto(memRepo.selectMember(mem_id));
 
             //배송지
-            AddressDto address = addressRepository.selectDefaultAddress(mem_id);
-            oc.setAddressDto(address);
+            oc.setAddressDto(addressRepository.selectDefaultAddress(mem_id));
 
             //배송요청사항 가져오기
-            DelNotesDto delNotes = delNotesRepository.select_delNotes(mem_id);
-            oc.setDelNotesDto(delNotes);
+            oc.setDelNotesDto(delNotesRepository.select_delNotes(mem_id));
 
-            //쿠폰 정보 가져오기
-            List<CouponJoinDto> couponJoinDtos = couponRepository.selectMembersWithCoupons(mem_id);
+            //쿠폰 정보 가져오기. (단, 총 주문 금액이 쿠폰 사용 가능한 최소 금액보다 클 경우에만 사용 가능)
+            List<CouponJoinDto> couponJoinDtos =  Collections.synchronizedList(couponRepository.selectMembersWithCoupons(mem_id));
+            Iterator<CouponJoinDto> it = couponJoinDtos.iterator();
+            while (it.hasNext()){
+                if(tot_prod_price < it.next().getMin_amt()){
+                    it.remove();
+                }
+            }
             oc.setCouponList(couponJoinDtos);
+
+            //적립금 정보 가져오기
+            oc.setAvailablePoint(pointService.getAvailablePoint(mem_id));
+
             return oc;
 
         } catch (Exception e) {
@@ -119,6 +124,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
+    @Transactional
     public PaymentDiscountDto calculatePayment(PaymentDiscountDto pdd) {
         Long coupon_id = pdd.getCoupon_id();// 쿠폰 id
         int coupon_disc = 0; //쿠폰 사용 금액
@@ -130,8 +136,11 @@ public class OrderServiceImpl implements OrderService{
                 CouponDto coupon = couponRepository.select_coupon(coupon_id);
                 if(coupon.getType().equals("cash")){ //쿠폰이 할인 금액일 때
                     coupon_disc = coupon.getCash_rate();
-                }else { //쿠폰이 할인율일 때
+                }else { //쿠폰이 할인율일 때(최대 사용 금액이 존재)
                     coupon_disc = pdd.getTot_prod_price() * coupon.getCash_rate() / 100;
+                    if(coupon_disc > coupon.getMax_disc_amt()){ //최대 사용 금액보다 쿠폰할인 금액이 클 경우
+                        coupon_disc = coupon.getMax_disc_amt();
+                    }
                 }
                 pdd.setCoupon_disc(coupon_disc);
                 discountPrice += coupon_disc;
@@ -141,18 +150,18 @@ public class OrderServiceImpl implements OrderService{
             }
             pdd.setTot_pay_price(pdd.getTot_prod_price() - discountPrice + pdd.getDlvy_fee());
 
-            return pdd;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return pdd;
     }
 
 
     @Override
+    @Transactional
     public Long writeOrder(OrderCheckout oc) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
 
         System.out.println("writeOrder 주문서 = " + oc);
         List<SelectedItemsDto> items = oc.getSelectedItems();
@@ -165,7 +174,7 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = basketRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 
@@ -186,16 +195,17 @@ public class OrderServiceImpl implements OrderService{
             PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
-            return orderDto.getOrd_id();
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+
+        return orderDto.getOrd_id();
     }
 
 
     @Override
+    @Transactional
     public void modifyOrder(Long ord_id, String code_name) {
         System.out.println("modifyOrder");
         try {
@@ -223,4 +233,34 @@ public class OrderServiceImpl implements OrderService{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * @param mem_id(유저ID)
+     * @param period(검색범위:현재기준-day)
+     * @return List<OrderDto>
+     * @feat : mypage에 주문리스트를 가져오는 메서드
+     **/ 
+	@Override
+	public List<OrderDto> selectAllByUserIdAndPeriod(Map map) throws Exception {
+		return orderRepository.selectAllByUserIdAndPeriod(map);
+	}
+	/**
+     * @param ord_id(주문ID)
+     * @return String
+     * @feat : mypage에 주문리스트 메인 이미지를 가져오는 메서드
+     **/ 
+	@Override
+	public String selectByOrderMainImg(Long ord_id) {
+		return orderRepository.selectByOrderMainImg(ord_id);
+	}
+	/**
+     * @param ord_id(주문ID)
+     * @return OrderDto
+     * @feat : mypage에 주문상세의 결제정보를 가져오는 메서드
+     **/ 
+	@Override
+	public OrderDto selectByOrderId(Long ord_id) {
+		// TODO Auto-generated method stub
+		return orderRepository.selectByOrderId(ord_id);
+	}
 }

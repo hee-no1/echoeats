@@ -31,13 +31,14 @@
 .form{
     padding: 0px;
     border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
+    /*border-bottom: 2px solid #000;*/
     padding-top: 10px;
 }
 .form_in{
     display: inline-flex;
     width: 100%;
     padding: 10px 20px;
+    align-items: baseline;
 }
 .one{
     width: 139px;
@@ -74,7 +75,7 @@
     box-sizing: border-box;
 }
 .form_in.address{
-    height: 92px;
+    height: 120px;
 }
 .two > .address_button{
     display: block;
@@ -84,9 +85,9 @@
     width: 100%;
     height: 44px;
     border-radius: 4px;
-    color: rgb(95, 0, 128);
+    color: #00C73C;
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #00C73C;
 }
 .two > .address_button > span{
     font-size: 14px;
@@ -190,9 +191,9 @@
     width: 100%;
     height: 52px;
     border-radius: 3px;
-    color: rgb(95, 0, 128);
+    color: #00C73C;
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #00C73C;
 
 }
 .three > button[disabled]{
@@ -209,6 +210,9 @@ button:hover {
 }
 .mini_space{
     padding: 10px 0;
+    /*border-bottom: 1px solid rgb(51, 51, 51);*/
+    border-bottom: 2px solid #000;
+
 }
 .checkbox{
     display: flex;
@@ -290,7 +294,7 @@ button:hover {
     height: 56px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: #00C73C;
     border: 0px none;
 }
 .sign_in_button > button > span{
@@ -309,7 +313,7 @@ button:hover {
     color: #333;
     box-sizing: border-box;
     margin: 0;
-    display: inline-flex;
+    /*display: inline-flex;*/
     width: 100%;
     padding: 10px 20px;
     flex-wrap: wrap;

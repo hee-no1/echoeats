@@ -26,12 +26,13 @@ public class ProductImageDto {
 
   private Long prod_id;
 
-  public ProductImageDto(String prod_img_id, String ori_file_name, String ser_file_name, String rg_num) {
+  public ProductImageDto(String prod_img_id, Long prod_id, String ori_file_name, String ser_file_name, String rg_num) {
     this.prod_img_id = prod_img_id;
     this.ori_file_name = ori_file_name;
     this.ser_file_name = ser_file_name;
     this.rg_num = rg_num;
     this.md_num = rg_num;
+    this.prod_id = prod_id;
   }
 
 }

@@ -12,6 +12,10 @@ public interface CartRepository {
     ProductOrderCheckout selectProductOrderCheckout(SelectedItemsDto selectedItemsDto) throws Exception;
     // 장바구니에 상품 데이터 저장
     int insertCartProduct(CartDto cartDto) throws Exception;
+    // 이미 담긴 상품 담을 시 수량 증가
+    int updateCartProduct(CartDto cartDto) throws Exception;
+    // 장바구니에 상품 데이터 삭제
+    int deleteCartProduct(CartDto cartDto) throws Exception;
     // 장바구니에 담은 상품 장바구니 페이지에 정렬
     List<CartDto> selectAllCartProduct(String mem_id) throws Exception;
 

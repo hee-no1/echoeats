@@ -1,6 +1,8 @@
 package com.pofol.main.product.cart;
 
+import com.pofol.main.member.dto.AddressDto;
 import com.pofol.main.member.dto.GradeDto;
+import com.pofol.main.member.service.AddressService;
 import com.pofol.main.member.service.GradeService;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
@@ -11,6 +13,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,20 +27,20 @@ public class CartController {
     private final GradeService gradeService;
     private final CartService cartService;
     private final CategoryList categoryList;
+    private final AddressService addressService;
 
-    // 상품 수량에 따라 상품 가격 계산
+    // 상품 수량에 따라 상품 가격 계산 (상품 상세 페이지)
     @ResponseBody
     @PostMapping("/ProductCalculation")
-    public List<CartDto> productCalculation(@RequestBody List<CartDto> cartDtoList) {
+    public ResponseEntity<List<CartDto>> productCalculation(@RequestBody List<CartDto> cartDtoList) {
 
-        for (CartDto cartDto : cartDtoList) {
-            if (cartDtoList.size() == 1) {
-                cartDto.setTotal_price(cartDto.getDisc_price() * cartDto.getQty());
-            } else {
-                cartDto.setTotal_price(cartDto.getOpt_disc_price() * cartDto.getQty());
-            }
+        try {
+            List<CartDto> productCount = cartService.goCartProductCount(cartDtoList);
+            return ResponseEntity.ok(productCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(cartDtoList);
         }
-        return cartDtoList;
     }
 
     // 장바구니 페이지로 가기
@@ -57,14 +60,24 @@ public class CartController {
             List<CartDto> cartProductList = cartService.getCartProductList(memberID);
             model.addAttribute("cartProductList", cartProductList);
 
-            // 회원 등급 가져오기
+            // 회원 등급 + 배송지 가져오기
             if(!(authentication instanceof AnonymousAuthenticationToken)){
                 GradeDto memberGrade = gradeService.show_grade(memberID);
                 model.addAttribute("memberGrade", memberGrade);
+
+                AddressDto defaultAddress = addressService.getDefaultAddress(memberID);
+                if (defaultAddress != null) {
+                    model.addAttribute("address", defaultAddress.getAddr());
+                    model.addAttribute("detailAddress", defaultAddress.getDtl_addr());
+                } else {
+                    model.addAttribute("address", "배송지를 설정하세요.");
+                    model.addAttribute("addressSetting", "no");
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/main";
         }
 
         return "/product/cart";
@@ -78,45 +91,52 @@ public class CartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication instanceof AnonymousAuthenticationToken){
-            return ResponseEntity.badRequest().body("로그인 이후 이용");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
         }
 
-        for (CartDto cartDto : cartDtoList) {
-
-            if (cartDto.getQty() != 0) {
-                try {
-                    cartService.saveCartProduct(cartDto);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return ResponseEntity.badRequest().body("장바구니 담기 실패");
-                }
-            }
+        try {
+            cartService.saveCartProduct(cartDtoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to put in the shopping cart");
         }
-        return ResponseEntity.ok("장바구니 담기 성공");
+
+        return ResponseEntity.ok().body("Successfully put in the shopping cart");
     }
 
     // 장바구니 상품 수량 변경에 따른 가격 변동
     @ResponseBody
     @PostMapping("/CartCalculation")
-    public CartDto getCartProductCount(@RequestBody CartDto cartDto) {
+    public ResponseEntity<CartDto> getCartProductCount(@RequestBody CartDto cartDto) {
+        try {
+            CartDto cartProductPrice = cartService.getCartProductPrice(cartDto);
+            return ResponseEntity.ok(cartProductPrice);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(cartDto);
+        }
+    }
 
-        Integer prodPrice = cartDto.getProd_price();
-        Integer prodDiscPrice = cartDto.getDisc_price();
-        Integer optPrice = cartDto.getOpt_price();
-        Integer optDiscPrice = cartDto.getOpt_disc_price();
-        Integer qty = cartDto.getQty();
+    // 장바구니에 상품 삭제
+    @ResponseBody
+    @PostMapping("/removeProduct")
+    public ResponseEntity<String> removeCartProduct(@RequestBody CartDto cartDto) {
 
-        if (prodPrice != null && prodDiscPrice != null) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            cartDto.setTotal_price(prodPrice * qty);
-            cartDto.setTotal_disc_price(prodDiscPrice * qty);
-
-        } else if (optPrice != null && optDiscPrice != null) {
-
-            cartDto.setTotal_price(optPrice * qty);
-            cartDto.setTotal_disc_price(optDiscPrice * qty);
+        if(authentication instanceof AnonymousAuthenticationToken){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized");
         }
 
-        return cartDto;
+        try {
+//            for (CartDto cartDto : cartDtoList) {
+                cartService.removeCartProduct(cartDto);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete shopping cart");
+        }
+
+        return ResponseEntity.ok().body("Successful deletion of shopping cart");
     }
 }

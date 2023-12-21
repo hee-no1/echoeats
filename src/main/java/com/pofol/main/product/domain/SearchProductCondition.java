@@ -1,4 +1,4 @@
-package com.pofol.main.product;
+package com.pofol.main.product.domain;
 
 import lombok.Getter;
 import lombok.ToString;

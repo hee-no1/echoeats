@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductOrderCheckout {
 
     private Long prod_id;
+    private String prod_img_id;
     private String prod_name;
     private Integer prod_price;
     private Integer disc_price;

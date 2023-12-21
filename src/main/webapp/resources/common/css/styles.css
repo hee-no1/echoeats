@@ -10973,6 +10973,9 @@ body {
 .sb-topnav.navbar-light #sidebarToggle {
   color: #212529;
 }
+#sidebarToggle {
+  background-color: #212529!important;
+}
 
 .sb-sidenav {
   display: flex;

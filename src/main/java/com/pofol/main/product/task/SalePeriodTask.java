@@ -45,17 +45,17 @@ public class SalePeriodTask {
                         productDto.setSale_sts(after);
                         try {
                             productAdminService.updateProductAdmin(productDto);
-                        } catch (ProductStatusException productStatusException) { // 판매상태가 존재하지 않을 때 예외처리
-                            HandlerProductException handlerProductException = new HandlerProductException();
-                            handlerProductException.ProductStatusExceptionHandler(productStatusException);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
                     });
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ProductStatusException productStatusException) { // 판매상태가 존재하지 않을 때 예외처리
+            HandlerProductException handlerProductException = new HandlerProductException();
+            handlerProductException.ProductStatusExceptionHandler(productStatusException);
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 

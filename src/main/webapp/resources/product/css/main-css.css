@@ -50,6 +50,7 @@ canvas, img, video {
 }
 #top > #header > #homeInfo > a:nth-of-type(1) {
     color: #00c73c;
+    padding: 10px;
 }
 #top > #header > #homeInfo span {
     width: 8px;
@@ -125,15 +126,15 @@ canvas, img, video {
 #search > #search-bar > a:nth-of-type(1) {
     margin-left: 20px;
 }
-#search > #search-bar > a:nth-of-type(1)::after {
-    content: "";
-    position: absolute;
-    width: 1px;
-    height: 14px;
-    margin-top: 5px;
-    margin-left: 11px;
-    background-color: rgb(226, 226, 226);
-}
+/*#search > #search-bar > a:nth-of-type(1)::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 1px;*/
+/*    height: 14px;*/
+/*    margin-top: 5px;*/
+/*    margin-left: 11px;*/
+/*    background-color: rgb(226, 226, 226);*/
+/*}*/
 #search > #search-bar > a:nth-of-type(2) {
     /* color: rgb(181, 181, 181); */
     cursor: pointer;
@@ -929,6 +930,7 @@ ol, ul {
 }
 .css-zjik7 {
     display: flex;
+    align-items: center;
 }
 .css-9ipg3 {
     display: block;
@@ -972,4 +974,89 @@ ol, ul {
 footer {
     font-weight: normal;
     text-align: left;
+}
+
+#wrap-center {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+}
+
+/*드롭 다운 카테고리 (수정 필요)*/
+nav {
+    overflow: hidden;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*드롭다운 css 끝*/
+
+
+/*회원 페이지 리스트 추가*/
+
+.mem_name + .css-1ho29iy {
+    position: absolute;
+    display: none;
+    right: 49px;
+    top: 35px;
+    width: 130px;
+    padding: 3px 9px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(255, 255, 255);
+}
+.mem_name:hover + .css-1ho29iy,
+.mem_name + .css-1ho29iy:hover {
+    display: block;
+}
+.mem_name + .css-1ho29iy > div{
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: left;
+    font-weight: normal;
+}
+
+
+.mem_name:hover + .menu1,
+.menu1:hover, .mem_name+.menu1 > div:hover {
+    display: block;
 }

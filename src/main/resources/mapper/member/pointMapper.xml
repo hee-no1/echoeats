@@ -4,27 +4,43 @@
 
 <mapper namespace="com.pofol.main.member.pointMapper">
     <insert id="insert_point" parameterType="PointDto">
-        INSERT INTO point_his
-        (price, status, reason, his_end_date)
+        INSERT INTO point
+        (price, status, reason, mem_id, ord_id)
         VALUES
-            (#{price}, #{status}, #{reason}, #{his_end_date})
+            (#{price}, #{status}, #{reason}, #{mem_id}, #{ord_id})
     </insert>
 
-    <select id="selectAll_point">
-        SELECT * FROM point_his WHERE mem_id = #{mem_id}
+    <select id="selectAll_point" resultType="PointDto">
+        SELECT * FROM point WHERE mem_id = #{mem_id}
     </select>
 
     <select id="select_point">
-        SELECT * FROM point_his WHERE point_id = #{point_id}
+        SELECT * FROM point WHERE point_id = #{point_id}
+    </select>
+
+    <select id="sum_point" resultType="Integer">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "적립" OR status = "소멸"
+    </select>
+
+    <select id="accumulate_point" resultType="int">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "적립"
+    </select>
+
+    <select id="use_point" resultType="int">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND status = "사용"
+    </select>
+
+    <select id="preExtinct_point" resultType="Integer">
+        SELECT SUM(price) FROM point WHERE mem_id = #{mem_id} AND his_end_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()
     </select>
 
     <update id="update_point">
-        UPDATE point_his
+        UPDATE point
         SET price = #{price}, status = #{status}, reason = #{reason}, his_end_date = #{his_end_date}
         WHERE point_id = #{point_id}
     </update>
 
-    <select id="count_point">
-        SELECT count(*) FROM point_his WHERE mem_id = #{mem_id}
+    <select id="count_point" resultType="Integer">
+        SELECT count(*) FROM point WHERE mem_id = #{mem_id}
     </select>
 </mapper>

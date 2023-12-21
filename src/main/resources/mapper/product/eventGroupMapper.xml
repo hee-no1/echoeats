@@ -14,4 +14,10 @@
         WHERE evt_gp_id = #{evt_gp_id}
     </delete>
 
+    <!--    이벤트 그룹 이름 + 설명-->
+    <select id="select" parameterType="long" resultType="EventGroupDto">
+        SELECT evt_gp_name, evt_gp_dtl
+        FROM event_group
+        WHERE evt_gp_id = #{evt_gp_id}
+    </select>
 </mapper>

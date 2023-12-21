@@ -3,10 +3,9 @@ package com.pofol.main.product.repository;
 import com.pofol.main.product.domain.EventGroupDto;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
-import com.pofol.main.product.SearchProductCondition;
+import com.pofol.main.product.domain.SearchProductCondition;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public class ProductListRepositoryImpl implements ProductListRepository {
         return sqlSession.selectList(productNamespace + "selectAllOptionProduct", prod_id);
     }
 
-    @Override // 전체 진열 상품 리스트 조회 (필요하지 않을 가능성 높음)
+    @Override // 전체 진열 상품 리스트 조회
     public List<ProductDto> selectAll() throws Exception {
         return sqlSession.selectList(productListNamespace + "selectAll");
     }
@@ -84,7 +83,7 @@ public class ProductListRepositoryImpl implements ProductListRepository {
 
     @Override // 전체 상품 리스트 카운트
     public int count() throws Exception {
-        return 0;
+        return sqlSession.selectOne(productListNamespace + "count");
     }
 
     @Override // 이벤트 그룹 이름과 설명

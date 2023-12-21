@@ -3,6 +3,7 @@ package com.pofol.main.product.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pofol.main.product.category.CategoryDto;
 import com.pofol.main.product.category.CategoryList;
+import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import com.pofol.main.product.domain.ProductImageDto;
 import com.pofol.main.product.service.ProductService;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -65,18 +67,23 @@ public class AdminController {
     // 상품 등록 페이지 접속
     @GetMapping("/hyoungJun/productEnroll")
     public void prodEnrollGET(Model model) throws Exception {
+        log.info("prodEnrollGET 진입");
         ObjectMapper objectMapper = new ObjectMapper();
-        List<CategoryDto> list = categoryList.cateList();
-        String categoryListJson = objectMapper.writeValueAsString(list);
+        String categoryListJson = objectMapper.writeValueAsString(
+                new ArrayList<>(categoryList.cateList())
+        );
         model.addAttribute("categoryList", categoryListJson);
     }
 
     // 상품 등록
     @PostMapping("hyoungJun/productEnroll")
     public String productEnrollPOST(ProductDto productDto, RedirectAttributes redirectAttributes) throws Exception {
-        productDto.setRg_num("admin");
-        productDto.setMd_num("admin");
+        log.info("productEnrollPOST 진입");
+        log.info("{}", productDto);
         productService.productEnroll(productDto);
+        log.info("{} 상품 등록 완료", productDto.getProd_name());
+        productService.productInfoEnroll(productDto);
+        log.info("{} 상품 정보 등록 완료", productDto.getProd_name());
         redirectAttributes.addFlashAttribute(
                 "productEnroll_result",
                 productDto.getProd_name() + " 상품이 등록되었습니다.");

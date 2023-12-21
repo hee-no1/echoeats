@@ -64,7 +64,7 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	public int count() throws Exception {
 		return session.selectOne(namespace + "count");
 	}
-
+	
 	@Override
 	public List<CodeTableDto> selectCodeTypeByCodeName(String code_name) throws Exception {
 		return session.selectList(namespace + "selectCodeTypeByCodeName",code_name);
@@ -74,5 +74,4 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	public String selectNametoSts(String code_name) throws Exception {
 		return session.selectOne(namespace + "selectNametoSts", code_name);
 	}
-
 }

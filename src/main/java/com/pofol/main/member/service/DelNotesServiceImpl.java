@@ -19,9 +19,9 @@ public class DelNotesServiceImpl implements  DelNotesService{
 
     @Override
     public void writeDelNotes(DelNotesDto dto) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
         try {
             DelNotesDto delNotesDto = delNotesRepository.select_delNotes(mem_id);
             System.out.println("select: "+delNotesDto);
@@ -42,10 +42,10 @@ public class DelNotesServiceImpl implements  DelNotesService{
 
     @Override
     public DelNotesDto getDelNotes() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
 
-        String mem_id = "you11";
+//        String mem_id = "you11";
         DelNotesDto delNotesDto;
         try {
             delNotesDto = delNotesRepository.select_delNotes(mem_id);

@@ -100,7 +100,7 @@
     height: 54px;
     border-radius: 3px;
     color: #fff;
-    background-color: #5f0080;
+    background-color: #00c73c;
     border: 0 none;
     text-align: center;
 }
@@ -112,8 +112,8 @@
     height: 54px;
     border-radius: 3px;
     background-color: #fff;
-    color: #5f0080;
-    border: 1px solid #5f0080;
+    color: #00C73C;
+    border: 1px solid #00C73C;
     text-align: center;
     margin-top: 10px;
 }
