@@ -46,7 +46,7 @@
         }
 
     </style>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectPratice.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/projectPratice.css">
 
 </head>
 <body>
