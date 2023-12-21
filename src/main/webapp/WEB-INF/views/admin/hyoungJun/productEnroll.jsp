@@ -1214,6 +1214,19 @@
 
     dlvyNameInput.addEventListener('keyup', toggleDlvyWarning);
 
+    // 판매자
+    let sellerCheck = false;
+
+    const sellerNameInput = document.querySelector('[name="seller"]');
+    const sellerWarning = document.querySelector('.seller-warn');
+
+    function toggleSellerWarning() {
+        sellerCheck = sellerNameInput.value.length > 0;
+        sellerWarning.style.display = sellerCheck ? 'none' : 'block';
+    }
+
+    sellerNameInput.addEventListener('keyup', toggleSellerWarning);
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
