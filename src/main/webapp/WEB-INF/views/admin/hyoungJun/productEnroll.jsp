@@ -289,7 +289,7 @@
                                     <div class="seller-option-input">
                                         <div class="option-wrap">
                                             <div class="col-sm-3">
-                                                <label for="choice_option_name0">옵션명</label>
+                                                <label for="choice_option_name0">옵션</label>
                                                 <div class="seller-input-wrap">
                                                     <input type="text" class="form-control" id="choice_option_name0"
                                                            placeholder="최소 2개이상 입력" maxlength="25" readonly>
