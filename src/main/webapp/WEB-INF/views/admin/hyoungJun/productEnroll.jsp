@@ -1238,7 +1238,7 @@
         packWarning.style.display = packCheck ? 'none' : 'block';
     }
 
-    packNameInput.addEventListener('keyup', togglePackWarning);입
+    packNameInput.addEventListener('keyup', togglePackWarning);
 
     // 판매단위 유효성 검사
     let salesUnitCheck = false;
