@@ -46,8 +46,8 @@
                         <a>고객센터<span></span></a>
                     </div>
                     <div class="menu">
-                        <div>공지사항</div>
-                        <div>자주하는 질문</div>
+                        <div><a href="<c:url value='/board/notice'/>">공지사항</a></div>
+                        <div><a href="<c:url value='/board/faq'/>">자주하는 질문</a></div>
                         <div><a href="<c:url value='/mypage/inquiry/list'/>">1:1 문의</a></div>
                         <div>대량주문 문의</div>
                     </div>
