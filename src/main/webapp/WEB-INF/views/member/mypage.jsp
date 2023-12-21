@@ -33,9 +33,8 @@
                             </sec:authorize>
                         </strong>
                         <div class = "css-70qvj9">
-                            <button class = "css-rlyyl8">다음 달 등급 확인</button>
                             <span class = "css-i9bkc4"></span>
-                            <button class = css-rlyyl8>전체 등급 확인</button>
+                            <button class = "css-rlyyl8">전체 등급 확인</button>
                         </div>
                     </div>
                 </div>
@@ -43,13 +42,6 @@
                 <div class = "css-1rqh7gg">
                     <p class = "css-1nwlk71">적립 5%</p>
                     <p class = "css-1nwlk71">최소 1회 무료배송</p>
-                    <a href="/member/membership" class="css-1qcjshh">
-                            <span class="css-1fid7vq">
-                                <span class="css-3a5cil">NEW</span>
-                                <span class="css-1kxzrwz">컬리멤버스</span>
-                                <span class="css-10yg44e">월 1,900원으로 10배 쿠폰 받기</span>
-                            </span>
-                    </a>
                 </div>
             </div>
 
@@ -65,7 +57,7 @@
                         </div>
                     </button>
                 </div>
-                <div class="css-1lomzjv epggjnz0">
+                <div class="css-1lomzjv epggjnz0" id="myPageTopCp">
                     <button class="css-1bm0yf4 e1ugk4rt6">
                         <div class="css-157zkrj e1ugk4rt5">쿠폰
                             <span class="css-14phxgn e1ugk4rt4"></span>
@@ -123,7 +115,7 @@
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
                             </defs>
                             <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
-                                <use stroke="#5f0080" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
+                                <use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
                             </g></g></g></g></g>
                         </svg>
                     </a>
@@ -186,7 +178,7 @@
                 </li>
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">쿠폰
+                    <a class=" css-g4g0eu ecbxmj0" id="myPageSideCp">쿠폰
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -257,6 +249,18 @@
 
 </div>
 <%@ include file="../include/footer.jspf" %>
+<script>
+    $('.css-rlyyl8').on("click", function () {
+        window.location.href = "/grade";
+    });
 
+    $('#myPageSideCp').on("click", function () {
+        window.location.href = "/coupon";
+    });
+    $('#myPageTopCp').on("click", function () {
+        window.location.href = "/coupon";
+    });
+
+</script>
 </body>
 </html>
