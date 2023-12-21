@@ -1070,6 +1070,25 @@
 
     productNameInput.addEventListener('keyup', toggleNameWarning);
 
+    // 판매가 유효성검사
+    let priceCheck = false;
+    const productPriceInput = document.querySelector('[name="prod_price"]');
+    const priceWarning = document.querySelector('.price-warn');
+    const priceUnitWarning = document.querySelector('.price-unit-warn');
+
+    function togglePriceWarning() {
+        priceCheck = productPriceInput.value.length > 0;
+        priceWarning.style.display = priceCheck ? 'none' : 'block';
+    }
+
+    function togglePriceUnitWarning() {
+        const price = productPriceInput.value;
+        priceCheck = price.length > 0 && price % 10 === 0;
+        priceUnitWarning.style.display = !priceCheck && price.length > 0 ? 'block' : 'none';
+    }
+
+    productPriceInput.addEventListener('keyup', togglePriceWarning);
+    productPriceInput.addEventListener('keyup', togglePriceUnitWarning);
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
