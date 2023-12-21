@@ -63,18 +63,18 @@
                             <button href="#">
                                 <span class="blind">배송지등록</span>
                             </button>
-                            <div id="tooltip">
-                                <div>
-                                    <div><p><strong>배송지를 등록</strong>하고<br><span>구매 가능한 상품을 확인하세요!</span></p>
-                                        <div>
-                                            <button type="button" width="80" height="36" radius="3"><span>로그인</span>
-                                            </button>
-                                            <button type="button" height="36" radius="3"><span><img src="">주소 검색</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                            <div id="tooltip">--%>
+<%--                                <div>--%>
+<%--                                    <div><p><strong>배송지를 등록</strong>하고<br><span>구매 가능한 상품을 확인하세요!</span></p>--%>
+<%--                                        <div>--%>
+<%--                                            <button type="button" width="80" height="36" radius="3"><span>로그인</span>--%>
+<%--                                            </button>--%>
+<%--                                            <button type="button" height="36" radius="3"><span><img src="">주소 검색</span>--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <button href="#">
                                 <span class="blind">찜하기</span>
                             </button>
