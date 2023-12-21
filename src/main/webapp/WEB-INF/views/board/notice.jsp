@@ -9,7 +9,7 @@
     <title>공지사항 - 에코잇츠</title>
     <%@ include file="../include/bootstrap.jspf" %>
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectPratice.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/projectPratice.css">
 </head>
 <style>
     .table {
