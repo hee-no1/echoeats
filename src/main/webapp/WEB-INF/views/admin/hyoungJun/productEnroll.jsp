@@ -1227,6 +1227,20 @@
 
     sellerNameInput.addEventListener('keyup', toggleSellerWarning);
 
+    // 포장타입
+    let packCheck = false;
+
+    const packNameInput = document.querySelector('[name="pack_type"]');
+    const packWarning = document.querySelector('.pack-warn');
+
+    function togglePackWarning() {
+        packCheck = packNameInput.value.length > 0;
+        packWarning.style.display = packCheck ? 'none' : 'block';
+    }
+
+    packNameInput.addEventListener('keyup', togglePackWarning);
+
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
