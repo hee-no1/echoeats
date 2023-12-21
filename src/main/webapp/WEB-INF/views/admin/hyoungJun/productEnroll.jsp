@@ -78,10 +78,14 @@
                                 <div class="seller-input-wrap">
                                     <input name="prod_name" type="text"
                                            class="form-control" maxlength="99"
-                                           title="상품명 입력">
+                                           title="상품명 입력" value="">
                                 </div>
                                 <span class="input-group-addon"><span class="text-primary">0</span>/100</span>
                             </div>
+                            <p class="has-error error-msg sub-text text-danger name-warn">
+                                <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                필수 정보입니다.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -100,13 +104,18 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력">
+                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력" type="number">
                                             </div>
                                             <span class="input-group-addon">원</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <span class="text-sub">원</span>
+                                        <p class="has-error error-msg sub-text text-danger price-warn">
+                                            <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                            필수 정보입니다.
+                                        </p>
+                                        <p class="has-error error-msg sub-text text-danger price-unit-warn">
+                                            <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                            10원 단위로 입력해주세요.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -305,12 +314,12 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <label class="hidden-xs"></label>
-<%--                                                <a role="button" href class="btn btn-default">--%>
-<%--                                                    <i class="seller-icon icon-minus"></i>--%>
-<%--                                                </a>--%>
-<%--                                                <a role="button" href class="btn btn-single">--%>
-<%--                                                    <i class="seller-icon icon-plus"></i>--%>
-<%--                                                </a>--%>
+                                                <%--                                                <a role="button" href class="btn btn-default">--%>
+                                                <%--                                                    <i class="seller-icon icon-minus"></i>--%>
+                                                <%--                                                </a>--%>
+                                                <%--                                                <a role="button" href class="btn btn-single">--%>
+                                                <%--                                                    <i class="seller-icon icon-plus"></i>--%>
+                                                <%--                                                </a>--%>
                                             </div>
                                         </div>
                                         <div class="option-wrap">
@@ -341,53 +350,53 @@
                                             </a>
                                         </div>
                                         <div class="pull-right">
-<%--                                            <div class="form-inline">--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    옵션가--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <div class="input-group">--%>
-<%--                                                        <div class="input-group-btn">--%>
-<%--                                                            <button class="btn btn-default--%>
-<%--                                                        btn-sm dropdown-toggle"--%>
-<%--                                                                    data-toggle="dropdown" type="button"--%>
-<%--                                                                    aria-expanded="false">+ <span--%>
-<%--                                                                    class="caret"></span>--%>
-<%--                                                            </button>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="seller-input-wrap">--%>
-<%--                                                            <input type="tel" class="form-control input-sm"--%>
-<%--                                                                   maxlength="12">--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group">재고수량</div>--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <div class="input-group">--%>
-<%--                                                        <div class="seller-input-wrap">--%>
-<%--                                                            <input type="tel" class="form-control input-sm"--%>
-<%--                                                                   maxlength="12">--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group">사용여부</div>--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <div class="input-group">--%>
-<%--                                                        <div class="input-group-btn">--%>
-<%--                                                            <button class="btn btn-default--%>
-<%--                                                        btn-sm dropdown-toggle"--%>
-<%--                                                                    data-toggle="dropdown" type="button"--%>
-<%--                                                                    aria-expanded="false">Y <span--%>
-<%--                                                                    class="caret"></span>--%>
-<%--                                                            </button>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="form-group">--%>
-<%--                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록--%>
-<%--                                                        일괄수정</a>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
+                                            <%--                                            <div class="form-inline">--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    옵션가--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="input-group-btn">--%>
+                                            <%--                                                            <button class="btn btn-default--%>
+                                            <%--                                                        btn-sm dropdown-toggle"--%>
+                                            <%--                                                                    data-toggle="dropdown" type="button"--%>
+                                            <%--                                                                    aria-expanded="false">+ <span--%>
+                                            <%--                                                                    class="caret"></span>--%>
+                                            <%--                                                            </button>--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                        <div class="seller-input-wrap">--%>
+                                            <%--                                                            <input type="tel" class="form-control input-sm"--%>
+                                            <%--                                                                   maxlength="12">--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">재고수량</div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="seller-input-wrap">--%>
+                                            <%--                                                            <input type="tel" class="form-control input-sm"--%>
+                                            <%--                                                                   maxlength="12">--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">사용여부</div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="input-group-btn">--%>
+                                            <%--                                                            <button class="btn btn-default--%>
+                                            <%--                                                        btn-sm dropdown-toggle"--%>
+                                            <%--                                                                    data-toggle="dropdown" type="button"--%>
+                                            <%--                                                                    aria-expanded="false">Y <span--%>
+                                            <%--                                                                    class="caret"></span>--%>
+                                            <%--                                                            </button>--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록--%>
+                                            <%--                                                        일괄수정</a>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                            </div>--%>
                                         </div>
                                     </div>
                                     <div class="seller-grid-area ag-theme-fresh has-space-top"
@@ -811,7 +820,7 @@
 
     // 상품명 글자수 표시
     $(document).ready(() => {
-        $('.form-control').on('input', function() {
+        $('.form-control').on('input', function () {
             let textLength = $(this).val().length;
             $(this).closest('.input-group').find('.text-primary').text(textLength);
         });
@@ -1048,10 +1057,26 @@
         optionDetail.style.display = 'block';
     });
 
+    // 상품명 유효성검사
+    let nameCheck = false;
+
+    const productNameInput = document.querySelector('[name="prod_name"]');
+    const nameWarning = document.querySelector('.name-warn');
+
+    function toggleNameWarning() {
+        nameCheck = productNameInput.value.length > 0;
+        nameWarning.style.display = nameCheck ? 'none' : 'block';
+    }
+
+    productNameInput.addEventListener('keyup', toggleNameWarning);
+
+
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
 <script src="<c:url value='/resources/common/js/scripts.js' />"></script>
 <script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
 <script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
