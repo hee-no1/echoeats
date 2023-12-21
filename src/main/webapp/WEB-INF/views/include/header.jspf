@@ -35,7 +35,7 @@
                                 <div class="myPage_product">상품 후기</div>
                                 <div class="myPage_point">적립금</div>
                                 <div class="myPage_coupon">쿠폰</div>
-                                <div class="myPage_info">개인 정보 수정</div>
+<%--                                <div class="myPage_info">개인 정보 수정</div>--%>
                                 <a href="/logout">로그아웃</a>
                             </div>
                             <div class="stick"></div>
@@ -158,6 +158,18 @@
     
     $('.myPage_coupon').on("click", function () {
         window.location.href = "/coupon";
+    })
+    $('.myPage_address').on("click", function () {
+        window.location.href = "/address/";
+    })
+    $('.myPage_product').on("click", function () {
+        window.location.href = "/mypage1/review";
+    })
+    $('.myPage_point').on("click", function () {
+        window.open("/point/all", "_blank");
+    })
+    $('.myPage_order').on("click", function () {
+        window.location.href = "/mypage/order";
     })
 </script>
 </body>
