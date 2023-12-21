@@ -71,6 +71,11 @@ public class OrderController {
     }
 
 
+    /**
+     * @param pdd
+     * @return PaymentDiscountDto
+     * @feat : js에서 ajax로 넘어오는 결제금액 및 할인금액 정보를 계산해서 다시 뷰에 전달하는 메서드
+     */
     @ResponseBody
     @PostMapping("/calculatePayment")
     public PaymentDiscountDto calculatePayment(@RequestBody PaymentDiscountDto pdd){
@@ -82,7 +87,6 @@ public class OrderController {
             throw new RuntimeException(e);
         }
     }
-
 
     @GetMapping("/completed/{ord_id}")
     public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session){
@@ -127,7 +131,7 @@ public class OrderController {
             m.addAttribute("mem_name", mem_name);
             m.addAttribute("address", address);
             m.addAttribute("payment",payment);
-            System.out.println("session"+session);
+
             session.setAttribute("checkout",null); //세션 종료, url로 치던 뒤로가기로 하던 주문완료 페이지에는 들어올 수 없게
             return "/order/orderCompleted";
         } catch (Exception e) {
