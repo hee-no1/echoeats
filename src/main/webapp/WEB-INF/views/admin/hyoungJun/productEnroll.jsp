@@ -282,7 +282,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-sub-detail">
+                        <div class="form-sub-detail" id="option-div">
                             <div class="form-sub-detail-wrap">
                                 <label class="control-label">옵션 입력</label>
                                 <div class="input-content">
@@ -598,7 +598,7 @@
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
                                                 <input name="exp_date" class="form-control"
-                                                placeholder="ex) 상온 상태 시 2년 이내">
+                                                       placeholder="ex) 상온 상태 시 2년 이내">
                                             </div>
                                         </div>
                                     </div>
@@ -737,7 +737,7 @@
     }
 
     // 대분류 선택시 중분류 목록
-    $(cate1Select).on("change", function() {
+    $(cate1Select).on("change", function () {
         let selectVal = $(this).find("option:selected").val();
         cate2Select.children().remove();
         cate2Select.append('<option selected value="none">선택</option>');
@@ -986,17 +986,15 @@
 
         const isChecked = checkAll.checked;
 
-        if(isChecked){
+        if (isChecked) {
             const checkboxes = document.querySelectorAll(`#myTable tbody input[type="checkbox"]`);
 
-            for(const checkbox of checkboxes){
+            for (const checkbox of checkboxes) {
                 checkbox.checked = true;
             }
-        }
-
-        else{
+        } else {
             const checkboxes = document.querySelectorAll(`#myTable tbody input[type="checkbox"]`);
-            for(const checkbox of checkboxes){
+            for (const checkbox of checkboxes) {
                 checkbox.checked = false;
             }
         }
@@ -1034,6 +1032,20 @@
                 console.log(checkbox.checked = this.checked);
             }
         });
+    });
+
+    // 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
+
+    let optionTrueChoice = document.getElementById('option-choice-type-true');
+    let optionFalseChoice = document.getElementById('option-choice-type-false');
+    let optionDetail = document.getElementById('option-div');
+
+    optionFalseChoice.addEventListener('click', () => {
+        optionDetail.style.display = 'none';
+    });
+
+    optionTrueChoice.addEventListener('click', () => {
+        optionDetail.style.display = 'block';
     });
 
 </script>

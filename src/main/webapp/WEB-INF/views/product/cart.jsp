@@ -72,7 +72,7 @@
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
                         <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
-                        <span> 전체선택 (0/1)</span>
+                        <span> 전체선택 (<span class="selected-product">0</span>/<span class="whole-product">1</span>)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
                     <button disabled="" class="css-0 e149z640">선택삭제</button>
@@ -113,7 +113,7 @@
                                         <span class="css-1usz68g esoayg89" style="background-image: url(${cartProductList.prod_img_id});"></span>
                                     </a>
                                     <div class="css-14sb0pe esoayg88">
-                                        <a class="css-e0dnmk esoayg87">
+                                        <a class="css-e0dnmk esoayg87" data-prod-id="${cartProductList.prod_id}">
                                             <p class="css-efcx1u esoayg86">
                                                 <c:choose>
                                                     <c:when test="${not empty cartProductList.opt_prod_id}">
@@ -166,7 +166,7 @@
                 <div class="css-zbxehx e149z642">
                     <label class="css-xi6i4x e1dcessg3">
                         <input type="checkbox" class="css-agvwxo e1dcessg2 allCartCheck">&nbsp;&nbsp;
-                        <span class="all-select"> 전체선택 (0/1)</span>
+                        <span> 전체선택 (<span class="selected-product">0</span>/<span class="whole-product">1</span>)</span>
                     </label>
                     <span class="css-454d5e e149z641"></span>
                     <button disabled="" class="css-0 e149z640">선택삭제</button>

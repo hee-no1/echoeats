@@ -9,6 +9,8 @@ const saveMoney = document.querySelector('.save-money');
 const choiceDelete = document.querySelectorAll('.css-0');
 const allSelect = document.querySelector('.allSelect');
 const goAddressPage = document.querySelector('.css-122i3z7');
+const selectedProduct = document.getElementsByClassName('selected-product');
+const wholeProduct = document.getElementsByClassName('whole-product');
 
 // 전체선택 버튼 클릭시 모든 전체 버튼이 클릭되는 기능
 const allCheck = (isChecked) => {
@@ -159,7 +161,6 @@ $(document).ready(function () {
             } else {
                 cartProduct.style.display = "none"
                 upDownButton.setAttribute("transform", "rotate(135 15.5 16.5)")
-
             }
         });
     })
@@ -192,7 +193,7 @@ $(document).ready(function () {
             checkbox.checked = isChecked;
         });
         updateCartTotals();
-    };
+    }
 
     // 배송지 변경 클릭 시 배송지 화면으로 이동
     if (goAddressPage !== null) {
@@ -217,16 +218,14 @@ $(document).ready(function () {
     });
 
     // 장바구니 상품 주문하기 버튼
-    if (orderButton !== null) {
-        orderButton.addEventListener('click', function () {
-            let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
-            if (hiddenInputs.length === null || hiddenInputs.length === 0) {
-                alert('장바구니 상품을 선택해 주세요.')
-                return;
-            }
-            orderButton.type = 'submit';
-        })
-    }
+    orderButton.addEventListener('click', function () {
+        let hiddenInputs = cartOrderForm.querySelectorAll('input[type="hidden"]');
+        if (hiddenInputs.length === null || hiddenInputs.length === 0) {
+            alert('장바구니 상품을 선택해 주세요.')
+            return;
+        }
+        orderButton.type = 'submit';
+    })
 
     // 상품 수량 올리기
     const upButton = document.querySelectorAll('.css-18y6jr4')
@@ -268,6 +267,7 @@ $(document).ready(function () {
     // 장바구니 x버튼으로 상품 삭제
     // 여러개 삭제할 시 기능 추가해야함
     for (let i = 0; i < removeButton.length; i++) {
+
         removeButton[i].addEventListener('click', function () {
             if (!confirm("정말로 삭제하시겠습니까?")) {
                 return;
@@ -344,4 +344,18 @@ $(document).ready(function () {
             makeInputHidden();
         });
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const redirectToProductDetail = (prodId) => {
+        window.location.href = 'product/' + prodId; // URL 이동
+    };
+
+    const productLinks = document.querySelectorAll('.css-e0dnmk.esoayg87');
+    productLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            const prodId = this.getAttribute('data-prod-id');
+            redirectToProductDetail(prodId);
+        });
+    });
 });
