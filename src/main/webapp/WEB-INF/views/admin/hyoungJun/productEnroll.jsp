@@ -1260,7 +1260,25 @@
     const weightNameInput = document.querySelector('[name="weight"]');
     const weightWarning = document.querySelector('.weight-warn');
 
+    function toggleWeightWarning() {
+        weightCheck = weightNameInput.value.length > 0;
+        weightWarning.style.display = weightCheck ? 'none' : 'block';
+    }
 
+    weightNameInput.addEventListener('keyup', toggleWeightWarning);
+
+    // 유통기한 유효성 검사
+    let expCheck = false;
+
+    const expNameInput = document.querySelector('[name="exp_date"]');
+    const expWarning = document.querySelector('.exp-warn');
+
+    function toggleExpWarning() {
+        expCheck = expNameInput.value.length > 0;
+        expWarning.style.display = expCheck ? 'none' : 'block';
+    }
+
+    expNameInput.addEventListener('keyup', toggleExpWarning);
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
