@@ -267,10 +267,10 @@
                                             <span class="input-group-addon">개</span>
                                         </div>
                                     </div>
-<%--                                    <div class="form-group">--%>
-<%--                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어--%>
-<%--                                            자동으로 입력됩니다.</p>--%>
-<%--                                    </div>--%>
+                                    <%--                                    <div class="form-group">--%>
+                                    <%--                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어--%>
+                                    <%--                                            자동으로 입력됩니다.</p>--%>
+                                    <%--                                    </div>--%>
                                 </div>
                             </div>
                             <p class="has-error error-msg sub-text text-danger qty-warn">
@@ -555,6 +555,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger dlvy-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -570,6 +574,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger seller-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -585,6 +593,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger pack-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -600,6 +612,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger sales-unit-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -615,6 +631,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger weight-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -630,6 +650,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger exp-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -645,6 +669,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger guide-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1172,6 +1200,20 @@
     }
 
     originNameInput.addEventListener('keyup', toggleOriginWarning);
+
+    // 배송타입
+    let dlvyCheck = false;
+
+    const dlvyNameInput = document.querySelector('[name="dlvy_type"]');
+    const dlvyWarning = document.querySelector('.dlvy-warn');
+
+    function toggleDlvyWarning() {
+        dlvyCheck = dlvyNameInput.value.length > 0;
+        dlvyWarning.style.display = dlvyCheck ? 'none' : 'block';
+    }
+
+    dlvyNameInput.addEventListener('keyup', toggleDlvyWarning);
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
