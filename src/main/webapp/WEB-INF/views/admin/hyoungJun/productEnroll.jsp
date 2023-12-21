@@ -1201,7 +1201,7 @@
 
     originNameInput.addEventListener('keyup', toggleOriginWarning);
 
-    // 배송타입
+    // 배송타입 유효성 검사
     let dlvyCheck = false;
 
     const dlvyNameInput = document.querySelector('[name="dlvy_type"]');
@@ -1214,7 +1214,7 @@
 
     dlvyNameInput.addEventListener('keyup', toggleDlvyWarning);
 
-    // 판매자
+    // 판매자 유효성 검사
     let sellerCheck = false;
 
     const sellerNameInput = document.querySelector('[name="seller"]');
@@ -1227,7 +1227,7 @@
 
     sellerNameInput.addEventListener('keyup', toggleSellerWarning);
 
-    // 포장타입
+    // 포장타입 유효성 검사
     let packCheck = false;
 
     const packNameInput = document.querySelector('[name="pack_type"]');
@@ -1240,7 +1240,7 @@
 
     packNameInput.addEventListener('keyup', togglePackWarning);입
 
-    // 판매단위
+    // 판매단위 유효성 검사
     let salesUnitCheck = false;
 
     const salesUnitNameInput = document.querySelector('[name="sales_unit"]');
@@ -1254,6 +1254,11 @@
     salesUnitNameInput.addEventListener('keyup', toggleSalesUnitWarning);
 
 
+    // 중량/용량 유효성 검사
+    let weightCheck = false;
+
+    const weightNameInput = document.querySelector('[name="weight"]');
+    const weightWarning = document.querySelector('.weight-warn');
 
 
 
