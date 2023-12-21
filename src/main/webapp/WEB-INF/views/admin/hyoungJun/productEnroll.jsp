@@ -536,6 +536,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger origin-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -1155,6 +1159,19 @@
     }
 
     brandNameInput.addEventListener('keyup', toggleBrandWarning);
+
+    // 원산지
+    let originCheck = false;
+
+    const originNameInput = document.querySelector('[name="origin"]');
+    const originWarning = document.querySelector('.origin-warn');
+
+    function toggleOriginWarning() {
+        originCheck = originNameInput.value.length > 0;
+        originWarning.style.display = originCheck ? 'none' : 'block';
+    }
+
+    originNameInput.addEventListener('keyup', toggleOriginWarning);
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
