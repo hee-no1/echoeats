@@ -93,8 +93,8 @@
                         최대 ${coupon.max_disc_amt}원 할인
                     </c:if>
                 </div>
-                <p data-testid="payment-condition" class="css-3apn08 er3hb6s0">특정상품 한정</p><button
-                    class="css-1xwjhen e1mgczsm0">사용조건 보기</button>
+                <p data-testid="payment-condition" class="css-3apn08 er3hb6s0">특정상품 한정</p><div
+                    class="css-1xwjhen e1mgczsm0">${coupon.cp_qty}장</div>
             </td>
             <td class="css-44wg63 e1tgnahe1">할인</td>
             <td class="css-44wg63 e1tgnahe1">
@@ -273,7 +273,7 @@
                         "</c:if>" +
                         "</div>" +
                         "<p data-testid='payment-condition' class='css-3apn08 er3hb6s0'>특정상품 한정</p>" +
-                        "<button class='css-1xwjhen e1mgczsm0'>사용조건 보기</button>" +
+                        "<div class='css-1xwjhen e1mgczsm0'>"+ couponData.cp_qty +"장</div>" +
                         "</td>");
 
                     newTr.append("<td class='css-44wg63 e1tgnahe1'>할인</td>");

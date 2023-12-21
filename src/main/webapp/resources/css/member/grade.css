@@ -272,11 +272,11 @@ canvas, img, video {
 .css-1x9bshx {
     border: 1px solid rgb(242, 242, 242);
 }
-.css-g4g0eu.active, .css-g4g0eu:hover {
-    background-color: rgb(250, 250, 250);
-    color: rgb(95, 0, 128);
-    font-weight: 500;
-}
+/*.css-g4g0eu.active, .css-g4g0eu:hover {*/
+/*    background-color: rgb(250, 250, 250);*/
+/*    color: rgb(95, 0, 128);*/
+/*    font-weight: 500;*/
+/*}*/
 .css-g4g0eu {
     cursor: pointer;
     border-bottom: 1px solid rgb(242, 242, 242);
@@ -847,7 +847,7 @@ tbody {
     margin-left: -16px;
     font-size: 12px;
     font-weight: 500;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     color: rgb(95, 0, 128);
     padding: 16px;
 }
