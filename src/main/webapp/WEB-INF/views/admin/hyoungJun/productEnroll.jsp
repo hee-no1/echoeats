@@ -305,12 +305,12 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <label class="hidden-xs"></label>
-                                                <a role="button" href class="btn btn-default">
-                                                    <i class="seller-icon icon-minus"></i>
-                                                </a>
-                                                <a role="button" href class="btn btn-single">
-                                                    <i class="seller-icon icon-plus"></i>
-                                                </a>
+<%--                                                <a role="button" href class="btn btn-default">--%>
+<%--                                                    <i class="seller-icon icon-minus"></i>--%>
+<%--                                                </a>--%>
+<%--                                                <a role="button" href class="btn btn-single">--%>
+<%--                                                    <i class="seller-icon icon-plus"></i>--%>
+<%--                                                </a>--%>
                                             </div>
                                         </div>
                                         <div class="option-wrap">
@@ -341,53 +341,53 @@
                                             </a>
                                         </div>
                                         <div class="pull-right">
-                                            <div class="form-inline">
-                                                <div class="form-group">
-                                                    옵션가
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                    data-toggle="dropdown" type="button"
-                                                                    aria-expanded="false">+ <span
-                                                                    class="caret"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="seller-input-wrap">
-                                                            <input type="tel" class="form-control input-sm"
-                                                                   maxlength="12">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">재고수량</div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="seller-input-wrap">
-                                                            <input type="tel" class="form-control input-sm"
-                                                                   maxlength="12">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">사용여부</div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                    data-toggle="dropdown" type="button"
-                                                                    aria-expanded="false">Y <span
-                                                                    class="caret"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록
-                                                        일괄수정</a>
-                                                </div>
-                                            </div>
+<%--                                            <div class="form-inline">--%>
+<%--                                                <div class="form-group">--%>
+<%--                                                    옵션가--%>
+<%--                                                </div>--%>
+<%--                                                <div class="form-group">--%>
+<%--                                                    <div class="input-group">--%>
+<%--                                                        <div class="input-group-btn">--%>
+<%--                                                            <button class="btn btn-default--%>
+<%--                                                        btn-sm dropdown-toggle"--%>
+<%--                                                                    data-toggle="dropdown" type="button"--%>
+<%--                                                                    aria-expanded="false">+ <span--%>
+<%--                                                                    class="caret"></span>--%>
+<%--                                                            </button>--%>
+<%--                                                        </div>--%>
+<%--                                                        <div class="seller-input-wrap">--%>
+<%--                                                            <input type="tel" class="form-control input-sm"--%>
+<%--                                                                   maxlength="12">--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="form-group">재고수량</div>--%>
+<%--                                                <div class="form-group">--%>
+<%--                                                    <div class="input-group">--%>
+<%--                                                        <div class="seller-input-wrap">--%>
+<%--                                                            <input type="tel" class="form-control input-sm"--%>
+<%--                                                                   maxlength="12">--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="form-group">사용여부</div>--%>
+<%--                                                <div class="form-group">--%>
+<%--                                                    <div class="input-group">--%>
+<%--                                                        <div class="input-group-btn">--%>
+<%--                                                            <button class="btn btn-default--%>
+<%--                                                        btn-sm dropdown-toggle"--%>
+<%--                                                                    data-toggle="dropdown" type="button"--%>
+<%--                                                                    aria-expanded="false">Y <span--%>
+<%--                                                                    class="caret"></span>--%>
+<%--                                                            </button>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="form-group">--%>
+<%--                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록--%>
+<%--                                                        일괄수정</a>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
                                         </div>
                                     </div>
                                     <div class="seller-grid-area ag-theme-fresh has-space-top"
@@ -811,7 +811,7 @@
 
     // 상품명 글자수 표시
     $(document).ready(() => {
-        $('.form-control').on('input', () => {
+        $('.form-control').on('input', function() {
             let textLength = $(this).val().length;
             $(this).closest('.input-group').find('.text-primary').text(textLength);
         });
