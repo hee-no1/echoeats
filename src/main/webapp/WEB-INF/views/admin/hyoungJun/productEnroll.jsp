@@ -1188,7 +1188,7 @@
 
     brandNameInput.addEventListener('keyup', toggleBrandWarning);
 
-    // 원산지
+    // 원산지 유효성 검사
     let originCheck = false;
 
     const originNameInput = document.querySelector('[name="origin"]');
