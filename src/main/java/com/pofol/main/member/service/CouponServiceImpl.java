@@ -99,5 +99,18 @@ public class CouponServiceImpl implements CouponService{
         }
     }
 
+    @Override
+    public int member_cp_qty_count(String id) {
+//        int num;
+//        try {
+//            num = couponRepository.member_cp_qty_count(id);
+//        }catch (NullPointerException e){
+//            return 0;
+//        }
+//        return num;
+        //원래 는 위와 같이 하였지만 COALESCE(SUM(cp_qty), 0)를 사용하여 주석처리
+        return couponRepository.member_cp_qty_count(id);
+    }
+
 
 }

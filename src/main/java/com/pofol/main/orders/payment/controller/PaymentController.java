@@ -25,7 +25,7 @@ public class PaymentController {
 
     @PostMapping("/payment/verify/prev")
     public ResponseEntity<String> PrevVerify(@RequestBody OrderCheckout oc){
-        System.out.println("검증"+oc);
+        System.out.println("paycontroller verify prev");
         try{
             Boolean isVerify = paymentService.prevVerify(oc);
             System.out.println(isVerify);
@@ -44,7 +44,7 @@ public class PaymentController {
 
     @PostMapping("/payment/verify/next")
     public ResponseEntity<String> NextVerify(@RequestBody PaymentDto pd){
-        System.out.println(pd);
+        System.out.println("paycontroller verify/next");
         try{
             if(pd.getSuccess().equals("true")){ //결제 성공
                 pd.setCode_name("PAYMENT_COMPLETE");

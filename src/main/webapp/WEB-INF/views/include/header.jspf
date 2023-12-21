@@ -23,7 +23,8 @@
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasAuthority('ADMIN')">
                             <a href="/admin/hyoungJun/productEnroll">관리자</a>
-                            <div></div>
+                            <div class="stick"></div>
+                            <a href="/logout">로그아웃</a>
                             <div class="stick"></div>
                         </sec:authorize>
                         <sec:authorize access="hasAuthority('USER')">

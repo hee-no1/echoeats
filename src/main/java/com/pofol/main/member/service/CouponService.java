@@ -20,5 +20,5 @@ public interface CouponService {
     CouponDto getCoupon(Long coupon_id);
     MemCouponDto getUnusedCoupon(Long cp_id, String mem_id);
     void modifyCouponStatus(Long cp_id, String mem_id);
-
+    int member_cp_qty_count(String id);
 }

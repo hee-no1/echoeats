@@ -129,10 +129,15 @@
                                     <div class="css-kmlyvg e1ro4vie3">
                                         <strong class="css-1bfy7g3 e1ro4vie2">${coupon.cp_name}</strong><br>
                                         ${coupon.min_amt}원 이상 주문 시
-                                        <c:if test="${coupon.max_disc_amt != 0}">
-                                            최대 ${coupon.max_disc_amt}원 할인
-                                        </c:if>
-                                        <span class="css-bs5mk4 e1ro4vie0">${coupon.cp_del_date} 만료</span>
+                                        <c:choose>
+                                            <c:when test="${coupon.max_disc_amt != 0}">
+                                                최대 ${coupon.max_disc_amt}원 할인
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${coupon.cash_rate}원 할인
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <span class="css-bs5mk4 e1ro4vie0">(${coupon.cp_del_date} 만료)</span>
                                     </div>
                                 </div>
                             </button>
@@ -145,8 +150,8 @@
                 <%-- 적립금 내용 --%>
                 <div class="css-pkhh3q e150alo82"><span class="css-ln1csn e150alo81">적립금</span><div class="css-82a6rk e150alo80">
                     <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4">
-                        <span id="point">
-                        <fmt:formatNumber value="${checkout.availablePoint}" pattern="#,###"/></span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
+                        <span id="point"><fmt:formatNumber value="${checkout.availablePoint}" pattern="#,###"/>
+                        </span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
 
                     <%-- 사용할 적립금 입력 --%>
                     <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">
@@ -217,7 +222,7 @@
     //쿠폰 리스트
     let couponDtoList = [];
     <c:forEach var="coupon" items="${checkout.couponList}" varStatus="loop">
-        couponDtoList[${loop.index}] = {cp_id: ${coupon.cp_id}, cp_name: '${coupon.cp_name}', cp_del_date: '${coupon.cp_del_date}', cash_rate:${coupon.cash_rate}, type:'${coupon.type}'};
+        couponDtoList[${loop.index}] = {cp_id: ${coupon.cp_id}, cp_name: '${coupon.cp_name}', min_amt: ${coupon.min_amt}, max_disc_amt: ${coupon.max_disc_amt}, cp_del_date: '${coupon.cp_del_date}',  cash_rate:${coupon.cash_rate}, type:'${coupon.type}'};
     </c:forEach>
 
 </script>

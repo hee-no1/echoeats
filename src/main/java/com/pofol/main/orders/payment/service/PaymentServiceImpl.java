@@ -16,7 +16,10 @@ import com.pofol.main.product.cart.CartRepository;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService{
 
 
     @Override
+    @Transactional
     public Boolean prevVerify(OrderCheckout oc) {
         List<SelectedItemsDto> items = oc.getSelectedItems();
         int jsTotPayPrice = oc.getTot_pay_price(); //js에서 넘어온 실 결제 금액
@@ -68,9 +72,11 @@ public class PaymentServiceImpl implements PaymentService{
 
 
     @Override
+    @Transactional
     public PaymentDto writePayment(PaymentDto pay) {
-        System.out.println("pay: " + pay);
-        String mem_id = "you11"; //나중에 session에서 꺼내와야한다.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+
         try {
             //결제 table 작성
             pay.setMemberData(mem_id);
