@@ -847,7 +847,7 @@ tbody {
     margin-left: -16px;
     font-size: 12px;
     font-weight: 500;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     color: rgb(95, 0, 128);
     padding: 16px;
 }
