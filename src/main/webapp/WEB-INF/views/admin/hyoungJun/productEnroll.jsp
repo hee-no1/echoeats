@@ -1238,7 +1238,22 @@
         packWarning.style.display = packCheck ? 'none' : 'block';
     }
 
-    packNameInput.addEventListener('keyup', togglePackWarning);
+    packNameInput.addEventListener('keyup', togglePackWarning);입
+
+    // 판매단위
+    let salesUnitCheck = false;
+
+    const salesUnitNameInput = document.querySelector('[name="sales_unit"]');
+    const salesUnitWarning = document.querySelector('.sales-unit-warn');
+
+    function toggleSalesUnitWarning() {
+        salesUnitCheck = salesUnitNameInput.value.length > 0;
+        salesUnitWarning.style.display = salesUnitCheck ? 'none' : 'block';
+    }
+
+    salesUnitNameInput.addEventListener('keyup', toggleSalesUnitWarning);
+
+
 
 
 
