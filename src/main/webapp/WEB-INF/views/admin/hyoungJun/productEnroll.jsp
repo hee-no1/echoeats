@@ -129,12 +129,12 @@
                                            name="discount-choice-type" value="true">
                                     <label for="discount-choice-type-true">설정함</label>
                                     <input type="radio" id="discount-choice-type-false"
-                                           name="discount-choice-type" value="false">
+                                           name="discount-choice-type" value="false" checked>
                                     <label for="discount-choice-type-false">설정안함</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-sub-detail">
+                        <div class="form-sub-detail" id="discount-div">
                             <div class="form-sub-detail-wrap">
                                 <label class="control-label">기본할인</label>
                                 <div class="input-content">
@@ -185,12 +185,12 @@
                                            name="sale_sts" value="판매중">
                                     <label for="salePeriod-choice-type-true">설정함</label>
                                     <input type="radio" id="salePeriod-choice-type-false"
-                                           name="sale_sts" value="판매전">
+                                           name="sale_sts" value="판매전" checked>
                                     <label for="salePeriod-choice-type-false">설정안함</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-sub-detail">
+                        <div class="form-sub-detail" id="salePeriod-div">
                             <div class="form-sub-detail-wrap">
                                 <label class="control-label">기간설정</label>
                                 <div class="input-content">
@@ -296,7 +296,7 @@
                                            name="is_opt" value="Y">
                                     <label for="option-choice-type-true">설정함</label>
                                     <input type="radio" id="option-choice-type-false"
-                                           name="is_opt" value="N">
+                                           name="is_opt" value="N" checked>
                                     <label for="option-choice-type-false">설정안함</label>
                                 </div>
                             </div>
@@ -1012,7 +1012,7 @@
             deleteButton.className = 'deleteBtn';
             deleteButton.onclick = function (e) {
                 e.stopPropagation();
-                this.closest('tr').remove(); // Removes the closest tr element (the row)
+                this.closest('tr').remove();
             };
             deleteButtonCell.appendChild(deleteButton);
         });
@@ -1063,9 +1063,6 @@
             checkbox.addEventListener('change', () => {
                 const totalCount = checkboxes.length;
                 const checkedCount = document.querySelectorAll('#myTable tbody input[type="checkbox"]:checked').length;
-                console.log("totalCount : " + totalCount);
-                console.log("checkdeCount : " + checkedCount);
-                console.log(checkedCount);
                 checkAll.checked = totalCount === checkedCount;
             });
         }
@@ -1089,11 +1086,12 @@
         });
     });
 
-    // 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
-
+    // 옵션 유무를 눌렀을때 내용 칸이 드러나지는 이벤트
     let optionTrueChoice = document.getElementById('option-choice-type-true');
     let optionFalseChoice = document.getElementById('option-choice-type-false');
     let optionDetail = document.getElementById('option-div');
+
+    optionDetail.style.display = 'none';
 
     optionFalseChoice.addEventListener('click', () => {
         optionDetail.style.display = 'none';
@@ -1101,6 +1099,36 @@
 
     optionTrueChoice.addEventListener('click', () => {
         optionDetail.style.display = 'block';
+    });
+
+    // 판매 기간 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
+    let salePeriodTrueChoice = document.getElementById('salePeriod-choice-type-true');
+    let salePeriodFalseChoice = document.getElementById('salePeriod-choice-type-false');
+    let salePeriodDetail = document.getElementById('salePeriod-div');
+
+    salePeriodDetail.style.display = 'none';
+
+    salePeriodFalseChoice.addEventListener('click', () => {
+        salePeriodDetail.style.display = 'none';
+    });
+
+    salePeriodTrueChoice.addEventListener('click', () => {
+        salePeriodDetail.style.display = 'block';
+    });
+
+    // 할인 설정을 눌렀을 때 내용 칸이 드러나지는 이벤트
+    let discountTrueChoice = document.getElementById('discount-choice-type-true');
+    let discountFalseChoice = document.getElementById('discount-choice-type-false');
+    let discountDetail = document.getElementById('discount-div');
+
+    discountDetail.style.display = 'none';
+
+    discountFalseChoice.addEventListener('click', () => {
+        discountDetail.style.display = 'none';
+    });
+
+    discountTrueChoice.addEventListener('click', () => {
+        discountDetail.style.display = 'block';
     });
 
     // 상품명 유효성검사
