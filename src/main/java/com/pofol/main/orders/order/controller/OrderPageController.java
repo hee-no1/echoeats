@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.pofol.main.orders.order.domain.OrderHistoryDto;
 import com.pofol.main.orders.order.service.OrderHistoryService;
@@ -33,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
-public class MypageController {
+public class OrderPageController {
 
     private final OrderService orderService;
     private final OrderDetailService ordDetService;
@@ -44,7 +43,6 @@ public class MypageController {
 
     @GetMapping("/order")
     public String order(Integer period, Model m){
-		System.out.println("OrderController.order()");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mem_id = authentication.getName();
 

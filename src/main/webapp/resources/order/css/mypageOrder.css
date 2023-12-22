@@ -730,11 +730,6 @@ h2 {
     margin-inline-end: 0px;
     font-weight: bold;
 }
-body, button, input, select, textarea {
-    font-size: 14px;
-    color: #333;
-}
-
 button {
     border-radius: 0;
 }

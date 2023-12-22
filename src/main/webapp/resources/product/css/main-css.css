@@ -785,28 +785,10 @@ html {
 html {
     line-height: 1.15;
 }
-*, :after, :before {
-    box-sizing: border-box;
-    margin: 0;
-}
-*, :after, :before, legend, td, th {
-    padding: 0;
-}
-*, :after, :before {
-    box-sizing: border-box;
-    margin: 0;
-}
-*, :after, :before, legend, td, th {
-    padding: 0;
-}
 button {
     border-radius: 0;
 }
 
-body, button, input, select, textarea {
-    font-size: 14px;
-    color: #333;
-}
 button, input[type=button], input[type=reset], input[type=submit] {
     cursor: pointer;
 }

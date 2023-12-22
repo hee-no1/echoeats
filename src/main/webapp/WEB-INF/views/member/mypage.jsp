@@ -111,7 +111,7 @@
             <div class="css-1v4whg ecbxmj2">마이에코</div>
             <ul class="css-1x9bshx ecbxmj1">
                 <li>
-                    <a class="active css-g4g0eu ecbxmj0">주문내역
+                    <a class="css-g4g0eu ecbxmj0" href="/mypage/order">주문내역
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
