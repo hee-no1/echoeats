@@ -31,7 +31,8 @@ public class AddressController {
         m.addAttribute("list",addressDtos);
         MemberDto memberDto = memberService.select(authentication.getName());
         m.addAttribute("memberDto",memberDto);
-        return "member/addr_form";
+        m.addAttribute("mypage","address");
+        return "member/mypage";
     }
 
     // 상세주소 페이지

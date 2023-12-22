@@ -38,6 +38,7 @@ public class PointController {
         int availablePoint = pointService.getAvailablePoint(mem_id);
         int countPoint = pointService.getCountPoint(mem_id);
         Integer preExtinctPoint = pointService.getPreExtinctPoint(mem_id);
+
         m.addAttribute("sum",sumPoint);
         m.addAttribute("available",availablePoint);
         m.addAttribute("count",countPoint);

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -40,7 +41,12 @@ public class OrderHistoryRepositoryImpl implements OrderHistoryRepository{
 	public OrderHistoryDto selectMaxByOrdId(Long ord_id) throws Exception {
 		return session.selectOne(namespace+"selectMaxByOrdId",ord_id);
 	}
-    
+
+    @Override
+    public List<OrderHistoryDto> selectFinalOrderHistory(Map map) throws Exception {
+        return session.selectList(namespace + "selectFinalOrderHistory", map);
+    }
+
     @Override
     public int delete(Long ord_hist_id) throws Exception {
         return session.delete(namespace+"delete",ord_hist_id);

@@ -29,7 +29,7 @@
         FROM spring.order_history
         WHERE code_name = "ORDERING" and ord_id = #{ord_id}
     </select>
-    
+
     <select id="selectMaxByOrdId" resultType="OrderHistoryDto">
         SELECT oh.*
 		FROM order_history oh
@@ -38,6 +38,21 @@
 		    FROM order_history
 		    WHERE ord_id = #{ord_id}
 		) max ON oh.ord_hist_id = max.ord_hist_id;
+    </select>
+
+    <select id="selectFinalOrderHistory" parameterType="map" resultType="OrderHistoryDto">
+        select oh.ord_id, oh.tot_prod_name, oh.pay_way, oh.tot_pay_price, oh.ord_date, ct.column_sts
+        from order_history oh
+                 join code_table ct on ct.code_name = oh.code_name
+                 join(
+            select max(oh.ord_hist_id) ord_hist_id
+            from order_history oh
+            where mem_id = #{mem_id}
+            group by ord_id
+        ) max_oh on oh.ord_hist_id = max_oh.ord_hist_id
+        where (ct.code_type = 0 or ct.code_type = 1 or ct.code_type = 2 or ct.code_type = 3)
+          and oh.ord_date >= date_sub(now(), interval #{period} day)
+        order by ord_date desc
     </select>
 
     <delete id="delete" parameterType="long">

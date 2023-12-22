@@ -41,7 +41,7 @@ public class OrderDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date md_date;
     
-    private String img_url; // 주문 대표이미지 url
+
     private Integer coupon_disc; // 쿠폰 할인금액
     private Integer point_used; // 적립금사용금액
 
