@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Dhurjati&family=Orbit&family=Rethink+Sans&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -274,5 +275,6 @@
     });
 
 </script>
+
 </body>
 </html>

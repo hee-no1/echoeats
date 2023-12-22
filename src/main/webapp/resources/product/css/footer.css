@@ -126,7 +126,7 @@ button, input, optgroup, select, textarea {
 a {
     background-color: transparent;
     text-decoration: none;
-    color: inherit !important;
+    color: inherit;
 }
 .css-1fttcpj {
     display: flex;
@@ -158,7 +158,7 @@ ol, ul {
 }
 .css-1tby8gd {
     margin-left: 3px;
-    color: #00c73c !important;
+    color: #00c73c;
 }
 .css-zjik7 {
     display: flex;
@@ -208,4 +208,10 @@ footer {
 }
 canvas, img, video {
     max-width: 100%;
+}
+.footLink {
+    color: inherit !important;
+}
+.ffoooott {
+    color: #00c73c !important;
 }
