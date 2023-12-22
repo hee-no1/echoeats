@@ -42,13 +42,13 @@ public class MyReviewController {
     @RequestMapping( "/writeProReview")
     public String writeProReview(HttpServletRequest request, @RequestParam MultipartFile ori_filename, Model m) throws IllegalStateException, IOException {
         System.out.println();
-        ProReviewDto dto = new ProReviewDto();
+        MyReviewWrtDto dto = new MyReviewWrtDto();
 
         try {
             Long ordId = Long.parseLong((request.getParameter("ord_id")));
             int prodId = Integer.parseInt(request.getParameter("prod_id"));
 
-            dto.setOrd_id(ordId);
+            dto.setOrd_id(String.valueOf(ordId));
             dto.setProd_id(prodId);
         } catch (Exception e) {
             e.printStackTrace(); // 예외를 로깅합니다.
@@ -56,6 +56,8 @@ public class MyReviewController {
 
         dto.setMem_id(request.getParameter("mem_id"));
         dto.setReview_content(request.getParameter("review_content"));
+        dto.setReviewStatus("Y");
+
         System.out.println(dto.toString());
 
         if(ori_filename == null) {
@@ -95,11 +97,11 @@ public class MyReviewController {
     //리뷰 수정
     @RequestMapping("/modifyProReview")
     public String modifyProReview(ServletRequest request, Model m)  {
-        ProReviewDto dto = new ProReviewDto();
+        MyReviewWrtDto dto = new MyReviewWrtDto();
 
         dto.setReview_id(Integer.parseInt(request.getParameter("review_id")));
         dto.setProd_id(Integer.parseInt(request.getParameter("prod_id")));
-        dto.setOrd_id(Long.parseLong(request.getParameter("ord_id")));
+        dto.setOrd_id(request.getParameter("ord_id"));
         dto.setMem_id(request.getParameter("mem_id"));
         dto.setReview_content(request.getParameter("review_content"));
         System.out.println("리뷰 수정내용 : " + dto);
@@ -110,7 +112,7 @@ public class MyReviewController {
     }
 
 
-    // 리뷰 목록 가져오기
+    // 작성가능한 리뷰 조회
     @ResponseBody
     @RequestMapping(value = "/getMemberReview", method = RequestMethod.POST)
     public List<MyReviewWrtDto> getMemberReview (@RequestBody Map<String, String> reviewInfo) {
@@ -126,10 +128,11 @@ public class MyReviewController {
     // 작성한 리뷰 조회
     @ResponseBody
 	@RequestMapping(value = "/seeMyReview", method = RequestMethod.POST)
-	public ProReviewDto seeMyReview (@RequestBody Map<String, String> reviewInfo) {
+	public List<MyReviewWrtDto> seeMyReview (@RequestBody Map<String, String> reviewInfo) {
         System.out.println("seeMyReviewAjax() 실행");
         System.out.println(">>>> 리뷰가져오기 회원아이디 : " + reviewInfo.get("mem_id"));
         System.out.println(">>>> controller리뷰구분 : " + reviewInfo.get("reviewStatus"));
+
 
         System.out.println("작성한 리뷰 목록");
         return myReviewService.seeMyReview(reviewInfo);

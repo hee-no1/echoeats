@@ -16,18 +16,17 @@ public class MyReviewServiceImpl implements MyReviewService {
 
         return myReviewRepository.getMyReview(reviewInfo);
     }
-    @Override
-    public ProReviewDto seeMyReview(Map<String, String> reviewInfo) {
+    public List<MyReviewWrtDto> seeMyReview(Map<String, String> reviewInfo) {
         return myReviewRepository.seeMyReview(reviewInfo);
     }
     @Override
-    public int writeReview(ProReviewDto dto) {
-        int wrtResult = myReviewRepository.writeReview(dto);
-        int upResult= myReviewRepository.updateState(dto);
-        return upResult;
+    public int writeReview(MyReviewWrtDto dto) {
+//        int wrtResult = myReviewRepository.writeReview(dto);
+//        int upResult= myReviewRepository.updateState(dto);
+        return myReviewRepository.writeReview(dto);
     }
     @Override
-    public int modifyReview(ProReviewDto dto) {
+    public int modifyReview(MyReviewWrtDto dto) {
         return myReviewRepository.modifyReview(dto);
     }
 

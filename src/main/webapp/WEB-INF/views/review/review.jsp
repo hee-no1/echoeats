@@ -9,9 +9,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>에코잇츠</title>
-    <link rel="stylesheet" href="/resources/product/css/header-css.css">
+    <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
-    <link rel="stylesheet" href="/resources/order/css/mypageOrder.css">
+    <link rel="stylesheet" href="/resources/css/member/grade.css">
+<%--    <link rel="stylesheet" href="/resources/order/css/mypage.css">--%>
     <link rel="stylesheet" href="/resources/css/board/review.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -28,15 +29,16 @@
         .modal {
             display: none;
         }
+        .css-1omzzwx, .css-17cmttl {
+            color: #00C73C;
+        }
+
+
     </style>
 </head>
 
 <body>
-<header>
-    <%@ include file="../include/header.jspf" %>
-</header>
-<!-- 마이페이지네비메뉴 -->
-<%--<%@include file="../include/mypageOrder_Include.jsp" %>--%>
+<%@ include file="../include/header.jspf" %>
 <div class = "css-2b29tl">
     <div class = "css-1jgbowa epggjnz4">
         <div class = "css-1oynwoh epggjnz3">
@@ -45,12 +47,13 @@
                     <div class = "welcome">웰컴</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
-                            이희원님
+                            <sec:authorize access="isAuthenticated()">
+                                <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+                            </sec:authorize>
                         </strong>
                         <div class = "css-70qvj9">
-                            <button class = "css-rlyyl8">다음 달 등급 확인</button>
                             <span class = "css-i9bkc4"></span>
-                            <button class = css-rlyyl8>전체 등급 확인</button>
+                            <button class = "css-rlyyl8">전체 등급 확인</button>
                         </div>
                     </div>
                 </div>
@@ -58,13 +61,6 @@
                 <div class = "css-1rqh7gg">
                     <p class = "css-1nwlk71">적립 5%</p>
                     <p class = "css-1nwlk71">최소 1회 무료배송</p>
-                    <a href="/member/membership" class="css-1qcjshh">
-                            <span class="css-1fid7vq">
-                                <span class="css-3a5cil">NEW</span>
-                                <span class="css-1kxzrwz">컬리멤버스</span>
-                                <span class="css-10yg44e">월 1,900원으로 10배 쿠폰 받기</span>
-                            </span>
-                    </a>
                 </div>
             </div>
 
@@ -72,7 +68,7 @@
             <div class="css-1jemrvf epggjnz1">
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-1bm0yf4 e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">적립금 · 컬리캐시
+                        <div class="css-157zkrj e1ugk4rt5">적립금
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-1omzzwx e1ugk4rt3">바로가기
@@ -80,19 +76,19 @@
                         </div>
                     </button>
                 </div>
-                <div class="css-1lomzjv epggjnz0">
+                <div class="css-1lomzjv epggjnz0" id="myPageTopCp">
                     <button class="css-1bm0yf4 e1ugk4rt6">
                         <div class="css-157zkrj e1ugk4rt5">쿠폰
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
-                        <div class="css-1omzzwx e1ugk4rt3">0
+                        <div class="css-1omzzwx e1ugk4rt3">${mem_have_cp_qty}
                             <span class="css-mmvz9h e1ugk4rt0">개</span>
                         </div>
                     </button>
                 </div>
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-1bm0yf4 e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">나의 컬리 스타일
+                        <div class="css-157zkrj e1ugk4rt5">나의 에코 스타일
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-1omzzwx e1ugk4rt3">등록하기
@@ -105,7 +101,7 @@
             <div class="css-1jemrvf epggjnz1">
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-13d66fq e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">컬리 퍼플 박스
+                        <div class="css-157zkrj e1ugk4rt5">에코 그린 박스
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-17cmttl e1ugk4rt3">알아보기</div>
@@ -113,7 +109,7 @@
                 </div>
                 <div class="css-1lomzjv epggjnz0">
                     <button class="css-13d66fq e1ugk4rt6">
-                        <div class="css-157zkrj e1ugk4rt5">컬리멤버스
+                        <div class="css-157zkrj e1ugk4rt5">에코멤버스
                             <span class="css-14phxgn e1ugk4rt4"></span>
                         </div>
                         <div class="css-17cmttl e1ugk4rt3">혜택받기</div>
@@ -129,7 +125,7 @@
 
     <div class="css-luwwab eug5r8l1">
         <div class="css-833hqy ecbxmj3">
-            <div class="css-1v4whg ecbxmj2">마이컬리</div>
+            <div class="css-1v4whg ecbxmj2">마이에코</div>
             <ul class="css-1x9bshx ecbxmj1">
                 <li>
                     <a class="active css-g4g0eu ecbxmj0">주문내역
@@ -138,37 +134,14 @@
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
                             </defs>
                             <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
-                                <use stroke="#5f0080" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
-                            </g></g></g></g></g>
-                        </svg>
-                    </a>
-                </li>
-
-                <li>
-                    <a class=" css-g4g0eu ecbxmj0">선물내역
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
-                            <defs>
-                                <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
-                            </defs>
-                            <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
                                 <use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
                             </g></g></g></g></g>
                         </svg>
                     </a>
                 </li>
 
-                <li>
-                    <a class=" css-g4g0eu ecbxmj0">찜한상품
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
-                            <defs>
-                                <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
-                            </defs>
-                            <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
-                                <use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
-                            </g></g></g></g></g>
-                        </svg>
-                    </a>
-                </li>
+
+
 
                 <li>
                     <a class=" css-g4g0eu ecbxmj0">배송지 관리
@@ -196,8 +169,9 @@
                     </a>
                 </li>
 
+
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">결제수단 · 컬리페이
+                    <a class=" css-g4g0eu ecbxmj0">상품 문의
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -210,7 +184,7 @@
                 </li>
 
                 <li>
-                    <a href="/mypage/myqna" class=" css-g4g0eu ecbxmj0">상품 문의
+                    <a class=" css-g4g0eu ecbxmj0">적립금
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -223,7 +197,7 @@
                 </li>
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">적립금 · 컬리캐시
+                    <a class=" css-g4g0eu ecbxmj0" id="myPageSideCp">쿠폰
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -235,31 +209,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a class=" css-g4g0eu ecbxmj0">쿠폰
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
-                            <defs>
-                                <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
-                            </defs>
-                            <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
-                                <use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
-                            </g></g></g></g></g>
-                        </svg>
-                    </a>
-                </li>
-
-                <li>
-                    <a class=" css-g4g0eu ecbxmj0">나의 컬리 스타일
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
-                            <defs>
-                                <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
-                            </defs>
-                            <g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)">
-                                <use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use>
-                            </g></g></g></g></g>
-                        </svg>
-                    </a>
-                </li>
 
                 <li>
                     <a class=" css-g4g0eu ecbxmj0">개인 정보 수정
@@ -291,6 +240,7 @@
             </a>
         </div>
 
+
         <div class="css-171zbec eug5r8l0 content">
             <div class="col-sm-6">
                 <div class="mypage-top3">
@@ -316,7 +266,7 @@
                     <div class="beforeWriteArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="reviewCnt"></span>개</div>
-                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->
+<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="reviewArea">
                             <!-- 작성가능 후기 -->
@@ -326,7 +276,7 @@
                     <div class="writtenArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="writeReviewCnt"></span>개</div>
-                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->
+<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="writeReviewArea">
                             <!-- 작성한 후기 -->
@@ -349,12 +299,12 @@
         writtenArea.classList.add('hide');
 
         // 작성가능후기, 작성한후기 버튼 속성지정
-        $('#beforeWrite').attr('style', "border-bottom:none; color: #00C73C");
+        $('#beforeWrite').attr('style', "color: #00C73C");
         $('#written').attr('style', "background-color: #00C73C");
 
         var reviewInfo = {
             <%--mem_id : ${loginMember.get ~~},--%>
-            mem_id: 'user123',
+            mem_id: '${loginMember}',
             reviewStatus: 'N'
         }
         console.log("reviewInfo: " + reviewInfo.mem_id);
@@ -365,7 +315,7 @@
             console.log("작성 가능한리뷰 클릭");
             beforeWriteArea.classList.remove('hide'); // 보이기
             writtenArea.classList.add('hide');  // 숨김
-            $('#beforeWrite').attr('style', "border-bottom:none; color:  #00C73C");
+            $('#beforeWrite').attr('style', "color:  #00C73C");
             $('#written').attr('style', "background-color:  #00C73C");
             var reviewInfo = {
                 mem_id: 'user123',
@@ -400,30 +350,29 @@
                     } else {
                         $.each(data, function(index, reviewList){
                             htmlTag += '<div class="reviewGrp">';
-                            htmlTag += '<div class="review-container" id="review" style="">';
+                            htmlTag += '<div class="review-container" id="review">';
                             htmlTag += '<div id="reviewContent">';
-                            htmlTag += '<li class="d-flex inquiryPro-row" style="padding: 20px;">';
-                            htmlTag +=      '<div class="pro_img"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
-                            htmlTag += 		'<div class="pro_title" style="width: 560px; text-align: left;padding-left:20px" >';
-                            htmlTag += 		'<div class="pro_name font-weight-bold">'+ reviewList.prod_name + '</div>';
-                            htmlTag += 		'<div class="">' + reviewList.deliveryStatus + '</div>';
-                            htmlTag += '</div>';
-                            htmlTag += '<div class="review-deadline minusPoint" style="width: 135px; margin-top: 20px; margin-right:20px;"></div>';
-                            htmlTag += '<div class="write_review" style="margin-top: 13px;">';
-                            htmlTag += '<button type="button" class="trigger btn font-weight-bold" id = "writeReviewBtn" data-toggle="modal" data-target="#reviewModal'+index+'" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기작성</button>';
+                            htmlTag += '<li class="d-flex inquiryPro-row" style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">';
+                            htmlTag +=      '<div class="pro_img" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
 
+                            htmlTag += '<div class="pro_title" style="flex: 3; text-align: left; margin-left: -80px;">'; // 너비 조정
+                            htmlTag += 		'<div class="pro_name font-weight-bold">'+ reviewList.prod_name + '</div>';
+                            htmlTag += 		'<div class="delivery-status" style="font-weight: 300; font-size: 0.9em;">'+ reviewList.review_date + " " + reviewList.deliveryStatus + '</div>';
+                            htmlTag += '</div>';
+                            htmlTag += '<div class="write_review" style="flex: 1; text-align: right;">'; // 너비 조정 및 오른쪽 정렬
+                            htmlTag += '<button type="button" class="trigger btn font-weight-bold" id="writeReviewBtn" data-toggle="modal" data-target="#reviewModal'+index+'" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기작성</button>';
                             htmlTag += '</div>';
                             htmlTag += '</li>';
                             htmlTag += '</div>';
                             htmlTag += '</div>';
+
 
                             // 모달창
                             htmlTag += '<div class="modal fade" id="reviewModal'+index+'">';
                             htmlTag += '<div class="modal-dialog modal-dialog-centered">';
                             htmlTag += '<div class="modal-content">';
                             htmlTag += '<div class="modal-header">';
-                            htmlTag += '<h4 class="modal-title">상품 후기</h4>';
-                            // htmlTag += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
+                            htmlTag += '<h4 class="modal-title">후기 작성</h4>';
                             htmlTag += '</div>';
                             htmlTag += '<div class="modal-body">';
 
@@ -432,18 +381,21 @@
                             htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+reviewList.prod_id+'">';
                             htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+reviewList.mem_id+'">';
 
-                            htmlTag += '<div class="productInfo d-flex align-content-between" style="margin-bottom: 20px;">';
+                            // prod_name 가져오기 위해서 추가 !!
+                            htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + reviewList.prod_name + '">';
 
-                            htmlTag += '<div class="writeProImg" style="border:none;margin: 0px 20px"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
-                            htmlTag += '<div class="writeProName">'+ reviewList.prod_name + '</div>';
+
+                            htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬을 위해 justify-content-end 사용
+                            htmlTag +=      '<div class="writeProImg" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ reviewList.prod_name + '</div>';
                             htmlTag += '</div>';
-                            htmlTag += '<div class="writeArea d-flex">';
+
+
+                            htmlTag += '<div class="writeArea">';
+                            htmlTag += '<label for="review_content" style="width: 100%; text-align: left; margin-bottom: 10px;">내용</label>';
+                            htmlTag += '<textarea id="review_content" name="review_content" style="width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" placeholder="상품 특성에 맞는 후기를 작성해주세요. 예) 레시피, 겉포장 속 실제 구성품 사진, 플레이팅, 화장품 사용자의 피부타입 등" required></textarea>';
+                            htmlTag += '</div>';
                             htmlTag += '<div>'
-                            htmlTag += 		'<label for="review_content"style="width: 80px; text-align: left;  margin: 0px; margin-right: 20px;">내용</label> ';
-                            htmlTag += '</div>';
-                            htmlTag += '<div>'
-                            htmlTag += '<textarea type="text" name="review_content" placeholder="상품 특성에 맞는 후기를 작성해주세요. 예)레시피, 겉포장 속 실제 구성품 사진, 플레이팅, 화장품 사용자의 피부타입 등 " required="required"></textarea>';
-                            htmlTag += '</div>';
                             htmlTag += ' </div>';
                             htmlTag += '<div class="filebox d-flex align-content-between" style="margin-top:20px">';
                             htmlTag += '<div style="width: 90px; text-align: left; margin-top: 15px; ">사진첨부</div>';
@@ -453,15 +405,15 @@
                             htmlTag += '</div>';
                             htmlTag += '<div><input type="file" id="file"  name="ori_filename" onchange="setThumbnail(event)"></div>';
                             htmlTag += '<div border:1px solid #00C73C">';
-                            htmlTag += '<label for="thumb"><img class="thumb" src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';
+                            <%--htmlTag += '<label for="thumb"><img class="thumb" src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';--%>
                             htmlTag += '<div id="preview"></div>';
                             htmlTag += '</div>';
                             htmlTag += '</div>';
 
-                            htmlTag += '<div class="buttonBox" style="text-align: center;">';
-                            htmlTag += '<input type="button" id="write_review" value="작성하기" onclick="writeProReview()"> ';
-                            htmlTag += '<button type="button" class="closeReviewModal" style="border: 1px solid lightgray; margin-left: 5px; background-color: gray; color: white; width: 60px; height: 36px; font-size: small;">닫기</button>';
+                            htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
+                            htmlTag += '<input type="button" id="write_review" value="작성하기" onclick="writeProReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
 
+                            htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
                             htmlTag += '</div>';
 
                             htmlTag += '</form>';
@@ -479,18 +431,16 @@
                     alert("리뷰 목록 불러오기 실패");
                 }
             }); // ajax 끝
-        };
+        }
 
         $(document).on("click", "#writeReviewBtn", function() {
             // 모달 창을 표시하는 코드
             $(".modal").show();
         });
-        $(document).on("click", ".closeReviewModal", function() {
-            // 모달을 찾아서 숨깁니다. 모달의 정확한 선택자는 상황에 따라 다를 수 있습니다.
+        $(document).on("click", ".closeReviewModal", function(event) {
+            event.stopPropagation();
             $(this).closest('.modal').hide();
         });
-
-
 
 
         // 작성한 리뷰
@@ -502,7 +452,7 @@
             $('#beforeWrite').attr('style', "background-color: #00C73C;");
 
             var reviewInfo = {
-                mem_id: 'user123',
+                mem_id: '${loginMember}',
                 reviewStatus: 'Y'
             }
             console.log("reviewInfo: " + reviewInfo.mem_id);
@@ -534,21 +484,23 @@
                         htmlTag += '</div>';
                     } else {
                         $.each(data, function(index, reviewList){
-                            htmlTag += '<div class="review-container" style="">';
-                            htmlTag += '<li class="d-flex inquiryPro-row" style="padding: 20px;">';
-                            htmlTag += '<div class="pro_img"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag += '<div class="review-container">';
+                            htmlTag += '<li class="d-flex inquiryPro-row" style="padding: 20px; display: flex; align-items: center; justify-content: space-between;">'; // Flexbox 적용
 
-                            htmlTag += '<div class="pro_title" style="width: 560px; text-align: left;padding-left:20px">';
-                            htmlTag += '<div class="pro_name font-weight-bold">' + reviewList.prod_id + '</div>';
-                            htmlTag += 		'<div>' + reviewList.deliveryStatus + '</div>';
+                            htmlTag += '<div style="flex-grow: 1;">';
+                            htmlTag += '<div class="pro_title" style="width: 560px; text-align: left; padding-left: 20px">';
+                            htmlTag += '<div class="pro_name font-weight-bold" style="font-size: 15px">' + reviewList.prod_name + '</div>';
+                            htmlTag += '<div class="review_date" style="font-weight: 300; font-size: 0.9em; margin-bottom: 20px;">' + reviewList.review_date + "작성" + '</div>';
+                            htmlTag += '<div>' + reviewList.review_content + '</div>';
                             htmlTag += '</div>';
-                            htmlTag += '<div class="review-deadline minusPoint" style="width: 135px; margin-top: 20px; margin-right:20px;"></div>';
+                            htmlTag += '</div>';
 
                             htmlTag += '<div class="write_review" style="margin-top: 13px;">'
-                                + '<button type="button" class="trigger btn font-weight-bold reviewMdfyBtn" id = "writeReviewBtn" data-toggle="modal" data-target="#wtReviewModal'+index+'" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기수정</button>'
+                                + '<button type="button" class="trigger btn font-weight-bold reviewMdfyBtn" id="writeReviewBtn" data-toggle="modal" data-target="#wtReviewModal' + index + '" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기수정</button>'
                                 + '</div>';
                             htmlTag += '</li>';
                             htmlTag += '</div>';
+
 
                             // 모달창
                             htmlTag += '<div class="modal fade" id="wtReviewModal'+index+'">';
@@ -556,7 +508,7 @@
                             htmlTag += '<div class="modal-content">';
                             htmlTag += '<div class="modal-header">';
                             htmlTag += '<h4 class="modal-title">작성한 후기</h4>';
-                            htmlTag += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
+                            // htmlTag += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="modal-body">';
@@ -568,9 +520,9 @@
                             htmlTag += `<input type="hidden" name="mem_id" id="mem_id" value="${reviewList.mem_id}">`;
 
 
-                            htmlTag += '<div class="productInfo d-flex align-content-between" style="margin-bottom: 20px;">';
-                            htmlTag += '<div class="writeProImg" style="border:none;margin: 0px 20px"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
-                            htmlTag += '<div class="writeProName">'+ reviewList.prod_id + '</div>';
+                            htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬
+                            htmlTag += '<div class="writeProImg"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ reviewList.prod_name + '</div>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="writeArea d-flex">';
@@ -579,20 +531,22 @@
                             htmlTag += '</div>';
 
                             htmlTag += '<div>'
-                            htmlTag += '<textarea type="text" id="writtenReview" name="reivew_content" style="background-color:white;" readonly>'+ reviewList.reivew_content +'</textarea>';
+                            htmlTag += '<textarea type="text" id="writtenReview" name="reivew_content" style="background-color:white;" readonly>'+ reviewList.review_content +'</textarea>';
                             htmlTag += '</div>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="filebox d-flex align-content-between" style="margin-top:20px">';
-                            htmlTag += '<div style="width: 100px; text-align: left; margin-top: 15px;">사진첨부</div>';
+                            htmlTag += '<div style="width: 90px; text-align: left; margin-top: 15px;">사진첨부</div>';
 
-                            htmlTag += '<div class="fileIconBox">';
-                            htmlTag += '<label for="thumb"><img class="thumb" src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';
+                            htmlTag += '<div class="fileIconBox" style="margin-right: 20px;">';
+                            htmlTag += '<label for="thumb"><img src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';
                             htmlTag += '</div>';
 
-                            htmlTag += '<div class="buttonBox" style="text-align: center; margin-left:60px">';
-                            htmlTag +=  '<input type="button" id="write_review" value="수정하기" onclick="modifyReview()"> ';
-                            htmlTag +=  '<input type="button" id="write_review" value="저장하기" onclick="saveReview()"> ';
+                            htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
+                            htmlTag += '<input type="button" id="write_review" value="수정하기" onclick="modifyReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
+                            // htmlTag += '<input type="button" id="save_review" value="저장하기" onclick="saveReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px;">';
+                            htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-left: 5px;">닫기</button>';
+
                             htmlTag += '</div>';
 
                             htmlTag += '</form>';
@@ -621,15 +575,6 @@
 
     });
 
-    // //썸네일 이미지 변경
-    // function setThumbnail(event) {
-    //     var reader = new FileReader();
-    //     reader.onload = function(event) {
-    //         var img = $(".thumb");
-    //         img.setAttribute("src", event.target.result); //이미지 주소를 변경해줌
-    //     };
-    //     reader.readAsDataURL(event.target.files[0]);
-    // }
     function showPreview(event) {
         var reader = new FileReader();
         reader.onload = function() {
@@ -650,14 +595,11 @@
         //수정활성화
         $('#writtenReview').removeAttr('readonly');
         $('#writtenReview').css('border', '3px solid #692498')
-    }
-
-    function saveReview(){
-        //alert("리뷰 수정 실행");
         mdfyReviewFrm = document.getElementById("mdfyReviewFrm");
         mdfyReviewFrm.action ="modifyProReview";
         mdfyReviewFrm.submit();
     }
+
 </script>
 </body>
 
