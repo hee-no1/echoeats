@@ -27,11 +27,11 @@
         <div class = "css-1oynwoh epggjnz3">
             <div class = "css-1nmq3i1 epggjnz2">
                 <div class = "css-zjik7">
-                    <div class = "welcome">웰컴</div>
+                    <div class = "welcome">${mem_grade}</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
                             <sec:authorize access="isAuthenticated()">
-                                <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+                                <p><sec:authentication property="principal.mem_name" />님</p>
                             </sec:authorize>
                         </strong>
                         <div class = "css-70qvj9">
