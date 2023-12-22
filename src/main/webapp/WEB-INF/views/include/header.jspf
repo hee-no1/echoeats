@@ -22,7 +22,7 @@
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasAuthority('ADMIN')">
-                            <a href="/admin/hyoungJun/productEnroll">관리자</a>
+                            <a href="/admin/dashboard">관리자</a>
                             <div class="stick"></div>
                             <a href="/logout">로그아웃</a>
                             <div class="stick"></div>
@@ -88,9 +88,16 @@
                                 <span class="blind">찜하기</span>
                             </button>
                             <button>
+                                <sec:authorize access="isAuthenticated()">
                                 <a href="/cart" style="width: 100%; height: 100%; display: inline-block">
                                     <span class="blind">장바구니</span>
                                 </a>
+                                </sec:authorize>
+                                <sec:authorize access="!isAuthenticated()">
+                                    <a href="/member/login_form" style="width: 100%; height: 100%; display: inline-block">
+                                        <span class="blind">장바구니</span>
+                                    </a>
+                                </sec:authorize>
                             </button>
                         </div>
                     </div>
