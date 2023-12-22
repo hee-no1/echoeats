@@ -264,20 +264,20 @@ canvas, img, video {
 /*    color: rgb(95, 0, 128);*/
 /*    font-weight: 500;*/
 /*}*/
-.css-g4g0eu {
-    cursor: pointer;
-    border-bottom: 1px solid rgb(242, 242, 242);
-    padding: 15px 13px 15px 20px;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    align-items: center;
-    line-height: 19px;
-    letter-spacing: -0.3px;
-    font-size: 14px;
-    color: rgb(102, 102, 102);
-}
+/*.css-g4g0eu {*/
+/*    cursor: pointer;*/
+/*    border-bottom: 1px solid rgb(242, 242, 242);*/
+/*    padding: 15px 13px 15px 20px;*/
+/*    display: flex;*/
+/*    -webkit-box-pack: justify;*/
+/*    justify-content: space-between;*/
+/*    -webkit-box-align: center;*/
+/*    align-items: center;*/
+/*    line-height: 19px;*/
+/*    letter-spacing: -0.3px;*/
+/*    font-size: 14px;*/
+/*    color: rgb(102, 102, 102);*/
+/*}*/
 
 svg:not(:root) {
     overflow: hidden;
