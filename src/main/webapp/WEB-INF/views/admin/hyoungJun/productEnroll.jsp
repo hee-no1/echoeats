@@ -550,7 +550,7 @@
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
                                                 <input name="dlvy_type" class="form-control" type="text"
-                                                       placeholder="ex) 샛별배송">
+                                                       placeholder="ex) 에코배송">
                                             </div>
                                         </div>
                                     </div>
@@ -569,7 +569,7 @@
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
                                                 <input name="seller" class="form-control" type="text"
-                                                       placeholder="ex) 컬리">
+                                                       placeholder="ex) ">
                                             </div>
                                         </div>
                                     </div>
