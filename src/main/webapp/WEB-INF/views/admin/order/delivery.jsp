@@ -28,7 +28,7 @@
         <%--        let code = $(this).data('code_name');--%>
         <%--        let cnt = 0;--%>
         <%--        $('input.allChk').each(function(){--%>
-
+        <%--//--%>
         <%--            if($(this).data('chk')){--%>
         <%--                cnt++;--%>
         <%--                let id = $(this).closest('td').data('id');--%>
@@ -40,13 +40,13 @@
         <%--                if(code === 'DELIVERY_PREPARING'){--%>
         <%--                    let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);--%>
         <%--                    let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);--%>
-
+        <%--//--%>
         <%--                    if(real_prod_qty < prod_qty ){--%>
         <%--                        alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");--%>
         <%--                        return false;--%>
         <%--                    }--%>
         <%--                }--%>
-
+        <%--//--%>
         <%--                $.ajax({--%>
         <%--                    type:'PATCH',--%>
         <%--                    url:"/admin/orderDetail/modify?ord_det_id="+id+"&code_name="+code,--%>
@@ -63,9 +63,9 @@
         <%--        if(cnt ==0)--%>
         <%--            alert("변경할 데이터를 선택해 주세요");--%>
         <%--    });--%>
-
+        <%--//--%>
         <%--    $('input.allChk').click(function(){--%>
-
+        <%--//--%>
         <%--        let all = $(this).hasClass('all');--%>
         <%--        let v = $(this).data('chk');--%>
         <%--        if(!all){--%>
@@ -133,14 +133,14 @@
         <%--    }--%>
         <%--}--%>
 
-        // const fullDate = (d) => {
-        //     const today = new Date();
-        //     today.setDate(today.getDate() + d);
-        //     const day = today.getDate();
-        //     const month = today.getMonth() + 1;
-        //     const year = today.getFullYear();
-        //     return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
-        // }
+        <%--const fullDate = (d) => {--%>
+        <%--    const today = new Date();--%>
+        <%--    today.setDate(today.getDate() + d);--%>
+        <%--    const day = today.getDate();--%>
+        <%--    const month = today.getMonth() + 1;--%>
+        <%--    const year = today.getFullYear();--%>
+        <%--    return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);--%>
+        <%--}--%>
     </script>
     <style>
         .pagination, .datatable-pagination ul {
@@ -192,13 +192,21 @@
                         <th scope="row">기간</th>
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
-<%--                                <c:forEach var="ct" items="${dtList}">--%>
-<%--                                    <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                </c:forEach>--%>
+                                <option value="orderDate">주문일</option>
+                                <option value="paymentDate">결제일</option>
+                                <option value="DeliveryStartDate">배송시작일</option>
+                                <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
-<%--                            <c:forEach var="ct" items="${diList}">--%>
-<%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
-<%--                            </c:forEach>--%>
+
+                            <a href="#none" class="btnDate" ><span>오늘</span></a>
+                            <a href="#none" class="btnDate"><span>어제</span></a>
+                            <a href="#none" class="btnDate"><span>3일</span></a>
+                            <a href="#none" class="btnDate"><span>7일</span></a>
+                            <a href="#none" class="btnDate"><span>15일</span></a>
+                            <a href="#none" class="btnDate"><span>1개월</span></a>
+                            <a href="#none" class="btnDate"><span>3개월</span></a>
+                            <a href="#none" class="btnDate"><span>6개월</span></a>
+
                             <div class="duet-date-picker-grid  duet-date-theme-ec-new  sun">
                                 <duet-date-picker first-day-of-week="0" name="start_date" identifier="startDate"
                                                   class="duet-date-picker start hydrated changePicker start_date" ></duet-date-picker>
@@ -215,9 +223,13 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-<%--                                        <c:forEach var="ct" items="${ksList}">--%>
-<%--                                            <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                        </c:forEach>--%>
+                                        <option>주문번호</option>
+                                        <option>상품주문번호</option>
+                                        <option>운송장번호</option>
+                                        <option>운송장번호</option>
+                                        <option>-----------------</option>
+                                        <option>주문자명</option>
+                                        <option>주문자 아이디</option>
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword"
                                            id="sBaseSearchBox" style="width:400px;" placeholder="검색어를 입력해 주세요">
@@ -405,6 +417,13 @@
     });
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="<c:url value='/resources/common/js/scripts.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
+<script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
 <script src="/resources/admin/order/js/delivery.js"></script>
 </body>
 </html>

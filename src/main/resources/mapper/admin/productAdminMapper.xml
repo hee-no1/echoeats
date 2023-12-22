@@ -154,6 +154,7 @@
         FROM product p, product_info i, category c
         WHERE p.prod_id = i.prod_id AND p.cat_code = c.cat_code
         <include refid="searchCondition"/>
+        ORDER BY p.prod_id DESC
         LIMIT #{offset}, #{pageSize}
     </select>
 

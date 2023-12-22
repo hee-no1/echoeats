@@ -22,6 +22,11 @@ public class ProductAdminController {
 
     private final ProductAdminService productAdminService;
 
+    @GetMapping("/dashboard")
+    public String goDashboard() {
+        return "/admin/dashboard/dashboard";
+    }
+
     @GetMapping("/product/list")
     public String getAdminProductList(SearchProductAdminCondition sc,
                                       Model model, ProductFilterDto productFilterDto, String Stock) {

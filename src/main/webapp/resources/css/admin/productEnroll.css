@@ -205,10 +205,6 @@ h2 {
     border-radius: 0;
 }
 
-.form-control:focus {
-    background-color: #fff;
-}
-
 .form-control:first-child {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
@@ -730,4 +726,34 @@ th {
 
 td:nth-child(1) {
     background-color: #ffffff!important;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    /*border-color: #ff545c;*/
+    outline: none;
+}
+
+.seller-icon {
+    display: inline-block;
+    margin: -1px 0 1px;
+    vertical-align: middle;
+}
+
+.icon-slash-circle {
+    width: 15px;
+    height: 15px;
+    background-position: -140px 0;
+}
+
+.text-danger {
+        display: none;
+        padding-top: 10px;
+        color: #e05757;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

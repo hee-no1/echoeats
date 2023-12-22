@@ -1,8 +1,10 @@
 package com.pofol.main.orders.delivery.controller;
 
+import com.pofol.admin.order.Repository.AdminOrderDetailRepository;
 import com.pofol.main.orders.delivery.domain.DeliveryDto;
 import com.pofol.main.orders.delivery.repository.DeliveryRepository;
 import com.pofol.main.orders.delivery.service.DeliveryService;
+import com.pofol.main.orders.order.domain.CodeTableDto;
 import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.service.OrderDetailService;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +28,7 @@ public class DeliveryController {
 
     private final OrderDetailService orderDetailService;
     private final DeliveryService deliveryService;
+    private AdminOrderDetailRepository adminOrdDetailRepo;
 
 
     @GetMapping
@@ -77,5 +83,4 @@ public class DeliveryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DELIVERY_COMPLETE fail");
         }
     }
-
 }

@@ -53,36 +53,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="css-vtjvf eam2qm51">비회원 문의 : <a href="mailto:help@kurlycorp.com">help@kurlycorp.com</a>
+                    <div class="css-vtjvf eam2qm51 ">비회원 문의 : <a href="#" class="footLink">help@ecoeats.com</a>
                     </div>
                 </div>
                 <div class="css-1fttcpj ebj6vxr3">
                     <ul class="css-17hse91 e13nap1l2">
                         <li class=" css-slkv2p e13nap1l1"><a href="/introduce" target="_self"
-                                                             class="css-1tfhwyj e13nap1l0">에코소개</a></li>
+                                                             class="css-1tfhwyj e13nap1l0 footLink">에코소개</a></li>
                         <li class=" css-slkv2p e13nap1l1"><a
                                 href="https://www.youtube.com/embed/WEep7BcboMQ?rel=0&amp;showinfo=0&amp;wmode=opaque&amp;enablejsapi=1"
-                                target="_self" class="css-1tfhwyj e13nap1l0">에코소개영상</a></li>
+                                target="_self" class="css-1tfhwyj e13nap1l0 footLink">에코소개영상</a></li>
                         <li class=" css-slkv2p e13nap1l1"><a href="https://ir.kurly.com" target="_blank"
-                                                             class="css-1tfhwyj e13nap1l0">투자정보</a></li>
+                                                             class="css-1tfhwyj e13nap1l0 footLink">투자정보</a></li>
                         <li class=" css-slkv2p e13nap1l1"><a href="https://kurly.career.greetinghr.com"
                                                              target="_blank"
-                                                             class="css-1tfhwyj e13nap1l0">인재채용</a></li>
+                                                             class="css-1tfhwyj e13nap1l0 footLink">인재채용</a></li>
                         <li class=" css-slkv2p e13nap1l1"><a href="/user-terms/agreement" target="_self"
-                                                             class="css-1tfhwyj e13nap1l0">이용약관</a></li>
+                                                             class="css-1tfhwyj e13nap1l0 footLink">이용약관</a></li>
                         <li class="bold css-slkv2p e13nap1l1"><a href="/user-terms/privacy-policy"
-                                                                 target="_self" class="css-1tfhwyj e13nap1l0">개인정보처리방침</a>
+                                                                 target="_self" class="css-1tfhwyj e13nap1l0 footLink">개인정보처리방침</a>
                         </li>
                         <li class=" css-slkv2p e13nap1l1"><a href="/user-guide" target="_self"
-                                                             class="css-1tfhwyj e13nap1l0">이용안내</a></li>
+                                                             class="css-1tfhwyj e13nap1l0 footLink">이용안내</a></li>
                     </ul>
                     <div class="css-bz7mfs ebj6vxr2">법인명 (상호) : 주식회사 에코 <span
-                            class="css-1ekjygq ebj6vxr1"></span> 사업자등록번호 : 261-81-23567<a
-                            href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2618123567&amp;apv_perm_no="
-                            target="_blank" rel="noreferrer" class="css-1tby8gd ebj6vxr0">사업자정보 확인</a><br>통신판매업
-                        : 제 2018-서울강남-01646 호<br>주소 : 서울특별시 강남구 테헤란로 133, 18층(역삼동) <span
-                                class="css-1ekjygq ebj6vxr1"></span> 대표이사 : 김슬아<br>채용문의 :<a
-                                href="mailto:recruit@kurlycorp.com" class="css-1tby8gd ebj6vxr0">recruit@kurlycorp.com</a><br>팩스:
+                            class="css-1ekjygq ebj6vxr1"></span> 사업자등록번호
+                        <a href="#" target="_blank" rel="noreferrer" class="css-1tby8gd ebj6vxr0 ffoooott">사업자정보 확인</a><br>통신판매업
+                        : 제 2018-인천송도-01646 호<br>주소 : 인천광역시 연수구 게림로 111 <span
+                                class="css-1ekjygq ebj6vxr1"></span> 대표이사 : 임형준<br>채용문의 :<a
+                                href="mailto:recruit@kurlycorp.com" class="css-1tby8gd ebj6vxr0 ffoooott">recruit@ecoeats.com</a><br>팩스:
                         070 - 7500 - 6098
                     </div>
                     <ul class="css-zjik7 ek68y4g1"><a href="https://instagram.com/marketkurly" target="_blank"
@@ -115,17 +114,17 @@
                 <button class="css-12t5wjq e57xuci2"><img
                         src="https://res.kurly.com/pc/ico/2208/logo_tosspayments.svg" alt="payments 로고"
                         class="css-as7ifw e57xuci1">
-                    <p class="css-bft4sh e57xuci0">토스페이먼츠 구매안전(에스크로)<br>서비스를 이용하실 수 있습니다.</p></button>
+                    <p class="css-bft4sh e57xuci0">**페이먼츠 구매안전(에스크로)<br>서비스를 이용하실 수 있습니다.</p></button>
                 <button class="css-12t5wjq e57xuci2"><img
                         src="https://res.kurly.com/pc/ico/2208/logo_wooriBank.svg" alt="우리은행 로고"
                         class="css-1262i6n e57xuci1">
-                    <p class="css-bft4sh e57xuci0">고객님이 현금으로 결제한 금액에 대해 우리은행과<br>채무지급보증 계약을 체결하여 안전거래를 보장하고<br>있습니다.
+                    <p class="css-bft4sh e57xuci0">고객님이 현금으로 결제한 금액에 대해 **은행과<br>채무지급보증 계약을 체결하여 안전거래를 보장하고<br>있습니다.
                     </p></button>
             </div>
         </div>
         <div class="css-175n8cp etk3uz81">에코에서 판매되는 상품 중에는 에코에 입점한 개별 판매자가 판매하는 마켓플레이스(오픈마켓) 상품이 포함되어 있습니다.<br>마켓플레이스(오픈마켓)
             상품의 경우 에코는 통신판매중개자로서 통신판매의 당사자가 아닙니다. 에코는 해당 상품의 주문, 품질, 교환/환불 등 의무와 책임을 부담하지 않습니다.<em
-                    class="css-1vhhy2d etk3uz80">© KURLY CORP. ALL RIGHTS RESERVED</em>
+                    class="css-1vhhy2d etk3uz80">© ECO CORP. ALL RIGHTS RESERVED</em>
         </div>
     </div>
 </footer>

@@ -171,15 +171,6 @@
     height: 23px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAQAAAACj/OVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfmAxYGNhJAM7wjAAAAd0lEQVRYw+3UsQ2AMAwAQQfRsESWiCmp2I+aJagYgZYBaGGItGYEIhQZIf3VVl5OYREAAP4oxRTrvdYUzGzh6EfHYFiss7Ve8pEFnZNpJkmSJEnT/ObGltzSrzl/KTly5PxzIjo5X8501sy1BTODyX657QcAgL8b8j9nkEwifVYAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjItMDMtMjJUMDY6NTQ6MTYrMDA6MDClJXo+AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIyLTAzLTIyVDA2OjU0OjE2KzAwOjAw1HjCggAAAABJRU5ErkJggg==) 50% 50% / cover no-repeat;
 }
-.css-1omzzwx {
-    font-weight: 700;
-    font-size: 20px;
-    color: rgb(95, 0, 128);
-    margin-top: 20px;
-}
-/* .css-mmvz9h {
-    font-weight: 400;
-} */
 
 
 
@@ -210,11 +201,7 @@
     align-items: center;
     color: rgb(51, 51, 51);
 }
-.css-17cmttl {
-    font-weight: 700;
-    font-size: 20px;
-    color: rgb(95, 0, 128);
-}
+
 
 
 
@@ -277,20 +264,20 @@ canvas, img, video {
 /*    color: rgb(95, 0, 128);*/
 /*    font-weight: 500;*/
 /*}*/
-.css-g4g0eu {
-    cursor: pointer;
-    border-bottom: 1px solid rgb(242, 242, 242);
-    padding: 15px 13px 15px 20px;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    align-items: center;
-    line-height: 19px;
-    letter-spacing: -0.3px;
-    font-size: 14px;
-    color: rgb(102, 102, 102);
-}
+/*.css-g4g0eu {*/
+/*    cursor: pointer;*/
+/*    border-bottom: 1px solid rgb(242, 242, 242);*/
+/*    padding: 15px 13px 15px 20px;*/
+/*    display: flex;*/
+/*    -webkit-box-pack: justify;*/
+/*    justify-content: space-between;*/
+/*    -webkit-box-align: center;*/
+/*    align-items: center;*/
+/*    line-height: 19px;*/
+/*    letter-spacing: -0.3px;*/
+/*    font-size: 14px;*/
+/*    color: rgb(102, 102, 102);*/
+/*}*/
 
 svg:not(:root) {
     overflow: hidden;
@@ -623,11 +610,6 @@ h2 {
     margin-inline-end: 0px;
     font-weight: bold;
 }
-body, button, input, select, textarea {
-    font-size: 14px;
-    color: #333;
-}
-
 button {
     border-radius: 0;
 }

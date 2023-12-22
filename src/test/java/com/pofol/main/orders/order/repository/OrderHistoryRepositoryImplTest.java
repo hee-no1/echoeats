@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,5 +55,15 @@ class OrderHistoryRepositoryImplTest {
         assertThat(delete).isEqualTo(1);
     }
 
+    @Test
+    public void selectFinalOrderHistory() throws Exception{
+        Map map = new HashMap();
+        map.put("mem_id", "user123");
+        map.put("period", 90);
+        List<OrderHistoryDto> orderHistoryDtos = orderHistoryRepository.selectFinalOrderHistory(map);
+        for (OrderHistoryDto orderHistoryDto : orderHistoryDtos) {
+            System.out.println(orderHistoryDto);
+        }
+    }
 
 }
