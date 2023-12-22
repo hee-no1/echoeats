@@ -144,27 +144,27 @@
                         <tbody>
                         <tr>
                             <td>김경훈</td>
-                            <td>aaaaaaa</td>
+                            <td>hoon11</td>
                             <td>남자</td>
                             <td>씨앗</td>
                             <td>2022/04/25</td>
-                            <td>aaaaaa@gmail.com</td>
+                            <td>hoon11@gmail.com</td>
                         </tr>
                         <tr>
                             <td>임형준</td>
-                            <td>bbbbbbb</td>
+                            <td>firebulldog</td>
                             <td>남자</td>
                             <td>가지</td>
                             <td>2018/07/25</td>
-                            <td>bbbbbbb@gmail.com</td>
+                            <td>firebulldog@gmail.com</td>
                         </tr>
                         <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
+                            <td>우형주</td>
+                            <td>woo5715</td>
+                            <td>남자</td>
+                            <td>나무</td>
                             <td>2009/01/12</td>
-                            <td>$86,000</td>
+                            <td>woo5715@gmail.com</td>
                         </tr>
                         <tr>
                             <td>Cedric Kelly</td>

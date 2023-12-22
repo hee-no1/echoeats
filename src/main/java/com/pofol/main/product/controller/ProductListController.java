@@ -57,19 +57,19 @@ public class ProductListController {
             // 2번 상품 정렬 칸
             EventGroupDto eventNo2 = eventGroupService.getEvent(3L);
             model.addAttribute("eventNo2", eventNo2);
-            List<ProductDto> productList2 = productListService.getEventList(1L);
+            List<ProductDto> productList2 = productListService.getEventList(3L);
             model.addAttribute("productList2", productList2);
 
             // 3번 상품 정렬 칸
             EventGroupDto eventNo3 = eventGroupService.getEvent(4L);
             model.addAttribute("eventNo3", eventNo3);
-            List<ProductDto> productList3 = productListService.getEventList(2L);
+            List<ProductDto> productList3 = productListService.getEventList(4L);
             model.addAttribute("productList3", productList3);
 
             // 4번 상품 정렬 칸
             EventGroupDto eventNo4 = eventGroupService.getEvent(5L);
             model.addAttribute("eventNo4", eventNo4);
-            List<ProductDto> productList4 = productListService.getEventList(2L);
+            List<ProductDto> productList4 = productListService.getEventList(5L);
             model.addAttribute("productList4", productList4);
 
             // 대 카테고리 리스트 정렬 (header의 카테고리 정렬)
