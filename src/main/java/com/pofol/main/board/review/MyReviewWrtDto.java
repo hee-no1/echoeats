@@ -1,5 +1,7 @@
 package com.pofol.main.board.review;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MyReviewWrtDto {
     // 작성 가능한 후기
     private int prod_id, count, review_id, like, point;

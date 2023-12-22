@@ -8,14 +8,14 @@ public interface MyReviewRepository {
     List<MyReviewWrtDto> getMyReview(Map<String, String> reviewInfo) throws Exception;
 
     // 작성한 리뷰 보기
-    ProReviewDto seeMyReview(Map<String, String> reviewInfo) throws Exception;
+    List<MyReviewWrtDto> seeMyReview(Map<String, String> reviewInfo) throws Exception;
 
     // 리뷰작성
-    int writeReview(ProReviewDto dto) throws Exception;
+    int writeReview(MyReviewWrtDto dto) throws Exception;
 
-    // 리뷰상태변경
-    int updateState(ProReviewDto dto) throws Exception;
+//    // 리뷰상태변경
+//    int updateState(ProReviewDto dto) throws Exception;
 
     // 리뷰수정
-    int modifyReview(ProReviewDto dto) throws Exception;
+    int modifyReview(MyReviewWrtDto dto) throws Exception;
 }
