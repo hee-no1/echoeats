@@ -204,6 +204,11 @@
         var currentId = $(this).attr('class');
         if(currentId.includes('active')){
 
+            //밑에 두 코드를 추가한 이유: 여러번 클릭했을 경우 밑에 코드가 여러번 실행된다
+            // 첫 번 째 응답은 success, 그 뒤부터는 erorr로 오게되어 여러개의 alert가 나온다
+            var currentElement = $(this);
+            currentElement.removeClass('active').addClass('non');
+
             var cp_del_date = $(this).siblings('.coupon_front').find('.cp_del_date').text();
             console.log(cp_del_date);
 
@@ -214,6 +219,8 @@
             var dw_id = couponId.split(' ')[1];
 
             var clickedId = $(this).attr('id');
+
+            var isAlertShown = false;
 
             $.ajax({
                 url: "coupon_dw",
@@ -321,14 +328,17 @@
                     //두 사람이 같은 아이디로 이미 다운받은 쿠폰을 다운받은 경우
                     //경고메시지와 redirect
                     var errorData = error.responseJSON;
-                    console.error('Error:', errorData);
-                    alert(errorData.message);
+                    if (!isAlertShown) {
+                        isAlertShown = true;
+                        console.error('Error:', errorData);
+                        alert(errorData.message);
 
-                    if(errorData.redirect){
-                        console.log(errorData.redirect);
-                        window.location.href =errorData.redirect;
+                        if (errorData.redirect) {
+                            console.log(errorData.redirect);
+                            window.location.href = errorData.redirect;
+                        }
+
                     }
-
 
 
                 }
@@ -345,10 +355,11 @@
         var dwId1Tag = $('#dw_id\\ ' + number);
         let couponBackTag = dwId1Tag.find('.coupon_back');
         let couponFrontTag = dwId1Tag.find('.coupon_front');
-        var isActive = couponBackTag.hasClass('active');
-        if (isActive) {
-            couponBackTag.removeClass('active').addClass('non');
-        }
+
+        // var isActive = couponBackTag.hasClass('active');
+        // if (isActive) {
+        //     couponBackTag.removeClass('active').addClass('non');
+        // }
 
         couponBackTag.css("background-color", "gray");
         couponFrontTag.css("background-color", "gray");

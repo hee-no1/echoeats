@@ -50,7 +50,7 @@ canvas, img, video {
 }
 #top > #header > #homeInfo > a:nth-of-type(1) {
     color: #00c73c;
-    padding: 10px;
+    padding: 10px 0;
 }
 #top > #header > #homeInfo span {
     width: 8px;
