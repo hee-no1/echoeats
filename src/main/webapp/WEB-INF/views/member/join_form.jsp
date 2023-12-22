@@ -282,6 +282,15 @@
         var regExp = /^01[0-9]\d{7,8}$/;
         return regExp.test(mem_phone);
     }
+    // 휴대폰 번호 입력 필드에 대한 이벤트 처리
+    document.getElementById('mem_phone').addEventListener('input', function() {
+        // 현재 입력된 값에서 숫자만 추출
+        var filteredValue = this.value.replace(/[^\d]/g, '');
+
+        // 입력 필드에 필터링된 값 설정
+        this.value = filteredValue;
+    });
+
 
     // function regMemberName(mem_name) { //이름
     //     var regExp = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
@@ -376,6 +385,7 @@
                     alert("사용가능한 아이디이십니다.")
                     idCheck = 1;
                     $("#idCheck_btn").prop("disabled", true).css("background-color", "#CCCCCC");
+                    $("#mem_id").prop("readonly", true);
                 }
             },
         })
@@ -400,6 +410,7 @@
                     alert("사용가능한 이메일이십니다.")
                     emailCheck = 1;
                     $("#emailCheck_btn").prop("disabled", true).css("background-color", "#CCCCCC");
+                    $("#mem_email").prop("readonly", true);
                 }
             },
         })
