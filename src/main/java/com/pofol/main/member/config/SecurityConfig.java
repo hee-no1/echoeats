@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member/user").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/member/admin").hasAuthority("ADMIN")
                 .antMatchers("/order/checkout").hasAuthority("USER")
+                //.antMatchers("/grade", "/coupon", "/point/all","/address/*").hasAnyAuthority("USER","ADMIN")
                // .antMatchers("/member/login_form").anonymous()
                 .anyRequest().permitAll()
                 .and()
