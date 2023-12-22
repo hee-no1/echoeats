@@ -7,6 +7,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.pofol.main.orders.order.domain.OrderHistoryDto;
+import com.pofol.main.orders.order.service.OrderHistoryService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,40 +37,37 @@ public class MypageController {
 
     private final OrderService orderService;
     private final OrderDetailService ordDetService;
+	private final OrderHistoryService orderHistoryService;
     private final MemberService memService;
     private final AddressService addrService;
     private final DelNotesService delNotesService;
 
     @GetMapping("/order")
-    public String order(Integer period, Model m, HttpSession session){
+    public String order(Integer period, Model m){
 		System.out.println("OrderController.order()");
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		String id = authentication.getName();
-		// 회원id 정보 session or security
-		if (session.getAttribute("id") == null) {
-		    session.setAttribute("id", "you11");
-		}
-		String id = (String) session.getAttribute("id");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mem_id = authentication.getName();
+
 		// period
 		if(period == null)
 			period = 90;
 		try {
 			Map map = new HashMap();
-	        map.put("id", id);
+	        map.put("mem_id", mem_id);
 	        map.put("period", period);
-	        // 주문 정보 가져오기
-			List<OrderDto> list = orderService.selectAllByUserIdAndPeriod(map);
-			//list = new ArrayList<>(list.subList(0, 10));
-			for(OrderDto dto : list) {
-				dto.setImg_url(orderService.selectByOrderMainImg(dto.getOrd_id()));
-				//System.out.println(orderService.selectByOrderMainImg(dto.getOrd_id()));
+	        // 주문 정보 가져오기 <- 주문 이력에서 가져오기
+			List<OrderHistoryDto> list = orderHistoryService.selectFinalOrderHistory(map);
+
+			for(OrderHistoryDto dto : list) {
+				dto.setProd_img_id(orderService.selectByOrderMainImg(dto.getOrd_id()));
 			}
-			m.addAttribute("ordDtoList",list);
+			m.addAttribute("ordList",list);
+			m.addAttribute("mypage", "order");
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-    	return "/order/mypageOrder";
+    	return "/member/mypage";
     }
 
 	@GetMapping("/order/{ord_id}")

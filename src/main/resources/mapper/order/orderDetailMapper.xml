@@ -32,7 +32,7 @@
     </select>
 
 	<select id="selectByOrderDetImg" resultType="string">
-        SELECT pi.upld_path
+        SELECT pi.img_prod_id
 		FROM product_image pi
 		JOIN order_detail od ON pi.prd_id = od.prod_id
 		WHERE od.ord_det_id = #{ord_det_id}

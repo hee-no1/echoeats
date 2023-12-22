@@ -80,7 +80,7 @@
 	
 	<select id="selectAllByUserIdAndPeriod" parameterType="map" resultType="OrderDto">
 		SELECT *
-		FROM spring.order
+		FROM order
 		WHERE mem_id = #{id}
 		AND ord_date >= DATE_SUB(NOW(), INTERVAL #{period} DAY)
 		ORDER BY ord_date DESC, ord_id DESC

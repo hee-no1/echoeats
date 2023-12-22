@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <html lang="ko">
@@ -10,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%--    <link rel="icon" href="./favicon.ico">--%>
     <title>컬리</title>
+    <link rel="stylesheet" href="/resources/order/css/mypageOrder.css">
     <link rel="stylesheet" href="/resources/css/member/grade.css">
     <link rel="stylesheet" href="/resources/css/member/mypage.css">
     <link rel="stylesheet" href="/resources/css/member/coupon.css">
@@ -236,6 +238,9 @@
         </c:when>
         <c:when test="${mypage eq 'address'}">
             <%@ include file="addr_form.jsp" %>
+        </c:when>
+        <c:when test="${mypage eq 'order'}">
+            <%@ include file="/WEB-INF/views/order/mypageOrder.jsp" %>
         </c:when>
         <c:otherwise>
             <!-- 다른 값에 대한 기본 처리나 예외 처리를 여기에 추가 -->
