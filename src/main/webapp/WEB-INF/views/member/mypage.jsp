@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <html lang="ko">
@@ -10,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%--    <link rel="icon" href="./favicon.ico">--%>
     <title>컬리</title>
+    <link rel="stylesheet" href="/resources/order/css/mypageOrder.css">
     <link rel="stylesheet" href="/resources/css/member/grade.css">
     <link rel="stylesheet" href="/resources/css/member/mypage.css">
     <link rel="stylesheet" href="/resources/css/member/coupon.css">
@@ -98,9 +100,7 @@
                 </div>
             </div>
         </div>
-        <a href="https://www.kurly.com/m2/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon" class="css-1khmcew eyulecr1">
-            <img src="https://product-image.kurly.com/banner/da-banner/55b64dac-7373-4bb5-b44d-7a2eecde375a.jpg" alt="230713 신규1만원 쿠폰 웰컴 PC" class="css-1th0ley eyulecr0">
-        </a>
+
     </div>
 
 
@@ -109,7 +109,7 @@
             <div class="css-1v4whg ecbxmj2">마이에코</div>
             <ul class="css-1x9bshx ecbxmj1">
                 <li>
-                    <a class="active css-g4g0eu ecbxmj0">주문내역
+                    <a class="css-g4g0eu ecbxmj0" href="/mypage/order">주문내역
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -236,6 +236,9 @@
         </c:when>
         <c:when test="${mypage eq 'address'}">
             <%@ include file="addr_form.jsp" %>
+        </c:when>
+        <c:when test="${mypage eq 'order'}">
+            <%@ include file="/WEB-INF/views/order/mypageOrder.jsp" %>
         </c:when>
         <c:otherwise>
             <!-- 다른 값에 대한 기본 처리나 예외 처리를 여기에 추가 -->

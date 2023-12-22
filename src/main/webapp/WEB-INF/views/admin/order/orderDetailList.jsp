@@ -41,9 +41,11 @@
                                 let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);
                                 let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);
 
-                                if(real_prod_qty < prod_qty ){
-                                    alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");
+                                if(real_prod_qty < prod_qty ) {
+                                    alert("재고가 부족합니다\n(재고수량:" + real_prod_qty + ",주문수량:" + prod_qty + ")");
                                     return false;
+                                } else{
+                                    alert("재고가 충분합니다\n배송준비중으로 상태를 변경합니다")
                                 }
                             }
                             
@@ -177,7 +179,7 @@
     	<%@include file="../include/top_side_nav.jspf" %>
             <div id="layoutSidenav_content">
                 <div class="container">
-                	<h2 class="mTitle">전체 주문 조회</h2>
+                	<h2 class="mTitle">주문 상세 조회</h2>
                     <form action="<c:url value='/admin/orderDetail/list'/>" class="optionArea" method="get">
                     <!-- <div class="optionArea " id="QA_deposit1"> -->
                         <div class="mOption">
@@ -324,7 +326,7 @@
                         </div>
                         <div id="searchResultList" class="mBoard typeOrder typeList gScroll gCellSingle">
                             <table border="1" summary="" class="thead">
-                                <caption>전체주문 조회 목록</caption>
+                                <caption>주문 상세 조회 목록</caption>
                                 <tbody>
                                 <tr>
                                     <th scope="col" class="w24"><input type="checkbox" class="allChk all"></th>

@@ -78,10 +78,14 @@
                                 <div class="seller-input-wrap">
                                     <input name="prod_name" type="text"
                                            class="form-control" maxlength="99"
-                                           title="상품명 입력">
+                                           title="상품명 입력" value="">
                                 </div>
                                 <span class="input-group-addon"><span class="text-primary">0</span>/100</span>
                             </div>
+                            <p class="has-error error-msg sub-text text-danger name-warn">
+                                <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                필수 정보입니다.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -100,13 +104,19 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력">
+                                                <input name="prod_price" class="form-control" placeholder="숫자만 입력"
+                                                       type="number">
                                             </div>
                                             <span class="input-group-addon">원</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <span class="text-sub">원</span>
+                                        <p class="has-error error-msg sub-text text-danger price-warn">
+                                            <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                            필수 정보입니다.
+                                        </p>
+                                        <p class="has-error error-msg sub-text text-danger price-unit-warn">
+                                            <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                            10원 단위로 입력해주세요.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -119,12 +129,12 @@
                                            name="discount-choice-type" value="true">
                                     <label for="discount-choice-type-true">설정함</label>
                                     <input type="radio" id="discount-choice-type-false"
-                                           name="discount-choice-type" value="false">
+                                           name="discount-choice-type" value="false" checked>
                                     <label for="discount-choice-type-false">설정안함</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-sub-detail">
+                        <div class="form-sub-detail" id="discount-div">
                             <div class="form-sub-detail-wrap">
                                 <label class="control-label">기본할인</label>
                                 <div class="input-content">
@@ -175,26 +185,31 @@
                                            name="sale_sts" value="판매중">
                                     <label for="salePeriod-choice-type-true">설정함</label>
                                     <input type="radio" id="salePeriod-choice-type-false"
-                                           name="sale_sts" value="판매전">
+                                           name="sale_sts" value="판매전" checked>
                                     <label for="salePeriod-choice-type-false">설정안함</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-sub-detail">
+                        <div class="form-sub-detail" id="salePeriod-div">
                             <div class="form-sub-detail-wrap">
                                 <label class="control-label">기간설정</label>
                                 <div class="input-content">
                                     <div class="form-inline">
                                         <div class="form-group">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-primary2">3일</button>
-                                                <button type="button" class="btn btn-primary2">5일</button>
-                                                <button type="button" class="btn btn-primary2">7일</button>
-                                                <button type="button" class="btn btn-primary2">15일</button>
-                                                <button type="button" class="btn btn-primary2">30일</button>
-                                                <button type="button" class="btn btn-primary2">60일</button>
-                                                <button type="button" class="btn btn-primary2">90일</button>
-                                                <button type="button" class="btn btn-primary2">120일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="3">3일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="5">5일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="7">7일</button>
+                                                <button type="button" class="btn btn-primary2" data-days="15">15일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="30">30일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="60">60일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="90">90일
+                                                </button>
+                                                <button type="button" class="btn btn-primary2" data-days="120">120일
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -219,8 +234,8 @@
                                                             <input name="sel_end_date" autocomplete="off"
                                                                    readonly="readonly" class="form-control">
                                                             <span class="input-group-addon">
-                                                            <a role="button" href></a>
-                                                        </span>
+                                                                <a role="button" href></a>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,18 +261,22 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
-                                                <input name="prod_qty" class="form-control" type="text"
+                                                <input name="prod_qty" class="form-control" type="number"
                                                        placeholder="숫자만 입력">
                                             </div>
                                             <span class="input-group-addon">개</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어
-                                            자동으로 입력됩니다.</p>
-                                    </div>
+                                    <%--                                    <div class="form-group">--%>
+                                    <%--                                        <p class="sub-text text-primary mg-reset">옵션 재고수량을 사용하면, 옵션의 재고수량으로 적용되어--%>
+                                    <%--                                            자동으로 입력됩니다.</p>--%>
+                                    <%--                                    </div>--%>
                                 </div>
                             </div>
+                            <p class="has-error error-msg sub-text text-danger qty-warn">
+                                <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                필수 정보입니다.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -277,7 +296,7 @@
                                            name="is_opt" value="Y">
                                     <label for="option-choice-type-true">설정함</label>
                                     <input type="radio" id="option-choice-type-false"
-                                           name="is_opt" value="N">
+                                           name="is_opt" value="N" checked>
                                     <label for="option-choice-type-false">설정안함</label>
                                 </div>
                             </div>
@@ -289,7 +308,7 @@
                                     <div class="seller-option-input">
                                         <div class="option-wrap">
                                             <div class="col-sm-3">
-                                                <label for="choice_option_name0">옵션명</label>
+                                                <label for="choice_option_name0">옵션</label>
                                                 <div class="seller-input-wrap">
                                                     <input type="text" class="form-control" id="choice_option_name0"
                                                            placeholder="최소 2개이상 입력" maxlength="25" readonly>
@@ -305,12 +324,12 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <label class="hidden-xs"></label>
-                                                <a role="button" href class="btn btn-default">
-                                                    <i class="seller-icon icon-minus"></i>
-                                                </a>
-                                                <a role="button" href class="btn btn-single">
-                                                    <i class="seller-icon icon-plus"></i>
-                                                </a>
+                                                <%--                                                <a role="button" href class="btn btn-default">--%>
+                                                <%--                                                    <i class="seller-icon icon-minus"></i>--%>
+                                                <%--                                                </a>--%>
+                                                <%--                                                <a role="button" href class="btn btn-single">--%>
+                                                <%--                                                    <i class="seller-icon icon-plus"></i>--%>
+                                                <%--                                                </a>--%>
                                             </div>
                                         </div>
                                         <div class="option-wrap">
@@ -341,53 +360,53 @@
                                             </a>
                                         </div>
                                         <div class="pull-right">
-                                            <div class="form-inline">
-                                                <div class="form-group">
-                                                    옵션가
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                    data-toggle="dropdown" type="button"
-                                                                    aria-expanded="false">+ <span
-                                                                    class="caret"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="seller-input-wrap">
-                                                            <input type="tel" class="form-control input-sm"
-                                                                   maxlength="12">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">재고수량</div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="seller-input-wrap">
-                                                            <input type="tel" class="form-control input-sm"
-                                                                   maxlength="12">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">사용여부</div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-btn">
-                                                            <button class="btn btn-default
-                                                        btn-sm dropdown-toggle"
-                                                                    data-toggle="dropdown" type="button"
-                                                                    aria-expanded="false">Y <span
-                                                                    class="caret"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록
-                                                        일괄수정</a>
-                                                </div>
-                                            </div>
+                                            <%--                                            <div class="form-inline">--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    옵션가--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="input-group-btn">--%>
+                                            <%--                                                            <button class="btn btn-default--%>
+                                            <%--                                                        btn-sm dropdown-toggle"--%>
+                                            <%--                                                                    data-toggle="dropdown" type="button"--%>
+                                            <%--                                                                    aria-expanded="false">+ <span--%>
+                                            <%--                                                                    class="caret"></span>--%>
+                                            <%--                                                            </button>--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                        <div class="seller-input-wrap">--%>
+                                            <%--                                                            <input type="tel" class="form-control input-sm"--%>
+                                            <%--                                                                   maxlength="12">--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">재고수량</div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="seller-input-wrap">--%>
+                                            <%--                                                            <input type="tel" class="form-control input-sm"--%>
+                                            <%--                                                                   maxlength="12">--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">사용여부</div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <div class="input-group">--%>
+                                            <%--                                                        <div class="input-group-btn">--%>
+                                            <%--                                                            <button class="btn btn-default--%>
+                                            <%--                                                        btn-sm dropdown-toggle"--%>
+                                            <%--                                                                    data-toggle="dropdown" type="button"--%>
+                                            <%--                                                                    aria-expanded="false">Y <span--%>
+                                            <%--                                                                    class="caret"></span>--%>
+                                            <%--                                                            </button>--%>
+                                            <%--                                                        </div>--%>
+                                            <%--                                                    </div>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                                <div class="form-group">--%>
+                                            <%--                                                    <a role="button" href class="btn btn-default2 btn-sm">선택목록--%>
+                                            <%--                                                        일괄수정</a>--%>
+                                            <%--                                                </div>--%>
+                                            <%--                                            </div>--%>
                                         </div>
                                     </div>
                                     <div class="seller-grid-area ag-theme-fresh has-space-top"
@@ -498,6 +517,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger brand-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -513,6 +536,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger origin-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -528,6 +555,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger dlvy-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -543,6 +574,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger seller-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -558,6 +593,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger pack-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -573,6 +612,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger sales-unit-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -588,6 +631,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger weight-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -603,6 +650,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger exp-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                         <div class="form-sub-wrap">
@@ -618,6 +669,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="has-error error-msg sub-text text-danger guide-warn">
+                                    <i class="seller-icon icon-slash-circle" aria-hidden="true"></i>
+                                    필수 정보입니다.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -811,7 +866,7 @@
 
     // 상품명 글자수 표시
     $(document).ready(() => {
-        $('.form-control').on('input', () => {
+        $('.form-control').on('input', function () {
             let textLength = $(this).val().length;
             $(this).closest('.input-group').find('.text-primary').text(textLength);
         });
@@ -957,7 +1012,7 @@
             deleteButton.className = 'deleteBtn';
             deleteButton.onclick = function (e) {
                 e.stopPropagation();
-                this.closest('tr').remove(); // Removes the closest tr element (the row)
+                this.closest('tr').remove();
             };
             deleteButtonCell.appendChild(deleteButton);
         });
@@ -1008,9 +1063,6 @@
             checkbox.addEventListener('change', () => {
                 const totalCount = checkboxes.length;
                 const checkedCount = document.querySelectorAll('#myTable tbody input[type="checkbox"]:checked').length;
-                console.log("totalCount : " + totalCount);
-                console.log("checkdeCount : " + checkedCount);
-                console.log(checkedCount);
                 checkAll.checked = totalCount === checkedCount;
             });
         }
@@ -1034,11 +1086,12 @@
         });
     });
 
-    // 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
-
+    // 옵션 유무를 눌렀을때 내용 칸이 드러나지는 이벤트
     let optionTrueChoice = document.getElementById('option-choice-type-true');
     let optionFalseChoice = document.getElementById('option-choice-type-false');
     let optionDetail = document.getElementById('option-div');
+
+    optionDetail.style.display = 'none';
 
     optionFalseChoice.addEventListener('click', () => {
         optionDetail.style.display = 'none';
@@ -1048,6 +1101,235 @@
         optionDetail.style.display = 'block';
     });
 
+    // 판매 기간 제목을 눌렀을때 내용 칸이 드러나지는 이벤트
+    let salePeriodTrueChoice = document.getElementById('salePeriod-choice-type-true');
+    let salePeriodFalseChoice = document.getElementById('salePeriod-choice-type-false');
+    let salePeriodDetail = document.getElementById('salePeriod-div');
+
+    salePeriodDetail.style.display = 'none';
+
+    salePeriodFalseChoice.addEventListener('click', () => {
+        salePeriodDetail.style.display = 'none';
+    });
+
+    salePeriodTrueChoice.addEventListener('click', () => {
+        salePeriodDetail.style.display = 'block';
+    });
+
+    // 할인 설정을 눌렀을 때 내용 칸이 드러나지는 이벤트
+    let discountTrueChoice = document.getElementById('discount-choice-type-true');
+    let discountFalseChoice = document.getElementById('discount-choice-type-false');
+    let discountDetail = document.getElementById('discount-div');
+
+    discountDetail.style.display = 'none';
+
+    discountFalseChoice.addEventListener('click', () => {
+        discountDetail.style.display = 'none';
+    });
+
+    discountTrueChoice.addEventListener('click', () => {
+        discountDetail.style.display = 'block';
+    });
+
+    // 상품명 유효성검사
+    let nameCheck = false;
+
+    const productNameInput = document.querySelector('[name="prod_name"]');
+    const nameWarning = document.querySelector('.name-warn');
+
+    function toggleNameWarning() {
+        nameCheck = productNameInput.value.length > 0;
+        nameWarning.style.display = nameCheck ? 'none' : 'block';
+    }
+
+    productNameInput.addEventListener('keyup', toggleNameWarning);
+
+    // 판매가 유효성검사
+    let priceCheck = false;
+    const productPriceInput = document.querySelector('[name="prod_price"]');
+    const priceWarning = document.querySelector('.price-warn');
+    const priceUnitWarning = document.querySelector('.price-unit-warn');
+
+    function togglePriceWarning() {
+        priceCheck = productPriceInput.value.length > 0;
+        priceWarning.style.display = priceCheck ? 'none' : 'block';
+    }
+
+    function togglePriceUnitWarning() {
+        const price = productPriceInput.value;
+        priceCheck = price.length > 0 && price % 10 === 0;
+        priceUnitWarning.style.display = !priceCheck && price.length > 0 ? 'block' : 'none';
+    }
+
+    productPriceInput.addEventListener('keyup', togglePriceWarning);
+    productPriceInput.addEventListener('keyup', togglePriceUnitWarning);
+
+    // 달력 날짜 버튼 선택
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-primary2').forEach(button => {
+            button.addEventListener('click', function () {
+                const days = parseInt(this.getAttribute('data-days'));
+                const startDate = new Date();
+                const endDate = new Date();
+
+                console.log(days);
+                endDate.setDate(startDate.getDate() + days);
+
+                const formatDate = (date) => {
+                    const year = date.getFullYear();
+                    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    console.log(month);
+                    const day = ('0' + date.getDate()).slice(-2);
+                    console.log(year + '-' + month + '-' + day)
+                    return year + '-' + month + '-' + day;
+                };
+
+                document.querySelector('input[name="sel_str_date"]').value = formatDate(startDate);
+                document.querySelector('input[name="sel_end_date"]').value = formatDate(endDate);
+            });
+        });
+    });
+
+    // 재고수량 유효성검사
+    let qtyCheck = false;
+
+    const qtyNameInput = document.querySelector('[name="prod_qty"]');
+    const qtyWarning = document.querySelector('.qty-warn');
+
+    function toggleQtyWarning() {
+        qtyCheck = qtyNameInput.value.length > 0;
+        qtyWarning.style.display = qtyCheck ? 'none' : 'block';
+    }
+
+    qtyNameInput.addEventListener('keyup', toggleQtyWarning);
+
+    // 브랜드 유효성검사
+    let brandCheck = false;
+
+    const brandNameInput = document.querySelector('[name="brand"]');
+    const brandWarning = document.querySelector('.brand-warn');
+
+    function toggleBrandWarning() {
+        brandCheck = brandNameInput.value.length > 0;
+        brandWarning.style.display = brandCheck ? 'none' : 'block';
+    }
+
+    brandNameInput.addEventListener('keyup', toggleBrandWarning);
+
+    // 원산지 유효성 검사
+    let originCheck = false;
+
+    const originNameInput = document.querySelector('[name="origin"]');
+    const originWarning = document.querySelector('.origin-warn');
+
+    function toggleOriginWarning() {
+        originCheck = originNameInput.value.length > 0;
+        originWarning.style.display = originCheck ? 'none' : 'block';
+    }
+
+    originNameInput.addEventListener('keyup', toggleOriginWarning);
+
+    // 배송타입 유효성 검사
+    let dlvyCheck = false;
+
+    const dlvyNameInput = document.querySelector('[name="dlvy_type"]');
+    const dlvyWarning = document.querySelector('.dlvy-warn');
+
+    function toggleDlvyWarning() {
+        dlvyCheck = dlvyNameInput.value.length > 0;
+        dlvyWarning.style.display = dlvyCheck ? 'none' : 'block';
+    }
+
+    dlvyNameInput.addEventListener('keyup', toggleDlvyWarning);
+
+    // 판매자 유효성 검사
+    let sellerCheck = false;
+
+    const sellerNameInput = document.querySelector('[name="seller"]');
+    const sellerWarning = document.querySelector('.seller-warn');
+
+    function toggleSellerWarning() {
+        sellerCheck = sellerNameInput.value.length > 0;
+        sellerWarning.style.display = sellerCheck ? 'none' : 'block';
+    }
+
+    sellerNameInput.addEventListener('keyup', toggleSellerWarning);
+
+    // 포장타입 유효성 검사
+    let packCheck = false;
+
+    const packNameInput = document.querySelector('[name="pack_type"]');
+    const packWarning = document.querySelector('.pack-warn');
+
+    function togglePackWarning() {
+        packCheck = packNameInput.value.length > 0;
+        packWarning.style.display = packCheck ? 'none' : 'block';
+    }
+
+    packNameInput.addEventListener('keyup', togglePackWarning);
+
+    // 판매단위 유효성 검사
+    let salesUnitCheck = false;
+
+    const salesUnitNameInput = document.querySelector('[name="sales_unit"]');
+    const salesUnitWarning = document.querySelector('.sales-unit-warn');
+
+    function toggleSalesUnitWarning() {
+        salesUnitCheck = salesUnitNameInput.value.length > 0;
+        salesUnitWarning.style.display = salesUnitCheck ? 'none' : 'block';
+    }
+
+    salesUnitNameInput.addEventListener('keyup', toggleSalesUnitWarning);
+
+
+    // 중량/용량 유효성 검사
+    let weightCheck = false;
+
+    const weightNameInput = document.querySelector('[name="weight"]');
+    const weightWarning = document.querySelector('.weight-warn');
+
+    function toggleWeightWarning() {
+        weightCheck = weightNameInput.value.length > 0;
+        weightWarning.style.display = weightCheck ? 'none' : 'block';
+    }
+
+    weightNameInput.addEventListener('keyup', toggleWeightWarning);
+
+    // 유통기한 유효성 검사
+    let expCheck = false;
+
+    const expNameInput = document.querySelector('[name="exp_date"]');
+    const expWarning = document.querySelector('.exp-warn');
+
+    function toggleExpWarning() {
+        expCheck = expNameInput.value.length > 0;
+        expWarning.style.display = expCheck ? 'none' : 'block';
+    }
+
+    expNameInput.addEventListener('keyup', toggleExpWarning);
+
+    // 안내사항 유효성 검사
+    let guideCheck = false;
+
+    const guideNameInput = document.querySelector('[name="as_guide"]');
+    const guideWarning = document.querySelector('.guide-warn');
+
+    function toggleGuideWarning() {
+        guideCheck = guideNameInput.value.length > 0;
+        guideWarning.style.display = guideCheck ? 'none' : 'block';
+    }
+
+    guideNameInput.addEventListener('keyup', toggleGuideWarning);
+
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+<script src="<c:url value='/resources/common/js/scripts.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
+<script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
 </body>
 </html>

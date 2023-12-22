@@ -72,15 +72,30 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         //refer이 없다 = url로 진입
         //savedRequest는 가로챘을 때만 가지고 있다
         if(referer != null){
+            System.out.println("referer != null");
             //로그인버튼 2번 누르고 카카오 로그인
             if (referer.equals("http://localhost:8080/member/login_form")){
+                System.out.println("http://localhost:8080/member/login_form");
                 referer ="http://localhost:8080/main";
             }
             response.sendRedirect(referer);
         }else{
-            response.sendRedirect(savedRequest.getRedirectUrl());
+            // 그럼 둘 다 null 일 때는 어떻게 하냐?
+            if (savedRequest == null){
+                System.out.println("referer가 null");
+                referer ="http://localhost:8080/main";
+                System.out.println("ㅇㅋ");
+                response.sendRedirect(referer);
+            }else {
+                System.out.println("referer는 null  savedRequest는 null이 아님");
+
             //얘는 사용자가 직접 /member/admin을 입력했을 때 필요
             //이 때는 referer가 null이고, savedRequest가 가로챈 주소를 가지고 있다
+            response.sendRedirect(savedRequest.getRedirectUrl());
+
+        }
+
+
         }
     }
 
