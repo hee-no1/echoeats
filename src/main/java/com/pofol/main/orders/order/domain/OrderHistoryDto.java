@@ -30,6 +30,10 @@ public class OrderHistoryDto {
     private Date md_date;
     private String md_num;
 
+
+    private String column_sts; //주문 최종 상태
+    private String prod_img_id; // 주문 대표이미지 url
+
     //insert 용도
     public OrderHistoryDto(Long ord_id, String mem_id, String code_name, String tot_prod_name, Integer tot_prod_price, Integer tot_pay_price, Integer tot_ord_qty, String pay_way, String rg_num, String md_num) {
         this.ord_id = ord_id;

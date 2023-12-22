@@ -28,7 +28,7 @@
         <%--        let code = $(this).data('code_name');--%>
         <%--        let cnt = 0;--%>
         <%--        $('input.allChk').each(function(){--%>
-
+        <%--//--%>
         <%--            if($(this).data('chk')){--%>
         <%--                cnt++;--%>
         <%--                let id = $(this).closest('td').data('id');--%>
@@ -40,13 +40,13 @@
         <%--                if(code === 'DELIVERY_PREPARING'){--%>
         <%--                    let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);--%>
         <%--                    let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);--%>
-
+        <%--//--%>
         <%--                    if(real_prod_qty < prod_qty ){--%>
         <%--                        alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");--%>
         <%--                        return false;--%>
         <%--                    }--%>
         <%--                }--%>
-
+        <%--//--%>
         <%--                $.ajax({--%>
         <%--                    type:'PATCH',--%>
         <%--                    url:"/admin/orderDetail/modify?ord_det_id="+id+"&code_name="+code,--%>
@@ -63,9 +63,9 @@
         <%--        if(cnt ==0)--%>
         <%--            alert("변경할 데이터를 선택해 주세요");--%>
         <%--    });--%>
-
+        <%--//--%>
         <%--    $('input.allChk').click(function(){--%>
-
+        <%--//--%>
         <%--        let all = $(this).hasClass('all');--%>
         <%--        let v = $(this).data('chk');--%>
         <%--        if(!all){--%>
@@ -133,14 +133,14 @@
         <%--    }--%>
         <%--}--%>
 
-        // const fullDate = (d) => {
-        //     const today = new Date();
-        //     today.setDate(today.getDate() + d);
-        //     const day = today.getDate();
-        //     const month = today.getMonth() + 1;
-        //     const year = today.getFullYear();
-        //     return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
-        // }
+        <%--const fullDate = (d) => {--%>
+        <%--    const today = new Date();--%>
+        <%--    today.setDate(today.getDate() + d);--%>
+        <%--    const day = today.getDate();--%>
+        <%--    const month = today.getMonth() + 1;--%>
+        <%--    const year = today.getFullYear();--%>
+        <%--    return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);--%>
+        <%--}--%>
     </script>
     <style>
         .pagination, .datatable-pagination ul {
@@ -192,9 +192,10 @@
                         <th scope="row">기간</th>
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
-<%--                                <c:forEach var="ct" items="${dtList}">--%>
-<%--                                    <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                </c:forEach>--%>
+                                <option value="orderDate">주문일</option>
+                                <option value="paymentDate">결제일</option>
+                                <option value="DeliveryStartDate">배송시작일</option>
+                                <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
 <%--                            <c:forEach var="ct" items="${diList}">--%>
 <%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
@@ -405,6 +406,13 @@
     });
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="<c:url value='/resources/common/js/scripts.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
+<script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
 <script src="/resources/admin/order/js/delivery.js"></script>
 </body>
 </html>
