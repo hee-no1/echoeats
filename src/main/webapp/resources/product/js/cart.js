@@ -8,7 +8,7 @@ const orderButton = document.querySelector('.orderButton');
 const saveMoney = document.querySelector('.save-money');
 const choiceDelete = document.querySelectorAll('.css-0');
 const allSelect = document.querySelector('.allSelect');
-const goAddressPage = document.querySelector('.css-122i3z7');
+const goAddressPage = document.querySelectorAll('.addressButton');
 const selectedProduct = document.getElementsByClassName('selected-product');
 const wholeProduct = document.getElementsByClassName('whole-product');
 
@@ -199,6 +199,7 @@ $(document).ready(function () {
     if (goAddressPage !== null) {
         for (let i = 0; i < goAddressPage.length; i++) {
             goAddressPage[i].addEventListener('click', function () {
+                console.log("ㅇㅇㅇ")
                 window.location.href = '/address/'
             })
         }
