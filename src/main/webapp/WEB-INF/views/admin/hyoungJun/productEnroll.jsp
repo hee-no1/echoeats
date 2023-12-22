@@ -746,14 +746,74 @@
     let enrollForm = document.getElementById('enrollForm');
 
     // 취소버튼
-    $('#cancelBtn').click(() => {
-        location.href = '/admin/productManage';
-        enrollForm.submit();
+    $('#cancelBtn').click((e) => {
+        e.preventDefault();
+        location.href = '/admin/dashborad';
     });
 
     // 등록 버튼
     $('#enrollBtn').click((e) => {
         e.preventDefault();
+        if (productNameInput.value.length === 0) {
+            alert('상품명을 입력해주세요.');
+            return;
+        }
+
+        if (priceCheck === false) {
+            alert('판매가를 입력해주세요.');
+            return;
+        }
+
+        if (qtyCheck === false) {
+            alert('재고수량을 입력해주세요.');
+            return;
+        }
+
+        if (brandCheck === false) {
+            alert('브랜드를 입력해주세요.');
+            return;
+        }
+
+        if (originCheck === false) {
+            alert('원산지를 입력해주세요.');
+            return;
+        }
+
+        if (dlvyCheck === false) {
+            alert('배송타입을 입력해주세요.');
+            return;
+        }
+
+        if (sellerCheck === false) {
+            alert('판매자를 입력해주세요.');
+            return;
+        }
+
+        if (packCheck === false) {
+            alert('포장타입을 입력해주세요.');
+            return;
+        }
+
+        if (salesUnitCheck === false) {
+            alert('판매단위를 입력해주세요.');
+            return;
+        }
+
+        if (weightCheck === false) {
+            alert('중량/용량을 입력해주세요.');
+            return;
+        }
+
+        if (expCheck === false) {
+            alert('유통기한을 입력해주세요.');
+            return;
+        }
+
+        if (guideCheck === false) {
+            alert('안내사항을 입력해주세요.');
+            return;
+        }
+
         enrollForm.submit();
     });
 
@@ -965,9 +1025,22 @@
     }
 
     // 옵션관련
-    document.getElementById('applyOptionList').addEventListener('click', (e) => {
+    document.getElementById('applyOptionList').addEventListener('click', function(e) {
         e.preventDefault();
         let optionValues = document.getElementById('choice_option_value0').value.split(',');
+
+        let uniqueValues = new Set();
+
+        // Check for duplicates
+        for (let value of optionValues) {
+            value = value.trim();
+            if (uniqueValues.has(value)) {
+                alert("Duplicate values found. No new rows will be added.");
+                return; // Exit the function if duplicates are found
+            }
+            uniqueValues.add(value);
+        }
+
         let table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 
         optionValues.forEach((value, index) => {
@@ -1016,7 +1089,6 @@
             };
             deleteButtonCell.appendChild(deleteButton);
         });
-
         // 만약 어느 한줄이라도 delete 버튼을 누르면
         // 있던 table안의 <input>을 전부 삭제한다
         // 그리고 존재했던 <input>태그들은 다시 재배치해서 <input>태그를 넣는다.
@@ -1320,6 +1392,14 @@
     }
 
     guideNameInput.addEventListener('keyup', toggleGuideWarning);
+
+    document.querySelectorAll('#enrollForm').forEach(input => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+    });
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
