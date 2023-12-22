@@ -197,9 +197,16 @@
                                 <option value="DeliveryStartDate">배송시작일</option>
                                 <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
-<%--                            <c:forEach var="ct" items="${diList}">--%>
-<%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
-<%--                            </c:forEach>--%>
+
+                            <a href="#none" class="btnDate" ><span>오늘</span></a>
+                            <a href="#none" class="btnDate"><span>어제</span></a>
+                            <a href="#none" class="btnDate"><span>3일</span></a>
+                            <a href="#none" class="btnDate"><span>7일</span></a>
+                            <a href="#none" class="btnDate"><span>15일</span></a>
+                            <a href="#none" class="btnDate"><span>1개월</span></a>
+                            <a href="#none" class="btnDate"><span>3개월</span></a>
+                            <a href="#none" class="btnDate"><span>6개월</span></a>
+
                             <div class="duet-date-picker-grid  duet-date-theme-ec-new  sun">
                                 <duet-date-picker first-day-of-week="0" name="start_date" identifier="startDate"
                                                   class="duet-date-picker start hydrated changePicker start_date" ></duet-date-picker>
@@ -216,9 +223,13 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-<%--                                        <c:forEach var="ct" items="${ksList}">--%>
-<%--                                            <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                        </c:forEach>--%>
+                                        <option>주문번호</option>
+                                        <option>상품주문번호</option>
+                                        <option>운송장번호</option>
+                                        <option>운송장번호</option>
+                                        <option>-----------------</option>
+                                        <option>주문자명</option>
+                                        <option>주문자 아이디</option>
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword"
                                            id="sBaseSearchBox" style="width:400px;" placeholder="검색어를 입력해 주세요">
