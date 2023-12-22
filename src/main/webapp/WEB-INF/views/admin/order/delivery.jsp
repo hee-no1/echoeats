@@ -192,9 +192,10 @@
                         <th scope="row">기간</th>
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
-<%--                                <c:forEach var="ct" items="${dtList}">--%>
-<%--                                    <option value="${ct.code_name}">${ct.column_sts}</option>--%>
-<%--                                </c:forEach>--%>
+                                <option value="orderDate">주문일</option>
+                                <option value="paymentDate">결제일</option>
+                                <option value="DeliveryStartDate">배송시작일</option>
+                                <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
 <%--                            <c:forEach var="ct" items="${diList}">--%>
 <%--                                <a href="#none" class="btnDate" date-interval="${ct.code_name}"><span>${ct.column_sts}</span></a>--%>
