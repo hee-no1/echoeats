@@ -1,7 +1,9 @@
 package com.pofol.main.member.handler;
 
+import com.pofol.main.member.dto.GradeDto;
 import com.pofol.main.member.repository.CouponRepository;
 import com.pofol.main.member.service.CouponService;
+import com.pofol.main.member.service.GradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     CouponService couponService;
 
+    @Autowired
+    GradeService gradeService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
@@ -43,6 +48,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             request.getSession().setAttribute("mem_have_cp_qty", cp_qty);
 
         }
+
+        GradeDto gradeDto = gradeService.show_grade(authentication.getName());
+
+        request.getSession().setAttribute("mem_grade", gradeDto.getGd_name());
 
 
 

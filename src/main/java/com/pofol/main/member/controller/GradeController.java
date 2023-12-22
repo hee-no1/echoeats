@@ -25,12 +25,7 @@ public class GradeController {
         List<GradeDto> gradeDtos = gradeService.show_list();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(!(authentication instanceof AnonymousAuthenticationToken)){
 
-            GradeDto gradeDto = gradeService.show_grade(authentication.getName());
-
-            httpServletRequest.getSession().setAttribute("mem_grade", gradeDto.getGd_name());
-        }
 
         model.addAttribute("id", authentication.getName());
         model.addAttribute("grade", gradeDtos);
