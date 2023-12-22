@@ -87,12 +87,7 @@ public class AdminController {
         redirectAttributes.addFlashAttribute(
                 "productEnroll_result",
                 productDto.getProd_name() + " 상품이 등록되었습니다.");
-        return "redirect:/admin/hyoungJun/productManage";
-    }
-
-    @GetMapping("/hyoungJun/productManage")
-    public void productManageGET() {
-        log.info("productManageGET");
+        return "redirect:/admin/dashboard";
     }
 
     // 첨부 파일 업로드
