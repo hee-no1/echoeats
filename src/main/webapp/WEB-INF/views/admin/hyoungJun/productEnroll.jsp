@@ -929,7 +929,7 @@
     function handleFiles(files) { // files를 핸들링한다
         let list = $('#img-wrap-wrap'); // id가 img-wrap-wrap인 모든 요소를 선택하고 변수 list에 저장한다.
         let last = $('#img-wrap'); // id가 img-wrap인 모든 요소를 선택하고 변수 last에 저장한다.
-        for (let i = 0; i < files.length; i++) { // files의 길이만큼 반복한다.
+        for (let i = 0; i < files.length; i++) { // files의 길이만큼 순회한다.
 
             // 클래스 이름이 css-o4030c e5xt3dr1인 div태그를 생성한다.
             const div = $('<div>', {
