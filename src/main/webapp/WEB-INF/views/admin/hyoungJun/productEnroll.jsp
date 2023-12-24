@@ -148,7 +148,6 @@
                                                     <div class="seller-input-wrap">
                                                         <input id="discount-interface" class="form-control"
                                                                placeholder="판매가에서" max="99" min="0"
-                                                               minlength="1" maxlength="2"
                                                                value="0" name="disc_rate"
                                                                type="number">
                                                         <input name="discount-rate" type="hidden" value="0">
@@ -569,7 +568,7 @@
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
                                                 <input name="seller" class="form-control" type="text"
-                                                       placeholder="ex) ">
+                                                       placeholder="ex) 에코">
                                             </div>
                                         </div>
                                     </div>
@@ -875,7 +874,7 @@
         // 원래 가격
         let productPrice = $("input[name='prod_price']").val();
         // 할인된 가격
-        let discountedPrice = Math.floor(productPrice * (1 - sendDiscountRate));
+        let discountedPrice = (Math.floor(productPrice * (1 - sendDiscountRate) / 10) * 10);
         let discountedInput = $("input[name='disc_price']").val();
         discountedInput.value = discountedPrice;
         // 할인 얼마나 됐는지
@@ -1255,15 +1254,12 @@
                 const startDate = new Date();
                 const endDate = new Date();
 
-                console.log(days);
                 endDate.setDate(startDate.getDate() + days);
 
                 const formatDate = (date) => {
                     const year = date.getFullYear();
                     const month = ('0' + (date.getMonth() + 1)).slice(-2);
-                    console.log(month);
                     const day = ('0' + date.getDate()).slice(-2);
-                    console.log(year + '-' + month + '-' + day)
                     return year + '-' + month + '-' + day;
                 };
 
@@ -1410,6 +1406,20 @@
                 event.preventDefault();
             }
         });
+    });
+
+    document.getElementById('discount-interface').addEventListener('input', function(e) {
+        const value = e.target.value;
+        if(value.length > 2 || value < 0 || value > 99) { // 2자리 숫자, 0 이상 99 이하의 값 검사
+            alert("0과 99사이의 숫자를 입력해주세요.");
+            e.target.value = "";
+        }
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    document.querySelector('[name="prod_qty"]').addEventListener('input', function(e) {
+        // 입력된 값이 숫자가 아니면 제거
+        this.value = this.value.replace(/[^0-9]/g, '');
     });
 
 </script>
