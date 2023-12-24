@@ -27,6 +27,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     public void writeDelivery(List<DeliveryDto> deliveryList) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
+        System.out.println("mem_id: "+mem_id);
 
         try {
             for (DeliveryDto delivery : deliveryList) {
@@ -49,6 +50,8 @@ public class DeliveryServiceImpl implements DeliveryService{
     public void selectListByWaybillNum(List<Long> waybillNumList) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
+        System.out.println("mem_id: "+mem_id);
+
 
         try {
             for (Long waybillNum : waybillNumList) {

@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.pofol.main.member.dto.PointDto;
 import com.pofol.main.member.service.*;
+import com.pofol.main.orders.order.domain.OrderDetailDto;
+import com.pofol.main.orders.order.service.OrderDetailService;
+import com.pofol.main.product.cart.CartDto;
+import com.pofol.main.product.cart.CartService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,8 +41,10 @@ public class OrderController {
     private final CouponService couponService;
     private final PointService pointService;
     private final OrderService orderService;
+    private final OrderDetailService orderDetailService;
     private final PaymentService paymentService;
     private final PaymentDiscountService paymentDiscountService;
+    private final CartService cartService;
 
     @GetMapping
     public String Order(){
@@ -126,6 +132,13 @@ public class OrderController {
             if(payment.getTot_pay_price() != 0){ //적립금 db에 저장, 적립금이 0일때는 굳이 insert할 필요없다.
                 PointDto point = new PointDto(payment.getReserves(), "적립", "구매적립", mem_id, ord_id);
                 pointService.regPoint(point);
+            }
+
+            //장바구니를 통해서 들어온 상품 장바구니에서 삭제
+            List<OrderDetailDto> orderDetailList = orderDetailService.selectAllByOrdId(ord_id);
+            for (OrderDetailDto od : orderDetailList) {
+                CartDto cartDto = new CartDto(mem_id, od.getProd_id(), od.getOpt_prod_id());
+                cartService.removeCartProduct(cartDto);
             }
 
             m.addAttribute("mem_name", mem_name);
