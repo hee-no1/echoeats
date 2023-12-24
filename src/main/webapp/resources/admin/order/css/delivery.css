@@ -1043,3 +1043,6 @@ table .rowChk[type="checkbox"] {
 .btnPrep:hover{
     background-color: #eafbfd;
 }
+.deliveryStatus{
+    font-weight: bold;
+}
