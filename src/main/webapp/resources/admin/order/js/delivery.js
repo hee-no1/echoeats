@@ -58,8 +58,9 @@ document.getElementById("deliveringBtn").addEventListener('click', function(){
             }
         });
     }catch (e){
-        alert(e.message)
-        return;
+        alert(e.message);
+        location.reload();
+        return false;
     }
 
     let ajaxData = [];
@@ -95,7 +96,9 @@ document.getElementById("deliveryCompleteBtn").addEventListener('click', functio
             ajaxSet.add(waybillNum);
         });
     }catch (e) {
-        alert(e.message)
+        alert(e.message);
+        location.reload();
+        return false;
     }
     console.log("set", ajaxSet);
     let ajaxData = Array.from(ajaxSet);

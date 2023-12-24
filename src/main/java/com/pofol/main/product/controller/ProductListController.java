@@ -116,12 +116,12 @@ public class ProductListController {
             }
 
             // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
-            if (product.isSaleExpired()) {
-                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
-            }
-            if (product.getDisp_sts().equals("N") || !product.getSale_sts().equals("판매중")) {
-                throw new ProductStatusException("현재 판매중인 상품이 아닙니다.");
-            }
+//            if (product.isSaleExpired()) {
+//                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
+//            }
+//            if (product.getDisp_sts().equals("N") || !product.getSale_sts().equals("판매중")) {
+//                throw new ProductStatusException("현재 판매중인 상품이 아닙니다.");
+//            }
 
         } catch (ExpiredProductException expiredProductException) {
             HandlerProductException handlerProductException = new HandlerProductException();

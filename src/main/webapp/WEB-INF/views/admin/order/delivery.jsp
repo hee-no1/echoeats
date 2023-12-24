@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>orderList</title>
+    <title>delivery</title>
     <!-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" /> -->
     <link href="<c:url value='/resources/common/css/styles.css' />" rel="stylesheet" />
     <link href="<c:url value='/resources/admin/order/css/delivery.css' />" rel="stylesheet" />
@@ -338,7 +338,7 @@
                                 ${item.waybill_num}
                             </c:if>
                             </td>
-                            <td scope="col" class="w140" style="">${item.column_sts}</td>
+                            <td scope="col" class="w140 deliveryStatus" style="">${item.column_sts}</td>
                             <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_start_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
                                 <fmt:formatDate value='${item.dlvy_start_date}' pattern='HH:mm:ss' type='time'/></td>
                             <td scope="col" class="w140" style=""><fmt:formatDate value="${item.dlvy_cmplt_date}" pattern="yyyy-MM-dd" type="date"/>&nbsp;
