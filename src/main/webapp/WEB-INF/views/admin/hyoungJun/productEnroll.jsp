@@ -150,7 +150,7 @@
                                                                placeholder="판매가에서" max="99" min="0"
                                                                minlength="1" maxlength="2"
                                                                value="0" name="disc_rate"
-                                                               type="text">
+                                                               type="number">
                                                         <input name="discount-rate" type="hidden" value="0">
                                                     </div>
                                                     <span class="input-group-addon">%</span>
@@ -1025,7 +1025,7 @@
     }
 
     // 옵션관련
-    document.getElementById('applyOptionList').addEventListener('click', function(e) {
+    document.getElementById('applyOptionList').addEventListener('click', function (e) {
         e.preventDefault();
         let optionValues = document.getElementById('choice_option_value0').value.split(',');
 
@@ -1236,6 +1236,17 @@
     productPriceInput.addEventListener('keyup', togglePriceWarning);
     productPriceInput.addEventListener('keyup', togglePriceUnitWarning);
 
+    // 할인율 유효성검사
+    let discountCheck = false;
+
+    const discountInput = document.querySelector('[name="disc_rate"]');
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-' || e.key === '.') {
+            e.preventDefault();
+        }
+    });
+
     // 달력 날짜 버튼 선택
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.btn-primary2').forEach(button => {
@@ -1394,7 +1405,7 @@
     guideNameInput.addEventListener('keyup', toggleGuideWarning);
 
     document.querySelectorAll('#enrollForm').forEach(input => {
-        input.addEventListener('keydown', function(event) {
+        input.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
             }
