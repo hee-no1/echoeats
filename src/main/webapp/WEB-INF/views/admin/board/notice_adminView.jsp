@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:scriptlet> pageContext.setAttribute("newline", "\n"); </jsp:scriptlet>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 공지사항 관리자 상세조회 페이지 -->
@@ -98,7 +99,7 @@
                         <td class="tbody_td" style="width: 10%; background-color: #4CAF50; vertical-align: middle; text-align: left; padding-left: 20px;">
                             작성일</td>
                         <td class="date"style="text-align: left; vertical-align: middle; letter-spacing: -1px; padding-left: 20px;">
-                            ${notice.notice_date }</td>
+                            <fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
                     </tr>
                     </tbody>
                     <tfoot>

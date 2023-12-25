@@ -21,8 +21,7 @@ public class MyReviewServiceImpl implements MyReviewService {
     }
     @Override
     public int writeReview(MyReviewWrtDto dto) {
-//        int wrtResult = myReviewRepository.writeReview(dto);
-//        int upResult= myReviewRepository.updateState(dto);
+
         return myReviewRepository.writeReview(dto);
     }
     @Override

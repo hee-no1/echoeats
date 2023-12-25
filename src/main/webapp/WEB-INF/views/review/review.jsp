@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
     <link rel="stylesheet" href="/resources/css/member/grade.css">
-<%--    <link rel="stylesheet" href="/resources/order/css/mypage.css">--%>
+    <link rel="stylesheet" href="/resources/css/member/mypage.css">
     <link rel="stylesheet" href="/resources/css/board/review.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -266,7 +266,6 @@
                     <div class="beforeWriteArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="reviewCnt"></span>개</div>
-<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="reviewArea">
                             <!-- 작성가능 후기 -->
@@ -276,7 +275,6 @@
                     <div class="writtenArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="writeReviewCnt"></span>개</div>
-<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="writeReviewArea">
                             <!-- 작성한 후기 -->
@@ -303,7 +301,6 @@
         $('#written').attr('style', "background-color: #00C73C");
 
         var reviewInfo = {
-            <%--mem_id : ${loginMember.get ~~},--%>
             mem_id: '${loginMember}',
             reviewStatus: 'N'
         }
@@ -423,14 +420,14 @@
                             htmlTag += '</div>';
 
                         });
-                    } // else 끝
+                    }
                     $("#reviewArea").html(htmlTag);
                     $("#reviewCnt").html(reviewCnt);
                 },
                 error: function() {
                     alert("리뷰 목록 불러오기 실패");
                 }
-            }); // ajax 끝
+            });
         }
 
         $(document).on("click", "#writeReviewBtn", function() {
@@ -544,13 +541,12 @@
 
                             htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
                             htmlTag += '<input type="button" id="write_review" value="수정하기" onclick="modifyReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
-                            // htmlTag += '<input type="button" id="save_review" value="저장하기" onclick="saveReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px;">';
                             htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-left: 5px;">닫기</button>';
 
                             htmlTag += '</div>';
 
                             htmlTag += '</form>';
-                            htmlTag += '</div>'; // modalbody
+                            htmlTag += '</div>';
 
                             htmlTag += '</div>';
                             htmlTag += '</div>';
@@ -561,17 +557,17 @@
                     }
                     $("#writeReviewArea").html(htmlTag);
                     $("#writeReviewCnt").html(writeReviewCnt);
-                }, // success
+                },
                 error: function() {
                     alert("작성리뷰 불러오기 실패");
                 }
-            }); // ajax 끝
+            });
         }
 
     });
 
     $(document).on("click", ".reviewMdfyBtn", function () {
-        //alert("리뷰수정 클릭")
+        // 리뷰수정
 
     });
 
@@ -585,14 +581,14 @@
     }
 
     function writeProReview() {
-        //alert("리뷰 작성 실행");
+        // 리뷰 작성 실행
         var reviewFrm = document.getElementById("reviewFrm");
         reviewFrm.action = "writeProReview";
         reviewFrm.submit();
     }
 
     function modifyReview(){
-        //수정활성화
+        // 수정활성화
         $('#writtenReview').removeAttr('readonly');
         $('#writtenReview').css('border', '3px solid #692498')
         mdfyReviewFrm = document.getElementById("mdfyReviewFrm");

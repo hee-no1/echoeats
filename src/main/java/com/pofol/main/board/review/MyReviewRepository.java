@@ -13,8 +13,6 @@ public interface MyReviewRepository {
     // 리뷰작성
     int writeReview(MyReviewWrtDto dto) throws Exception;
 
-//    // 리뷰상태변경
-//    int updateState(ProReviewDto dto) throws Exception;
 
     // 리뷰수정
     int modifyReview(MyReviewWrtDto dto) throws Exception;
