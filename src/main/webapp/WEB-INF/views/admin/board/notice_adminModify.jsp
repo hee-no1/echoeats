@@ -96,9 +96,7 @@
                         <tr>
                             <td style="font-weight: bolder;">내용</td>
                             <td>
-                                <textarea class="form-control" rows="18" id="content" name="notice_con">
-                                    ${notice.notice_con}
-                                </textarea>
+                                <textarea class="form-control" rows="18" id="content" name="notice_con">${notice.notice_con}</textarea>
                                 <span style="color:#aaa; float: right;" id="counter">(0 /2000자)</span>
                             </td>
                         </tr>
