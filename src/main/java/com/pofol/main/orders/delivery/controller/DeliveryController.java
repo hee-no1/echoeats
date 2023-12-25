@@ -2,6 +2,8 @@ package com.pofol.main.orders.delivery.controller;
 
 import com.pofol.admin.order.Repository.AdminOrderDetailRepository;
 import com.pofol.main.orders.delivery.domain.DeliveryDto;
+import com.pofol.main.orders.delivery.domain.PageHandler;
+import com.pofol.main.orders.delivery.domain.SearchDeliveryCondition;
 import com.pofol.main.orders.delivery.repository.DeliveryRepository;
 import com.pofol.main.orders.delivery.service.DeliveryService;
 import com.pofol.main.orders.order.domain.CodeTableDto;
@@ -28,15 +30,31 @@ import java.util.Set;
 @RequestMapping("/admin/delivery")
 public class DeliveryController {
 
-    private final OrderDetailService orderDetailService;
     private final DeliveryService deliveryService;
 
-
-
     @GetMapping
-    public String getDeliveryList(Model m){
-        List<OrderDetailDto> orderDetailDtos = orderDetailService.selectForDelivery();
-        m.addAttribute("list", orderDetailDtos);
+    public String getDeliveryList(SearchDeliveryCondition sc, Model m){
+        System.out.println("delivery");
+        try{
+//            List<OrderDetailDto> orderDetailDtos = deliveryService.selectForDelivery();
+//            m.addAttribute("list", orderDetailDtos);
+
+            //페이징
+            int totalCnt = deliveryService.searchResultCnt(sc);
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+            m.addAttribute("ph", pageHandler);
+            if(totalCnt == 0) {
+                return "/admin/order/delivery";
+            }
+
+            //검색 결과에 따른 조회
+            List<OrderDetailDto> list = deliveryService.searchSelectPage(sc);
+            m.addAttribute("list", list);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return "/admin/order/delivery";
     }
 

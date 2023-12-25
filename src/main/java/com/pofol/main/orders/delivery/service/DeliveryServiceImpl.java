@@ -1,6 +1,7 @@
 package com.pofol.main.orders.delivery.service;
 
 import com.pofol.main.orders.delivery.domain.DeliveryDto;
+import com.pofol.main.orders.delivery.domain.SearchDeliveryCondition;
 import com.pofol.main.orders.delivery.repository.DeliveryRepository;
 import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
@@ -64,6 +65,37 @@ public class DeliveryServiceImpl implements DeliveryService{
                     deliveryRepository.update(delivery);
                 }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @return List<OrderDetailDto>
+     * @feat : 관리자 배송 페이지에서 주문상세를 가져오는 메서드
+     */
+    @Override
+    public List<OrderDetailDto> selectForDelivery() {
+        try {
+            return deliveryRepository.selectForDelivery();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int searchResultCnt(SearchDeliveryCondition sc) {
+        try {
+            return deliveryRepository.searchResultCnt(sc);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<OrderDetailDto> searchSelectPage(SearchDeliveryCondition sc) {
+        try {
+            return deliveryRepository.searchSelectPage(sc);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

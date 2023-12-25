@@ -29,6 +29,16 @@
         where waybill_num = #{waybill_num};
     </select>
 
+    <select id="selectForDelivery" resultType="OrderDetailDto">
+        select od.*, ct.column_sts, m.mem_name, d.waybill_num, d.dlvy_start_date, d.dlvy_cmplt_date
+        from order_detail as od
+                 join code_table as ct on od.code_name = ct.code_name
+                 left join member as m on od.mem_id = m.mem_id
+                 left join delivery as d on od.ord_det_id = d.ord_det_id
+        where ct.code_type = 1
+        order by od.ord_det_id desc
+    </select>
+
     <update id="updateStatus" parameterType="DeliveryDto">
         UPDATE spring.delivery
         SET
@@ -52,7 +62,7 @@
     </select>
 
     <sql id="searchCondition">
-        <if test='start_date ! = "" and end_date != "" and start_date != null and end_date != null'>
+        <if test='start_date != "" and end_date != "" and start_date != null and end_date != null'>
             <choose>
                 <when test='date_type == "orderDate"'>
                     AND od.ord_date BETWEEN STR_TO_DATE(#{start_date}, '%Y-%m-%d') AND STR_TO_DATE(#{end_date}, '%Y-%m-%d')
@@ -66,31 +76,34 @@
             </choose>
         </if>
         <choose>
-            <when test='keyword_type == ord_id'>
+            <when test='keyword_type == "ord_id"'>
                 AND od.ord_id LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test='keyword_type == ord_det_id'>
+            <when test='keyword_type == "ord_det_id"'>
                 AND od.ord_det_id LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test='keyword_type == waybill_num'>
+            <when test='keyword_type == "waybill_num"'>
                 AND od.waybill_num LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test='keyword_type == dlvy_sts'>
+            <when test='keyword_type == "dlvy_sts"'>
                 AND od.dlvy_sts LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test='keyword_type == mem_name'>
+            <when test='keyword_type == "mem_name"'>
                 AND m.mem_name LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test='keyword_type == mem_id'>
+            <when test='keyword_type == "mem_id"'>
                 AND m.mem_id LIKE concat('%', #{keyword}, '%')
             </when>
         </choose>
     </sql>
 
     <select id="searchResultCnt" parameterType="SearchDeliveryCondition" resultType="int">
-        SELECT count(*)
-        FROM order_detail
-        WHERE true
+        select count(*)
+        from order_detail as od
+        join code_table as ct on od.code_name = ct.code_name
+        left join member as m on od.mem_id = m.mem_id
+        left join delivery as d on od.ord_det_id = d.ord_det_id
+        where ct.code_type = 1
         <include refid="searchCondition"/>
     </select>
 
