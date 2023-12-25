@@ -193,7 +193,6 @@
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
                                 <option value="orderDate">주문일</option>
-                                <option value="paymentDate">결제일</option>
                                 <option value="DeliveryStartDate">배송시작일</option>
                                 <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
@@ -223,13 +222,14 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-                                        <option>주문번호</option>
-                                        <option>상품주문번호</option>
-                                        <option>운송장번호</option>
-                                        <option>운송장번호</option>
+                                        <option value="ord_id">주문번호</option>
+                                        <option value="ord_det_id">상품주문번호</option>
+                                        <option value="waybill_num">운송장번호</option>
                                         <option>-----------------</option>
-                                        <option>주문자명</option>
-                                        <option>주문자 아이디</option>
+                                        <option value="dlvy_sts">배송상태</option>
+                                        <option>-----------------</option>
+                                        <option value="mem_name">주문자명</option>
+                                        <option value="mem_id">주문자 아이디</option>
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword"
                                            id="sBaseSearchBox" style="width:400px;" placeholder="검색어를 입력해 주세요">
