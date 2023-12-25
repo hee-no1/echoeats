@@ -69,15 +69,13 @@
                                 <div class="product-price">
                                     <div>
                                         <span class="dimmed-price">
-                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                     <div class="discount">
                                         <span class="discount-rate">${product.disc_rate}%</span>
                                         <span class="sales-price">
-                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                 </div>
@@ -184,15 +182,13 @@
                                 <div class="product-price">
                                     <div>
                                         <span class="dimmed-price">
-                                            <fmt:formatNumber value="${eventOneList.prod_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${eventOneList.prod_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                     <div class="discount">
                                         <span class="discount-rate">${eventOneList.disc_rate}%</span>
                                         <span class="sales-price">
-                                            <fmt:formatNumber value="${eventOneList.disc_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${eventOneList.disc_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                 </div>
@@ -258,15 +254,13 @@
                                 <div class="product-price">
                                     <div>
                                         <span class="dimmed-price">
-                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                     <div class="discount">
                                         <span class="discount-rate">${product.disc_rate}%</span>
                                         <span class="sales-price">
-                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                     </div>
                                 </div>
@@ -330,15 +324,13 @@
                                 <div class="content-row">
                                     <div class="product-price">
                                         <div><span class="dimmed-price">
-                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/>
-                                            <span class="won">원</span>
+                                            <fmt:formatNumber value="${product.prod_price}" pattern="#,###"/><span class="won">원</span>
                                         </span>
                                         </div>
                                         <div class="discount">
                                             <span class="discount-rate">${product.disc_rate}%</span>
                                             <span class="sales-price">
-                                                <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/>
-                                                <span class="won">원</span>
+                                                <fmt:formatNumber value="${product.disc_price}" pattern="#,###"/><span class="won">원</span>
                                             </span>
                                         </div>
                                     </div>
