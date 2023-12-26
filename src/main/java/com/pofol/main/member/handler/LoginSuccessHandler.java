@@ -83,8 +83,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if(referer != null){
             System.out.println("referer != null");
             //로그인버튼 2번 누르고 카카오 로그인
-            if (referer.equals("http://localhost:8080/member/login_form")){
-                System.out.println("http://localhost:8080/member/login_form");
+//            if (referer.equals("http://localhost:8080/member/login_form")){
+            if (referer.contains("/member/login_form")){
                 referer ="http://localhost:8080/main";
             }
             response.sendRedirect(referer);
