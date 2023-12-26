@@ -49,7 +49,7 @@
             <c:if test="${pageType eq 'best'}">
                 <h3 id="best">베스트</h3>
             </c:if>
-            <c:if test="${pageType eq 'new'}">
+            <c:if test="${pageType eq 'newProduct'}">
                 <h3 id="best">신상품</h3>
             </c:if>
 
@@ -812,15 +812,13 @@
                                             <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
                                                 <div>
                                                     <span class="dimmed-price css-18tpqqq ei5rudb1">
-                                                        <fmt:formatNumber value="${productList.prod_price}" pattern="#,###"/>
-                                                        <span class="won">원</span>
+                                                        <fmt:formatNumber value="${productList.prod_price}" pattern="#,###"/><span class="won">원</span>
                                                     </span>
                                                 </div>
                                                 <div class="discount">
                                                     <span class="discount-rate css-19lkxd2 ei5rudb0">${productList.disc_rate}%</span>
                                                     <span class="sales-price css-18tpqqq ei5rudb1">
-                                                        <fmt:formatNumber value="${productList.disc_price}" pattern="#,###"/>
-                                                        <span class="won">원</span>
+                                                        <fmt:formatNumber value="${productList.disc_price}" pattern="#,###"/><span class="won">원</span>
                                                     </span>
                                                 </div>
                                             </div>
