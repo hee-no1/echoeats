@@ -225,18 +225,19 @@ public class ProductListController {
 
     // 신상품 상품 리스트 페이지로 이동
     @GetMapping("/newProduct")
-    public String getNewProductPage(SearchProductCondition sc, Model model) {
+    public String getNewProductPage(SearchProductCondition sc, Model model, String type) {
 
         try {
             // 상품이름 검색 페이지
-            model.addAttribute("pageType", "new");
+            model.addAttribute("pageType", "newProduct");
 
             // 전체 상품 카운트
             int totalCount = productListService.getAllProductCount();
             model.addAttribute("totalCount", totalCount);
 
             // 전체 상품 리스트
-            List<ProductDto> allProductList = productListService.getAllProductList();
+//            List<ProductDto> allProductList = productListService.getAllProductList();
+            List<ProductDto> allProductList = productListService.getSearchSelectProduct(sc, type);
             model.addAttribute("productList", allProductList);
 
             // 페이징

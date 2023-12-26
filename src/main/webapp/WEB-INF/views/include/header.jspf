@@ -160,7 +160,7 @@
         window.location.href = "/best"
     })
     document.querySelector(".newProduct").addEventListener("click", function () {
-        window.location.href = "/newProduct"
+        window.location.href = "/newProduct?type=1"
     })
     
     $('.myPage_coupon').on("click", function () {
