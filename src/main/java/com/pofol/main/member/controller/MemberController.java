@@ -40,6 +40,8 @@ public class MemberController {
         //1. 인증된 회원과 익명사용자의 Authentication을 확인
         System.out.println("로그인GET : " + authentication);
         String referer = request.getHeader("Referer"); //login_form
+        String ser = request.getServletPath();
+        System.out.println("ser : " +ser);
 
         //referer - o 버튼으로 들어옴
         //referer - x url
@@ -75,9 +77,10 @@ public class MemberController {
                 return "redirect:http://localhost:8080/main";
                 //return "main";
 
-                //referer ="http://localhost:8080/main"
             }
-            if(referer.equals("http://localhost:8080/member/login_form")){
+//            if(referer.equals("http://localhost:8080/member/login_form")){
+            if(referer.contains("/member/login_form")){
+                System.out.println("인증이 되고 referer가 login폼");
                 return "main";
             }else {
                 return "redirect:" + referer;
