@@ -224,7 +224,7 @@ public class OrderServiceImpl implements OrderService{
             System.out.println("orderDto: "+orderDto);
 
             //주문 이력 table
-            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(ord_id);
+            OrderHistoryDto orderHistoryDto = orderHistoryRepository.selectOne(ord_id); //수정 필요
             orderHistoryDto.setStatus(orderDto);
             orderHistoryRepository.insert(orderHistoryDto);
             System.out.println("orderHist: "+orderHistoryDto);
