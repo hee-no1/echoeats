@@ -11,6 +11,8 @@ import com.pofol.main.orders.order.service.OrderDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +43,9 @@ public class DeliveryController {
     @ResponseBody
     @PostMapping("/registerWaybillNum")
     public ResponseEntity<String> setDelivering(@RequestBody List<DeliveryDto> deliveryList){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
 
         try{
             for (DeliveryDto delivery : deliveryList) {
@@ -63,9 +65,9 @@ public class DeliveryController {
     @ResponseBody
     @PostMapping("/DeliveryComplete")
     public ResponseEntity<String> setDeliveryComplete(@RequestBody List<Long> waybillNumList){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String mem_id = authentication.getName(); //회원id
-        String mem_id = "you11";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mem_id = authentication.getName(); //회원id
+//        String mem_id = "you11";
         try{
             for (Long waybillNum : waybillNumList) {
                 List<DeliveryDto> deliveryList = deliveryService.selectListByWaybillNum(waybillNum);
