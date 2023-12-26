@@ -17,130 +17,90 @@
     <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
     <script>
-        <%--$(function(){--%>
-        <%--    $('.start_date').val(fullDate(0));--%>
-        <%--    $('.end_date').val(fullDate(0));--%>
-        <%--    $('select[name=rows]').val('${ph.sc.pageSize}');--%>
+        $(function(){
+            $('.start_date').val(fullDate(0));
+            $('.end_date').val(fullDate(0));
+            $('select[name=rows]').val('${ph.sc.pageSize}');
 
-        <%--    SearchCondition();--%>
+            SearchCondition();
 
-        <%--    $('.btnPrep').click(function(){--%>
-        <%--        let code = $(this).data('code_name');--%>
-        <%--        let cnt = 0;--%>
-        <%--        $('input.allChk').each(function(){--%>
-        <%--//--%>
-        <%--            if($(this).data('chk')){--%>
-        <%--                cnt++;--%>
-        <%--                let id = $(this).closest('td').data('id');--%>
-        <%--                let cd = $(this).closest('td').data('code');--%>
-        <%--                if(code === cd){--%>
-        <%--                    alert("[주문상세번호]:"+id+"\n상태가 같습니다");--%>
-        <%--                    return false;--%>
-        <%--                }--%>
-        <%--                if(code === 'DELIVERY_PREPARING'){--%>
-        <%--                    let real_prod_qty = parseInt($(this).closest('tr').find('.real_prod_qty').text(),10);--%>
-        <%--                    let prod_qty = parseInt ($(this).closest('tr').find('.prod_qty').text(),10);--%>
-        <%--//--%>
-        <%--                    if(real_prod_qty < prod_qty ){--%>
-        <%--                        alert("재고가 부족합니다\n(재고수량:"+real_prod_qty+",주문수량:"+prod_qty+")");--%>
-        <%--                        return false;--%>
-        <%--                    }--%>
-        <%--                }--%>
-        <%--//--%>
-        <%--                $.ajax({--%>
-        <%--                    type:'PATCH',--%>
-        <%--                    url:"/admin/orderDetail/modify?ord_det_id="+id+"&code_name="+code,--%>
-        <%--                    success:function(result){--%>
-        <%--                        console.log('orderDetail modefiy ok:', result);--%>
-        <%--                        location.reload();--%>
-        <%--                    },--%>
-        <%--                    error:function(error){--%>
-        <%--                        console.error('orderDetail modefiy error:', error);--%>
-        <%--                    },--%>
-        <%--                });--%>
-        <%--            }--%>
-        <%--        });--%>
-        <%--        if(cnt ==0)--%>
-        <%--            alert("변경할 데이터를 선택해 주세요");--%>
-        <%--    });--%>
-        <%--//--%>
-        <%--    $('input.allChk').click(function(){--%>
-        <%--//--%>
-        <%--        let all = $(this).hasClass('all');--%>
-        <%--        let v = $(this).data('chk');--%>
-        <%--        if(!all){--%>
-        <%--            if(v)--%>
-        <%--                $(this).css('background-position', '0 0');--%>
-        <%--            else--%>
-        <%--                $(this).css('background-position', '-50px 0');--%>
-        <%--            $(this).data('chk', !v);--%>
-        <%--        }else{--%>
-        <%--            if(v)--%>
-        <%--                $('input.allChk').css('background-position', '0 0');--%>
-        <%--            else--%>
-        <%--                $('input.allChk').css('background-position', '-50px 0');--%>
-        <%--            $('input.allChk').data('chk', !v);--%>
-        <%--        }--%>
+            $('input.allChk').click(function(){
 
-        <%--    });--%>
+                let all = $(this).hasClass('all');
+                let v = $(this).data('chk');
+                if(!all){
+                    if(v)
+                        $(this).css('background-position', '0 0');
+                    else
+                        $(this).css('background-position', '-50px 0');
+                    $(this).data('chk', !v);
+                }else{
+                    if(v)
+                        $('input.allChk').css('background-position', '0 0');
+                    else
+                        $('input.allChk').css('background-position', '-50px 0');
+                    $('input.allChk').data('chk', !v);
+                }
 
-        <%--    $('select[name=rows]').change(function(){--%>
-        <%--        const ps = $('select[name=rows]').val();--%>
-        <%--        &lt;%&ndash;location.href = "/admin/orderDetail/list${ph.sc.queryStringWithoutPS}&pageSize="+ps;&ndash;%&gt;--%>
-        <%--    });--%>
+            });
 
-        <%--    $('.btnDate').click(function(e) {--%>
-        <%--        e.preventDefault();--%>
-        <%--        $('.btnDate').removeClass('selected');--%>
-        <%--        $(this).addClass('selected');--%>
+            <%--$('select[name=rows]').change(function(){--%>
+            <%--    const ps = $('select[name=rows]').val();--%>
+            <%--    location.href = "/admin/delivery/${ph.sc.queryStringWithoutPS}&pageSize="+ps;--%>
+            <%--});--%>
 
-        <%--        let interval = e.target.closest('a.btnDate').getAttribute('date-interval');--%>
+            $('.btnDate').click(function(e) {
+                e.preventDefault();
+                $('.btnDate').removeClass('selected');
+                $(this).addClass('selected');
 
-        <%--        $('.start_date').val(fullDate(-interval));--%>
-        <%--        $('.end_date').val(fullDate(0));--%>
-        <%--    });--%>
+                let interval = e.target.closest('a.btnDate').getAttribute('date-interval');
 
-        <%--    $('#search_button').click(function(e){--%>
-        <%--        e.preventDefault();--%>
-        <%--        if($('select[name=keyword_type]').val()=='choice'){--%>
-        <%--            alert("검색어 항목을 선택해주세요.")--%>
-        <%--            return;--%>
-        <%--        }--%>
-        <%--        $('.optionArea').submit();--%>
-        <%--    });--%>
+                $('.start_date').val(fullDate(-interval));
+                $('.end_date').val(fullDate(0));
+            });
 
-        <%--    $('.duet-date-picker-grid').click(function(e){--%>
-        <%--        $('.btnDate').removeClass('selected');--%>
-        <%--    });--%>
-        <%--});--%>
-        <%--const SearchCondition = () => {--%>
-        <%--    if('${ph.sc.date_type}'!=''){--%>
-        <%--        $('select[name=date_type]').val('${ph.sc.date_type}').prop("selected", true);--%>
-        <%--    }--%>
-        <%--    if('${ph.sc.keyword_type}'!=''){--%>
-        <%--        $('select[name=keyword_type]').val('${ph.sc.keyword_type}').prop("selected", true);--%>
-        <%--    }--%>
-        <%--    if('${ph.sc.keyword}'!=''){--%>
-        <%--        $('input[name=keyword]').val('${ph.sc.keyword}');--%>
-        <%--    }--%>
-        <%--    if('${ph.sc.start_date}'!=''){--%>
-        <%--        const startDate = "<fmt:formatDate value='${ph.sc.start_date}' pattern='yyyy-MM-dd' type='date'/>";--%>
-        <%--        $('duet-date-picker[name=start_date]').val(startDate);--%>
-        <%--    }--%>
-        <%--    if('${ph.sc.end_date}'!=''){--%>
-        <%--        const endtDate = "<fmt:formatDate value='${ph.sc.end_date}' pattern='yyyy-MM-dd' type='date'/>";--%>
-        <%--        $('duet-date-picker[name=end_date]').val(endtDate);--%>
-        <%--    }--%>
-        <%--}--%>
+            $('#search_button').click(function(e){
+                e.preventDefault();
+                if($('select[name=keyword_type]').val()=='choice'){
+                    alert("검색어 항목을 선택해주세요.")
+                    return;
+                }
+                $('.optionArea').submit();
+            });
 
-        <%--const fullDate = (d) => {--%>
-        <%--    const today = new Date();--%>
-        <%--    today.setDate(today.getDate() + d);--%>
-        <%--    const day = today.getDate();--%>
-        <%--    const month = today.getMonth() + 1;--%>
-        <%--    const year = today.getFullYear();--%>
-        <%--    return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);--%>
-        <%--}--%>
+            $('.duet-date-picker-grid').click(function(e){
+                $('.btnDate').removeClass('selected');
+            });
+        });
+        const SearchCondition = () => {
+            if('${ph.sc.date_type}'!=''){
+                $('select[name=date_type]').val('${ph.sc.date_type}').prop("selected", true);
+            }
+            if('${ph.sc.keyword_type}'!=''){
+                $('select[name=keyword_type]').val('${ph.sc.keyword_type}').prop("selected", true);
+            }
+            if('${ph.sc.keyword}'!=''){
+                $('input[name=keyword]').val('${ph.sc.keyword}');
+            }
+            if('${ph.sc.start_date}'!=''){
+                const startDate = "<fmt:formatDate value='${ph.sc.start_date}' pattern='yyyy-MM-dd' type='date'/>";
+                $('duet-date-picker[name=start_date]').val(startDate);
+            }
+            if('${ph.sc.end_date}'!=''){
+                const endtDate = "<fmt:formatDate value='${ph.sc.end_date}' pattern='yyyy-MM-dd' type='date'/>";
+                $('duet-date-picker[name=end_date]').val(endtDate);
+            }
+        }
+
+        const fullDate = (d) => {
+            const today = new Date();
+            today.setDate(today.getDate() + d);
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+            return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+        }
     </script>
     <style>
         .pagination, .datatable-pagination ul {
@@ -193,7 +153,6 @@
                         <td colspan="3">
                             <select name="date_type" style="width:115px;" class="fSelect disabled">
                                 <option value="orderDate">주문일</option>
-                                <option value="paymentDate">결제일</option>
                                 <option value="DeliveryStartDate">배송시작일</option>
                                 <option value="DeliveryCompleteDate">배송완료일</option>
                             </select>
@@ -223,13 +182,14 @@
                             <div id="mainSearch">
                                 <div class="keywordSearchSelect">
                                     <select class="fSelect" name="keyword_type" style="width:163px;">
-                                        <option>주문번호</option>
-                                        <option>상품주문번호</option>
-                                        <option>운송장번호</option>
-                                        <option>운송장번호</option>
+                                        <option value="ord_id">주문번호</option>
+                                        <option value="ord_det_id">상품주문번호</option>
+                                        <option value="waybill_num">운송장번호</option>
                                         <option>-----------------</option>
-                                        <option>주문자명</option>
-                                        <option>주문자 아이디</option>
+                                        <option value="dlvy_sts">배송상태</option>
+                                        <option>-----------------</option>
+                                        <option value="mem_name">주문자명</option>
+                                        <option value="mem_id">주문자 아이디</option>
                                     </select>
                                     <input type="text" class="fText sBaseSearchBox eSearchText" name="keyword"
                                            id="sBaseSearchBox" style="width:400px;" placeholder="검색어를 입력해 주세요">
@@ -257,7 +217,7 @@
         <div id="tabNumber" class="tabCont">
             <div class="mState typeHeader">
                 <div class="gLeft">
-                    <div class="total">검색결과 : <strong><!--$ph.totalCnt}--></strong>건
+                    <div class="total">검색결과 : <strong>${ph.totalCnt}</strong>건
                     </div>
                 </div>
             </div>
@@ -358,23 +318,23 @@
                 </table>
 
             </div>
-            <div class="mPaginate d-flex justify-content-center" style="width: 1000px;">
+            <div class="mPaginate d-flex justify-content-center">
                 <ul class="pagination">
-<%--                    <c:if test="${ph.totalCnt!=null && ph.totalCnt!=0}">--%>
-<%--                        <c:if test="${ph.showPrev}">--%>
-<%--                            <li class="page-item">--%>
-<%--                                <a class="page-link" href="<c:url value="/admin/orderDetail/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>--%>
-<%--                            </li>--%>
-<%--                        </c:if>--%>
-<%--                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">--%>
-<%--                            <li class='page-item ${i==ph.sc.page? "active" : ""}'><a class="page-link" href="<c:url value="/admin/orderDetail/list${ph.sc.getQueryString(i)}"/>">${i}</a></li>--%>
-<%--                        </c:forEach>--%>
-<%--                        <c:if test="${ph.showNext}">--%>
-<%--                            <li class="page-item">--%>
-<%--                                <a class="page-link" href="<c:url value="/admin/orderDetail/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>--%>
-<%--                            </li>--%>
-<%--                        </c:if>--%>
-<%--                    </c:if>--%>
+                    <c:if test="${ph.totalCnt!=null && ph.totalCnt!=0}">
+                        <c:if test="${ph.showPrev}">
+                            <li class="page-item">
+                                <a class="page-link" href="<c:url value="/admin/delivery/${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                            </li>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <li class='page-item ${i==ph.sc.page? "active" : ""}'><a class="page-link" href="<c:url value="/admin/delivery/${ph.sc.getQueryString(i)}"/>">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <li class="page-item">
+                                <a class="page-link" href="<c:url value="/admin/delivery/${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                            </li>
+                        </c:if>
+                    </c:if>
                 </ul>
             </div>
         </div>
