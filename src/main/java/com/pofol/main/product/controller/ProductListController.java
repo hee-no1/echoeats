@@ -116,12 +116,12 @@ public class ProductListController {
             }
 
             // 현재 판매하지 않는 상품 조회시 예외발생 (판매기간 + 질열상태 + 판매상태)
-            if (product.isSaleExpired()) {
-                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
-            }
-            if (product.getDisp_sts().equals("N") || !product.getSale_sts().equals("판매중")) {
-                throw new ProductStatusException("현재 판매중인 상품이 아닙니다.");
-            }
+//            if (product.isSaleExpired()) {
+//                throw new ExpiredProductException("상품의 판매기간이 지났습니다.");
+//            }
+//            if (product.getDisp_sts().equals("N") || !product.getSale_sts().equals("판매중")) {
+//                throw new ProductStatusException("현재 판매중인 상품이 아닙니다.");
+//            }
 
         } catch (ExpiredProductException expiredProductException) {
             HandlerProductException handlerProductException = new HandlerProductException();
@@ -225,18 +225,19 @@ public class ProductListController {
 
     // 신상품 상품 리스트 페이지로 이동
     @GetMapping("/newProduct")
-    public String getNewProductPage(SearchProductCondition sc, Model model) {
+    public String getNewProductPage(SearchProductCondition sc, Model model, String type) {
 
         try {
             // 상품이름 검색 페이지
-            model.addAttribute("pageType", "new");
+            model.addAttribute("pageType", "newProduct");
 
             // 전체 상품 카운트
             int totalCount = productListService.getAllProductCount();
             model.addAttribute("totalCount", totalCount);
 
             // 전체 상품 리스트
-            List<ProductDto> allProductList = productListService.getAllProductList();
+//            List<ProductDto> allProductList = productListService.getAllProductList();
+            List<ProductDto> allProductList = productListService.getSearchSelectProduct(sc, type);
             model.addAttribute("productList", allProductList);
 
             // 페이징

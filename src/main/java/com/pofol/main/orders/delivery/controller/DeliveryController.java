@@ -2,6 +2,8 @@ package com.pofol.main.orders.delivery.controller;
 
 import com.pofol.admin.order.Repository.AdminOrderDetailRepository;
 import com.pofol.main.orders.delivery.domain.DeliveryDto;
+import com.pofol.main.orders.delivery.domain.PageHandler;
+import com.pofol.main.orders.delivery.domain.SearchDeliveryCondition;
 import com.pofol.main.orders.delivery.repository.DeliveryRepository;
 import com.pofol.main.orders.delivery.service.DeliveryService;
 import com.pofol.main.orders.order.domain.CodeTableDto;
@@ -28,57 +30,51 @@ import java.util.Set;
 @RequestMapping("/admin/delivery")
 public class DeliveryController {
 
-    private final OrderDetailService orderDetailService;
     private final DeliveryService deliveryService;
-    private AdminOrderDetailRepository adminOrdDetailRepo;
-
 
     @GetMapping
-    public String getDeliveryList(Model m){
-        List<OrderDetailDto> orderDetailDtos = orderDetailService.selectForDelivery();
-        m.addAttribute("list", orderDetailDtos);
+    public String getDeliveryList(SearchDeliveryCondition sc, Model m){
+        System.out.println("delivery");
+        try{
+//            List<OrderDetailDto> orderDetailDtos = deliveryService.selectForDelivery();
+//            m.addAttribute("list", orderDetailDtos);
+
+            //페이징
+            int totalCnt = deliveryService.searchResultCnt(sc);
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+            m.addAttribute("ph", pageHandler);
+            if(totalCnt == 0) {
+                return "/admin/order/delivery";
+            }
+
+            //검색 결과에 따른 조회
+            List<OrderDetailDto> list = deliveryService.searchSelectPage(sc);
+            m.addAttribute("list", list);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return "/admin/order/delivery";
     }
 
     @ResponseBody
     @PostMapping("/registerWaybillNum")
     public ResponseEntity<String> setDelivering(@RequestBody List<DeliveryDto> deliveryList){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String mem_id = authentication.getName(); //회원id
-//        String mem_id = "you11";
-
         try{
-            for (DeliveryDto delivery : deliveryList) {
-                OrderDetailDto dto = new OrderDetailDto(delivery.getOrd_det_id(), "DELIVERING", mem_id);
-                orderDetailService.update(dto); //주문 상세table을 기준으로 modify
-                delivery.setMember(mem_id);
-                delivery.setDlvy_sts("DELIVERING");
-                deliveryService.writeDelivery(delivery); //배송table insert
-            }
-            return ResponseEntity.ok("DELIVERING success");
+            deliveryService.writeDelivery(deliveryList);
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DELIVERING fail");
         }
+        return ResponseEntity.ok("DELIVERING success");
     }
 
     @ResponseBody
     @PostMapping("/DeliveryComplete")
     public ResponseEntity<String> setDeliveryComplete(@RequestBody List<Long> waybillNumList){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String mem_id = authentication.getName(); //회원id
-//        String mem_id = "you11";
         try{
-            for (Long waybillNum : waybillNumList) {
-                List<DeliveryDto> deliveryList = deliveryService.selectListByWaybillNum(waybillNum);
-                for (DeliveryDto delivery : deliveryList) {
-                    OrderDetailDto dto = new OrderDetailDto(delivery.getOrd_det_id(), "DELIVERY_COMPLETE", mem_id);
-                    orderDetailService.update(dto);
-                    delivery.setMd_num(mem_id);
-                    delivery.setDlvy_sts("DELIVERY_COMPLETE");
-                    deliveryService.modifyDelivery(delivery);
-                }
-            }
+            deliveryService.selectListByWaybillNum(waybillNumList);
             return ResponseEntity.ok("DELIVERY_COMPLETE success");
         }catch (Exception e){
             e.printStackTrace();

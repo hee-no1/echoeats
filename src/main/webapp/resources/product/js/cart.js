@@ -98,6 +98,7 @@ const productRemoveAjax = function (i) {
             cartList[i].style.display = 'none';
             cartProductCheck[i].checked = false;
             cartProductCheck[i].disabled = true;
+            updateCartTotals();
         },
         error: function () {
             alert("error");
@@ -141,6 +142,56 @@ const productCountAjax = function (action, productQuantity, productQuantityHtml,
         }
     })
 }
+
+// Function to calculate and update cart totals
+const updateCartTotals = () => {
+    let productAmount = 0;
+    let discountAmount = 0;
+    let shippingCost = 3000; // 배송비
+    makeInputHidden();
+    productCartCheck.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+            let qty = cartProduct[index].qty;
+            let productPrice = cartProduct[index].prod_price;
+            let discountPrice = cartProduct[index].disc_price;
+            let optionPrice = cartProduct[index].opt_price;
+            let optionDiscPrice = cartProduct[index].opt_disc_price;
+
+            if (optionPrice !== null && optionPrice !== undefined) {
+                productAmount += qty * optionPrice;
+                discountAmount += qty * (optionPrice - optionDiscPrice);
+                console.log("optionProductAmount : " + productAmount);
+            } else {
+                productAmount += qty * productPrice;
+                discountAmount += qty * (productPrice - discountPrice);
+                console.log("productAmount : " + productAmount);
+            }
+
+            if (memberGradeMoney !== undefined || memberGradeMoney !== null) {
+                let saveMoneyByMember = Math.floor(productAmount * memberGradeMoney / 100);
+                saveMoney.innerHTML = saveMoneyByMember.toLocaleString() + '원 적립';
+            }
+        }
+    });
+
+    if (productAmount - discountAmount >= 40000) {
+        shippingCost = 0;
+    }
+
+    let totalPayableAmount = productAmount - discountAmount + shippingCost;
+
+    if (productAmount === 0) {
+        shippingCost = 0;
+        totalPayableAmount = 0;
+        saveMoney.innerHTML = '0원 적립';
+    }
+
+    document.getElementById('product-origin-price').innerHTML = productAmount.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
+    document.getElementById('product-discount-amount').innerHTML = discountAmount.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
+    document.getElementById('shipping-cost').innerHTML = shippingCost.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
+    document.getElementById('total-payable').innerHTML = '<strong class="css-xmbce4 eepcpbj0">' + totalPayableAmount.toLocaleString() + '</strong><span class="css-aro4zf eepcpbj1">원</span>';
+
+};
 
 $(document).ready(function () {
 
@@ -274,59 +325,13 @@ $(document).ready(function () {
                 return;
             }
             productRemoveAjax(i);
+            updateCartTotals();
+            makeInputHidden();
         })
     }
 
 
-// Function to calculate and update cart totals
-    const updateCartTotals = () => {
-        let productAmount = 0;
-        let discountAmount = 0;
-        let shippingCost = 3000; // 배송비
-        makeInputHidden();
-        productCartCheck.forEach((checkbox, index) => {
-            if (checkbox.checked) {
-                let qty = cartProduct[index].qty;
-                let productPrice = cartProduct[index].prod_price;
-                let discountPrice = cartProduct[index].disc_price;
-                let optionPrice = cartProduct[index].opt_price;
-                let optionDiscPrice = cartProduct[index].opt_disc_price;
 
-                if (optionPrice !== null && optionPrice !== undefined) {
-                    productAmount += qty * optionPrice;
-                    discountAmount += qty * (optionPrice - optionDiscPrice);
-                    console.log("optionProductAmount : " + productAmount);
-                } else {
-                    productAmount += qty * productPrice;
-                    discountAmount += qty * (productPrice - discountPrice);
-                    console.log("productAmount : " + productAmount);
-                }
-
-                if (memberGradeMoney !== undefined || memberGradeMoney !== null) {
-                    let saveMoneyByMember = Math.floor(productAmount * memberGradeMoney / 100);
-                    saveMoney.innerHTML = saveMoneyByMember.toLocaleString() + '원 적립';
-                }
-            }
-        });
-
-        if (productAmount - discountAmount >= 40000) {
-            shippingCost = 0;
-        }
-
-        let totalPayableAmount = productAmount - discountAmount + shippingCost;
-
-        if (productAmount === 0) {
-            shippingCost = 0;
-            totalPayableAmount = 0;
-            saveMoney.innerHTML = '0원 적립';
-        }
-
-        document.getElementById('product-origin-price').innerHTML = productAmount.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
-        document.getElementById('product-discount-amount').innerHTML = discountAmount.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
-        document.getElementById('shipping-cost').innerHTML = shippingCost.toLocaleString() + '<span class="css-hfgifi ea1mry72">원</span>';
-        document.getElementById('total-payable').innerHTML = '<strong class="css-xmbce4 eepcpbj0">' + totalPayableAmount.toLocaleString() + '</strong><span class="css-aro4zf eepcpbj1">원</span>';
-
-    };
 
     for (let i = 0; i < choiceDelete.length; i++) {
         choiceDelete[i].addEventListener('click', (e) => {
@@ -342,6 +347,7 @@ $(document).ready(function () {
                 }
                 j++;
             });
+            updateCartTotals();
             makeInputHidden();
         });
     }

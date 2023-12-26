@@ -31,7 +31,6 @@
     <delete id="deleteNotice" parameterType="NoticeDto">
         DELETE FROM notice WHERE notice_id = #{notice_id}
 
-        <!-- 게시물이 삭제되면 그 다음 게시물들이 다시금 새로 정렬되어야 함 -->
     </delete>
 
     <select id="count" parameterType="NoticeDto" resultType="int">

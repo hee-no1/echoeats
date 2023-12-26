@@ -44,8 +44,6 @@
                                 if(real_prod_qty < prod_qty ) {
                                     alert("재고가 부족합니다\n(재고수량:" + real_prod_qty + ",주문수량:" + prod_qty + ")");
                                     return false;
-                                } else{
-                                    alert("재고가 충분합니다\n배송준비중으로 상태를 변경합니다")
                                 }
                             }
                             
@@ -62,7 +60,7 @@
 						    });
                         }
                     });
-                    if(cnt ==0)
+                    if(cnt === 0)
                         alert("변경할 데이터를 선택해 주세요");
                 });
 
@@ -355,7 +353,7 @@
                                             (<fmt:formatDate value='${dto.ord_date}' pattern='HH:mm' type='time'/>)</td>
                                             <td scope="col" class="w90" style="">${dto.ord_id}</td>
                                             <td scope="col" class="w120 ord_det_id" style="">${dto.ord_det_id}</td>
-                                            <td scope="col" class="w60" style="">${dto.column_sts}</td>
+                                            <td scope="col" class="w60 status" style="">${dto.column_sts}</td>
                                             <td scope="col" class="w80" style="">${dto.mem_id}</td>
                                             <td scope="col" class="w120" style="">${dto.prod_name}</td>
                                             <td scope="col" class="w45 prod_qty" style="">${dto.prod_qty}</td>
