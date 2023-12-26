@@ -136,7 +136,7 @@
         console.log('회원가입')
         let form = $('#loginform');
         form.attr("method", "GET");
-        form.attr("action", "/join").submit();
+        form.attr("action", "/member/join").submit();
 
 
     });
