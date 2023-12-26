@@ -702,7 +702,7 @@
             </div>
             <div class="seller-btn-area btn-group-xlg">
                 <button type="button" class="btn btn-default" id="cancelBtn">취소</button>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary enroll-btn" onclick="submitForm()">
                     <span class="content" id="enrollBtn">저장하기</span>
                 </button>
             </div>
@@ -1421,6 +1421,12 @@
         // 입력된 값이 숫자가 아니면 제거
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+
+    // 등록버튼 한번누르면 비활성화시켜 동시에 등록되는것을 방지한다.
+    function submitForm() {
+        const submitBtn = document.querySelector('.enroll-btn');
+        submitBtn.disabled = true;
+    }
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

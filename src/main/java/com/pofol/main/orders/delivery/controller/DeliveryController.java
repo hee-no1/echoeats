@@ -73,7 +73,6 @@ public class DeliveryController {
     @ResponseBody
     @PostMapping("/DeliveryComplete")
     public ResponseEntity<String> setDeliveryComplete(@RequestBody List<Long> waybillNumList){
-
         try{
             deliveryService.selectListByWaybillNum(waybillNumList);
             return ResponseEntity.ok("DELIVERY_COMPLETE success");
