@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
             dataType: 'text',
             data : JSON.stringify(checkout),
             success: function(result){
-                alert("✅ 1차 검증 성공 = " + result);
+                // alert("✅ 1차 검증 성공 = " + result);
                 orderData.ord_id = result*1;
                 if(checkout.tot_pay_price === '0'){
 ;                    window.location.href = "/order/completed/"+orderData.ord_id;
