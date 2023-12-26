@@ -90,7 +90,7 @@
                             </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_email" placeholder="예: marketkurly@kurly.com">
+                    <input type="text" id="mem_email" placeholder="예: ecoeats@ecoeats.com">
                     <div id="emailErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
