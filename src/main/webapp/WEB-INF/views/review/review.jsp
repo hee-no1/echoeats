@@ -44,11 +44,11 @@
         <div class = "css-1oynwoh epggjnz3">
             <div class = "css-1nmq3i1 epggjnz2">
                 <div class = "css-zjik7">
-                    <div class = "welcome">웰컴</div>
+                    <div class = "welcome">씨앗</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
                             <sec:authorize access="isAuthenticated()">
-                                <p>Welcome, <sec:authentication property="principal.mem_name" />!</p>
+                                <p><sec:authentication property="principal.mem_name" />님</p>
                             </sec:authorize>
                         </strong>
                         <div class = "css-70qvj9">
@@ -59,8 +59,7 @@
                 </div>
 
                 <div class = "css-1rqh7gg">
-                    <p class = "css-1nwlk71">적립 5%</p>
-                    <p class = "css-1nwlk71">최소 1회 무료배송</p>
+                    <p class = "css-1nwlk71">적립 1%</p>
                 </div>
             </div>
 
@@ -117,9 +116,7 @@
                 </div>
             </div>
         </div>
-        <a href="https://www.kurly.com/m2/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon" class="css-1khmcew eyulecr1">
-            <img src="https://product-image.kurly.com/banner/da-banner/55b64dac-7373-4bb5-b44d-7a2eecde375a.jpg" alt="230713 신규1만원 쿠폰 웰컴 PC" class="css-1th0ley eyulecr0">
-        </a>
+
     </div>
 
 
@@ -128,7 +125,7 @@
             <div class="css-1v4whg ecbxmj2">마이에코</div>
             <ul class="css-1x9bshx ecbxmj1">
                 <li>
-                    <a class="active css-g4g0eu ecbxmj0">주문내역
+                    <a class="active css-g4g0eu ecbxmj0" href="/mypage/order">주문내역
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -144,7 +141,7 @@
 
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">배송지 관리
+                    <a class=" css-g4g0eu ecbxmj0" href="/address/">배송지 관리
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -184,7 +181,7 @@
                 </li>
 
                 <li>
-                    <a class=" css-g4g0eu ecbxmj0">적립금
+                    <a class=" css-g4g0eu ecbxmj0" id="point2_btn">적립금
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                             <defs>
                                 <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -288,6 +285,15 @@
 
 </div>
 <script>
+
+    $('#point2_btn').on("click", function(){
+        window.open("/point/all","_blank")
+    });
+
+    $('#myPageSideCp').on("click", function () {
+        window.location.href = "/coupon";
+    });
+
     $(function() {
         // 작성가능후기 + 작성한후기 구분
         let beforeWriteArea = document.querySelector('.beforeWriteArea');
