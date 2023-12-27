@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()//인증이 필요한 url지정
                 .antMatchers("/admin/**", "/admin1/**").hasAuthority("ADMIN")
                 .antMatchers("/order/checkout").hasAuthority("USER")
-                .antMatchers("/grade", "/coupon", "/point/all","/address/*", "/order/**", "/mypage/**").hasAnyAuthority("USER","ADMIN")
+                .antMatchers("/grade", "/coupon", "/point/all", "/order/**", "/mypage/**").hasAnyAuthority("USER","ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
