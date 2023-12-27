@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:scriptlet> pageContext.setAttribute("newline", "\n"); </jsp:scriptlet>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 공지사항 관리자 상세조회 페이지 -->
@@ -98,7 +99,7 @@
                         <td class="tbody_td" style="width: 10%; background-color: #4CAF50; vertical-align: middle; text-align: left; padding-left: 20px;">
                             작성일</td>
                         <td class="date"style="text-align: left; vertical-align: middle; letter-spacing: -1px; padding-left: 20px;">
-                            ${notice.notice_date }</td>
+                            <fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
                     </tr>
                     </tbody>
                     <tfoot>
@@ -115,5 +116,12 @@
     </div>
     <div class="col-sm-2"></div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="<c:url value='/resources/common/js/scripts.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-area-demo.js' />"></script>
+<script src="<c:url value='/resources/common/assets/demo/chart-bar-demo.js' />"></script>
+<script src="<c:url value='/resources/common/js/datatables-simple-demo.js' />"></script>
 </body>
 </html>

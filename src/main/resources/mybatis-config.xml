@@ -31,6 +31,7 @@
 		<typeAlias alias="DelNotesDto" type="com.pofol.main.member.dto.DelNotesDto"/>
 		<typeAlias alias="SampleMemberDto" type="com.pofol.main.orders.sample.memberSample.SampleMemberDto"/>
 		<typeAlias alias="ProductOrderCheckout" type="com.pofol.main.orders.order.domain.ProductOrderCheckout"/>
+		<typeAlias alias="SearchDeliveryCondition" type="com.pofol.main.orders.delivery.domain.SearchDeliveryCondition"/>
 		<!-- Mypage -->
 		<typeAlias alias="InquiryDto" type="com.pofol.main.orders.inquiry.domain.InquiryDto"/>
 		<typeAlias alias="InquiryImgDto" type="com.pofol.main.orders.inquiry.domain.InquiryImgDto"/>

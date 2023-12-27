@@ -90,7 +90,7 @@
                             </span></label>
                 </div>
                 <div class="two">
-                    <input type="text" id="mem_email" placeholder="예: marketkurly@kurly.com">
+                    <input type="text" id="mem_email" placeholder="예: ecoeats@ecoeats.com">
                     <div id="emailErrorMsg" style="color: red; font-size: 12px;"></div>
                 </div>
                 <div class="three">
@@ -307,10 +307,10 @@
         var mem_id = this.value;
 
         if (!regMemberid(mem_id)) {
-        $("#idErrorMsg").text("영문자 또는 숫자 6~16자로 해주세요.").show();
-    } else {
-        $("#idErrorMsg").text("").hide();
-    }
+            $("#idErrorMsg").text("영문자 또는 숫자 6~16자로 해주세요.").show();
+        } else {
+            $("#idErrorMsg").text("").hide();
+        }
     });
 
     //비밀번호 정규식 체크
@@ -559,7 +559,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "${pageContext.request.contextPath}/address/detail",
+                    url: "/address/detail",
                     data: JSON.stringify(inputed),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
@@ -571,16 +571,16 @@
                 } else if (pwdCheck == 0) {
                     alert("비밀번호가 동일하지않습니다.")
                 }
-                  else if (phoneCheck == 0) {
+                else if (phoneCheck == 0) {
                     alert("허용되지 않는 전화번호입니다.")
                 }
-                  else if (emailCheck == 0) {
+                else if (emailCheck == 0) {
                     alert("email중복확인 눌러주세요.")
                 }
-                  else if (!infoCheck()){
+                else if (!infoCheck()){
                     alert("필수이용약관을 동의해주세요")
                 }
-                  else if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1 && infoCheck()) {
+                else if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1 && infoCheck()) {
                     alert("회원가입이 완료되었습니다.")
                     location.href = "http://localhost:8080/main";
                 }

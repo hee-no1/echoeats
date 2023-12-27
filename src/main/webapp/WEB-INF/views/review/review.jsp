@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <link rel="stylesheet" href="/resources/product/css/footer.css">
     <link rel="stylesheet" href="/resources/css/member/grade.css">
-<%--    <link rel="stylesheet" href="/resources/order/css/mypage.css">--%>
+    <link rel="stylesheet" href="/resources/css/member/mypage.css">
     <link rel="stylesheet" href="/resources/css/board/review.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -266,7 +266,6 @@
                     <div class="beforeWriteArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="reviewCnt"></span>개</div>
-<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="reviewArea">
                             <!-- 작성가능 후기 -->
@@ -276,7 +275,6 @@
                     <div class="writtenArea hide">
                         <div class="d-flex align-content-lg-between" style="padding:10px 0px; border-bottom: 1px solid black;">
                             <div style="width: 780px; font-weight: bold;">총 <span id="writeReviewCnt"></span>개</div>
-<%--                            <div style="float: right; color: #666666; font-size: small; margin-top: 5px; font-weight: bold;"><a>작성시 유의사항<i class="bi-question-circle"></i></a></div> <!--클릭시 모달창-->--%>
                         </div>
                         <div id="writeReviewArea">
                             <!-- 작성한 후기 -->
@@ -303,7 +301,6 @@
         $('#written').attr('style', "background-color: #00C73C");
 
         var reviewInfo = {
-            <%--mem_id : ${loginMember.get ~~},--%>
             mem_id: '${loginMember}',
             reviewStatus: 'N'
         }
@@ -318,7 +315,7 @@
             $('#beforeWrite').attr('style', "color:  #00C73C");
             $('#written').attr('style', "background-color:  #00C73C");
             var reviewInfo = {
-                mem_id: 'user123',
+                mem_id: '${loginMember}',
                 reviewStatus : 'N'
             }
             console.log("reviewInfo :" + reviewInfo.mem_id)
@@ -350,25 +347,25 @@
                     } else {
                         $.each(data, function(index, reviewList){
                             htmlTag += '<div class="reviewGrp">';
-                            htmlTag += '<div class="review-container" id="review">';
-                            htmlTag += '<div id="reviewContent">';
+                            htmlTag += '<div class="review-container" id="review' + index + '">';
+                            htmlTag += '<div id="reviewContent' + index + '">';
                             htmlTag += '<li class="d-flex inquiryPro-row" style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">';
-                            htmlTag +=      '<div class="pro_img" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag +=      '<div class="pro_img" style="flex: 1;"><img src="' + data[index].ori_filename + '" id="image'+index+'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
 
                             htmlTag += '<div class="pro_title" style="flex: 3; text-align: left; margin-left: -80px;">'; // 너비 조정
-                            htmlTag += 		'<div class="pro_name font-weight-bold">'+ reviewList.prod_name + '</div>';
-                            htmlTag += 		'<div class="delivery-status" style="font-weight: 300; font-size: 0.9em;">'+ reviewList.review_date + " " + reviewList.deliveryStatus + '</div>';
+                            htmlTag += 		'<div class="pro_name font-weight-bold">'+ data[index].prod_name + '</div>';
+                            htmlTag += 		'<div class="delivery-status" style="font-weight: 300; font-size: 0.9em;">'+ data[index].review_date + " " + data[index].deliveryStatus + '</div>';
                             htmlTag += '</div>';
                             htmlTag += '<div class="write_review" style="flex: 1; text-align: right;">'; // 너비 조정 및 오른쪽 정렬
-                            htmlTag += '<button type="button" class="trigger btn font-weight-bold" id="writeReviewBtn" data-toggle="modal" data-target="#reviewModal'+index+'" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기작성</button>';
+                            htmlTag += '<button type="button" class="trigger btn font-weight-bold" id="writeReviewBtn" data-toggle="modal" data-target="#reviewModal' + index + '" style="border: 1px solid lightgray; width: 100px; height: 36px; font-size: small; color: #666666;">후기작성</button>';
                             htmlTag += '</div>';
                             htmlTag += '</li>';
                             htmlTag += '</div>';
                             htmlTag += '</div>';
 
-
+                            console.log(htmlTag);
                             // 모달창
-                            htmlTag += '<div class="modal fade" id="reviewModal'+index+'">';
+                            htmlTag += '<div class="modal fade" id="reviewModal' + index + '">';
                             htmlTag += '<div class="modal-dialog modal-dialog-centered">';
                             htmlTag += '<div class="modal-content">';
                             htmlTag += '<div class="modal-header">';
@@ -377,17 +374,17 @@
                             htmlTag += '<div class="modal-body">';
 
                             htmlTag += '<form name="reviewFrm" id="reviewFrm" method="post" style="margin: 0px;" enctype="multipart/form-data">';
-                            htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+reviewList.ord_id+'">';
-                            htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+reviewList.prod_id+'">';
-                            htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+reviewList.mem_id+'">';
-
-                            // prod_name 가져오기 위해서 추가 !!
-                            htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + reviewList.prod_name + '">';
+                            htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
+                            htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
+                            htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
+                            htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + data[index].prod_name + '">';
 
 
                             htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬을 위해 justify-content-end 사용
-                            htmlTag +=      '<div class="writeProImg" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
-                            htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ reviewList.prod_name + '</div>';
+                            // 이게 지금 이미지가 랜덤이 나옴,,
+                            // htmlTag +=      '<div class="writeProImg" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag += '<div class="writeProImg" style="flex: 1;"><img src="' + data[index].ori_filename + '" id="image'+index+'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ data[index].prod_name + '</div>';
                             htmlTag += '</div>';
 
 
@@ -413,7 +410,8 @@
                             htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
                             htmlTag += '<input type="button" id="write_review" value="작성하기" onclick="writeProReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
 
-                            htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
+                            // htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
+                            htmlTag += '<button type="button" class="closeReviewModal" data-dismiss="modal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
                             htmlTag += '</div>';
 
                             htmlTag += '</form>';
@@ -423,24 +421,30 @@
                             htmlTag += '</div>';
 
                         });
-                    } // else 끝
+                    }
                     $("#reviewArea").html(htmlTag);
                     $("#reviewCnt").html(reviewCnt);
                 },
                 error: function() {
                     alert("리뷰 목록 불러오기 실패");
                 }
-            }); // ajax 끝
+            });
         }
 
-        $(document).on("click", "#writeReviewBtn", function() {
-            // 모달 창을 표시하는 코드
-            $(".modal").show();
+        // 모달을 열 때, 해당 모달만을 타겟팅하기 위해 data-target 속성을 활용합니다.
+        $(document).on("click", ".trigger", function() {
+            var targetModalSelector = $(this).data('target'); // 이 버튼이 타겟팅하는 모달의 selector를 가져옵니다.
+            $(targetModalSelector).show(); // 해당 모달만 표시합니다.
         });
+
+        // 모달을 닫을 때, 이벤트가 발생한 모달만 닫습니다.
         $(document).on("click", ".closeReviewModal", function(event) {
-            event.stopPropagation();
-            $(this).closest('.modal').hide();
+            event.stopPropagation(); // 이벤트 전파를 중단합니다.
+            var modalToClose = $(this).closest('.modal'); // 이벤트가 발생한 '닫기' 버튼에 가장 가까운 모달을 찾습니다.
+            modalToClose.hide(); // 해당 모달만 숨깁니다.
         });
+
+
 
 
         // 작성한 리뷰
@@ -508,7 +512,6 @@
                             htmlTag += '<div class="modal-content">';
                             htmlTag += '<div class="modal-header">';
                             htmlTag += '<h4 class="modal-title">작성한 후기</h4>';
-                            // htmlTag += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="modal-body">';
@@ -521,7 +524,7 @@
 
 
                             htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬
-                            htmlTag += '<div class="writeProImg"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
+                            <%--htmlTag += '<div class="writeProImg"><img src="${pageContext.request.contextPath }/resources/images/'+ reviewList.thumOriFilename +'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';--%>
                             htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ reviewList.prod_name + '</div>';
                             htmlTag += '</div>';
 
@@ -531,26 +534,23 @@
                             htmlTag += '</div>';
 
                             htmlTag += '<div>'
-                            htmlTag += '<textarea type="text" id="writtenReview" name="reivew_content" style="background-color:white;" readonly>'+ reviewList.review_content +'</textarea>';
+                            htmlTag += '<textarea type="text" id="writtenReview" name="review_content" style="background-color:white;" readonly>'+ reviewList.review_content +'</textarea>';
                             htmlTag += '</div>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="filebox d-flex align-content-between" style="margin-top:20px">';
-                            htmlTag += '<div style="width: 90px; text-align: left; margin-top: 15px;">사진첨부</div>';
 
                             htmlTag += '<div class="fileIconBox" style="margin-right: 20px;">';
-                            htmlTag += '<label for="thumb"><img src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
                             htmlTag += '<input type="button" id="write_review" value="수정하기" onclick="modifyReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
-                            // htmlTag += '<input type="button" id="save_review" value="저장하기" onclick="saveReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px;">';
                             htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-left: 5px;">닫기</button>';
 
                             htmlTag += '</div>';
 
                             htmlTag += '</form>';
-                            htmlTag += '</div>'; // modalbody
+                            htmlTag += '</div>';
 
                             htmlTag += '</div>';
                             htmlTag += '</div>';
@@ -561,38 +561,41 @@
                     }
                     $("#writeReviewArea").html(htmlTag);
                     $("#writeReviewCnt").html(writeReviewCnt);
-                }, // success
+                },
                 error: function() {
                     alert("작성리뷰 불러오기 실패");
                 }
-            }); // ajax 끝
+            });
         }
 
     });
 
     $(document).on("click", ".reviewMdfyBtn", function () {
-        //alert("리뷰수정 클릭")
+        // 리뷰수정
 
     });
 
-    function showPreview(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.innerHTML = '<img src="' + reader.result + '" style="width: 100px; height: 100px;"/>'; // 썸네일 크기 조정
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+    // function showPreview(event) {
+    //     var reader = new FileReader();
+    //     reader.onload = function() {
+    //         var output = document.getElementById('preview');
+    //         output.innerHTML = '<img src="' + reader.result + '" style="width: 100px; height: 100px;"/>'; // 썸네일 크기 조정
+    //     };
+    //     reader.readAsDataURL(event.target.files[0]);
+    // }
 
     function writeProReview() {
-        //alert("리뷰 작성 실행");
+        // // 리뷰 작성 실행
         var reviewFrm = document.getElementById("reviewFrm");
         reviewFrm.action = "writeProReview";
         reviewFrm.submit();
+        // document.getElementById("reviewFrm").submit();
+
     }
 
+
     function modifyReview(){
-        //수정활성화
+        // 수정활성화
         $('#writtenReview').removeAttr('readonly');
         $('#writtenReview').css('border', '3px solid #692498')
         mdfyReviewFrm = document.getElementById("mdfyReviewFrm");

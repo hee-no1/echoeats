@@ -81,11 +81,6 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
 	public OrderDetailDto selectByOrderDetId(Long ord_det_id) {
 		return session.selectOne(namespace+"selectByOrderDetId", ord_det_id);
 	}
-
-  @Override
-  public List<OrderDetailDto> selectForDelivery() {
-      return session.selectList(namespace+"selectForDelivery");
-  }
   
 	@Override
 	public List searchSelectPage(SearchOrderCondition sc) throws Exception {

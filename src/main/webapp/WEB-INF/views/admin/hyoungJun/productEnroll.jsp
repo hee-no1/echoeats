@@ -147,9 +147,8 @@
                                                     <div class="seller-input-wrap">
                                                         <input id="discount-interface" class="form-control"
                                                                placeholder="판매가에서" max="99" min="0"
-                                                               minlength="1" maxlength="2"
                                                                value="0" name="disc_rate"
-                                                               type="text">
+                                                               type="number">
                                                         <input name="discount-rate" type="hidden" value="0">
                                                     </div>
                                                     <span class="input-group-addon">%</span>
@@ -568,7 +567,7 @@
                                         <div class="input-group">
                                             <div class="seller-input-wrap">
                                                 <input name="seller" class="form-control" type="text"
-                                                       placeholder="ex) ">
+                                                       placeholder="ex) 에코">
                                             </div>
                                         </div>
                                     </div>
@@ -702,7 +701,7 @@
             </div>
             <div class="seller-btn-area btn-group-xlg">
                 <button type="button" class="btn btn-default" id="cancelBtn">취소</button>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary enroll-btn" onclick="submitForm()">
                     <span class="content" id="enrollBtn">저장하기</span>
                 </button>
             </div>
@@ -874,7 +873,7 @@
         // 원래 가격
         let productPrice = $("input[name='prod_price']").val();
         // 할인된 가격
-        let discountedPrice = Math.floor(productPrice * (1 - sendDiscountRate));
+        let discountedPrice = (Math.floor(productPrice * (1 - sendDiscountRate) / 10) * 10);
         let discountedInput = $("input[name='disc_price']").val();
         discountedInput.value = discountedPrice;
         // 할인 얼마나 됐는지
@@ -1024,7 +1023,7 @@
     }
 
     // 옵션관련
-    document.getElementById('applyOptionList').addEventListener('click', function(e) {
+    document.getElementById('applyOptionList').addEventListener('click', function (e) {
         e.preventDefault();
         let optionValues = document.getElementById('choice_option_value0').value.split(',');
 
@@ -1235,6 +1234,17 @@
     productPriceInput.addEventListener('keyup', togglePriceWarning);
     productPriceInput.addEventListener('keyup', togglePriceUnitWarning);
 
+    // 할인율 유효성검사
+    let discountCheck = false;
+
+    const discountInput = document.querySelector('[name="disc_rate"]');
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-' || e.key === '.') {
+            e.preventDefault();
+        }
+    });
+
     // 달력 날짜 버튼 선택
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.btn-primary2').forEach(button => {
@@ -1243,15 +1253,12 @@
                 const startDate = new Date();
                 const endDate = new Date();
 
-                console.log(days);
                 endDate.setDate(startDate.getDate() + days);
 
                 const formatDate = (date) => {
                     const year = date.getFullYear();
                     const month = ('0' + (date.getMonth() + 1)).slice(-2);
-                    console.log(month);
                     const day = ('0' + date.getDate()).slice(-2);
-                    console.log(year + '-' + month + '-' + day)
                     return year + '-' + month + '-' + day;
                 };
 
@@ -1393,12 +1400,32 @@
     guideNameInput.addEventListener('keyup', toggleGuideWarning);
 
     document.querySelectorAll('#enrollForm').forEach(input => {
-        input.addEventListener('keydown', function(event) {
+        input.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
             }
         });
     });
+
+    document.getElementById('discount-interface').addEventListener('input', function(e) {
+        const value = e.target.value;
+        if(value.length > 2 || value < 0 || value > 99) { // 2자리 숫자, 0 이상 99 이하의 값 검사
+            alert("0과 99사이의 숫자를 입력해주세요.");
+            e.target.value = "";
+        }
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    document.querySelector('[name="prod_qty"]').addEventListener('input', function(e) {
+        // 입력된 값이 숫자가 아니면 제거
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    // 등록버튼 한번누르면 비활성화시켜 동시에 등록되는것을 방지한다.
+    function submitForm() {
+        const submitBtn = document.querySelector('.enroll-btn');
+        submitBtn.disabled = true;
+    }
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

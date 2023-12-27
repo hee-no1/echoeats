@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="u75ne30 _2wzkdc1 _1c1ajx22 _1mkbjwk3"><span
                                                 class="u75ne30 _1shy0uyp _7qafms4">${pointDtos.reason} 5%</span><span
-                                                class="u75ne30 _1shy0uyn _7qafms2">주문번호 (2322817120037)</span></div>
+                                                class="u75ne30 _1shy0uyn _7qafms2">주문번호 (${pointDtos.ord_id})</span></div>
                                     </div>
                                     <div class="u75ne30 _2wzkdc1 _1c1ajx22 _1mkbjwk3 _1cwllq52 _1j5ftz50"><span
                                             class="u75ne30 _1shy0uy0 _7qafms4">

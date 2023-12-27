@@ -44,8 +44,6 @@
                                 if(real_prod_qty < prod_qty ) {
                                     alert("재고가 부족합니다\n(재고수량:" + real_prod_qty + ",주문수량:" + prod_qty + ")");
                                     return false;
-                                } else{
-                                    alert("재고가 충분합니다\n배송준비중으로 상태를 변경합니다")
                                 }
                             }
                             
@@ -62,7 +60,7 @@
 						    });
                         }
                     });
-                    if(cnt ==0)
+                    if(cnt === 0)
                         alert("변경할 데이터를 선택해 주세요");
                 });
 
@@ -330,12 +328,12 @@
                                 <tbody>
                                 <tr>
                                     <th scope="col" class="w24"><input type="checkbox" class="allChk all"></th>
-                                    <th scope="col" class="w90" style="">주문일시</th>
-                                    <th scope="col" class="w90" style="">주문번호</th>
+                                    <th scope="col" class="w110" style="">주문일시</th>
+                                    <th scope="col" class="w110" style="">주문번호</th>
                                     <th scope="col" class="w120 orddetid" style="">주문상세번호</th>
-                                    <th scope="col" class="w60" style="">상태</th>
-                                    <th scope="col" class="w80" style="">주문자</th>
-                                    <th scope="col" class="w120" style="">상품명</th>
+                                    <th scope="col" class="w80" style="">상태</th>
+                                    <th scope="col" class="w90" style="">주문자</th>
+                                    <th scope="col" class="w210" style="">상품명</th>
                                     <th scope="col" class="w45" style="">구매수량</th>
                                     <th scope="col" class="w45" style="">재고수량</th>
                                     <th scope="col" class="w105" style="">총 상품구매금액</th>
@@ -351,13 +349,18 @@
                                         <c:forEach var="dto" items="${list}">
                                         <tr>
                                             <td scope="col" class="w24" data-id="${dto.ord_det_id}" data-code="${dto.code_name}"><input type="checkbox" class="allChk"></td>
-                                            <td scope="col" class="w90" style=""><fmt:formatDate value="${dto.ord_date}" pattern="yyyy-MM-dd" type="date"/>
+                                            <td scope="col" class="w110"><fmt:formatDate value="${dto.ord_date}" pattern="yyyy-MM-dd" type="date"/>
                                             (<fmt:formatDate value='${dto.ord_date}' pattern='HH:mm' type='time'/>)</td>
-                                            <td scope="col" class="w90" style="">${dto.ord_id}</td>
+                                            <td scope="col" class="w110" style="">${dto.ord_id}</td>
                                             <td scope="col" class="w120 ord_det_id" style="">${dto.ord_det_id}</td>
-                                            <td scope="col" class="w60" style="">${dto.column_sts}</td>
-                                            <td scope="col" class="w80" style="">${dto.mem_id}</td>
-                                            <td scope="col" class="w120" style="">${dto.prod_name}</td>
+                                            <td scope="col" class="w80 status" style="">${dto.column_sts}</td>
+                                            <td scope="col" class="w90" style="">${dto.mem_id}</td>
+                                            <td scope="col" class="w210" style="">
+                                                <div class="img_outer">
+                                                    <img src="${dto.prod_img_id}" class="w50 img">
+                                                    <div class="img_next">&nbsp;${dto.prod_name}</div>
+                                                 </div>
+                                            </td>
                                             <td scope="col" class="w45 prod_qty" style="">${dto.prod_qty}</td>
                                             <td scope="col" class="w45 real_prod_qty" style="">${dto.real_prod_qty}</td>
                                             <td scope="col" class="w105" style="">${dto.prod_tot_price}</td>

@@ -1,6 +1,8 @@
 package com.pofol.main.orders.delivery.repository;
 
 import com.pofol.main.orders.delivery.domain.DeliveryDto;
+import com.pofol.main.orders.delivery.domain.SearchDeliveryCondition;
+import com.pofol.main.orders.order.domain.OrderDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -32,7 +34,27 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     }
 
     @Override
+    public List<OrderDetailDto> selectForDelivery() throws Exception {
+        return session.selectList(namespace+"selectForDelivery");
+    }
+
+    @Override
     public List<DeliveryDto> selectListByWaybillNum(Long waybill_num) throws Exception {
         return session.selectList(namespace+"selectListByWaybillNum",waybill_num);
+    }
+
+    @Override
+    public int searchResultCnt(SearchDeliveryCondition sc) throws Exception {
+        return session.selectOne(namespace + "searchResultCnt", sc);
+    }
+
+    @Override
+    public List<OrderDetailDto> searchSelectPage(SearchDeliveryCondition sc) throws Exception {
+        return session.selectList(namespace + "searchSelectPage", sc);
+    }
+
+    @Override
+    public String selectPackTypeByWaybillNum(Long waybill_num) throws Exception {
+        return session.selectOne(namespace + "selectPackTypeByWaybillNum", waybill_num);
     }
 }

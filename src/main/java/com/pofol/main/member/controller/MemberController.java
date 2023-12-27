@@ -40,6 +40,8 @@ public class MemberController {
         //1. 인증된 회원과 익명사용자의 Authentication을 확인
         System.out.println("로그인GET : " + authentication);
         String referer = request.getHeader("Referer"); //login_form
+        String ser = request.getServletPath();
+        System.out.println("ser : " +ser);
 
         //referer - o 버튼으로 들어옴
         //referer - x url
@@ -75,9 +77,10 @@ public class MemberController {
                 return "redirect:http://localhost:8080/main";
                 //return "main";
 
-                //referer ="http://localhost:8080/main"
             }
-            if(referer.equals("http://localhost:8080/member/login_form")){
+//            if(referer.equals("http://localhost:8080/member/login_form")){
+            if(referer.contains("/member/login_form")){
+                System.out.println("인증이 되고 referer가 login폼");
                 return "main";
             }else {
                 return "redirect:" + referer;
@@ -88,65 +91,7 @@ public class MemberController {
     }
 
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String userGET(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Object result = session.getAttribute("result");
-        model.addAttribute("result", result);
-        return "member/user";
-    }
 
-    @GetMapping("/admin")
-    public @ResponseBody String admin() {
-        System.out.println("어드민 진입");
-        return "admin";
-    }
-
-
-    @GetMapping(value = "/info", produces = "text/plain; charset=UTF-8")
-    public @ResponseBody String info(HttpServletRequest request,Authentication authentication2) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object a = authentication.getPrincipal();
-        HttpSession session = request.getSession();
-        System.out.println("authentication : "+authentication);
-
-        if(authentication instanceof AnonymousAuthenticationToken){
-            //여기는 인증이 안되었을 때만 실행
-        }
-        System.out.println("authentication2 : " + authentication2);
-
-//        //유저이름을 가져오기 위해서
-//        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-//        System.out.println("securityUser : "+securityUser);
-//
-//        // SecurityUser 객체에서 mem_name 가져오기
-//        String memName = securityUser.getMem_name();
-//        System.out.println("memName : "+memName);
-
-        //Object greeting = session.getAttribute("greeting");
-
-        return a.toString() + "     "  + "    한글 테스트     "+ authentication.getName()+"의  이름은 ";
-    }
-
-
-    @GetMapping("/triggerException")
-    public String triggerException() throws Exception {
-        // 예외를 발생시키는 코드
-        throw new Exception("This is a simulated exception.");
-    }
-
-    @GetMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
-        String referer = request.getHeader("Referer");
-        System.out.println("컨트롤러 referer : " + referer);
-    }
-
-
-
-    @GetMapping("/board")
-    public String boardJoin() {
-        return "member/board_test";
-    }
 
     @GetMapping("/join")
     public String memberJoin() {

@@ -117,6 +117,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		List<OrderDetailDto> list = orderDetailRepository.searchSelectPage(sc);
 		for(OrderDetailDto dto: list) {
 			dto.setColumn_sts(orderDetailRepository.selectByCodeName(dto.getCode_name()));
+			dto.setProd_img_id(orderDetailRepository.selectByOrderDetImg(dto.getOrd_det_id()));
 		}
 		return list;
 	}
@@ -124,14 +125,4 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public int searchResultCnt(SearchOrderCondition sc) throws Exception {
 		return orderDetailRepository.searchResultCnt(sc);
 	}
-
-	/**
-	 * @return List<OrderDetailDto>
-	 * @feat : 관리자 배송 페이지에서 주문상세를 가져오는 메서드
-	 */
-	@Override
-	public List<OrderDetailDto> selectForDelivery() {
-		return orderDetailRepository.selectForDelivery();
-	}
-
 }

@@ -40,11 +40,7 @@ public class MyReviewRepositoryImpl implements MyReviewRepository {
         return session.insert(namespace + "writeReview", dto);
     }
 
-//    // 리뷰상태변경
-//    @Override
-//    public int updateState(MyReviewWrtDto dto) {
-//        return session.insert(namespace + "updateState", dto);
-//    }
+
 
     // 리뷰수정
     @Override
