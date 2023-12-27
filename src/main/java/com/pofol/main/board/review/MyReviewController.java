@@ -30,7 +30,7 @@ public class MyReviewController {
     // 리뷰페이지 로드
     @RequestMapping("/review")
     public String review(Model m) {
-        ProReviewDto myReview = new ProReviewDto();
+        MyReviewWrtDto myReview = new MyReviewWrtDto();
         m.addAttribute("myReview", myReview);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loginMember = authentication.getName();
@@ -41,7 +41,7 @@ public class MyReviewController {
     // 리뷰작성
     @RequestMapping( "/writeProReview")
     public String writeProReview(HttpServletRequest request, @RequestParam MultipartFile ori_filename, Model m) throws IllegalStateException, IOException {
-        System.out.println();
+        System.out.println(request);
         MyReviewWrtDto dto = new MyReviewWrtDto();
 
         try {
@@ -55,6 +55,7 @@ public class MyReviewController {
         }
 
         dto.setMem_id(request.getParameter("mem_id"));
+        dto.setProd_name(request.getParameter("prod_name"));
         dto.setReview_content(request.getParameter("review_content"));
         dto.setReviewStatus("Y");
 
