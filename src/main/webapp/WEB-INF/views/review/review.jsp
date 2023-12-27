@@ -346,6 +346,7 @@
                         htmlTag += '</div>';
                     } else {
                         $.each(data, function(index, reviewList){
+                            alert(data);
                             htmlTag += '<div class="reviewGrp">';
                             htmlTag += '<div class="review-container" id="review">';
                             htmlTag += '<div id="reviewContent">';
@@ -374,9 +375,9 @@
                             htmlTag += '<div class="modal-body">';
 
                             htmlTag += '<form name="reviewFrm" id="reviewFrm" method="post" style="margin: 0px;" enctype="multipart/form-data">';
-                            htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+reviewList.ord_id+'">';
-                            htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+reviewList.prod_id+'">';
-                            htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+reviewList.mem_id+'">';
+                            htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
+                            htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
+                            htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
 
                             // prod_name 가져오기 위해서 추가 !!
                             htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + reviewList.prod_name + '">';
@@ -510,7 +511,7 @@
 
                             htmlTag += '<div class="modal-body">';
 
-                            htmlTag += '<form name="mdfyReviewFrm" id="mdfyReviewFrm" method="post" style="margin: 0px;">';
+                            htmlTag += '<form name="mdfyReviewFrm" id="mdfyReviewFrm"  method="post" style="margin: 0px;">';
                             htmlTag += `<input type="hidden" name="review_id" id="review_id" value="${reviewList.review_id}">`;
                             htmlTag += `<input type="hidden" name="ord_id" id="ord_id" value="${reviewList.ord_id}">`;
                             htmlTag += `<input type="hidden" name="prod_id" id="prod_id" value="${reviewList.prod_id}">`;
@@ -584,7 +585,8 @@
         // 리뷰 작성 실행
         var reviewFrm = document.getElementById("reviewFrm");
         reviewFrm.action = "writeProReview";
-        reviewFrm.submit();
+        console.log("reviewFrm: " + reviewFrm);
+        // reviewFrm.submit();
     }
 
     function modifyReview(){

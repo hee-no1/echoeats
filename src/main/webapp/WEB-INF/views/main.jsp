@@ -16,7 +16,7 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="/resources/images/ad1.jpg">
+                    <img id="first-banner" src="/resources/images/second-banner.jpg">
                 </div>
                 <div class="swiper-slide">
                     <img src="/resources/images/ad2.jpg">
@@ -34,9 +34,9 @@
         </div>
         <button id="btn_left" type="button"></button>
         <button id="btn_right" type="button"></button>
-        <div id="ad-page">
-            <div>1/5</div>
-        </div>
+<%--        <div id="ad-page">--%>
+<%--            <div>1/5</div>--%>
+<%--        </div>--%>
     </div>
     <div id="main-01"> <!-- 슈퍼빅세일특가 -->
         <div class="SectionTitle">
