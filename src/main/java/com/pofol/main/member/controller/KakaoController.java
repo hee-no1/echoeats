@@ -53,10 +53,17 @@ public class KakaoController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
+
+        String fullURL = httprequest.getRequestURL().toString();
+        System.out.println("fullURL: " + fullURL);
+
+        String baseURL = fullURL.substring(0, fullURL.indexOf(httprequest.getRequestURI()));
+        System.out.println("baseURL: " + baseURL);
+
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "adb16712b617f7a830213eb50de44a79");
-        params.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+        params.add("redirect_uri", baseURL+"/auth/kakao/callback");
         params.add("code", code);
 
         //헤더와 바디를 하나의 오브젝트에 담기
@@ -123,8 +130,5 @@ public class KakaoController {
         loginSuccessHandler.onAuthenticationSuccess(httprequest, httpresponse,authenticate);
 
 
-        //그냥 "main"으로 했을 때는 브라우저는 정상적으로 main으로 나오지만 url주소는 kakao/auth/callback/~~~~~ 이렇게 나온다
-        //그래서 리다이렉트로 바꿈
-        //return "redirect:http://localhost:8080/main";
     }
 }
