@@ -346,6 +346,8 @@
                         htmlTag += '</div>';
                     } else {
                         $.each(data, function(index, reviewList){
+                            console.log("data[index]", data[index]);
+
                             htmlTag += '<div class="reviewGrp">';
                             htmlTag += '<div class="review-container" id="review' + index + '">';
                             htmlTag += '<div id="reviewContent' + index + '">';
@@ -363,7 +365,7 @@
                             htmlTag += '</div>';
                             htmlTag += '</div>';
 
-                            console.log(htmlTag);
+                            // console.log(htmlTag);
                             // 모달창
                             htmlTag += '<div class="modal fade" id="reviewModal' + index + '">';
                             htmlTag += '<div class="modal-dialog modal-dialog-centered">';
@@ -373,7 +375,7 @@
                             htmlTag += '</div>';
                             htmlTag += '<div class="modal-body">';
 
-                            htmlTag += '<form name="reviewFrm" id="reviewFrm" method="post" style="margin: 0px;" enctype="multipart/form-data">';
+                            htmlTag += '<form name="reviewFrm" id="reviewFrm' + index + '" method="post" style="margin: 0px;" enctype="multipart/form-data">';
                             htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
                             htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
                             htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
@@ -408,7 +410,7 @@
                             htmlTag += '</div>';
 
                             htmlTag += '<div class="buttonBox" style="text-align: center; padding-top: 20px;">';
-                            htmlTag += '<input type="button" id="write_review" value="작성하기" onclick="writeProReview()" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
+                            htmlTag += '<input type="button" id="write_review" value="작성하기" onclick="writeProReview('+index+')" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 5px;">';
 
                             // htmlTag += '<button type="button" class="closeReviewModal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
                             htmlTag += '<button type="button" class="closeReviewModal" data-dismiss="modal" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px;">닫기</button>';
@@ -584,13 +586,12 @@
     //     reader.readAsDataURL(event.target.files[0]);
     // }
 
-    function writeProReview() {
+    function writeProReview(index) {
         // // 리뷰 작성 실행
-        var reviewFrm = document.getElementById("reviewFrm");
+        var reviewFrm = document.querySelector("#reviewFrm"+index);
         reviewFrm.action = "writeProReview";
+        console.log("reviewFrm", reviewFrm);
         reviewFrm.submit();
-        // document.getElementById("reviewFrm").submit();
-
     }
 
 
