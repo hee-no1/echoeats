@@ -9,6 +9,7 @@ import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.service.OrderDetailService;
 import com.pofol.main.orders.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class DeliveryServiceImpl implements DeliveryService{
     public void writeDelivery(List<DeliveryDto> deliveryList) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
+
+//        if(authentication instanceof AnonymousAuthenticationToken){
+//            //여기는 인증이 안되었을 때만 실행
+//        }
 
         try {
             //운송장번호가 같으면 포장 타입이 같아야한다! 그걸 확인하는 것
