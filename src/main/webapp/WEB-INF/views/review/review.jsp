@@ -352,8 +352,6 @@
                         htmlTag += '</div>';
                     } else {
                         $.each(data, function(index, reviewList){
-                            console.log("data[index]", data[index]);
-
                             htmlTag += '<div class="reviewGrp">';
                             htmlTag += '<div class="review-container" id="review' + index + '">';
                             htmlTag += '<div id="reviewContent' + index + '">';
@@ -380,13 +378,11 @@
                             htmlTag += '<h4 class="modal-title">후기 작성</h4>';
                             htmlTag += '</div>';
                             htmlTag += '<div class="modal-body">';
-
                             htmlTag += '<form name="reviewFrm" id="reviewFrm' + index + '" method="post" style="margin: 0px;" enctype="multipart/form-data">';
                             htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
                             htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
                             htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
                             htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + data[index].prod_name + '">';
-
 
                             htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬을 위해 justify-content-end 사용
                             // 이게 지금 이미지가 랜덤이 나옴,,
@@ -524,7 +520,7 @@
 
                             htmlTag += '<div class="modal-body">';
 
-                            htmlTag += '<form name="mdfyReviewFrm" id="mdfyReviewFrm" method="post" style="margin: 0px;">';
+                            htmlTag += '<form name="mdfyReviewFrm" id="mdfyReviewFrm"  method="post" style="margin: 0px;">';
                             htmlTag += `<input type="hidden" name="review_id" id="review_id" value="${reviewList.review_id}">`;
                             htmlTag += `<input type="hidden" name="ord_id" id="ord_id" value="${reviewList.ord_id}">`;
                             htmlTag += `<input type="hidden" name="prod_id" id="prod_id" value="${reviewList.prod_id}">`;
