@@ -346,12 +346,6 @@
                         htmlTag += '</div>';
                     } else {
                         $.each(data, function(index, reviewList){
-<<<<<<< HEAD
-                            alert(data);
-=======
-                            console.log("data[index]", data[index]);
-
->>>>>>> 126c542dfeef0c0247da0eb3ed3358c1fe747914
                             htmlTag += '<div class="reviewGrp">';
                             htmlTag += '<div class="review-container" id="review' + index + '">';
                             htmlTag += '<div id="reviewContent' + index + '">';
@@ -378,23 +372,11 @@
                             htmlTag += '<h4 class="modal-title">후기 작성</h4>';
                             htmlTag += '</div>';
                             htmlTag += '<div class="modal-body">';
-
-<<<<<<< HEAD
-                            htmlTag += '<form name="reviewFrm" id="reviewFrm" method="post" style="margin: 0px;" enctype="multipart/form-data">';
-                            htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
-                            htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
-                            htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
-
-                            // prod_name 가져오기 위해서 추가 !!
-                            htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + reviewList.prod_name + '">';
-=======
                             htmlTag += '<form name="reviewFrm" id="reviewFrm' + index + '" method="post" style="margin: 0px;" enctype="multipart/form-data">';
                             htmlTag += '<input type="hidden" name="ord_id" id="ord_id" value="'+data[index].ord_id+'">';
                             htmlTag += '<input type="hidden" name="prod_id" id="prod_id" value="'+data[index].prod_id+'">';
                             htmlTag += '<input type="hidden" name="mem_id" id="mem_id" value="'+data[index].mem_id+'">';
                             htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + data[index].prod_name + '">';
->>>>>>> 126c542dfeef0c0247da0eb3ed3358c1fe747914
-
 
                             htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬을 위해 justify-content-end 사용
                             // 이게 지금 이미지가 랜덤이 나옴,,
@@ -604,13 +586,8 @@
         // // 리뷰 작성 실행
         var reviewFrm = document.querySelector("#reviewFrm"+index);
         reviewFrm.action = "writeProReview";
-<<<<<<< HEAD
-        console.log("reviewFrm: " + reviewFrm);
-        // reviewFrm.submit();
-=======
         console.log("reviewFrm", reviewFrm);
         reviewFrm.submit();
->>>>>>> 126c542dfeef0c0247da0eb3ed3358c1fe747914
     }
 
 
