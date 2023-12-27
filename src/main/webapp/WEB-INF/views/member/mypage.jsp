@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%--    <link rel="icon" href="./favicon.ico">--%>
-    <title>컬리</title>
+    <title>마이에코</title>
     <link rel="stylesheet" href="/resources/order/css/mypageOrder.css">
     <link rel="stylesheet" href="/resources/css/member/grade.css">
     <link rel="stylesheet" href="/resources/css/member/mypage.css">
