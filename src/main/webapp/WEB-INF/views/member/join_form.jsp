@@ -559,7 +559,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/address/detail",
+                    url: "/address/detail",
                     data: JSON.stringify(inputed),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
