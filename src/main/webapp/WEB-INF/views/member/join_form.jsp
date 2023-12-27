@@ -526,7 +526,7 @@
     //가입하기
     let index = {
         init: function() {
-            $("#sign_in_button").on("click", function () {
+            $("#sign_in_button").on("click", ()=>{
                 this.save();
             })
         },
