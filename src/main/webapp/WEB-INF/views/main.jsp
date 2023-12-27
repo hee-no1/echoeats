@@ -8,8 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
+    <link rel="stylesheet" href="/resources/product/css/snow.css">
 </head>
 <body>
+<script src="/resources/product/js/snow.js"></script>
+
 <%@ include file="include/header.jspf" %>
 <main>
     <div>
@@ -373,6 +376,5 @@
 </div> <!--wrap-->
 
 <script src="/resources/product/js/main.js"></script>
-
 </body>
 </html>

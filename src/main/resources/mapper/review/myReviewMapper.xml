@@ -14,7 +14,7 @@
         SELECT *
         FROM member_review
         WHERE mem_id = #{mem_id} AND
-              reviewStatus = 'Y'
+              reviewStatus = #{reviewStatus}
     </select>
 
     <!-- 리뷰 작성 -->

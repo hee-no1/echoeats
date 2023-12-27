@@ -44,7 +44,6 @@
                 <button type="button" class="sign_in_button">
                     <span class="button_name" id="join">회원가입</span>
                 </button>
-<%--                <a class="kakao_a" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=adb16712b617f7a830213eb50de44a79&redirect_uri=http://localhost:8080/auth/kakao/callback">--%>
                 <a class="kakao_a active">
                     <img src="/resources/images/kakao_login_button.png"></a>
             </div>
@@ -136,7 +135,7 @@
         console.log('회원가입')
         let form = $('#loginform');
         form.attr("method", "GET");
-        form.attr("action", "/join").submit();
+        form.attr("action", "/member/join").submit();
 
 
     });
@@ -149,9 +148,12 @@
 
     $('.kakao_a').on("click", function () {
         var currentId = $(this).attr('class');
+        //현재 작업 중인 도메인 주소
+        var currentDomain = window.location.origin;
         if(currentId.includes('active')){
             $(this).removeClass('active').addClass('non');
-            window.location.href ="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=adb16712b617f7a830213eb50de44a79&redirect_uri=http://localhost:8080/auth/kakao/callback";
+            window.location.href ="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=adb16712b617f7a830213eb50de44a79&redirect_uri="+currentDomain+"/auth/kakao/callback";
+
         }
     });
 

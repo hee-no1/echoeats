@@ -414,7 +414,8 @@ element.style {
     border-radius: 4px;
 }
 ._1f1nead0 {
-    border-color: #5f0080;
+    /*border-color: #5f0080;*/
+    border-color: #00C73C;
 }
 .umo8vf1 {
     border-width: 1px;
@@ -427,7 +428,8 @@ element.style {
     font-weight: 600;
 }
 ._1shy0uy0 {
-    color: #5f0080;
+    /*color: #5f0080;*/
+    color: #00C73C;
 }
 ._15ozwg2 {
     cursor: pointer;

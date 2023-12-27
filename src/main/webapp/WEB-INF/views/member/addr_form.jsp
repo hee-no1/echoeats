@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%--    <link rel="icon" href="./favicon.ico">--%>
-    <title>컬리</title>
+    <title>에코</title>
     <link rel="stylesheet" href="/resources/css/member/addr_form.css">
     <link rel="stylesheet" href="/resources/product/css/main-css.css">
     <script src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

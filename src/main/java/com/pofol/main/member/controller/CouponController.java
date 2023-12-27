@@ -91,9 +91,7 @@ public class CouponController {
                 System.out.println("is_downloaded : " + is_downloaded);
 
                 if (!is_downloaded) {
-                    System.out.println("다운 받은 적이 없음");
 
-                    System.out.println("매개변수");
                     List<CouponJoinDto> couponJoin = couponService.getCouponJoin(authentication.getName());
                     boolean have_coupon = couponJoin.stream().anyMatch(a -> a.getCp_id().equals(cp_id));
                     CouponJoinDto couponJoinDto = null;
@@ -115,14 +113,12 @@ public class CouponController {
 
                     //쿠폰테이블에 있는 수량 -1
                     int dw_id_result = couponRepository.update_minus_cp_qty(dw_id);
-                    System.out.println("dw_id_result : " + dw_id_result);
 
                     //쿠폰 다운 이력에 추가
                     Map<String, Object> map = new HashMap<>();
                     map.put("mem_id", authentication.getName());
                     map.put("dw_id", dw_id);
                     int insert_cp_dw_hi_result = couponRepository.insert_cp_dw_hi(map);
-                    System.out.println("insert_cp_dw_hi_result : " + insert_cp_dw_hi_result);
 
 
                     //쿠폰 다운 이력 테이블과 쿠폰 다운 테이블의 중복된 dw_id들을 반환
@@ -146,7 +142,6 @@ public class CouponController {
                             couponJoinDto1 = joinDto;
                         }
                     }
-                    System.out.println("couponJoinDto1 : " + couponJoinDto1);
 
 
                     //넘길 데이터
