@@ -27,7 +27,7 @@
         <div class = "css-1oynwoh epggjnz3">
             <div class = "css-1nmq3i1 epggjnz2">
                 <div class = "css-zjik7">
-                    <div class = "welcome">${mem_grade}</div>
+                    <div class = "welcome">${mem_grade.gd_name}</div>
                     <div class = "css-38n0u7">
                         <strong class = "name">
                             <sec:authorize access="isAuthenticated()">
@@ -42,8 +42,7 @@
                 </div>
 
                 <div class = "css-1rqh7gg">
-                    <p class = "css-1nwlk71">적립 5%</p>
-                    <p class = "css-1nwlk71">최소 1회 무료배송</p>
+                    <p class = "css-1nwlk71">적립 ${mem_grade.acm_rate}%</p>
                 </div>
             </div>
 
