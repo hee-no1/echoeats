@@ -57,7 +57,9 @@
                         </dl>
                         <dl class="css-1ccl3pq e1437c646">
                             <dt class="css-dzjp62 e1437c645">결제금액</dt>
-                            <dd class="css-1i58pf4 e1437c644">${ordDto.tot_pay_price}원</dd>
+                            <dd class="css-1i58pf4 e1437c644">
+                                <fmt:formatNumber value="${ordDto.tot_pay_price}" pattern="#,###"/>원
+                            </dd>
                         </dl>
                     </div>
                 </div>
