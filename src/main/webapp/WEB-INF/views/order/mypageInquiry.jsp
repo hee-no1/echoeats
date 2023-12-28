@@ -1107,7 +1107,7 @@
                                                                     <strong class="css-1sz9zst e1fgvk592">주문취소</strong>
                                                                     <p class="css-1vtbu89 e1fgvk591">[주문완료] 상태일 경우에만 주문
                                                                         취소 가능합니다. (배송준비중 이후 취소불가)</p>
-                                                                    <p class="css-1vtbu89 e1fgvk591">[마이컬리 &gt; 주문내역
+                                                                    <p class="css-1vtbu89 e1fgvk591">[마이에코 &gt; 주문내역
                                                                         상세페이지]에서 직접 취소하실 수 있습니다.</p>
                                                                     <p class="css-1vtbu89 e1fgvk591">주문상품의 부분취소는 불가능합니다.
                                                                         전체 주문 취소 후 다시 구매해주세요.</p><strong

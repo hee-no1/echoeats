@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>컬리</title>
+    <title>에코</title>
     <link rel="stylesheet" href="/resources/css/member/point.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
@@ -64,7 +64,7 @@
                                                                                                  aria-label="NaN / 1" style="width: 1023px;">
                 <div class="u75ne30 _1yyx8n02 _2wzkdc1 _1c1ajx22 _1siu7xkj">
                     <div class="u75ne30 _1yyx8n02 _2wzkdc1 _1c1ajx22 _1siu7xkj _15ozwg2 xjsnc60"><img
-                            alt="컬리상품권 구매하러가기" loading="lazy" width="1125" height="186" decoding="async"
+                            alt="에코상품권 구매하러가기" loading="lazy" width="1125" height="186" decoding="async"
                             data-nimg="1" class="u75ne30 u75ne35 _1siu7xkj"
                             srcset="https://www.kurlypay.co.kr/images/mypage/point/PointBannerPresentGiftcardV2.png?width=1200 1x, https://www.kurlypay.co.kr/images/mypage/point/PointBannerPresentGiftcardV2.png?width=3840 2x"
                             src="https://www.kurlypay.co.kr/images/mypage/point/PointBannerPresentGiftcardV2.png?width=3840"

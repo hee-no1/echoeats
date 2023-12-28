@@ -255,7 +255,7 @@
             <div class="board-top"> <!--게시판 상단1-->
                 <div class="board-top-content">
                     <h2 class="Notice1">공지사항</h2>
-                    <span class="Notice2">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</span>
+                    <span class="Notice2">에코의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</span>
                 </div>
             </div>
             <div style="text-align:center">

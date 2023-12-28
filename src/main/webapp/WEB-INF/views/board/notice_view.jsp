@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공지사항 - 컬리</title>
+  <title>공지사항 - 에코</title>
   <%@ include file="../include/bootstrap.jspf" %>
   <header>
     <%@ include file="../include/header.jspf" %>

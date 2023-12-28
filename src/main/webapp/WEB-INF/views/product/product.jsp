@@ -291,7 +291,7 @@
                 <div class="css-8k5a6c ezy1ugy1">
                     <div class="css-12peuyp ezy1ugy0"><span
                             style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
-                            alt="컬리 파트너스 BODY 이미지"
+                            alt="에코 파트너스 BODY 이미지"
                             src="https://3p-image.kurly.com/files/20231124/7f8cf35c-f24b-4e70-9b3f-e91c923ccda8.jpg"
                             decoding="async" data-nimg="fill" class="autoImage css-1zjvv7"
                             style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
@@ -374,7 +374,7 @@
                                       fill="#333333"></rect>
                             </svg>
                             <span>본 상품은 파트너사가 판매하는 상품입니다.</span></div>
-                        <p class="description">컬리는 통신판매중개자로서 통신판매의 당사자가 아닙니다.
+                        <p class="description">에코는 통신판매중개자로서 통신판매의 당사자가 아닙니다.
                             본 상품의 광고, 주문, 품질, 교환/환불 등의 의무와 책임은 각 판매자에게 있습니다.</p>
                     </div>
                 </div>
@@ -391,8 +391,8 @@
                         </dl>
                         <dl class="css-12dlzwv e1711h2r3">
                             <dt class="css-csns7h e1711h2r2">차별화된 Kurly Only 상품</dt>
-                            <dd class="css-164ekbt e1711h2r1">전국 각지와 해외의 훌륭한 생산자가<br>믿고 선택하는 파트너, 컬리.<br>3천여 개가
-                                넘는 컬리 단독 브랜드,
+                            <dd class="css-164ekbt e1711h2r1">전국 각지와 해외의 훌륭한 생산자가<br>믿고 선택하는 파트너, 에코.<br>3천여 개가
+                                넘는 에코 단독 브랜드,
                                 스펙의<br>Kurly Only 상품을 믿고 만나보세요.<span class="css-1ldxevt e1711h2r0">(온라인 기준 /
                                             자사몰, 직구 제외)</span>
                             </dd>
@@ -415,7 +415,7 @@
                         <dl class="css-12dlzwv e1711h2r3">
                             <dt class="css-iktv7d e1711h2r2">환경을 생각하는 지속 가능한 유통</dt>
                             <dd class="css-164ekbt e1711h2r1">친환경 포장재부터 생산자가 상품에만<br>집중할 수 있는 직매입 유통구조까지,<br>지속
-                                가능한 유통을 고민하며 컬리를
+                                가능한 유통을 고민하며 에코를
                                 있게<br>하는 모든 환경(생산자, 커뮤니티, 직원)이<br>더 나아질 수 있도록 노력합니다.
                             </dd>
                         </dl>
@@ -436,11 +436,11 @@
                             <li class="css-18zkc1e e18xf2bx3"><strong class="css-x0he4f e18xf2bx2">카카오톡
                                 문의</strong><span class="css-1qjuprf e18xf2bx1">월~토요일 오전 7시 - 오후
                                             6시</span><span class="css-1qjuprf e18xf2bx1">일/공휴일 오전 7시 - 오후
-                                            1시</span><strong class="css-xjrpkm e18xf2bx0">카카오톡에서 '컬리' 를 검색 후<br>대화창에 문의
+                                            1시</span><strong class="css-xjrpkm e18xf2bx0">카카오톡에서 '에코' 를 검색 후<br>대화창에 문의
                                 및 불편사항을<br>남겨주세요.</strong></li>
                             <li class="css-18zkc1e e18xf2bx3"><strong class="css-x0he4f e18xf2bx2">홈페이지
                                 문의</strong><span class="css-1qjuprf e18xf2bx1">365일</span><span
-                                    class="css-1qjuprf e18xf2bx1">로그인 &gt; 마이컬리
+                                    class="css-1qjuprf e18xf2bx1">로그인 &gt; 마이에코
                                             &gt;
                                             1:1 문의</span><strong class="css-xjrpkm e18xf2bx0">고객센터 운영 시간에
                                 순차적으로<br>답변해드리겠습니다.</strong>
@@ -461,7 +461,7 @@
                         상품의 정확한 상태를 확인할 수 있도록 사진을 함께 보내주시면 더 빠른 상담이 가능합니다.<span class="css-13ttlil e1u4390v2">※
                                     배송 상품에 문제가 있는
                                     것으로
-                                    확인되면 배송비는 컬리가 부담합니다.</span></p>
+                                    확인되면 배송비는 에코가 부담합니다.</span></p>
                 </div>
                 <div class="css-zym26p e1wuccxq2"><strong class="css-ro4hvg e1wuccxq1">02. 단순 변심, 주문 착오의
                     경우</strong>
@@ -497,7 +497,7 @@
                 <div class="css-xwfhcz e1wbvr7p4"><strong class="css-1whdyd5 e1wbvr7p3">주문 취소 안내</strong>
                     <p class="css-1l0p3iw e1wbvr7p2"><strong class="css-1oekmga e1wbvr7p1">- [주문완료] 상태일 경우에만 주문
                         취소 가능합니다.
-                        - [마이컬리 &gt; 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</strong></p>
+                        - [마이에코 &gt; 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</strong></p>
                     <button type="button"
                             class="css-1t0iw3m e1wbvr7p0">닫기
                     </button>
@@ -506,7 +506,7 @@
                     <p class="css-13xsn2p e1wuccxq0">- [배송준비중] 부터는 취소가 불가하니, 반품으로 진행해주세요. (상품에 따라 반품이 불가할 수
                         있습니다.)
                         - 주문마감 시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.
-                        - 비회원은 App 또는 모바일 웹사이트에서 [마이컬리 &gt; 비회원 주문조회 페이지] 에서 취소가 가능합니다.
+                        - 비회원은 App 또는 모바일 웹사이트에서 [마이에코 &gt; 비회원 주문조회 페이지] 에서 취소가 가능합니다.
                         - 일부 예약상품은 배송 3~4일 전에만 취소 가능합니다.
                         - 주문상품의 부분취소는 불가능합니다. 전체 주문 취소 후 다시 구매 해주세요.
                         - 미성년자 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.
@@ -595,7 +595,7 @@
                             <li class="css-owypta eu9pqlw1">상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당
                                 게시판으로 이동될 수 있습니다.
                             </li>
-                            <li class="css-owypta eu9pqlw1">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이컬리 내<a
+                            <li class="css-owypta eu9pqlw1">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이에코 내<a
                                     href="/mypage/inquiry/list" class="css-1p56jfg eu9pqlw0">1:1 문의</a>에 남겨주세요.
                             </li>
                         </ul>

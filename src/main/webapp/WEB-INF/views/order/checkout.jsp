@@ -71,7 +71,7 @@
 
             <div class="css-yazyg9 e150alo82"><span class="css-ln1csn e150alo81">이메일</span>
             <div class="css-82a6rk e150alo80">${member.mem_email}
-            <div class="css-1r0yqr6 e1vfdada1"><p class="css-i7dt79 e1vfdada0">이메일을 통해 주문처리과정을 보내드립니다.</p><p class="css-i7dt79 e1vfdada0">정보 변경은 마이컬리 &gt; 개인정보 수정 메뉴에서 가능합니다.</p></div></div></div></div>
+            <div class="css-1r0yqr6 e1vfdada1"><p class="css-i7dt79 e1vfdada0">이메일을 통해 주문처리과정을 보내드립니다.</p><p class="css-i7dt79 e1vfdada0">정보 변경은 마이에코 &gt; 개인정보 수정 메뉴에서 가능합니다.</p></div></div></div></div>
 
 <%--          배송정보--%>
         <div id="shipping-container">
