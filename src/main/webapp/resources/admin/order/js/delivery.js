@@ -11,7 +11,20 @@ function updateValue(input){
 }
 
 //배송중 처리 버튼을 누르면
-document.getElementById("deliveringBtn").addEventListener('click', function(){
+let lastClickTimeDeliverying = 0; //버튼 중복 클릭을 방지하기 위함
+document.getElementById("deliveringBtn").addEventListener('click', function(e){
+
+    //중복 클릭 방지
+    let currentTimeDeliverying = new Date().getTime();
+    console.log("전 currentTime", currentTimeDeliverying)
+    let timeDiff = currentTimeDeliverying - lastClickTimeDeliverying;
+    if(timeDiff < 7000){ //5초 이내에 다시 클릭하면 이벤트를 무시한다.
+        e.preventDefault();
+        return;
+    }
+    lastClickTimeDeliverying = currentTimeDeliverying;
+
+
     //.allChk 체크박스에 check된 것만 가지고 온다.
     let list = document.querySelectorAll('input[name="dlvyChk"]:checked');
     if(list.length === 0 ){
@@ -78,7 +91,18 @@ document.getElementById("deliveringBtn").addEventListener('click', function(){
 });
 
 //배송 완료 처리 -> 운송장번호 하나라도 상태가 배송완료로 바뀌면 같은 운송장번호를 가진 주문상세의 상태도 모두 바뀐다.
+let lastClickTimeDeliveryComplete = 0; //버튼 중복 클릭을 방지하기 위함
 document.getElementById("deliveryCompleteBtn").addEventListener('click', function(){
+
+    //중복 클릭 방지
+    let currentTimeDeliveryComplete = new Date().getTime();
+    console.log("전 currentTime", currentTimeDeliveryComplete)
+    let timeDiff = currentTimeDeliveryComplete - lastClickTimeDeliveryComplete;
+    if(timeDiff < 7000){ //5초 이내에 다시 클릭하면 이벤트를 무시한다.
+        e.preventDefault();
+        return;
+    }
+    lastClickTimeDeliveryComplete = currentTimeDeliveryComplete;
 
     let list = document.querySelectorAll('input[name="dlvyChk"]:checked');
     if(list.length === 0 ){
