@@ -303,8 +303,8 @@
         writtenArea.classList.add('hide');
 
         // 작성가능후기, 작성한후기 버튼 속성지정
-        $('#beforeWrite').attr('style', "color: #00C73C");
-        $('#written').attr('style', "background-color: #00C73C");
+        $('#beforeWrite').attr('style', "background-color: #00C73C");
+        $('#written').attr('style', "color: #00C73C");
 
         var reviewInfo = {
             mem_id: '${loginMember}',
@@ -318,8 +318,8 @@
             console.log("작성 가능한리뷰 클릭");
             beforeWriteArea.classList.remove('hide'); // 보이기
             writtenArea.classList.add('hide');  // 숨김
-            $('#beforeWrite').attr('style', "color:  #00C73C");
-            $('#written').attr('style', "background-color:  #00C73C");
+            $('#beforeWrite').attr('style', "background-color:  #00C73C");
+            $('#written').attr('style', "color:  #00C73C");
             var reviewInfo = {
                 mem_id: '${loginMember}',
                 reviewStatus : 'N'
@@ -385,7 +385,7 @@
                             htmlTag += '<input type="hidden" name="prod_name" id="prod_name" value="' + data[index].prod_name + '">';
 
                             htmlTag += '<div class="productInfo d-flex align-items-center justify-content-end" style="margin-bottom: 20px;">'; // 오른쪽 정렬을 위해 justify-content-end 사용
-                            // 이게 지금 이미지가 랜덤이 나옴,,
+                            // 이게 지금 이미지가 랜덤이 나옴
                             // htmlTag +=      '<div class="writeProImg" style="flex: 1;"><img src="' + reviewList.ori_filename + '" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
                             htmlTag += '<div class="writeProImg" style="flex: 1;"><img src="' + data[index].ori_filename + '" id="image'+index+'" style="width: 60px; height: 60px; border-radius: 5px;"></div>';
                             htmlTag += '<div class="writeProName" style="margin-left: 10px;">'+ data[index].prod_name + '</div>';
@@ -405,7 +405,7 @@
                             htmlTag += '<label for="file"><img src="https://cdn-icons-png.flaticon.com/512/1829/1829371.png" style="width: 60px; height: 60px;" alt="카메라" ></label>';
                             htmlTag += '</div>';
                             htmlTag += '<div><input type="file" id="file"  name="ori_filename" onchange="setThumbnail(event)"></div>';
-                            htmlTag += '<div border:1px solid #00C73C">';
+                            htmlTag += '<div style="border: 1px solid #00C73C;">';
                             <%--htmlTag += '<label for="thumb"><img class="thumb" src="${pageContext.request.contextPath }/resources/images/" style="width: 60px; height: 60px;"></label>';--%>
                             htmlTag += '<div id="preview"></div>';
                             htmlTag += '</div>';
@@ -456,8 +456,8 @@
             console.log("작성한리뷰 클릭");
             writtenArea.classList.remove('hide'); // 보이기
             beforeWriteArea.classList.add('hide'); // 숨김
-            $('#written').attr('style', "border-bottom:none; color: #00C73C");
-            $('#beforeWrite').attr('style', "background-color: #00C73C;");
+            $('#written').attr('style', "background-color: #00C73C");
+            $('#beforeWrite').attr('style', "color: #00C73C;");
 
             var reviewInfo = {
                 mem_id: '${loginMember}',
@@ -483,7 +483,7 @@
                     console.log ("작성한 리뷰 갯수 : " + writeReviewCnt)
 
                     let htmlTag = "";
-                    if (data.length == 0) {
+                    if (data.length === 0) {
                         console.log("작성한 리뷰 없음")
                         htmlTag += '<div class="orderList">';
                         htmlTag += '<div class="text-center noData "><h4><b>작성한 리뷰가 없습니다.</b></h4>';
@@ -534,7 +534,7 @@
 
                             htmlTag += '<div class="writeArea d-flex">';
                             htmlTag += '<div>'
-                            htmlTag += 		'<label for="R_content"style="width: 80px; text-align: left;  margin: 0px; margin-right: 20px;" >내용</label> ';
+                            htmlTag += 		'<label for="R_content" style="width: 80px; text-align: left;  margin: 0px; margin-right: 20px;" >내용</label> ';
                             htmlTag += '</div>';
 
                             htmlTag += '<div>'
@@ -600,7 +600,7 @@
     function modifyReview(){
         // 수정활성화
         $('#writtenReview').removeAttr('readonly');
-        $('#writtenReview').css('border', '3px solid #692498')
+        $('#writtenReview').css('border', '3px solid #692498');
         mdfyReviewFrm = document.getElementById("mdfyReviewFrm");
         mdfyReviewFrm.action ="modifyProReview";
         mdfyReviewFrm.submit();
