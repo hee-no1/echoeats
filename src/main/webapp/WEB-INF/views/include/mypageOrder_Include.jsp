@@ -24,7 +24,7 @@
                         <a href="/member/membership" class="css-1qcjshh">
                             <span class="css-1fid7vq">
                                 <span class="css-3a5cil">NEW</span>
-                                <span class="css-1kxzrwz">컬리멤버스</span>
+                                <span class="css-1kxzrwz">에코멤버스</span>
                                 <span class="css-10yg44e">월 1,900원으로 10배 쿠폰 받기</span>
                             </span>
                         </a>
@@ -35,7 +35,7 @@
                 <div class="css-1jemrvf epggjnz1">
                     <div class="css-1lomzjv epggjnz0">
                         <button class="css-1bm0yf4 e1ugk4rt6">
-                            <div class="css-157zkrj e1ugk4rt5">적립금 · 컬리캐시
+                            <div class="css-157zkrj e1ugk4rt5">적립금 · 에코캐시
                                 <span class="css-14phxgn e1ugk4rt4"></span>
                             </div>
                             <div class="css-1omzzwx e1ugk4rt3">바로가기
@@ -55,7 +55,7 @@
                     </div>
                     <div class="css-1lomzjv epggjnz0">
                         <button class="css-1bm0yf4 e1ugk4rt6">
-                            <div class="css-157zkrj e1ugk4rt5">나의 컬리 스타일
+                            <div class="css-157zkrj e1ugk4rt5">나의 에코 스타일
                                 <span class="css-14phxgn e1ugk4rt4"></span>
                             </div>
                             <div class="css-1omzzwx e1ugk4rt3">등록하기
@@ -68,7 +68,7 @@
                 <div class="css-1jemrvf epggjnz1">
                     <div class="css-1lomzjv epggjnz0">
                         <button class="css-13d66fq e1ugk4rt6">
-                            <div class="css-157zkrj e1ugk4rt5">컬리 퍼플 박스
+                            <div class="css-157zkrj e1ugk4rt5">에코 그린 박스
                                 <span class="css-14phxgn e1ugk4rt4"></span>
                             </div>
                             <div class="css-17cmttl e1ugk4rt3">알아보기</div>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="css-1lomzjv epggjnz0">
                         <button class="css-13d66fq e1ugk4rt6">
-                            <div class="css-157zkrj e1ugk4rt5">컬리멤버스
+                            <div class="css-157zkrj e1ugk4rt5">에코멤버스
                                 <span class="css-14phxgn e1ugk4rt4"></span>
                             </div>
                             <div class="css-17cmttl e1ugk4rt3">혜택받기</div>
@@ -92,7 +92,7 @@
 
         <div class="css-luwwab eug5r8l1">
             <div class="css-833hqy ecbxmj3">
-                <div class="css-1v4whg ecbxmj2">마이컬리</div>
+                <div class="css-1v4whg ecbxmj2">마이에코</div>
                 <ul class="css-1x9bshx ecbxmj1">
                     <li>
                         <a class="active css-g4g0eu ecbxmj0">주문내역
@@ -160,7 +160,7 @@
                     </li>
                     
                     <li>
-                        <a class=" css-g4g0eu ecbxmj0">결제수단 · 컬리페이
+                        <a class=" css-g4g0eu ecbxmj0">결제수단 · 에코페이
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                                 <defs>
                                     <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -186,7 +186,7 @@
                     </li>
                 
                     <li>
-                        <a class=" css-g4g0eu ecbxmj0">적립금 · 컬리캐시
+                        <a class=" css-g4g0eu ecbxmj0">적립금 · 에코캐시
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                                 <defs>
                                     <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
@@ -212,7 +212,7 @@
                     </li>
                     
                     <li>
-                        <a class=" css-g4g0eu ecbxmj0">나의 컬리 스타일
+                        <a class=" css-g4g0eu ecbxmj0">나의 에코 스타일
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
                                 <defs>
                                     <path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path>
