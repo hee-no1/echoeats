@@ -26,12 +26,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memRepo;
+    private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
     private final DelNotesRepository delNotesRepository;
     private final CouponRepository couponRepository;
     private final PointService pointService;
-    private final CartRepository cartRepo;
+    private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final OrderHistoryRepository orderHistoryRepository;
@@ -46,15 +46,16 @@ public class OrderServiceImpl implements OrderService{
 
         int tot_prod_price = 0; //총 주문 금액;
         int origin_prod_price = 0; //총 원래 상품 금액;
-        int dlvy_fee = 0;
+        int dlvy_fee = 0; //배송비
         String tot_prod_name; //총 상품명
 
-        OrderCheckout oc = new OrderCheckout(items);
+        OrderCheckout oc = new OrderCheckout(items); //주문서 생성
 
         try{
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
-                item.setProductOrderCheckout(prod);
+                ProductOrderCheckout prod = cartRepository.selectProductOrderCheckout(item);
+                //장바구니에서 넘어온 정보를 통해 상품 DB에서 상품 정보를 조회해서 가져옴
+                item.setProductOrderCheckout(prod); //item dto에 상품정보를 담아서 view로 전달
 
                 if(item.getOpt_prod_id() == null){ //일반 상품일 때
                     tot_prod_price += prod.getDisc_price() * item.getQty(); //총 주문금액 계산
@@ -63,6 +64,7 @@ public class OrderServiceImpl implements OrderService{
                     tot_prod_price += prod.getOpt_disc_price() * item.getQty();
                     origin_prod_price += prod.getOpt_price() * item.getQty();
                 }
+
                 item.calculateProductTotal(); //각 상품별 총 주문금액과 원래 금액 계산
             }
 
@@ -94,7 +96,7 @@ public class OrderServiceImpl implements OrderService{
 
 
             //회원정보 가져오기
-            oc.setMemberDto(memRepo.selectMember(mem_id));
+            oc.setMemberDto(memberRepository.selectMember(mem_id));
 
             //배송지
             oc.setAddressDto(addressRepository.selectDefaultAddress(mem_id));
@@ -103,7 +105,7 @@ public class OrderServiceImpl implements OrderService{
             oc.setDelNotesDto(delNotesRepository.select_delNotes(mem_id));
 
             //쿠폰 정보 가져오기. (단, 총 주문 금액이 쿠폰 사용 가능한 최소 금액보다 클 경우에만 사용 가능)
-            List<CouponJoinDto> couponJoinDtos =  Collections.synchronizedList(couponRepository.selectMembersWithCoupons(mem_id));
+            List<CouponJoinDto> couponJoinDtos =  Collections.synchronizedList(couponRepository.selectMembersWithCoupons(mem_id)); //스레드간의 안전한 접근 보장
             Iterator<CouponJoinDto> it = couponJoinDtos.iterator();
             while (it.hasNext()){
                 if(tot_prod_price < it.next().getMin_amt()){
@@ -174,7 +176,7 @@ public class OrderServiceImpl implements OrderService{
 
             //주문 상세 table 작성
             for (SelectedItemsDto item : items) {
-                ProductOrderCheckout prod = cartRepo.selectProductOrderCheckout(item);
+                ProductOrderCheckout prod = cartRepository.selectProductOrderCheckout(item);
                 item.setProductOrderCheckout(prod);
                 item.calculateProductTotal();
 
