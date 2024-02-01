@@ -1,6 +1,7 @@
 package com.pofol.main.orders.order.controller;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.pofol.main.member.dto.PointDto;
 import com.pofol.main.member.service.*;
@@ -8,6 +9,7 @@ import com.pofol.main.orders.order.domain.OrderDetailDto;
 import com.pofol.main.orders.order.service.OrderDetailService;
 import com.pofol.main.product.cart.CartDto;
 import com.pofol.main.product.cart.CartService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,10 +28,11 @@ import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.cart.SelectedItemsDto;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.http.HttpSession;
 
-
+@Slf4j
 @Controller
 @RequestMapping("/order")
 @RequiredArgsConstructor
@@ -51,13 +54,14 @@ public class OrderController {
         return "redirect:/main";
     }
 
-    //장바구니를 통해 넘어오는 정보
+    //장바구니를 통해 넘어오는 정보로 주문서를 작성
     @PostMapping("/checkout")
     public String receiveItems(SelectedItemsDto selectedItemsDto, HttpSession session){
         List<SelectedItemsDto> items = selectedItemsDto.getItems();
         try{
             OrderCheckout orderCheckout = orderService.writeCheckout(items);
-            System.out.println(orderCheckout);
+            log.info("{}",orderCheckout);
+//            System.out.println(orderCheckout);
             session.setAttribute("checkout", orderCheckout);
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +70,7 @@ public class OrderController {
         return "redirect:/order/checkout";
     }
 
+    //작성한 주문서를 view에 뿌려줌
     @GetMapping("/checkout")
     public String showCheckout(Model m, HttpSession session){
         OrderCheckout checkout = (OrderCheckout) session.getAttribute("checkout");
@@ -95,7 +100,7 @@ public class OrderController {
     }
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session){
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session) {
         System.out.println("orderController complete/ord_id");
         if(session.getAttribute("checkout") == null){
             return "redirect:/cart";
@@ -136,7 +141,7 @@ public class OrderController {
 
             //장바구니를 통해서 들어온 상품 장바구니에서 삭제
             List<OrderDetailDto> orderDetailList = orderDetailService.selectAllByOrdId(ord_id);
-            for (OrderDetailDto od : orderDetailList) {
+            for(OrderDetailDto od : orderDetailList){
                 CartDto cartDto = new CartDto(mem_id, od.getProd_id(), od.getOpt_prod_id());
                 cartService.removeCartProduct(cartDto);
             }
