@@ -1,6 +1,7 @@
 package com.pofol.main.orders.order.controller;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.pofol.main.member.dto.PointDto;
 import com.pofol.main.member.service.*;
@@ -27,6 +28,7 @@ import com.pofol.main.orders.payment.service.PaymentService;
 import com.pofol.main.product.cart.SelectedItemsDto;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.http.HttpSession;
 
@@ -98,7 +100,7 @@ public class OrderController {
     }
 
     @GetMapping("/completed/{ord_id}")
-    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session){
+    public String orderCompleted(@PathVariable("ord_id") Long ord_id, Model m, HttpSession session) {
         System.out.println("orderController complete/ord_id");
         if(session.getAttribute("checkout") == null){
             return "redirect:/cart";
@@ -139,8 +141,7 @@ public class OrderController {
 
             //장바구니를 통해서 들어온 상품 장바구니에서 삭제
             List<OrderDetailDto> orderDetailList = orderDetailService.selectAllByOrdId(ord_id);
-            orderDetailList.forEach((od) -> {});
-            for (OrderDetailDto od : orderDetailList) {
+            for(OrderDetailDto od : orderDetailList){
                 CartDto cartDto = new CartDto(mem_id, od.getProd_id(), od.getOpt_prod_id());
                 cartService.removeCartProduct(cartDto);
             }

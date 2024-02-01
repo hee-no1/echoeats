@@ -1,5 +1,8 @@
 package com.pofol.main.orders.payment.service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.pofol.main.member.dto.GradeDto;
 import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.repository.GradeRepository;
@@ -16,14 +19,28 @@ import com.pofol.main.product.cart.CartRepository;
 import com.pofol.main.product.domain.OptionProductDto;
 import com.pofol.main.product.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.*;
+
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService{
 
@@ -99,22 +116,94 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
 
+    @Value("${api.Key}")
+    private String apiKey;
+
+    @Value("${api.secretKey}")
+    private String apiSecretKey;
+
     @Override
-    public Boolean nextVerify(PaymentDto pd) {
-        int jsTotPayPrice = pd.getTot_pay_price(); //js에서 넘어온 실 결제 금액
-        int dbTotPayPrice = 0;
-
+    public Boolean nextVerify(PaymentDto pd)  {
+        //자바 서버에서 포트원 api를 연결하자
+        String iamportUrl = "https://api.iamport.kr";
+        log.info("PortOne api 호출");
         try {
-            OrderDto orderDto = orderRepository.select(pd.getOrd_id());
-            dbTotPayPrice = orderDto.getTot_pay_price(); //주문table에서 실 결제 금액 가져옴(1차 검증 성공 후 db에 저장한 것)
+            //먼저 토큰을 발급
+            URL url = new URL(iamportUrl + "/users/getToken");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-            System.out.println("2차 검증: "+(jsTotPayPrice==dbTotPayPrice));
-            return jsTotPayPrice == dbTotPayPrice; //같은면 true, 다르면 false
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; utf-8");
+            con.setDoOutput(true);
+
+            String formData = "imp_key=" + URLEncoder.encode(apiKey, UTF_8) +
+                    "&imp_secret=" + URLEncoder.encode(apiSecretKey, UTF_8);
+
+            try (OutputStream os = con.getOutputStream();
+                 OutputStreamWriter osw = new OutputStreamWriter(os, UTF_8)) {
+                osw.write(formData);
+                osw.flush();
+            }
+
+            int responseCode = con.getResponseCode();
+            System.out.println("토큰 발급 HTTP Response Code: " + responseCode);
+
+            //토큰 가져오기
+            String accessToken;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), UTF_8))) {
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+
+
+                // JSON 파싱
+                JsonElement element = JsonParser.parseString(response.toString());
+
+                JsonObject object = element.getAsJsonObject();
+
+                accessToken = object.getAsJsonObject("response").get("access_token").getAsString();
+            }
+
+
+            //토큰을 해더에 넣고, GET /payments/{imp_uid}를 이용해 결제 내역 조회
+            url = new URL(iamportUrl+"/payments/"+ pd.getPay_id());
+            con = (HttpURLConnection) url.openConnection();
+
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            responseCode = con.getResponseCode();
+            System.out.println("결제 내역 조회 HTTP Response Code: " + responseCode);
+
+            int portOneTotPayPrice;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), UTF_8))) {
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+
+
+                // JSON 파싱
+                JsonElement element = JsonParser.parseString(response.toString());
+
+                JsonObject object = element.getAsJsonObject();
+
+                String amount = object.getAsJsonObject("response").get("amount").getAsString();
+                portOneTotPayPrice = Integer.parseInt(amount);
+            }
+
+            int dbTotPayPrice = pd.getTot_pay_price(); //결제 DB에 저장된 총 실 결제 금액
+            System.out.println("dbTotPayPrice = " + dbTotPayPrice);
+            System.out.println("portOneTotPayPrice = " + portOneTotPayPrice);;
+
+            return portOneTotPayPrice == dbTotPayPrice;
+        }catch (Exception e) {
+            log.info("에러발생");
+            return false;
         }
-
     }
 
     @Override
