@@ -68,7 +68,7 @@
 
     <!--	적립급 지급, PointTask	-->
     <select id="selectMemberIdForPaymentPoint" resultType="PaymentDto">
-        SELECT od.ord_id, pay.mem_id, pay.reserves
+        SELECT od.ord_id, pay.mem_id, pay.reserves, pay.tot_pay_price
         FROM spring.order AS od
                  LEFT JOIN spring.payment AS pay ON od.ord_id = pay.ord_id
         WHERE od.dlvy_cmplt + od.ord_ex_cmplt = od.tot_ord_qty
