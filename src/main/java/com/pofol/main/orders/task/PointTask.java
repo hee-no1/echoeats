@@ -2,7 +2,6 @@ package com.pofol.main.orders.task;
 
 import com.pofol.main.member.dto.PointDto;
 import com.pofol.main.member.repository.PointRepository;
-import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
