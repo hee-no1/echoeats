@@ -65,4 +65,14 @@
     <select id="count" resultType="int">
         SELECT count(*) FROM spring.payment
     </select>
+
+    <!--	적립급 지급, PointTask	-->
+    <select id="selectMemberIdForPaymentPoint" resultType="PaymentDto">
+        SELECT od.ord_id, pay.mem_id, pay.reserves
+        FROM spring.order AS od
+                 LEFT JOIN spring.payment AS pay ON od.ord_id = pay.ord_id
+        WHERE od.dlvy_cmplt + od.ord_ex_cmplt = od.tot_ord_qty
+          AND DATE(od.md_date) = DATE_SUB(DATE(now()), interval 8 day);
+    </select>
+
 </mapper>
