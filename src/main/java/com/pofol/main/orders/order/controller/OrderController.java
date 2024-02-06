@@ -134,10 +134,10 @@ public class OrderController {
                 pointService.regPoint(point);
             }
             //결제 후 등급에 따라 생성된 적립금 insert
-            if(payment.getTot_pay_price() != 0){ //적립금 db에 저장, 적립금이 0일때는 굳이 insert할 필요없다.
-                PointDto point = new PointDto(payment.getReserves(), "적립", "구매적립", mem_id, ord_id);
-                pointService.regPoint(point);
-            }
+//            if(payment.getTot_pay_price() != 0){ //적립금 db에 저장, 적립금이 0일때는 굳이 insert할 필요없다.
+//                PointDto point = new PointDto(payment.getReserves(), "적립", "구매적립", mem_id, ord_id);
+//                pointService.regPoint(point);
+//            }
 
             //장바구니를 통해서 들어온 상품 장바구니에서 삭제
             List<OrderDetailDto> orderDetailList = orderDetailService.selectAllByOrdId(ord_id);

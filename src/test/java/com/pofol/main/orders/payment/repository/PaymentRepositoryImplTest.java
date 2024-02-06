@@ -63,4 +63,12 @@ class PaymentRepositoryImplTest {
             System.out.println(dto);
         }
     }
+
+    @Test
+    public void selectOrderIdForPaymentPoint(){
+        List<PaymentDto> list = paymentRepository.selectMemberIdForPaymentPoint();
+        for (PaymentDto paymentDto : list) {
+            System.out.println(paymentDto);
+        }
+    }
 }

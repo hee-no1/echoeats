@@ -16,4 +16,6 @@ public interface PaymentRepository {
     Integer selectTotalPrice(PaymentDto paymentDto) throws Exception;
     List<PaymentDto> selectPayment(PaymentDto paymentDto) throws Exception;
 
+    List<PaymentDto> selectMemberIdForPaymentPoint();
+
 }
