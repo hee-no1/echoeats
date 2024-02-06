@@ -59,4 +59,9 @@ public class PaymentRepositoryImpl implements PaymentRepository{
         return session.selectList(namespace+"selectPayment",paymentDto);
     }
 
+    //적립급을 지급
+    @Override
+    public List<PaymentDto> selectMemberIdForPaymentPoint() {
+        return session.selectList(namespace + "selectMemberIdForPaymentPoint");
+    }
 }

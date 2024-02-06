@@ -104,7 +104,7 @@
 		JOIN pay_discount pd ON ord.ord_id = pd.ord_id
 		WHERE ord.ord_id = #{ord_id};
 	</select>
-	
+
 	<delete id="deleteAll">
 		DELETE FROM spring.order
 	</delete>
