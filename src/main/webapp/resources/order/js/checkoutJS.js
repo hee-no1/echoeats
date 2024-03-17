@@ -154,7 +154,7 @@ document.getElementById('AddrBtn').addEventListener('click', function(){
 document.addEventListener("DOMContentLoaded", function () {
 
     let delNotesTag =
-        "<div id=\"NotFirst\" class=\"css-82a6rk e150alo80\"><span id=\"place\" class=\"css-11y0tcn efthce41\"></span><span class=\"css-bhczxb efthce40\"></span>\n" +
+        "<div id=\"NotFirst\" class=\"css-subframe-flex><span id=\"place\" class=\"css-11y0tcn efthce41\"></span><span class=\"css-bhczxb efthce40\"></span>\n" +
         "<span id=\"entryway\" class=\"css-11y0tcn efthce41\"></span><span id=\"entrywayDetail\"></span>\n" +
         "<div id=\"personData\" class=\"css-rqc9f e14u1xpe0\"></div>\n" +
         "<div class=\"css-iqoq9n e1pxan880\"><button class=\"css-117jo2j e4nu7ef3 delNotesBtn\" type=\"button\" width=\"60\" height=\"30\" radius=\"3\"><span class=\"css-nytqmg e4nu7ef1\">수정</span></button></div></div></div>";
@@ -216,66 +216,28 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-    //결제 버튼 클릭 이벤트
-    $(".payBtnList").on('click', function (e){
-       if(e.target.id === 'kakaopayBtn'){
-           $('#kakaopayBtn').removeClass('css-1wlyg0y');
-           $('#kakaopayBtn').addClass('css-1fecctx');
-           $('#creditcardBtn').removeClass('css-1pvbmgb');
-           $('#creditcardBtn').addClass('css-1wlyg0y');
-           $('#simplepayBtn').removeClass('css-1pvbmgb');
-           $('#simplepayBtn').addClass('css-1wlyg0y');
-           $('#mobiliansBtn').removeClass('css-1pvbmgb');
-           $('#mobiliansBtn').addClass('css-1wlyg0y');
-           $(".css-nemdq9").remove()
-           orderData.pg = $("#kakaopayBtn").val();
-           orderData.pay_method = 'kakaopay';
 
-       } else if(e.target.id === 'creditcardBtn'){
-           $('#creditcardBtn').removeClass('css-1wlyg0y');
-           $('#creditcardBtn').addClass('css-1pvbmgb');
-           $('#kakaopayBtn').removeClass('css-1fecctx');
-           $('#kakaopayBtn').addClass('css-1wlyg0y');
-           $('#simplepayBtn').removeClass('css-1pvbmgb');
-           $('#simplepayBtn').addClass('css-1wlyg0y');
-           $('#mobiliansBtn').removeClass('css-1pvbmgb');
-           $('#mobiliansBtn').addClass('css-1wlyg0y');
-           $(".css-nemdq9").remove()
-           orderData.pg = $("#creditcardBtn").val();
-           orderData.pay_method = 'card';
-
-       } else if(e.target.id === 'simplepayBtn'){
-           $('#simplepayBtn').removeClass('css-1wlyg0y');
-           $('#simplepayBtn').addClass('css-1pvbmgb');
-           $('#kakaopayBtn').removeClass('css-1fecctx');
-           $('#kakaopayBtn').addClass('css-1wlyg0y');
-           $('#creditcardBtn').removeClass('css-1pvbmgb');
-           $('#creditcardBtn').addClass('css-1wlyg0y');
-           $('#mobiliansBtn').removeClass('css-1pvbmgb');
-           $('#mobiliansBtn').addClass('css-1wlyg0y');
-           let checkbox = "";
-           checkbox = checkbox + '<div class="css-nemdq9 evz7bw03">' +
-               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="naver-pay">' +
-                    '<input data-testid="radio-naver-pay" id="naver-pay" name="naver-pay" type="radio" class="css-1pes2r6 et8nqc32" value="naver-pay" checked=""><span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span><span aria-labelledby="naver-pay" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">네이버페이 </span></span></label></div>' +
-               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="toss">' +
-                    '<input data-testid="radio-toss" id="toss" name="toss" type="radio" class="css-1pes2r6 et8nqc32" value="toss"><span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span><span aria-labelledby="toss" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">토스 </span></span></label></div>' +
-               '<div class="css-nznuh9 evz7bw02"><label class="css-11zj85u et8nqc33" for="payco">' +
-                    '<input data-testid="radio-payco" id="payco" name="payco" type="radio" class="css-1pes2r6 et8nqc32" value="payco"><span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span><span aria-labelledby="payco" class="css-mgd87h et8nqc31"><span class="css-s5xdrg evz7bw00">페이코</span></span></label></div>' +
-               '</div>';
-           $(".css-gd125q").append(checkbox);
-
-       } else if(e.target.id === 'mobiliansBtn'){
-           $('#mobiliansBtn').removeClass('css-1wlyg0y');
-           $('#mobiliansBtn').addClass('css-1pvbmgb');
-           $('#kakaopayBtn').removeClass('css-1fecctx');
-           $('#kakaopayBtn').addClass('css-1wlyg0y');
-           $('#creditcardBtn').removeClass('css-1pvbmgb');
-           $('#creditcardBtn').addClass('css-1wlyg0y');
-           $('#simplepayBtn').removeClass('css-1pvbmgb');
-           $('#simplepayBtn').addClass('css-1wlyg0y');
-           $(".css-nemdq9").remove()
-       }
-    });
+//결제 버튼 리스트
+const buttons = document.querySelectorAll(".payBtnList")
+buttons.forEach((button, index)=>{
+    button.addEventListener('click', function(){
+        //카카오페이 버튼 클릭
+        if(index === 0){
+            buttons.forEach(btn=>{
+                btn.classList.remove('css-1pvbmgb')
+                btn.classList.add("css-1wlyg0y")
+            })
+            this.classList.add('css-1fecctx')
+        } //그 외 버튼 클릭
+        else{
+            buttons.forEach(btn=>{
+                btn.classList.remove('css-1pvbmgb', 'css-1fecctx')
+                btn.classList.add("css-1wlyg0y")
+            })
+            this.classList.add('css-1pvbmgb')
+        }
+    })
+})
 
 
     //주문서 상품 목록

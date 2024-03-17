@@ -5,13 +5,16 @@ import com.pofol.main.member.repository.PointRepository;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class PointTask {
 
@@ -25,9 +28,9 @@ public class PointTask {
     public void paymentOfPoint(){
         //주문 DB에서 현재 날짜에서 - 8일하고 주문상태가 '배송완료' + '교환완료' = 총 주문수량 인 것을 모두 꺼내온다.
         List<PaymentDto> paymentDtos = paymentRepository.selectMemberIdForPaymentPoint();
-        System.out.println(paymentDtos.size());
+        log.info("적립금 지급 스케줄러 실행 list size: {}",paymentDtos.size());
+
         for (PaymentDto payment : paymentDtos) {
-            System.out.println(payment);
             if(payment.getTot_pay_price() != 0){ //적립금 db에 저장, 적립금이 0일때는 굳이 insert할 필요없다.
                 PointDto point = new PointDto(payment.getReserves(), "적립", "구매적립", payment.getMem_id(), payment.getOrd_id());
                 try {

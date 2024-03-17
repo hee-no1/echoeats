@@ -356,7 +356,7 @@
             margin-bottom: 60px;
             border-bottom: 1px solid rgb(244, 244, 244);
         }
-        .css-82a6rk {
+        .css-subframe-flex {
             flex: 1 1 0%;
         }
         .css-v47f8e {

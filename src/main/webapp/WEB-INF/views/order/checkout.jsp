@@ -62,15 +62,15 @@
 
 <%--         주문자 정보--%>
         <div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">주문자 정보</h3></div>
-            <div id="kurly-orderer-info" class="css-shoa2s e1vfdada3"><div class="css-yazyg9 e150alo82"><span class="css-ln1csn e150alo81">보내는 분</span><div class="css-82a6rk e150alo80">
+            <div id="kurly-orderer-info" class="css-shoa2s e1vfdada3"><div class="css-yazyg9 e150alo82"><span class="css-detail-title e150alo81">보내는 분</span><div class="css-subframe-flex e150alo80">
             <div class="css-t6o2y8 e1vfdada2">${member.mem_name}</div></div></div>
 
-            <div class="css-yazyg9 e150alo82"><span class="css-ln1csn e150alo81">휴대폰</span>
-            <div class="css-82a6rk e150alo80">
+            <div class="css-yazyg9 e150alo82"><span class="css-detail-title e150alo81">휴대폰</span>
+            <div class="css-subframe-flex e150alo80">
             <div class="css-t6o2y8 e1vfdada2">${member.mem_phone}</div></div></div>
 
-            <div class="css-yazyg9 e150alo82"><span class="css-ln1csn e150alo81">이메일</span>
-            <div class="css-82a6rk e150alo80">${member.mem_email}
+            <div class="css-yazyg9 e150alo82"><span class="css-detail-title e150alo81">이메일</span>
+            <div class="css-subframe-flex e150alo80">${member.mem_email}
             <div class="css-1r0yqr6 e1vfdada1"><p class="css-i7dt79 e1vfdada0">이메일을 통해 주문처리과정을 보내드립니다.</p><p class="css-i7dt79 e1vfdada0">정보 변경은 마이에코 &gt; 개인정보 수정 메뉴에서 가능합니다.</p></div></div></div></div>
 
 <%--          배송정보--%>
@@ -78,23 +78,23 @@
             <div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">배송 정보</h3>
                 <div class="css-bjn8wh er4y7r83"><a class="css-orhu8r er4y7r82">배송지 변경 안내<span class="css-gwort8 er4y7r81"></span></a>
                     <div width="188" height="60" class="css-1k2fiq3 ev65imb2">
-                        <div class="css-82a6rk ev65imb1"><span class="css-2s3epn er4y7r80">장바구니, 홈에서</span><span class="css-4zleql er4y7r80">배송지를 변경할 수 있어요</span></div><button class="css-157xhr7 ev65imb0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.6154 12.8154L3 3" stroke="#fff" stroke-linecap="round"></path><path d="M3 12.8154L12.6242 3" stroke="#fff" stroke-linecap="round"></path></svg></button></div></div></div>
+                        <div class="css-subframe-flex ev65imb1"><span class="css-2s3epn er4y7r80">장바구니, 홈에서</span><span class="css-4zleql er4y7r80">배송지를 변경할 수 있어요</span></div><button class="css-157xhr7 ev65imb0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.6154 12.8154L3 3" stroke="#fff" stroke-linecap="round"></path><path d="M3 12.8154L12.6242 3" stroke="#fff" stroke-linecap="round"></path></svg></button></div></div></div>
             <div class="css-5d6nlw e17yjk9v4">
-                <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">배송지</span>
-                    <div class="css-82a6rk e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">${address.addr} ${address.dtl_addr}</p>
+                <div class="css-frame-flex e150alo82"><span class="css-detail-title e150alo81">배송지</span>
+                    <div class="css-subframe-flex e150alo80"><span class="css-3uygi7 e17yjk9v3">기본배송지</span><p class="css-36j4vu e17yjk9v2">${address.addr} ${address.dtl_addr}</p>
                         <div class="css-iqoq9n e17yjk9v0"><button id="AddrBtn" class="css-1xky6jf e4nu7ef3" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">변경</span></button></div></div></div></div>
             <div id="checkout-shipping-details" class="css-1y0xj4c e1pxan881">
-                <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-ln1csn e150alo81">배송 요청사항</span>
+                <div id="delNotes" class="css-kc45zq e150alo82"><span class="css-detail-title e150alo81">배송 요청사항</span>
             <c:choose>
                 <c:when test = "${delNotes == null}">
-                    <div id="firstDelNotesDiv"class="css-82a6rk e150alo80">
+                    <div id="firstDelNotesDiv"class="css-subframe-flex e150alo80">
                     <span id="firstDelNotes" class="css-11y0tcn efthce41">배송 요청사항을 입력해주세요</span>
                     <div class="css-iqoq9n e1pxan880"><button class="css-117jo2j e4nu7ef3 delNotesBtn" type="button" width="60" height="30" radius="3"><span class="css-nytqmg e4nu7ef1">입력</span></button></div>
                     </div>
 
                 </c:when>
                 <c:otherwise>
-                    <div id="NotFirst" class="css-82a6rk e150alo80"><span id="place" class="css-11y0tcn efthce41">${delNotes.place}</span><span class="css-bhczxb efthce40"></span>
+                    <div id="NotFirst" class="css-subframe-flex e150alo80"><span id="place" class="css-11y0tcn efthce41">${delNotes.place}</span><span class="css-bhczxb efthce40"></span>
                     <span id="entryway" class="css-11y0tcn efthce41">${delNotes.column_sts}</span>
                         <c:choose>
                             <c:when test = "${empty delNotes.entryway_detail}">
@@ -119,8 +119,8 @@
             <%-- 쿠폰 헤더 --%>
             <div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">쿠폰</h3></div>
                 <%-- 쿠폰 내용 --%>
-                <div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">쿠폰 적용</span>
-                    <div class="css-82a6rk e150alo80"><div class="css-1uj3loi e1brt3tk0">
+                <div class="css-frame-flex e150alo82"><span class="css-detail-title e150alo81">쿠폰 적용</span>
+                    <div class="css-subframe-flex e150alo80"><div class="css-1uj3loi e1brt3tk0">
                         <button id="couponBtn" class="css-1cg046d e1wlhyxd1" value="unchecked">사용가능 쿠폰 ${fn:length(checkout.couponList)}장<span class="css-1e56lav e1wlhyxd0"><span rotate="0" class="css-f2a03j ebkt7i80"></span></span></button>
                         <div id="couponList" role="listbox" class="css-wvvmzg e12aaan21">
                         <c:forEach var="coupon" items="${checkout.couponList}">
@@ -148,27 +148,28 @@
             <%-- 적립금 헤더 --%>
             <div class="css-17t7y0p edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">적립금</h3></div>
                 <%-- 적립금 내용 --%>
-                <div class="css-pkhh3q e150alo82"><span class="css-ln1csn e150alo81">적립금</span><div class="css-82a6rk e150alo80">
+                <div class="css-pkhh3q e150alo82"><span class="css-detail-title e150alo81">적립금</span><div class="css-subframe-flex e150alo80">
                     <div class="css-iptwzv e1gm2j0y9"><div class="css-1az0nid e1gm2j0y8"><span class="css-o5boot e1gm2j0y5">사용가능 잔액</span><span class="css-cp6cch e1gm2j0y4">
                         <span id="point">
                             <fmt:formatNumber value="${checkout.availablePoint}" pattern="#,###"/>
                         </span><span class="css-o5boot e1gm2j0y5">원</span></span></div></div>
 
                     <%-- 사용할 적립금 입력 --%>
-                    <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6"><div height="44" class="css-t7kbxx e1uzxhvi3">
+                    <div class="css-1s0y7rc e1gm2j0y2"><div class="css-16axygr e1uzxhvi6">
+                        <div height="44" class="css-t7kbxx e1uzxhvi3">
                         <input data-testid="input-box" name="point-usage" placeholder="0" type="text" height="44" class="css-1quw3ub e1uzxhvi2" oninput="updateValue(this)" id="inputPointUsed" autocomplete="off"></div></div>
-                        <button id="allUseBtn" class="css-197i5eo e4nu7ef3" type="button" width="100" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">모두사용</span></button></div><div class="css-54a39b e1gm2j0y1">사용 시 적립금이 먼저 소진됩니다.</div><div class="css-1waf5ak ezr038b1"></div></div></div><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 수단</h3></div><div class="css-1gshg9u e150alo82"><span class="css-ln1csn e150alo81">결제수단 선택</span>
-                <div class="css-82a6rk e150alo80">
-                    <div class="css-gd125q e4nb37r1"><div><div class="css-18dvwsu ef0cmoa0">
-                        <button type="button" id="kakaopayBtn" class="css-1fecctx payBtnList" data-testid="kakao-pay-button" color="#f6e500" value="kakaopay"><img class="css-1wbfblw e1ewacwr0" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik03LjUxNSAyLjhDMy4zNjUgMi44IDAgNS40NDUgMCA4LjcwN2MwIDEuOTM4IDEuMTg3IDMuNjU3IDMuMDIxIDQuNzM0LS4xOTEuNzY4LS42ODQgMi43NDItLjc1IDIuOTU3LS4wODMuMjY2LS4xMDMgMS4wNDYuNzAyLjUxMi42MzQtLjQyIDIuNDc5LTEuNyAzLjU3LTIuMzQ4LjMxOC4wMzMuNjQyLjA1MS45NzIuMDUxIDQuMTUgMCA3LjUxNS0yLjY0NCA3LjUxNS01LjkwNiAwLTMuMjYyLTMuMzY1LTUuOTA3LTcuNTE1LTUuOTA3TTIxLjA0OCA0LjExM2MxLjUxNy0xLjMxMyAzLjQ2OC0xLjUwOCA0Ljg5My0uNTg1IDEuNzA3IDEuMTA2IDIuMTY4IDIuNzU0IDIuMTY4IDQuODkyIDAgMi40LTEuMTE1IDMuOTY4LTEuNjQyIDQuNDYtLjUyNi40OTMtMS42NzMgMS4yOTItMi44OCAxLjI5MkgyMS40MnYzLjc4NGgtMi45MTFWMy4yODJoMi4xMDZzLjI2LjU0OC40MzMuODN6bTEuOTUxIDEuMTUzYy0uNjk3IDAtMS4xNTMuMTc3LTEuNTMzLjQ3N3Y2LjMwNmgxLjEzOGMuNTU4IDAgMi41NDctLjUwNyAyLjU0Ny0zLjM4MyAwLS42NzctLjA5LTEuMzg1LS4yNzgtMS45LS4zNTctLjk3Ny0xLjI0Ny0xLjUtMS44NzQtMS41ek0zMy44MTcgMy4wNDZjMi4wODUgMCAyLjk0Mi43MTggMy40NDggMS4zNTQuNDgxLjYwNC44NjIgMS40OTcuODYyIDIuOHY2LjY4aC0yLjI2di0uOTU0cy0uNDQyLjQyLTEuMzc5LjgzMWMtLjk4LjQzLTIuNjUzLjg3Ny00LjA0MS0uMTg0LTEuMzk3LTEuMDY4LTEuMi0zLjQ3MS0uODUyLTQuMTU0LjQ4LS45MzggMS4zNjMtMS45NjggMy43MTYtMS45NjhoMi4wMjl2LS45MDhjMC0uNTU0LS41ODMtMS4xMDctMS43My0xLjEwNy0xLjI4IDAtMS44MzMuMTkyLTIuODE3LjYzNWwtLjk5Ni0xLjk0M3MxLjQ5Ni0xLjA4MiA0LjAyLTEuMDgyem0xLjQ3NyA2LjI1aC0xLjQxNWMtLjU5OSAwLTEuOTYxLjIxNi0xLjk2MSAxLjQ3NyAwIDEuMjgzIDEuMDkgMS4yNiAxLjQ0OCAxLjIzIDEuMDg5LS4wOTEgMS45MzgtLjc5NCAxLjkzOC0uNzk0bC0uMDEtMS45MTN6TTQ3LjA2MSAzLjA0NmwtMi4yOTEgOC4xMTEtMi41NC04LjExLTIuODQ5LjgyczMuNSA5LjM4MyAzLjYyNCA5Ljc4M2MuMTIzLjQtLjAwNS44NTgtLjI4IDEuMzIyLS4zNzEuNjMtMS44MjYgMi4wMy0xLjgyNiAyLjAzbDEuODc4IDEuNjYzcy44NTctLjY4OCAxLjc0NS0xLjc1NWMuNzQzLS44OTIgMS42MzYtMi44MyAxLjkzOC0zLjU3Ny44NTktMi4xMTkgMy40Mi05LjQ2NiAzLjQyLTkuNDY2bC0yLjgxOS0uODJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=" alt="카카오페이"></button></div>
-
-                    <div class="css-18dvwsu ef0cmoa0">
-                        <button type="button" id="creditcardBtn" class="css-1wlyg0y payBtnList" data-testid="creditcard-button" value="kcp">신용카드</button>
-                        <button type="button" id="simplepayBtn" class="css-1wlyg0y payBtnList" data-testid="simplepay-button">간편 결제</button>
-                        <button type="button" id="mobiliansBtn" class="css-1wlyg0y payBtnList" data-testid="mobilians">휴대폰</button>
-                    </div></div>
-                </div></div></div>
-                <ul class="css-wx42bm e4nb37r0"><li>※ 카카오페이, 토스, 네이버페이, 페이코 결제 시, 결제하신 수단으로만 환불되는 점 양해부탁드립니다.</li><li>※ 고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 토스 페이먼츠의 구매안전(에스크로) 서비스를 이용하실 수 있습니다.</li></ul><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">개인정보 수집/제공</h3></div><div class="css-37px7p eh5sxvr5"><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">개인정보 수집∙이용 및 처리 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">전자지급 결제대행 서비스 이용약관 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><strong class="css-87vide eh5sxvr4">위 내용을 확인 하였으며 결제에 동의합니다.</strong></div><p class="css-1tak4sl eh5sxvr3">주문완료 상태일 경우에만 주문 취소가 가능하며, 상품 미배송 시 결제하신 수단으로 환불됩니다.</p>
+                        <button id="allUseBtn" class="css-197i5eo e4nu7ef3" type="button" width="100" height="44" radius="3"><span class="css-nytqmg e4nu7ef1">모두사용</span></button></div><div class="css-54a39b e1gm2j0y1">사용 시 적립금이 먼저 소진됩니다.</div><div class="css-1waf5ak ezr038b1"></div></div></div><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">결제 수단</h3></div>
+                <div class="css-frame-flex">
+                    <span class="css-detail-title">결제수단 선택</span>
+                    <div class="css-subframe-flex">
+                        <div class="css-paymentBtnList-flex">
+                            <button type="button" id="kakaopayBtn" class="css-1fecctx payBtnList" data-testid="kakao-pay-button" color="#f6e500" value="kakaopay"><img class="css-1wbfblw e1ewacwr0" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik03LjUxNSAyLjhDMy4zNjUgMi44IDAgNS40NDUgMCA4LjcwN2MwIDEuOTM4IDEuMTg3IDMuNjU3IDMuMDIxIDQuNzM0LS4xOTEuNzY4LS42ODQgMi43NDItLjc1IDIuOTU3LS4wODMuMjY2LS4xMDMgMS4wNDYuNzAyLjUxMi42MzQtLjQyIDIuNDc5LTEuNyAzLjU3LTIuMzQ4LjMxOC4wMzMuNjQyLjA1MS45NzIuMDUxIDQuMTUgMCA3LjUxNS0yLjY0NCA3LjUxNS01LjkwNiAwLTMuMjYyLTMuMzY1LTUuOTA3LTcuNTE1LTUuOTA3TTIxLjA0OCA0LjExM2MxLjUxNy0xLjMxMyAzLjQ2OC0xLjUwOCA0Ljg5My0uNTg1IDEuNzA3IDEuMTA2IDIuMTY4IDIuNzU0IDIuMTY4IDQuODkyIDAgMi40LTEuMTE1IDMuOTY4LTEuNjQyIDQuNDYtLjUyNi40OTMtMS42NzMgMS4yOTItMi44OCAxLjI5MkgyMS40MnYzLjc4NGgtMi45MTFWMy4yODJoMi4xMDZzLjI2LjU0OC40MzMuODN6bTEuOTUxIDEuMTUzYy0uNjk3IDAtMS4xNTMuMTc3LTEuNTMzLjQ3N3Y2LjMwNmgxLjEzOGMuNTU4IDAgMi41NDctLjUwNyAyLjU0Ny0zLjM4MyAwLS42NzctLjA5LTEuMzg1LS4yNzgtMS45LS4zNTctLjk3Ny0xLjI0Ny0xLjUtMS44NzQtMS41ek0zMy44MTcgMy4wNDZjMi4wODUgMCAyLjk0Mi43MTggMy40NDggMS4zNTQuNDgxLjYwNC44NjIgMS40OTcuODYyIDIuOHY2LjY4aC0yLjI2di0uOTU0cy0uNDQyLjQyLTEuMzc5LjgzMWMtLjk4LjQzLTIuNjUzLjg3Ny00LjA0MS0uMTg0LTEuMzk3LTEuMDY4LTEuMi0zLjQ3MS0uODUyLTQuMTU0LjQ4LS45MzggMS4zNjMtMS45NjggMy43MTYtMS45NjhoMi4wMjl2LS45MDhjMC0uNTU0LS41ODMtMS4xMDctMS43My0xLjEwNy0xLjI4IDAtMS44MzMuMTkyLTIuODE3LjYzNWwtLjk5Ni0xLjk0M3MxLjQ5Ni0xLjA4MiA0LjAyLTEuMDgyem0xLjQ3NyA2LjI1aC0xLjQxNWMtLjU5OSAwLTEuOTYxLjIxNi0xLjk2MSAxLjQ3NyAwIDEuMjgzIDEuMDkgMS4yNiAxLjQ0OCAxLjIzIDEuMDg5LS4wOTEgMS45MzgtLjc5NCAxLjkzOC0uNzk0bC0uMDEtMS45MTN6TTQ3LjA2MSAzLjA0NmwtMi4yOTEgOC4xMTEtMi41NC04LjExLTIuODQ5LjgyczMuNSA5LjM4MyAzLjYyNCA5Ljc4M2MuMTIzLjQtLjAwNS44NTgtLjI4IDEuMzIyLS4zNzEuNjMtMS44MjYgMi4wMy0xLjgyNiAyLjAzbDEuODc4IDEuNjYzcy44NTctLjY4OCAxLjc0NS0xLjc1NWMuNzQzLS44OTIgMS42MzYtMi44MyAxLjkzOC0zLjU3Ny44NTktMi4xMTkgMy40Mi05LjQ2NiAzLjQyLTkuNDY2bC0yLjgxOS0uODJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=" alt="카카오페이"></button>
+                            <button type="button" id="creditcardBtn" class="css-1wlyg0y payBtnList" data-testid="creditcard-button" value="kcp">신용카드</button>
+                            <button type="button" id="simplepayBtn" class="css-1wlyg0y payBtnList" data-testid="simplepay-button">간편 결제</button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="css-wx42bm e4nb37r0"><li>※ 카카오페이, 토스, 네이버페이 결제 시, 결제하신 수단으로만 환불되는 점 양해부탁드립니다.</li><li>※ 고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 토스 페이먼츠의 구매안전(에스크로) 서비스를 이용하실 수 있습니다.</li></ul><div class="css-12aowi2 edbbr7c2"><h3 class="css-1ddzp0m edbbr7c1">개인정보 수집/제공</h3></div><div class="css-37px7p eh5sxvr5"><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">개인정보 수집∙이용 및 처리 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><div class="css-vtybye eh5sxvr2"><span class="css-0 eh5sxvr1">전자지급 결제대행 서비스 이용약관 동의</span><button class="css-1q6jmiw eh5sxvr0">보기</button></div><strong class="css-87vide eh5sxvr4">위 내용을 확인 하였으며 결제에 동의합니다.</strong></div><p class="css-1tak4sl eh5sxvr3">주문완료 상태일 경우에만 주문 취소가 가능하며, 상품 미배송 시 결제하신 수단으로 환불됩니다.</p>
                 <%-- 결제하기 버튼 --%>
                 <div class="css-1azakc el0c5j40"><button class="css-1lha8en e4nu7ef3" type="button" width="240" height="56" radius="3" id="paymentBtn"><span class="css-nytqmg e4nu7ef1">
                     <span id="payment" class="money">
