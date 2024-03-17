@@ -319,21 +319,18 @@ paymentBtn.addEventListener("click", function(e){
         selectedItems: selectedItems
     }
 
-    console.log(paymentInfo)
     $.ajax({
         type:'POST',
         url: '/payment/verify/prev',
         headers:{"content-type": "application/json"},
-        dataType: 'text',
         data : JSON.stringify(paymentInfo),
         success: function(ord_id){
-            alert("✅ 1차 검증 성공 = " + ord_id);
             if(paymentInfo.tot_pay_price === 0){
                 window.location.href = "/order/completed/"+ord_id;
             }else{
-                // requestPay();
+                requestPay(paymentInfo, ord_id);
+                console.log("사전 검증 성공")
             }
-
         },
         error: function(){
             alert("🔥 1차 검증 실패 또는 서버 오류")
@@ -363,53 +360,48 @@ function preventDuplicateClick(e){
     lastClickTime = currentTime;
 }
 
-    var IMP = window.IMP;
-    IMP.init("imp38341687");
 
-    function requestPay() {
-        IMP.request_pay({
-            pg: orderData.pg,
-            pay_method: orderData.pay_method,
-            merchant_uid: orderData.ord_id,
-            name: checkout.tot_prod_name,
-            amount: checkout.tot_pay_price,
-        }, rsp => {
-            if (rsp.success) {
-                // axios로 HTTP 요청, 결제 성공시 서버로 전송
-                // alert("success")
-                console.log("rsp",rsp);
-                writePayment(rsp);
+//포트원 결제 api 연동
+var IMP = window.IMP;
+IMP.init("imp38341687");
 
-            } else {
-                // alert("fail")
-                writePayment(rsp);
-            }
-        });
-    }
+function requestPay(paymentInfo, ord_id) {
+    IMP.request_pay({
+        pg: "kakaopay",
+        pay_method: paymentInfo.pay_method,
+        merchant_uid: ord_id,
+        name: paymentInfo.tot_prod_name,
+        amount: paymentInfo.tot_pay_price,
+    }, function(rsp) {
+        if (rsp.success) {
+            // axios로 HTTP 요청, 결제 성공시 서버로 전송
+            // alert("success")
+            console.log("rsp",rsp);
+            // writePayment(rsp);
 
-    function writePayment(rsp){
-        axios({
+        } else {
+            // alert("fail")
+            // writePayment(rsp);
+        }
+    });
+}
+
+    function NextVerify(rsp){
+        $.ajax({
+            type:'POST',
             url: "/payment/verify/next",
-            method: "post",
             headers: { "Content-Type": "application/json" },
-            data: {
-                pay_id: rsp.imp_uid,
-                ord_id: rsp.merchant_uid,
-                tot_prod_name: rsp.name,
-                tot_pay_price: rsp.paid_amount,
-                pay_way: rsp.pg_provider,
-                pg_tid: rsp.pg_tid,
-                success: rsp.success
-            }
-        }).then(response  => {
+            data: JSON.stringify(rsp),
+            success: function(response){
             // 서버 결제 API 성공시 로직
-            // alert("success: " +JSON.stringify(response.data))
+            alert("success: " +JSON.stringify(response))
             //주문번호
-            window.location.href = '/order/completed/'+orderData.ord_id;
-
-        }).catch(error => {
-            alert("결제에 실패하셨습니다. 다시 시도해주세요.")
+            // window.location.href = '/order/completed/'+orderData.ord_id;
+        },
+        error:function() {
+            alert("결제에 실패하셨습니다. 다시 시도해주세요.");
             // alert("error: " + JSON.stringify(error.response))
+        }
         });
     }
 

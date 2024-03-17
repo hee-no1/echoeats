@@ -43,17 +43,17 @@ public class PaymentController {
 
     @PostMapping("/payment/verify/next")
     public ResponseEntity<String> NextVerify(@RequestBody PaymentDto pd){
-        System.out.println("paycontroller verify/next");
+        log.info("payController verify/next");
         try{
             if(pd.getSuccess().equals("true")){ //결제 성공
                 pd.setCode_name("PAYMENT_COMPLETE");
                 PaymentDto paymentDto = paymentService.writePayment(pd); //결제, 결제이력 table 작성
 
-                if(paymentService.nextVerify(paymentDto)){ //2차 검증 성공 시
-                    return ResponseEntity.ok("2차 검증 성공");
-                }else { //2차 검증 실패 시
+                if(paymentService.nextVerify(paymentDto)){ //사후 검증 성공 시
+                    return ResponseEntity.ok("사후 검증 성공");
+                }else { //사후 검증 실패 시
                     //결체 취소 필요
-                    return ResponseEntity.badRequest().body("2차 검증 실패");
+                    return ResponseEntity.badRequest().body("사후 검증 실패");
                 }
             }else { //결제 실패 (창 닫음, 잔액부족)
                 System.out.println("결제 실패");
