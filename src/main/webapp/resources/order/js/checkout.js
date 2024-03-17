@@ -8,6 +8,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
+
 let checkout = {
     selectedItems: selectedItems,
     tot_prod_name: tot_prod_name,
@@ -16,6 +17,8 @@ let checkout = {
     dlvy_fee: dlvy_fee,
     pay_way: pay_way
 }
+
+let tot_pay_price_element = document.getElementById("tot_pay_price"); //최종 결제 금액 요소
 
 let coupon_id; //쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
 
@@ -133,7 +136,7 @@ $(document).on('click',"#deleteCouponBtn", function(){
     coupon_id = null;
     ajaxData();
 })
-let tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "")*1;
+let tot_pay_price = tot_pay_price_element.innerText.replace(/,/g, "")*1;
 let point = document.getElementById('point').innerText.replace(/,/g, "")*1;
 //적립금 입력
 function updateValue(input){
@@ -289,6 +292,10 @@ buttons.forEach((button, index)=>{
 /**
  * 결제 버튼 클릭
  */
+let coupon_disc_element = document.getElementById("outputCouponUsed");
+checkout.coupon_id = coupon_id;
+let point_used_element = document.getElementById("outputPointUsed");
+
 let lastClickTime = 0; //결제 버튼 중복 클릭 방지
 
 const paymentBtn = document.querySelector("#paymentBtn")
@@ -297,26 +304,34 @@ paymentBtn.addEventListener("click", function(e){
     if(checkPersonData()){ return; } //배송 요청 사항 입력 체크
     preventDuplicateClick(e) // 결제 버튼 중복 클릭 방지
 
-    //ajax로 보낼 데이터
-    checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
-    checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
-    checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
-    checkout.coupon_id = coupon_id;
-    checkout.point_used = document.getElementById("outputPointUsed").innerText.replace(/,/g, "");
+    //사전 검증 데이터
+    let paymentInfo = {
+        tot_prod_name: tot_prod_name,//
+        tot_prod_price: tot_prod_price,//
+        tot_pay_price: tot_pay_price_element.innerText.replace(/,/g, "")*1,
+        origin_prod_price: origin_prod_price,//
+        dlvy_fee:dlvy_fee,//
+        pay_way:pay_way,//
+        prod_disc: origin_prod_price - tot_prod_price,
+        coupon_id: coupon_id,
+        coupon_disc: coupon_disc_element.innerText.replace(/,/g, "")*1,
+        point_used: point_used_element.innerText.replace(/,/g, "")*1,
+        selectedItems: selectedItems
+    }
 
+    console.log(paymentInfo)
     $.ajax({
         type:'POST',
         url: '/payment/verify/prev',
         headers:{"content-type": "application/json"},
         dataType: 'text',
-        data : JSON.stringify(checkout),
-        success: function(result){
-            // alert("✅ 1차 검증 성공 = " + result);
-            orderData.ord_id = result*1;
-            if(checkout.tot_pay_price === '0'){
-                window.location.href = "/order/completed/"+orderData.ord_id;
+        data : JSON.stringify(paymentInfo),
+        success: function(ord_id){
+            alert("✅ 1차 검증 성공 = " + ord_id);
+            if(paymentInfo.tot_pay_price === 0){
+                window.location.href = "/order/completed/"+ord_id;
             }else{
-                requestPay();
+                // requestPay();
             }
 
         },

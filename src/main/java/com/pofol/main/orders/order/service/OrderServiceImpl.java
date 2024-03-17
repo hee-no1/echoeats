@@ -7,11 +7,13 @@ import com.pofol.main.orders.order.domain.*;
 import com.pofol.main.orders.order.repository.OrderDetailRepository;
 import com.pofol.main.orders.order.repository.OrderHistoryRepository;
 import com.pofol.main.orders.order.repository.OrderRepository;
+import com.pofol.main.orders.payment.domain.PaymentInfo;
 import com.pofol.main.orders.payment.domain.PaymentDiscountDto;
 import com.pofol.main.orders.payment.repository.PaymentDiscountRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
 import com.pofol.main.product.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
@@ -161,15 +164,15 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public Long writeOrder(OrderCheckout oc) {
+    public Long writeOrder(PaymentInfo pi) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mem_id = authentication.getName(); //회원id
 
-        System.out.println("writeOrder 주문서 = " + oc);
-        List<SelectedItemsDto> items = oc.getSelectedItems();
+        System.out.println("writeOrder 주문서 = " + pi);
+        List<SelectedItemsDto> items = pi.getSelectedItems();
 
         //주문 table 작성
-        OrderDto orderDto = new OrderDto(mem_id, oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), oc.getOrigin_prod_price() - oc.getTot_prod_price(), items.size(), oc.getDlvy_fee(), oc.getPay_way(), items.size(), mem_id, mem_id);
+        OrderDto orderDto = new OrderDto(mem_id, pi.getTot_prod_name(), pi.getTot_prod_price(), pi.getTot_pay_price(), pi.getOrigin_prod_price() - pi.getTot_prod_price(), items.size(), pi.getDlvy_fee(), pi.getPay_way(), items.size(), mem_id, mem_id);
         try {
             orderRepository.insert(orderDto);
             Long ord_id = orderDto.getOrd_id();
@@ -190,11 +193,11 @@ public class OrderServiceImpl implements OrderService{
             }
 
             //주문 이력 table 작성
-            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(ord_id, mem_id, "ORDERING", oc.getTot_prod_name(), oc.getTot_prod_price(), oc.getTot_pay_price(), items.size(), oc.getPay_way(), mem_id, mem_id);
+            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(ord_id, mem_id, "ORDERING", pi.getTot_prod_name(), pi.getTot_prod_price(), pi.getTot_pay_price(), items.size(), pi.getPay_way(), mem_id, mem_id);
             orderHistoryRepository.insert(orderHistoryDto);
 
             //할인 금액 정보 table 작성
-            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, oc.getProd_disc(), oc.getCoupon_disc(), oc.getCoupon_id(), oc.getPoint_used());
+            PaymentDiscountDto paymentDiscountDto = new PaymentDiscountDto(ord_id, pi.getProd_disc(), pi.getCoupon_disc(), pi.getCoupon_id(), pi.getPoint_used());
             paymentDiscountRepository.insert(paymentDiscountDto);
 
         } catch (Exception e) {

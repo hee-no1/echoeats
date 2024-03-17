@@ -5,14 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.pofol.main.member.dto.GradeDto;
-import com.pofol.main.member.dto.MemberDto;
 import com.pofol.main.member.repository.GradeRepository;
-import com.pofol.main.member.repository.MemberRepository;
-import com.pofol.main.orders.order.domain.OrderCheckout;
-import com.pofol.main.orders.order.domain.OrderDto;
 import com.pofol.main.orders.order.repository.OrderRepository;
 import com.pofol.main.orders.payment.domain.PaymentDto;
 import com.pofol.main.orders.payment.domain.PaymentHistoryDto;
+import com.pofol.main.orders.payment.domain.PaymentInfo;
 import com.pofol.main.orders.payment.repository.PaymentHistoryRepository;
 import com.pofol.main.orders.payment.repository.PaymentRepository;
 import com.pofol.main.product.cart.SelectedItemsDto;
@@ -29,10 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.*;
@@ -51,9 +45,9 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     @Transactional
-    public Boolean prevVerify(OrderCheckout oc) {
-        List<SelectedItemsDto> items = oc.getSelectedItems();
-        int jsTotPayPrice = oc.getTot_pay_price(); //js에서 넘어온 실 결제 금액
+    public Boolean prevVerify(PaymentInfo data) {
+        List<SelectedItemsDto> items = data.getSelectedItems();
+        int jsTotPayPrice = data.getTot_pay_price(); //js에서 넘어온 실 결제 금액
         int dbTotPayPrice = 0; //
 
         try {
@@ -74,7 +68,7 @@ public class PaymentServiceImpl implements PaymentService{
                 dbTotPayPrice += 3000;
             }
 
-            dbTotPayPrice -= (oc.getCoupon_disc() + oc.getPoint_used());
+            dbTotPayPrice -= (data.getCoupon_disc() + data.getPoint_used());
 
             System.out.println("jsTotPayPrice = " + jsTotPayPrice);
             System.out.println("dbTotPayPrice = " + dbTotPayPrice);

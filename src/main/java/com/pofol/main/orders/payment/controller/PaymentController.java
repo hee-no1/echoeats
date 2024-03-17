@@ -1,21 +1,18 @@
 package com.pofol.main.orders.payment.controller;
 
-import com.pofol.main.orders.order.domain.OrderCheckout;
 import com.pofol.main.orders.order.service.OrderService;
 import com.pofol.main.orders.payment.domain.PaymentDto;
+import com.pofol.main.orders.payment.domain.PaymentInfo;
 import com.pofol.main.orders.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.HttpStatus.*;
-
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class PaymentController {
@@ -24,16 +21,18 @@ public class PaymentController {
     private final OrderService orderService;
 
     @PostMapping("/payment/verify/prev")
-    public ResponseEntity<String> PrevVerify(@RequestBody OrderCheckout oc){
-        System.out.println("paycontroller verify prev");
+    public ResponseEntity<String> PrevVerify(@RequestBody PaymentInfo pi){
+        log.info("PaymentController verify prev");
         try{
-            Boolean isVerify = paymentService.prevVerify(oc);
-            System.out.println(isVerify);
-            if(isVerify){ //1차 검증 성공 시
-                Long ord_id = orderService.writeOrder(oc);
-                return ResponseEntity.ok("" + ord_id);
-            }else { //1차 검증 실패 시
-                return ResponseEntity.badRequest().body("1차 검증 실패");
+            Boolean isVerify = paymentService.prevVerify(pi);
+            log.info("isVerify:{}", isVerify);
+
+
+            if(isVerify){  //사전 검증 성공
+                Long ord_id = orderService.writeOrder(pi); //주문 데이블 작성
+                return ResponseEntity.ok(""+ord_id);
+            }else {  //사전 검증 실패
+                return ResponseEntity.badRequest().body("사전 검증 실패");
             }
         } catch (Exception e) {
             e.printStackTrace();
