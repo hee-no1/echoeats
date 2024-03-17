@@ -887,7 +887,7 @@ input[type="radio"]{
 .css-paymentBtnList-flex {
     display: flex;
 }
-.css-1fecctx {
+.css-kakaopay-button-click {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -1031,7 +1031,7 @@ input[type="radio"]{
     position: relative;
     padding: 24px 0px 16px;
 }
-.css-1wlyg0y {
+.css-paymentBtnList-not-click {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -1045,25 +1045,25 @@ input[type="radio"]{
     font-weight: 500;
     border-radius: 3px;
 }
-.css-1wlyg0y:not(:first-of-type) {
+.css-paymentBtnList-not-click:not(:first-of-type) {
     border-left: none;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
 }
-.css-1wlyg0y:not(:last-of-type) {
+.css-paymentBtnList-not-click:not(:last-of-type) {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.css-1pvbmgb:not(:last-of-type) {
+.css-paymentBtn-click:not(:last-of-type) {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
- .css-1pvbmgb:not(:first-of-type) {
+ .css-paymentBtn-click:not(:first-of-type) {
      border-left: none;
      border-top-left-radius: 0px;
      border-bottom-left-radius: 0px;
  }
-.css-1pvbmgb {
+.css-paymentBtn-click {
      display: flex;
      -webkit-box-align: center;
      align-items: center;

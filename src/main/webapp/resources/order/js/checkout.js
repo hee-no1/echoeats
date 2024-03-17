@@ -19,6 +19,21 @@ let checkout = {
 
 let coupon_id; //쿠폰 id 나중에 ajax로도 보내고 결제 버튼을 눌렀울때도 결제할인 금액 table로도 보내야한다.
 
+//주문서 상품 목록
+$('#prodDetailBtn').click(function(){
+    let arrowBtn = document.getElementById("arrowBtn");
+    let rotate = arrowBtn.getAttribute("transform");
+    if(rotate === "rotate(135 15.5 16.5)"){
+        $('.totItems').hide(); //클릭 시 첫 번째 요소 숨김
+        $('.items').show(); //클릭 시 두 번째 요소 표시
+        arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
+    }else{
+        $('.totItems').show(); //클릭 시 첫 번째 요소 숨김
+        $('.items').hide(); //클릭 시 두 번째 요소 표시
+        arrowBtn.setAttribute("transform", "rotate(135 15.5 16.5)");
+    }
+});
+
 let ajaxData = function(){ //쿠폰, 적립금 ajax로 보내기
 
     //ajax로 보낼 데이터
@@ -217,13 +232,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /**
- * 결제 버튼
+ * 결제 수단 버튼
  * 카카오페이, 신용카드, 간편결제(네이버페이, 토스)
  */
-const paymentDiv = document.querySelector(".paymentFrame")
-const buttons = document.querySelectorAll(".payBtnList")
+const paymentDiv = document.querySelector(".paymentFrame") //결제 수단 div
+const buttons = document.querySelectorAll(".payBtnList") //결제 수단 버튼
 
-const simplePayButtons = document.createElement('div'); //네이버페이, 토스
+const simplePayButtons = document.createElement('div'); //간편 결제 세부 버튼(네이버페이, 토스)
 simplePayButtons.className = 'simplePayBtnList';
 
 // 간편 결제 라디오 버튼을 생성
@@ -243,102 +258,95 @@ function createRadioButton(id, name, labelText) {
 simplePayButtons.appendChild(createRadioButton('naverPayBtn', 'simplePayBtn', '네이버페이'));
 simplePayButtons.appendChild(createRadioButton('tossBtn', 'simplePayBtn', '토스'));
 
-//결제 버튼 클릭
+//결제 수단 버튼 클릭
 buttons.forEach((button, index)=>{
     button.addEventListener('click', function(){
         //카카오페이 버튼 클릭
         if(index === 0){
             buttons.forEach(btn=>{
-                btn.classList.remove('css-1pvbmgb')
-                btn.classList.add("css-1wlyg0y")
+                btn.classList.remove('css-paymentBtn-click')
+                btn.classList.add("css-paymentBtnList-not-click")
                 simplePayButtons.remove();
             })
-            this.classList.add('css-1fecctx')
+            this.classList.add('css-kakaopay-button-click')
         } //그 외 버튼 클릭
         else {
             buttons.forEach(btn=>{
-                btn.classList.remove('css-1pvbmgb', 'css-1fecctx')
-                btn.classList.add("css-1wlyg0y")
+                btn.classList.remove('css-paymentBtn-click', 'css-kakaopay-button-click')
+                btn.classList.add("css-paymentBtnList-not-click")
                 if(index===1){
                     simplePayButtons.remove();
                 }else{
                     paymentDiv.appendChild(simplePayButtons);
                 }
             })
-            this.classList.add('css-1pvbmgb')
+            this.classList.add('css-paymentBtn-click')
         }
     })
 })
 
 
-    //주문서 상품 목록
-    $('#prodDetailBtn').click(function(){
-        let arrowBtn = document.getElementById("arrowBtn");
-        let rotate = arrowBtn.getAttribute("transform");
-        if(rotate === "rotate(135 15.5 16.5)"){
-            $('.totItems').hide(); //클릭 시 첫 번째 요소 숨김
-            $('.items').show(); //클릭 시 두 번째 요소 표시
-            arrowBtn.setAttribute("transform", "rotate(-45 15.5 16.5)");
-        }else{
-            $('.totItems').show(); //클릭 시 첫 번째 요소 숨김
-            $('.items').hide(); //클릭 시 두 번째 요소 표시
-            arrowBtn.setAttribute("transform", "rotate(135 15.5 16.5)");
+/**
+ * 결제 버튼 클릭
+ */
+let lastClickTime = 0; //결제 버튼 중복 클릭 방지
+
+const paymentBtn = document.querySelector("#paymentBtn")
+paymentBtn.addEventListener("click", function(e){
+
+    if(checkPersonData()){ return; } //배송 요청 사항 입력 체크
+    preventDuplicateClick(e) // 결제 버튼 중복 클릭 방지
+
+    //ajax로 보낼 데이터
+    checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
+    checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
+    checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
+    checkout.coupon_id = coupon_id;
+    checkout.point_used = document.getElementById("outputPointUsed").innerText.replace(/,/g, "");
+
+    $.ajax({
+        type:'POST',
+        url: '/payment/verify/prev',
+        headers:{"content-type": "application/json"},
+        dataType: 'text',
+        data : JSON.stringify(checkout),
+        success: function(result){
+            // alert("✅ 1차 검증 성공 = " + result);
+            orderData.ord_id = result*1;
+            if(checkout.tot_pay_price === '0'){
+                window.location.href = "/order/completed/"+orderData.ord_id;
+            }else{
+                requestPay();
+            }
+
+        },
+        error: function(){
+            alert("🔥 1차 검증 실패 또는 서버 오류")
         }
     });
+})
 
 
-    let lastClickTime = 0; //결제 버튼 중복 클릭을 방지하기 위함
+//배송 요청 사항 입력 체크
+function checkPersonData(){
+    let personData = document.getElementById("personData");
+    if(personData === null){ //첫 주문
+        alert("배송 요청사항을 입력해주세요")
+        return true;
+    }
+}
 
-    //결제 버튼 누르면
-    $('#paymentBtn').click(function(e){
+//중복 클릭 방지
+function preventDuplicateClick(e){
+    let currentTime = new Date().getTime();
+    let timeDiff = currentTime - lastClickTime;
+    if(timeDiff < 5000){ //5초 이내에 다시 클릭하면 이벤트를 무시한다.
 
-        let personData = document.getElementById("personData");
-        if(personData === null){ //첫 주문
-            alert("배송 요청사항을 입력해주세요")
-            return;
-        }
-
-        // 결제 버튼 중복 클릭 방지
-        let currentTime = new Date().getTime();
-        console.log("전 currentTime", currentTime)
-        let timeDiff = currentTime - lastClickTime;
-        if(timeDiff < 5000){ //5초 이내에 다시 클릭하면 이벤트를 무시한다.
-
-            e.preventDefault();
-            return;
-        }
-        lastClickTime = currentTime;
-
-        console.log("후 currentTime", currentTime)
-
-        //ajax로 보낼 데이터
-        checkout.tot_pay_price = document.getElementById("tot_pay_price").innerText.replace(/,/g, "");
-        checkout.prod_disc = checkout.origin_prod_price - checkout.tot_prod_price;
-        checkout.coupon_disc = document.getElementById("outputCouponUsed").innerText.replace(/,/g, "");
-        checkout.coupon_id = coupon_id;
-        checkout.point_used = document.getElementById("outputPointUsed").innerText.replace(/,/g, "");
-
-        $.ajax({
-            type:'POST',
-            url: '/payment/verify/prev',
-            headers:{"content-type": "application/json"},
-            dataType: 'text',
-            data : JSON.stringify(checkout),
-            success: function(result){
-                // alert("✅ 1차 검증 성공 = " + result);
-                orderData.ord_id = result*1;
-                if(checkout.tot_pay_price === '0'){
-;                    window.location.href = "/order/completed/"+orderData.ord_id;
-                }else{
-                    requestPay();
-                }
-
-            },
-            error: function(){
-                alert("🔥 1차 검증 실패 또는 서버 오류")
-            }
-        });
-    })
+        e.preventDefault();
+        return;
+    }
+    lastClickTime = currentTime;
+}
 
     var IMP = window.IMP;
     IMP.init("imp38341687");
