@@ -328,12 +328,13 @@ paymentBtn.addEventListener("click", function(e){
             if(paymentInfo.tot_pay_price === 0){
                 window.location.href = "/order/completed/"+ord_id;
             }else{
-                requestPay(paymentInfo, ord_id);
+                paymentInfo.ord_id = ord_id;
+                requestPay(paymentInfo);
                 console.log("사전 검증 성공")
             }
         },
         error: function(){
-            alert("🔥 1차 검증 실패 또는 서버 오류")
+            alert("사전 검증 실패 또는 서버 오류")
         }
     });
 })
@@ -341,7 +342,7 @@ paymentBtn.addEventListener("click", function(e){
 
 //배송 요청 사항 입력 체크
 function checkPersonData(){
-    let personData = document.getElementById("personData");
+    const personData = document.getElementById("personData");
     if(personData === null){ //첫 주문
         alert("배송 요청사항을 입력해주세요")
         return true;
@@ -365,44 +366,40 @@ function preventDuplicateClick(e){
 var IMP = window.IMP;
 IMP.init("imp38341687");
 
-function requestPay(paymentInfo, ord_id) {
+function requestPay(paymentInfo) {
     IMP.request_pay({
         pg: "kakaopay",
         pay_method: paymentInfo.pay_method,
-        merchant_uid: ord_id,
+        merchant_uid: paymentInfo.ord_id,
         name: paymentInfo.tot_prod_name,
         amount: paymentInfo.tot_pay_price,
     }, function(rsp) {
-        if (rsp.success) {
-            // axios로 HTTP 요청, 결제 성공시 서버로 전송
-            // alert("success")
-            console.log("rsp",rsp);
-            // writePayment(rsp);
-
-        } else {
-            // alert("fail")
-            // writePayment(rsp);
+        let paymentCompleteInfo = {
+            pay_id: rsp.imp_uid,
+            success:rsp.success,
+            ord_id:paymentInfo.ord_id
         }
+        NextVerify(paymentCompleteInfo);
     });
 }
 
-    function NextVerify(rsp){
-        $.ajax({
-            type:'POST',
-            url: "/payment/verify/next",
-            headers: { "Content-Type": "application/json" },
-            data: JSON.stringify(rsp),
-            success: function(response){
-            // 서버 결제 API 성공시 로직
-            alert("success: " +JSON.stringify(response))
-            //주문번호
-            // window.location.href = '/order/completed/'+orderData.ord_id;
+function NextVerify(paymentCompleteInfo){
+    $.ajax({
+        type:'POST',
+        url: "/payment/verify/next",
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify(paymentCompleteInfo),
+        success: function(response){
+        // 서버 결제 API 성공시 로직
+        alert("success: " +JSON.stringify(response))
+        //주문번호
+        // window.location.href = '/order/completed/'+orderData.ord_id;
         },
         error:function() {
             alert("결제에 실패하셨습니다. 다시 시도해주세요.");
             // alert("error: " + JSON.stringify(error.response))
         }
-        });
-    }
+    });
+}
 
 

@@ -47,9 +47,10 @@ public class PaymentController {
         try{
             if(pd.getSuccess().equals("true")){ //결제 성공
                 pd.setCode_name("PAYMENT_COMPLETE");
-                PaymentDto paymentDto = paymentService.writePayment(pd); //결제, 결제이력 table 작성
 
-                if(paymentService.nextVerify(paymentDto)){ //사후 검증 성공 시
+                if(paymentService.nextVerify(pd)){ //사후 검증 성공 시
+//                    PaymentDto paymentDto = paymentService.writePayment(pd); //결제, 결제이력 table 작성
+
                     return ResponseEntity.ok("사후 검증 성공");
                 }else { //사후 검증 실패 시
                     //결체 취소 필요

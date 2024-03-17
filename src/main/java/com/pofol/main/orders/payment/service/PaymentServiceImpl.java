@@ -89,6 +89,7 @@ public class PaymentServiceImpl implements PaymentService{
         try {
             //결제 table 작성
             pay.setMemberData(mem_id);
+            log.info("사후 검증: {}", pay);
             //적립금 계산 <- 결제 완료 시에만 필요
             if(pay.getSuccess().equals("true")){
                 GradeDto grade = gradeRepository.select_grade(mem_id);
@@ -152,7 +153,8 @@ public class PaymentServiceImpl implements PaymentService{
                 portOneTotPayPrice = Integer.parseInt(amount);
             }
 
-            int dbTotPayPrice = pd.getTot_pay_price(); //결제 DB에 저장된 총 실 결제 금액
+
+            int dbTotPayPrice = orderRepository.select(pd.getOrd_id()).getTot_pay_price(); //주문 DB에 저장된 총 실 결제 금액
             System.out.println("dbTotPayPrice = " + dbTotPayPrice);
             System.out.println("portOneTotPayPrice = " + portOneTotPayPrice);;
 
