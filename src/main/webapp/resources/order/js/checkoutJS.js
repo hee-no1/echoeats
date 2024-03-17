@@ -216,9 +216,34 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-
-//결제 버튼 리스트
+/**
+ * 결제 버튼
+ * 카카오페이, 신용카드, 간편결제(네이버페이, 토스)
+ */
+const paymentDiv = document.querySelector(".paymentFrame")
 const buttons = document.querySelectorAll(".payBtnList")
+
+const simplePayButtons = document.createElement('div'); //네이버페이, 토스
+simplePayButtons.className = 'simplePayBtnList';
+
+// 간편 결제 라디오 버튼을 생성
+function createRadioButton(id, name, labelText) {
+    let label = document.createElement('label');
+    let input = document.createElement('input');
+    input.type = 'radio';
+    input.id = id;
+    input.name = name;
+    label.htmlFor = id;
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(' ' + labelText));
+    return label;
+}
+
+// 라디오 버튼을 부모 요소에 추가합니다.
+simplePayButtons.appendChild(createRadioButton('naverPayBtn', 'simplePayBtn', '네이버페이'));
+simplePayButtons.appendChild(createRadioButton('tossBtn', 'simplePayBtn', '토스'));
+
+//결제 버튼 클릭
 buttons.forEach((button, index)=>{
     button.addEventListener('click', function(){
         //카카오페이 버튼 클릭
@@ -226,13 +251,19 @@ buttons.forEach((button, index)=>{
             buttons.forEach(btn=>{
                 btn.classList.remove('css-1pvbmgb')
                 btn.classList.add("css-1wlyg0y")
+                simplePayButtons.remove();
             })
             this.classList.add('css-1fecctx')
         } //그 외 버튼 클릭
-        else{
+        else {
             buttons.forEach(btn=>{
                 btn.classList.remove('css-1pvbmgb', 'css-1fecctx')
                 btn.classList.add("css-1wlyg0y")
+                if(index===1){
+                    simplePayButtons.remove();
+                }else{
+                    paymentDiv.appendChild(simplePayButtons);
+                }
             })
             this.classList.add('css-1pvbmgb')
         }

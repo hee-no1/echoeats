@@ -692,9 +692,16 @@ css-bs5mk4{
     color: rgb(51, 51, 51);
     padding: 0px;
 }
-input[type=checkbox], input[type=radio] {
+input[type=checkbox]{
     box-sizing: border-box;
     padding: 0;
+}
+input[type="radio"]{
+
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    accent-color: #00a833;
 }
 .css-agvwxo {
     overflow: hidden;
@@ -918,10 +925,10 @@ input[type=checkbox], input[type=radio] {
     font-size: 14px;
     font-weight: 600;
 }
-.css-nemdq9 {
+.simplePayBtnList {
     display: grid;
     grid-template-columns: 213px auto;
-    margin-top: 21px;
+    margin-top: 30px;
 }
 .css-11zj85u {
     position: relative;
@@ -930,10 +937,6 @@ input[type=checkbox], input[type=radio] {
     display: inline-flex;
     padding: 0px;
     cursor: pointer;
-}
-input[type=checkbox], input[type=radio] {
-    box-sizing: border-box;
-    padding: 0;
 }
 .css-1pes2r6 {
     overflow: hidden;
